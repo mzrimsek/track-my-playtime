@@ -1,0 +1,36 @@
+.nav {
+  width: 250px;
+  height: 100vh;
+  padding: 30px 15px;
+
+  background: #533a7b;
+  color: #e9f1f7;
+
+  .banner {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+  }
+
+  ul {
+    padding: 0;
+    list-style: none;
+
+    li{
+      display: flex;
+      align-items: center;
+      height: 45px;
+      padding: 0px 10px;
+      border-radius: 8px;
+      
+      &.active {
+        background: #8d69c6;
+      }
+
+      a{
+        color: #e9f1f7;
+        text-decoration: none;
+      }
+    }
+  }
+}
