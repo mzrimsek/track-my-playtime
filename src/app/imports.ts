@@ -7,12 +7,15 @@ import { EffectsModule } from '@ngrx/effects';
 
 import { AppRoutingModule } from './app-routing.module';
 
+import { TrackerModule } from './features/tracker/tracker.module';
+
 import { reducers } from './reducers';
 import { environment } from '../environments/environment';
 
 let imports = [
   BrowserModule,
   AppRoutingModule,
+  TrackerModule,
   HttpClientModule,
   StoreModule.forRoot(reducers),
   EffectsModule.forRoot([])
