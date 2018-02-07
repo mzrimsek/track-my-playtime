@@ -15,8 +15,8 @@ import { environment } from '../environments/environment';
 let imports = [
   BrowserModule,
   AppRoutingModule,
-  TrackerModule,
   HttpClientModule,
+  TrackerModule,
   StoreModule.forRoot(reducers),
   EffectsModule.forRoot([])
 ];

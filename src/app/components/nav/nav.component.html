@@ -1,3 +1,7 @@
-<p>
-  nav works!
-</p>
+<nav>
+  <ul>
+    <li *ngFor="let route of routes" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: route.exact }">
+      <a [routerLink]="route.router">{{ route.caption }}</a>
+    </li>
+  </ul>
+</nav>

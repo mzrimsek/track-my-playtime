@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 
+import { RouteEntry } from './components/nav/nav.component';
+
 import { State } from './reducers';
 import * as actions from './actions';
 
@@ -16,4 +18,12 @@ export class AppComponent {
   constructor(private store: Store<State>) {
     store.dispatch(new actions.InitializeApplication());
   }
+
+  routes: RouteEntry[] = [
+    {
+      caption: 'Tracker',
+      router: ['tracker'],
+      exact: true
+    }
+  ];
 }
