@@ -1,4 +1,6 @@
 <div class="tracker">
-  <app-tracker-timer [active]="timerActive$ | async"></app-tracker-timer>
+  <app-tracker-timer [active]="timerActive$ | async"
+                     [game]="timerGame$ | async"
+                     [platform]="timerPlatform$ | async"></app-tracker-timer>
   <app-tracker-history></app-tracker-history>
 </div>

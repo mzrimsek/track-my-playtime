@@ -12,6 +12,8 @@ import * as actions from '../../actions/timer';
 export class TimerComponent implements OnInit {
 
   @Input() active: boolean;
+  @Input() game: string;
+  @Input() platform: string;
   constructor(private store: Store<State>) { }
 
   ngOnInit() {
@@ -23,5 +25,18 @@ export class TimerComponent implements OnInit {
 
   stopTimer() {
     this.store.dispatch(new actions.TimerStop());
+  }
+
+  setGame(gameEl: HTMLInputElement) {
+    if (gameEl.value) {
+      this.store.dispatch(new actions.SetGame(gameEl.value));
+
+    }
+  }
+
+  setPlatform(platformEl: HTMLInputElement) {
+    if (platformEl.value) {
+      this.store.dispatch(new actions.SetPlatform(platformEl.value));
+    }
   }
 }

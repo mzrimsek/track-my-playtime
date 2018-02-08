@@ -1,2 +1,23 @@
-<button *ngIf="!active" (click)="startTimer()">Start</button>
-<button *ngIf="active" (click)="stopTimer()">Stop</button>
+<div class="timer">
+  <div class="game">
+    <input type="text"
+           #gameEl
+           [value]="game"
+           (change)="setGame(gameEl)">
+  </div>
+  <div class="platform">
+    <input type="text"
+           #platformEl
+           [value]="platform"
+           (change)="setPlatform(platformEl)">
+  </div>
+  <div class="actionButton">
+    <button *ngIf="!active"
+            class="start"
+            (click)="startTimer()">Start</button>
+    <button *ngIf="active"
+            class="stop"
+            (click)="stopTimer()">Stop</button>
+  </div>
+
+</div>
