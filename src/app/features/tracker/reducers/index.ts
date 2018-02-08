@@ -17,9 +17,13 @@ export const _selectTrackerState = createFeatureSelector<TrackerState>('tracker'
 export const _selectTimer = createSelector(_selectTrackerState, state => state.timer);
 
 export const _selectTimerActive = createSelector(_selectTimer, timer => timer.active);
+export const _selectTimerGame = createSelector(_selectTimer, state => state.game);
+export const _selectTimerPlatform = createSelector(_selectTimer, state => state.platform);
 
 const trackerComponentSelectors = {
-  timerActive: _selectTimerActive
+  timerActive: _selectTimerActive,
+  timerGame: _selectTimerGame,
+  timerPlatform: _selectTimerPlatform
 };
 
 export default trackerComponentSelectors;

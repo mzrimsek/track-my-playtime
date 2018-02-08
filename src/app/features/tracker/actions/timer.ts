@@ -12,4 +12,16 @@ export class TimerStop implements Action {
   constructor() { }
 }
 
-export type All = TimerStart | TimerStop;
+export const SET_GAME = '[Timer] Set Game';
+export class SetGame implements Action {
+  readonly type = SET_GAME;
+  constructor(public game: string) { }
+}
+
+export const SET_PLATFORM = '[Timer] Set Platform';
+export class SetPlatform implements Action {
+  readonly type = SET_PLATFORM;
+  constructor(public platform: string) { }
+}
+
+export type All = TimerStart | TimerStop | SetGame | SetPlatform;

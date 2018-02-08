@@ -24,6 +24,12 @@ export function reducer(state: State = initialState, action: actions.All): State
     case actions.TIMER_STOP: {
       return initialState;
     }
+    case actions.SET_GAME: {
+      return tassign(state, { game: action.game });
+    }
+    case actions.SET_PLATFORM: {
+      return tassign(state, { platform: action.platform });
+    }
     default: {
       return state;
     }
