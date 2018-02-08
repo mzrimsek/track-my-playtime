@@ -12,17 +12,14 @@ import { TrackerModule } from './features/tracker/tracker.module';
 import { reducers } from './reducers';
 import { environment } from '../environments/environment';
 
-let imports = [
+const imports = [
   BrowserModule,
   AppRoutingModule,
   HttpClientModule,
-  TrackerModule,
   StoreModule.forRoot(reducers),
-  EffectsModule.forRoot([])
+  !environment.production ? StoreDevtoolsModule.instrument() : [],
+  EffectsModule.forRoot([]),
+  TrackerModule
 ];
-
-if (!environment.production) {
-  imports = [...imports, StoreDevtoolsModule.instrument()];
-}
 
 export default imports;
