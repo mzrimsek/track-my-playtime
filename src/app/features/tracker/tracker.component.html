@@ -1,4 +1,4 @@
 <div class="tracker">
-  <app-tracker-timer></app-tracker-timer>
-  <app-tracker-history> </app-tracker-history>
+  <app-tracker-timer [active]="timerActive$ | async"></app-tracker-timer>
+  <app-tracker-history></app-tracker-history>
 </div>

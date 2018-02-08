@@ -1,3 +1,2 @@
-<p>
-  timer works!
-</p>
+<button *ngIf="!active" (click)="startTimer()">Start</button>
+<button *ngIf="active" (click)="stopTimer()">Stop</button>
