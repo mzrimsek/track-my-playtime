@@ -16,7 +16,7 @@ export class AppComponent {
   title = 'app';
 
   constructor(private store: Store<State>) {
-    store.dispatch(new actions.InitializeApplication());
+    this.store.dispatch(new actions.InitializeApplication());
   }
 
   routes: RouteEntry[] = [

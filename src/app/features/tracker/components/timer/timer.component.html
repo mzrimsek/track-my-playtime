@@ -6,10 +6,13 @@
            (change)="setGame(gameEl)">
   </div>
   <div class="platform">
-    <input type="text"
-           #platformEl
-           [value]="platform"
-           (change)="setPlatform(platformEl)">
+    <select #platformEl
+            [value]="platform"
+            (change)="setPlatform(platformEl)">
+      <option value="">Select Platform</option>
+      <option *ngFor="let platform of platforms"
+              value="{{ platform }}">{{ platform }}</option>
+    </select>
   </div>
   <div class="actionButton">
     <button *ngIf="!active"

@@ -14,6 +14,7 @@ export class TimerComponent implements OnInit {
   @Input() active: boolean;
   @Input() game: string;
   @Input() platform: string;
+  @Input() platforms: string[];
   constructor(private store: Store<State>) { }
 
   ngOnInit() {
@@ -34,7 +35,7 @@ export class TimerComponent implements OnInit {
     }
   }
 
-  setPlatform(platformEl: HTMLInputElement) {
+  setPlatform(platformEl: HTMLSelectElement) {
     if (platformEl.value) {
       this.store.dispatch(new actions.SetPlatform(platformEl.value));
     }
