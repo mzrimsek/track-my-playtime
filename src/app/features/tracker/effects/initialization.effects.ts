@@ -6,7 +6,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
 
 @Injectable()
-export class TimerInitializationEffects {
+export class TrackerInitializationEffects {
 
   constructor(private actions$: Actions) { }
 

@@ -4,7 +4,8 @@ import * as actions from '../actions/timer';
 export interface State {
   game: string;
   platform: string;
-  time: number;
+  startDate: string;
+  startTime: string;
   active: boolean;
   platforms: string[];
 }
@@ -12,7 +13,8 @@ export interface State {
 const initialState: State = {
   game: '',
   platform: '',
-  time: 0,
+  startDate: '',
+  startTime: '',
   active: false,
   platforms: []
 };
@@ -21,15 +23,16 @@ const initialState: State = {
 export function reducer(state: State = initialState, action: actions.All): State {
   switch (action.type) {
     case actions.TIMER_START: {
-      return tassign(state, { active: true });
-    }
-    case actions.TIMER_STOP: {
+      const currentDate = new Date();
       return tassign(state, {
-        game: '',
-        platform: '',
-        time: 0,
-        active: false,
+        startDate: currentDate.toDateString(),
+        startTime: currentDate.toTimeString(),
+        active: true
       });
+    }
+    case actions.RESET_TIMER: {
+      const platforms = state.platforms;
+      return tassign(initialState, { platforms: platforms });
     }
     case actions.SET_GAME: {
       return tassign(state, { game: action.game });

@@ -1,14 +1,20 @@
 import { Action } from '@ngrx/store';
 
-export const TIMER_START = '[Timer] Start';
+export const TIMER_START = '[Timer] Start Timer';
 export class TimerStart implements Action {
   readonly type = TIMER_START;
   constructor() { }
 }
 
-export const TIMER_STOP = '[Timer] Stop';
+export const TIMER_STOP = '[Timer] Stop Timer';
 export class TimerStop implements Action {
   readonly type = TIMER_STOP;
+  constructor(public endTime: Date) { }
+}
+
+export const RESET_TIMER = '[Timer] Reset Timer';
+export class ResetTimer implements Action {
+  readonly type = RESET_TIMER;
   constructor() { }
 }
 
@@ -38,6 +44,7 @@ export class LoadPlatformsSucceeded implements Action {
 
 export type All = TimerStart |
   TimerStop |
+  ResetTimer |
   SetGame |
   SetPlatform |
   LoadPlatforms |

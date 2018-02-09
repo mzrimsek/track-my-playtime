@@ -8,14 +8,15 @@ import { TrackerComponent } from './tracker.component';
 import { TimerComponent } from './components/timer/timer.component';
 import { HistoryComponent } from './components/history/history.component';
 
-import { TimerInitializationEffects } from './effects/initialization.effects';
+import { TrackerInitializationEffects } from './effects/initialization.effects';
+import { TimerEffects } from './effects/timer.effects';
 import { reducers } from './reducers';
 
 @NgModule({
   imports: [
     CommonModule,
     StoreModule.forFeature('tracker', reducers),
-    EffectsModule.forFeature([TimerInitializationEffects])
+    EffectsModule.forFeature([TrackerInitializationEffects, TimerEffects])
   ],
   declarations: [TrackerComponent, TimerComponent, HistoryComponent]
 })

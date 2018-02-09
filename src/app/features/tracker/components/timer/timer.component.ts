@@ -25,7 +25,7 @@ export class TimerComponent implements OnInit {
   }
 
   stopTimer() {
-    this.store.dispatch(new actions.TimerStop());
+    this.store.dispatch(new actions.TimerStop(new Date()));
   }
 
   setGame(gameEl: HTMLInputElement) {
