@@ -21,15 +21,25 @@ export const _selectTimerGame = createSelector(_selectTimer, state => state.game
 export const _selectTimerPlatform = createSelector(_selectTimer, state => state.platform);
 export const _selectTimerPlatforms = createSelector(_selectTimer, state => state.platforms);
 export const _selectTimerStartDate = createSelector(_selectTimer, state => state.startDate);
-export const _selectTimerStartTime = createSelector(_selectTimer, state => state.startTime);
+export const _selectElapsedTime = createSelector(_selectTimerStartDate, startDate => {
+  if (startDate !== '') {
+    const currentTime = new Date();
+    const startTime = new Date(startDate);
+    const elapsedTime = currentTime.valueOf() - startTime.valueOf();
+    return new Date(elapsedTime).toISOString().substring(11, 19);
+  }
+  return '00:00:00';
+});
 
 const trackerComponentSelectors = {
-  timerActive: _selectTimerActive,
-  timerGame: _selectTimerGame,
-  timerPlatform: _selectTimerPlatform,
-  timerPlatforms: _selectTimerPlatforms,
-  timerStartDate: _selectTimerStartDate,
-  timerStateTime: _selectTimerStartTime
+  timer: {
+    active: _selectTimerActive,
+    game: _selectTimerGame,
+    platform: _selectTimerPlatform,
+    platforms: _selectTimerPlatforms,
+    startDate: _selectTimerStartDate,
+    elapsedTime: _selectElapsedTime
+  }
 };
 
 export default trackerComponentSelectors;

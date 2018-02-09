@@ -5,7 +5,6 @@ export interface State {
   game: string;
   platform: string;
   startDate: string;
-  startTime: string;
   active: boolean;
   platforms: string[];
 }
@@ -14,7 +13,6 @@ const initialState: State = {
   game: '',
   platform: '',
   startDate: '',
-  startTime: '',
   active: false,
   platforms: []
 };
@@ -23,10 +21,8 @@ const initialState: State = {
 export function reducer(state: State = initialState, action: actions.All): State {
   switch (action.type) {
     case actions.TIMER_START: {
-      const currentDate = new Date();
       return tassign(state, {
-        startDate: currentDate.toDateString(),
-        startTime: currentDate.toTimeString(),
+        startDate: new Date().toString(),
         active: true
       });
     }
