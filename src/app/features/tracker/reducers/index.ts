@@ -19,11 +19,13 @@ export const _selectTimer = createSelector(_selectTrackerState, state => state.t
 export const _selectTimerActive = createSelector(_selectTimer, timer => timer.active);
 export const _selectTimerGame = createSelector(_selectTimer, state => state.game);
 export const _selectTimerPlatform = createSelector(_selectTimer, state => state.platform);
+export const _selectTimerPlatforms = createSelector(_selectTimer, state => state.platforms);
 
 const trackerComponentSelectors = {
   timerActive: _selectTimerActive,
   timerGame: _selectTimerGame,
-  timerPlatform: _selectTimerPlatform
+  timerPlatform: _selectTimerPlatform,
+  timerPlatforms: _selectTimerPlatforms
 };
 
 export default trackerComponentSelectors;

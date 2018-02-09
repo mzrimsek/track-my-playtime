@@ -24,4 +24,21 @@ export class SetPlatform implements Action {
   constructor(public platform: string) { }
 }
 
-export type All = TimerStart | TimerStop | SetGame | SetPlatform;
+export const LOAD_PLATFORMS = '[Timer] Load Platforms';
+export class LoadPlatforms implements Action {
+  readonly type = LOAD_PLATFORMS;
+  constructor() { }
+}
+
+export const LOAD_PLATFORMS_SUCCEEDED = '[Timer] Load Platforms Succeeded';
+export class LoadPlatformsSucceeded implements Action {
+  readonly type = LOAD_PLATFORMS_SUCCEEDED;
+  constructor(public platforms: string[]) { }
+}
+
+export type All = TimerStart |
+  TimerStop |
+  SetGame |
+  SetPlatform |
+  LoadPlatforms |
+  LoadPlatformsSucceeded;

@@ -6,13 +6,15 @@ export interface State {
   platform: string;
   time: number;
   active: boolean;
+  platforms: string[];
 }
 
 const initialState: State = {
   game: '',
   platform: '',
   time: 0,
-  active: false
+  active: false,
+  platforms: []
 };
 
 
@@ -22,13 +24,21 @@ export function reducer(state: State = initialState, action: actions.All): State
       return tassign(state, { active: true });
     }
     case actions.TIMER_STOP: {
-      return initialState;
+      return tassign(state, {
+        game: '',
+        platform: '',
+        time: 0,
+        active: false,
+      });
     }
     case actions.SET_GAME: {
       return tassign(state, { game: action.game });
     }
     case actions.SET_PLATFORM: {
       return tassign(state, { platform: action.platform });
+    }
+    case actions.LOAD_PLATFORMS_SUCCEEDED: {
+      return tassign(state, { platforms: action.platforms });
     }
     default: {
       return state;
