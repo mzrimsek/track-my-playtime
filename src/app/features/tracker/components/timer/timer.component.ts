@@ -15,9 +15,19 @@ export class TimerComponent implements OnInit {
   @Input() game: string;
   @Input() platform: string;
   @Input() platforms: string[];
+  @Input() startDate: Date;
+  @Input() currentTime: Date;
   constructor(private store: Store<State>) { }
 
   ngOnInit() {
+  }
+
+  getElapsedTime(startDate: Date, currentTime: Date): string {
+    if (startDate && currentTime) {
+      const elapsedTime = currentTime.valueOf() - startDate.valueOf();
+      return new Date(elapsedTime).toISOString().substring(11, 19);
+    }
+    return '00:00:00';
   }
 
   startTimer() {
