@@ -14,7 +14,6 @@ export class TrackerComponent implements OnInit {
   timerGame$: Observable<string>;
   timerPlatform$: Observable<string>;
   timerPlatforms$: Observable<string[]>;
-  elapsedTime$: Observable<string>;
   constructor(private store: Store<State>) { }
 
   ngOnInit() {
@@ -22,6 +21,5 @@ export class TrackerComponent implements OnInit {
     this.timerGame$ = this.store.select(trackerComponentSelectors.timer.game);
     this.timerPlatform$ = this.store.select(trackerComponentSelectors.timer.platform);
     this.timerPlatforms$ = this.store.select(trackerComponentSelectors.timer.platforms);
-    this.elapsedTime$ = this.store.select(trackerComponentSelectors.timer.elapsedTime);
   }
 }

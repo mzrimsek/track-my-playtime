@@ -15,7 +15,6 @@ export class TimerComponent implements OnInit {
   @Input() game: string;
   @Input() platform: string;
   @Input() platforms: string[];
-  @Input() elapsedTime: string;
   constructor(private store: Store<State>) { }
 
   ngOnInit() {
