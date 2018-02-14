@@ -3,6 +3,8 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { ClockService } from './services/clock.service';
 import trackerComponentSelectors, { State } from './reducers';
+import 'rxjs/add/operator/combineLatest';
+import 'rxjs/add/operator/map';
 
 @Component({
   selector: 'app-tracker',
@@ -15,8 +17,7 @@ export class TrackerComponent implements OnInit {
   timerGame$: Observable<string>;
   timerPlatform$: Observable<string>;
   timerPlatforms$: Observable<string[]>;
-  timerStartDate$: Observable<Date | null>;
-  currentTime$: Observable<Date>;
+  elapsedTime$: Observable<string>;
   constructor(private store: Store<State>, private clockService: ClockService) { }
 
   ngOnInit() {
@@ -24,7 +25,23 @@ export class TrackerComponent implements OnInit {
     this.timerGame$ = this.store.select(trackerComponentSelectors.timer.game);
     this.timerPlatform$ = this.store.select(trackerComponentSelectors.timer.platform);
     this.timerPlatforms$ = this.store.select(trackerComponentSelectors.timer.platforms);
-    this.timerStartDate$ = this.store.select(trackerComponentSelectors.timer.startDate);
-    this.currentTime$ = this.clockService.getClock();
+
+    const timerStartDate$ = this.store.select(trackerComponentSelectors.timer.startDate);
+    const currentTime$ = this.clockService.getClock();
+    this.elapsedTime$ = timerStartDate$.combineLatest(currentTime$).map(([startDate, currentTime]) => {
+      return this.getElapsedTime(startDate, currentTime);
+    });
+  }
+
+  getElapsedTime(startDate: Date | null, currentTime: Date): string {
+    if (startDate !== null && this.isValidDate(startDate) && this.isValidDate(currentTime) && startDate.getTime() <= currentTime.getTime()) {
+      const elapsedTime = currentTime.valueOf() - startDate.valueOf();
+      return new Date(elapsedTime).toISOString().substring(11, 19);
+    }
+    return '00:00:00';
+  }
+
+  isValidDate(date: Date): boolean {
+    return !isNaN(date.getTime());
   }
 }
