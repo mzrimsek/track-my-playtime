@@ -33,8 +33,8 @@ export class TrackerComponent implements OnInit {
     });
   }
 
-  getElapsedTime(startDate: Date | null, currentTime: Date): string {
-    if (startDate !== null && this.isValidDate(startDate) && this.isValidDate(currentTime) && startDate.getTime() <= currentTime.getTime()) {
+  getElapsedTime(startDate: Date, currentTime: Date): string {
+    if (this.isValidDate(startDate) && this.isValidDate(currentTime) && startDate.getTime() <= currentTime.getTime()) {
       const elapsedTime = currentTime.valueOf() - startDate.valueOf();
       return new Date(elapsedTime).toISOString().substring(11, 19);
     }
@@ -42,6 +42,6 @@ export class TrackerComponent implements OnInit {
   }
 
   isValidDate(date: Date): boolean {
-    return !isNaN(date.getTime());
+    return !isNaN(date.getTime()) && date.getTime() !== new Date(0).getTime();
   }
 }

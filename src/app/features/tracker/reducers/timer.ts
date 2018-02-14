@@ -4,7 +4,7 @@ import * as actions from '../actions/timer';
 export interface State {
   game: string;
   platform: string;
-  startDate: Date | null;
+  startDate: Date;
   active: boolean;
   platforms: string[];
 }
@@ -12,7 +12,7 @@ export interface State {
 const initialState: State = {
   game: '',
   platform: '',
-  startDate: null,
+  startDate: new Date(0),
   active: false,
   platforms: []
 };
