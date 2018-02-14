@@ -31,7 +31,7 @@ export class TimerComponent implements OnInit {
   }
 
   isValidDate(date: Date): boolean {
-    return !isNaN(date.getTime());
+    return date && !isNaN(date.getTime());
   }
 
   startTimer() {

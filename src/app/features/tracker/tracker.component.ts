@@ -15,7 +15,7 @@ export class TrackerComponent implements OnInit {
   timerGame$: Observable<string>;
   timerPlatform$: Observable<string>;
   timerPlatforms$: Observable<string[]>;
-  timerStartDate$: Observable<Date>;
+  timerStartDate$: Observable<Date | null>;
   currentTime$: Observable<Date>;
   constructor(private store: Store<State>, private clockService: ClockService) { }
 
