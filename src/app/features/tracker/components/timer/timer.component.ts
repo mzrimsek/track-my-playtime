@@ -23,11 +23,15 @@ export class TimerComponent implements OnInit {
   }
 
   getElapsedTime(startDate: Date, currentTime: Date): string {
-    if (startDate && currentTime) {
+    if (this.isValidDate(startDate) && this.isValidDate(currentTime)) {
       const elapsedTime = currentTime.valueOf() - startDate.valueOf();
       return new Date(elapsedTime).toISOString().substring(11, 19);
     }
     return '00:00:00';
+  }
+
+  isValidDate(date: Date): boolean {
+    return !isNaN(date.getTime());
   }
 
   startTimer() {
