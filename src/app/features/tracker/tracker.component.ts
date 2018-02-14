@@ -28,9 +28,8 @@ export class TrackerComponent implements OnInit {
 
     const timerStartDate$ = this.store.select(trackerComponentSelectors.timer.startDate);
     const currentTime$ = this.clockService.getClock();
-    this.elapsedTime$ = timerStartDate$.combineLatest(currentTime$).map(([startDate, currentTime]) => {
-      return this.getElapsedTime(startDate, currentTime);
-    });
+    this.elapsedTime$ = timerStartDate$.combineLatest(currentTime$)
+      .map(([startDate, currentTime]) => this.getElapsedTime(startDate, currentTime));
   }
 
   getElapsedTime(startDate: Date, currentTime: Date): string {

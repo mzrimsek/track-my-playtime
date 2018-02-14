@@ -19,6 +19,7 @@ export class TimerComponent implements OnInit {
   constructor(private store: Store<State>) { }
 
   ngOnInit() {
+    this.elapsedTime = '00:00:00';
   }
 
   startTimer() {
