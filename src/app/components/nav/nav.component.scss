@@ -1,10 +1,12 @@
+@import "../../../variables.scss";
+
 .nav {
   width: 250px;
   height: 100vh;
   padding: 30px 15px;
 
-  background: #533a7b;
-  color: #e9f1f7;
+  background: $background-dark;
+  color: $text-light;
 
   .banner {
     display: flex;
@@ -22,13 +24,13 @@
       height: 45px;
       padding: 0px 10px;
       border-radius: 8px;
-      
+
       &.active {
-        background: #8d69c6;
+        background: $background-dark-accent;
       }
 
       a{
-        color: #e9f1f7;
+        color: $text-light;
         text-decoration: none;
       }
     }

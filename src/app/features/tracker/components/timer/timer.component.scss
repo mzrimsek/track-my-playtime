@@ -1,3 +1,7 @@
+@import "../../../../../variables.scss";
+
 .timer {
   display: flex;
+  background: $background-light;
+  height: 150px;
 }
