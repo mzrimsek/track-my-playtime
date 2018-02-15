@@ -2,6 +2,7 @@ import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core
 import { Store } from '@ngrx/store';
 import { State } from '../../reducers';
 import * as actions from '../../actions/timer';
+import { TimerInfo } from '../../models';
 
 @Component({
   selector: 'app-tracker-timer',
@@ -11,10 +12,7 @@ import * as actions from '../../actions/timer';
 })
 export class TimerComponent implements OnInit {
 
-  @Input() active: boolean;
-  @Input() game: string;
-  @Input() platform: string;
-  @Input() platforms: string[];
+  @Input() info: TimerInfo;
   @Input() elapsedTime: string;
   constructor(private store: Store<State>) { }
 

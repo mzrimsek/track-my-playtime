@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { ClockService } from './services/clock.service';
 import trackerComponentSelectors, { State } from './reducers';
+import { TimerInfo } from './models';
 import 'rxjs/add/operator/combineLatest';
 import 'rxjs/add/operator/map';
 
@@ -13,20 +14,14 @@ import 'rxjs/add/operator/map';
 })
 export class TrackerComponent implements OnInit {
 
-  timerActive$: Observable<boolean>;
-  timerGame$: Observable<string>;
-  timerPlatform$: Observable<string>;
-  timerPlatforms$: Observable<string[]>;
+  timerInfo$: Observable<TimerInfo>;
   elapsedTime$: Observable<string>;
   constructor(private store: Store<State>, private clockService: ClockService) { }
 
   ngOnInit() {
-    this.timerActive$ = this.store.select(trackerComponentSelectors.timer.active);
-    this.timerGame$ = this.store.select(trackerComponentSelectors.timer.game);
-    this.timerPlatform$ = this.store.select(trackerComponentSelectors.timer.platform);
-    this.timerPlatforms$ = this.store.select(trackerComponentSelectors.timer.platforms);
+    this.timerInfo$ = this.store.select(trackerComponentSelectors.timerInfo);
 
-    const timerStartDate$ = this.store.select(trackerComponentSelectors.timer.startDate);
+    const timerStartDate$ = this.store.select(trackerComponentSelectors.timerStartDate);
     const currentTime$ = this.clockService.getClock();
     this.elapsedTime$ = timerStartDate$.combineLatest(currentTime$)
       .map(([startDate, currentTime]) => this.getElapsedTime(startDate, currentTime));

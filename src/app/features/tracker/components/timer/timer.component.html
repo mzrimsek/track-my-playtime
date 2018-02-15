@@ -3,15 +3,15 @@
     <input type="text"
            placeholder="Game name"
            #gameEl
-           [value]="game"
+           [value]="info.game"
            (change)="setGame(gameEl)">
   </div>
   <div class="platform">
     <select #platformEl
-            [value]="platform"
+            [value]="info.platform"
             (change)="setPlatform(platformEl)">
       <option value="">Select Platform</option>
-      <option *ngFor="let platform of platforms"
+      <option *ngFor="let platform of info.platforms"
               value="{{ platform }}">{{ platform }}</option>
     </select>
   </div>
@@ -19,10 +19,10 @@
     {{ elapsedTime }}
   </div>
   <div class="actionButton">
-    <button *ngIf="!active"
+    <button *ngIf="!info.active"
             class="start"
             (click)="startTimer()">Start</button>
-    <button *ngIf="active"
+    <button *ngIf="info.active"
             class="stop"
             (click)="stopTimer()">Stop</button>
   </div>
