@@ -1,5 +1,5 @@
-import { Action } from '@ngrx/store';
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
+import * as actions from '../actions/history';
 
 export interface History {
   id: string;
@@ -14,8 +14,11 @@ export interface State extends EntityState<History> { }
 export const adapter: EntityAdapter<History> = createEntityAdapter<History>();
 const initialState: State = adapter.getInitialState();
 
-export function reducer(state: State = initialState, action: Action): State {
+export function reducer(state: State = initialState, action: actions.All): State {
   switch (action.type) {
+    case actions.ADD_NEW_HISTORY_ITEM: {
+      return adapter.addOne(action.item, state);
+    }
     default: {
       return state;
     }
