@@ -1,4 +1,5 @@
 import { Action } from '@ngrx/store';
+import { TimerInfo } from '../models';
 
 export const TIMER_START = '[Timer] Start Timer';
 export class TimerStart implements Action {
@@ -9,7 +10,7 @@ export class TimerStart implements Action {
 export const TIMER_STOP = '[Timer] Stop Timer';
 export class TimerStop implements Action {
   readonly type = TIMER_STOP;
-  constructor(public endTime: Date) { }
+  constructor(public timerInfo: TimerInfo, public endTime: Date) { }
 }
 
 export const RESET_TIMER = '[Timer] Reset Timer';

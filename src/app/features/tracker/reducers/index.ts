@@ -21,16 +21,16 @@ export const _selectTrackerState = createFeatureSelector<TrackerState>('tracker'
 export const _selectTimer = createSelector(_selectTrackerState, state => state.timer);
 export const _selectHistory = createSelector(_selectTrackerState, state => state.history);
 
-export const _selectTimerInfo = createSelector(_selectTimer, timer => {
+export const _selectTimerStartDate = createSelector(_selectTimer, state => state.startDate);
+export const _selectTimerInfo = createSelector(_selectTimer, _selectTimerStartDate, (timer, startDate) => {
   return <TimerInfo>{
     active: timer.active,
     game: timer.game,
     platform: timer.platform,
+    startDate,
     platforms: timer.platforms
   };
 });
-
-export const _selectTimerStartDate = createSelector(_selectTimer, state => state.startDate);
 
 const trackerComponentSelectors = {
   timerInfo: _selectTimerInfo,
