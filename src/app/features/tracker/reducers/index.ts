@@ -1,8 +1,10 @@
 import { ActionReducerMap, createFeatureSelector, createSelector } from '@ngrx/store';
 import * as fromTimer from './timer';
+import * as fromHistory from './history';
 
 export interface TrackerState {
   timer: fromTimer.State;
+  history: fromHistory.State;
 }
 
 export interface State {
@@ -10,11 +12,13 @@ export interface State {
 }
 
 export const reducers: ActionReducerMap<TrackerState> = {
-  timer: fromTimer.reducer
+  timer: fromTimer.reducer,
+  history: fromHistory.reducer
 };
 
 export const _selectTrackerState = createFeatureSelector<TrackerState>('tracker');
 export const _selectTimer = createSelector(_selectTrackerState, state => state.timer);
+export const _selectHistory = createSelector(_selectTrackerState, state => state.history);
 
 export const _selectTimerActive = createSelector(_selectTimer, timer => timer.active);
 export const _selectTimerGame = createSelector(_selectTimer, state => state.game);
