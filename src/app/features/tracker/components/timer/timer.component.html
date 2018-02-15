@@ -1,6 +1,7 @@
 <div class="timer drop-shadow">
   <div class="game">
     <input type="text"
+           placeholder="Game name"
            #gameEl
            [value]="game"
            (change)="setGame(gameEl)">
@@ -25,5 +26,4 @@
             class="stop"
             (click)="stopTimer()">Stop</button>
   </div>
-
 </div>

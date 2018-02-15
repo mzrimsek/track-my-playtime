@@ -1,3 +1,5 @@
+@import "./variables.scss";
+
 html {
   box-sizing: border-box;
 }
@@ -9,8 +11,8 @@ html {
 body {
   margin: 0;
   padding: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 1.25em;
+  font-family: $base-font-family;
+  font-size: $base-font-size;
 }
 
 .drop-shadow {
