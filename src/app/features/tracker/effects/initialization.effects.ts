@@ -24,9 +24,13 @@ export class TrackerInitializationEffects {
   @Effect() loadPlatforms$ =
     this.actions$
       .ofType(timerActions.LOAD_PLATFORMS)
-      .switchMap(() => this.http.get<{ _data: string[] }>(this.platformsUrl)
+      .switchMap(() => this.http.get<PlatformsResponse>(this.platformsUrl)
         .map(res => res._data)
         .map(data => {
           return new timerActions.LoadPlatformsSucceeded(data);
         }));
+}
+
+interface PlatformsResponse {
+  _data: string[];
 }
