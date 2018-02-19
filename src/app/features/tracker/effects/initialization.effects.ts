@@ -1,39 +1,32 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Actions, Effect } from '@ngrx/effects';
 import * as appActions from '../../../actions';
 import * as timerActions from '../actions/timer';
+import { environment } from '../../../../environments/environment';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/mergeMap';
 
 @Injectable()
 export class TrackerInitializationEffects {
 
-  constructor(private actions$: Actions) { }
+  private platformsUrl = environment.platformsUrl;
+  constructor(private actions$: Actions, private http: HttpClient) { }
 
   @Effect() initialize$ =
     this.actions$
       .ofType(appActions.APP_INIT)
-      .mergeMap(action => [
+      .mergeMap(_ => [
         new timerActions.LoadPlatforms()
       ]);
 
   @Effect() loadPlatforms$ =
-    this.actions$.ofType(timerActions.LOAD_PLATFORMS)
-      .map(() => {
-        return new timerActions.LoadPlatformsSucceeded([
-          'PS3',
-          'PS4',
-          'Xbox 360',
-          'Xbox One',
-          '3DS',
-          'Switch',
-          'PC - Steam',
-          'PC - GoG',
-          'PC - Battle.net',
-          'PC - Origin',
-          'PC - Uplay',
-          'PC - Other',
-          'Mobile'
-        ]);
-      });
+    this.actions$
+      .ofType(timerActions.LOAD_PLATFORMS)
+      .switchMap(() => this.http.get<{ _data: string[] }>(this.platformsUrl)
+        .map(res => res._data)
+        .map(data => {
+          return new timerActions.LoadPlatformsSucceeded(data);
+        }));
 }
