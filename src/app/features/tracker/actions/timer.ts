@@ -7,12 +7,6 @@ export class TimerStart implements Action {
   constructor() { }
 }
 
-export const TIMER_STOP = '[Timer] Stop Timer';
-export class TimerStop implements Action {
-  readonly type = TIMER_STOP;
-  constructor(public info: TimerInfo, public endTime: Date) { }
-}
-
 export const RESET_TIMER = '[Timer] Reset Timer';
 export class ResetTimer implements Action {
   readonly type = RESET_TIMER;
@@ -56,7 +50,6 @@ export class SaveTimerInfoSucceeded implements Action {
 }
 
 export type All = TimerStart |
-  TimerStop |
   ResetTimer |
   SetGame |
   SetPlatform |
