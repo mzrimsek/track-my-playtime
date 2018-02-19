@@ -12,13 +12,14 @@ import { ClockService } from './services/clock.service';
 
 import { TrackerInitializationEffects } from './effects/initialization.effects';
 import { TimerEffects } from './effects/timer.effects';
+import { HistoryEffects } from './effects/history.effects';
 import { reducers } from './reducers';
 
 @NgModule({
   imports: [
     CommonModule,
     StoreModule.forFeature('tracker', reducers),
-    EffectsModule.forFeature([TrackerInitializationEffects, TimerEffects])
+    EffectsModule.forFeature([TrackerInitializationEffects, TimerEffects, HistoryEffects])
   ],
   declarations: [TrackerComponent, TimerComponent, HistoryComponent],
   providers: [ClockService]

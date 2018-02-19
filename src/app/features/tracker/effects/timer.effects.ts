@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Actions, Effect } from '@ngrx/effects';
 import * as timerActions from '../actions/timer';
-import { TimerInfo, HistoryListItem } from '../models';
+import { HistoryListItem } from '../models';
 import { environment } from '../../../../environments/environment';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
@@ -12,14 +12,6 @@ import 'rxjs/add/operator/mergeMap';
 export class TimerEffects {
 
   constructor(private actions$: Actions, private http: HttpClient) { }
-
-  @Effect() stopTimer$ =
-    this.actions$
-      .ofType(timerActions.TIMER_STOP)
-      .mergeMap(action => [
-        new timerActions.SaveTimerInfo(<TimerInfo>action['info'], <Date>action['endTime']),
-        new timerActions.ResetTimer()
-      ]);
 
   @Effect() saveTimerInfo$ =
     this.actions$
@@ -32,9 +24,10 @@ export class TimerEffects {
       })
       .switchMap(addTimerInfo => this.http.post<HistoryItemResponse>(environment.urls.saveTimerInfo, addTimerInfo))
       .map(res => res._data)
-      .map(item => {
-        return new timerActions.SaveTimerInfoSucceeded(item);
-      });
+      .mergeMap(item => [
+        new timerActions.SaveTimerInfoSucceeded(item),
+        new timerActions.ResetTimer()
+      ]);
 }
 
 interface AddTimerInfo {
