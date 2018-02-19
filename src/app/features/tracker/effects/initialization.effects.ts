@@ -11,7 +11,6 @@ import 'rxjs/add/operator/mergeMap';
 @Injectable()
 export class TrackerInitializationEffects {
 
-  private platformsUrl = environment.platformsUrl;
   constructor(private actions$: Actions, private http: HttpClient) { }
 
   @Effect() initialize$ =
@@ -24,7 +23,7 @@ export class TrackerInitializationEffects {
   @Effect() loadPlatforms$ =
     this.actions$
       .ofType(timerActions.LOAD_PLATFORMS)
-      .switchMap(() => this.http.get<PlatformsResponse>(this.platformsUrl)
+      .switchMap(() => this.http.get<PlatformsResponse>(environment.urls.loadPlatforms)
         .map(res => res._data)
         .map(data => {
           return new timerActions.LoadPlatformsSucceeded(data);

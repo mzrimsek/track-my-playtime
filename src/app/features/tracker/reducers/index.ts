@@ -24,11 +24,8 @@ export const _selectHistory = createSelector(_selectTrackerState, state => state
 export const _selectTimerStartDate = createSelector(_selectTimer, state => state.startDate);
 export const _selectTimerInfo = createSelector(_selectTimer, _selectTimerStartDate, (timer, startDate) => {
   return <TimerInfo>{
-    active: timer.active,
-    game: timer.game,
-    platform: timer.platform,
-    startDate,
-    platforms: timer.platforms
+    ...timer,
+    startDate
   };
 });
 

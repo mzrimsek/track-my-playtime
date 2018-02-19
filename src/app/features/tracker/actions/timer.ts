@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { TimerInfo } from '../models';
+import { TimerInfo, HistoryListItem } from '../models';
 
 export const TIMER_START = '[Timer] Start Timer';
 export class TimerStart implements Action {
@@ -10,7 +10,7 @@ export class TimerStart implements Action {
 export const TIMER_STOP = '[Timer] Stop Timer';
 export class TimerStop implements Action {
   readonly type = TIMER_STOP;
-  constructor(public timerInfo: TimerInfo, public endTime: Date) { }
+  constructor(public info: TimerInfo, public endTime: Date) { }
 }
 
 export const RESET_TIMER = '[Timer] Reset Timer';
@@ -43,10 +43,24 @@ export class LoadPlatformsSucceeded implements Action {
   constructor(public platforms: string[]) { }
 }
 
+export const SAVE_TIMER_INFO = '[Timer] Save Timer Info';
+export class SaveTimerInfo implements Action {
+  readonly type = SAVE_TIMER_INFO;
+  constructor(public info: TimerInfo, public endTime: Date) { }
+}
+
+export const SAVE_TIMER_INFO_SUCCEEDED = '[Timer] Save Timer Info Succeeded';
+export class SaveTimerInfoSucceeded implements Action {
+  readonly type = SAVE_TIMER_INFO_SUCCEEDED;
+  constructor(public item: HistoryListItem) { }
+}
+
 export type All = TimerStart |
   TimerStop |
   ResetTimer |
   SetGame |
   SetPlatform |
   LoadPlatforms |
-  LoadPlatformsSucceeded;
+  LoadPlatformsSucceeded |
+  SaveTimerInfo |
+  SaveTimerInfoSucceeded;
