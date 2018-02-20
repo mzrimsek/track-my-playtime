@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { TimerInfo } from '../../models';
 import { State } from '../../reducers';
 import * as actions from '../../actions/timer';
-import { TimerInfo } from '../../models';
 
 @Component({
   selector: 'app-tracker-timer',

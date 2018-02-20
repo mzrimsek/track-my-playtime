@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { ClockService } from './services/clock.service';
-import trackerComponentSelectors, { State } from './reducers';
 import { TimerInfo } from './models';
+import trackerComponentSelectors, { State } from './reducers';
 import 'rxjs/add/operator/combineLatest';
 import 'rxjs/add/operator/map';
 

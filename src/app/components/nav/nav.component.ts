@@ -11,9 +11,7 @@ export class NavComponent implements OnInit {
   @Input() routes: RouteEntry[] = [];
   constructor() { }
 
-  ngOnInit() {
-  }
-
+  ngOnInit() { }
 }
 
 export interface RouteEntry {
