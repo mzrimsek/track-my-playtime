@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Actions, Effect } from '@ngrx/effects';
+import { TimerService } from '../services/timer.service';
 import * as appActions from '../../../actions';
 import * as timerActions from '../actions/timer';
-import { environment } from '../../../../environments/environment';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/mergeMap';
@@ -11,7 +10,7 @@ import 'rxjs/add/operator/mergeMap';
 @Injectable()
 export class TrackerInitializationEffects {
 
-  constructor(private actions$: Actions, private http: HttpClient) { }
+  constructor(private actions$: Actions, private timerService: TimerService) { }
 
   @Effect() initialize$ =
     this.actions$
@@ -23,13 +22,8 @@ export class TrackerInitializationEffects {
   @Effect() loadPlatforms$ =
     this.actions$
       .ofType(timerActions.LOAD_PLATFORMS)
-      .switchMap(() => this.http.get<PlatformsResponse>(environment.urls.loadPlatforms)
-        .map(res => res._data)
+      .switchMap(() => this.timerService.getPlatforms()
         .map(data => {
           return new timerActions.LoadPlatformsSucceeded(data);
         }));
-}
-
-interface PlatformsResponse {
-  _data: string[];
 }

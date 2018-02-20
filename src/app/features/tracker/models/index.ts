@@ -13,3 +13,10 @@ export interface HistoryListItem {
   startDate: Date;
   endDate: Date;
 }
+
+export interface AddTimerInfo {
+  game: string;
+  platform: string;
+  startDate: Date;
+  endDate: Date;
+}
