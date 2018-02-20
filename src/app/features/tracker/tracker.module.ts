@@ -10,6 +10,7 @@ import { HistoryComponent } from './components/history/history.component';
 
 import { ClockService } from './services/clock.service';
 import { TimerService } from './services/timer.service';
+import { HistoryService } from './services/history.service';
 
 import { TrackerInitializationEffects } from './effects/initialization.effects';
 import { TimerEffects } from './effects/timer.effects';
@@ -23,6 +24,6 @@ import { reducers } from './reducers';
     EffectsModule.forFeature([TrackerInitializationEffects, TimerEffects, HistoryEffects])
   ],
   declarations: [TrackerComponent, TimerComponent, HistoryComponent],
-  providers: [ClockService, TimerService]
+  providers: [ClockService, TimerService, HistoryService]
 })
 export class TrackerModule { }

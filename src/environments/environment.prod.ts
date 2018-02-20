@@ -4,6 +4,7 @@ export const environment: Environment = {
   production: true,
   urls: {
     loadPlatforms: '',
-    saveTimerInfo: ''
+    saveTimerInfo: '',
+    loadHistoryItems: ''
   }
 };

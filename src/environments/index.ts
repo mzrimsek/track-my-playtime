@@ -3,5 +3,6 @@ export interface Environment {
   urls: {
     loadPlatforms: string;
     saveTimerInfo: string;
+    loadHistoryItems: string;
   };
 }
