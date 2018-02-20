@@ -1,5 +1,5 @@
 import { ActionReducerMap, createFeatureSelector, createSelector } from '@ngrx/store';
-import { TimerInfo } from '../models';
+import { TimerInfo, HistoryListItem } from '../models';
 import * as fromTimer from './timer';
 import * as fromHistory from './history';
 
@@ -29,9 +29,17 @@ export const _selectTimerInfo = createSelector(_selectTimer, _selectTimerStartDa
   };
 });
 
+export const { selectAll: _selectAllHistory } = fromHistory.adapter.getSelectors(_selectHistory);
+export const _selectHistoryItems = createSelector(_selectAllHistory,
+  entities => entities.map(
+    entity => <HistoryListItem>{
+      ...entity
+    }));
+
 const trackerComponentSelectors = {
   timerInfo: _selectTimerInfo,
-  timerStartDate: _selectTimerStartDate
+  timerStartDate: _selectTimerStartDate,
+  historyItems: _selectHistoryItems
 };
 
 export default trackerComponentSelectors;
