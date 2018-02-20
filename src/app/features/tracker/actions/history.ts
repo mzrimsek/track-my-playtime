@@ -7,4 +7,18 @@ export class AddNewHistoryItem implements Action {
   constructor(public item: HistoryListItem) { }
 }
 
-export type All = AddNewHistoryItem;
+export const LOAD_HISTORY_ITEMS = '[History] Load Items';
+export class LoadHistoryItems implements Action {
+  readonly type = LOAD_HISTORY_ITEMS;
+  constructor() { }
+}
+
+export const LOAD_HISTORY_ITEMS_SUCCEEDED = '[History] Load Items Succeeded';
+export class LoadHistoryItemsSucceeded implements Action {
+  readonly type = LOAD_HISTORY_ITEMS_SUCCEEDED;
+  constructor(public items: HistoryListItem[]) { }
+}
+
+export type All = AddNewHistoryItem |
+  LoadHistoryItems |
+  LoadHistoryItemsSucceeded;

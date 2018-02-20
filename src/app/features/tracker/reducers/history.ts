@@ -19,6 +19,9 @@ export function reducer(state: State = initialState, action: actions.All): State
     case actions.ADD_NEW_HISTORY_ITEM: {
       return adapter.addOne(action.item, state);
     }
+    case actions.LOAD_HISTORY_ITEMS_SUCCEEDED: {
+      return adapter.addAll(action.items, state);
+    }
     default: {
       return state;
     }
