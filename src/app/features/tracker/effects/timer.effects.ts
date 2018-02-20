@@ -15,11 +15,12 @@ export class TimerEffects {
   @Effect() saveTimerInfo$ =
     this.actions$
       .ofType(timerActions.SAVE_TIMER_INFO)
+      .map(action => action as timerActions.SaveTimerInfo)
       .map(action => <AddTimerInfo>{
-        game: <string>action['info'].game,
-        platform: <string>action['info'].platform,
-        startDate: <Date>action['info'].startDate,
-        endDate: <Date>action['endTime']
+        game: action.info.game,
+        platform: action.info.platform,
+        startDate: action.info.startDate,
+        endDate: action.endTime
       })
       .switchMap(addTimerInfo => this.timerService.saveTimerInfo(addTimerInfo))
       .mergeMap(item => [

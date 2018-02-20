@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
-import { HistoryListItem } from '../models';
 import * as timerActions from '../actions/timer';
 import * as historyActions from '../actions/history';
 import 'rxjs/add/operator/map';
@@ -14,7 +13,8 @@ export class HistoryEffects {
   @Effect() saveTimerInfoSucceeded$ =
     this.actions$
       .ofType(timerActions.SAVE_TIMER_INFO_SUCCEEDED)
+      .map(action => action as timerActions.SaveTimerInfoSucceeded)
       .mergeMap(action => [
-        new historyActions.AddNewHistoryItem(<HistoryListItem>action['item'])
+        new historyActions.AddNewHistoryItem(action.item)
       ]);
 }
