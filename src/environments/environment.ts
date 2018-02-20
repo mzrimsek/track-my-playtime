@@ -5,6 +5,6 @@ export const environment: Environment = {
   urls: {
     loadPlatforms: 'http://localhost:3000/timer/platforms',
     saveTimerInfo: 'http://localhost:3000/timer/save',
-    loadHistoryItems: 'http://localhost:3000/history/items'
+    loadHistoryItems: 'http://localhost:3000/history'
   }
 };
