@@ -1,4 +1,8 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { HistoryListItem } from '../../models';
+import { State } from '../../reducers';
+import * as actions from '../../actions/history';
 
 @Component({
   selector: 'app-tracker-history',
@@ -8,7 +12,8 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 })
 export class HistoryComponent implements OnInit {
 
-  constructor() { }
+  @Input() items: HistoryListItem[];
+  constructor(private store: Store<State>) { }
 
   ngOnInit() { }
 }

@@ -1,3 +1,6 @@
-<p>
-  history works!
-</p>
+<div class="history">
+  <div class="item"
+       *ngFor="let item of items">
+    {{ item.game }} - {{ item.platform }}
+  </div>
+</div>
