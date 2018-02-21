@@ -54,6 +54,8 @@
     width: 5%;
 
     .remove {
+      color: $neutral-action-color;
+
       &:hover {
         cursor: pointer;
       }

@@ -54,14 +54,14 @@
     width: 5%;
 
     .start {
-      color: green;
+      color: $good-action-color;
 
       &:hover {
         cursor: pointer;
       }
     }
     .stop {
-      color: red;
+      color: $bad-action-color;
 
       &:hover {
         cursor: pointer;
@@ -76,6 +76,8 @@
     width: 5%;
 
     .cancel {
+      color: $neutral-action-color;
+
       &:hover {
         cursor: pointer;
       }
