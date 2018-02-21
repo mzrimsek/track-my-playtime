@@ -13,12 +13,10 @@ import * as actions from '../../actions/timer';
 export class TimerComponent implements OnInit {
 
   @Input() info: TimerInfo;
-  @Input() elapsedTime: string;
+  @Input() currentTime: Date;
   constructor(private store: Store<State>) { }
 
-  ngOnInit() {
-    this.elapsedTime = '00:00:00';
-  }
+  ngOnInit() { }
 
   startTimer() {
     this.store.dispatch(new actions.StartTimer());

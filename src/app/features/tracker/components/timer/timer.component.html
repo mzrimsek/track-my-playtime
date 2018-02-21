@@ -16,7 +16,7 @@
     </select>
   </div>
   <div class="time">
-    {{ elapsedTime }}
+    {{ info.startDate | elapsedTime:currentTime }}
   </div>
   <div class="actionButton">
     <button *ngIf="!info.active"
