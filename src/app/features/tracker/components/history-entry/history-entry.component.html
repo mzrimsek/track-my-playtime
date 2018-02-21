@@ -23,8 +23,10 @@
       {{ item.startDate | elapsedTime:item.endDate}}
     </div>
   </div>
-  <div class="actionButton">
-    <button class="remove"
-            (click)="remove()">Remove</button>
+  <div class="primary-action">
+    <div class="remove fa-lg"
+         (click)="remove()">
+      <i class="fas fa-ban"></i>
+    </div>
   </div>
 </div>

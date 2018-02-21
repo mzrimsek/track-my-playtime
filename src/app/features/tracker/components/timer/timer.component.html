@@ -18,15 +18,23 @@
   <div class="time">
     {{ info.startDate | elapsedTime:currentTime }}
   </div>
-  <div class="actionButton">
-    <button *ngIf="!info.active"
-            class="start"
-            (click)="startTimer()">Start</button>
-    <button *ngIf="info.active"
-            class="stop"
-            (click)="stopTimer()">Stop</button>
-    <button *ngIf="info.active"
-            class="cancel"
-            (click)="cancelTimer()">Cancel</button>
+  <div class="primary-action">
+    <div *ngIf="!info.active"
+         class="start fa-2x"
+         (click)="startTimer()">
+      <i class="fas fa-play-circle"></i>
+    </div>
+    <div *ngIf="info.active"
+         class="stop fa-2x"
+         (click)="stopTimer()">
+      <i class="fas fa-stop-circle"></i>
+    </div>
+  </div>
+  <div class="secondary-action">
+    <div *ngIf="info.active"
+         class="cancel fa-lg"
+         (click)="cancelTimer()">
+      <i class="fas fa-ban"></i>
+    </div>
   </div>
 </div>

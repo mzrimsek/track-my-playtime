@@ -10,6 +10,7 @@
 
   .content {
     width: $content-width;
+    min-height: 100vh;
     margin-left: $sidebar-width;
   }
 }

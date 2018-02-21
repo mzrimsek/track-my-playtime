@@ -17,7 +17,7 @@
   }
 
   .game {
-    width: 50%;
+    width: 55%;
     input {
       @extend .display-element;
       outline: none;
@@ -47,7 +47,16 @@
     width: 20%;
   }
 
-  .actionButton {
-    width: 10%;
+  .primary-action {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 5%;
+
+    .remove {
+      &:hover {
+        cursor: pointer;
+      }
+    }
   }
 }

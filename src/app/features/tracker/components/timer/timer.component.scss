@@ -18,7 +18,7 @@
   }
 
   .game {
-    width: 50%;
+    width: 60%;
     input {
       @extend .display-element;
       outline: none;
@@ -42,10 +42,43 @@
 
   .time {
     @extend .display-element;
+    display: flex;
+    justify-content: center;
     width: 10%;
   }
 
-  .actionButton {
-    width: 20%;
+  .primary-action {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 5%;
+
+    .start {
+      color: green;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+    .stop {
+      color: red;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  .secondary-action {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 5%;
+
+    .cancel {
+      &:hover {
+        cursor: pointer;
+      }
+    }
   }
 }
