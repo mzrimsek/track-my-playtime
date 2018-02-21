@@ -17,4 +17,20 @@ export class HistoryComponent implements OnInit {
   constructor(private store: Store<State>) { }
 
   ngOnInit() { }
+
+  updateGame(id: string, gameEl: HTMLInputElement) {
+    if (gameEl.value) {
+      this.store.dispatch(new actions.UpdateGame(id, gameEl.value));
+    }
+  }
+
+  updatePlatform(id: string, platformEl: HTMLSelectElement) {
+    if (platformEl.value) {
+      this.store.dispatch(new actions.UpdatePlatform(id, platformEl.value));
+    }
+  }
+
+  remove(id: string) {
+    this.store.dispatch(new actions.RemoveHistoryItem(id));
+  }
 }

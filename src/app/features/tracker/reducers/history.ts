@@ -22,6 +22,25 @@ export function reducer(state: State = initialState, action: actions.All): State
     case actions.LOAD_HISTORY_ITEMS_SUCCEEDED: {
       return adapter.addAll(action.items, state);
     }
+    case actions.REMOVE_HISTORY_ITEM: {
+      return adapter.removeOne(action.id, state);
+    }
+    case actions.UPDATE_GAME: {
+      return adapter.updateOne({
+        id: action.id,
+        changes: {
+          game: action.game
+        }
+      }, state);
+    }
+    case actions.UPDATE_PLATFORM: {
+      return adapter.updateOne({
+        id: action.id,
+        changes: {
+          platform: action.platform
+        }
+      }, state);
+    }
     default: {
       return state;
     }

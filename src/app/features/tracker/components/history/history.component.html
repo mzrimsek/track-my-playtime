@@ -7,11 +7,13 @@
         <input type="text"
                placeholder="Game name"
                #gameEl
-               [value]="item.game">
+               [value]="item.game"
+               (change)="updateGame(item.id, gameEl)">
       </div>
       <div class="platform">
         <select #platformEl
-                [value]="item.platform">
+                [value]="item.platform"
+                (change)="updatePlatform(item.id, platformEl)">
           <option value="">Select Platform</option>
           <option *ngFor="let platform of platforms"
                   value="{{ platform }}">{{ platform }}</option>
@@ -21,7 +23,8 @@
         {{ item.startDate | date:'mediumTime' }} - {{ item.endDate | date:'mediumTime' }} ({{ item.startDate | elapsedTime:item.endDate}})
       </div>
       <div class="actionButton">
-        <button class="remove">Remove</button>
+        <button class="remove"
+                (click)="remove(item.id)">Remove</button>
       </div>
     </div>
   </div>
