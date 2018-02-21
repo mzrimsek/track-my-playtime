@@ -1,3 +1,25 @@
-<p>
-  history-entry works!
-</p>
+<div class="history-entry drop-shadow">
+  <div class="game">
+    <input type="text"
+           placeholder="Game name"
+           #gameEl
+           [value]="item.game"
+           (change)="updateGame(gameEl)">
+  </div>
+  <div class="platform">
+    <select #platformEl
+            [value]="item.platform"
+            (change)="updatePlatform(platformEl)">
+      <option value="">Select Platform</option>
+      <option *ngFor="let platform of platforms"
+              value="{{ platform }}">{{ platform }}</option>
+    </select>
+  </div>
+  <div class="time">
+    {{ item.startDate | date:'shortTime' }} - {{ item.endDate | date:'shortTime' }} ({{ item.startDate | elapsedTime:item.endDate}})
+  </div>
+  <div class="actionButton">
+    <button class="remove"
+            (click)="remove()">Remove</button>
+  </div>
+</div>

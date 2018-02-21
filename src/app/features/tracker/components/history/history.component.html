@@ -1,32 +1,9 @@
 <div class="history">
   <div class="items"
        *ngIf="items.length !== 0">
-    <div class="item drop-shadow"
-         *ngFor="let item of items">
-      <div class="game">
-        <input type="text"
-               placeholder="Game name"
-               #gameEl
-               [value]="item.game"
-               (change)="updateGame(item.id, gameEl)">
-      </div>
-      <div class="platform">
-        <select #platformEl
-                [value]="item.platform"
-                (change)="updatePlatform(item.id, platformEl)">
-          <option value="">Select Platform</option>
-          <option *ngFor="let platform of platforms"
-                  value="{{ platform }}">{{ platform }}</option>
-        </select>
-      </div>
-      <div class="time">
-        {{ item.startDate | date:'shortTime' }} - {{ item.endDate | date:'shortTime' }} ({{ item.startDate | elapsedTime:item.endDate}})
-      </div>
-      <div class="actionButton">
-        <button class="remove"
-                (click)="remove(item.id)">Remove</button>
-      </div>
-    </div>
+    <app-tracker-history-entry *ngFor="let item of items"
+                               [item]="item"
+                               [platforms]="platforms"></app-tracker-history-entry>
   </div>
   <div class="no-items"
        *ngIf="items.length === 0">
