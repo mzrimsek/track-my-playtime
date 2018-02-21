@@ -27,5 +27,12 @@ export class TimerEffects {
         new timerActions.SaveTimerInfoSucceeded(item),
         new timerActions.ResetTimer()
       ]);
+
+  @Effect() cancelTimer$ =
+    this.actions$
+      .ofType(timerActions.CANCEL_TIMER)
+      .mergeMap(() => [
+        new timerActions.ResetTimer()
+      ]);
 }
 

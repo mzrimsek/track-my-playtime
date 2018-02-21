@@ -21,11 +21,15 @@ export class TimerComponent implements OnInit {
   }
 
   startTimer() {
-    this.store.dispatch(new actions.TimerStart());
+    this.store.dispatch(new actions.StartTimer());
   }
 
   stopTimer() {
     this.store.dispatch(new actions.SaveTimerInfo(this.info, new Date()));
+  }
+
+  cancelTimer() {
+    this.store.dispatch(new actions.CancelTimer());
   }
 
   setGame(gameEl: HTMLInputElement) {

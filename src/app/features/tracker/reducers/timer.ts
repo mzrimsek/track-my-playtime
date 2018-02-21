@@ -20,7 +20,7 @@ const initialState: State = {
 
 export function reducer(state: State = initialState, action: actions.All): State {
   switch (action.type) {
-    case actions.TIMER_START: {
+    case actions.START_TIMER: {
       return tassign(state, {
         startDate: new Date(),
         active: true

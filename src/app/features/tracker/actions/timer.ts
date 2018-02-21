@@ -1,9 +1,9 @@
 import { Action } from '@ngrx/store';
 import { TimerInfo, HistoryListItem } from '../models';
 
-export const TIMER_START = '[Timer] Start Timer';
-export class TimerStart implements Action {
-  readonly type = TIMER_START;
+export const START_TIMER = '[Timer] Start Timer';
+export class StartTimer implements Action {
+  readonly type = START_TIMER;
   constructor() { }
 }
 
@@ -49,11 +49,19 @@ export class SaveTimerInfoSucceeded implements Action {
   constructor(public item: HistoryListItem) { }
 }
 
-export type All = TimerStart |
+export const CANCEL_TIMER = '[Timer] Cancel Timer';
+export class CancelTimer implements Action {
+  readonly type = CANCEL_TIMER;
+  constructor() { }
+}
+
+
+export type All = StartTimer |
   ResetTimer |
   SetGame |
   SetPlatform |
   LoadPlatforms |
   LoadPlatformsSucceeded |
   SaveTimerInfo |
-  SaveTimerInfoSucceeded;
+  SaveTimerInfoSucceeded |
+  CancelTimer;
