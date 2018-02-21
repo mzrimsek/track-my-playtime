@@ -25,7 +25,8 @@
     <button *ngIf="info.active"
             class="stop"
             (click)="stopTimer()">Stop</button>
-    <button class="cancel"
+    <button *ngIf="info.active"
+            class="cancel"
             (click)="cancelTimer()">Cancel</button>
   </div>
 </div>
