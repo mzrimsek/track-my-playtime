@@ -3,7 +3,8 @@
        *ngIf="items.length !== 0">
     <div class="item"
          *ngFor="let item of items">
-      {{ item.game }} - {{ item.platform }}
+      {{ item.game }} ({{ item.platform }}) {{ item.startDate | date:'mediumTime' }} - {{ item.endDate | date:'mediumTime' }} ({{
+      item.startDate | elapsedTime:item.endDate}})
     </div>
   </div>
   <div class="no-items"

@@ -6,6 +6,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 
 import { AppRoutingModule } from './app-routing.module';
+import { SharedModule } from './shared/shared.module';
 
 import { TrackerModule } from './features/tracker/tracker.module';
 
@@ -15,6 +16,7 @@ import { environment } from '../environments/environment';
 const imports = [
   BrowserModule,
   AppRoutingModule,
+  SharedModule,
   HttpClientModule,
   StoreModule.forRoot(reducers),
   !environment.production ? StoreDevtoolsModule.instrument() : [],
