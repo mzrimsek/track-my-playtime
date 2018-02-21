@@ -28,6 +28,7 @@ export const _selectTimerInfo = createSelector(_selectTimer, _selectTimerStartDa
     startDate
   };
 });
+export const _selectTimerPlatforms = createSelector(_selectTimer, state => state.platforms);
 
 export const { selectAll: _selectAllHistory } = fromHistory.adapter.getSelectors(_selectHistory);
 export const _selectHistoryItems = createSelector(_selectAllHistory,
@@ -39,6 +40,7 @@ export const _selectHistoryItems = createSelector(_selectAllHistory,
 const trackerComponentSelectors = {
   timerInfo: _selectTimerInfo,
   timerStartDate: _selectTimerStartDate,
+  timerPlatforms: _selectTimerPlatforms,
   historyItems: _selectHistoryItems
 };
 

@@ -1,5 +1,6 @@
 <div class="tracker">
   <app-tracker-timer [info]="timerInfo$ | async"
                      [currentTime]="currentTime$ | async"></app-tracker-timer>
-  <app-tracker-history [items]="historyItems$ | async"></app-tracker-history>
+  <app-tracker-history [items]="historyItems$ | async"
+                       [platforms]="platforms$ | async"></app-tracker-history>
 </div>

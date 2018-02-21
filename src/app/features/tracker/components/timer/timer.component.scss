@@ -16,7 +16,7 @@
   }
 
   .game {
-    width: 60%;
+    width: 50%;
     input {
       @extend .display-element;
       outline: none;
@@ -44,6 +44,6 @@
   }
 
   .actionButton {
-    width: 10%;
+    width: 20%;
   }
 }

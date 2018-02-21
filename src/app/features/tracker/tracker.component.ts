@@ -15,11 +15,13 @@ export class TrackerComponent implements OnInit {
   timerInfo$: Observable<TimerInfo>;
   currentTime$: Observable<Date>;
   historyItems$: Observable<HistoryListItem[]>;
+  platforms$: Observable<string[]>;
   constructor(private store: Store<State>, private clockService: ClockService) { }
 
   ngOnInit() {
     this.timerInfo$ = this.store.select(trackerComponentSelectors.timerInfo);
     this.currentTime$ = this.clockService.getClock();
     this.historyItems$ = this.store.select(trackerComponentSelectors.historyItems);
+    this.platforms$ = this.store.select(trackerComponentSelectors.timerPlatforms);
   }
 }

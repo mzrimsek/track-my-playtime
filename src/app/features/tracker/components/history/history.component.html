@@ -1,10 +1,28 @@
 <div class="history">
   <div class="items"
        *ngIf="items.length !== 0">
-    <div class="item"
+    <div class="item drop-shadow"
          *ngFor="let item of items">
-      {{ item.game }} ({{ item.platform }}) {{ item.startDate | date:'mediumTime' }} - {{ item.endDate | date:'mediumTime' }} ({{
-      item.startDate | elapsedTime:item.endDate}})
+      <div class="game">
+        <input type="text"
+               placeholder="Game name"
+               #gameEl
+               [value]="item.game">
+      </div>
+      <div class="platform">
+        <select #platformEl
+                [value]="item.platform">
+          <option value="">Select Platform</option>
+          <option *ngFor="let platform of platforms"
+                  value="{{ platform }}">{{ platform }}</option>
+        </select>
+      </div>
+      <div class="time">
+        {{ item.startDate | date:'mediumTime' }} - {{ item.endDate | date:'mediumTime' }} ({{ item.startDate | elapsedTime:item.endDate}})
+      </div>
+      <div class="actionButton">
+        <button class="remove">Remove</button>
+      </div>
     </div>
   </div>
   <div class="no-items"
