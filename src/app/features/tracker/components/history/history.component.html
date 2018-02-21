@@ -1,6 +1,13 @@
 <div class="history">
-  <div class="item"
-       *ngFor="let item of items">
-    {{ item.game }} - {{ item.platform }}
+  <div class="items"
+       *ngIf="items.length !== 0">
+    <div class="item"
+         *ngFor="let item of items">
+      {{ item.game }} - {{ item.platform }}
+    </div>
+  </div>
+  <div class="no-items"
+       *ngIf="items.length === 0">
+    Nothing to show! Get tracking!
   </div>
 </div>
