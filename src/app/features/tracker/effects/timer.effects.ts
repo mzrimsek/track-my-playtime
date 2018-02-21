@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
+import * as moment from 'moment';
 import { TimerService } from '../services/timer.service';
 import { AddTimerInfo } from '../models';
 import * as timerActions from '../actions/timer';
@@ -27,7 +28,7 @@ export class TimerEffects {
       .map(action => <AddTimerInfo>{
         game: action.info.game,
         platform: action.info.platform,
-        startDate: action.info.startDate,
+        startDate: moment(action.info.startDate).toDate(),
         endDate: action.endTime
       })
       .switchMap(addTimerInfo => this.timerService.saveTimerInfo(addTimerInfo))

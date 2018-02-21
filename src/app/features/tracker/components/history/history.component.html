@@ -20,7 +20,7 @@
         </select>
       </div>
       <div class="time">
-        {{ item.startDate | date:'mediumTime' }} - {{ item.endDate | date:'mediumTime' }} ({{ item.startDate | elapsedTime:item.endDate}})
+        {{ item.startDate | date:'shortTime' }} - {{ item.endDate | date:'shortTime' }} ({{ item.startDate | elapsedTime:item.endDate}})
       </div>
       <div class="actionButton">
         <button class="remove"
