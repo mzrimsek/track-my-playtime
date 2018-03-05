@@ -19,8 +19,4 @@ export class TrackerInitializationEffects {
         new timerActions.LoadPlatforms(),
         new historyActions.LoadHistoryItems()
       ]);
-
-
-
-
 }
