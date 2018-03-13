@@ -1,7 +1,7 @@
 import { ActionReducerMap, createFeatureSelector, createSelector } from '@ngrx/store';
 import { TimerInfo, HistoryListItem } from '../models';
-import * as fromTimer from './timer';
-import * as fromHistory from './history';
+import * as fromTimer from './timer.reducer';
+import * as fromHistory from './history.reducer';
 
 export interface TrackerState {
   timer: fromTimer.State;

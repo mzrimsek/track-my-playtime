@@ -1,5 +1,5 @@
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
-import * as actions from '../actions/history';
+import * as actions from '../actions/history.actions';
 
 export interface History {
   id: string;

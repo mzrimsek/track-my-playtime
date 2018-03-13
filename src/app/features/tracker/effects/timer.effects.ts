@@ -3,7 +3,7 @@ import { Actions, Effect } from '@ngrx/effects';
 import * as moment from 'moment';
 import { TimerService } from '../services/timer.service';
 import { AddTimerInfo } from '../models';
-import * as timerActions from '../actions/timer';
+import * as timerActions from '../actions/timer.actions';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/mergeMap';

@@ -1,6 +1,6 @@
 import { tassign } from 'tassign';
 import * as moment from 'moment';
-import * as actions from '../actions/timer';
+import * as actions from '../actions/timer.actions';
 
 export interface State {
   game: string;
