@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
 
 import { TrackerModule } from './features/tracker/tracker.module';
+import { HomeModule } from './features/home/home.module';
 
 import { reducers } from './reducers';
 import { environment } from '../environments/environment';
