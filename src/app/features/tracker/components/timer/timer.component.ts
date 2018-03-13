@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { TimerInfo } from '../../models';
+import * as moment from 'moment';
+import { TimerInfo, AddTimerInfo } from '../../models';
 import { State } from '../../reducers';
 import * as actions from '../../actions/timer.actions';
 
@@ -23,7 +24,13 @@ export class TimerComponent implements OnInit {
   }
 
   stopTimer() {
-    this.store.dispatch(new actions.SaveTimerInfo(this.info, new Date()));
+    const info = <AddTimerInfo>{
+      game: this.info.game,
+      platform: this.info.platform,
+      startDate: moment(this.info.startDate).toDate(),
+      endDate: new Date()
+    };
+    this.store.dispatch(new actions.SaveTimerInfo(info));
   }
 
   cancelTimer() {

@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { TimerInfo, HistoryListItem } from '../models';
+import { AddTimerInfo, HistoryListItem } from '../models';
 
 export const START_TIMER = '[Timer] Start Timer';
 export class StartTimer implements Action {
@@ -40,7 +40,7 @@ export class LoadPlatformsSucceeded implements Action {
 export const SAVE_TIMER_INFO = '[Timer] Save Timer Info';
 export class SaveTimerInfo implements Action {
   readonly type = SAVE_TIMER_INFO;
-  constructor(public info: TimerInfo, public endTime: Date) { }
+  constructor(public info: AddTimerInfo) { }
 }
 
 export const SAVE_TIMER_INFO_SUCCEEDED = '[Timer] Save Timer Info Succeeded';
