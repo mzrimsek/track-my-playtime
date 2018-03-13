@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { RouteEntry } from './components/nav/nav.component';
 
 import { State } from './reducers';
-import * as actions from './actions';
+import * as actions from './actions/app.actions';
 
 @Component({
   selector: 'app-root',
