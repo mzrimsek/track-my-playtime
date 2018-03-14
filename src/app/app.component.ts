@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { State } from './reducers';
+import { State } from './reducers/root.reducer';
 import * as actions from './actions/app.actions';
 
 @Component({

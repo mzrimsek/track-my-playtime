@@ -23,7 +23,7 @@ import { TimerEffects } from './effects/timer.effects';
 import { HistoryEffects } from './effects/history.effects';
 import { PlatformsEffects } from './effects/platforms.effects';
 
-import { reducers } from './reducers';
+import { reducers } from './reducers/root.reducer';
 
 @NgModule({
   imports: [

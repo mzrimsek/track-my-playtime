@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { ClockService } from './services/clock.service';
 import { TimerInfo, HistoryListItem, RouteEntry } from './models';
-import trackerComponentSelectors, { State } from './reducers';
+import trackerComponentSelectors, { State } from './reducers/root.reducer';
 
 @Component({
   selector: 'app-tracker',
