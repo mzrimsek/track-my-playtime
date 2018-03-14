@@ -11,8 +11,8 @@
             [value]="item.platform"
             (change)="updatePlatform(platformEl)">
       <option value="">Select Platform</option>
-      <option *ngFor="let platform of platforms"
-              value="{{ platform }}">{{ platform }}</option>
+      <option *ngFor="let option of platformsOptions"
+              value="{{ option }}">{{ option }}</option>
     </select>
   </div>
   <div class="time">

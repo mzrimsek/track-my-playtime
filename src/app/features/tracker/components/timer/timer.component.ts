@@ -2,7 +2,7 @@ import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core
 import { Store } from '@ngrx/store';
 import * as moment from 'moment';
 import { TimerInfo, AddTimerInfo } from '../../models';
-import { State } from '../../reducers';
+import { State } from '../../reducers/root.reducer';
 import * as actions from '../../actions/timer.actions';
 
 @Component({
@@ -15,6 +15,7 @@ export class TimerComponent implements OnInit {
 
   @Input() info: TimerInfo;
   @Input() currentTime: Date;
+  @Input() platformsOptions: string[];
   constructor(private store: Store<State>) { }
 
   ngOnInit() { }

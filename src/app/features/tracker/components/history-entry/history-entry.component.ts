@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { HistoryListItem } from '../../models';
-import { State } from '../../reducers';
+import { State } from '../../reducers/root.reducer';
 import * as actions from '../../actions/history.actions';
 
 @Component({
@@ -13,7 +13,7 @@ import * as actions from '../../actions/history.actions';
 export class HistoryEntryComponent implements OnInit {
 
   @Input() item: HistoryListItem;
-  @Input() platforms: string[];
+  @Input() platformsOptions: string[];
   constructor(private store: Store<State>) { }
 
   ngOnInit() { }
