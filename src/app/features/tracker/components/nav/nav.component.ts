@@ -1,7 +1,8 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
+import { RouteEntry } from '../../models';
 
 @Component({
-  selector: 'app-nav',
+  selector: 'app-tracker-nav',
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -12,10 +13,4 @@ export class NavComponent implements OnInit {
   constructor() { }
 
   ngOnInit() { }
-}
-
-export interface RouteEntry {
-  caption: string;
-  router: string[];
-  exact: boolean;
 }
