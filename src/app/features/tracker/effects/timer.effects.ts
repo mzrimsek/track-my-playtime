@@ -11,14 +11,6 @@ export class TimerEffects {
 
   constructor(private actions$: Actions, private timerService: TimerService) { }
 
-  @Effect() loadPlatforms$ =
-    this.actions$
-      .ofType(timerActions.LOAD_PLATFORMS)
-      .switchMap(() => this.timerService.getPlatforms()
-        .map(data => {
-          return new timerActions.LoadPlatformsSucceeded(data);
-        }));
-
   @Effect() saveTimerInfo$ =
     this.actions$
       .ofType(timerActions.SAVE_TIMER_INFO)

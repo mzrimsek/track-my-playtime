@@ -13,7 +13,7 @@ import * as actions from '../../actions/history.actions';
 export class HistoryEntryComponent implements OnInit {
 
   @Input() item: HistoryListItem;
-  @Input() platforms: string[];
+  @Input() platformsOptions: string[];
   constructor(private store: Store<State>) { }
 
   ngOnInit() { }

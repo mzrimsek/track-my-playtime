@@ -25,18 +25,6 @@ export class SetPlatform implements Action {
   constructor(public platform: string) { }
 }
 
-export const LOAD_PLATFORMS = '[Timer] Load Platforms';
-export class LoadPlatforms implements Action {
-  readonly type = LOAD_PLATFORMS;
-  constructor() { }
-}
-
-export const LOAD_PLATFORMS_SUCCEEDED = '[Timer] Load Platforms Succeeded';
-export class LoadPlatformsSucceeded implements Action {
-  readonly type = LOAD_PLATFORMS_SUCCEEDED;
-  constructor(public platforms: string[]) { }
-}
-
 export const SAVE_TIMER_INFO = '[Timer] Save Timer Info';
 export class SaveTimerInfo implements Action {
   readonly type = SAVE_TIMER_INFO;
@@ -55,13 +43,10 @@ export class CancelTimer implements Action {
   constructor() { }
 }
 
-
 export type All = StartTimer |
   ResetTimer |
   SetGame |
   SetPlatform |
-  LoadPlatforms |
-  LoadPlatformsSucceeded |
   SaveTimerInfo |
   SaveTimerInfoSucceeded |
   CancelTimer;
