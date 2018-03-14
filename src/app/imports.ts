@@ -12,7 +12,7 @@ import { TrackerModule } from './features/tracker/tracker.module';
 import { HomeModule } from './features/home/home.module';
 import { AuthModule } from './features/auth/auth.module';
 
-import { reducers } from './reducers';
+import { reducers } from './reducers/root.reducer';
 import { environment } from '../environments/environment';
 
 const imports = [

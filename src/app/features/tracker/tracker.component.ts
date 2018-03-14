@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { ClockService } from './services/clock.service';
 import { TimerInfo, HistoryListItem, RouteEntry } from './models';
-import trackerComponentSelectors, { State } from './reducers';
+import trackerComponentSelectors, { State } from './reducers/root.reducer';
 
 @Component({
   selector: 'app-tracker',
@@ -23,13 +23,13 @@ export class TrackerComponent implements OnInit {
   timerInfo$: Observable<TimerInfo>;
   currentTime$: Observable<Date>;
   historyItems$: Observable<HistoryListItem[]>;
-  platforms$: Observable<string[]>;
+  platformsOptions$: Observable<string[]>;
   constructor(private store: Store<State>, private clockService: ClockService) { }
 
   ngOnInit() {
     this.timerInfo$ = this.store.select(trackerComponentSelectors.timerInfo);
     this.currentTime$ = this.clockService.getClock();
     this.historyItems$ = this.store.select(trackerComponentSelectors.historyItems);
-    this.platforms$ = this.store.select(trackerComponentSelectors.timerPlatforms);
+    this.platformsOptions$ = this.store.select(trackerComponentSelectors.platformsOptions);
   }
 }

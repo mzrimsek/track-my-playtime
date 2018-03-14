@@ -3,7 +3,7 @@
        *ngIf="items.length !== 0">
     <app-tracker-history-entry *ngFor="let item of items"
                                [item]="item"
-                               [platforms]="platforms"></app-tracker-history-entry>
+                               [platformsOptions]="platformsOptions"></app-tracker-history-entry>
   </div>
   <div class="no-items"
        *ngIf="items.length === 0">

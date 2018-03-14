@@ -16,22 +16,24 @@ import { NavComponent } from './components/nav/nav.component';
 import { ClockService } from './services/clock.service';
 import { TimerService } from './services/timer.service';
 import { HistoryService } from './services/history.service';
+import { PlatformsService } from './services/platforms.service';
 
 import { TrackerInitializationEffects } from './effects/initialization.effects';
 import { TimerEffects } from './effects/timer.effects';
 import { HistoryEffects } from './effects/history.effects';
+import { PlatformsEffects } from './effects/platforms.effects';
 
-import { reducers } from './reducers';
+import { reducers } from './reducers/root.reducer';
 
 @NgModule({
   imports: [
     CommonModule,
     AppRoutingModule,
     StoreModule.forFeature('tracker', reducers),
-    EffectsModule.forFeature([TrackerInitializationEffects, TimerEffects, HistoryEffects]),
+    EffectsModule.forFeature([TrackerInitializationEffects, TimerEffects, HistoryEffects, PlatformsEffects]),
     SharedModule
   ],
   declarations: [TrackerComponent, TimerComponent, HistoryComponent, HistoryEntryComponent, NavComponent],
-  providers: [ClockService, TimerService, HistoryService]
+  providers: [ClockService, TimerService, HistoryService, PlatformsService]
 })
 export class TrackerModule { }

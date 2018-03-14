@@ -10,7 +10,7 @@ import { HistoryListItem } from '../../models';
 export class HistoryComponent implements OnInit {
 
   @Input() items: HistoryListItem[];
-  @Input() platforms: string[];
+  @Input() platformsOptions: string[];
   constructor() { }
 
   ngOnInit() { }

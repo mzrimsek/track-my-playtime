@@ -3,7 +3,6 @@ export interface TimerInfo {
   platform: string;
   active: boolean;
   startDate: string;
-  platforms: string[];
 }
 
 export interface AddTimerInfo {
