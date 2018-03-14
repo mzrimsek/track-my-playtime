@@ -1,3 +1,4 @@
+// global variables
 $base-font-size: 22px;
 $base-font-family: Arial, Helvetica, sans-serif;
 
@@ -8,9 +9,10 @@ $text-light: #e9f1f7;
 $background-light: #f1f5f2;
 $background-light-accent: #ddd8ff;
 
-$sidebar-width: 250px;
-$content-width: calc(100% - #{$sidebar-width});
-
 $good-action-color: green;
 $bad-action-color: red;
 $neutral-action-color: grey;
+
+// tracker variables
+$sidebar-width: 250px;
+$content-width: calc(100% - #{$sidebar-width});

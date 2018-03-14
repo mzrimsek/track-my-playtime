@@ -1,16 +1,1 @@
 @import '../variables.scss';
-
-.app {
-  display: flex;
-
-  .sidebar {
-    width: $sidebar-width;
-    position: fixed;
-  }
-
-  .content {
-    width: $content-width;
-    min-height: 100vh;
-    margin-left: $sidebar-width;
-  }
-}
