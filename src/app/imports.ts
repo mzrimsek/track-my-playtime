@@ -10,6 +10,7 @@ import { SharedModule } from './shared/shared.module';
 
 import { TrackerModule } from './features/tracker/tracker.module';
 import { HomeModule } from './features/home/home.module';
+import { AuthModule } from './features/auth/auth.module';
 
 import { reducers } from './reducers';
 import { environment } from '../environments/environment';
@@ -22,7 +23,9 @@ const imports = [
   StoreModule.forRoot(reducers),
   !environment.production ? StoreDevtoolsModule.instrument() : [],
   EffectsModule.forRoot([]),
-  TrackerModule
+  TrackerModule,
+  HomeModule,
+  AuthModule
 ];
 
 export default imports;
