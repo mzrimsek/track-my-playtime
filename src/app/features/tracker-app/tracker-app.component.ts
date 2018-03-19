@@ -11,14 +11,13 @@ export class TrackerAppComponent implements OnInit {
   routes: RouteEntry[] = [
     {
       caption: 'Tracker',
-      router: ['{ outlets: { trackerApp: ["tracker"] } }'],
+      router: [],
       exact: true
     }
   ];
 
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
 }
