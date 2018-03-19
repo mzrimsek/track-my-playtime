@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { ClockService } from './services/clock.service';
-import { TimerInfo, HistoryListItem, RouteEntry } from './models';
+import { TimerInfo, HistoryListItem } from './models';
 import trackerComponentSelectors, { State } from './reducers/root.reducer';
 
 @Component({
@@ -11,14 +11,6 @@ import trackerComponentSelectors, { State } from './reducers/root.reducer';
   styleUrls: ['./tracker.component.scss']
 })
 export class TrackerComponent implements OnInit {
-
-  routes: RouteEntry[] = [
-    {
-      caption: 'Tracker',
-      router: ['tracker'],
-      exact: true
-    }
-  ];
 
   timerInfo$: Observable<TimerInfo>;
   currentTime$: Observable<Date>;

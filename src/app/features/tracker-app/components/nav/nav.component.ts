@@ -2,7 +2,7 @@ import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core
 import { RouteEntry } from '../../models';
 
 @Component({
-  selector: 'app-tracker-nav',
+  selector: 'app-tracker-app-nav',
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

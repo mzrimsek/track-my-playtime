@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RouteEntry } from './models';
 
 @Component({
   selector: 'app-tracker-app',
@@ -6,6 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tracker-app.component.scss']
 })
 export class TrackerAppComponent implements OnInit {
+
+  routes: RouteEntry[] = [
+    {
+      caption: 'Tracker',
+      router: ['{ outlets: { trackerApp: ["tracker"] } }'],
+      exact: true
+    }
+  ];
 
   constructor() { }
 
