@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { TrackerAppComponent } from './tracker-app.component';
 import { TrackerComponent } from '../tracker/tracker.component';
+import { DashboardComponent } from '../dashboard/dashboard.component';
 
 const OUTLET_NAME = 'trackerApp';
 
@@ -14,6 +15,11 @@ const trackerAppRoutes: Routes = [
       {
         path: 'tracker',
         component: TrackerComponent,
+        outlet: OUTLET_NAME
+      },
+      {
+        path: 'dashboard',
+        component: DashboardComponent,
         outlet: OUTLET_NAME
       },
       {

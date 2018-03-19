@@ -6,12 +6,14 @@ import { NavComponent } from './components/nav/nav.component';
 
 import { TrackerAppRoutingModule } from './tracker-app-routing.module';
 import { TrackerModule } from '../tracker/tracker.module';
+import { DashboardModule } from '../dashboard/dashboard.module';
 
 @NgModule({
   imports: [
     CommonModule,
     TrackerAppRoutingModule,
-    TrackerModule
+    TrackerModule,
+    DashboardModule
   ],
   declarations: [TrackerAppComponent, NavComponent]
 })

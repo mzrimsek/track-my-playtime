@@ -11,7 +11,12 @@ export class TrackerAppComponent implements OnInit {
   routes: RouteEntry[] = [
     {
       caption: 'Tracker',
-      router: [],
+      router: ['../app'],
+      exact: false
+    },
+    {
+      caption: 'Dashboard',
+      router: ['../app/(trackerApp:dashboard)'],
       exact: true
     }
   ];
