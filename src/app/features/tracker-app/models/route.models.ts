@@ -1,5 +1,5 @@
 export interface RouteEntry {
   caption: string;
-  router: string[];
+  router: any[] | string;
   exact: boolean;
 }

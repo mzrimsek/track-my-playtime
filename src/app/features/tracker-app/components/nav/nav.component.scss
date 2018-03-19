@@ -11,6 +11,12 @@
     display: flex;
     justify-content: center;
     margin-bottom: 30px;
+
+    a{
+      text-decoration: none;
+      color: $text-light;
+      font-size: 1.1em;
+    }
   }
 
   ul {
