@@ -11,8 +11,8 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
 
-import { TrackerModule } from './features/tracker/tracker.module';
 import { HomeModule } from './features/home/home.module';
+import { TrackerAppModule } from './features/tracker-app/tracker-app.module';
 
 import { reducers } from './reducers/root.reducer';
 import { environment } from '../environments/environment';
@@ -29,8 +29,8 @@ import { environment } from '../environments/environment';
     StoreModule.forRoot(reducers),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     EffectsModule.forRoot([]),
-    TrackerModule,
-    HomeModule
+    HomeModule,
+    TrackerAppModule
   ],
   providers: [],
   bootstrap: [AppComponent]

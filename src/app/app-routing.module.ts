@@ -1,16 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './features/home/home.component';
-import { TrackerComponent } from './features/tracker/tracker.component';
 
 const routes: Routes = [
   {
     path: '',
     component: HomeComponent
-  },
-  {
-    path: 'tracker',
-    component: TrackerComponent
   }
 ];
 
