@@ -1,0 +1,30 @@
+@import "../../../variables";
+
+.header {
+  display: flex;
+  height: $header-height;
+  justify-content: space-between;
+  align-items: center;
+
+  a {
+    text-decoration: none;
+  }
+
+  .main {
+    margin-left: 30px;
+
+    a {
+      color: $text-light;
+    }
+  }
+
+  .login {
+    background: $background-light-accent;
+    padding: 15px 10px;
+    margin-right: 30px;
+
+    &:hover {
+      background: darken($background-light-accent, 5%);
+    }
+  }
+}

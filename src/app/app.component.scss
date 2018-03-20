@@ -1,1 +1,14 @@
 @import '../variables.scss';
+
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+
+  background: $background-dark;
+  background: linear-gradient(45deg, $background-dark 20%, $background-dark-accent 70%);
+
+  .content {
+    height: $main-height;
+  }
+}

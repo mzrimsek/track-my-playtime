@@ -15,7 +15,7 @@ export class TimerComponent implements OnInit {
 
   @Input() info: TimerInfo;
   @Input() currentTime: Date;
-  @Input() platformsOptions: string[];
+  @Input() platformsOptions: string[] = [];
   constructor(private store: Store<State>) { }
 
   ngOnInit() { }

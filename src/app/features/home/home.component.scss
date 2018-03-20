@@ -1,0 +1,19 @@
+@import "../../../variables";
+
+.home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+
+  .tagline {
+    width: 50%;
+    color: $text-light;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 3.5em;
+    text-align: center;
+    text-shadow: -1px -1px 1px #fff, 1px 1px 1px #000;
+  }
+}

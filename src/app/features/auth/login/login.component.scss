@@ -1,0 +1,33 @@
+@import "../../../../variables";
+
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+
+  .box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 350px;
+    width: 400px;
+    padding: 20px;
+    background: $background-light;
+
+    .login-button {
+      border: none;
+      color: $background-dark;
+      background: $background-light-accent;
+      width: 70%;
+      padding: 15px;
+      font-size: $base-font-size * .75;
+
+      &:hover {
+        background: darken($background-light-accent, 5%);
+        cursor: pointer;
+      }
+    }
+  }
+}
