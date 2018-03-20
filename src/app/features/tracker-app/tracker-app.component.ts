@@ -8,10 +8,17 @@ import { RouteEntry } from './models';
 })
 export class TrackerAppComponent implements OnInit {
 
+  private trackerRouter = ['/app', { outlets: { trackerApp: ['tracker'] } }];
+
+  bannerRoute: RouteEntry = {
+    caption: 'Track My Playtime',
+    router: this.trackerRouter
+  };
+
   routes: RouteEntry[] = [
     {
       caption: 'Tracker',
-      router: ['/app', { outlets: { trackerApp: ['tracker'] } }],
+      router: this.trackerRouter,
       exact: true
     },
     {

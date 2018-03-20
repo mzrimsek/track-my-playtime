@@ -9,6 +9,7 @@ import { RouteEntry } from '../../models';
 })
 export class NavComponent implements OnInit {
 
+  @Input() bannerRoute: RouteEntry;
   @Input() routes: RouteEntry[] = [];
   constructor() { }
 
