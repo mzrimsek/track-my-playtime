@@ -1,0 +1,65 @@
+import { Injectable } from '@angular/core';
+import { Actions, Effect } from '@ngrx/effects';
+import { AngularFireAuth } from 'angularfire2/auth';
+import * as firebase from 'firebase';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/fromPromise';
+import 'rxjs/add/observable/of';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/catch';
+import { User } from '../models';
+import * as userActions from '../actions/user.actions';
+
+@Injectable()
+export class UserEffects {
+
+  constructor(private actions$: Actions, private afAuth: AngularFireAuth) { }
+
+  @Effect() getUser$ =
+    this.actions$
+      .ofType(userActions.GET_USER)
+      .map(action => action as userActions.GetUser)
+      .map(action => action.payload)
+      .switchMap(_ => this.afAuth.authState // payload
+        .map(authData => {
+          if (authData) {
+            const user = <User>{
+              uid: authData.uid,
+              displayName: authData.displayName
+            };
+            return new userActions.Authenticated(user);
+          } else {
+            return new userActions.NotAuthenticated();
+          }
+        })
+        .catch(() => Observable.of(new userActions.AuthError())) // err
+      );
+
+  @Effect() googleLogin$ =
+    this.actions$
+      .ofType(userActions.GOOGLE_LOGIN)
+      .map(action => action as userActions.GoogleLogin)
+      .map(action => action.payload)
+      .switchMap(_ => Observable.fromPromise(this.googleLogin()) // payload
+        .map(() => { // credential
+          return new userActions.GetUser();
+        })
+        .catch(err => Observable.of(new userActions.AuthError({ error: err.message })))
+      );
+
+  @Effect() logout$ =
+    this.actions$
+      .ofType(userActions.LOGOUT)
+      .map(action => action as userActions.Logout)
+      .map(action => action.payload)
+      .switchMap(_ => Observable.of(this.afAuth.auth.signOut()) // payload
+        .map(() => new userActions.NotAuthenticated()) // authData
+        .catch(err => Observable.of(new userActions.AuthError({ error: err.message })))
+      );
+
+  private googleLogin(): Promise<any> {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    return this.afAuth.auth.signInWithPopup(provider);
+  }
+}

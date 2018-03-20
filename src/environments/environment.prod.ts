@@ -6,5 +6,13 @@ export const environment: Environment = {
     loadPlatforms: '',
     saveTimerInfo: '',
     loadHistoryItems: ''
+  },
+  firebase: {
+    apiKey: '',
+    authDomain: '',
+    databaseURL: '',
+    projectId: '',
+    storageBucket: '',
+    messagingSenderId: ''
   }
 };

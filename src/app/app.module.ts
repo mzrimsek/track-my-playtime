@@ -6,6 +6,8 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 
+import { AngularFireModule } from 'angularfire2';
+
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 
@@ -28,6 +30,7 @@ import { environment } from '../environments/environment';
     AppRoutingModule,
     SharedModule,
     HttpClientModule,
+    AngularFireModule.initializeApp(environment.firebase),
     StoreModule.forRoot(reducers),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     EffectsModule.forRoot([]),
