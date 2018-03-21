@@ -37,7 +37,6 @@ export class UpdatePlatform implements Action {
   constructor(public id: string, public platform: string) { }
 }
 
-
 export type All = AddNewHistoryItem |
   LoadHistoryItems |
   LoadHistoryItemsSucceeded |
