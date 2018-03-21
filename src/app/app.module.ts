@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
+import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router-store';
 
 import { AngularFireModule } from 'angularfire2';
 
@@ -19,6 +20,7 @@ import { TrackerAppModule } from './features/tracker-app/tracker-app.module';
 
 import { reducers } from './reducers/root.reducer';
 import { environment } from '../environments/environment';
+import { CustomRouterStateSerializer } from './shared/utils';
 
 @NgModule({
   declarations: [
@@ -32,12 +34,17 @@ import { environment } from '../environments/environment';
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
     StoreModule.forRoot(reducers),
+    StoreRouterConnectingModule.forRoot({
+      stateKey: 'router'
+    }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     EffectsModule.forRoot([]),
     HomeModule,
     TrackerAppModule
   ],
-  providers: [],
+  providers: [{
+    provide: RouterStateSerializer, useClass: CustomRouterStateSerializer
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
