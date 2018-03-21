@@ -4,7 +4,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class ElapsedTimePipe implements PipeTransform {
 
   transform(startTime: number, endTime: number): string {
-    const elapsedTime = endTime - startTime;
+    const elapsedTime = (endTime - startTime) / 1000;
     return elapsedTime >= 0 && this.canCalculate(startTime, endTime) ? this.formatElapsedTime(elapsedTime) : '00:00:00';
   }
 
@@ -23,6 +23,7 @@ export class ElapsedTimePipe implements PipeTransform {
   }
 
   getZeroPaddingTime(time: number): string {
-    return time < 10 ? '0' + time : '' + time;
+    const paddedTime = time < 10 ? '0' + time : '' + time;
+    return paddedTime.indexOf('.') === -1 ? paddedTime : paddedTime.substr(0, paddedTime.indexOf('.'));
   }
 }

@@ -3,7 +3,6 @@ import { Store } from '@ngrx/store';
 import { TimerInfo, AddTimerInfo } from '../../models';
 import { State } from '../../reducers/root.reducer';
 import * as actions from '../../actions/timer.actions';
-import { getUnixTimestampForDate } from '../../../../shared/helpers/dateHelper';
 
 @Component({
   selector: 'app-tracker-timer',
@@ -29,7 +28,7 @@ export class TimerComponent implements OnInit {
       game: this.info.game,
       platform: this.info.platform,
       startTime: this.info.startTime,
-      endTime: getUnixTimestampForDate(new Date())
+      endTime: new Date().getTime()
     };
     this.store.dispatch(new actions.SaveTimerInfo(info));
   }
