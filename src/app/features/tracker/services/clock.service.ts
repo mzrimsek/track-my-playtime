@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import { getUnixTimestampForDate } from '../../../shared/helpers/dateHelper';
 import 'rxjs/add/observable/interval';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/share';
@@ -7,12 +8,12 @@ import 'rxjs/add/operator/share';
 @Injectable()
 export class ClockService {
 
-  private clock$: Observable<Date>;
+  private currentTime$: Observable<number>;
   constructor() {
-    this.clock$ = Observable.interval(1000).map(() => new Date()).share();
+    this.currentTime$ = Observable.interval(1000).map(() => getUnixTimestampForDate(new Date())).share();
   }
 
-  getClock(): Observable<Date> {
-    return this.clock$;
+  getCurrentTime(): Observable<number> {
+    return this.currentTime$;
   }
 }

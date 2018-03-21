@@ -13,14 +13,14 @@ import trackerComponentSelectors, { State } from './reducers/root.reducer';
 export class TrackerComponent implements OnInit {
 
   timerInfo$: Observable<TimerInfo>;
-  currentTime$: Observable<Date>;
+  currentTime$: Observable<number>;
   historyItems$: Observable<HistoryListItem[]>;
   platformsOptions$: Observable<string[]>;
   constructor(private store: Store<State>, private clockService: ClockService) { }
 
   ngOnInit() {
     this.timerInfo$ = this.store.select(trackerComponentSelectors.timerInfo);
-    this.currentTime$ = this.clockService.getClock();
+    this.currentTime$ = this.clockService.getCurrentTime();
     this.historyItems$ = this.store.select(trackerComponentSelectors.historyItems);
     this.platformsOptions$ = this.store.select(trackerComponentSelectors.platformsOptions);
   }

@@ -5,8 +5,8 @@ export interface History {
   id: string;
   game: string;
   platform: string;
-  startDate: Date;
-  endDate: Date;
+  startTime: number;
+  endTime: number;
 }
 
 export interface State extends EntityState<History> { }

@@ -2,12 +2,12 @@ export interface TimerInfo {
   game: string;
   platform: string;
   active: boolean;
-  startDate: string;
+  startTime: number;
 }
 
 export interface AddTimerInfo {
   game: string;
   platform: string;
-  startDate: Date;
-  endDate: Date;
+  startTime: number;
+  endTime: number;
 }

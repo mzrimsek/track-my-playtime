@@ -1,9 +1,9 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import * as moment from 'moment';
 import { TimerInfo, AddTimerInfo } from '../../models';
 import { State } from '../../reducers/root.reducer';
 import * as actions from '../../actions/timer.actions';
+import { getUnixTimestampForDate } from '../../../../shared/helpers/dateHelper';
 
 @Component({
   selector: 'app-tracker-timer',
@@ -28,8 +28,8 @@ export class TimerComponent implements OnInit {
     const info = <AddTimerInfo>{
       game: this.info.game,
       platform: this.info.platform,
-      startDate: moment(this.info.startDate).toDate(),
-      endDate: new Date()
+      startTime: this.info.startTime,
+      endTime: getUnixTimestampForDate(new Date())
     };
     this.store.dispatch(new actions.SaveTimerInfo(info));
   }

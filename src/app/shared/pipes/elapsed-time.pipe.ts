@@ -1,26 +1,28 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import * as moment from 'moment';
 
 @Pipe({ name: 'elapsedTime' })
 export class ElapsedTimePipe implements PipeTransform {
 
-  transform(startTime: string, endTime: string): string {
-    const start = moment(startTime);
-    const end = moment(endTime);
-    return this.getElapsedTime(start, end);
+  transform(startTime: number, endTime: number): string {
+    const elapsedTime = endTime - startTime;
+    return elapsedTime >= 0 && this.canCalculate(startTime, endTime) ? this.formatElapsedTime(elapsedTime) : '00:00:00';
   }
 
-  getElapsedTime(startDate: moment.Moment, endDate: moment.Moment): string {
-    if (this.canCalculate(startDate, endDate)) {
-      const elapsedTime = endDate.diff(startDate);
-      return moment(elapsedTime).toISOString().substring(11, 19);
-    }
-    return '00:00:00';
-  }
-
-  canCalculate(startDate: moment.Moment, endDate: moment.Moment): boolean {
-    const areValid = startDate.isValid() && endDate.isValid();
-    const areInOrder = startDate.isBefore(endDate);
+  canCalculate(startTime: number, endTime: number): boolean {
+    const areValid = startTime !== 0 && endTime !== 0;
+    const areInOrder = startTime <= endTime;
     return areValid && areInOrder;
+  }
+
+  formatElapsedTime(elapsedTime: number): string {
+    const hours = Math.floor(elapsedTime / 3600);
+    const minutes = Math.floor((elapsedTime - (hours * 3600)) / 60);
+    const seconds = elapsedTime - (hours * 3600) - (minutes * 60);
+
+    return this.getZeroPaddingTime(hours) + ':' + this.getZeroPaddingTime(minutes) + ':' + this.getZeroPaddingTime(seconds);
+  }
+
+  getZeroPaddingTime(time: number): string {
+    return time < 10 ? '0' + time : '' + time;
   }
 }

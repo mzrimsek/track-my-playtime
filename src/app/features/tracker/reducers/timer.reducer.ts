@@ -1,18 +1,18 @@
 import { tassign } from 'tassign';
-import * as moment from 'moment';
 import * as actions from '../actions/timer.actions';
+import { getUnixTimestampForDate } from '../../../shared/helpers/dateHelper';
 
 export interface State {
   game: string;
   platform: string;
-  startDate: string;
+  startTime: number;
   active: boolean;
 }
 
 const initialState: State = {
   game: '',
   platform: '',
-  startDate: '',
+  startTime: 0,
   active: false
 };
 
@@ -20,7 +20,7 @@ export function reducer(state: State = initialState, action: actions.All): State
   switch (action.type) {
     case actions.START_TIMER: {
       return tassign(state, {
-        startDate: moment(moment.now()).toISOString(),
+        startTime: getUnixTimestampForDate(new Date()),
         active: true
       });
     }
