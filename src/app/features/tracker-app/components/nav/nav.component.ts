@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
 import { RouteEntry } from '../../models';
+import { UserService } from '../../../../shared/services/user.service';
 
 @Component({
   selector: 'app-tracker-app-nav',
@@ -11,7 +12,12 @@ export class NavComponent implements OnInit {
 
   @Input() bannerRoute: RouteEntry;
   @Input() routes: RouteEntry[] = [];
-  constructor() { }
+  @Input() userName: string;
+  constructor(private userService: UserService) { }
 
   ngOnInit() { }
+
+  logout() {
+    this.userService.logout();
+  }
 }

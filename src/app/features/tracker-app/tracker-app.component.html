@@ -1,7 +1,8 @@
 <div class="tracker-app">
   <div class="sidebar">
     <app-tracker-app-nav [bannerRoute]="bannerRoute"
-                         [routes]="routes"></app-tracker-app-nav>
+                         [routes]="routes"
+                         [userName]="(user$ | async).displayName"></app-tracker-app-nav>
   </div>
   <div class="content">
     <router-outlet name="trackerApp"></router-outlet>

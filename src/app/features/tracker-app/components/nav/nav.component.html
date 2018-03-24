@@ -1,14 +1,20 @@
 <div class="nav">
-  <div class="banner">
-    <a [routerLink]="bannerRoute.router">{{ bannerRoute.caption }}</a>
+  <div class="main">
+    <div class="banner">
+      <a [routerLink]="bannerRoute.router">{{ bannerRoute.caption }}</a>
+    </div>
+    <nav>
+      <ul>
+        <li *ngFor="let route of routes"
+            [routerLinkActive]="['active']"
+            [routerLinkActiveOptions]="{ exact: route.exact }">
+          <a [routerLink]="route.router">{{ route.caption }}</a>
+        </li>
+      </ul>
+    </nav>
   </div>
-  <nav>
-    <ul>
-      <li *ngFor="let route of routes"
-          [routerLinkActive]="['active']"
-          [routerLinkActiveOptions]="{ exact: route.exact }">
-        <a [routerLink]="route.router">{{ route.caption }}</a>
-      </li>
-    </ul>
-  </nav>
+  <div class="user-info">
+    {{ userName }}
+    <button (click)="logout()">Logout</button>
+  </div>
 </div>

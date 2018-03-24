@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { AuthGuard } from '../auth/guards/auth.guard';
+
 import { TrackerAppComponent } from './tracker-app.component';
 import { TrackerComponent } from '../tracker/tracker.component';
 import { DashboardComponent } from '../dashboard/dashboard.component';
@@ -11,6 +13,7 @@ const trackerAppRoutes: Routes = [
   {
     path: 'app',
     component: TrackerAppComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'tracker',

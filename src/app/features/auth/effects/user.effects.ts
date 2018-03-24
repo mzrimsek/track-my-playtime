@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Actions, Effect } from '@ngrx/effects';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase';
@@ -14,7 +15,7 @@ import * as userActions from '../actions/user.actions';
 @Injectable()
 export class UserEffects {
 
-  constructor(private actions$: Actions, private afAuth: AngularFireAuth) { }
+  constructor(private actions$: Actions, private afAuth: AngularFireAuth, private router: Router) { }
 
   @Effect() getUser$ =
     this.actions$
@@ -28,6 +29,7 @@ export class UserEffects {
               uid: authData.uid,
               displayName: authData.displayName
             };
+            this.router.navigate(['/app']);
             return new userActions.Authenticated(user);
           } else {
             return new userActions.NotAuthenticated();
@@ -54,7 +56,10 @@ export class UserEffects {
       .map(action => action as userActions.Logout)
       .map(action => action.payload)
       .switchMap(_ => Observable.of(this.afAuth.auth.signOut()) // payload
-        .map(() => new userActions.NotAuthenticated()) // authData
+        .map(() => {
+          this.router.navigate(['/login']);
+          return new userActions.NotAuthenticated();
+        }) // authData
         .catch(err => Observable.of(new userActions.AuthError({ error: err.message })))
       );
 
