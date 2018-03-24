@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
 import { TimerService } from '../services/timer.service';
+import * as userActions from '../../auth/actions/user.actions';
 import * as timerActions from '../actions/timer.actions';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
@@ -28,5 +29,11 @@ export class TimerEffects {
       .mergeMap(() => [
         new timerActions.ResetTimer()
       ]);
-}
 
+  @Effect() logout$ =
+    this.actions$
+      .ofType(userActions.LOGOUT)
+      .mergeMap(() => [
+        new timerActions.ResetTimer()
+      ]);
+}

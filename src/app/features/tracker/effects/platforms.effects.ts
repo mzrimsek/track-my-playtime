@@ -19,4 +19,3 @@ export class PlatformsEffects {
           return new platformsActions.LoadOptionsSucceeded(data);
         }));
 }
-

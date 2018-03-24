@@ -41,6 +41,9 @@ export function reducer(state: State = initialState, action: actions.All): State
         }
       }, state);
     }
+    case actions.CLEAR_HISTORY_ITEMS: {
+      return adapter.removeAll(state);
+    }
     default: {
       return state;
     }

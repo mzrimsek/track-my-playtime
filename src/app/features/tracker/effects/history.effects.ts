@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
 import { HistoryService } from '../services/history.service';
+import * as userActions from '../../auth/actions/user.actions';
 import * as timerActions from '../actions/timer.actions';
 import * as historyActions from '../actions/history.actions';
 import 'rxjs/add/operator/map';
@@ -26,5 +27,12 @@ export class HistoryEffects {
       .map(action => action as timerActions.SaveTimerInfoSucceeded)
       .mergeMap(action => [
         new historyActions.AddNewHistoryItem(action.item)
+      ]);
+
+  @Effect() logout$ =
+    this.actions$
+      .ofType(userActions.LOGOUT)
+      .mergeMap(() => [
+        new historyActions.ClearHistoryItems()
       ]);
 }

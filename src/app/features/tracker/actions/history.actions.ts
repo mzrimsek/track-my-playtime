@@ -37,9 +37,16 @@ export class UpdatePlatform implements Action {
   constructor(public id: string, public platform: string) { }
 }
 
+export const CLEAR_HISTORY_ITEMS = '[History] Clear Items';
+export class ClearHistoryItems implements Action {
+  readonly type = CLEAR_HISTORY_ITEMS;
+  constructor() { }
+}
+
 export type All = AddNewHistoryItem |
   LoadHistoryItems |
   LoadHistoryItemsSucceeded |
   RemoveHistoryItem |
   UpdateGame |
-  UpdatePlatform;
+  UpdatePlatform |
+  ClearHistoryItems;
