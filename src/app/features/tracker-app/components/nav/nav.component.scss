@@ -45,10 +45,23 @@
     }
   }
 
-  .user-info {
+  .user {
+    display: flex;
+    justify-content: space-around;
     width: 100%;
     padding: 30px 15px;
     font-size: .8em;
     background: darken($background-dark, 10%);
+
+    .info {
+
+    }
+
+    .logout {
+      font-size: $base-font-size;
+      &:hover {
+        cursor: pointer;
+      }
+    }
   }
 }

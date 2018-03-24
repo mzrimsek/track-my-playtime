@@ -13,8 +13,13 @@
       </ul>
     </nav>
   </div>
-  <div class="user-info">
-    {{ userName }}
-    <button (click)="logout()">Logout</button>
+  <div class="user">
+    <div class="info">
+      {{ userName }}
+    </div>
+    <div class="logout"
+         (click)="logout()">
+      <i class="fas fa-sign-out-alt"></i>
+    </div>
   </div>
 </div>
