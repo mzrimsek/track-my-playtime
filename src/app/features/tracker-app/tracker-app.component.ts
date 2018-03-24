@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { RouteEntry } from './models';
 import { User } from '../auth/models';
-import { UserService } from '../../shared/services/user.service';
+import { UserService } from '../auth/services/user.service';
 
 @Component({
   selector: 'app-tracker-app',

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-import authComponentSelectors, { State } from '../../features/auth/reducers/root.reducer';
-import { User } from '../../features/auth/models';
-import * as userActions from '../../features/auth/actions/user.actions';
+import authComponentSelectors, { State } from '../reducers/root.reducer';
+import { User } from '../models';
+import * as userActions from '../actions/user.actions';
 
 @Injectable()
 export class UserService {

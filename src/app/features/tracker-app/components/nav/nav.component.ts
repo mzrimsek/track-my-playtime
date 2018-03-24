@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
 import { RouteEntry } from '../../models';
-import { UserService } from '../../../../shared/services/user.service';
+import { UserService } from '../../../auth/services/user.service';
 
 @Component({
   selector: 'app-tracker-app-nav',
