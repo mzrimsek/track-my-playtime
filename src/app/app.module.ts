@@ -20,7 +20,7 @@ import { TrackerAppModule } from './features/tracker-app/tracker-app.module';
 
 import { reducers } from './reducers/root.reducer';
 import { environment } from '../environments/environment';
-import { CustomRouterStateSerializer } from './shared/utils';
+import { CustomRouterStateSerializer } from './shared/router.utils';
 
 @NgModule({
   declarations: [
