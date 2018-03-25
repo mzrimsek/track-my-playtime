@@ -6,6 +6,7 @@ export interface TimerInfo {
 }
 
 export interface AddTimerInfo {
+  uid: string;
   game: string;
   platform: string;
   startTime: number;

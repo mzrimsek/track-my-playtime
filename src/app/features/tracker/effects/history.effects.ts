@@ -25,7 +25,7 @@ export class HistoryEffects {
           return new historyActions.LoadHistoryItemsSucceeded(data);
         })
         .catch(err =>
-          Observable.of(new appActions.Error(err.message))
+          Observable.of(new appActions.Error(historyActions.LOAD_HISTORY_ITEMS, err.message))
         )
       );
 

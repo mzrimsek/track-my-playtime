@@ -1,9 +1,6 @@
 export interface Environment {
   production: boolean;
-  urls: {
-    saveTimerInfo: string;
-    loadHistoryItems: string;
-  };
+  urls: {};
   firebase: FirebaseConfig;
 }
 

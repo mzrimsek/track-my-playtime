@@ -2,10 +2,7 @@ import { Environment } from './';
 
 export const environment: Environment = {
   production: false,
-  urls: {
-    saveTimerInfo: 'http://localhost:3000/timer/save',
-    loadHistoryItems: 'http://localhost:3000/history'
-  },
+  urls: {},
   firebase: {
     apiKey: 'AIzaSyDIwtutkMaINN8gaGZmoEjt_fR9_XhDZdY',
     authDomain: 'track-my-playtime.firebaseapp.com',

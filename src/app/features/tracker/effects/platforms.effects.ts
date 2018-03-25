@@ -23,7 +23,7 @@ export class PlatformsEffects {
           return new platformsActions.LoadOptionsSucceeded(data);
         })
         .catch(err =>
-          Observable.of(new appActions.Error(err.message))
+          Observable.of(new appActions.Error(platformsActions.LOAD_OPTIONS, err.message))
         )
       );
 }
