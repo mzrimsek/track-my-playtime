@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+
 import { SharedModule } from '../../shared/shared.module';
 
 import { TrackerComponent } from './tracker.component';
@@ -26,6 +28,7 @@ import { reducers } from './reducers/root.reducer';
 @NgModule({
   imports: [
     CommonModule,
+    AngularFirestoreModule,
     StoreModule.forFeature('tracker', reducers),
     EffectsModule.forFeature([TrackerInitializationEffects, TimerEffects, HistoryEffects, PlatformsEffects]),
     SharedModule

@@ -1,20 +1,22 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
-import { environment } from '../../../../environments/environment';
 import 'rxjs/add/operator/map';
 
 @Injectable()
 export class PlatformsService {
 
-  constructor(private http: HttpClient) { }
+  private platformsCollection: AngularFirestoreCollection<Platforms>;
+  constructor(private afs: AngularFirestore) {
+    this.platformsCollection = this.afs.collection<Platforms>('platforms');
+  }
 
   getPlatformsOptions(): Observable<string[]> {
-    return this.http.get<PlatformsResponse>(environment.urls.loadPlatforms)
-      .map(res => res._data);
+    return this.platformsCollection.valueChanges()
+      .map(platforms => platforms[0].options);
   }
 }
 
-interface PlatformsResponse {
-  _data: string[];
+interface Platforms {
+  options: string[];
 }
