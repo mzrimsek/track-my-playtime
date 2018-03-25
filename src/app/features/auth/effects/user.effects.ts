@@ -22,7 +22,7 @@ export class UserEffects {
       .ofType(userActions.GET_USER)
       .map(action => action as userActions.GetUser)
       .map(action => action.payload)
-      .switchMap(_ => this.afAuth.authState // payload
+      .switchMap(() => this.afAuth.authState
         .map(authData => {
           if (authData) {
             const user = <User>{
@@ -35,7 +35,9 @@ export class UserEffects {
             return new userActions.NotAuthenticated();
           }
         })
-        .catch(() => Observable.of(new userActions.AuthError())) // err
+        .catch(err =>
+          Observable.of(new userActions.AuthError({ error: err.message }))
+        )
       );
 
   @Effect() googleLogin$ =
@@ -43,11 +45,13 @@ export class UserEffects {
       .ofType(userActions.GOOGLE_LOGIN)
       .map(action => action as userActions.GoogleLogin)
       .map(action => action.payload)
-      .switchMap(_ => Observable.fromPromise(this.googleLogin()) // payload
-        .map(() => { // credential
+      .switchMap(() => Observable.fromPromise(this.googleLogin())
+        .map(() => {
           return new userActions.GetUser();
         })
-        .catch(err => Observable.of(new userActions.AuthError({ error: err.message })))
+        .catch(err =>
+          Observable.of(new userActions.AuthError({ error: err.message }))
+        )
       );
 
   @Effect() logout$ =
@@ -55,12 +59,14 @@ export class UserEffects {
       .ofType(userActions.LOGOUT)
       .map(action => action as userActions.Logout)
       .map(action => action.payload)
-      .switchMap(_ => Observable.of(this.afAuth.auth.signOut()) // payload
+      .switchMap(() => Observable.of(this.afAuth.auth.signOut())
         .map(() => {
           this.router.navigate(['/login']);
           return new userActions.NotAuthenticated();
-        }) // authData
-        .catch(err => Observable.of(new userActions.AuthError({ error: err.message })))
+        })
+        .catch(err =>
+          Observable.of(new userActions.AuthError({ error: err.message }))
+        )
       );
 
   private googleLogin(): Promise<any> {

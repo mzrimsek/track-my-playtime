@@ -4,14 +4,12 @@ import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
-import { AngularFirestoreModule } from 'angularfire2/firestore';
-
-import { SharedModule } from '../../shared/shared.module';
-
 import { TrackerComponent } from './tracker.component';
 import { TimerComponent } from './components/timer/timer.component';
 import { HistoryComponent } from './components/history/history.component';
 import { HistoryEntryComponent } from './components/history-entry/history-entry.component';
+
+import { SharedModule } from '../../shared/shared.module';
 
 import { ClockService } from './services/clock.service';
 import { TimerService } from './services/timer.service';
@@ -28,7 +26,6 @@ import { reducers } from './reducers/root.reducer';
 @NgModule({
   imports: [
     CommonModule,
-    AngularFirestoreModule,
     StoreModule.forFeature('tracker', reducers),
     EffectsModule.forFeature([TrackerInitializationEffects, TimerEffects, HistoryEffects, PlatformsEffects]),
     SharedModule

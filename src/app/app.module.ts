@@ -8,6 +8,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router-store';
 
 import { AngularFireModule } from 'angularfire2';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -33,6 +34,7 @@ import { CustomRouterStateSerializer } from './shared/router.utils';
     SharedModule,
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
     StoreModule.forRoot(reducers),
     StoreRouterConnectingModule.forRoot({
       stateKey: 'router'

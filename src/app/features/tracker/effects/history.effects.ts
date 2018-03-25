@@ -1,12 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
 import { HistoryService } from '../services/history.service';
+import * as appActions from '../../../actions/app.actions';
 import * as userActions from '../../auth/actions/user.actions';
 import * as timerActions from '../actions/timer.actions';
 import * as historyActions from '../actions/history.actions';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class HistoryEffects {
@@ -19,7 +23,11 @@ export class HistoryEffects {
       .switchMap(() => this.historyService.getHistoryList()
         .map(data => {
           return new historyActions.LoadHistoryItemsSucceeded(data);
-        }));
+        })
+        .catch(err =>
+          Observable.of(new appActions.Error(err.message))
+        )
+      );
 
   @Effect() saveTimerInfoSucceeded$ =
     this.actions$
