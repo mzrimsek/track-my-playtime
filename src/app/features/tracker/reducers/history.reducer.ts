@@ -22,7 +22,7 @@ export function reducer(state: State = initialState, action: actions.All): State
     case actions.LOAD_HISTORY_ITEMS_SUCCEEDED: {
       return adapter.addAll(action.items, state);
     }
-    case actions.REMOVE_HISTORY_ITEM: {
+    case actions.REMOVE_HISTORY_ITEM_SUCCEEDED: {
       return adapter.removeOne(action.id, state);
     }
     case actions.UPDATE_GAME: {

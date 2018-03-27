@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+
 import { Actions, Effect } from '@ngrx/effects';
-import { AngularFireAuth } from 'angularfire2/auth';
+
 import * as firebase from 'firebase';
+import { AngularFireAuth } from 'angularfire2/auth';
+
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/fromPromise';
-import 'rxjs/add/observable/of';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/switchMap';
-import 'rxjs/add/operator/catch';
+
 import { User } from '../models';
 import * as userActions from '../actions/user.actions';
 

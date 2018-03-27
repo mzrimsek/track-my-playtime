@@ -1,3 +1,5 @@
+import './rxjs-operators';
+
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
@@ -20,8 +22,9 @@ import { HomeModule } from './features/home/home.module';
 import { TrackerAppModule } from './features/tracker-app/tracker-app.module';
 
 import { reducers } from './reducers/root.reducer';
+
 import { environment } from '../environments/environment';
-import { CustomRouterStateSerializer } from './shared/router.utils';
+import { CustomRouterStateSerializer } from './shared/utils/router.utils';
 
 @NgModule({
   declarations: [

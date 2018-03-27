@@ -25,6 +25,12 @@ export class RemoveHistoryItem implements Action {
   constructor(public id: string) { }
 }
 
+export const REMOVE_HISTORY_ITEM_SUCCEEDED = '[History] Remove Item Succeeded';
+export class RemoveHistoryItemSucceeded implements Action {
+  readonly type = REMOVE_HISTORY_ITEM_SUCCEEDED;
+  constructor(public id: string) { }
+}
+
 export const UPDATE_GAME = '[History] Update Game';
 export class UpdateGame implements Action {
   readonly type = UPDATE_GAME;
@@ -47,6 +53,7 @@ export type All = AddNewHistoryItem |
   LoadHistoryItems |
   LoadHistoryItemsSucceeded |
   RemoveHistoryItem |
+  RemoveHistoryItemSucceeded |
   UpdateGame |
   UpdatePlatform |
   ClearHistoryItems;

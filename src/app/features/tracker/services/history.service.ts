@@ -1,34 +1,50 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
+import uuidv5 = require('uuid/v5');
+
+import { UserService } from '../../auth/services/user.service';
 import { AddTimerInfo, HistoryListItem } from '../models';
-import { Guid } from '../../../shared/guid.utils';
-import 'rxjs/add/observable/of';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/switchMap';
+import { environment } from '../../../../environments/environment';
 
 @Injectable()
 export class HistoryService {
 
   private historyCollection: AngularFirestoreCollection<HistoryCollection>;
-  constructor(private afs: AngularFirestore) {
+  constructor(private afs: AngularFirestore, private userService: UserService) {
     this.historyCollection = this.afs.collection<HistoryCollection>('history');
   }
 
-  getHistoryList(userId: string): Observable<HistoryListItem[]> {
-    return this.getUserItemCollection(userId).valueChanges()
-      .map(histories => histories
-        .map(history => this.getHistoryListItem(history)));
+  getHistoryList(): Observable<HistoryListItem[]> {
+    const historyList = this.userService.getUser()
+      .switchMap(user =>
+        this.getUserItemCollection(user.uid).valueChanges());
+    return historyList.map(histories => histories
+      .map(history => this.getHistoryListItem(history)));
   }
 
   saveTimerInfo(info: AddTimerInfo): Observable<HistoryListItem> {
     const newItem = this.getNewHistory(info);
-    this.getUserItemCollection(info.userId).add(newItem);
+    this.getUserItemCollection(info.userId).doc(newItem.id).set(newItem);
     return Observable.of(this.getHistoryListItem(newItem));
   }
 
+  deleteHistoryItem(itemId: string): Observable<string> {
+    this.userService.getUser()
+      .switchMap(user =>
+        this.getUserItemCollection(user.uid).doc(itemId).delete());
+    return Observable.of(itemId);
+  }
+
+  updateHistoryItem(item: HistoryListItem): void {
+    const history = this.getHistory(item);
+    this.userService.getUser()
+      .switchMap(user =>
+        this.getUserItemCollection(user.uid).doc(history.id).update(history));
+  }
+
   private getNewHistory(info: AddTimerInfo): History {
-    const id = Guid.newGuid();
+    const id = uuidv5(environment.domain, uuidv5.URL);
     return <History>{
       id,
       game: info.game,
@@ -45,6 +61,12 @@ export class HistoryService {
   private getHistoryListItem(history: History): HistoryListItem {
     return <HistoryListItem>{
       ...history
+    };
+  }
+
+  private getHistory(item: HistoryListItem): History {
+    return <History>{
+      ...item
     };
   }
 }

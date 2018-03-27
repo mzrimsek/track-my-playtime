@@ -1,34 +1,28 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
+import { Observable } from 'rxjs/Observable';
+
 import { HistoryService } from '../services/history.service';
-import { UserService } from '../../auth/services/user.service';
+
 import * as appActions from '../../../actions/app.actions';
 import * as userActions from '../../auth/actions/user.actions';
 import * as timerActions from '../actions/timer.actions';
 import * as historyActions from '../actions/history.actions';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/of';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/switchMap';
-import 'rxjs/add/operator/mergeMap';
-import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class HistoryEffects {
 
-  constructor(private actions$: Actions, private historyService: HistoryService, private userService: UserService) { }
+  constructor(private actions$: Actions, private historyService: HistoryService) { }
 
   @Effect() loadHistoryItems$ =
     this.actions$
       .ofType(historyActions.LOAD_HISTORY_ITEMS)
-      .switchMap(() => this.userService.getUser()
-        .switchMap(user => this.historyService.getHistoryList(user.uid)
-          .map(data => {
-            return new historyActions.LoadHistoryItemsSucceeded(data);
-          })
-          .catch(err =>
-            Observable.of(new appActions.Error(historyActions.LOAD_HISTORY_ITEMS, err.message))
-          )
+      .switchMap(() => this.historyService.getHistoryList()
+        .map(data => {
+          return new historyActions.LoadHistoryItemsSucceeded(data);
+        })
+        .catch(err =>
+          Observable.of(new appActions.Error(historyActions.LOAD_HISTORY_ITEMS, err.message))
         )
       );
 
@@ -39,6 +33,20 @@ export class HistoryEffects {
       .mergeMap(action => [
         new historyActions.AddNewHistoryItem(action.item)
       ]);
+
+  @Effect() removeHistoryItem$ =
+    this.actions$
+      .ofType(historyActions.REMOVE_HISTORY_ITEM)
+      .map(action => action as historyActions.RemoveHistoryItem)
+      .map(action => action.id)
+      .switchMap(itemId => this.historyService.deleteHistoryItem(itemId)
+        .map(removedId => {
+          return new historyActions.RemoveHistoryItemSucceeded(removedId);
+        })
+        .catch(err =>
+          Observable.of(new appActions.Error(historyActions.REMOVE_HISTORY_ITEM, err.message))
+        )
+      );
 
   @Effect() logout$ =
     this.actions$

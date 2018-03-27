@@ -1,5 +1,7 @@
 import { ActionReducerMap, createFeatureSelector, createSelector } from '@ngrx/store';
+
 import { TimerInfo, HistoryListItem } from '../models';
+
 import * as fromTimer from './timer.reducer';
 import * as fromHistory from './history.reducer';
 import * as fromPlatforms from './platforms.reducer';

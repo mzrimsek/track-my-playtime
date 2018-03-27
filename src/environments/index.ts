@@ -2,6 +2,7 @@ export interface Environment {
   production: boolean;
   urls: {};
   firebase: FirebaseConfig;
+  domain: string;
 }
 
 interface FirebaseConfig {

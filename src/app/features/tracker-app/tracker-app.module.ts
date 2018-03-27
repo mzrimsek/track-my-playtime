@@ -10,6 +10,7 @@ import { TrackerModule } from '../tracker/tracker.module';
 import { DashboardModule } from '../dashboard/dashboard.module';
 
 import { UserService } from '../auth/services/user.service';
+
 import { AuthGuard } from '../auth/guards/auth.guard';
 
 @NgModule({
