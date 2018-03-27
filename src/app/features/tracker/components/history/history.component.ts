@@ -11,7 +11,6 @@ export class HistoryComponent implements OnInit {
 
   @Input() items: HistoryListItem[] = [];
   @Input() platformsOptions: string[] = [];
-  @Input() uid: string;
   constructor() { }
 
   ngOnInit() { }

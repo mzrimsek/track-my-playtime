@@ -6,9 +6,9 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class PlatformsService {
 
-  private platformsCollection: AngularFirestoreCollection<Platforms>;
+  private platformsCollection: AngularFirestoreCollection<PlatformsCollection>;
   constructor(private afs: AngularFirestore) {
-    this.platformsCollection = this.afs.collection<Platforms>('platforms');
+    this.platformsCollection = this.afs.collection<PlatformsCollection>('platforms');
   }
 
   getPlatformsOptions(): Observable<string[]> {
@@ -17,6 +17,6 @@ export class PlatformsService {
   }
 }
 
-interface Platforms {
+interface PlatformsCollection {
   options: string[];
 }

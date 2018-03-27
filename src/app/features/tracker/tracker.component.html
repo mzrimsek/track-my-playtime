@@ -1,7 +1,6 @@
 <app-tracker-timer [info]="timerInfo$ | async"
                    [currentTime]="currentTime$ | async"
                    [platformsOptions]="platformsOptions$ | async"
-                   [uid]="(user$ | async).uid"></app-tracker-timer>
+                   [userId]="(user$ | async).uid"></app-tracker-timer>
 <app-tracker-history [items]="historyItems$ | async"
-                     [platformsOptions]="platformsOptions$ | async"
-                     [uid]="(user$ | async).uid"></app-tracker-history>
+                     [platformsOptions]="platformsOptions$ | async"></app-tracker-history>

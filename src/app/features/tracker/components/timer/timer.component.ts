@@ -15,7 +15,7 @@ export class TimerComponent implements OnInit {
   @Input() info: TimerInfo;
   @Input() currentTime: Date;
   @Input() platformsOptions: string[] = [];
-  @Input() uid: string;
+  @Input() userId: string;
   constructor(private store: Store<State>) { }
 
   ngOnInit() { }
@@ -26,7 +26,7 @@ export class TimerComponent implements OnInit {
 
   stopTimer() {
     const info = <AddTimerInfo>{
-      uid: this.uid,
+      userId: this.userId,
       game: this.info.game,
       platform: this.info.platform,
       startTime: this.info.startTime,
