@@ -14,6 +14,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { ClockService } from './services/clock.service';
 import { HistoryService } from './services/history.service';
 import { PlatformsService } from './services/platforms.service';
+import { UserService } from '../auth/services/user.service';
 
 import { TrackerInitializationEffects } from './effects/initialization.effects';
 import { TimerEffects } from './effects/timer.effects';
@@ -30,6 +31,6 @@ import { reducers } from './reducers/root.reducer';
     SharedModule
   ],
   declarations: [TrackerComponent, TimerComponent, HistoryComponent, HistoryEntryComponent],
-  providers: [ClockService, HistoryService, PlatformsService]
+  providers: [ClockService, HistoryService, PlatformsService, UserService]
 })
 export class TrackerModule { }

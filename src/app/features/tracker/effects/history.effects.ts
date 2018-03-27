@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
 import { HistoryService } from '../services/history.service';
+import { UserService } from '../../auth/services/user.service';
 import * as appActions from '../../../actions/app.actions';
 import * as userActions from '../../auth/actions/user.actions';
 import * as timerActions from '../actions/timer.actions';
@@ -15,17 +16,19 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 export class HistoryEffects {
 
-  constructor(private actions$: Actions, private historyService: HistoryService) { }
+  constructor(private actions$: Actions, private historyService: HistoryService, private userService: UserService) { }
 
   @Effect() loadHistoryItems$ =
     this.actions$
       .ofType(historyActions.LOAD_HISTORY_ITEMS)
-      .switchMap(() => this.historyService.getHistoryList()
-        .map(data => {
-          return new historyActions.LoadHistoryItemsSucceeded(data);
-        })
-        .catch(err =>
-          Observable.of(new appActions.Error(historyActions.LOAD_HISTORY_ITEMS, err.message))
+      .switchMap(() => this.userService.getUser()
+        .switchMap(user => this.historyService.getHistoryList(user.uid)
+          .map(data => {
+            return new historyActions.LoadHistoryItemsSucceeded(data);
+          })
+          .catch(err =>
+            Observable.of(new appActions.Error(historyActions.LOAD_HISTORY_ITEMS, err.message))
+          )
         )
       );
 

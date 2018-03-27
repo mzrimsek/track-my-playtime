@@ -6,7 +6,7 @@ import { User } from '../models';
 export interface State extends User { }
 
 const initialState: State = {
-  uid: null,
+  uid: '',
   displayName: 'GUEST',
   loading: false,
   error: ''

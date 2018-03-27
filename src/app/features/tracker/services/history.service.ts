@@ -5,6 +5,7 @@ import { AddTimerInfo, HistoryListItem } from '../models';
 import { Guid } from '../../../shared/guid.utils';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/switchMap';
 
 @Injectable()
 export class HistoryService {
@@ -14,10 +15,10 @@ export class HistoryService {
     this.historyCollection = this.afs.collection<HistoryCollection>('history');
   }
 
-  getHistoryList(): Observable<HistoryListItem[]> {
-    // return this.historyCollection.valueChanges()
-    // .map(histories => histories
-    // .map(history => this.getHistoryListItemFromHistory(history)));
+  getHistoryList(userId: string): Observable<HistoryListItem[]> {
+    return this.getUserItemCollection(userId).valueChanges()
+      .map(histories => histories
+        .map(history => this.getHistoryListItem(history)));
   }
 
   saveTimerInfo(info: AddTimerInfo): Observable<HistoryListItem> {
@@ -37,7 +38,7 @@ export class HistoryService {
     };
   }
 
-  private getUserItemCollection(userId: string): AngularFirestoreCollection<HistoryListItem> {
+  private getUserItemCollection(userId: string): AngularFirestoreCollection<History> {
     return this.historyCollection.doc(userId).collection('items');
   }
 
@@ -46,6 +47,7 @@ export class HistoryService {
       ...history
     };
   }
+}
 
 interface History {
   id: string;

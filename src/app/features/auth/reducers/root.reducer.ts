@@ -17,7 +17,7 @@ export const reducers: ActionReducerMap<AuthState> = {
 export const _selectAuthState = createFeatureSelector<AuthState>('auth');
 export const _selectUser = createSelector(_selectAuthState, state => state.user);
 
-export const _selectUserLoggedIn = createSelector(_selectUser, user => user.uid !== null);
+export const _selectUserLoggedIn = createSelector(_selectUser, user => user.uid !== '');
 export const _selectDisplayUser = createSelector(_selectUser, user => <User>{ uid: user.uid, displayName: user.displayName });
 
 const authComponentSelectors = {

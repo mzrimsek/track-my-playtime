@@ -1,5 +1,5 @@
 export interface User {
-  uid: string | null;
+  uid: string;
   displayName: string;
   loading: boolean;
   error: string;
