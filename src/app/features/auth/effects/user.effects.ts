@@ -3,13 +3,13 @@ import { Router } from '@angular/router';
 
 import { Actions, Effect } from '@ngrx/effects';
 
-import * as firebase from 'firebase';
 import { AngularFireAuth } from 'angularfire2/auth';
-
+import * as firebase from 'firebase';
 import { Observable } from 'rxjs/Observable';
 
-import { User } from '../models';
 import * as userActions from '../actions/user.actions';
+
+import { User } from '../models';
 
 @Injectable()
 export class UserEffects {

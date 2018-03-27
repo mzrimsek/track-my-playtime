@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+
 import { Store } from '@ngrx/store';
+
 import * as userActions from '../../actions/user.actions';
+
 import { State } from '../../reducers/root.reducer';
 
 @Component({

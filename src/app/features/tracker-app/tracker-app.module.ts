@@ -1,13 +1,13 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 
-import { TrackerAppComponent } from './tracker-app.component';
-import { NavComponent } from './components/nav/nav.component';
-
-import { TrackerAppRoutingModule } from './tracker-app-routing.module';
 import { SharedModule } from '../../shared/shared.module';
-import { TrackerModule } from '../tracker/tracker.module';
 import { DashboardModule } from '../dashboard/dashboard.module';
+import { TrackerModule } from '../tracker/tracker.module';
+import { TrackerAppRoutingModule } from './tracker-app-routing.module';
+
+import { NavComponent } from './components/nav/nav.component';
+import { TrackerAppComponent } from './tracker-app.component';
 
 import { UserService } from '../auth/services/user.service';
 

@@ -1,4 +1,5 @@
-import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
+import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
+
 import * as actions from '../actions/history.actions';
 
 export interface History {

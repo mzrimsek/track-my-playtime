@@ -1,8 +1,9 @@
-import { ActionReducerMap } from '@ngrx/store';
 import * as fromRouter from '@ngrx/router-store';
+import { ActionReducerMap } from '@ngrx/store';
+
+import * as fromError from './error.reducer';
 
 import { RouterStateUrl } from '../shared/utils/router.utils';
-import * as fromError from './error.reducer';
 
 export interface State {
   router: fromRouter.RouterReducerState<RouterStateUrl>;

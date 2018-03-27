@@ -1,10 +1,8 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 
-import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-
-import { AngularFireAuthModule } from 'angularfire2/auth';
+import { StoreModule } from '@ngrx/store';
 
 import { LoginComponent } from './components/login/login.component';
 
@@ -15,7 +13,6 @@ import { reducers } from './reducers/root.reducer';
 @NgModule({
   imports: [
     CommonModule,
-    AngularFireAuthModule,
     StoreModule.forFeature('auth', reducers),
     EffectsModule.forFeature([UserEffects])
   ],

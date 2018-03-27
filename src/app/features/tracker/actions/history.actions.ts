@@ -1,4 +1,5 @@
 import { Action } from '@ngrx/store';
+
 import { HistoryListItem } from '../models';
 
 export const ADD_NEW_HISTORY_ITEM = '[History] Add New History Item';

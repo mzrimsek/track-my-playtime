@@ -1,4 +1,5 @@
 import { Action } from '@ngrx/store';
+
 import { AddTimerInfo, HistoryListItem } from '../models';
 
 export const START_TIMER = '[Timer] Start Timer';

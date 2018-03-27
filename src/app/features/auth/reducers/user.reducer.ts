@@ -1,6 +1,8 @@
 import { tassign } from 'tassign';
-import { User } from '../models';
+
 import * as actions from '../actions/user.actions';
+
+import { User } from '../models';
 
 // tslint:disable-next-line:no-empty-interface
 export interface State extends User { }

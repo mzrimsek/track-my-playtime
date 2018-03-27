@@ -1,11 +1,15 @@
 import { Injectable } from '@angular/core';
+
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
-import uuidv5 = require('uuid/v5');
 
 import { UserService } from '../../auth/services/user.service';
+
 import { AddTimerInfo, HistoryListItem } from '../models';
+
 import { environment } from '../../../../environments/environment';
+
+import uuidv5 = require('uuid/v5');
 
 @Injectable()
 export class HistoryService {

@@ -1,4 +1,5 @@
 import { tassign } from 'tassign';
+
 import * as actions from '../actions/timer.actions';
 
 export interface State {

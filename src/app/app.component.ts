@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+
 import { Store } from '@ngrx/store';
-import { State } from './reducers/root.reducer';
+
 import * as actions from './actions/app.actions';
+
+import { State } from './reducers/root.reducer';
 
 @Component({
   selector: 'app-root',

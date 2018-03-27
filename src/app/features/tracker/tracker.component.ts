@@ -1,11 +1,16 @@
 import { Component, OnInit } from '@angular/core';
+
 import { Store } from '@ngrx/store';
+
 import { Observable } from 'rxjs/Observable';
-import { ClockService } from './services/clock.service';
+
 import { UserService } from '../auth/services/user.service';
-import { TimerInfo, HistoryListItem } from './models';
-import { User } from '../auth/models';
+import { ClockService } from './services/clock.service';
+
 import trackerComponentSelectors, { State } from './reducers/root.reducer';
+
+import { User } from '../auth/models';
+import { HistoryListItem, TimerInfo } from './models';
 
 @Component({
   selector: 'app-tracker',

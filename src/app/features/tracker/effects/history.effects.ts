@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
+
 import { Actions, Effect } from '@ngrx/effects';
+
 import { Observable } from 'rxjs/Observable';
 
 import { HistoryService } from '../services/history.service';
 
 import * as appActions from '../../../actions/app.actions';
 import * as userActions from '../../auth/actions/user.actions';
-import * as timerActions from '../actions/timer.actions';
 import * as historyActions from '../actions/history.actions';
+import * as timerActions from '../actions/timer.actions';
 
 @Injectable()
 export class HistoryEffects {

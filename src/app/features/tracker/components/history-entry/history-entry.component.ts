@@ -1,11 +1,12 @@
-import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 
-import { HistoryListItem } from '../../models';
+import { Store } from '@ngrx/store';
 
 import * as actions from '../../actions/history.actions';
 
 import { State } from '../../reducers/root.reducer';
+
+import { HistoryListItem } from '../../models';
 
 @Component({
   selector: 'app-tracker-history-entry',
