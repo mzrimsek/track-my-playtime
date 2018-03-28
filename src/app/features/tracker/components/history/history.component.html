@@ -1,12 +1,7 @@
 <div class="history">
   <div *ngIf="loading"
        class="loading">
-    <div class="spinner">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
+    <app-shared-spinner></app-shared-spinner>
   </div>
 
   <div *ngIf="!loading">
