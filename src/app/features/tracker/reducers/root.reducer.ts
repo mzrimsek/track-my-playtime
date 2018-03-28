@@ -41,12 +41,14 @@ export const _selectHistoryItems = createSelector(_selectAllHistory,
     entity => <HistoryListItem>{
       ...entity
     }));
+export const _selectHistoryLoading = createSelector(_selectHistory, history => history.loading);
 
 export const _selectPlatformsOptions = createSelector(_selectPlatforms, platforms => platforms.options);
 
 const trackerComponentSelectors = {
   timerInfo: _selectTimerInfo,
   historyItems: _selectHistoryItems,
+  historyLoading: _selectHistoryLoading,
   platformsOptions: _selectPlatformsOptions
 };
 

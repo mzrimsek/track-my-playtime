@@ -1,12 +1,24 @@
 <div class="history">
-  <div class="items"
-       *ngIf="items.length !== 0">
-    <app-tracker-history-entry *ngFor="let item of items"
-                               [item]="item"
-                               [platformsOptions]="platformsOptions"></app-tracker-history-entry>
+  <div *ngIf="loading"
+       class="loading">
+    <div class="spinner">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
   </div>
-  <div class="no-items"
-       *ngIf="items.length === 0">
-    Nothing to show...get tracking!
+
+  <div *ngIf="!loading">
+    <div class="items"
+         *ngIf="items.length !== 0">
+      <app-tracker-history-entry *ngFor="let item of items"
+                                 [item]="item"
+                                 [platformsOptions]="platformsOptions"></app-tracker-history-entry>
+    </div>
+    <div class="no-items"
+         *ngIf="items.length === 0">
+      Nothing to show...get tracking!
+    </div>
   </div>
 </div>

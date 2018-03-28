@@ -1,5 +1,7 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 
+import { tassign } from 'tassign';
+
 import * as actions from '../actions/history.actions';
 
 export interface History {
@@ -10,18 +12,30 @@ export interface History {
   endTime: number;
 }
 
-export interface State extends EntityState<History> { }
+export interface State extends EntityState<History> {
+  loading: boolean;
+}
 
 export const adapter: EntityAdapter<History> = createEntityAdapter<History>();
-const initialState: State = adapter.getInitialState();
+const initialState: State = adapter.getInitialState({
+  loading: false
+});
 
 export function reducer(state: State = initialState, action: actions.All): State {
   switch (action.type) {
     case actions.ADD_NEW_HISTORY_ITEM: {
       return adapter.addOne(action.item, state);
     }
+    case actions.LOAD_HISTORY_ITEMS: {
+      return tassign(state, {
+        loading: true
+      });
+    }
     case actions.LOAD_HISTORY_ITEMS_SUCCEEDED: {
-      return adapter.addAll(action.items, state);
+      const newState = adapter.addAll(action.items, state);
+      return tassign(newState, {
+        loading: false
+      });
     }
     case actions.REMOVE_HISTORY_ITEM_SUCCEEDED: {
       return adapter.removeOne(action.id, state);

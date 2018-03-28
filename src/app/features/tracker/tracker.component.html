@@ -3,4 +3,5 @@
                    [platformsOptions]="platformsOptions$ | async"
                    [userId]="(user$ | async).uid"></app-tracker-timer>
 <app-tracker-history [items]="historyItems$ | async"
-                     [platformsOptions]="platformsOptions$ | async"></app-tracker-history>
+                     [platformsOptions]="platformsOptions$ | async"
+                     [loading]="historyLoading$ | async"></app-tracker-history>
