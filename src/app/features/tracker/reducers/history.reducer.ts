@@ -27,15 +27,11 @@ export function reducer(state: State = initialState, action: actions.All): State
       return adapter.addOne(action.item, state);
     }
     case actions.LOAD_HISTORY_ITEMS: {
-      return tassign(state, {
-        loading: true
-      });
+      return tassign(state, { loading: true });
     }
     case actions.LOAD_HISTORY_ITEMS_SUCCEEDED: {
       const newState = adapter.addAll(action.items, state);
-      return tassign(newState, {
-        loading: false
-      });
+      return tassign(newState, { loading: false });
     }
     case actions.REMOVE_HISTORY_ITEM_SUCCEEDED: {
       return adapter.removeOne(action.id, state);

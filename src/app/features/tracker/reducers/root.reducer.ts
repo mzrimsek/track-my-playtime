@@ -28,12 +28,12 @@ export const _selectHistory = createSelector(_selectTrackerState, state => state
 export const _selectPlatforms = createSelector(_selectTrackerState, state => state.platforms);
 
 export const _selectTimerStartTime = createSelector(_selectTimer, state => state.startTime);
-export const _selectTimerInfo = createSelector(_selectTimer, _selectTimerStartTime, (timer, startDate) => {
-  return <TimerInfo>{
-    ...timer,
-    startDate
-  };
-});
+export const _selectTimerInfo = createSelector(_selectTimer, _selectTimerStartTime,
+  (timer, startDate) =>
+    <TimerInfo>{
+      ...timer,
+      startDate
+    });
 
 export const { selectAll: _selectAllHistory } = fromHistory.adapter.getSelectors(_selectHistory);
 export const _selectHistoryItems = createSelector(_selectAllHistory,
@@ -41,13 +41,14 @@ export const _selectHistoryItems = createSelector(_selectAllHistory,
     entity => <HistoryListItem>{
       ...entity
     }));
+export const _selectSortedHistoryItems = createSelector(_selectHistoryItems, items => items.sort((a, b) => b.startTime - a.startTime));
 export const _selectHistoryLoading = createSelector(_selectHistory, history => history.loading);
 
 export const _selectPlatformsOptions = createSelector(_selectPlatforms, platforms => platforms.options);
 
 const trackerComponentSelectors = {
   timerInfo: _selectTimerInfo,
-  historyItems: _selectHistoryItems,
+  historyItems: _selectSortedHistoryItems,
   historyLoading: _selectHistoryLoading,
   platformsOptions: _selectPlatformsOptions
 };
