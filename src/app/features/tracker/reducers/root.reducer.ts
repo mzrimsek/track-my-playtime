@@ -6,6 +6,8 @@ import * as fromTimer from './timer.reducer';
 
 import { HistoryListItem, TimerInfo } from '../models';
 
+import { getGroupedHistoryListItems } from '../utils/history.utils';
+
 export interface TrackerState {
   timer: fromTimer.State;
   history: fromHistory.State;
@@ -42,13 +44,14 @@ export const _selectHistoryItems = createSelector(_selectAllHistory,
       ...entity
     }));
 export const _selectSortedHistoryItems = createSelector(_selectHistoryItems, items => items.sort((a, b) => b.startTime - a.startTime));
+export const _selectGroupedHistoryItems = createSelector(_selectSortedHistoryItems, items => getGroupedHistoryListItems(items));
 export const _selectHistoryLoading = createSelector(_selectHistory, history => history.loading);
 
 export const _selectPlatformsOptions = createSelector(_selectPlatforms, platforms => platforms.options);
 
 const trackerComponentSelectors = {
   timerInfo: _selectTimerInfo,
-  historyItems: _selectSortedHistoryItems,
+  historyGroupings: _selectGroupedHistoryItems,
   historyLoading: _selectHistoryLoading,
   platformsOptions: _selectPlatformsOptions
 };

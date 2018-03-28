@@ -5,3 +5,8 @@ export interface HistoryListItem {
   startTime: number;
   endTime: number;
 }
+
+export interface HistoryGrouping {
+  date: string;
+  historyItems: HistoryListItem[];
+}

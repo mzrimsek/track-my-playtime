@@ -2,6 +2,6 @@
                    [currentTime]="currentTime$ | async"
                    [platformsOptions]="platformsOptions$ | async"
                    [userId]="(user$ | async).uid"></app-tracker-timer>
-<app-tracker-history [items]="historyItems$ | async"
+<app-tracker-history [items]="historyGroupings$ | async"
                      [platformsOptions]="platformsOptions$ | async"
                      [loading]="historyLoading$ | async"></app-tracker-history>

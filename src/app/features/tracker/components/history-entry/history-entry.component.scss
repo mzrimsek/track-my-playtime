@@ -6,14 +6,22 @@
   background: $background-light;
   height: 80px;
   padding: 0px 10px;
-  margin-bottom: 5px;
+  border-bottom: 1px solid darken($background-light, 10%);
+
+  &:hover {
+    background: darken($background-light, 5%);
+  }
 
   .display-element {
     font-size: $base-font-size - 3px;
     font-family: $base-font-family;
     width: 100%;
     padding: 5px;
-    background: $background-light;
+    background: inherit;
+
+    &:hover {
+      background: darken($background-light, 5%);
+    }
   }
 
   .game {

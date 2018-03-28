@@ -1,11 +1,23 @@
 @import "../../../../../variables.scss";
 
 .history {
-  margin-top: 110px;
+  margin-top: $timer-height + 20px;
 
   .loading {
     display: flex;
     justify-content: center;
+  }
+
+  .items {
+    .history-group {
+      background: $background-light;
+      margin-bottom: 20px;
+
+      .date {
+        padding: 30px 15px;
+        font-weight: bold;
+      }
+    }
   }
 
   .no-items {
