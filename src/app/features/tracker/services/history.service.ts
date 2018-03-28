@@ -3,26 +3,20 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
 
-import { UserService } from '../../auth/services/user.service';
-
 import { AddTimerInfo, HistoryListItem } from '../models';
 
-import { environment } from '../../../../environments/environment';
-
-import uuidv5 = require('uuid/v5');
+import { getUUID } from '../../../shared/utils/uuid.utils';
 
 @Injectable()
 export class HistoryService {
 
   private historyCollection: AngularFirestoreCollection<HistoryCollection>;
-  constructor(private afs: AngularFirestore, private userService: UserService) {
+  constructor(private afs: AngularFirestore) {
     this.historyCollection = this.afs.collection<HistoryCollection>('history');
   }
 
-  getHistoryList(): Observable<HistoryListItem[]> {
-    const historyList = this.userService.getUser()
-      .switchMap(user =>
-        this.getUserItemCollection(user.uid).valueChanges());
+  getHistoryList(userId: string): Observable<HistoryListItem[]> {
+    const historyList = this.getUserItemCollection(userId).valueChanges();
     return historyList.map(histories => histories
       .map(history => this.getHistoryListItem(history)));
   }
@@ -33,22 +27,18 @@ export class HistoryService {
     return Observable.of(this.getHistoryListItem(newItem));
   }
 
-  deleteHistoryItem(itemId: string): Observable<string> {
-    this.userService.getUser()
-      .switchMap(user =>
-        this.getUserItemCollection(user.uid).doc(itemId).delete());
+  deleteHistoryItem(userId: string, itemId: string): Observable<string> {
+    this.getUserItemCollection(userId).doc(itemId).delete();
     return Observable.of(itemId);
   }
 
-  updateHistoryItem(item: HistoryListItem): void {
+  updateHistoryItem(userId: string, item: HistoryListItem): void {
     const history = this.getHistory(item);
-    this.userService.getUser()
-      .switchMap(user =>
-        this.getUserItemCollection(user.uid).doc(history.id).update(history));
+    this.getUserItemCollection(userId).doc(history.id).update(history);
   }
 
   private getNewHistory(info: AddTimerInfo): History {
-    const id = uuidv5(environment.domain, uuidv5.URL);
+    const id = getUUID(info.userId);
     return <History>{
       id,
       game: info.game,

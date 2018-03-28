@@ -11,5 +11,8 @@ export const environment: Environment = {
     storageBucket: 'track-my-playtime.appspot.com',
     messagingSenderId: '629658315142'
   },
-  domain: 'https://trackmyplaytime.com'
+  uuid: {
+    domain: 'https://trackmyplaytime.com',
+    namespace: 'e3f55957-93ab-507a-9c01-86eb4e4bc347'
+  }
 };

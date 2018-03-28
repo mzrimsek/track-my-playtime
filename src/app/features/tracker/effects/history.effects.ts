@@ -4,6 +4,7 @@ import { Actions, Effect } from '@ngrx/effects';
 
 import { Observable } from 'rxjs/Observable';
 
+import { UserService } from '../../auth/services/user.service';
 import { HistoryService } from '../services/history.service';
 
 import * as appActions from '../../../actions/app.actions';
@@ -14,12 +15,13 @@ import * as timerActions from '../actions/timer.actions';
 @Injectable()
 export class HistoryEffects {
 
-  constructor(private actions$: Actions, private historyService: HistoryService) { }
+  constructor(private actions$: Actions, private historyService: HistoryService, private userService: UserService) { }
 
   @Effect() loadHistoryItems$ =
     this.actions$
       .ofType(historyActions.LOAD_HISTORY_ITEMS)
-      .switchMap(() => this.historyService.getHistoryList()
+      .switchMap(() => this.userService.getUser())
+      .switchMap(user => this.historyService.getHistoryList(user.uid)
         .map(data => {
           return new historyActions.LoadHistoryItemsSucceeded(data);
         })
@@ -41,10 +43,15 @@ export class HistoryEffects {
       .ofType(historyActions.REMOVE_HISTORY_ITEM)
       .map(action => action as historyActions.RemoveHistoryItem)
       .map(action => action.id)
-      .switchMap(itemId => this.historyService.deleteHistoryItem(itemId)
-        .map(removedId => {
-          return new historyActions.RemoveHistoryItemSucceeded(removedId);
-        })
+      .switchMap(itemId => this.userService.getUser()
+        .map(user => <Delete>{
+          userId: user.uid,
+          itemId
+        }))
+      .switchMap(data => this.historyService.deleteHistoryItem(data.userId, data.itemId)
+        .map(removedId =>
+          new historyActions.RemoveHistoryItemSucceeded(removedId)
+        )
         .catch(err =>
           Observable.of(new appActions.Error(historyActions.REMOVE_HISTORY_ITEM, err.message))
         )
@@ -56,4 +63,9 @@ export class HistoryEffects {
       .mergeMap(() => [
         new historyActions.ClearHistoryItems()
       ]);
+}
+
+interface Delete {
+  userId: string;
+  itemId: string;
 }

@@ -2,7 +2,10 @@ export interface Environment {
   production: boolean;
   urls: {};
   firebase: FirebaseConfig;
-  domain: string;
+  uuid: {
+    domain: string;
+    namespace: string;
+  };
 }
 
 interface FirebaseConfig {
