@@ -44,7 +44,8 @@ export class HistoryService {
       game: info.game,
       platform: info.platform,
       startTime: info.startTime,
-      endTime: info.endTime
+      endTime: info.endTime,
+      source: 'web'
     };
   }
 
@@ -54,13 +55,18 @@ export class HistoryService {
 
   private getHistoryListItem(history: History): HistoryListItem {
     return <HistoryListItem>{
-      ...history
+      id: history.id,
+      game: history.game,
+      platform: history.platform,
+      startTime: history.startTime,
+      endTime: history.endTime
     };
   }
 
   private getHistory(item: HistoryListItem): History {
     return <History>{
-      ...item
+      ...item,
+      source: 'web'
     };
   }
 }
@@ -71,6 +77,7 @@ interface History {
   platform: string;
   startTime: number;
   endTime: number;
+  source: string;
 }
 
 interface HistoryCollection {
