@@ -47,13 +47,60 @@ export class HistoryEffects {
         .map(user => <Delete>{
           userId: user.uid,
           itemId
-        }))
+        })
+      )
       .switchMap(data => this.historyService.deleteHistoryItem(data.userId, data.itemId)
         .map(removedId =>
           new historyActions.RemoveHistoryItemSucceeded(removedId)
         )
         .catch(err =>
           Observable.of(new appActions.Error(historyActions.REMOVE_HISTORY_ITEM, err.message))
+        )
+      );
+
+  @Effect() updateGame$ =
+    this.actions$
+      .ofType(historyActions.UPDATE_GAME)
+      .map(action => action as historyActions.UpdateGame)
+      .map(action => <UpdateActionData>{
+        itemId: action.id,
+        property: action.game
+      })
+      .switchMap(actionData => this.userService.getUser()
+        .map(user => <UpdateData>{
+          userId: user.uid,
+          ...actionData
+        })
+      )
+      .switchMap(updateData => this.historyService.updateGame(updateData.userId, updateData.itemId, <string>updateData.property)
+        .map(updateProperty =>
+          new historyActions.UpdateGameSucceeded(updateProperty.itemId, <string>updateProperty.property)
+        )
+        .catch(err =>
+          Observable.of(new appActions.Error(historyActions.UPDATE_GAME, err.message))
+        )
+      );
+
+  @Effect() updatePlatform$ =
+    this.actions$
+      .ofType(historyActions.UPDATE_PLATFORM)
+      .map(action => action as historyActions.UpdatePlatform)
+      .map(action => <UpdateActionData>{
+        itemId: action.id,
+        property: action.platform
+      })
+      .switchMap(actionData => this.userService.getUser()
+        .map(user => <UpdateData>{
+          userId: user.uid,
+          ...actionData
+        })
+      )
+      .switchMap(updateData => this.historyService.updatePlatform(updateData.userId, updateData.itemId, <string>updateData.property)
+        .map(updateProperty =>
+          new historyActions.UpdatePlatformSucceeded(updateProperty.itemId, <string>updateProperty.property)
+        )
+        .catch(err =>
+          Observable.of(new appActions.Error(historyActions.UPDATE_PLATFORM, err.message))
         )
       );
 
@@ -68,4 +115,13 @@ export class HistoryEffects {
 interface Delete {
   userId: string;
   itemId: string;
+}
+
+interface UpdateActionData {
+  itemId: string;
+  property: string | number;
+}
+
+interface UpdateData extends UpdateActionData {
+  userId: string;
 }

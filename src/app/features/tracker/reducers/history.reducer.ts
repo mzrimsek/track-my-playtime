@@ -36,7 +36,7 @@ export function reducer(state: State = initialState, action: actions.All): State
     case actions.REMOVE_HISTORY_ITEM_SUCCEEDED: {
       return adapter.removeOne(action.id, state);
     }
-    case actions.UPDATE_GAME: {
+    case actions.UPDATE_GAME_SUCCEEDED: {
       return adapter.updateOne({
         id: action.id,
         changes: {
@@ -44,7 +44,7 @@ export function reducer(state: State = initialState, action: actions.All): State
         }
       }, state);
     }
-    case actions.UPDATE_PLATFORM: {
+    case actions.UPDATE_PLATFORM_SUCCEEDED: {
       return adapter.updateOne({
         id: action.id,
         changes: {

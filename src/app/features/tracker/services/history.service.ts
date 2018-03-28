@@ -32,9 +32,20 @@ export class HistoryService {
     return Observable.of(itemId);
   }
 
-  updateHistoryItem(userId: string, item: HistoryListItem): void {
-    const history = this.getHistory(item);
-    this.getUserItemCollection(userId).doc(history.id).update(history);
+  updateGame(userId: string, itemId: string, game: string): Observable<UpdateProperty> {
+    this.getUserItemCollection(userId).doc(itemId).update({ game });
+    return Observable.of(<UpdateProperty>{
+      itemId,
+      property: game
+    });
+  }
+
+  updatePlatform(userId: string, itemId: string, platform: string): Observable<UpdateProperty> {
+    this.getUserItemCollection(userId).doc(itemId).update({ platform });
+    return Observable.of(<UpdateProperty>{
+      itemId,
+      property: platform
+    });
   }
 
   private getNewHistory(info: AddTimerInfo): History {
@@ -62,13 +73,6 @@ export class HistoryService {
       endTime: history.endTime
     };
   }
-
-  private getHistory(item: HistoryListItem): History {
-    return <History>{
-      ...item,
-      source: 'web'
-    };
-  }
 }
 
 interface History {
@@ -82,4 +86,9 @@ interface History {
 
 interface HistoryCollection {
   items: History[];
+}
+
+interface UpdateProperty {
+  itemId: string;
+  property: string | number;
 }

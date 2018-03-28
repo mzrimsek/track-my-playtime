@@ -38,9 +38,21 @@ export class UpdateGame implements Action {
   constructor(public id: string, public game: string) { }
 }
 
+export const UPDATE_GAME_SUCCEEDED = '[History] Update Game Succeeded';
+export class UpdateGameSucceeded implements Action {
+  readonly type = UPDATE_GAME_SUCCEEDED;
+  constructor(public id: string, public game: string) { }
+}
+
 export const UPDATE_PLATFORM = '[History] Update Platform';
 export class UpdatePlatform implements Action {
   readonly type = UPDATE_PLATFORM;
+  constructor(public id: string, public platform: string) { }
+}
+
+export const UPDATE_PLATFORM_SUCCEEDED = '[History] Update Platform Succeeded';
+export class UpdatePlatformSucceeded implements Action {
+  readonly type = UPDATE_PLATFORM_SUCCEEDED;
   constructor(public id: string, public platform: string) { }
 }
 
@@ -56,5 +68,7 @@ export type All = AddNewHistoryItem |
   RemoveHistoryItem |
   RemoveHistoryItemSucceeded |
   UpdateGame |
+  UpdateGameSucceeded |
   UpdatePlatform |
+  UpdatePlatformSucceeded |
   ClearHistoryItems;
