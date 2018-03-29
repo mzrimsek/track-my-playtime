@@ -4,7 +4,7 @@ import { tassign } from 'tassign';
 
 import * as actions from '../actions/history.actions';
 
-export interface History {
+export interface HistoryEntity {
   id: string;
   game: string;
   platform: string;
@@ -12,11 +12,11 @@ export interface History {
   endTime: number;
 }
 
-export interface State extends EntityState<History> {
+export interface State extends EntityState<HistoryEntity> {
   loading: boolean;
 }
 
-export const adapter: EntityAdapter<History> = createEntityAdapter<History>();
+export const adapter: EntityAdapter<HistoryEntity> = createEntityAdapter<HistoryEntity>();
 const initialState: State = adapter.getInitialState({
   loading: false
 });
@@ -49,6 +49,15 @@ export function reducer(state: State = initialState, action: actions.All): State
         id: action.id,
         changes: {
           platform: action.platform
+        }
+      }, state);
+    }
+    case actions.UPDATE_ELAPSED_TIME_SUCCEEDED: {
+      return adapter.updateOne({
+        id: action.id,
+        changes: {
+          startTime: action.startTime,
+          endTime: action.endTime
         }
       }, state);
     }

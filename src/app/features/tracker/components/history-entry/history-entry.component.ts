@@ -18,6 +18,7 @@ export class HistoryEntryComponent implements OnInit {
 
   @Input() item: HistoryListItem;
   @Input() platformsOptions: string[] = [];
+  @Input() dateRange: Date[] = [];
   constructor(private store: Store<State>) { }
 
   ngOnInit() { }
@@ -36,5 +37,18 @@ export class HistoryEntryComponent implements OnInit {
 
   remove() {
     this.store.dispatch(new actions.RemoveHistoryItem(this.item.id));
+  }
+
+  updateElapsedTime(elapsedTimeEl: HTMLInputElement) {
+    if (elapsedTimeEl.value) {
+      const dateStrings = elapsedTimeEl.value.split('~').map(dateString => dateString.trim());
+      const startTime = new Date(dateStrings[0]).getTime();
+      const endTime = new Date(dateStrings[1]).getTime();
+      this.store.dispatch(new actions.UpdateElapsedTime(this.item.id, startTime, endTime));
+    }
+  }
+
+  openDateTimePicker(el: HTMLInputElement) {
+    el.click();
   }
 }

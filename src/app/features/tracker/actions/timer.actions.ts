@@ -1,6 +1,8 @@
 import { Action } from '@ngrx/store';
 
-import { AddTimerInfo, HistoryListItem } from '../models';
+import { HistoryEntity } from '../reducers/history.reducer';
+
+import { AddTimerInfo } from '../models';
 
 export const START_TIMER = '[Timer] Start Timer';
 export class StartTimer implements Action {
@@ -26,6 +28,12 @@ export class SetPlatform implements Action {
   constructor(public platform: string) { }
 }
 
+export const SET_START_TIME = '[Timer] Set Start Time';
+export class SetStartTime implements Action {
+  readonly type = SET_START_TIME;
+  constructor(public startTime: number) { }
+}
+
 export const SAVE_TIMER_INFO = '[Timer] Save Timer Info';
 export class SaveTimerInfo implements Action {
   readonly type = SAVE_TIMER_INFO;
@@ -35,7 +43,7 @@ export class SaveTimerInfo implements Action {
 export const SAVE_TIMER_INFO_SUCCEEDED = '[Timer] Save Timer Info Succeeded';
 export class SaveTimerInfoSucceeded implements Action {
   readonly type = SAVE_TIMER_INFO_SUCCEEDED;
-  constructor(public item: HistoryListItem) { }
+  constructor(public item: HistoryEntity) { }
 }
 
 export const CANCEL_TIMER = '[Timer] Cancel Timer';
@@ -44,17 +52,11 @@ export class CancelTimer implements Action {
   constructor() { }
 }
 
-export const SET_START_TIME = '[Timer] Set Start Time';
-export class SetStartTime implements Action {
-  readonly type = SET_START_TIME;
-  constructor(public startTime: number) { }
-}
-
 export type All = StartTimer |
   ResetTimer |
   SetGame |
   SetPlatform |
+  SetStartTime |
   SaveTimerInfo |
   SaveTimerInfoSucceeded |
-  CancelTimer |
-  SetStartTime;
+  CancelTimer;

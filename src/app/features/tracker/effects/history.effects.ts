@@ -64,7 +64,7 @@ export class HistoryEffects {
       .map(action => action as historyActions.UpdateGame)
       .map(action => <UpdateActionData>{
         itemId: action.id,
-        property: action.game
+        prop: action.game
       })
       .switchMap(actionData => this.userService.getUser()
         .map(user => <UpdateData>{
@@ -72,9 +72,9 @@ export class HistoryEffects {
           ...actionData
         })
       )
-      .switchMap(updateData => this.historyService.updateGame(updateData.userId, updateData.itemId, <string>updateData.property)
-        .map(updateProperty =>
-          new historyActions.UpdateGameSucceeded(updateProperty.itemId, <string>updateProperty.property)
+      .switchMap(updateData => this.historyService.updateGame(updateData.userId, updateData.itemId, updateData.prop)
+        .map(updateProp =>
+          new historyActions.UpdateGameSucceeded(updateProp.itemId, updateProp.prop)
         )
         .catch(err =>
           Observable.of(new appActions.Error(historyActions.UPDATE_GAME, err.message))
@@ -87,7 +87,7 @@ export class HistoryEffects {
       .map(action => action as historyActions.UpdatePlatform)
       .map(action => <UpdateActionData>{
         itemId: action.id,
-        property: action.platform
+        prop: action.platform
       })
       .switchMap(actionData => this.userService.getUser()
         .map(user => <UpdateData>{
@@ -95,13 +95,40 @@ export class HistoryEffects {
           ...actionData
         })
       )
-      .switchMap(updateData => this.historyService.updatePlatform(updateData.userId, updateData.itemId, <string>updateData.property)
-        .map(updateProperty =>
-          new historyActions.UpdatePlatformSucceeded(updateProperty.itemId, <string>updateProperty.property)
+      .switchMap(updateData => this.historyService.updatePlatform(updateData.userId, updateData.itemId, updateData.prop)
+        .map(updateProp =>
+          new historyActions.UpdatePlatformSucceeded(updateProp.itemId, updateProp.prop)
         )
         .catch(err =>
           Observable.of(new appActions.Error(historyActions.UPDATE_PLATFORM, err.message))
         )
+      );
+
+  @Effect() updateElapsedTime$ =
+    this.actions$
+      .ofType(historyActions.UPDATE_ELAPSED_TIME)
+      .map(action => action as historyActions.UpdateElapsedTime)
+      .map(action => <MultiUpdateActionData>{
+        itemId: action.id,
+        props: {
+          startTime: action.startTime,
+          endTime: action.endTime
+        }
+      })
+      .switchMap(actionData => this.userService.getUser()
+        .map(user => <MultiUpdateData>{
+          userId: user.uid,
+          ...actionData
+        })
+      )
+      .switchMap(updateData =>
+        this.historyService.updateElapsedTime(updateData.userId, updateData.itemId, updateData.props.startTime, updateData.props.endTime)
+          .map(updateProps =>
+            new historyActions.UpdateElapsedTimeSucceeded(updateProps.itemId, updateProps.props.startTime, updateProps.props.endTime)
+          )
+          .catch(err =>
+            Observable.of(new appActions.Error(historyActions.UPDATE_ELAPSED_TIME, err.message))
+          )
       );
 
   @Effect() logout$ =
@@ -119,9 +146,20 @@ interface Delete {
 
 interface UpdateActionData {
   itemId: string;
-  property: string | number;
+  prop: string;
 }
 
 interface UpdateData extends UpdateActionData {
+  userId: string;
+}
+
+interface MultiUpdateActionData {
+  itemId: string;
+  props: {
+    [key: string]: number;
+  };
+}
+
+interface MultiUpdateData extends MultiUpdateActionData {
   userId: string;
 }

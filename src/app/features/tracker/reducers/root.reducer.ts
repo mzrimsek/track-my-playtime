@@ -42,7 +42,11 @@ export const { selectAll: _selectAllHistory } = fromHistory.adapter.getSelectors
 export const _selectHistoryItems = createSelector(_selectAllHistory,
   entities => entities.map(
     entity => <HistoryListItem>{
-      ...entity
+      ...entity,
+      dateRange: [
+        new Date(entity.startTime),
+        new Date(entity.endTime)
+      ]
     }));
 export const _selectSortedHistoryItems = createSelector(_selectHistoryItems, items => items.sort((a, b) => b.startTime - a.startTime));
 export const _selectHistoryItemsGroupedByDate = createSelector(_selectSortedHistoryItems, items => {

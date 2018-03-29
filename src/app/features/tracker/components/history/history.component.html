@@ -7,12 +7,15 @@
   <div *ngIf="!loading">
     <div class="groups"
          *ngIf="groups.length !== 0">
+
       <div class="history-group drop-shadow"
            *ngFor="let group of groups">
+
         <div class="overall-data">
           <div class="date">{{ group.date }}</div>
           <div class="elapsedTime">{{ group.totalTime }}</div>
         </div>
+
         <app-tracker-history-entry *ngFor="let historyItem of group.historyItems"
                                    [item]="historyItem"
                                    [platformsOptions]="platformsOptions"></app-tracker-history-entry>

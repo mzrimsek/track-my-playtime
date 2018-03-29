@@ -1,4 +1,5 @@
 <div class="history-entry">
+
   <div class="game">
     <input type="text"
            placeholder="Game name"
@@ -6,6 +7,7 @@
            [value]="item.game"
            (change)="updateGame(gameEl)">
   </div>
+
   <div class="platform">
     <select #platformEl
             [value]="item.platform"
@@ -15,14 +17,27 @@
               value="{{ option }}">{{ option }}</option>
     </select>
   </div>
+
   <div class="time">
-    <div>
+    <div class="start-end"
+         (click)="openDateTimePicker(elapsedTimeEl)">
       {{ item.startTime | date:'shortTime' }} - {{ item.endTime | date:'shortTime' }}
     </div>
+    <div class="date-time-picker">
+      <input #elapsedTimeEl
+             [(ngModel)]="item.dateRange"
+             [selectMode]="'range'"
+             [owlDateTime]="elapsedTimeDT"
+             [owlDateTimeTrigger]="elapsedTimeDT"
+             (dateTimeChange)="updateElapsedTime(elapsedTimeEl)">
+      <owl-date-time #elapsedTimeDT></owl-date-time>
+    </div>
+
     <div class="elapsed">
       {{ item.startTime | elapsedTime:item.endTime }}
     </div>
   </div>
+
   <div class="primary-action">
     <div class="remove fa-lg"
          (click)="remove()">

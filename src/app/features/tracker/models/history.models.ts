@@ -4,6 +4,7 @@ export interface HistoryListItem {
   platform: string;
   startTime: number;
   endTime: number;
+  dateRange: Date[];
 }
 
 export interface HistoryGrouping {

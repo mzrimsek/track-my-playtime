@@ -18,10 +18,6 @@
     width: 100%;
     padding: 5px;
     background: inherit;
-
-    &:hover {
-      background: darken($background-light, 5%);
-    }
   }
 
   .game {
@@ -53,6 +49,18 @@
     flex-direction: column;
     align-items: center;
     width: 20%;
+
+    .start-end {
+      &:hover{
+        cursor: pointer;
+      }
+    }
+
+    .date-time-picker {
+      visibility: hidden;
+      width: 0px;
+      height: 0px;
+    }
   }
 
   .primary-action {

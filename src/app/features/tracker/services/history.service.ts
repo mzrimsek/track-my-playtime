@@ -3,7 +3,9 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
 
-import { AddTimerInfo, HistoryListItem } from '../models';
+import { HistoryEntity } from '../reducers/history.reducer';
+
+import { AddTimerInfo } from '../models';
 
 import { getUUID } from '../../../shared/utils/uuid.utils';
 
@@ -15,16 +17,16 @@ export class HistoryService {
     this.historyCollection = this.afs.collection<HistoryCollection>('history');
   }
 
-  getHistoryList(userId: string): Observable<HistoryListItem[]> {
+  getHistoryList(userId: string): Observable<HistoryEntity[]> {
     const historyList = this.getUserItemCollection(userId).valueChanges();
     return historyList.map(histories => histories
-      .map(history => this.getHistoryListItem(history)));
+      .map(history => this.getHistoryEntity(history)));
   }
 
-  saveTimerInfo(info: AddTimerInfo): Observable<HistoryListItem> {
-    const newItem = this.getNewHistory(info);
+  saveTimerInfo(info: AddTimerInfo): Observable<HistoryEntity> {
+    const newItem = this.getNewHistoryItem(info);
     this.getUserItemCollection(info.userId).doc(newItem.id).set(newItem);
-    return Observable.of(this.getHistoryListItem(newItem));
+    return Observable.of(this.getHistoryEntity(newItem));
   }
 
   deleteHistoryItem(userId: string, itemId: string): Observable<string> {
@@ -36,7 +38,7 @@ export class HistoryService {
     this.getUserItemCollection(userId).doc(itemId).update({ game });
     return Observable.of(<UpdateProperty>{
       itemId,
-      property: game
+      prop: game
     });
   }
 
@@ -44,13 +46,24 @@ export class HistoryService {
     this.getUserItemCollection(userId).doc(itemId).update({ platform });
     return Observable.of(<UpdateProperty>{
       itemId,
-      property: platform
+      prop: platform
     });
   }
 
-  private getNewHistory(info: AddTimerInfo): History {
+  updateElapsedTime(userId: string, itemId: string, startTime: number, endTime: number): Observable<UpdateMultiProperty> {
+    this.getUserItemCollection(userId).doc(itemId).update({ startTime, endTime });
+    return Observable.of(<UpdateMultiProperty>{
+      itemId,
+      props: {
+        startTime,
+        endTime
+      }
+    });
+  }
+
+  private getNewHistoryItem(info: AddTimerInfo): FirestoreHistoryItem {
     const id = getUUID(info.userId);
-    return <History>{
+    return <FirestoreHistoryItem>{
       id,
       game: info.game,
       platform: info.platform,
@@ -60,12 +73,12 @@ export class HistoryService {
     };
   }
 
-  private getUserItemCollection(userId: string): AngularFirestoreCollection<History> {
+  private getUserItemCollection(userId: string): AngularFirestoreCollection<FirestoreHistoryItem> {
     return this.historyCollection.doc(userId).collection('items');
   }
 
-  private getHistoryListItem(history: History): HistoryListItem {
-    return <HistoryListItem>{
+  private getHistoryEntity(history: FirestoreHistoryItem): HistoryEntity {
+    return <HistoryEntity>{
       id: history.id,
       game: history.game,
       platform: history.platform,
@@ -75,7 +88,7 @@ export class HistoryService {
   }
 }
 
-interface History {
+interface FirestoreHistoryItem {
   id: string;
   game: string;
   platform: string;
@@ -85,10 +98,17 @@ interface History {
 }
 
 interface HistoryCollection {
-  items: History[];
+  items: FirestoreHistoryItem[];
 }
 
 interface UpdateProperty {
   itemId: string;
-  property: string | number;
+  prop: string;
+}
+
+interface UpdateMultiProperty {
+  itemId: string;
+  props: {
+    [key: string]: number;
+  };
 }
