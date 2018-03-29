@@ -6,7 +6,7 @@ export const formatElapsedTime = (elapsedTime: number): string => {
   return getZeroPaddingTime(hours) + ':' + getZeroPaddingTime(minutes) + ':' + getZeroPaddingTime(seconds);
 };
 
-export const getElapsedTime = (startTime: number, endTime: number) => (endTime - startTime) / 1000;
+export const getElapsedTime = (startTime: number, endTime: number) => Math.floor((endTime - startTime) / 1000);
 
 const getZeroPaddingTime = (time: number): string => {
   const paddedTime = time < 10 ? '0' + time : '' + time;
