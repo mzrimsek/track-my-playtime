@@ -4,9 +4,10 @@ import * as fromHistory from './history.reducer';
 import * as fromPlatforms from './platforms.reducer';
 import * as fromTimer from './timer.reducer';
 
-import { HistoryListItem, TimerInfo } from '../models';
+import { HistoryGrouping, HistoryListItem, TimerInfo } from '../models';
 
-import { getGroupedHistoryListItems } from '../utils/history.utils';
+import { formatElapsedTime, getElapsedTime } from '../../../shared/utils/date.utils';
+import { getDateFromHistoryListItem } from '../utils/history.utils';
 
 export interface TrackerState {
   timer: fromTimer.State;
@@ -44,7 +45,32 @@ export const _selectHistoryItems = createSelector(_selectAllHistory,
       ...entity
     }));
 export const _selectSortedHistoryItems = createSelector(_selectHistoryItems, items => items.sort((a, b) => b.startTime - a.startTime));
-export const _selectGroupedHistoryItems = createSelector(_selectSortedHistoryItems, items => getGroupedHistoryListItems(items));
+export const _selectHistoryItemsGroupedByDate = createSelector(_selectSortedHistoryItems, items => {
+  const map: Map<string, HistoryListItem[]> = new Map();
+  items.forEach((item) => {
+    const key = getDateFromHistoryListItem(item);
+    const collection = map.get(key);
+    if (!collection) {
+      map.set(key, [item]);
+    } else {
+      collection.push(item);
+    }
+  });
+  return map;
+});
+export const _selectGroupedHistoryItems = createSelector(_selectHistoryItemsGroupedByDate, map => {
+  let groupings: HistoryGrouping[] = [];
+  map.forEach((value: HistoryListItem[], key: string) => {
+    const elapsedTime = value.map(item => getElapsedTime(item.startTime, item.endTime)).reduce((a, b) => a + b, 0);
+    const newGrouping = <HistoryGrouping>{
+      date: key,
+      totalTime: formatElapsedTime(elapsedTime),
+      historyItems: value
+    };
+    groupings = [...groupings, newGrouping];
+  });
+  return groupings;
+});
 export const _selectHistoryLoading = createSelector(_selectHistory, history => history.loading);
 
 export const _selectPlatformsOptions = createSelector(_selectPlatforms, platforms => platforms.options);

@@ -45,6 +45,15 @@
     display: flex;
     justify-content: center;
     width: 10%;
+
+    &.active:hover{
+      cursor: pointer;
+    }
+
+    .date-time-picker {
+      visibility: hidden;
+      width: 0px;
+    }
   }
 
   .primary-action {

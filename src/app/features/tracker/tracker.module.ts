@@ -4,6 +4,8 @@ import { NgModule } from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+
 import { SharedModule } from '../../shared/shared.module';
 
 import { HistoryEntryComponent } from './components/history-entry/history-entry.component';
@@ -26,6 +28,8 @@ import { reducers } from './reducers/root.reducer';
 @NgModule({
   imports: [
     CommonModule,
+    OwlDateTimeModule,
+    OwlNativeDateTimeModule,
     StoreModule.forFeature('tracker', reducers),
     EffectsModule.forFeature([TrackerInitializationEffects, TimerEffects, HistoryEffects, PlatformsEffects]),
     SharedModule

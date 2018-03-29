@@ -55,4 +55,21 @@ export class TimerComponent implements OnInit {
       this.store.dispatch(new actions.SetPlatform(platformEl.value));
     }
   }
+
+  setStartTime(startTimeEl: HTMLInputElement) {
+    if (startTimeEl.value) {
+      const startTime = new Date(startTimeEl.value).getTime();
+      this.store.dispatch(new actions.SetStartTime(startTime));
+    }
+  }
+
+  openDateTimePicker(el: HTMLInputElement) {
+    if (this.info.active) {
+      el.click();
+    }
+  }
+
+  getCurrentTimeDate(): Date {
+    return new Date(this.currentTime);
+  }
 }

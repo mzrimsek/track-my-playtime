@@ -44,10 +44,17 @@ export class CancelTimer implements Action {
   constructor() { }
 }
 
+export const SET_START_TIME = '[Timer] Set Start Time';
+export class SetStartTime implements Action {
+  readonly type = SET_START_TIME;
+  constructor(public startTime: number) { }
+}
+
 export type All = StartTimer |
   ResetTimer |
   SetGame |
   SetPlatform |
   SaveTimerInfo |
   SaveTimerInfoSucceeded |
-  CancelTimer;
+  CancelTimer |
+  SetStartTime;

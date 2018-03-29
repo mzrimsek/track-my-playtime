@@ -33,6 +33,9 @@ export function reducer(state: State = initialState, action: actions.All): State
     case actions.SET_PLATFORM: {
       return tassign(state, { platform: action.platform });
     }
+    case actions.SET_START_TIME: {
+      return tassign(state, { startTime: action.startTime });
+    }
     default: {
       return state;
     }
