@@ -5,19 +5,22 @@
   </div>
 
   <div *ngIf="!loading">
-    <div class="items"
-         *ngIf="items.length !== 0">
+    <div class="groups"
+         *ngIf="groups.length !== 0">
       <div class="history-group drop-shadow"
-           *ngFor="let item of items">
-        <div class="date">{{ item.date }}</div>
-        <app-tracker-history-entry *ngFor="let historyItem of item.historyItems"
+           *ngFor="let group of groups">
+        <div class="overall-data">
+          <div class="date">{{ group.date }}</div>
+          <div class="elapsedTime">{{ group.totalTime }}</div>
+        </div>
+        <app-tracker-history-entry *ngFor="let historyItem of group.historyItems"
                                    [item]="historyItem"
                                    [platformsOptions]="platformsOptions"></app-tracker-history-entry>
       </div>
-
     </div>
-    <div class="no-items"
-         *ngIf="items.length === 0">
+
+    <div class="no-groups"
+         *ngIf="groups.length === 0">
       Nothing to show...get tracking!
     </div>
   </div>

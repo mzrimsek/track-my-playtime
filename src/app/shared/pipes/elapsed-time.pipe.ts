@@ -1,29 +1,18 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
+import { formatElapsedTime, getElapsedTime } from '../../shared/utils/date.utils';
+
 @Pipe({ name: 'elapsedTime' })
 export class ElapsedTimePipe implements PipeTransform {
 
   transform(startTime: number, endTime: number): string {
-    const elapsedTime = (endTime - startTime) / 1000;
-    return elapsedTime >= 0 && this.canCalculate(startTime, endTime) ? this.formatElapsedTime(elapsedTime) : '00:00:00';
+    const elapsedTime = getElapsedTime(startTime, endTime);
+    return elapsedTime >= 0 && this.canCalculate(startTime, endTime) ? formatElapsedTime(elapsedTime) : '00:00:00';
   }
 
   canCalculate(startTime: number, endTime: number): boolean {
     const areValid = startTime !== 0 && endTime !== 0;
     const areInOrder = startTime <= endTime;
     return areValid && areInOrder;
-  }
-
-  formatElapsedTime(elapsedTime: number): string {
-    const hours = Math.floor(elapsedTime / 3600);
-    const minutes = Math.floor((elapsedTime - (hours * 3600)) / 60);
-    const seconds = elapsedTime - (hours * 3600) - (minutes * 60);
-
-    return this.getZeroPaddingTime(hours) + ':' + this.getZeroPaddingTime(minutes) + ':' + this.getZeroPaddingTime(seconds);
-  }
-
-  getZeroPaddingTime(time: number): string {
-    const paddedTime = time < 10 ? '0' + time : '' + time;
-    return paddedTime.indexOf('.') === -1 ? paddedTime : paddedTime.substr(0, paddedTime.indexOf('.'));
   }
 }

@@ -10,7 +10,7 @@ import { HistoryGrouping } from '../../models';
 })
 export class HistoryComponent implements OnInit {
 
-  @Input() items: HistoryGrouping[] = [];
+  @Input() groups: HistoryGrouping[] = [];
   @Input() platformsOptions: string[] = [];
   @Input() loading = false;
   constructor() { }

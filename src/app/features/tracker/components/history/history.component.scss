@@ -8,19 +8,21 @@
     justify-content: center;
   }
 
-  .items {
+  .groups {
     .history-group {
       background: $background-light;
       margin-bottom: 20px;
 
-      .date {
-        padding: 30px 15px;
+      .overall-data {
+        display: flex;
+        justify-content: space-between;
+        padding: 30px 20px;
         font-weight: bold;
       }
     }
   }
 
-  .no-items {
+  .no-groups {
     text-align: center;
     padding: 10px 10px;
   }
