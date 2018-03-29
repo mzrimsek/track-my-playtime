@@ -9,7 +9,7 @@ export interface State extends User { }
 
 const initialState: State = {
   uid: '',
-  displayName: 'GUEST',
+  displayName: '',
   loading: false,
   error: ''
 };

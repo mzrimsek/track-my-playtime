@@ -17,6 +17,13 @@ export class HistoryEffects {
 
   constructor(private actions$: Actions, private historyService: HistoryService, private userService: UserService) { }
 
+  @Effect() authenticated$ =
+    this.actions$
+      .ofType(userActions.AUTHENTICATED)
+      .mergeMap(() => [
+        new historyActions.LoadHistoryItems()
+      ]);
+
   @Effect() loadHistoryItems$ =
     this.actions$
       .ofType(historyActions.LOAD_HISTORY_ITEMS)
