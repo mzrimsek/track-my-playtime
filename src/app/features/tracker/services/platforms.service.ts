@@ -6,17 +6,20 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class PlatformsService {
 
-  private platformsCollection: AngularFirestoreCollection<PlatformsCollection>;
+  private platformsCollection: AngularFirestoreCollection<FirestorePlatformsItem>;
   constructor(private afs: AngularFirestore) {
-    this.platformsCollection = this.afs.collection<PlatformsCollection>('platforms');
+    this.platformsCollection = this.afs.collection<FirestorePlatformsItem>('platforms');
   }
 
   getPlatformsOptions(): Observable<string[]> {
     return this.platformsCollection.valueChanges()
-      .map(platforms => platforms[0].options);
+      .map(platforms =>
+        platforms.sort((a, b) => a.index - b.index)
+          .map(items => items.option));
   }
 }
 
-interface PlatformsCollection {
-  options: string[];
+interface FirestorePlatformsItem {
+  index: number;
+  option: string;
 }
