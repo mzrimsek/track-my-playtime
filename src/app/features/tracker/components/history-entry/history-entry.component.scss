@@ -50,8 +50,8 @@
     align-items: center;
     width: 20%;
 
-    .start-end {
-      &:hover{
+    .start-end, .elapsed {
+        &:hover{
         cursor: pointer;
       }
     }
