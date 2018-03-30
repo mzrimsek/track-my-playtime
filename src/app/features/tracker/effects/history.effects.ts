@@ -8,7 +8,6 @@ import { UserService } from '../../auth/services/user.service';
 import { HistoryService } from '../services/history.service';
 
 import * as appActions from '../../../actions/app.actions';
-import * as userActions from '../../auth/actions/user.actions';
 import * as historyActions from '../actions/history.actions';
 import * as timerActions from '../actions/timer.actions';
 
@@ -16,13 +15,6 @@ import * as timerActions from '../actions/timer.actions';
 export class HistoryEffects {
 
   constructor(private actions$: Actions, private historyService: HistoryService, private userService: UserService) { }
-
-  @Effect() authenticated$ =
-    this.actions$
-      .ofType(userActions.AUTHENTICATED)
-      .mergeMap(() => [
-        new historyActions.LoadHistoryItems()
-      ]);
 
   @Effect() loadHistoryItems$ =
     this.actions$
@@ -137,13 +129,6 @@ export class HistoryEffects {
             Observable.of(new appActions.Error(historyActions.UPDATE_ELAPSED_TIME, err.message))
           )
       );
-
-  @Effect() logout$ =
-    this.actions$
-      .ofType(userActions.LOGOUT)
-      .mergeMap(() => [
-        new historyActions.ClearHistoryItems()
-      ]);
 }
 
 interface Delete {
