@@ -12,10 +12,10 @@ export class PlatformsService {
   }
 
   getPlatformsOptions(): Observable<string[]> {
-    return this.platformsCollection.valueChanges()
-      .map(platforms =>
-        platforms.sort((a, b) => a.index - b.index)
-          .map(items => items.option));
+    const platformsItems = this.platformsCollection.valueChanges().first();
+    return platformsItems.map(items =>
+      items.sort((a, b) => a.index - b.index)
+        .map(item => item.option));
   }
 }
 

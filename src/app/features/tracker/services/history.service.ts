@@ -18,7 +18,7 @@ export class HistoryService {
   }
 
   getHistoryList(userId: string): Observable<HistoryEntity[]> {
-    const historyList = this.getUserItemCollection(userId).valueChanges();
+    const historyList = this.getUserItemCollection(userId).valueChanges().first();
     return historyList.map(histories => histories
       .map(history => this.getHistoryEntity(history)));
   }
