@@ -6,7 +6,10 @@ import * as actions from '../../actions/history.actions';
 
 import { State } from '../../reducers/root.reducer';
 
-import { HistoryListItem } from '../../models';
+import {
+    HistoryListItem, UpdateHistoryItemGamePayload, UpdateHistoryItemPlatformPayload,
+    UpdateHistoryItemTimesPayload
+} from '../../models';
 
 @Component({
   selector: 'app-tracker-history-entry',
@@ -19,24 +22,33 @@ export class HistoryEntryComponent implements OnInit {
   @Input() item: HistoryListItem;
   @Input() platformsOptions: string[] = [];
   @Input() dateRange: Date[] = [];
+  @Input() userId = '';
   constructor(private store: Store<State>) { }
 
   ngOnInit() { }
 
   updateGame(gameEl: HTMLInputElement) {
     if (gameEl.value) {
-      this.store.dispatch(new actions.UpdateGame(this.item.id, gameEl.value));
+      const payload = <UpdateHistoryItemGamePayload>{
+        itemId: this.item.id,
+        game: gameEl.value
+      };
+      this.store.dispatch(new actions.UpdateGame(this.userId, payload));
     }
   }
 
   updatePlatform(platformEl: HTMLSelectElement) {
     if (platformEl.value) {
-      this.store.dispatch(new actions.UpdatePlatform(this.item.id, platformEl.value));
+      const payload = <UpdateHistoryItemPlatformPayload>{
+        itemId: this.item.id,
+        platform: platformEl.value
+      };
+      this.store.dispatch(new actions.UpdatePlatform(this.userId, payload));
     }
   }
 
   remove() {
-    this.store.dispatch(new actions.RemoveHistoryItem(this.item.id));
+    this.store.dispatch(new actions.RemoveHistoryItem(this.userId, this.item.id));
   }
 
   updateElapsedTime(elapsedTimeEl: HTMLInputElement) {
@@ -44,7 +56,13 @@ export class HistoryEntryComponent implements OnInit {
       const dateStrings = elapsedTimeEl.value.split('~').map(dateString => dateString.trim());
       const startTime = new Date(dateStrings[0]).getTime();
       const endTime = new Date(dateStrings[1]).getTime();
-      this.store.dispatch(new actions.UpdateElapsedTime(this.item.id, startTime, endTime));
+
+      const payload = <UpdateHistoryItemTimesPayload>{
+        itemId: this.item.id,
+        startTime,
+        endTime
+      };
+      this.store.dispatch(new actions.UpdateElapsedTime(this.userId, payload));
     }
   }
 

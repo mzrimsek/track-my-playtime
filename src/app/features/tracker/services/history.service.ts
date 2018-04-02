@@ -5,7 +5,10 @@ import { Observable } from 'rxjs/Observable';
 
 import { HistoryEntity } from '../reducers/history.reducer';
 
-import { AddTimerInfo } from '../models';
+import {
+    AddTimerInfo, UpdateHistoryItemGamePayload, UpdateHistoryItemPlatformPayload,
+    UpdateHistoryItemTimesPayload
+} from '../models';
 
 import { getUUID } from '../../../shared/utils/uuid.utils';
 
@@ -34,36 +37,27 @@ export class HistoryService {
     return Observable.of(itemId);
   }
 
-  updateGame(userId: string, itemId: string, game: string): Observable<UpdateProperty> {
+  updateGame(userId: string, payload: UpdateHistoryItemGamePayload): Observable<UpdateHistoryItemGamePayload> {
+    const { itemId, game } = payload;
     this.getUserItemCollection(userId).doc(itemId).update({ game });
-    return Observable.of(<UpdateProperty>{
-      itemId,
-      prop: game
-    });
+    return Observable.of(payload);
   }
 
-  updatePlatform(userId: string, itemId: string, platform: string): Observable<UpdateProperty> {
+  updatePlatform(userId: string, payload: UpdateHistoryItemPlatformPayload): Observable<UpdateHistoryItemPlatformPayload> {
+    const { itemId, platform } = payload;
     this.getUserItemCollection(userId).doc(itemId).update({ platform });
-    return Observable.of(<UpdateProperty>{
-      itemId,
-      prop: platform
-    });
+    return Observable.of(payload);
   }
 
-  updateElapsedTime(userId: string, itemId: string, startTime: number, endTime: number): Observable<UpdateMultiProperty> {
+  updateElapsedTime(userId: string, payload: UpdateHistoryItemTimesPayload): Observable<UpdateHistoryItemTimesPayload> {
+    const { itemId, startTime, endTime } = payload;
     this.getUserItemCollection(userId).doc(itemId).update({ startTime, endTime });
-    return Observable.of(<UpdateMultiProperty>{
-      itemId,
-      props: {
-        startTime,
-        endTime
-      }
-    });
+    return Observable.of(payload);
   }
 
   private getNewHistoryItem(info: AddTimerInfo): FirestoreHistoryItem {
     const id = getUUID(info.userId);
-    return <FirestoreHistoryItem>{
+    return {
       id,
       game: info.game,
       platform: info.platform,
@@ -78,7 +72,7 @@ export class HistoryService {
   }
 
   private getHistoryEntity(history: FirestoreHistoryItem): HistoryEntity {
-    return <HistoryEntity>{
+    return {
       id: history.id,
       game: history.game,
       platform: history.platform,
@@ -99,16 +93,4 @@ interface FirestoreHistoryItem {
 
 interface HistoryCollection {
   items: FirestoreHistoryItem[];
-}
-
-interface UpdateProperty {
-  itemId: string;
-  prop: string;
-}
-
-interface UpdateMultiProperty {
-  itemId: string;
-  props: {
-    [key: string]: number;
-  };
 }

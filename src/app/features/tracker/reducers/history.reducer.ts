@@ -34,30 +34,33 @@ export function reducer(state: State = initialState, action: actions.All): State
       return tassign(newState, { loading: false });
     }
     case actions.REMOVE_HISTORY_ITEM_SUCCEEDED: {
-      return adapter.removeOne(action.id, state);
+      return adapter.removeOne(action.itemId, state);
     }
     case actions.UPDATE_GAME_SUCCEEDED: {
+      const { itemId, game } = action.payload;
       return adapter.updateOne({
-        id: action.id,
+        id: itemId,
         changes: {
-          game: action.game
+          game
         }
       }, state);
     }
     case actions.UPDATE_PLATFORM_SUCCEEDED: {
+      const { itemId, platform } = action.payload;
       return adapter.updateOne({
-        id: action.id,
+        id: itemId,
         changes: {
-          platform: action.platform
+          platform
         }
       }, state);
     }
     case actions.UPDATE_ELAPSED_TIME_SUCCEEDED: {
+      const { itemId, startTime, endTime } = action.payload;
       return adapter.updateOne({
-        id: action.id,
+        id: itemId,
         changes: {
-          startTime: action.startTime,
-          endTime: action.endTime
+          startTime,
+          endTime
         }
       }, state);
     }

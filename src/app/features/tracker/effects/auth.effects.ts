@@ -14,9 +14,10 @@ export class AuthEffects {
   @Effect() authenticated$ =
     this.actions$
       .ofType(userActions.AUTHENTICATED)
-      .mergeMap(() => [
+      .map(action => action as userActions.Authenticated)
+      .mergeMap(action => [
         new platformsActions.LoadOptions(),
-        new historyActions.LoadHistoryItems()
+        new historyActions.LoadHistoryItems(action.payload.uid)
       ]);
 
   @Effect() logout$ =

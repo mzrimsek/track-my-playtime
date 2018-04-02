@@ -13,6 +13,7 @@ export class HistoryComponent implements OnInit {
   @Input() groups: HistoryGrouping[] = [];
   @Input() platformsOptions: string[] = [];
   @Input() loading = false;
+  @Input() userId = '';
   constructor() { }
 
   ngOnInit() { }

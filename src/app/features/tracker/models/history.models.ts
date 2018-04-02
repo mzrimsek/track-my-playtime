@@ -12,3 +12,19 @@ export interface HistoryGrouping {
   totalTime: string;
   historyItems: HistoryListItem[];
 }
+
+export interface UpdateHistoryItemGamePayload {
+  itemId: string;
+  game: string;
+}
+
+export interface UpdateHistoryItemPlatformPayload {
+  itemId: string;
+  platform: string;
+}
+
+export interface UpdateHistoryItemTimesPayload {
+  itemId: string;
+  startTime: number;
+  endTime: number;
+}
