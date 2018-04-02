@@ -1,10 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Observable } from 'rxjs/Observable';
-
-import { UserService } from '../auth/services/user.service';
-
-import { User } from '../auth/models';
 import { RouteEntry } from './models';
 
 @Component({
@@ -34,10 +29,7 @@ export class TrackerAppComponent implements OnInit {
     }
   ];
 
-  user$: Observable<User>;
-  constructor(private userService: UserService) { }
+  constructor() { }
 
-  ngOnInit() {
-    this.user$ = this.userService.getUser();
-  }
+  ngOnInit() { }
 }

@@ -14,8 +14,10 @@ export class NavComponent implements OnInit {
 
   @Input() bannerRoute: RouteEntry;
   @Input() routes: RouteEntry[] = [];
-  @Input() userName = '';
-  constructor(private userService: UserService) { }
+  userName = '';
+  constructor(private userService: UserService) {
+    this.userName = this.userService.getUser().displayName;
+  }
 
   ngOnInit() { }
 

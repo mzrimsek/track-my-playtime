@@ -2,6 +2,8 @@ import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core
 
 import { Store } from '@ngrx/store';
 
+import { UserService } from '../../../auth/services/user.service';
+
 import * as actions from '../../actions/timer.actions';
 
 import { State } from '../../reducers/root.reducer';
@@ -19,8 +21,10 @@ export class TimerComponent implements OnInit {
   @Input() info: TimerInfo;
   @Input() currentTime: Date;
   @Input() platformsOptions: string[] = [];
-  @Input() userId = '';
-  constructor(private store: Store<State>) { }
+  userId = '';
+  constructor(private store: Store<State>, private userService: UserService) {
+    this.userId = this.userService.getUser().uid;
+  }
 
   ngOnInit() { }
 
