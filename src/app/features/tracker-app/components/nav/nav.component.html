@@ -8,7 +8,12 @@
         <li *ngFor="let route of routes"
             [routerLinkActive]="['active']"
             [routerLinkActiveOptions]="{ exact: route.exact }">
-          <a [routerLink]="route.router">{{ route.caption }}</a>
+          <a [routerLink]="route.router">
+            <span class="icon">
+              <i [ngClass]="route.class"></i>
+            </span>
+            <span class="text">{{ route.caption }}</span>
+          </a>
         </li>
       </ul>
     </nav>

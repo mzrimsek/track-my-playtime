@@ -13,9 +13,14 @@ $good-action-color: green;
 $bad-action-color: red;
 $neutral-action-color: grey;
 
+$medium-breakpoint: 1224px;
+$small-breakpoint: 1024px;
+
 // tracker variables
 $sidebar-width: 250px;
+$small-sidebar-width: $sidebar-width/2;
 $content-width: calc(100% - #{$sidebar-width});
+$small-content-width: calc(100% - #{$small-sidebar-width});
 
 // app component variables
 $header-height: 100px;

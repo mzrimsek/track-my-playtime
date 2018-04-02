@@ -20,13 +20,15 @@ export class TrackerAppComponent implements OnInit {
     {
       caption: 'Tracker',
       router: this.trackerRouter,
-      exact: true
+      exact: true,
+      class: 'far fa-clock'
     },
-    {
-      caption: 'Dashboard',
-      router: ['/app', { outlets: { trackerApp: ['dashboard'] } }],
-      exact: true
-    }
+    // {
+    //   caption: 'Dashboard',
+    //   router: ['/app', { outlets: { trackerApp: ['dashboard'] } }],
+    //   exact: true,
+    //   class: 'fas fa-chart-bar'
+    // }
   ];
 
   constructor() { }

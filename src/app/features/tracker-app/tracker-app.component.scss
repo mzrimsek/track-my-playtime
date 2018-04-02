@@ -21,3 +21,15 @@
     margin-left: $sidebar-width;
   }
 }
+
+@media only screen  and (max-width : $medium-breakpoint) {
+  .tracker-app {
+    .sidebar {
+      width: $small-sidebar-width;
+    }
+    .content {
+      width: $small-content-width;
+      margin-left: $small-sidebar-width;
+    }
+  }
+}

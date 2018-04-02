@@ -78,3 +78,32 @@
     }
   }
 }
+
+@media only screen and (max-width: $small-breakpoint) {
+  .history-entry {
+    .game {
+      width: 30%;
+
+      input {
+        text-overflow: ellipsis;
+      }
+    }
+
+    .platform {
+      width: 25%;
+
+      select {
+        text-overflow: ellipsis;
+      }
+    }
+
+    .time {
+      width: 35%;
+    }
+
+    .primary-action {
+      width: 10%;
+    }
+  }
+}
+

@@ -18,7 +18,8 @@
   }
 
   .game {
-    width: 60%;
+    width: 55%;
+
     input {
       @extend .display-element;
       outline: none;
@@ -28,6 +29,7 @@
 
   .platform {
     width: 20%;
+
     select {
       @extend .display-element;
       outline: none;
@@ -44,7 +46,7 @@
     @extend .display-element;
     display: flex;
     justify-content: center;
-    width: 10%;
+    width: 15%;
 
     &.active:hover{
       cursor: pointer;
@@ -70,6 +72,7 @@
         cursor: pointer;
       }
     }
+
     .stop {
       color: $bad-action-color;
 
@@ -91,6 +94,44 @@
       &:hover {
         cursor: pointer;
       }
+    }
+  }
+}
+
+@media only screen  and (max-width : $medium-breakpoint) {
+  .timer {
+    width: $small-content-width;
+  }
+}
+
+@media only screen and (max-width: $small-breakpoint) {
+  .timer {
+    .game {
+      width: 30%;
+
+      input {
+        text-overflow: ellipsis;
+      }
+    }
+
+    .platform {
+      width: 25%;
+
+      select {
+        text-overflow: ellipsis;
+      }
+    }
+
+    .time {
+      width: 25%;
+    }
+
+    .primary-action {
+      width: 10%;
+    }
+
+    .secondary-action {
+      width: 10%;
     }
   }
 }

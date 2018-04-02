@@ -32,9 +32,15 @@
         height: 45px;
         padding: 0px 10px;
         border-radius: 8px;
+        margin-bottom: 5px;
 
         &.active {
           background: $background-dark-accent;
+        }
+
+        &:hover {
+          background: $background-dark-accent;
+          cursor: pointer;
         }
 
         a{
@@ -53,14 +59,31 @@
     font-size: .8em;
     background: darken($background-dark, 10%);
 
-    .info {
-
-    }
-
     .logout {
       font-size: $base-font-size;
       &:hover {
         cursor: pointer;
+      }
+    }
+  }
+}
+
+@media only screen  and (max-width : $medium-breakpoint) {
+  .nav {
+    .main {
+      ul {
+        li {
+          justify-content: center;
+          height: 60px;
+
+          .icon {
+            font-size: 2em;
+          }
+
+          .text {
+            display: none;
+          }
+        }
       }
     }
   }
