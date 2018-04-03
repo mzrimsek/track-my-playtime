@@ -13,6 +13,14 @@ deploy:
   - provider: firebase
     token:
       secure: $FIREBASE_TOKEN
+    project: prod
     skip_cleanup: true
     on:
       branch: master
+  - provider: firebase
+    token:
+      secure: $FIREBASE_TOKEN
+    project: dev
+    skip_cleanup: true
+    on:
+      branch: develop

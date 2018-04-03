@@ -4,15 +4,15 @@ export const environment: Environment = {
   production: false,
   urls: {},
   firebase: {
-    apiKey: 'AIzaSyDIwtutkMaINN8gaGZmoEjt_fR9_XhDZdY',
-    authDomain: 'track-my-playtime.firebaseapp.com',
-    databaseURL: 'https://track-my-playtime.firebaseio.com',
-    projectId: 'track-my-playtime',
-    storageBucket: 'track-my-playtime.appspot.com',
-    messagingSenderId: '629658315142'
+    apiKey: 'AIzaSyC7TgYwuaFYPwVNjXOafTA97Eq8IRuRu6g',
+    authDomain: 'track-my-playtime-dev.firebaseapp.com',
+    databaseURL: 'https://track-my-playtime-dev.firebaseio.com',
+    projectId: 'track-my-playtime-dev',
+    storageBucket: 'track-my-playtime-dev.appspot.com',
+    messagingSenderId: '448851574644'
   },
   uuid: {
-    domain: 'https://trackmyplaytime.com',
-    namespace: 'e3f55957-93ab-507a-9c01-86eb4e4bc347'
+    domain: 'https://track-my-playtime-dev.firebaseapp.com/',
+    namespace: 'b057090a-0931-5b05-8772-94eb3b9b0550'
   }
 };
