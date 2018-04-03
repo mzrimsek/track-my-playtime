@@ -1,0 +1,17 @@
+language: node_js
+node_js:
+  - "7"
+
+before_script:
+  - npm install -g  --silent @angular/cli
+
+script:
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then ng build --prod; fi
+  - if [ "$TRAVIS_BRANCH" != "master" ]; then ng build; fi
+
+deploy:
+  - provider: firebase
+    token:
+      secure: $FIREBASE_TOKEN
+    on:
+      branch: master
