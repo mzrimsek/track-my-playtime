@@ -26,6 +26,7 @@ export class UserEffects {
       .switchMap(() => this.afAuth.authState
         .map(authData => {
           if (authData) {
+            this.router.navigate(['/app']);
             return this.getAuthenticatedAction(authData);
           }
           return new userActions.NotAuthenticated();
@@ -76,7 +77,6 @@ export class UserEffects {
       email: authData.email,
       photoURL: authData.photoURL
     };
-    this.router.navigate(['/app']);
     return new userActions.Authenticated(user);
   }
 }
