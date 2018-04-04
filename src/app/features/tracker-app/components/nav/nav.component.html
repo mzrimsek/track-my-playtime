@@ -20,7 +20,9 @@
   </div>
   <div class="user">
     <div class="info">
-      {{ userName }}
+      <img class="drop-shadow"
+           src="{{ user.photoURL }}">
+      <div class="name">{{ user.displayName }}</div>
     </div>
     <div class="logout"
          (click)="logout()">
