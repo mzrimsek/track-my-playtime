@@ -15,5 +15,5 @@ export const environment: Environment = {
     domain: 'https://track-my-playtime-dev.firebaseapp.com/',
     namespace: 'b057090a-0931-5b05-8772-94eb3b9b0550'
   },
-  googleAnalytics: 'UA-41212245-9'
+  googleTagManager: 'GTM-M6D8H4V'
 };
