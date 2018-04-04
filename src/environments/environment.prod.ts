@@ -14,5 +14,6 @@ export const environment: Environment = {
   uuid: {
     domain: 'https://trackmyplaytime.com',
     namespace: 'e3f55957-93ab-507a-9c01-86eb4e4bc347'
-  }
+  },
+  googleAnalytics: 'UA-41212245-8'
 };

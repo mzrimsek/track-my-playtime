@@ -6,6 +6,7 @@ export interface Environment {
     domain: string;
     namespace: string;
   };
+  googleAnalytics: string;
 }
 
 interface FirebaseConfig {
