@@ -7,6 +7,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase';
 import { Observable } from 'rxjs/Observable';
 
+import * as appActions from '../../../actions/app.actions';
 import * as userActions from '../actions/user.actions';
 
 import { User } from '../models';
@@ -26,7 +27,9 @@ export class UserEffects {
           if (authData) {
             const user = <User>{
               uid: authData.uid,
-              displayName: authData.displayName
+              displayName: authData.displayName,
+              email: authData.email,
+              photoURL: authData.photoURL
             };
             this.router.navigate(['/app']);
             return new userActions.Authenticated(user);
@@ -35,7 +38,7 @@ export class UserEffects {
           }
         })
         .catch(err =>
-          Observable.of(new userActions.AuthError({ error: err.message }))
+          Observable.of(new appActions.Error(userActions.GET_USER, err.message))
         )
       );
 
@@ -49,7 +52,7 @@ export class UserEffects {
           return new userActions.GetUser();
         })
         .catch(err =>
-          Observable.of(new userActions.AuthError({ error: err.message }))
+          Observable.of(new appActions.Error(userActions.GET_USER, err.message))
         )
       );
 
@@ -64,7 +67,7 @@ export class UserEffects {
           return new userActions.NotAuthenticated();
         })
         .catch(err =>
-          Observable.of(new userActions.AuthError({ error: err.message }))
+          Observable.of(new appActions.Error(userActions.GET_USER, err.message))
         )
       );
 

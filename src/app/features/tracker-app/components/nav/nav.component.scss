@@ -54,10 +54,25 @@
   .user {
     display: flex;
     justify-content: space-around;
+    align-items: center;
     width: 100%;
     padding: 30px 15px;
-    font-size: .8em;
+    font-size: .7em;
     background: darken($background-dark, 10%);
+
+    .info {
+      display: flex;
+      align-items: center;
+
+      img {
+        width: 50px;
+        border-radius: 50%;
+      }
+
+      .name {
+        padding: 5px;
+      }
+    }
 
     .logout {
       font-size: $base-font-size;
@@ -83,6 +98,14 @@
           .text {
             display: none;
           }
+        }
+      }
+    }
+
+    .user {
+      .info {
+        .name {
+          display: none;
         }
       }
     }
