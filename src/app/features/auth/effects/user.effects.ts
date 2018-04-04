@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { User as AuthUser } from '@firebase/auth-types';
 import { Actions, Effect } from '@ngrx/effects';
 
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -25,17 +26,9 @@ export class UserEffects {
       .switchMap(() => this.afAuth.authState
         .map(authData => {
           if (authData) {
-            const user = <User>{
-              uid: authData.uid,
-              displayName: authData.displayName,
-              email: authData.email,
-              photoURL: authData.photoURL
-            };
-            this.router.navigate(['/app']);
-            return new userActions.Authenticated(user);
-          } else {
-            return new userActions.NotAuthenticated();
+            return this.getAuthenticatedAction(authData);
           }
+          return new userActions.NotAuthenticated();
         })
         .catch(err =>
           Observable.of(new appActions.Error(userActions.GET_USER, err.message))
@@ -74,5 +67,16 @@ export class UserEffects {
   private googleLogin(): Promise<any> {
     const provider = new firebase.auth.GoogleAuthProvider();
     return this.afAuth.auth.signInWithPopup(provider);
+  }
+
+  private getAuthenticatedAction(authData: AuthUser): userActions.Authenticated {
+    const user = <User>{
+      uid: authData.uid,
+      displayName: authData.displayName,
+      email: authData.email,
+      photoURL: authData.photoURL
+    };
+    this.router.navigate(['/app']);
+    return new userActions.Authenticated(user);
   }
 }
