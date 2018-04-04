@@ -12,3 +12,4 @@ A time tracker app specific to video games.
 * Redux (via NGRX)
 * Firebase (via AngularFire2)
 * TravisCI
+* Google Analytics (via Angulartics2)
