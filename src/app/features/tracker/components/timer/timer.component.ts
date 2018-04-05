@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 
+import { faBan, faPlayCircle, faStopCircle } from '@fortawesome/free-solid-svg-icons';
 import { Store } from '@ngrx/store';
 
 import { UserService } from '../../../auth/services/user.service';
@@ -22,6 +23,11 @@ export class TimerComponent implements OnInit {
   @Input() currentTime: Date;
   @Input() platformsOptions: string[] = [];
   userId = '';
+  icons = {
+    start: faPlayCircle,
+    stop: faStopCircle,
+    cancel: faBan
+  };
   constructor(private store: Store<State>, private userService: UserService) {
     this.userId = this.userService.getUser().uid;
   }

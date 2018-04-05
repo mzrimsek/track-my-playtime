@@ -4,3 +4,4 @@ languages:
 - javascript
 exclude:
 - .*\.conf.js
+- .*\.module.ts

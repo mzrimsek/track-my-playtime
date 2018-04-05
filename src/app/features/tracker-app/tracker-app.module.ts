@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 import { SharedModule } from '../../shared/shared.module';
 import { DashboardModule } from '../dashboard/dashboard.module';
 import { TrackerModule } from '../tracker/tracker.module';
@@ -16,6 +18,7 @@ import { AuthGuard } from '../auth/guards/auth.guard';
 @NgModule({
   imports: [
     CommonModule,
+    FontAwesomeModule,
     TrackerAppRoutingModule,
     SharedModule,
     TrackerModule,
