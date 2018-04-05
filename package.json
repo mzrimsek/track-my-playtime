@@ -31,6 +31,7 @@
     "@ngrx/router-store": "^5.0.1",
     "@ngrx/store": "^5.0.0",
     "@ngrx/store-devtools": "^5.0.1",
+    "@swimlane/ngx-charts": "^7.2.0",
     "@types/uuid": "^3.4.3",
     "angularfire2": "^5.0.0-rc.6",
     "core-js": "^2.4.1",

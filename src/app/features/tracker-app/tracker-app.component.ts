@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 import { faClock } from '@fortawesome/free-regular-svg-icons';
+import { faChartBar } from '@fortawesome/free-solid-svg-icons';
 
 import { RouteEntry } from './models';
-
-// import { faChartBar } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-tracker-app',
@@ -27,12 +26,12 @@ export class TrackerAppComponent implements OnInit {
       exact: true,
       icon: faClock
     },
-    // {
-    //   caption: 'Dashboard',
-    //   router: ['/app', { outlets: { trackerApp: ['dashboard'] } }],
-    //   exact: true,
-    //   icon: faChartBar
-    // }
+    {
+      caption: 'Dashboard',
+      router: ['/app', { outlets: { trackerApp: ['dashboard'] } }],
+      exact: true,
+      icon: faChartBar
+    }
   ];
 
   constructor() { }
