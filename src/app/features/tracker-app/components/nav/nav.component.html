@@ -10,7 +10,7 @@
             [routerLinkActiveOptions]="{ exact: route.exact }">
           <a [routerLink]="route.router">
             <span class="icon">
-              <i [ngClass]="route.class"></i>
+              <fa-icon [icon]="route.icon"></fa-icon>
             </span>
             <span class="text">{{ route.caption }}</span>
           </a>
@@ -20,11 +20,13 @@
   </div>
   <div class="user">
     <div class="info">
-      {{ userName }}
+      <img class="drop-shadow"
+           src="{{ user.photoURL }}">
+      <div class="name">{{ user.displayName }}</div>
     </div>
     <div class="logout"
          (click)="logout()">
-      <i class="fas fa-sign-out-alt"></i>
+      <fa-icon [icon]="icons.logout"></fa-icon>
     </div>
   </div>
 </div>

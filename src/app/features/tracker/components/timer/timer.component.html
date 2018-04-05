@@ -36,12 +36,12 @@
     <div *ngIf="!info.active"
          class="start fa-2x"
          (click)="startTimer()">
-      <i class="fas fa-play-circle"></i>
+      <fa-icon [icon]="icons.start"></fa-icon>
     </div>
     <div *ngIf="info.active"
          class="stop fa-2x"
          (click)="stopTimer()">
-      <i class="fas fa-stop-circle"></i>
+      <fa-icon [icon]="icons.stop"></fa-icon>
     </div>
   </div>
 
@@ -49,7 +49,7 @@
     <div *ngIf="info.active"
          class="cancel fa-lg"
          (click)="cancelTimer()">
-      <i class="fas fa-ban"></i>
+      <fa-icon [icon]="icons.cancel"></fa-icon>
     </div>
   </div>
 </div>

@@ -1,7 +1,10 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 
+import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+
 import { UserService } from '../../../auth/services/user.service';
 
+import { User } from '../../../auth/models';
 import { RouteEntry } from '../../models';
 
 @Component({
@@ -14,9 +17,12 @@ export class NavComponent implements OnInit {
 
   @Input() bannerRoute: RouteEntry;
   @Input() routes: RouteEntry[] = [];
-  userName = '';
+  user: User;
+  icons = {
+    logout: faSignOutAlt
+  };
   constructor(private userService: UserService) {
-    this.userName = this.userService.getUser().displayName;
+    this.user = this.userService.getUser();
   }
 
   ngOnInit() { }

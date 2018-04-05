@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
@@ -13,6 +14,7 @@ import { reducers } from './reducers/root.reducer';
 @NgModule({
   imports: [
     CommonModule,
+    FontAwesomeModule,
     StoreModule.forFeature('auth', reducers),
     EffectsModule.forFeature([UserEffects])
   ],

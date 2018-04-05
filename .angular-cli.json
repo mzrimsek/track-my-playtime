@@ -19,15 +19,9 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.scss",
-        "../node_modules/@fortawesome/fontawesome/styles.css"
+        "styles.scss"
       ],
-      "scripts": [
-        "../node_modules/@fortawesome/fontawesome/index.js",
-        "../node_modules/@fortawesome/fontawesome-free-brands/index.js",
-        "../node_modules/@fortawesome/fontawesome-free-regular/index.js",
-        "../node_modules/@fortawesome/fontawesome-free-solid/index.js"
-      ],
+      "scripts": [],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",
