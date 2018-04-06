@@ -1,8 +1,11 @@
 <div class="nav">
+
   <div class="main">
     <div class="banner">
-      <a [routerLink]="bannerRoute.router">{{ bannerRoute.caption }}</a>
+      <a id="navBanner"
+         [routerLink]="bannerRoute.router">{{ bannerRoute.caption }}</a>
     </div>
+
     <nav>
       <ul>
         <li *ngFor="let route of routes"
@@ -18,15 +21,19 @@
       </ul>
     </nav>
   </div>
+
   <div class="user">
     <div class="info">
       <img class="drop-shadow"
            src="{{ user.photoURL }}">
       <div class="name">{{ user.displayName }}</div>
     </div>
-    <div class="logout"
+
+    <div id="navLogout"
+         class="logout"
          (click)="logout()">
       <fa-icon [icon]="icons.logout"></fa-icon>
     </div>
   </div>
+
 </div>

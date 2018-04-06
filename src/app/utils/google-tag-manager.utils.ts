@@ -1,16 +1,14 @@
-import { environment } from '../../environments/environment';
-
-export const getGoogleTagManagerNoScriptTag = (): HTMLElement => {
+export const getGoogleTagManagerNoScriptTag = (googleTagManagerContainerId: string): HTMLElement => {
   const noScriptEl = document.createElement('noscript');
   const iframe = document.createElement('iframe');
-  iframe.src = `https://www.googletagmanager.com/ns.html?id=${environment.googleTagManager}`;
+  iframe.src = `https://www.googletagmanager.com/ns.html?id=${googleTagManagerContainerId}`;
   iframe.height = '0';
   iframe.width = '0';
   noScriptEl.appendChild(iframe);
   return noScriptEl;
 };
 
-export const getGoogleTagManagerScriptTag = (): HTMLScriptElement => {
+export const getGoogleTagManagerScriptTag = (googleTagManagerContainerId: string): HTMLScriptElement => {
   const configScript = document.createElement('script');
   configScript.innerHTML = `
     (function(w, d, s, l, i) {
@@ -26,7 +24,7 @@ export const getGoogleTagManagerScriptTag = (): HTMLScriptElement => {
       j.src =
           'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
       f.parentNode.insertBefore(j, f);
-    })(window, document, 'script', 'dataLayer', '${environment.googleTagManager}');
+    })(window, document, 'script', 'dataLayer', '${googleTagManagerContainerId}');
     `;
   return configScript;
 };

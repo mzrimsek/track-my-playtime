@@ -11,6 +11,8 @@ import {
     getGoogleTagManagerNoScriptTag, getGoogleTagManagerScriptTag
 } from './utils/google-tag-manager.utils';
 
+import { environment } from '../environments/environment';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -20,7 +22,7 @@ export class AppComponent {
 
   constructor(private store: Store<State>, private router: Router) {
     this.store.dispatch(new actions.InitializeApplication());
-    this.insertGoogleTagManagerElements();
+    this.insertGoogleTagManagerElements(environment.googleTagManager);
   }
 
   shouldShowHeader(): boolean {
@@ -28,10 +30,10 @@ export class AppComponent {
     return currentRoute.indexOf('/app') === -1;
   }
 
-  private insertGoogleTagManagerElements() {
+  private insertGoogleTagManagerElements(googleTagManagerContainerId: string) {
     try {
-      document.head.insertAdjacentElement('afterbegin', getGoogleTagManagerScriptTag());
-      document.body.insertAdjacentElement('afterbegin', getGoogleTagManagerNoScriptTag());
+      document.head.insertAdjacentElement('afterbegin', getGoogleTagManagerScriptTag(googleTagManagerContainerId));
+      document.body.insertAdjacentElement('afterbegin', getGoogleTagManagerNoScriptTag(googleTagManagerContainerId));
     } catch (err) {
       this.store.dispatch(new actions.Error('Append Google Tag Manager Scripts', err.message));
     }
