@@ -6,8 +6,7 @@ import { TrackerAppComponent } from './tracker-app.component';
 
 import { AuthGuard } from '../auth/guards/auth.guard';
 
-// import { DashboardComponent } from '../dashboard/dashboard.component';
-const OUTLET_NAME = 'trackerApp';
+const OUTLET_NAME = 'app';
 
 const trackerAppRoutes: Routes = [
   {
@@ -20,14 +19,9 @@ const trackerAppRoutes: Routes = [
         component: TrackerComponent,
         outlet: OUTLET_NAME
       },
-      // {
-      //   path: 'dashboard',
-      //   component: DashboardComponent,
-      //   outlet: OUTLET_NAME
-      // },
       {
         path: '**',
-        redirectTo: '/app/(trackerApp:tracker)',
+        redirectTo: `/app/(${OUTLET_NAME}:tracker)`,
         pathMatch: 'full'
       }
     ]

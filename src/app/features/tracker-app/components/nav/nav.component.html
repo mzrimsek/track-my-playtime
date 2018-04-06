@@ -1,22 +1,24 @@
 <div class="nav">
-
   <div class="main">
     <div class="banner">
-      <a id="navBanner"
+      <a [id]="bannerRoute.trackingId"
          [routerLink]="bannerRoute.router">{{ bannerRoute.caption }}</a>
     </div>
 
     <nav>
       <ul>
         <li *ngFor="let route of routes"
+            [id]="route.trackingId"
             [routerLinkActive]="['active']"
             [routerLinkActiveOptions]="{ exact: route.exact }">
+
           <a [routerLink]="route.router">
             <span class="icon">
               <fa-icon [icon]="route.icon"></fa-icon>
             </span>
             <span class="text">{{ route.caption }}</span>
           </a>
+
         </li>
       </ul>
     </nav>
@@ -29,11 +31,10 @@
       <div class="name">{{ user.displayName }}</div>
     </div>
 
-    <div id="navLogout"
-         class="logout"
-         (click)="logout()">
+    <button id="navLogout"
+            class="logout"
+            (click)="logout()">
       <fa-icon [icon]="icons.logout"></fa-icon>
-    </div>
+    </button>
   </div>
-
 </div>

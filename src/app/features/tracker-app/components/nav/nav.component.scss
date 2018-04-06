@@ -76,6 +76,10 @@
 
     .logout {
       font-size: $base-font-size;
+      color: $text-light;
+      background: none;
+      border: none;
+
       &:hover {
         cursor: pointer;
       }
