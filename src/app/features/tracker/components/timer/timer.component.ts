@@ -82,14 +82,4 @@ export class TimerComponent implements OnInit {
   getCurrentTimeDate(): Date {
     return new Date(this.currentTime);
   }
-
-  getOptionId(option: string): string {
-    const fixedOption = option.replace(' ', '');
-    return `timerOption(${fixedOption})`;
-  }
-
-  getTimeId(active: boolean): string {
-    const base = 'timerTime';
-    return active ? `${base}(Active)` : `${base}(Inactive)`;
-  }
 }

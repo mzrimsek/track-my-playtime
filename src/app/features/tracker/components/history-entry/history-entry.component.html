@@ -1,6 +1,7 @@
 <div class="history-entry">
   <div class="game">
-    <input type="text"
+    <input id="historyEntryGame"
+           type="text"
            placeholder="Game name"
            #gameEl
            [value]="item.game"
@@ -8,7 +9,8 @@
   </div>
 
   <div class="platform">
-    <select #platformEl
+    <select id="historyEntryPlatform"
+            #platformEl
             [value]="item.platform"
             (change)="updatePlatform(platformEl)">
       <option value="">Select Platform</option>
@@ -18,7 +20,8 @@
   </div>
 
   <div class="time">
-    <div class="start-end"
+    <div id="historyEntryTimeSpan"
+         class="start-end"
          (click)="openDateTimePicker(elapsedTimeEl)">
       {{ item.startTime | date:'shortTime' }} - {{ item.endTime | date:'shortTime' }}
     </div>
@@ -33,16 +36,18 @@
       <owl-date-time #elapsedTimeDT></owl-date-time>
     </div>
 
-    <div class="elapsed"
+    <div id="historyEntryTimeElapsed"
+         class="elapsed"
          (click)="openDateTimePicker(elapsedTimeEl)">
       {{ item.startTime | elapsedTime:item.endTime }}
     </div>
   </div>
 
   <div class="primary-action">
-    <div class="remove fa-lg"
-         (click)="remove()">
+    <button id="historyEntryRemove"
+            class="remove fa-lg icon-button"
+            (click)="remove()">
       <fa-icon [icon]="icons.remove"></fa-icon>
-    </div>
+    </button>
   </div>
 </div>

@@ -15,14 +15,13 @@
             (change)="setPlatform(platformEl)">
       <option value="">Select Platform</option>
       <option *ngFor="let option of platformsOptions"
-              [id]="getOptionId(option)"
               value="{{ option }}">{{ option }}</option>
     </select>
   </div>
 
   <div class="time"
        [class.active]="info.active">
-    <div [id]="getTimeId(info.active)"
+    <div id="timerTime"
          (click)="openDateTimePicker(startTimeEl)">{{ info.startTime | elapsedTime:currentTime }}</div>
 
     <div class="date-time-picker">
