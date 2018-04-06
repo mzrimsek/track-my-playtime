@@ -26,3 +26,12 @@ body {
 .cdk-global-scrollblock {
   position: initial;
 }
+
+.icon-button {
+  background: none;
+  border: none;
+
+  &:hover {
+    cursor: pointer;
+  }
+}

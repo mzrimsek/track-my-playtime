@@ -1,6 +1,7 @@
 <div class="timer drop-shadow">
   <div class="game">
-    <input type="text"
+    <input id="timerGame"
+           type="text"
            placeholder="Game name"
            #gameEl
            [value]="info.game"
@@ -8,18 +9,21 @@
   </div>
 
   <div class="platform">
-    <select #platformEl
+    <select id="timerPlatform"
+            #platformEl
             [value]="info.platform"
             (change)="setPlatform(platformEl)">
       <option value="">Select Platform</option>
       <option *ngFor="let option of platformsOptions"
+              [id]="getOptionId(option)"
               value="{{ option }}">{{ option }}</option>
     </select>
   </div>
 
   <div class="time"
        [class.active]="info.active">
-    <div (click)="openDateTimePicker(startTimeEl)">{{ info.startTime | elapsedTime:currentTime }}</div>
+    <div [id]="getTimeId(info.active)"
+         (click)="openDateTimePicker(startTimeEl)">{{ info.startTime | elapsedTime:currentTime }}</div>
 
     <div class="date-time-picker">
       <input #startTimeEl
@@ -32,23 +36,30 @@
   </div>
 
   <div class="primary-action">
-    <div *ngIf="!info.active"
-         class="start fa-2x"
-         (click)="startTimer()">
-      <fa-icon [icon]="icons.start"></fa-icon>
+    <div *ngIf="!info.active">
+      <button id="timerStart"
+              class="start fa-2x icon-button"
+              (click)="startTimer()">
+        <fa-icon [icon]="icons.start"></fa-icon>
+      </button>
     </div>
-    <div *ngIf="info.active"
-         class="stop fa-2x"
-         (click)="stopTimer()">
-      <fa-icon [icon]="icons.stop"></fa-icon>
+
+    <div *ngIf="info.active">
+      <button id="timerStop"
+              class="stop fa-2x icon-button"
+              (click)="stopTimer()">
+        <fa-icon [icon]="icons.stop"></fa-icon>
+      </button>
     </div>
   </div>
 
   <div class="secondary-action">
-    <div *ngIf="info.active"
-         class="cancel fa-lg"
-         (click)="cancelTimer()">
-      <fa-icon [icon]="icons.cancel"></fa-icon>
+    <div *ngIf="info.active">
+      <button id="timerCancel"
+              class="cancel fa-lg icon-button"
+              (click)="cancelTimer()">
+        <fa-icon [icon]="icons.cancel"></fa-icon>
+      </button>
     </div>
   </div>
 </div>
