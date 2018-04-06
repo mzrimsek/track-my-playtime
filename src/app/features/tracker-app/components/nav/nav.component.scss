@@ -76,9 +76,7 @@
 
     .logout {
       font-size: $base-font-size;
-      &:hover {
-        cursor: pointer;
-      }
+      color: $text-light;
     }
   }
 }

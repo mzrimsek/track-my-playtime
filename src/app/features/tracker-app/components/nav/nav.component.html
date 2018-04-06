@@ -1,32 +1,40 @@
 <div class="nav">
   <div class="main">
     <div class="banner">
-      <a [routerLink]="bannerRoute.router">{{ bannerRoute.caption }}</a>
+      <a [id]="bannerRoute.trackingId"
+         [routerLink]="bannerRoute.router">{{ bannerRoute.caption }}</a>
     </div>
+
     <nav>
       <ul>
         <li *ngFor="let route of routes"
+            [id]="route.trackingId"
             [routerLinkActive]="['active']"
             [routerLinkActiveOptions]="{ exact: route.exact }">
+
           <a [routerLink]="route.router">
             <span class="icon">
               <fa-icon [icon]="route.icon"></fa-icon>
             </span>
             <span class="text">{{ route.caption }}</span>
           </a>
+
         </li>
       </ul>
     </nav>
   </div>
+
   <div class="user">
     <div class="info">
       <img class="drop-shadow"
            src="{{ user.photoURL }}">
       <div class="name">{{ user.displayName }}</div>
     </div>
-    <div class="logout"
-         (click)="logout()">
+
+    <button id="navLogout"
+            class="logout icon-button"
+            (click)="logout()">
       <fa-icon [icon]="icons.logout"></fa-icon>
-    </div>
+    </button>
   </div>
 </div>
