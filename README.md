@@ -13,3 +13,4 @@ A time tracker app specific to video games.
 * [Firebase](https://firebase.google.com/) (via [AngularFire2](https://github.com/angular/angularfire2))
 * [TravisCI](https://travis-ci.org/)
 * [FontAwesome](https://fontawesome.com/) (via [angular-fontawesome](https://github.com/FortAwesome/angular-fontawesome))
+* [Google Analytics](https://www.google.com/analytics) (via [Angulartics2](https://github.com/angulartics/angulartics2))

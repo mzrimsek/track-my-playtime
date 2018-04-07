@@ -12,11 +12,12 @@ import { RouteEntry } from './models';
 })
 export class TrackerAppComponent implements OnInit {
 
-  private trackerRouter = ['/app', { outlets: { trackerApp: ['tracker'] } }];
+  private trackerRouter = ['/app', { outlets: { app: ['tracker'] } }];
 
   bannerRoute: RouteEntry = {
     caption: 'Track My Playtime',
-    router: this.trackerRouter
+    router: this.trackerRouter,
+    trackingId: 'navBanner'
   };
 
   routes: RouteEntry[] = [
@@ -24,13 +25,15 @@ export class TrackerAppComponent implements OnInit {
       caption: 'Tracker',
       router: this.trackerRouter,
       exact: true,
-      icon: faClock
+      icon: faClock,
+      trackingId: 'navTracker'
     },
     {
       caption: 'Dashboard',
-      router: ['/app', { outlets: { trackerApp: ['dashboard'] } }],
+      router: ['/app', { outlets: { app: ['dashboard'] } }],
       exact: true,
-      icon: faChartBar
+      icon: faChartBar,
+      trackingId: 'navDashboard'
     }
   ];
 
