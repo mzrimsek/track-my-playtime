@@ -12,25 +12,23 @@ import { RouteEntry } from './models';
 })
 export class TrackerAppComponent implements OnInit {
 
-  private trackerRouter = ['/app', { outlets: { app: ['tracker'] } }];
-
   bannerRoute: RouteEntry = {
     caption: 'Track My Playtime',
-    router: this.trackerRouter,
+    router: this.getNavRouter('tracker'),
     trackingId: 'navBanner'
   };
 
   routes: RouteEntry[] = [
     {
       caption: 'Tracker',
-      router: this.trackerRouter,
+      router: this.getNavRouter('tracker'),
       exact: true,
       icon: faClock,
       trackingId: 'navTracker'
     },
     {
       caption: 'Dashboard',
-      router: ['/app', { outlets: { app: ['dashboard'] } }],
+      router: this.getNavRouter('dashboard'),
       exact: true,
       icon: faChartBar,
       trackingId: 'navDashboard'
@@ -40,4 +38,9 @@ export class TrackerAppComponent implements OnInit {
   constructor() { }
 
   ngOnInit() { }
+
+  private getNavRouter(route: string) {
+    const parentRoute = '/app';
+    return [parentRoute, { outlets: { app: [route] } }];
+  }
 }
