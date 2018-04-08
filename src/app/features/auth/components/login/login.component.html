@@ -1,8 +1,12 @@
 <div class="login">
   <div class="box drop-shadow">
-    <button class="login-button drop-shadow"
+
+    <button data-tracking-category="loginGoogle"
+            class="login-button drop-shadow"
             (click)="googleLogin()">
-      <i class="fab fa-google"></i>
-      Login with Google</button>
+      <fa-icon [icon]="icons.google"></fa-icon>
+      Login with Google
+    </button>
+
   </div>
 </div>

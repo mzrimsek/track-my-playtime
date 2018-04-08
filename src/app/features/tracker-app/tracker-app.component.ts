@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { faClock } from '@fortawesome/free-regular-svg-icons';
+
 import { RouteEntry } from './models';
 
 @Component({
@@ -9,11 +11,12 @@ import { RouteEntry } from './models';
 })
 export class TrackerAppComponent implements OnInit {
 
-  private trackerRouter = ['/app', { outlets: { trackerApp: ['tracker'] } }];
+  private trackerRouter = ['/app', { outlets: { app: ['tracker'] } }];
 
   bannerRoute: RouteEntry = {
     caption: 'Track My Playtime',
-    router: this.trackerRouter
+    router: this.trackerRouter,
+    trackingCategory: 'navBanner'
   };
 
   routes: RouteEntry[] = [
@@ -21,14 +24,9 @@ export class TrackerAppComponent implements OnInit {
       caption: 'Tracker',
       router: this.trackerRouter,
       exact: true,
-      class: 'far fa-clock'
-    },
-    // {
-    //   caption: 'Dashboard',
-    //   router: ['/app', { outlets: { trackerApp: ['dashboard'] } }],
-    //   exact: true,
-    //   class: 'fas fa-chart-bar'
-    // }
+      icon: faClock,
+      trackingCategory: 'navTracker'
+    }
   ];
 
   constructor() { }

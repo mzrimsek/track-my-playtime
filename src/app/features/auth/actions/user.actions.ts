@@ -18,12 +18,6 @@ export class NotAuthenticated implements Action {
   constructor(public payload?: any) { }
 }
 
-export const AUTH_ERROR = '[Auth] Error';
-export class AuthError implements Action {
-  readonly type = AUTH_ERROR;
-  constructor(public payload?: any) { }
-}
-
 export const GOOGLE_LOGIN = '[Auth] Google Login Attempt';
 export class GoogleLogin implements Action {
   readonly type = GOOGLE_LOGIN;
@@ -39,6 +33,5 @@ export class Logout implements Action {
 export type All = GetUser |
   Authenticated |
   NotAuthenticated |
-  AuthError |
   GoogleLogin |
   Logout;

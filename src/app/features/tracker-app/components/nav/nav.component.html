@@ -1,30 +1,41 @@
 <div class="nav">
   <div class="main">
     <div class="banner">
-      <a [routerLink]="bannerRoute.router">{{ bannerRoute.caption }}</a>
+      <a [attr.data-tracking-category]="bannerRoute.trackingCategory"
+         [routerLink]="bannerRoute.router">{{ bannerRoute.caption }}</a>
     </div>
+
     <nav>
       <ul>
         <li *ngFor="let route of routes"
+            [attr.data-tracking-category]="route.trackingCategory"
             [routerLinkActive]="['active']"
             [routerLinkActiveOptions]="{ exact: route.exact }">
+
           <a [routerLink]="route.router">
             <span class="icon">
-              <i [ngClass]="route.class"></i>
+              <fa-icon [icon]="route.icon"></fa-icon>
             </span>
-            <span class="text">{{ route.caption }}</span>
+            <span [attr.data-tracking-category]="route.trackingCategory"
+                  class="text">{{ route.caption }}</span>
           </a>
+
         </li>
       </ul>
     </nav>
   </div>
+
   <div class="user">
     <div class="info">
-      {{ userName }}
+      <img class="drop-shadow"
+           src="{{ user.photoURL }}">
+      <div class="name">{{ user.displayName }}</div>
     </div>
-    <div class="logout"
-         (click)="logout()">
-      <i class="fas fa-sign-out-alt"></i>
-    </div>
+
+    <button data-tracking-category="navLogout"
+            class="logout icon-button"
+            (click)="logout()">
+      <fa-icon [icon]="icons.logout"></fa-icon>
+    </button>
   </div>
 </div>

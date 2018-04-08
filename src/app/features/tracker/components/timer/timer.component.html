@@ -1,7 +1,7 @@
 <div class="timer drop-shadow">
-
   <div class="game">
-    <input type="text"
+    <input data-tracking-category="timerGame"
+           type="text"
            placeholder="Game name"
            #gameEl
            [value]="info.game"
@@ -9,7 +9,8 @@
   </div>
 
   <div class="platform">
-    <select #platformEl
+    <select data-tracking-category="timerPlatform"
+            #platformEl
             [value]="info.platform"
             (change)="setPlatform(platformEl)">
       <option value="">Select Platform</option>
@@ -20,7 +21,8 @@
 
   <div class="time"
        [class.active]="info.active">
-    <div (click)="openDateTimePicker(startTimeEl)">{{ info.startTime | elapsedTime:currentTime }}</div>
+    <div data-tracking-category="timerTime"
+         (click)="openDateTimePicker(startTimeEl)">{{ info.startTime | elapsedTime:currentTime }}</div>
 
     <div class="date-time-picker">
       <input #startTimeEl
@@ -33,23 +35,30 @@
   </div>
 
   <div class="primary-action">
-    <div *ngIf="!info.active"
-         class="start fa-2x"
-         (click)="startTimer()">
-      <i class="fas fa-play-circle"></i>
+    <div *ngIf="!info.active">
+      <button data-tracking-category="timerStart"
+              class="start fa-2x icon-button"
+              (click)="startTimer()">
+        <fa-icon [icon]="icons.start"></fa-icon>
+      </button>
     </div>
-    <div *ngIf="info.active"
-         class="stop fa-2x"
-         (click)="stopTimer()">
-      <i class="fas fa-stop-circle"></i>
+
+    <div *ngIf="info.active">
+      <button data-tracking-category="timerStop"
+              class="stop fa-2x icon-button"
+              (click)="stopTimer()">
+        <fa-icon [icon]="icons.stop"></fa-icon>
+      </button>
     </div>
   </div>
 
   <div class="secondary-action">
-    <div *ngIf="info.active"
-         class="cancel fa-lg"
-         (click)="cancelTimer()">
-      <i class="fas fa-ban"></i>
+    <div *ngIf="info.active">
+      <button data-tracking-category="timerCancel"
+              class="cancel fa-lg icon-button"
+              (click)="cancelTimer()">
+        <fa-icon [icon]="icons.cancel"></fa-icon>
+      </button>
     </div>
   </div>
 </div>

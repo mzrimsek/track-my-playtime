@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { User as AuthUser } from '@firebase/auth-types';
 import { Actions, Effect } from '@ngrx/effects';
 
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase';
 import { Observable } from 'rxjs/Observable';
 
+import * as appActions from '../../../actions/app.actions';
 import * as userActions from '../actions/user.actions';
 
 import { User } from '../models';
@@ -24,18 +26,13 @@ export class UserEffects {
       .switchMap(() => this.afAuth.authState
         .map(authData => {
           if (authData) {
-            const user = <User>{
-              uid: authData.uid,
-              displayName: authData.displayName
-            };
             this.router.navigate(['/app']);
-            return new userActions.Authenticated(user);
-          } else {
-            return new userActions.NotAuthenticated();
+            return this.getAuthenticatedAction(authData);
           }
+          return new userActions.NotAuthenticated();
         })
         .catch(err =>
-          Observable.of(new userActions.AuthError({ error: err.message }))
+          Observable.of(new appActions.Error(userActions.GET_USER, err.message))
         )
       );
 
@@ -49,7 +46,7 @@ export class UserEffects {
           return new userActions.GetUser();
         })
         .catch(err =>
-          Observable.of(new userActions.AuthError({ error: err.message }))
+          Observable.of(new appActions.Error(userActions.GET_USER, err.message))
         )
       );
 
@@ -64,12 +61,22 @@ export class UserEffects {
           return new userActions.NotAuthenticated();
         })
         .catch(err =>
-          Observable.of(new userActions.AuthError({ error: err.message }))
+          Observable.of(new appActions.Error(userActions.GET_USER, err.message))
         )
       );
 
   private googleLogin(): Promise<any> {
     const provider = new firebase.auth.GoogleAuthProvider();
     return this.afAuth.auth.signInWithPopup(provider);
+  }
+
+  private getAuthenticatedAction(authData: AuthUser): userActions.Authenticated {
+    const user = <User>{
+      uid: authData.uid,
+      displayName: authData.displayName,
+      email: authData.email,
+      photoURL: authData.photoURL
+    };
+    return new userActions.Authenticated(user);
   }
 }
