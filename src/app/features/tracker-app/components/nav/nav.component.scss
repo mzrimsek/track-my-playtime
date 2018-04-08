@@ -27,13 +27,8 @@
       list-style: none;
 
       li{
-        display: flex;
-        align-items: center;
-        height: 45px;
-        padding: 0px 10px;
         border-radius: 8px;
         margin-bottom: 5px;
-
 
         &.active {
           background: $background-dark-accent;
@@ -47,7 +42,20 @@
         a{
           color: $text-light;
           text-decoration: none;
-          pointer-events: none;
+
+          display: flex;
+          align-items: center;
+          height: 45px;
+          padding: 0px 10px;
+
+          .icon {
+            margin-right: 5px;
+            pointer-events: none;
+          }
+
+          .text {
+            pointer-events: none;
+          }
         }
       }
     }
@@ -88,15 +96,17 @@
     .main {
       ul {
         li {
-          justify-content: center;
-          height: 60px;
+          a {
+            justify-content: center;
+            height: 60px;
 
-          .icon {
-            font-size: 2em;
-          }
+            .icon {
+              font-size: 2em;
+            }
 
-          .text {
-            display: none;
+            .text {
+              display: none;
+            }
           }
         }
       }

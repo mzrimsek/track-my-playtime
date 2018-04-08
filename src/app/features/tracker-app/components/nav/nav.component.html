@@ -8,11 +8,11 @@
     <nav>
       <ul>
         <li *ngFor="let route of routes"
-            [attr.data-tracking-category]="route.trackingCategory"
             [routerLinkActive]="['active']"
             [routerLinkActiveOptions]="{ exact: route.exact }">
 
-          <a [routerLink]="route.router">
+          <a [attr.data-tracking-category]="route.trackingCategory"
+             [routerLink]="route.router">
             <span class="icon">
               <fa-icon [icon]="route.icon"></fa-icon>
             </span>
