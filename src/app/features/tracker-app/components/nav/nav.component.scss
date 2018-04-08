@@ -34,6 +34,7 @@
         border-radius: 8px;
         margin-bottom: 5px;
 
+
         &.active {
           background: $background-dark-accent;
         }
@@ -46,6 +47,7 @@
         a{
           color: $text-light;
           text-decoration: none;
+          pointer-events: none;
         }
       }
     }
