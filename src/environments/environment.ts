@@ -16,4 +16,5 @@ export const environment: Environment = {
     namespace: 'b057090a-0931-5b05-8772-94eb3b9b0550'
   },
   googleTagManager: 'GTM-M6D8H4V'
+  }
 };
