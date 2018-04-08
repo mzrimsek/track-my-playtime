@@ -1,14 +1,14 @@
 <div class="nav">
   <div class="main">
     <div class="banner">
-      <a [id]="bannerRoute.trackingId"
+      <a [attr.data-tracking-category]="bannerRoute.trackingCategory"
          [routerLink]="bannerRoute.router">{{ bannerRoute.caption }}</a>
     </div>
 
     <nav>
       <ul>
         <li *ngFor="let route of routes"
-            [id]="route.trackingId"
+            [attr.data-tracking-category]="route.trackingCategory"
             [routerLinkActive]="['active']"
             [routerLinkActiveOptions]="{ exact: route.exact }">
 
@@ -16,7 +16,8 @@
             <span class="icon">
               <fa-icon [icon]="route.icon"></fa-icon>
             </span>
-            <span class="text">{{ route.caption }}</span>
+            <span [attr.data-tracking-category]="route.trackingCategory"
+                  class="text">{{ route.caption }}</span>
           </a>
 
         </li>
@@ -31,7 +32,7 @@
       <div class="name">{{ user.displayName }}</div>
     </div>
 
-    <button id="navLogout"
+    <button data-tracking-category="navLogout"
             class="logout icon-button"
             (click)="logout()">
       <fa-icon [icon]="icons.logout"></fa-icon>
