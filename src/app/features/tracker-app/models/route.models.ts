@@ -5,5 +5,5 @@ export interface RouteEntry {
   router: any[] | string;
   exact?: boolean;
   icon?: IconDefinition;
-  trackingId: string;
+  trackingCategory: string;
 }

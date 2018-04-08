@@ -16,7 +16,7 @@ export class TrackerAppComponent implements OnInit {
   bannerRoute: RouteEntry = {
     caption: 'Track My Playtime',
     router: this.trackerRouter,
-    trackingId: 'navBanner'
+    trackingCategory: 'navBanner'
   };
 
   routes: RouteEntry[] = [
@@ -25,7 +25,7 @@ export class TrackerAppComponent implements OnInit {
       router: this.trackerRouter,
       exact: true,
       icon: faClock,
-      trackingId: 'navTracker'
+      trackingCategory: 'navTracker'
     }
   ];
 
