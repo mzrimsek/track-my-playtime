@@ -1,3 +1,13 @@
-<p>
-  dashboard works!
-</p>
+<ngx-charts-bar-vertical [view]="view"
+                         [scheme]="colorScheme"
+                         [results]="timeVsDateGraphData$ | async"
+                         [gradient]="gradient"
+                         [xAxis]="showXAxis"
+                         [yAxis]="showYAxis"
+                         [legend]="showLegend"
+                         [showXAxisLabel]="showXAxisLabel"
+                         [showYAxisLabel]="showYAxisLabel"
+                         [xAxisLabel]="xAxisLabel"
+                         [yAxisLabel]="yAxisLabel"
+                         [yAxisTickFormatting]="yAxisTickFormatting">
+</ngx-charts-bar-vertical>
