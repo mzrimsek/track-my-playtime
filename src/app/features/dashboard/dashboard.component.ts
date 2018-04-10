@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Observable } from 'rxjs/Observable';
+
+import { GraphService } from './services/graph.service';
+
+import { BarGraphDataItem } from './models';
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -7,7 +13,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  timeVsDateGraphData$: Observable<BarGraphDataItem[]>;
+  constructor(private graphService: GraphService) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.timeVsDateGraphData$ = this.graphService.getTimeVsDateGraphData();
+  }
 }

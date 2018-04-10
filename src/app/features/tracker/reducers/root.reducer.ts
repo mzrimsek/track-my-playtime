@@ -4,7 +4,7 @@ import * as fromHistory from './history.reducer';
 import * as fromPlatforms from './platforms.reducer';
 import * as fromTimer from './timer.reducer';
 
-import { HistoryGrouping, HistoryListItem, TimerInfo } from '../models';
+import { HistoryGrouping, HistoryGroupingListItem, HistoryListItem, TimerInfo } from '../models';
 
 import { formatElapsedTime, getElapsedTime } from '../../../shared/utils/date.utils';
 import { getDateFromHistoryListItem } from '../utils/history.utils';
@@ -62,26 +62,34 @@ export const _selectHistoryItemsGroupedByDate = createSelector(_selectSortedHist
   });
   return map;
 });
-export const _selectGroupedHistoryItems = createSelector(_selectHistoryItemsGroupedByDate, map => {
+export const _selectHistoryGroupingsByDate = createSelector(_selectHistoryItemsGroupedByDate, map => {
   let groupings: HistoryGrouping[] = [];
   map.forEach((value: HistoryListItem[], key: string) => {
     const elapsedTime = value.map(item => getElapsedTime(item.startTime, item.endTime)).reduce((a, b) => a + b, 0);
     const newGrouping = <HistoryGrouping>{
-      date: key,
-      totalTime: formatElapsedTime(elapsedTime),
+      key,
+      totalTime: elapsedTime,
       historyItems: value
     };
     groupings = [...groupings, newGrouping];
   });
   return groupings;
 });
+export const _selectHistoryGroupingListItemsByDate = createSelector(_selectHistoryGroupingsByDate, groupings =>
+  groupings.map(grouping => <HistoryGroupingListItem>{
+    key: grouping.key,
+    totalTime: formatElapsedTime(grouping.totalTime),
+    historyItems: grouping.historyItems
+  })
+);
 export const _selectHistoryLoading = createSelector(_selectHistory, history => history.loading);
 
 export const _selectPlatformsOptions = createSelector(_selectPlatforms, platforms => platforms.options);
 
 const trackerComponentSelectors = {
   timerInfo: _selectTimerInfo,
-  historyGroupings: _selectGroupedHistoryItems,
+  historyGroupingsByDate: _selectHistoryGroupingsByDate,
+  historyGroupingListItemsByDate: _selectHistoryGroupingListItemsByDate,
   historyLoading: _selectHistoryLoading,
   platformsOptions: _selectPlatformsOptions
 };

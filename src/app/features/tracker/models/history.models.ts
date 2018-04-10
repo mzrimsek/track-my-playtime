@@ -8,7 +8,13 @@ export interface HistoryListItem {
 }
 
 export interface HistoryGrouping {
-  date: string;
+  key: string;
+  totalTime: number;
+  historyItems: HistoryListItem[];
+}
+
+export interface HistoryGroupingListItem {
+  key: string;
   totalTime: string;
   historyItems: HistoryListItem[];
 }
