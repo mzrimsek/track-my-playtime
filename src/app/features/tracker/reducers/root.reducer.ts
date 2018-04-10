@@ -4,10 +4,12 @@ import * as fromHistory from './history.reducer';
 import * as fromPlatforms from './platforms.reducer';
 import * as fromTimer from './timer.reducer';
 
-import { HistoryGrouping, HistoryGroupingListItem, HistoryListItem, TimerInfo } from '../models';
+import { HistoryGroupingListItem, HistoryListItem, TimerInfo } from '../models';
 
-import { formatElapsedTime, getElapsedTime } from '../../../shared/utils/date.utils';
-import { getDateFromHistoryListItem } from '../utils/history.utils';
+import { formatElapsedTime } from '../../../shared/utils/date.utils';
+import {
+    getDateFromHistoryListItem, getHistoryGroupingsFromHistoryListItemsMap, getHistoryListItemsMap
+} from '../utils/history.utils';
 
 export interface TrackerState {
   timer: fromTimer.State;
@@ -49,31 +51,9 @@ export const _selectHistoryItems = createSelector(_selectAllHistory,
       ]
     }));
 export const _selectSortedHistoryItems = createSelector(_selectHistoryItems, items => items.sort((a, b) => b.startTime - a.startTime));
-export const _selectHistoryItemsGroupedByDate = createSelector(_selectSortedHistoryItems, items => {
-  const map: Map<string, HistoryListItem[]> = new Map();
-  items.forEach((item) => {
-    const key = getDateFromHistoryListItem(item);
-    const collection = map.get(key);
-    if (!collection) {
-      map.set(key, [item]);
-    } else {
-      collection.push(item);
-    }
-  });
-  return map;
-});
-export const _selectHistoryGroupingsByDate = createSelector(_selectHistoryItemsGroupedByDate, map => {
-  let groupings: HistoryGrouping[] = [];
-  map.forEach((value: HistoryListItem[], key: string) => {
-    const elapsedTime = value.map(item => getElapsedTime(item.startTime, item.endTime)).reduce((a, b) => a + b, 0);
-    const newGrouping = <HistoryGrouping>{
-      key,
-      totalTime: elapsedTime,
-      historyItems: value
-    };
-    groupings = [...groupings, newGrouping];
-  });
-  return groupings;
+export const _selectHistoryGroupingsByDate = createSelector(_selectSortedHistoryItems, items => {
+  const historyListItemsMap = getHistoryListItemsMap(items, getDateFromHistoryListItem);
+  return getHistoryGroupingsFromHistoryListItemsMap(historyListItemsMap);
 });
 export const _selectHistoryGroupingListItemsByDate = createSelector(_selectHistoryGroupingsByDate, groupings =>
   groupings.map(grouping => <HistoryGroupingListItem>{
