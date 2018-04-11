@@ -4,7 +4,7 @@
   display: flex;
   align-items: center;
   background: $background-light;
-  height: 80px;
+  height: $history-entry-height;
   padding: 0px 10px;
   border-bottom: 1px solid darken($background-light, 10%);
 
@@ -17,7 +17,7 @@
     font-family: $base-font-family;
     width: 100%;
     padding: 5px;
-    background: inherit;
+    background: none;
   }
 
   .game {

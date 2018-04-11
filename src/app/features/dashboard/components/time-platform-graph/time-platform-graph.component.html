@@ -1,8 +1,10 @@
-<ngx-charts-advanced-pie-chart [view]="config.view"
-                               [scheme]="config.colorScheme"
-                               [results]="data"
-                               [gradient]="config.gradient"
-                               [animations]="config.animations"
-                               [valueFormatting]="config.valueFormatting"
-                               [percentageFormatting]="config.percentageFormatting">
-</ngx-charts-advanced-pie-chart>
+<ngx-charts-pie-chart [view]="config.view"
+                      [scheme]="config.colorScheme"
+                      [results]="data"
+                      [legend]="config.showLegend"
+                      [explodeSlices]="config.explodeSlices"
+                      [labels]="config.showLabels"
+                      [doughnut]="config.doughnut"
+                      [gradient]="config.gradient"
+                      [animations]="config.animations">
+</ngx-charts-pie-chart>

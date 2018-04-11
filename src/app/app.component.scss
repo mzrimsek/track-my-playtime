@@ -8,7 +8,9 @@
   background: $background-dark;
   background: linear-gradient(45deg, $background-dark 20%, $background-dark-accent 70%);
 
-  .content {
-    height: $main-height;
+  .main {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
   }
 }

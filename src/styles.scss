@@ -14,7 +14,6 @@ body {
   padding: 0;
   font-family: $base-font-family;
   font-size: $base-font-size;
-  background: $background-light-accent;
 }
 
 .drop-shadow {
@@ -39,3 +38,24 @@ body {
 fa-icon {
   pointer-events: none;
 }
+
+.content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: $background-light-accent;
+  width: $content-width;
+  min-height: 100vh;
+  margin-left: $sidebar-width;
+  background: $background-light-accent;
+}
+
+@media only screen  and (max-width : $medium-breakpoint) {
+  .content {
+    width: $small-content-width;
+    margin-left: $small-sidebar-width;
+  }
+}
+
+:focus {outline:none;}
+::-moz-focus-inner {border:0;}

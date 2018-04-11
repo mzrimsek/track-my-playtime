@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { User as AuthUser } from '@firebase/auth-types';
 import { Actions, Effect } from '@ngrx/effects';
@@ -16,7 +16,7 @@ import { User } from '../models';
 @Injectable()
 export class UserEffects {
 
-  constructor(private actions$: Actions, private afAuth: AngularFireAuth, private router: Router) { }
+  constructor(private actions$: Actions, private afAuth: AngularFireAuth, private router: Router, private route: ActivatedRoute) { }
 
   @Effect() getUser$ =
     this.actions$
@@ -26,7 +26,8 @@ export class UserEffects {
       .switchMap(() => this.afAuth.authState
         .map(authData => {
           if (authData) {
-            this.router.navigate(['/app']);
+            const returnUrl = this.getReturnUrl();
+            this.router.navigate([returnUrl]);
             return this.getAuthenticatedAction(authData);
           }
           return new userActions.NotAuthenticated();
@@ -57,7 +58,7 @@ export class UserEffects {
       .map(action => action.payload)
       .switchMap(() => Observable.of(this.afAuth.auth.signOut())
         .map(() => {
-          this.router.navigate(['/login']);
+          this.router.navigate(['login']);
           return new userActions.NotAuthenticated();
         })
         .catch(err =>
@@ -68,6 +69,10 @@ export class UserEffects {
   private googleLogin(): Promise<any> {
     const provider = new firebase.auth.GoogleAuthProvider();
     return this.afAuth.auth.signInWithPopup(provider);
+  }
+
+  private getReturnUrl(): string {
+    return this.route.snapshot.queryParams['returnUrl'] || 'app';
   }
 
   private getAuthenticatedAction(authData: AuthUser): userActions.Authenticated {
