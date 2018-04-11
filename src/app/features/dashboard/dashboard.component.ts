@@ -38,8 +38,8 @@ export class DashboardComponent implements OnInit {
       animations: false,
       showXAxis: true,
       showYAxis: true,
-      showXAxisLabel: true,
-      showYAxisLabel: true,
+      showXAxisLabel: false,
+      showYAxisLabel: false,
       showGridLines: true,
       xAxisLabel: 'Date',
       yAxisLabel: 'Total Time Played',
@@ -53,13 +53,10 @@ export class DashboardComponent implements OnInit {
       colorScheme: {
         domain: selectColorScheme('cool')
       },
-      showLegend: false,
       gradient: false,
       animations: false,
-      showLabels: true,
-      explodeSlices: false,
-      doughnut: false,
-      tooltipTextFormatting: formatElapsedTime
+      valueFormatting: formatElapsedTime,
+      percentageFormatting: (num: number) => num.toFixed(2)
     };
   }
 
@@ -74,8 +71,8 @@ export class DashboardComponent implements OnInit {
       animations: false,
       showXAxis: true,
       showYAxis: true,
-      showXAxisLabel: true,
-      showYAxisLabel: true,
+      showXAxisLabel: false,
+      showYAxisLabel: false,
       showGridLines: true,
       xAxisLabel: 'Total Time Played',
       yAxisLabel: 'Game',

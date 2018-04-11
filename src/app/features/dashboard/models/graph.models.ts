@@ -8,12 +8,12 @@ interface GraphConfig {
   colorScheme: {
     domain: string[]
   };
-  showLegend: boolean;
   gradient: boolean;
   animations: boolean;
 }
 
 export interface BarGraphConfig extends GraphConfig {
+  showLegend: boolean;
   showXAxis: boolean;
   showYAxis: boolean;
   showXAxisLabel: boolean;
@@ -24,9 +24,8 @@ export interface BarGraphConfig extends GraphConfig {
   axisTickFormatting: (x: any) => any;
 }
 
+// tslint:disable-next-line:no-empty-interface
 export interface PieChartConfig extends GraphConfig {
-  showLabels: boolean;
-  explodeSlices: boolean;
-  doughnut: boolean;
-  tooltipTextFormatting: (x: any) => any;
+  valueFormatting: (x: any) => any;
+  percentageFormatting: (x: any) => any;
 }
