@@ -40,4 +40,8 @@ export class GraphService {
         }).sort((a, b) => b.value - a.value)
       );
   }
+
+  isHistoryDataLoading(): Observable<boolean> {
+    return this.trackerService.isHistoryDataLoading();
+  }
 }

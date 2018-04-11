@@ -24,4 +24,8 @@ export class TrackerService {
   getHistoryGroupingsByGame(): Observable<HistoryGrouping[]> {
     return this.store.select(trackerComponentSelectors.historyGroupingsByGame);
   }
+
+  isHistoryDataLoading(): Observable<boolean> {
+    return this.store.select(trackerComponentSelectors.historyLoading);
+  }
 }

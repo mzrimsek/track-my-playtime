@@ -2,6 +2,8 @@ import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core
 
 import { GraphDataItem, PieChartConfig } from '../../models';
 
+import { selectColorScheme } from '../../utils/colorScheme.utils';
+
 @Component({
   selector: 'app-dashboard-time-platform-graph',
   templateUrl: './time-platform-graph.component.html',
@@ -10,9 +12,26 @@ import { GraphDataItem, PieChartConfig } from '../../models';
 })
 export class TimePlatformGraphComponent implements OnInit {
 
-  @Input() config: PieChartConfig;
   @Input() data: GraphDataItem[];
-  constructor() { }
+  config: PieChartConfig;
+  constructor() {
+    this.config = this.getConfig();
+  }
 
   ngOnInit() { }
+
+  getConfig(): PieChartConfig {
+    return {
+      view: [700, 400],
+      colorScheme: {
+        domain: selectColorScheme('cool')
+      },
+      showLegend: false,
+      gradient: false,
+      animations: false,
+      showLabels: true,
+      explodeSlices: false,
+      doughnut: true
+    };
+  }
 }

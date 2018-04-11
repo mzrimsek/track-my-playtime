@@ -1,5 +1,14 @@
 @import "../../../variables.scss";
 
-.graph {
-  display: flex;
+.content {
+  .loading {
+    display: flex;
+    justify-content: center;
+  }
+
+  .graphs {
+    .graph {
+      display: flex;
+    }
+  }
 }

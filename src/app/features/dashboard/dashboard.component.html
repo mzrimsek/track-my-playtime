@@ -1,16 +1,20 @@
 <div class="content">
-  <div class="time-vs-date graph">
-    <app-dashboard-time-date-graph [config]="getTimeDateGraphConfig()"
-                                   [data]="timeVsDateGraphData$ | async"></app-dashboard-time-date-graph>
+  <div *ngIf="isHistoryDataLoading$ | async"
+       class="loading">
+    <app-shared-spinner></app-shared-spinner>
   </div>
+  <div *ngIf="!(isHistoryDataLoading$ | async)"
+       class="graphs">
+    <div class="time-vs-date graph">
+      <app-dashboard-time-date-graph [data]="timeVsDateGraphData$ | async"></app-dashboard-time-date-graph>
+    </div>
 
-  <div class="time-vs-platform graph">
-    <app-dashboard-time-platform-graph [config]="getTimePlatformGraphConfig()"
-                                       [data]="timeVsPlatformGraphData$ | async"></app-dashboard-time-platform-graph>
-  </div>
+    <div class="time-vs-platform graph">
+      <app-dashboard-time-platform-graph [data]="timeVsPlatformGraphData$ | async"></app-dashboard-time-platform-graph>
+    </div>
 
-  <div class="time-vs-game graph">
-    <app-dashboard-time-game-graph [config]="getTimeGameGraphConfig()"
-                                   [data]="timeVsGameGraphData$ | async"></app-dashboard-time-game-graph>
+    <div class="time-vs-game graph">
+      <app-dashboard-time-game-graph [data]="timeVsGameGraphData$ | async"></app-dashboard-time-game-graph>
+    </div>
   </div>
 </div>
