@@ -1,6 +1,6 @@
 import { HistoryGrouping, HistoryListItem } from '../models';
 
-import { getElapsedTime } from '../../../shared/utils/date.utils';
+import { getElapsedTimeInSeconds } from '../../../shared/utils/date.utils';
 
 type HistoryListItemsMapKeyFunction = (item: HistoryListItem) => string;
 type HistoryListItemsMap = Map<string, HistoryListItem[]>;
@@ -22,7 +22,7 @@ export const getHistoryListItemsMap = (items: HistoryListItem[], keyFunction: Hi
 export const getHistoryGroupingsFromHistoryListItemsMap = (map: HistoryListItemsMap): HistoryGrouping[] => {
   let groupings: HistoryGrouping[] = [];
   map.forEach((value: HistoryListItem[], key: string) => {
-    const elapsedTime = value.map(item => getElapsedTime(item.startTime, item.endTime)).reduce((a, b) => a + b, 0);
+    const elapsedTime = value.map(item => getElapsedTimeInSeconds(item.startTime, item.endTime)).reduce((a, b) => a + b, 0);
     const newGrouping = <HistoryGrouping>{
       key,
       totalTime: elapsedTime,

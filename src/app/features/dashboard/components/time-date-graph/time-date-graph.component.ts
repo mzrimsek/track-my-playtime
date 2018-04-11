@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core
 
 import { BarGraphConfig, GraphDataItem } from '../../models';
 
-import { formatElapsedTime } from '../../../../shared/utils/date.utils';
+import { formatTime } from '../../../../shared/utils/date.utils';
 import { selectColorScheme } from '../../utils/colorScheme.utils';
 
 @Component({
@@ -37,7 +37,7 @@ export class TimeDateGraphComponent implements OnInit {
       showGridLines: true,
       xAxisLabel: 'Date',
       yAxisLabel: 'Total Time Played',
-      axisTickFormatting: formatElapsedTime
+      axisTickFormatting: formatTime
     };
   }
 }

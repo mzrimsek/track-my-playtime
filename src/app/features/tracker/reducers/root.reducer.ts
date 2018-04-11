@@ -8,7 +8,7 @@ import * as fromTimer from './timer.reducer';
 
 import { HistoryGroupingListItem, HistoryListItem, TimerInfo } from '../models';
 
-import { formatElapsedTime } from '../../../shared/utils/date.utils';
+import { formatTime } from '../../../shared/utils/date.utils';
 import {
     getHistoryGroupingsFromHistoryListItemsMap, getHistoryListItemsMap
 } from '../utils/history.utils';
@@ -68,7 +68,7 @@ export const _selectHistoryGroupingsByGame = createSelector(_selectSortedHistory
 export const _selectHistoryGroupingListItemsByDate = createSelector(_selectHistoryGroupingsByDate, groupings =>
   groupings.map(grouping => <HistoryGroupingListItem>{
     key: grouping.key,
-    totalTime: formatElapsedTime(grouping.totalTime),
+    totalTime: formatTime(grouping.totalTime),
     historyItems: grouping.historyItems
   })
 );
