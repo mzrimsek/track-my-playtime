@@ -1,13 +1,14 @@
-<ngx-charts-bar-vertical [view]="view"
-                         [scheme]="colorScheme"
-                         [results]="timeVsDateGraphData$ | async"
-                         [gradient]="gradient"
-                         [xAxis]="showXAxis"
-                         [yAxis]="showYAxis"
-                         [legend]="showLegend"
-                         [showXAxisLabel]="showXAxisLabel"
-                         [showYAxisLabel]="showYAxisLabel"
-                         [xAxisLabel]="xAxisLabel"
-                         [yAxisLabel]="yAxisLabel"
-                         [yAxisTickFormatting]="yAxisTickFormatting">
-</ngx-charts-bar-vertical>
+<div class="time-vs-date">
+  <app-dashboard-time-date-graph [config]="getTimeDateGraphConfig()"
+                                 [data]="timeVsDateGraphData$ | async"></app-dashboard-time-date-graph>
+</div>
+
+<div class="time-vs-platform">
+  <app-dashboard-time-platform-graph [config]="getTimePlatformGraphConfig()"
+                                     [data]="timeVsPlatformGraphData$ | async"></app-dashboard-time-platform-graph>
+</div>
+
+<div class="time-vs-game">
+  <app-dashboard-time-game-graph [config]="getTimeGameGraphConfig()"
+                                 [data]="timeVsGameGraphData$ | async"></app-dashboard-time-game-graph>
+</div>

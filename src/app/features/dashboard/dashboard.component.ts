@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { GraphService } from './services/graph.service';
 
-import { BarGraphDataItem } from './models';
+import { BarGraphConfig, GraphDataItem, PieChartConfig } from './models';
 
 import { formatElapsedTime } from '../../shared/utils/date.utils';
 
@@ -15,25 +15,65 @@ import { formatElapsedTime } from '../../shared/utils/date.utils';
 })
 export class DashboardComponent implements OnInit {
 
-  view: any[] = [700, 400];
-  showXAxis = true;
-  showYAxis = true;
-  gradient = false;
-  showLegend = true;
-  showXAxisLabel = true;
-  xAxisLabel = 'Date';
-  showYAxisLabel = true;
-  yAxisLabel = 'Total Time Played';
-  yAxisTickFormatting = formatElapsedTime;
-
-  colorScheme = {
-    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
-  };
-
-  timeVsDateGraphData$: Observable<BarGraphDataItem[]>;
+  timeVsDateGraphData$: Observable<GraphDataItem[]>;
+  timeVsPlatformGraphData$: Observable<GraphDataItem[]>;
+  timeVsGameGraphData$: Observable<GraphDataItem[]>;
   constructor(private graphService: GraphService) { }
 
   ngOnInit() {
     this.timeVsDateGraphData$ = this.graphService.getTimeVsDateGraphData();
+    this.timeVsPlatformGraphData$ = this.graphService.getTimeVsPlatformGraphData();
+    this.timeVsGameGraphData$ = this.graphService.getTimeVsGameGraphData();
+  }
+
+  getTimeDateGraphConfig(): BarGraphConfig {
+    return {
+      view: [700, 400],
+      colorScheme: {
+        domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+      },
+      showLegend: true,
+      gradient: false,
+      showXAxis: true,
+      showYAxis: true,
+      showXAxisLabel: true,
+      showYAxisLabel: true,
+      xAxisLabel: 'Date',
+      yAxisLabel: 'Total Time Played',
+      axisTickFormatting: formatElapsedTime
+    };
+  }
+
+  getTimePlatformGraphConfig(): PieChartConfig {
+    return {
+      view: [700, 400],
+      colorScheme: {
+        domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+      },
+      showLegend: true,
+      gradient: false,
+      showLabels: true,
+      explodeSlices: false,
+      doughnut: false,
+      tooltipTextFormatting: formatElapsedTime
+    };
+  }
+
+  getTimeGameGraphConfig(): BarGraphConfig {
+    return {
+      view: [700, 400],
+      colorScheme: {
+        domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+      },
+      showLegend: true,
+      gradient: false,
+      showXAxis: true,
+      showYAxis: true,
+      showXAxisLabel: true,
+      showYAxisLabel: true,
+      xAxisLabel: 'Total Time Played',
+      yAxisLabel: 'Game',
+      axisTickFormatting: formatElapsedTime
+    };
   }
 }

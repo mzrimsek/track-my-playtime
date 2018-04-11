@@ -16,4 +16,12 @@ export class TrackerService {
   getHistoryGroupingsByDate(): Observable<HistoryGrouping[]> {
     return this.store.select(trackerComponentSelectors.historyGroupingsByDate);
   }
+
+  getHistoryGroupingsByPlatform(): Observable<HistoryGrouping[]> {
+    return this.store.select(trackerComponentSelectors.historyGroupingsByPlatform);
+  }
+
+  getHistoryGroupingsByGame(): Observable<HistoryGrouping[]> {
+    return this.store.select(trackerComponentSelectors.historyGroupingsByGame);
+  }
 }

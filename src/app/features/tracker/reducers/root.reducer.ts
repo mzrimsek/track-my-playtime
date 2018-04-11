@@ -55,6 +55,14 @@ export const _selectHistoryGroupingsByDate = createSelector(_selectSortedHistory
   const historyListItemsMap = getHistoryListItemsMap(items, getDateFromHistoryListItem);
   return getHistoryGroupingsFromHistoryListItemsMap(historyListItemsMap);
 });
+export const _selectHistoryGroupingsByPlatform = createSelector(_selectSortedHistoryItems, items => {
+  const historyListItemsMap = getHistoryListItemsMap(items, item => item.platform);
+  return getHistoryGroupingsFromHistoryListItemsMap(historyListItemsMap);
+});
+export const _selectHistoryGroupingsByGame = createSelector(_selectSortedHistoryItems, items => {
+  const historyListItemsMap = getHistoryListItemsMap(items, item => item.game);
+  return getHistoryGroupingsFromHistoryListItemsMap(historyListItemsMap);
+});
 export const _selectHistoryGroupingListItemsByDate = createSelector(_selectHistoryGroupingsByDate, groupings =>
   groupings.map(grouping => <HistoryGroupingListItem>{
     key: grouping.key,
@@ -69,6 +77,8 @@ export const _selectPlatformsOptions = createSelector(_selectPlatforms, platform
 const trackerComponentSelectors = {
   timerInfo: _selectTimerInfo,
   historyGroupingsByDate: _selectHistoryGroupingsByDate,
+  historyGroupingsByPlatform: _selectHistoryGroupingsByPlatform,
+  historyGroupingsByGame: _selectHistoryGroupingsByGame,
   historyGroupingListItemsByDate: _selectHistoryGroupingListItemsByDate,
   historyLoading: _selectHistoryLoading,
   platformsOptions: _selectPlatformsOptions
