@@ -2,11 +2,6 @@ import { HistoryGrouping, HistoryListItem } from '../models';
 
 import { getElapsedTime } from '../../../shared/utils/date.utils';
 
-export const getDateFromHistoryListItem = (item: HistoryListItem): string => {
-  const date = item.dateRange[0];
-  return (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
-};
-
 type HistoryListItemsMapKeyFunction = (item: HistoryListItem) => string;
 type HistoryListItemsMap = Map<string, HistoryListItem[]>;
 

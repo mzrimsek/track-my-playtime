@@ -36,6 +36,7 @@
     "angularfire2": "^5.0.0-rc.6",
     "angulartics2": "^5.3.0",
     "core-js": "^2.4.1",
+    "date-fns": "^1.29.0",
     "firebase": "^4.11.0",
     "insert-analytics-elements": "0.0.2",
     "ng-pick-datetime": "^5.2.3",
