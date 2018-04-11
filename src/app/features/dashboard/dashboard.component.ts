@@ -7,6 +7,7 @@ import { GraphService } from './services/graph.service';
 import { BarGraphConfig, GraphDataItem, PieChartConfig } from './models';
 
 import { formatElapsedTime } from '../../shared/utils/date.utils';
+import { selectColorScheme } from './utils/colorScheme.utils';
 
 @Component({
   selector: 'app-dashboard',
@@ -30,14 +31,16 @@ export class DashboardComponent implements OnInit {
     return {
       view: [700, 400],
       colorScheme: {
-        domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+        domain: selectColorScheme('cool')
       },
-      showLegend: true,
+      showLegend: false,
       gradient: false,
+      animations: false,
       showXAxis: true,
       showYAxis: true,
       showXAxisLabel: true,
       showYAxisLabel: true,
+      showGridLines: true,
       xAxisLabel: 'Date',
       yAxisLabel: 'Total Time Played',
       axisTickFormatting: formatElapsedTime
@@ -48,10 +51,11 @@ export class DashboardComponent implements OnInit {
     return {
       view: [700, 400],
       colorScheme: {
-        domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+        domain: selectColorScheme('cool')
       },
-      showLegend: true,
+      showLegend: false,
       gradient: false,
+      animations: false,
       showLabels: true,
       explodeSlices: false,
       doughnut: false,
@@ -63,14 +67,16 @@ export class DashboardComponent implements OnInit {
     return {
       view: [700, 400],
       colorScheme: {
-        domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+        domain: selectColorScheme('cool')
       },
-      showLegend: true,
+      showLegend: false,
       gradient: false,
+      animations: false,
       showXAxis: true,
       showYAxis: true,
       showXAxisLabel: true,
       showYAxisLabel: true,
+      showGridLines: true,
       xAxisLabel: 'Total Time Played',
       yAxisLabel: 'Game',
       axisTickFormatting: formatElapsedTime

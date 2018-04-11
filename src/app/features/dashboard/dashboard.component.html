@@ -1,14 +1,16 @@
-<div class="time-vs-date">
-  <app-dashboard-time-date-graph [config]="getTimeDateGraphConfig()"
-                                 [data]="timeVsDateGraphData$ | async"></app-dashboard-time-date-graph>
-</div>
+<div class="dashboard">
+  <div class="time-vs-date graph">
+    <app-dashboard-time-date-graph [config]="getTimeDateGraphConfig()"
+                                   [data]="timeVsDateGraphData$ | async"></app-dashboard-time-date-graph>
+  </div>
 
-<div class="time-vs-platform">
-  <app-dashboard-time-platform-graph [config]="getTimePlatformGraphConfig()"
-                                     [data]="timeVsPlatformGraphData$ | async"></app-dashboard-time-platform-graph>
-</div>
+  <div class="time-vs-platform graph">
+    <app-dashboard-time-platform-graph [config]="getTimePlatformGraphConfig()"
+                                       [data]="timeVsPlatformGraphData$ | async"></app-dashboard-time-platform-graph>
+  </div>
 
-<div class="time-vs-game">
-  <app-dashboard-time-game-graph [config]="getTimeGameGraphConfig()"
-                                 [data]="timeVsGameGraphData$ | async"></app-dashboard-time-game-graph>
+  <div class="time-vs-game graph">
+    <app-dashboard-time-game-graph [config]="getTimeGameGraphConfig()"
+                                   [data]="timeVsGameGraphData$ | async"></app-dashboard-time-game-graph>
+  </div>
 </div>

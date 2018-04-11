@@ -10,6 +10,7 @@ interface GraphConfig {
   };
   showLegend: boolean;
   gradient: boolean;
+  animations: boolean;
 }
 
 export interface BarGraphConfig extends GraphConfig {
@@ -17,6 +18,7 @@ export interface BarGraphConfig extends GraphConfig {
   showYAxis: boolean;
   showXAxisLabel: boolean;
   showYAxisLabel: boolean;
+  showGridLines: boolean;
   xAxisLabel: string;
   yAxisLabel: string;
   axisTickFormatting: (x: any) => any;

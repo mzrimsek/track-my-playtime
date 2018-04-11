@@ -1,0 +1,10 @@
+@import "../../../variables.scss";
+
+.dashboard {
+  padding: 5px;
+
+  .graph {
+    display: flex;
+    background: $background-light;
+  }
+}
