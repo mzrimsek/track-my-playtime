@@ -27,7 +27,7 @@ describe('Date Utils', () => {
       expect(result).toBe('24:00:00');
     });
 
-    it('Can format large time', () => {
+    it('Can format multi-day time', () => {
       const timeInSeconds = (DAY * 2) + (HOUR * 3) + (MINUTE * 34) + 96;
       const result = formatTime(timeInSeconds);
       expect(result).toBe('51:35:36');
@@ -43,7 +43,7 @@ describe('Date Utils', () => {
       expect(result).toBe(MINUTE);
     });
 
-    it('Can calculate seconds between large timestamps', () => {
+    it('Can calculate seconds between timestamps days apart', () => {
       const start = new Date().getTime();
       const amountToAdd = (DAY * 2) + (HOUR * 4) + (MINUTE * 3) + 85;
       const end = start + (amountToAdd * 1000);
