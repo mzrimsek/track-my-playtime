@@ -7,6 +7,8 @@
     "start": "ng serve",
     "build": "ng build --prod",
     "test": "ng test",
+    "test:mocha": "ng test --config ./karma.headless.conf.js --reporters mocha",
+    "test:nyan": "ng test --config ./karma.headless.conf.js --reporters nyan",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
@@ -62,6 +64,7 @@
     "karma-jasmine": "~1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
     "karma-mocha-reporter": "^2.2.5",
+    "karma-nyan-reporter": "^0.2.5",
     "protractor": "~5.1.2",
     "ts-node": "~4.1.0",
     "tslint": "~5.9.1",
