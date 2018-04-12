@@ -76,7 +76,7 @@ export const _selectHistoryLoading = createSelector(_selectHistory, history => h
 
 export const _selectPlatformsOptions = createSelector(_selectPlatforms, platforms => platforms.options);
 
-const trackerComponentSelectors = {
+const trackerSelectors = {
   timerInfo: _selectTimerInfo,
   historyGroupingsByDate: _selectHistoryGroupingsByDate,
   historyGroupingsByPlatform: _selectHistoryGroupingsByPlatform,
@@ -86,4 +86,4 @@ const trackerComponentSelectors = {
   platformsOptions: _selectPlatformsOptions
 };
 
-export default trackerComponentSelectors;
+export default trackerSelectors;

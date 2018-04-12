@@ -28,9 +28,7 @@ import { NavComponent } from './components/nav/nav.component';
 
 import { AuthGuard } from './features/auth/guards/auth.guard';
 
-import { reducers } from './reducers/root.reducer';
-
-import { CustomRouterStateSerializer } from './shared/utils/router.utils';
+import { CustomRouterStateSerializer, reducers } from './reducers/root.reducer';
 
 import { environment } from '../environments/environment';
 import './rxjs-operators';

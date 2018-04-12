@@ -28,7 +28,7 @@ export class TimePlatformGraphComponent implements OnInit {
       },
       showLegend: false,
       gradient: false,
-      animations: false,
+      animations: true,
       showLabels: true,
       explodeSlices: false,
       doughnut: true

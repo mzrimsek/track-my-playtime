@@ -12,7 +12,6 @@ import {
 } from './components/time-platform-graph/time-platform-graph.component';
 import { DashboardComponent } from './dashboard.component';
 
-import { TrackerService } from '../tracker/services/tracker.service';
 import { GraphService } from './services/graph.service';
 
 @NgModule({
@@ -22,6 +21,6 @@ import { GraphService } from './services/graph.service';
     SharedModule
   ],
   declarations: [DashboardComponent, TimeDateGraphComponent, TimeGameGraphComponent, TimePlatformGraphComponent],
-  providers: [TrackerService, GraphService]
+  providers: [GraphService]
 })
 export class DashboardModule { }

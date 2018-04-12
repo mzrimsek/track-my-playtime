@@ -1,47 +1,38 @@
 import { Injectable } from '@angular/core';
 
+import { Store } from '@ngrx/store';
+
 import { Observable } from 'rxjs/Observable';
 
-import { TrackerService } from '../../tracker/services/tracker.service';
+import trackerSelectors, { State as TrackerState } from '../../tracker/reducers/root.reducer';
 
 import { GraphDataItem } from '../models';
+
+import { mapToGraphData } from '../utils/graph.utils';
 
 @Injectable()
 export class GraphService {
 
-  constructor(private trackerService: TrackerService) { }
+  constructor(private trackerStore: Store<TrackerState>) { }
 
   getTimeVsDateGraphData(): Observable<GraphDataItem[]> {
-    return this.trackerService.getHistoryGroupingsByDate()
-      .map(groupings =>
-        groupings.map(grouping => <GraphDataItem>{
-          name: grouping.key,
-          value: grouping.totalTime
-        }).reverse()
-      );
+    const groupingsByDate = this.trackerStore.select(trackerSelectors.historyGroupingsByDate);
+    return groupingsByDate.map(groupings =>
+      mapToGraphData(groupings).reverse()
+    );
   }
 
   getTimeVsPlatformGraphData(): Observable<GraphDataItem[]> {
-    return this.trackerService.getHistoryGroupingsByPlatform()
-      .map(groupings =>
-        groupings.map(grouping => <GraphDataItem>{
-          name: grouping.key,
-          value: grouping.totalTime
-        })
-      );
+    const groupingsByPlatform = this.trackerStore.select(trackerSelectors.historyGroupingsByPlatform);
+    return groupingsByPlatform.map(groupings => mapToGraphData(groupings));
   }
 
   getTimeVsGameGraphData(): Observable<GraphDataItem[]> {
-    return this.trackerService.getHistoryGroupingsByGame()
-      .map(groupings =>
-        groupings.map(grouping => <GraphDataItem>{
-          name: grouping.key,
-          value: grouping.totalTime
-        }).sort((a, b) => b.value - a.value)
-      );
+    const groupingsByGame = this.trackerStore.select(trackerSelectors.historyGroupingsByGame);
+    return groupingsByGame.map(groupings => mapToGraphData(groupings));
   }
 
   isHistoryDataLoading(): Observable<boolean> {
-    return this.trackerService.isHistoryDataLoading();
+    return this.trackerStore.select(trackerSelectors.historyLoading);
   }
 }

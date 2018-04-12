@@ -29,7 +29,7 @@ export class TimeDateGraphComponent implements OnInit {
       },
       showLegend: false,
       gradient: false,
-      animations: false,
+      animations: true,
       showXAxis: true,
       showYAxis: true,
       showXAxisLabel: true,
