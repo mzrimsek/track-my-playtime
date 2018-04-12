@@ -10,21 +10,7 @@ describe('Graph Utils', () => {
       expect(result.length).toBe(0);
     });
 
-    it('Can map a list with a single item', () => {
-      const key = 'Some Key';
-      const totalTime = 10000;
-      const groupings = [getHistoryGrouping(key, totalTime)];
-
-      const result = mapToGraphData(groupings);
-
-      expect(result.length).toBe(1);
-      expect(result[0]).toEqual({
-        name: key,
-        value: totalTime
-      });
-    });
-
-    it('Can map a list with several items', () => {
+    it('Can map a list with items', () => {
       const key = 'Some Key';
       const grouping1 = getHistoryGrouping(key, 2000);
       const grouping2 = getHistoryGrouping(key, 800);
