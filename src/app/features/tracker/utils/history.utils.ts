@@ -19,7 +19,7 @@ export const getHistoryListItemsMap = (items: HistoryListItem[], keyFunction: Hi
   return map;
 };
 
-export const getHistoryGroupingsFromHistoryListItemsMap = (map: HistoryListItemsMap): HistoryGrouping[] => {
+export const getHistoryGroupingList = (map: HistoryListItemsMap): HistoryGrouping[] => {
   let groupings: HistoryGrouping[] = [];
   map.forEach((value: HistoryListItem[], key: string) => {
     const elapsedTime = value.map(item => getElapsedTimeInSeconds(item.startTime, item.endTime)).reduce((a, b) => a + b, 0);

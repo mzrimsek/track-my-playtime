@@ -1,4 +1,4 @@
-import { formatTime, getElapsedTimeInSeconds } from './date.utils';
+import { formatDate, formatTime, getElapsedTimeInSeconds } from './date.utils';
 
 const MINUTE = 60;
 const HOUR = MINUTE * 60;
@@ -49,6 +49,14 @@ describe('Date Utils', () => {
       const end = start + (amountToAdd * 1000);
       const result = getElapsedTimeInSeconds(start, end);
       expect(result).toBe(amountToAdd);
+    });
+  });
+
+  describe('formatDate', () => {
+    it('Can format a date', () => {
+      const date = new Date(0);
+      const result = formatDate(date);
+      expect(result).toBe('12/31/1969');
     });
   });
 });
