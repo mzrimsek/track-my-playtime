@@ -22,7 +22,6 @@ export class UserEffects {
     this.actions$
       .ofType(userActions.GET_USER)
       .map(action => action as userActions.GetUser)
-      .map(action => action.payload)
       .switchMap(() => this.afAuth.authState
         .map(authData => {
           if (authData) {
@@ -41,7 +40,6 @@ export class UserEffects {
     this.actions$
       .ofType(userActions.GOOGLE_LOGIN)
       .map(action => action as userActions.GoogleLogin)
-      .map(action => action.payload)
       .switchMap(() => Observable.fromPromise(this.googleLogin())
         .map(() => {
           return new userActions.GetUser();
@@ -55,7 +53,6 @@ export class UserEffects {
     this.actions$
       .ofType(userActions.LOGOUT)
       .map(action => action as userActions.Logout)
-      .map(action => action.payload)
       .switchMap(() => Observable.of(this.afAuth.auth.signOut())
         .map(() => {
           this.router.navigate(['login']);

@@ -30,13 +30,7 @@ export const _selectTimer = createSelector(_selectTrackerState, state => state.t
 export const _selectHistory = createSelector(_selectTrackerState, state => state.history);
 export const _selectPlatforms = createSelector(_selectTrackerState, state => state.platforms);
 
-export const _selectTimerStartTime = createSelector(_selectTimer, state => state.startTime);
-export const _selectTimerInfo = createSelector(_selectTimer, _selectTimerStartTime,
-  (timer, startDate) =>
-    <TimerInfo>{
-      ...timer,
-      startDate
-    });
+export const _selectTimerInfo = createSelector(_selectTimer, timer => timer as TimerInfo);
 
 export const { selectAll: _selectAllHistory } = fromHistory.adapter.getSelectors(_selectHistory);
 export const _selectHistoryItems = createSelector(_selectAllHistory,

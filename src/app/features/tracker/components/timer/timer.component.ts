@@ -20,7 +20,7 @@ import { AddTimerInfo, TimerInfo } from '../../models';
 export class TimerComponent implements OnInit {
 
   @Input() info: TimerInfo;
-  @Input() currentTime: Date;
+  @Input() currentTime: number;
   @Input() platformsOptions: string[] = [];
   userId = '';
   icons = {
@@ -35,7 +35,8 @@ export class TimerComponent implements OnInit {
   ngOnInit() { }
 
   startTimer() {
-    this.store.dispatch(new actions.StartTimer());
+    const startTime = new Date().getTime();
+    this.store.dispatch(new actions.StartTimer(startTime));
   }
 
   stopTimer() {

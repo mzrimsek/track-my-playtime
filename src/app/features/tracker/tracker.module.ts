@@ -15,7 +15,6 @@ import { HistoryComponent } from './components/history/history.component';
 import { TimerComponent } from './components/timer/timer.component';
 import { TrackerComponent } from './tracker.component';
 
-import { AuthEffects } from './effects/auth.effects';
 import { HistoryEffects } from './effects/history.effects';
 import { PlatformsEffects } from './effects/platforms.effects';
 import { TimerEffects } from './effects/timer.effects';
@@ -35,7 +34,7 @@ import { reducers } from './reducers/root.reducer';
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
     StoreModule.forFeature('tracker', reducers),
-    EffectsModule.forFeature([AuthEffects, TimerEffects, HistoryEffects, PlatformsEffects]),
+    EffectsModule.forFeature([TimerEffects, HistoryEffects, PlatformsEffects]),
     SharedModule
   ],
   declarations: [TrackerComponent, TimerComponent, HistoryComponent, HistoryEntryComponent],

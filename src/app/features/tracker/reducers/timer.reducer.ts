@@ -20,7 +20,7 @@ export function reducer(state: State = initialState, action: actions.All): State
   switch (action.type) {
     case actions.START_TIMER: {
       return tassign(state, {
-        startTime: new Date().getTime(),
+        startTime: action.startTime,
         active: true
       });
     }

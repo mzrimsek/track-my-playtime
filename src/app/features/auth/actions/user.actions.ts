@@ -1,33 +1,35 @@
 import { Action } from '@ngrx/store';
 
+import { User } from '../models';
+
 export const GET_USER = '[Auth] Get User';
 export class GetUser implements Action {
   readonly type = GET_USER;
-  constructor(public payload?: any) { }
+  constructor() { }
 }
 
 export const AUTHENTICATED = '[Auth] Authenticated';
 export class Authenticated implements Action {
   readonly type = AUTHENTICATED;
-  constructor(public payload?: any) { }
+  constructor(public user: User) { }
 }
 
 export const NOT_AUTHENTICATED = '[Auth] Not Authenticated';
 export class NotAuthenticated implements Action {
   readonly type = NOT_AUTHENTICATED;
-  constructor(public payload?: any) { }
+  constructor() { }
 }
 
 export const GOOGLE_LOGIN = '[Auth] Google Login Attempt';
 export class GoogleLogin implements Action {
   readonly type = GOOGLE_LOGIN;
-  constructor(public payload?: any) { }
+  constructor() { }
 }
 
 export const LOGOUT = '[Auth] Logout';
 export class Logout implements Action {
   readonly type = LOGOUT;
-  constructor(public payload?: any) { }
+  constructor() { }
 }
 
 export type All = GetUser |
