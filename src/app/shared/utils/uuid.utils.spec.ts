@@ -1,10 +1,9 @@
 import { getUUID } from './uuid.utils';
 
-// TODO: Why can't I run this test with the other ones?
-xdescribe('UUID Utils', () => {
-  it('Can generate 50,000 unique IDs for a user', async () => {
+describe('UUID Utils', () => {
+  it('Can generate 1,000,000 unique IDs for a user', () => {
     const userId = 'myUserID';
-    const ids = await generateUUIDs(userId, 50000);
+    const ids = generateUUIDs(userId, 1000000);
 
     const result = getUUID(userId);
 
@@ -12,17 +11,7 @@ xdescribe('UUID Utils', () => {
   });
 });
 
-const generateUUIDs = (userId: string, amountToGenerate: number): Promise<string[]> => {
-  return new Promise((resolve) => {
-    let ids: string[] = [];
-    for (let i = 0; i < amountToGenerate; i++) {
-      // getUUID seeds value based on the current time
-      // waiting 1 millisecond before generating a UUID
-      setTimeout(() => {
-        const id = getUUID(userId);
-        ids = [...ids, id];
-      }, 1);
-    }
-    resolve(ids);
-  });
+const generateUUIDs = (userId: string, amountToGenerate: number): string[] => {
+  const ids: number[] = [amountToGenerate];
+  return ids.map(i => getUUID(userId, i));
 };
