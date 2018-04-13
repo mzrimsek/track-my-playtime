@@ -4,9 +4,9 @@ import * as fromHistory from './history.reducer';
 import * as fromPlatforms from './platforms.reducer';
 import * as fromTimer from './timer.reducer';
 
-import { HistoryGroupingListItem, HistoryListItem, TimerInfo } from '../models';
+import { HistoryListItem, TimerInfo } from '../models';
 
-import { formatDate, formatTime } from '../../../shared/utils/date.utils';
+import { formatDate } from '../../../shared/utils/date.utils';
 import { getHistoryGroupingList, getHistoryListItemsMap } from '../utils/history.utils';
 
 export interface TrackerState {
@@ -55,13 +55,6 @@ export const _selectHistoryGroupingsByGame = createSelector(_selectSortedHistory
   const historyListItemsMap = getHistoryListItemsMap(items, item => item.game);
   return getHistoryGroupingList(historyListItemsMap);
 });
-export const _selectHistoryGroupingListItemsByDate = createSelector(_selectHistoryGroupingsByDate, groupings =>
-  groupings.map(grouping => <HistoryGroupingListItem>{
-    key: grouping.key,
-    totalTime: formatTime(grouping.totalTime),
-    historyItems: grouping.historyItems
-  })
-);
 export const _selectHistoryLoading = createSelector(_selectHistory, history => history.loading);
 
 export const _selectPlatformsOptions = createSelector(_selectPlatforms, platforms => platforms.options);
@@ -71,7 +64,6 @@ const trackerSelectors = {
   historyGroupingsByDate: _selectHistoryGroupingsByDate,
   historyGroupingsByPlatform: _selectHistoryGroupingsByPlatform,
   historyGroupingsByGame: _selectHistoryGroupingsByGame,
-  historyGroupingListItemsByDate: _selectHistoryGroupingListItemsByDate,
   historyLoading: _selectHistoryLoading,
   platformsOptions: _selectPlatformsOptions
 };

@@ -13,12 +13,6 @@ export interface HistoryGrouping {
   historyItems: HistoryListItem[];
 }
 
-export interface HistoryGroupingListItem {
-  key: string;
-  totalTime: string;
-  historyItems: HistoryListItem[];
-}
-
 export interface UpdateHistoryItemGamePayload {
   itemId: string;
   game: string;

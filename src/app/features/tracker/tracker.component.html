@@ -4,7 +4,7 @@
                      [platformsOptions]="platformsOptions$ | async">
   </app-tracker-timer>
 
-  <app-tracker-history [groups]="historyGroupingListItems$ | async"
+  <app-tracker-history [groups]="historyGroupings$ | async"
                        [platformsOptions]="platformsOptions$ | async"
                        [loading]="historyLoading$ | async"></app-tracker-history>
 </div>

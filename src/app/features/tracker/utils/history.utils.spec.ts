@@ -48,7 +48,7 @@ describe('History Utils', () => {
   });
 
   describe('getHistoryGroupingList', () => {
-    it('Returns an empty list when map is empty', () => {
+    it('Should return an empty list when map is empty', () => {
       const items: HistoryListItem[] = [];
       const map = getHistoryListItemsMap(items, item => item.game);
 
@@ -57,7 +57,7 @@ describe('History Utils', () => {
       expect(result.length).toBe(0);
     });
 
-    it('Returns a list with same length as the map size', () => {
+    it('Should return a list with same length as the map size', () => {
       const game = 'Awesome Game';
       const items = [
         getHistoryListItem(game),
@@ -71,7 +71,7 @@ describe('History Utils', () => {
     });
 
     describe('Builds each history grouping correctly', () => {
-      it('Sets the key', () => {
+      it('Should set the key', () => {
         const game = 'Awesome Game';
         const items = [
           getHistoryListItem(game)
@@ -83,7 +83,7 @@ describe('History Utils', () => {
         expect(result[0].key).toBe(game);
       });
 
-      it('Sets the total time', () => {
+      it('Should set the total time', () => {
         const game = 'Awesome Game';
         const now = new Date().getTime();
         const items = [
@@ -97,7 +97,7 @@ describe('History Utils', () => {
         expect(result[0].totalTime).toBe(90);
       });
 
-      it('Sets the history items', () => {
+      it('Should set the history items', () => {
         const game = 'Awesome Game';
         const items = [
           getHistoryListItem(game),

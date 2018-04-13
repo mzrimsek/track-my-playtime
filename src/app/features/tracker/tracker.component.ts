@@ -8,7 +8,7 @@ import { ClockService } from './services/clock.service';
 
 import trackerSelectors, { State } from './reducers/root.reducer';
 
-import { HistoryGroupingListItem, TimerInfo } from './models';
+import { HistoryGrouping, TimerInfo } from './models';
 
 @Component({
   selector: 'app-tracker',
@@ -21,7 +21,7 @@ export class TrackerComponent implements OnInit {
   currentTime$: Observable<number>;
   platformsOptions$: Observable<string[]>;
 
-  historyGroupingListItems$: Observable<HistoryGroupingListItem[]>;
+  historyGroupings$: Observable<HistoryGrouping[]>;
   historyLoading$: Observable<boolean>;
   constructor(private store: Store<State>, private clockService: ClockService) { }
 
@@ -30,7 +30,7 @@ export class TrackerComponent implements OnInit {
     this.currentTime$ = this.clockService.getCurrentTime();
     this.platformsOptions$ = this.store.select(trackerSelectors.platformsOptions);
 
-    this.historyGroupingListItems$ = this.store.select(trackerSelectors.historyGroupingListItemsByDate);
+    this.historyGroupings$ = this.store.select(trackerSelectors.historyGroupingsByDate);
     this.historyLoading$ = this.store.select(trackerSelectors.historyLoading);
   }
 }
