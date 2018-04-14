@@ -113,13 +113,13 @@ describe('History Utils', () => {
   });
 });
 
-const getHistoryListItem = (game: string, startTime: number = 0, endTime: number = 0): HistoryListItem => {
+const getHistoryListItem = (game: string, startTime = 0, endTime = 0): HistoryListItem => {
   return <HistoryListItem>{
     id: 'totally a unique id',
     game,
     platform: 'the best platform ever',
     startTime,
     endTime,
-    dateRange: []
+    dateRange: [new Date(startTime), new Date(endTime)]
   };
 };

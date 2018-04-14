@@ -1,12 +1,15 @@
-import { addHours } from 'date-fns';
+import { addDays, addHours } from 'date-fns';
 
 import { HistoryEntity, State as HistoryState } from './history.reducer';
 import { State as PlatformsState } from './platforms.reducer';
 import {
+    _selectHistoryGroupingsByDate, _selectHistoryGroupingsByGame, _selectHistoryGroupingsByPlatform,
     _selectHistoryItems, _selectHistoryLoading, _selectPlatformsOptions, _selectSortedHistoryItems,
     _selectTimerInfo, State, TrackerState
 } from './root.reducer';
 import { State as TimerState } from './timer.reducer';
+
+import { formatDate } from '../../../shared/utils/date.utils';
 
 describe('Tracker Root Reducer', () => {
   describe('Timer State Selectors', () => {
@@ -185,20 +188,224 @@ describe('Tracker Root Reducer', () => {
     });
 
     describe('_selectHistoryGroupingsByDate', () => {
-      xit('Should return items grouped by date', () => {
-        fail();
+      it('Should return items grouped by start date', () => {
+        const startDate = new Date();
+        const item1: HistoryEntity = {
+          id: '1',
+          game: 'some game',
+          platform: 'some platform',
+          startTime: startDate.getTime(),
+          endTime: startDate.getTime()
+        };
+        const item2: HistoryEntity = {
+          id: '2',
+          game: 'some other game',
+          platform: 'some other platform',
+          startTime: startDate.getTime(),
+          endTime: startDate.getTime()
+        };
+        const item3: HistoryEntity = {
+          id: '3',
+          game: 'some other game',
+          platform: 'some other platform',
+          startTime: addDays(startDate, 1).getTime(),
+          endTime: addDays(startDate, 1).getTime()
+        };
+        const history: HistoryState = {
+          ids: [item1.id, item2.id, item3.id],
+          entities: {
+            [item1.id]: item1,
+            [item2.id]: item2,
+            [item3.id]: item3
+          },
+          loading: false
+        };
+        const trackerState: TrackerState = {
+          timer: getTimerInitialState(),
+          history,
+          platforms: getPlatformsInitialState()
+        };
+        const state: State = { tracker: trackerState };
+
+        const result = _selectHistoryGroupingsByDate(state);
+
+        expect(result).toEqual([{
+          key: formatDate(addDays(startDate, 1)),
+          totalTime: 0,
+          historyItems: [{
+            ...item3,
+            dateRange: [
+              addDays(startDate, 1),
+              addDays(startDate, 1)
+            ]
+          }]
+        },
+        {
+          key: formatDate(startDate),
+          totalTime: 0,
+          historyItems: [{
+            ...item1,
+            dateRange: [
+              startDate,
+              startDate
+            ]
+          },
+          {
+            ...item2,
+            dateRange: [
+              startDate,
+              startDate
+            ]
+          }]
+        }]);
       });
     });
 
     describe('_selectHistoryGroupingsByPlatform', () => {
-      xit('Should return items grouped by platform', () => {
-        fail();
+      it('Should return items grouped by platform', () => {
+        const platform = 'some platform';
+        const item1: HistoryEntity = {
+          id: '1',
+          game: 'some game',
+          platform,
+          startTime: 1000,
+          endTime: 1000
+        };
+        const item2: HistoryEntity = {
+          id: '2',
+          game: 'some other game',
+          platform: platform + '2',
+          startTime: 1000,
+          endTime: 1000
+        };
+        const item3: HistoryEntity = {
+          id: '3',
+          game: 'some other game',
+          platform,
+          startTime: 2000,
+          endTime: 2000
+        };
+        const history: HistoryState = {
+          ids: [item1.id, item2.id, item3.id],
+          entities: {
+            [item1.id]: item1,
+            [item2.id]: item2,
+            [item3.id]: item3
+          },
+          loading: false
+        };
+        const trackerState: TrackerState = {
+          timer: getTimerInitialState(),
+          history,
+          platforms: getPlatformsInitialState()
+        };
+        const state: State = { tracker: trackerState };
+
+        const result = _selectHistoryGroupingsByPlatform(state);
+
+        expect(result).toEqual([{
+          key: platform,
+          totalTime: 0,
+          historyItems: [{
+            ...item3,
+            dateRange: [
+              new Date(2000),
+              new Date(2000)
+            ]
+          },
+          {
+            ...item1,
+            dateRange: [
+              new Date(1000),
+              new Date(1000)
+            ]
+          }]
+        },
+        {
+          key: platform + '2',
+          totalTime: 0,
+          historyItems: [{
+            ...item2,
+            dateRange: [
+              new Date(1000),
+              new Date(1000)
+            ]
+          }]
+        }]);
       });
     });
 
     describe('_selectHistoryGroupingsByGame', () => {
-      xit('Should return items grouped by game', () => {
-        fail();
+      it('Should return items grouped by game', () => {
+        const game = 'some game';
+        const item1: HistoryEntity = {
+          id: '1',
+          game,
+          platform: 'some platform',
+          startTime: 1000,
+          endTime: 1000
+        };
+        const item2: HistoryEntity = {
+          id: '2',
+          game,
+          platform: 'some platform',
+          startTime: 2000,
+          endTime: 2000
+        };
+        const item3: HistoryEntity = {
+          id: '3',
+          game: game + '2',
+          platform: 'some other platform',
+          startTime: 2000,
+          endTime: 2000
+        };
+        const history: HistoryState = {
+          ids: [item1.id, item2.id, item3.id],
+          entities: {
+            [item1.id]: item1,
+            [item2.id]: item2,
+            [item3.id]: item3
+          },
+          loading: false
+        };
+        const trackerState: TrackerState = {
+          timer: getTimerInitialState(),
+          history,
+          platforms: getPlatformsInitialState()
+        };
+        const state: State = { tracker: trackerState };
+
+        const result = _selectHistoryGroupingsByGame(state);
+
+        expect(result).toEqual([{
+          key: game,
+          totalTime: 0,
+          historyItems: [{
+            ...item2,
+            dateRange: [
+              new Date(2000),
+              new Date(2000)
+            ]
+          },
+          {
+            ...item1,
+            dateRange: [
+              new Date(1000),
+              new Date(1000)
+            ]
+          }]
+        },
+        {
+          key: game + '2',
+          totalTime: 0,
+          historyItems: [{
+            ...item3,
+            dateRange: [
+              new Date(2000),
+              new Date(2000)
+            ]
+          }]
+        }]);
       });
     });
 

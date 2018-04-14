@@ -39,7 +39,7 @@ export const _selectHistoryItems = createSelector(_selectAllHistory,
       ...entity,
       dateRange: [
         new Date(entity.startTime),
-        new Date(entity.endTime)
+        new Date(entity.endTime),
       ]
     }));
 export const _selectSortedHistoryItems = createSelector(_selectHistoryItems, items => items.sort((a, b) => b.startTime - a.startTime));
