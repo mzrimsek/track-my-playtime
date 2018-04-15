@@ -1,6 +1,6 @@
 import { HistoryGrouping } from '../../tracker/models';
 
-import { mapToGraphData } from './graph.utils';
+import { DEFAULT_KEY, mapToGraphData } from './graph.utils';
 
 describe('Graph Utils', () => {
   describe('mapToGraphData', () => {
@@ -31,6 +31,35 @@ describe('Graph Utils', () => {
       expect(result[2]).toEqual({
         name: grouping3.key,
         value: grouping3.totalTime
+      });
+    });
+
+    describe('Builds each graph data item correctly', () => {
+      it('Should set the key', () => {
+        const key = 'Some Key';
+        const grouping = getHistoryGrouping(key, 2000);
+
+        const result = mapToGraphData([grouping]);
+
+        expect(result[0].name).toBe(key);
+      });
+
+      it('Should set the key to the default value when the key is empty', () => {
+        const key = '';
+        const grouping = getHistoryGrouping(key, 2000);
+
+        const result = mapToGraphData([grouping]);
+
+        expect(result[0].name).toBe(DEFAULT_KEY);
+      });
+
+      it('Should set the total time', () => {
+        const totalTime = 2000;
+        const grouping = getHistoryGrouping('some key', totalTime);
+
+        const result = mapToGraphData([grouping]);
+
+        expect(result[0].value).toBe(totalTime);
       });
     });
   });
