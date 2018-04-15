@@ -63,6 +63,12 @@ describe('Graph Utils', () => {
       });
     });
   });
+
+  describe('getGroupingsToGraph', () => {
+    it('should behave...', () => {
+      fail();
+    });
+  });
 });
 
 const getHistoryGrouping = (key: string, totalTime: number): HistoryGrouping => {

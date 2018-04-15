@@ -62,8 +62,7 @@ describe('Date Utils', () => {
 
   describe('getWeek', () => {
     it('Can get the week for a day', () => {
-      // Friday, April 6th, 2018
-      const date = new Date(2018, 3, 6);
+      const date = new Date(2018, 3, 7); // Saturday, April 7th, 2018
       const result = getWeek(date);
       expect(result).toEqual([
         new Date(2018, 3, 1),
@@ -74,6 +73,28 @@ describe('Date Utils', () => {
         new Date(2018, 3, 6),
         new Date(2018, 3, 7)
       ]);
+    });
+  });
+
+  describe('isInDateRange', () => {
+    it('Should return true for the first day of the range', () => {
+      fail();
+    });
+
+    it('Should return true for the last day of the range', () => {
+      fail();
+    });
+
+    it('Should return true for a day in the middle of the range', () => {
+      fail();
+    });
+
+    it('Should return false for a day before the first day of the range', () => {
+      fail();
+    });
+
+    it('Should return false for a day after the last day of the range', () => {
+      fail();
     });
   });
 });

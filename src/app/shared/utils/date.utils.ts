@@ -1,4 +1,4 @@
-import { addDays, format, startOfWeek } from 'date-fns';
+import { addDays, format, isSameDay, startOfWeek } from 'date-fns';
 
 export const formatTime = (timeInSeconds: number): string => {
   const hours = Math.floor(timeInSeconds / 3600);
@@ -29,4 +29,8 @@ export const getWeek = (date: Date): Date[] => {
   }
 
   return days;
+};
+
+export const isInDateRange = (dateToCheck: Date, dateRange: Date[]): boolean => {
+  return dateRange.some(date => isSameDay(date, dateToCheck));
 };
