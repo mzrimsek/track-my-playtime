@@ -1,4 +1,8 @@
-import { formatDate, formatTime, getElapsedTimeInSeconds, getWeek } from './date.utils';
+import { addDays, subDays } from 'date-fns';
+
+import {
+    formatDate, formatTime, getElapsedTimeInSeconds, getWeek, isInDateRange
+} from './date.utils';
 
 const MINUTE = 60;
 const HOUR = MINUTE * 60;
@@ -77,24 +81,40 @@ describe('Date Utils', () => {
   });
 
   describe('isInDateRange', () => {
+    let start: Date;
+    let range: Date[];
+    beforeEach(() => {
+      start = new Date(2018, 3, 1);
+      range = getWeek(start);
+    });
+
     it('Should return true for the first day of the range', () => {
-      fail();
+      const result = isInDateRange(start, range);
+      expect(result).toBe(true);
     });
 
     it('Should return true for the last day of the range', () => {
-      fail();
+      const date = range[range.length - 1];
+      const result = isInDateRange(date, range);
+      expect(result).toBe(true);
     });
 
     it('Should return true for a day in the middle of the range', () => {
-      fail();
+      const date = new Date(2018, 3, 4);
+      const result = isInDateRange(date, range);
+      expect(result).toBe(true);
     });
 
     it('Should return false for a day before the first day of the range', () => {
-      fail();
+      const date = subDays(range[0], 3);
+      const result = isInDateRange(date, range);
+      expect(result).toBe(false);
     });
 
     it('Should return false for a day after the last day of the range', () => {
-      fail();
+      const date = addDays(range[range.length - 1], 3);
+      const result = isInDateRange(date, range);
+      expect(result).toBe(false);
     });
   });
 });

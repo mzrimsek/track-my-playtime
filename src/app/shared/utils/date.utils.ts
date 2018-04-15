@@ -21,7 +21,7 @@ export const formatDate = (date: Date): string => {
 
 export const getWeek = (date: Date): Date[] => {
   const start = startOfWeek(date);
-  const end = addDays(start, 7);
+  const end = addDays(start, 6);
   return eachDay(start, end);
 };
 
