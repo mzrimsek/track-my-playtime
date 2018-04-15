@@ -21,11 +21,13 @@ $sidebar-width: 200px;
 $small-sidebar-width: $sidebar-width/2;
 $content-width: calc(100% - #{$sidebar-width});
 $small-content-width: calc(100% - #{$small-sidebar-width});
+$timer-height: 80px;
+$history-entry-height: 60px;
 
 // app component variables
 $header-height: 100px;
 $main-height: calc(100vh - #{$header-height});
 
-// tracker variables
-$timer-height: 80px;
-$history-entry-height: 60px;
+// login component variables
+$box-height: 350px;
+$box-width: 400px;

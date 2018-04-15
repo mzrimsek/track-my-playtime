@@ -11,8 +11,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 350px;
-    width: 400px;
+    height: $box-height;
+    width: $box-width;
     padding: 20px;
     background: $background-light;
 
@@ -28,6 +28,15 @@
         background: darken($background-light-accent, 5%);
         cursor: pointer;
       }
+    }
+  }
+}
+
+@media only screen  and (max-width : $small-breakpoint) {
+  .login {
+    .box {
+      height: $box-height * .75;
+      width: $box-width * .75;
     }
   }
 }

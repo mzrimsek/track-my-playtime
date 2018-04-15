@@ -17,3 +17,12 @@
     text-shadow: -1px -1px 1px #fff, 1px 1px 1px #000;
   }
 }
+
+@media only screen  and (max-width : $small-breakpoint) {
+  .home {
+    .tagline {
+      width: 100%;
+      font-size: 2em;
+    }
+  }
+}
