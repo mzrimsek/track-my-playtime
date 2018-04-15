@@ -1,4 +1,4 @@
-import { addDays, format, isSameDay, startOfWeek } from 'date-fns';
+import { addDays, eachDay, format, isSameDay, startOfWeek } from 'date-fns';
 
 export const formatTime = (timeInSeconds: number): string => {
   const hours = Math.floor(timeInSeconds / 3600);
@@ -21,14 +21,8 @@ export const formatDate = (date: Date): string => {
 
 export const getWeek = (date: Date): Date[] => {
   const start = startOfWeek(date);
-  const days: Date[] = [];
-
-  for (let i = 0; i < 7; i++) {
-    const nextDay = addDays(start, i);
-    days.push(nextDay);
-  }
-
-  return days;
+  const end = addDays(start, 7);
+  return eachDay(start, end);
 };
 
 export const isInDateRange = (dateToCheck: Date, dateRange: Date[]): boolean => {
