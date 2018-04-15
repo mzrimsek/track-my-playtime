@@ -1,4 +1,4 @@
-import { formatDate, formatTime, getElapsedTimeInSeconds } from './date.utils';
+import { formatDate, formatTime, getElapsedTimeInSeconds, getWeek } from './date.utils';
 
 const MINUTE = 60;
 const HOUR = MINUTE * 60;
@@ -57,6 +57,23 @@ describe('Date Utils', () => {
       const date = new Date(0);
       const result = formatDate(date);
       expect(result).toBe('12/31/1969');
+    });
+  });
+
+  describe('getWeek', () => {
+    it('Can get the week for a day', () => {
+      // Friday, April 6th, 2018
+      const date = new Date(2018, 3, 6);
+      const result = getWeek(date);
+      expect(result).toEqual([
+        new Date(2018, 3, 1),
+        new Date(2018, 3, 2),
+        new Date(2018, 3, 3),
+        new Date(2018, 3, 4),
+        new Date(2018, 3, 5),
+        new Date(2018, 3, 6),
+        new Date(2018, 3, 7)
+      ]);
     });
   });
 });
