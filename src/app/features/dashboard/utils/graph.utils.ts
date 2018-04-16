@@ -18,41 +18,48 @@ export const mapToGraphData = (groupings: HistoryGrouping[]): GraphDataItem[] =>
 
 export const filterGroupingsByDateRange = (groupings: HistoryGrouping[], dateRange: Date[]): HistoryGrouping[] => {
   const groupingsToGraph: HistoryGrouping[] = [];
-
   groupings.forEach(grouping => {
-    const itemsInDateRange = grouping.historyItems.some(item => isInDateRange(item.dateRange[0], dateRange));
-    if (itemsInDateRange) {
-      const historyItems = grouping.historyItems.filter(item => isInDateRange(item.dateRange[0], dateRange));
-      grouping.historyItems = historyItems;
-      grouping.totalTime = historyItems.map(item => getElapsedTimeInSeconds(item.startTime, item.endTime)).reduce((a, b) => a + b, 0);
-      groupingsToGraph.push(grouping);
+    const groupingHasHistoryItemInRange = grouping.historyItems.some(item => isInDateRange(item.dateRange[0], dateRange));
+    if (groupingHasHistoryItemInRange) {
+      const filtedGrouping = getFilteredGrouping(grouping, dateRange);
+      groupingsToGraph.push(filtedGrouping);
     }
   });
   return groupingsToGraph;
 };
 
-export const padGraphData = (graphItems: GraphDataItem[], dateRange: Date[]): GraphDataItem[] => {
+const getFilteredGrouping = (grouping: HistoryGrouping, dateRange: Date[]): HistoryGrouping => {
+  const historyItems = grouping.historyItems.filter(item => isInDateRange(item.dateRange[0], dateRange));
+  const totalTime = historyItems.map(item => getElapsedTimeInSeconds(item.startTime, item.endTime)).reduce((a, b) => a + b, 0);
+  return {
+    key: grouping.key,
+    totalTime,
+    historyItems
+  };
+};
+
+export const padDateGraphData = (graphItems: GraphDataItem[], dateRange: Date[]): GraphDataItem[] => {
   const paddedGraphItems: GraphDataItem[] = [];
-
   for (let i = 0; i < dateRange.length; i++) {
-    let inRange = false;
+    let itemToAdd = getGraphDataItemIfInRange(graphItems, dateRange[i]);
 
-    for (let j = 0; j < graphItems.length; j++) {
-      const itemDate = new Date(graphItems[j].name);
-      if (isSameDay(dateRange[i], itemDate)) {
-        inRange = true;
-        paddedGraphItems.push(graphItems[j]);
-        break;
-      }
-    }
-
-    if (!inRange) {
-      paddedGraphItems.push({
+    if (!itemToAdd) {
+      itemToAdd = {
         name: formatDate(dateRange[i]),
         value: 0
-      });
+      };
+    }
+    paddedGraphItems.push(itemToAdd);
+  }
+  return paddedGraphItems;
+};
+
+const getGraphDataItemIfInRange = (items: GraphDataItem[], rangeDate: Date): GraphDataItem | undefined => {
+  for (let i = 0; i < items.length; i++) {
+    const itemDate = new Date(items[i].name);
+    if (isSameDay(rangeDate, itemDate)) {
+      return items[i];
     }
   }
-
-  return paddedGraphItems;
+  return undefined;
 };

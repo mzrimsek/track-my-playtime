@@ -1,9 +1,12 @@
 import { addDays, subDays } from 'date-fns';
 
 import { HistoryGrouping } from '../../tracker/models';
+import { GraphDataItem } from '../models';
 
 import { getWeek } from '../../../shared/utils/date.utils';
-import { DEFAULT_KEY, filterGroupingsByDateRange, mapToGraphData } from './graph.utils';
+import {
+    DEFAULT_KEY, filterGroupingsByDateRange, mapToGraphData, padDateGraphData
+} from './graph.utils';
 
 describe('Graph Utils', () => {
   describe('mapToGraphData', () => {
@@ -96,8 +99,7 @@ describe('Graph Utils', () => {
           outOfRangeAhead,
           outOfRangeAhead
         ]
-      },
-      {
+      }, {
         id: 'some id 3',
         game,
         platform: 'some platform',
@@ -107,8 +109,7 @@ describe('Graph Utils', () => {
           inRange,
           inRange
         ]
-      },
-      {
+      }, {
         id: 'some id 2',
         game,
         platform: 'some platform',
@@ -118,8 +119,7 @@ describe('Graph Utils', () => {
           start,
           start
         ]
-      },
-      {
+      }, {
         id: 'some id',
         game,
         platform: 'some other platform',
@@ -136,29 +136,27 @@ describe('Graph Utils', () => {
       expect(result).toEqual([{
         key: game,
         totalTime: 0,
-        historyItems: [
-          {
-            id: 'some id 3',
-            game,
-            platform: 'some platform',
-            startTime: inRange.getTime(),
-            endTime: inRange.getTime(),
-            dateRange: [
-              inRange,
-              inRange
-            ]
-          },
-          {
-            id: 'some id 2',
-            game,
-            platform: 'some platform',
-            startTime: start.getTime(),
-            endTime: start.getTime(),
-            dateRange: [
-              start,
-              start
-            ]
-          }]
+        historyItems: [{
+          id: 'some id 3',
+          game,
+          platform: 'some platform',
+          startTime: inRange.getTime(),
+          endTime: inRange.getTime(),
+          dateRange: [
+            inRange,
+            inRange
+          ]
+        }, {
+          id: 'some id 2',
+          game,
+          platform: 'some platform',
+          startTime: start.getTime(),
+          endTime: start.getTime(),
+          dateRange: [
+            start,
+            start
+          ]
+        }]
       }]);
     });
 
@@ -174,8 +172,7 @@ describe('Graph Utils', () => {
           outOfRangeAhead,
           new Date(outOfRangeAhead.getTime() + 2000)
         ]
-      },
-      {
+      }, {
         id: 'some id 3',
         game,
         platform: 'some platform',
@@ -185,8 +182,7 @@ describe('Graph Utils', () => {
           inRange,
           new Date(inRange.getTime() + 1000)
         ]
-      },
-      {
+      }, {
         id: 'some id 2',
         game,
         platform: 'some platform',
@@ -196,8 +192,7 @@ describe('Graph Utils', () => {
           start,
           new Date(start.getTime() + 1000)
         ]
-      },
-      {
+      }, {
         id: 'some id',
         game,
         platform: 'some other platform',
@@ -214,36 +209,69 @@ describe('Graph Utils', () => {
       expect(result).toEqual([{
         key: game,
         totalTime: 2, // time on history items is in milliseconds; total time is in seconds
-        historyItems: [
-          {
-            id: 'some id 3',
-            game,
-            platform: 'some platform',
-            startTime: inRange.getTime(),
-            endTime: inRange.getTime() + 1000,
-            dateRange: [
-              inRange,
-              new Date(inRange.getTime() + 1000)
-            ]
-          },
-          {
-            id: 'some id 2',
-            game,
-            platform: 'some platform',
-            startTime: start.getTime(),
-            endTime: start.getTime() + 1000,
-            dateRange: [
-              start,
-              new Date(start.getTime() + 1000)
-            ]
-          }]
+        historyItems: [{
+          id: 'some id 3',
+          game,
+          platform: 'some platform',
+          startTime: inRange.getTime(),
+          endTime: inRange.getTime() + 1000,
+          dateRange: [
+            inRange,
+            new Date(inRange.getTime() + 1000)
+          ]
+        }, {
+          id: 'some id 2',
+          game,
+          platform: 'some platform',
+          startTime: start.getTime(),
+          endTime: start.getTime() + 1000,
+          dateRange: [
+            start,
+            new Date(start.getTime() + 1000)
+          ]
+        }]
       }]);
     });
   });
 
-  xdescribe('padGraphData', () => {
-    it('should behave...', () => {
-      fail();
+  describe('padDateGraphData', () => {
+    it('Should add empty data items where none exist in the date range', () => {
+      const items: GraphDataItem[] = [{
+        name: '4/3/2018',
+        value: 1000
+      }, {
+        name: '4/5/2018',
+        value: 2000
+      }, {
+        name: '4/6/2018',
+        value: 500
+      }];
+      const range = getWeek(new Date(2018, 3, 1));
+
+      const result = padDateGraphData(items, range);
+
+      expect(result).toEqual([{
+        name: '4/1/2018',
+        value: 0
+      }, {
+        name: '4/2/2018',
+        value: 0
+      }, {
+        name: '4/3/2018',
+        value: 1000
+      }, {
+        name: '4/4/2018',
+        value: 0
+      }, {
+        name: '4/5/2018',
+        value: 2000
+      }, {
+        name: '4/6/2018',
+        value: 500
+      }, {
+        name: '4/7/2018',
+        value: 0
+      }]);
     });
   });
 });

@@ -9,7 +9,7 @@ import trackerSelectors, { State as TrackerState } from '../../tracker/reducers/
 import { GraphDataItem } from '../models';
 
 import { getWeek } from '../../../shared/utils/date.utils';
-import { filterGroupingsByDateRange, mapToGraphData, padGraphData } from '../utils/graph.utils';
+import { filterGroupingsByDateRange, mapToGraphData, padDateGraphData } from '../utils/graph.utils';
 
 @Injectable()
 export class GraphService {
@@ -24,7 +24,7 @@ export class GraphService {
     const groupingsToGraph = groupingsByDate.map(grouping => filterGroupingsByDateRange(grouping, this.dateRange));
     return groupingsToGraph.map(groupings => {
       const graphItems = mapToGraphData(groupings).reverse();
-      return padGraphData(graphItems, this.dateRange);
+      return padDateGraphData(graphItems, this.dateRange);
     });
   }
 

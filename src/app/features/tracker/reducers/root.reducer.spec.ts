@@ -125,8 +125,7 @@ describe('Tracker Root Reducer', () => {
             item1Start,
             item1End
           ],
-        },
-        {
+        }, {
           ...item2,
           dateRange: [
             item2Start,
@@ -176,8 +175,7 @@ describe('Tracker Root Reducer', () => {
             new Date(item2.startTime),
             new Date(item2.endTime)
           ]
-        },
-        {
+        }, {
           ...item1,
           dateRange: [
             new Date(item1.startTime),
@@ -239,8 +237,7 @@ describe('Tracker Root Reducer', () => {
               addDays(startDate, 1)
             ]
           }]
-        },
-        {
+        }, {
           key: formatDate(startDate),
           totalTime: 0,
           historyItems: [{
@@ -249,8 +246,7 @@ describe('Tracker Root Reducer', () => {
               startDate,
               startDate
             ]
-          },
-          {
+          }, {
             ...item2,
             dateRange: [
               startDate,
@@ -312,16 +308,14 @@ describe('Tracker Root Reducer', () => {
               new Date(2000),
               new Date(2000)
             ]
-          },
-          {
+          }, {
             ...item1,
             dateRange: [
               new Date(1000),
               new Date(1000)
             ]
           }]
-        },
-        {
+        }, {
           key: platform + '2',
           totalTime: 0,
           historyItems: [{
@@ -386,16 +380,14 @@ describe('Tracker Root Reducer', () => {
               new Date(2000),
               new Date(2000)
             ]
-          },
-          {
+          }, {
             ...item1,
             dateRange: [
               new Date(1000),
               new Date(1000)
             ]
           }]
-        },
-        {
+        }, {
           key: game + '2',
           totalTime: 0,
           historyItems: [{

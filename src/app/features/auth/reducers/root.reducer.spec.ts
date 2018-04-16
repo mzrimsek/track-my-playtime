@@ -17,7 +17,7 @@ describe('Auth Root Reducer', () => {
 
         const result = _selectUserLoggedIn(state);
 
-        expect(result).toEqual(true);
+        expect(result).toBe(true);
       });
 
       it('Should return false if uid is not set', () => {
