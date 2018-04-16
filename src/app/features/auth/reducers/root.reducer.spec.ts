@@ -33,7 +33,7 @@ describe('Auth Root Reducer', () => {
 
         const result = _selectUserLoggedIn(state);
 
-        expect(result).toEqual(false);
+        expect(result).toBe(false);
       });
     });
 

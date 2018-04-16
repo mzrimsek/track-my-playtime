@@ -58,9 +58,9 @@ describe('Date Utils', () => {
 
   describe('formatDate', () => {
     it('Can format a date', () => {
-      const date = new Date(0);
+      const date = new Date(2018, 3, 1);
       const result = formatDate(date);
-      expect(result).toBe('12/31/1969');
+      expect(result).toBe('4/1/2018');
     });
   });
 

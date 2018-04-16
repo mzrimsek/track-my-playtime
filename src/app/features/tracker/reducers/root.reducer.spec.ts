@@ -424,7 +424,7 @@ describe('Tracker Root Reducer', () => {
 
         const result = _selectHistoryLoading(state);
 
-        expect(result).toEqual(true);
+        expect(result).toBe(true);
       });
 
       it('Should return false if loading is false', () => {
@@ -441,7 +441,7 @@ describe('Tracker Root Reducer', () => {
 
         const result = _selectHistoryLoading(state);
 
-        expect(result).toEqual(false);
+        expect(result).toBe(false);
       });
     });
   });
