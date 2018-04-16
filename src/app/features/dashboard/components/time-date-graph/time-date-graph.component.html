@@ -12,4 +12,8 @@
                          [yAxisTickFormatting]="config.axisTickFormatting"
                          [animations]="config.animations"
                          [showGridLines]="config.showGridLines">
+  <ng-template #tooltipTemplate
+               let-model="model">
+    <app-dashboard-graph-tooltip [model]="model"></app-dashboard-graph-tooltip>
+  </ng-template>
 </ngx-charts-bar-vertical>

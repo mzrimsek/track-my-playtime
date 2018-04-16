@@ -13,6 +13,7 @@ import {
 import { DashboardComponent } from './dashboard.component';
 
 import { GraphService } from './services/graph.service';
+import { GraphTooltipComponent } from './components/graph-tooltip/graph-tooltip.component';
 
 @NgModule({
   imports: [
@@ -20,7 +21,7 @@ import { GraphService } from './services/graph.service';
     NgxChartsModule,
     SharedModule
   ],
-  declarations: [DashboardComponent, TimeDateGraphComponent, TimeGameGraphComponent, TimePlatformGraphComponent],
+  declarations: [DashboardComponent, TimeDateGraphComponent, TimeGameGraphComponent, TimePlatformGraphComponent, GraphTooltipComponent],
   providers: [GraphService]
 })
 export class DashboardModule { }

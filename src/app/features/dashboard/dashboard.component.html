@@ -3,18 +3,25 @@
        class="loading">
     <app-shared-spinner></app-shared-spinner>
   </div>
-  <div *ngIf="!(isHistoryDataLoading$ | async)"
-       class="graphs">
-    <div class="time-vs-date graph">
-      <app-dashboard-time-date-graph [data]="timeVsDateGraphData$ | async"></app-dashboard-time-date-graph>
-    </div>
+  <div class="dashboard"
+       *ngIf="!(isHistoryDataLoading$ | async)">
 
-    <div class="time-vs-platform graph">
-      <app-dashboard-time-platform-graph [data]="timeVsPlatformGraphData$ | async"></app-dashboard-time-platform-graph>
-    </div>
+    <div>Total Time: {{ (totalTime$ | async) | time }}</div>
+    <div class="graphs">
+      <div class="time-vs-date graph">
+        <app-dashboard-time-date-graph [data]="timeVsDateGraphData$ | async"
+                                       [config]="this.getDateGraphConfig()"></app-dashboard-time-date-graph>
+      </div>
 
-    <div class="time-vs-game graph">
-      <app-dashboard-time-game-graph [data]="timeVsGameGraphData$ | async"></app-dashboard-time-game-graph>
+      <div class="time-vs-platform graph">
+        <app-dashboard-time-platform-graph [data]="timeVsPlatformGraphData$ | async"
+                                           [config]="this.getPlatformGraphConfig()"></app-dashboard-time-platform-graph>
+      </div>
+
+      <div class="time-vs-game graph">
+        <app-dashboard-time-game-graph [data]="timeVsGameGraphData$ | async"
+                                       [config]="this.getGameGraphConfig()"></app-dashboard-time-game-graph>
+      </div>
     </div>
   </div>
 </div>

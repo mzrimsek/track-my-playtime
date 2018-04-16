@@ -7,4 +7,8 @@
                       [doughnut]="config.doughnut"
                       [gradient]="config.gradient"
                       [animations]="config.animations">
+  <ng-template #tooltipTemplate
+               let-model="model">
+    <app-dashboard-graph-tooltip [model]="model"></app-dashboard-graph-tooltip>
+  </ng-template>
 </ngx-charts-pie-chart>
