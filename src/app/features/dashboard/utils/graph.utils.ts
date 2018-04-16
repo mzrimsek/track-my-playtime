@@ -7,7 +7,7 @@ import {
     formatDate, getElapsedTimeInSeconds, isInDateRange
 } from '../../../shared/utils/date.utils';
 
-export const DEFAULT_KEY = 'Unassigned';
+export const DEFAULT_KEY = 'Uncategorized';
 
 export const mapToGraphData = (groupings: HistoryGrouping[]): GraphDataItem[] => {
   return groupings.map(grouping => <GraphDataItem>{
