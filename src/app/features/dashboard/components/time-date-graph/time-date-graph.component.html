@@ -11,7 +11,8 @@
                          [yAxisLabel]="config.yAxisLabel"
                          [yAxisTickFormatting]="config.axisTickFormatting"
                          [animations]="config.animations"
-                         [showGridLines]="config.showGridLines">
+                         [showGridLines]="config.showGridLines"
+                         [yScaleMax]="config.scaleMax">
   <ng-template #tooltipTemplate
                let-model="model">
     <app-dashboard-graph-tooltip [model]="model"></app-dashboard-graph-tooltip>

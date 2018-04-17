@@ -22,7 +22,7 @@ export class DashboardComponent implements OnInit {
   isHistoryDataLoading$: Observable<boolean>;
   totalTime$: Observable<number>;
 
-  dateGraphConfig: BarGraphConfig = {
+  private barGraphBaseConfig: BarGraphConfig = {
     view: undefined,
     colorScheme: {
       domain: selectColorScheme('cool')
@@ -35,26 +35,20 @@ export class DashboardComponent implements OnInit {
     showXAxisLabel: true,
     showYAxisLabel: true,
     showGridLines: true,
+    xAxisLabel: '',
+    yAxisLabel: '',
+    axisTickFormatting: formatTime,
+    scaleMax: 36000
+  };
+  dateGraphConfig: BarGraphConfig = {
+    ...this.barGraphBaseConfig,
     xAxisLabel: 'Date',
-    yAxisLabel: 'Total Time Played',
-    axisTickFormatting: formatTime
+    yAxisLabel: 'Total Time Played'
   };
   gameGraphConfig: BarGraphConfig = {
-    view: undefined,
-    colorScheme: {
-      domain: selectColorScheme('cool')
-    },
-    showLegend: false,
-    gradient: false,
-    animations: true,
-    showXAxis: true,
-    showYAxis: true,
-    showXAxisLabel: true,
-    showYAxisLabel: true,
-    showGridLines: true,
+    ...this.barGraphBaseConfig,
     xAxisLabel: 'Total Time Played',
-    yAxisLabel: 'Game',
-    axisTickFormatting: formatTime
+    yAxisLabel: 'Game'
   };
   platformGraphConfig: PieChartConfig = {
     view: undefined,

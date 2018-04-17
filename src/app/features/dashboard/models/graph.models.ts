@@ -22,6 +22,7 @@ export interface BarGraphConfig extends GraphConfig {
   xAxisLabel: string;
   yAxisLabel: string;
   axisTickFormatting: (x: any) => any;
+  scaleMax: number;
 }
 
 export interface PieChartConfig extends GraphConfig {

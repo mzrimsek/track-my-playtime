@@ -8,6 +8,7 @@
 
   .dashboard {
     height: 100%;
+    padding: 20px;
 
     .header {
       height: $dashboard-header-height;
@@ -30,11 +31,17 @@
       section {
         display: flex;
         flex-direction: column;
+        margin-right: 20px;
 
         .graph {
           display: flex;
           height: 50%;
           width: 100%;
+          background: $background-light;
+
+          &:not(:last-child) {
+            margin-bottom: 20px;
+          }
         }
       }
 
@@ -46,6 +53,40 @@
         .graph {
           display: flex;
           height: 100%;
+          background: $background-light
+        }
+      }
+    }
+  }
+}
+
+@media only screen  and (max-width : $medium-breakpoint) {
+  .content {
+    .dashboard {
+      .header {
+        .title {
+          font-size: 1.5em;
+        }
+
+        .total {
+          font-size: 1em;
+        }
+      }
+
+      .graphs {
+        flex-direction: column;
+
+        section {
+          height: 75%;
+          margin-right: 0px;
+
+          .graph {
+            margin-bottom: 20px;
+          }
+        }
+
+        aside {
+          height: 25%;
         }
       }
     }
