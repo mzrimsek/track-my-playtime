@@ -4,6 +4,7 @@ import { faBan, faPlayCircle, faStopCircle } from '@fortawesome/free-solid-svg-i
 import { Store } from '@ngrx/store';
 
 import { UserService } from '../../../auth/services/user.service';
+import { TimerService } from '../../services/timer.service';
 
 import * as actions from '../../actions/timer.actions';
 
@@ -28,7 +29,7 @@ export class TimerComponent implements OnInit {
     stop: faStopCircle,
     cancel: faBan
   };
-  constructor(private store: Store<State>, private userService: UserService) {
+  constructor(private store: Store<State>, private userService: UserService, private timerService: TimerService) {
     this.userId = this.userService.getUser().uid;
   }
 
@@ -37,6 +38,7 @@ export class TimerComponent implements OnInit {
   startTimer() {
     const startTime = new Date().getTime();
     this.store.dispatch(new actions.StartTimer(startTime));
+    this.timerService.setStartTime(this.userId, startTime);
   }
 
   stopTimer() {
@@ -48,6 +50,7 @@ export class TimerComponent implements OnInit {
       endTime: new Date().getTime()
     };
     this.store.dispatch(new actions.SaveTimerInfo(info));
+    this.timerService.resetTimer(this.userId);
   }
 
   cancelTimer() {
@@ -56,14 +59,17 @@ export class TimerComponent implements OnInit {
 
   setGame(gameEl: HTMLInputElement) {
     if (gameEl.value) {
-      this.store.dispatch(new actions.SetGame(gameEl.value));
-
+      const game = gameEl.value;
+      this.store.dispatch(new actions.SetGame(game));
+      this.timerService.setGame(this.userId, game);
     }
   }
 
   setPlatform(platformEl: HTMLSelectElement) {
     if (platformEl.value) {
-      this.store.dispatch(new actions.SetPlatform(platformEl.value));
+      const platform = platformEl.value;
+      this.store.dispatch(new actions.SetPlatform(platform));
+      this.timerService.setPlatform(this.userId, platform);
     }
   }
 
@@ -71,6 +77,7 @@ export class TimerComponent implements OnInit {
     if (startTimeEl.value) {
       const startTime = new Date(startTimeEl.value).getTime();
       this.store.dispatch(new actions.SetStartTime(startTime));
+      this.timerService.setStartTime(this.userId, startTime);
     }
   }
 
