@@ -2,7 +2,7 @@ import { Action } from '@ngrx/store';
 
 import { HistoryEntity } from '../reducers/history.reducer';
 
-import { AddTimerInfo } from '../models';
+import { AddTimerInfo, TimerInfo } from '../models';
 
 export const START_TIMER = '[Timer] Start Timer';
 export class StartTimer implements Action {
@@ -52,6 +52,18 @@ export class CancelTimer implements Action {
   constructor() { }
 }
 
+export const LOAD_TIMER_INFO = '[Timer] Load Info';
+export class LoadTimerInfo implements Action {
+  readonly type = LOAD_TIMER_INFO;
+  constructor(public userId: string) { }
+}
+
+export const LOAD_TIMER_INFO_SUCCEEDED = '[Timer] Load Info Succeeded';
+export class LoadTimerInfoSucceeded implements Action {
+  readonly type = LOAD_TIMER_INFO_SUCCEEDED;
+  constructor(public info: TimerInfo) { }
+}
+
 export type All = StartTimer |
   ResetTimer |
   SetGame |
@@ -59,4 +71,6 @@ export type All = StartTimer |
   SetStartTime |
   SaveTimerInfo |
   SaveTimerInfoSucceeded |
-  CancelTimer;
+  CancelTimer |
+  LoadTimerInfo |
+  LoadTimerInfoSucceeded;
