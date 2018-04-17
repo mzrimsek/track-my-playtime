@@ -32,11 +32,12 @@
         display: flex;
         flex-direction: column;
         margin-right: 20px;
+        width: 50%;
 
-        .graph {
-          display: flex;
+        .time-vs-date, .time-vs-game {
           height: 50%;
           width: 100%;
+          padding: 10px;
           background: $background-light;
 
           &:not(:last-child) {
@@ -49,18 +50,20 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        width: 50%;
 
-        .graph {
-          display: flex;
+        .time-vs-platform {
           height: 100%;
-          background: $background-light
+          width: 100%;
+          padding: 10px;
+          background: $background-light;
         }
       }
     }
   }
 }
 
-@media only screen  and (max-width : $medium-breakpoint) {
+@media only screen  and (max-width : $small-breakpoint) {
   .content {
     .dashboard {
       .header {
@@ -77,16 +80,18 @@
         flex-direction: column;
 
         section {
-          height: 75%;
+          height: 66%;
+          width: 100%;
           margin-right: 0px;
 
-          .graph {
+          .time-vs-date, .time-vs-game {
             margin-bottom: 20px;
           }
         }
 
         aside {
-          height: 25%;
+          height: 33%;
+          width: 100%;
         }
       }
     }
