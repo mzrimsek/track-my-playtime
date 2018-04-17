@@ -21,6 +21,53 @@ export class DashboardComponent implements OnInit {
   timeVsGameGraphData$: Observable<GraphDataItem[]>;
   isHistoryDataLoading$: Observable<boolean>;
   totalTime$: Observable<number>;
+
+  dateGraphConfig: BarGraphConfig = {
+    view: [700, 400],
+    colorScheme: {
+      domain: selectColorScheme('cool')
+    },
+    showLegend: false,
+    gradient: false,
+    animations: true,
+    showXAxis: true,
+    showYAxis: true,
+    showXAxisLabel: true,
+    showYAxisLabel: true,
+    showGridLines: true,
+    xAxisLabel: 'Date',
+    yAxisLabel: 'Total Time Played',
+    axisTickFormatting: formatTime
+  };
+  gameGraphConfig: BarGraphConfig = {
+    view: [700, 400],
+    colorScheme: {
+      domain: selectColorScheme('cool')
+    },
+    showLegend: false,
+    gradient: false,
+    animations: true,
+    showXAxis: true,
+    showYAxis: true,
+    showXAxisLabel: true,
+    showYAxisLabel: true,
+    showGridLines: true,
+    xAxisLabel: 'Total Time Played',
+    yAxisLabel: 'Game',
+    axisTickFormatting: formatTime
+  };
+  platformGraphConfig: PieChartConfig = {
+    view: [700, 400],
+    colorScheme: {
+      domain: selectColorScheme('cool')
+    },
+    showLegend: false,
+    gradient: false,
+    animations: true,
+    showLabels: true,
+    explodeSlices: false,
+    doughnut: true
+  };
   constructor(private graphService: GraphService) { }
 
   ngOnInit() {
@@ -29,60 +76,5 @@ export class DashboardComponent implements OnInit {
     this.timeVsGameGraphData$ = this.graphService.getTimeVsGameGraphData();
     this.isHistoryDataLoading$ = this.graphService.isHistoryDataLoading();
     this.totalTime$ = this.timeVsDateGraphData$.map(x => x.reduce((a, b) => a + b.value, 0));
-  }
-
-  getDateGraphConfig(): BarGraphConfig {
-    return {
-      view: [700, 400],
-      colorScheme: {
-        domain: selectColorScheme('cool')
-      },
-      showLegend: false,
-      gradient: false,
-      animations: true,
-      showXAxis: true,
-      showYAxis: true,
-      showXAxisLabel: true,
-      showYAxisLabel: true,
-      showGridLines: true,
-      xAxisLabel: 'Date',
-      yAxisLabel: 'Total Time Played',
-      axisTickFormatting: formatTime
-    };
-  }
-
-  getGameGraphConfig(): BarGraphConfig {
-    return {
-      view: [700, 400],
-      colorScheme: {
-        domain: selectColorScheme('cool')
-      },
-      showLegend: false,
-      gradient: false,
-      animations: true,
-      showXAxis: true,
-      showYAxis: true,
-      showXAxisLabel: true,
-      showYAxisLabel: true,
-      showGridLines: true,
-      xAxisLabel: 'Total Time Played',
-      yAxisLabel: 'Game',
-      axisTickFormatting: formatTime
-    };
-  }
-
-  getPlatformGraphConfig(): PieChartConfig {
-    return {
-      view: [700, 400],
-      colorScheme: {
-        domain: selectColorScheme('cool')
-      },
-      showLegend: false,
-      gradient: false,
-      animations: true,
-      showLabels: true,
-      explodeSlices: false,
-      doughnut: true
-    };
   }
 }

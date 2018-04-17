@@ -4,4 +4,13 @@
   justify-content: center;
   align-items: center;
   padding: 5px;
+
+  .name {
+    font-size: 1em;
+  }
+
+  .value {
+    font-weight: bold;
+    font-size: 1.3em;
+  }
 }
