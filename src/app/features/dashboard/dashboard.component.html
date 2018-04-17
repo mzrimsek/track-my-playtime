@@ -13,17 +13,17 @@
 
     <div class="graphs">
       <section>
-        <div class="time-vs-date graph drop-shadow">
+        <div class="time-vs-date drop-shadow">
           <app-dashboard-time-date-graph [data]="timeVsDateGraphData$ | async"
                                          [config]="dateGraphConfig"></app-dashboard-time-date-graph>
         </div>
-        <div class="time-vs-game graph drop-shadow">
+        <div class="time-vs-game drop-shadow">
           <app-dashboard-time-game-graph [data]="timeVsGameGraphData$ | async"
                                          [config]="gameGraphConfig"></app-dashboard-time-game-graph>
         </div>
       </section>
       <aside>
-        <div class="time-vs-platform graph drop-shadow">
+        <div class="time-vs-platform drop-shadow">
           <app-dashboard-time-platform-graph [data]="timeVsPlatformGraphData$ | async"
                                              [config]="platformGraphConfig"></app-dashboard-time-platform-graph>
         </div>
