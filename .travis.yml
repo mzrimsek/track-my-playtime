@@ -1,11 +1,23 @@
+sudo: required
+dist: trusty
 language: node_js
 node_js:
   - "7"
+
+before_install:
+ - export CHROME_BIN=/usr/bin/google-chrome
+ - export DISPLAY=:99.0
+ - sh -e /etc/init.d/xvfb start
+ - sudo apt-get update
+ - sudo apt-get install -y libappindicator1 fonts-liberation
+ - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+ - sudo dpkg -i google-chrome*.deb
 
 before_script:
   - npm install -g  --silent @angular/cli
 
 script:
+  - ng test --single-run
   - if [ "$TRAVIS_BRANCH" == "master" ]; then ng build --prod; fi
   - if [ "$TRAVIS_BRANCH" != "master" ]; then ng build; fi
 

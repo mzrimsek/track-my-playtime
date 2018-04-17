@@ -1,5 +1,5 @@
 // global variables
-$base-font-size: 22px;
+$base-font-size: 20px;
 $base-font-family: Arial, Helvetica, sans-serif;
 
 $background-dark: #533a7b;
@@ -17,14 +17,21 @@ $medium-breakpoint: 1224px;
 $small-breakpoint: 1024px;
 
 // tracker variables
-$sidebar-width: 250px;
+$sidebar-width: 210px;
 $small-sidebar-width: $sidebar-width/2;
 $content-width: calc(100% - #{$sidebar-width});
 $small-content-width: calc(100% - #{$small-sidebar-width});
+$timer-height: 80px;
+$history-entry-height: 60px;
 
 // app component variables
 $header-height: 100px;
-$main-height: calc(100% - #{$header-height});
+$main-height: calc(100vh - #{$header-height});
 
-// tracker variables
-$timer-height: 100px;
+// login component variables
+$box-height: 350px;
+$box-width: 400px;
+
+// dashboard variables
+$dashboard-header-height: 60px;
+$graphs-height: calc(100% - #{$dashboard-header-height});

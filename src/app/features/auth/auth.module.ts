@@ -7,6 +7,7 @@ import { StoreModule } from '@ngrx/store';
 
 import { LoginComponent } from './components/login/login.component';
 
+import { AuthEffects } from './effects/auth.effects';
 import { UserEffects } from './effects/user.effects';
 
 import { reducers } from './reducers/root.reducer';
@@ -16,7 +17,7 @@ import { reducers } from './reducers/root.reducer';
     CommonModule,
     FontAwesomeModule,
     StoreModule.forFeature('auth', reducers),
-    EffectsModule.forFeature([UserEffects])
+    EffectsModule.forFeature([UserEffects, AuthEffects])
   ],
   declarations: [LoginComponent]
 })
