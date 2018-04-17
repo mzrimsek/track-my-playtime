@@ -36,6 +36,7 @@
 
         .time-vs-date, .time-vs-game {
           height: 50%;
+          width: 100%;
           padding: 10px;
           background: $background-light;
 
@@ -53,6 +54,7 @@
 
         .time-vs-platform {
           height: 100%;
+          width: 100%;
           padding: 10px;
           background: $background-light;
         }
@@ -78,7 +80,7 @@
         flex-direction: column;
 
         section {
-          height: 75%;
+          height: 66%;
           width: 100%;
           margin-right: 0px;
 
@@ -88,7 +90,7 @@
         }
 
         aside {
-          height: 25%;
+          height: 33%;
           width: 100%;
         }
       }
