@@ -34,8 +34,10 @@
         margin-right: 20px;
         width: 50%;
 
-        .graph {
+        .time-vs-date, .time-vs-game {
           height: 50%;
+          padding: 10px;
+          background: $background-light;
 
           &:not(:last-child) {
             margin-bottom: 20px;
@@ -49,19 +51,14 @@
         align-items: center;
         width: 50%;
 
-        .graph {
+        .time-vs-platform {
           height: 100%;
+          padding: 10px;
+          background: $background-light;
         }
       }
     }
   }
-}
-
-.graph {
-  display: flex;
-  width: 100%;
-  background: $background-light;
-  padding: 10px;
 }
 
 @media only screen  and (max-width : $small-breakpoint) {
@@ -85,7 +82,7 @@
           width: 100%;
           margin-right: 0px;
 
-          .graph {
+          .time-vs-date, .time-vs-game {
             margin-bottom: 20px;
           }
         }
