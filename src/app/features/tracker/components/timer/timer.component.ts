@@ -38,7 +38,7 @@ export class TimerComponent implements OnInit {
   startTimer() {
     const startTime = new Date().getTime();
     this.store.dispatch(new actions.StartTimer(startTime));
-    this.timerService.setStartTime(this.userId, startTime);
+    this.timerService.setTimer(this.userId, this.info);
   }
 
   stopTimer() {
@@ -61,7 +61,9 @@ export class TimerComponent implements OnInit {
     if (gameEl.value) {
       const game = gameEl.value;
       this.store.dispatch(new actions.SetGame(game));
-      this.timerService.setGame(this.userId, game);
+      if (this.info.active) {
+        this.timerService.setGame(this.userId, game);
+      }
     }
   }
 
@@ -69,7 +71,9 @@ export class TimerComponent implements OnInit {
     if (platformEl.value) {
       const platform = platformEl.value;
       this.store.dispatch(new actions.SetPlatform(platform));
-      this.timerService.setPlatform(this.userId, platform);
+      if (this.info.active) {
+        this.timerService.setPlatform(this.userId, platform);
+      }
     }
   }
 
@@ -77,7 +81,9 @@ export class TimerComponent implements OnInit {
     if (startTimeEl.value) {
       const startTime = new Date(startTimeEl.value).getTime();
       this.store.dispatch(new actions.SetStartTime(startTime));
-      this.timerService.setStartTime(this.userId, startTime);
+      if (this.info.active) {
+        this.timerService.setStartTime(this.userId, startTime);
+      }
     }
   }
 

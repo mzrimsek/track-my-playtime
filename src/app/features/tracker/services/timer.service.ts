@@ -2,12 +2,22 @@ import { Injectable } from '@angular/core';
 
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 
+import { TimerInfo } from '../models';
+
 @Injectable()
 export class TimerService {
 
   private timerCollection: AngularFirestoreCollection<FirestoreTimerItem>;
   constructor(private afs: AngularFirestore) {
     this.timerCollection = this.afs.collection<FirestoreTimerItem>('timer');
+  }
+
+  setTimer(userId: string, info: TimerInfo) {
+    this.timerCollection.doc(userId).set({
+      game: info.game,
+      platform: info.platform,
+      startTime: info.startTime
+    });
   }
 
   setGame(userId: string, game: string) {
