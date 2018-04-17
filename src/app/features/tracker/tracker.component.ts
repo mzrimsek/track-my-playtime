@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { ClockService } from './services/clock.service';
 
-import trackerComponentSelectors, { State } from './reducers/root.reducer';
+import trackerSelectors, { State } from './reducers/root.reducer';
 
 import { HistoryGrouping, TimerInfo } from './models';
 
@@ -26,11 +26,11 @@ export class TrackerComponent implements OnInit {
   constructor(private store: Store<State>, private clockService: ClockService) { }
 
   ngOnInit() {
-    this.timerInfo$ = this.store.select(trackerComponentSelectors.timerInfo);
+    this.timerInfo$ = this.store.select(trackerSelectors.timerInfo);
     this.currentTime$ = this.clockService.getCurrentTime();
-    this.platformsOptions$ = this.store.select(trackerComponentSelectors.platformsOptions);
+    this.platformsOptions$ = this.store.select(trackerSelectors.platformsOptions);
 
-    this.historyGroupings$ = this.store.select(trackerComponentSelectors.historyGroupings);
-    this.historyLoading$ = this.store.select(trackerComponentSelectors.historyLoading);
+    this.historyGroupings$ = this.store.select(trackerSelectors.historyGroupingsByDate);
+    this.historyLoading$ = this.store.select(trackerSelectors.historyLoading);
   }
 }

@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { EffectsModule } from '@ngrx/effects';
 import { RouterStateSerializer, StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
@@ -15,16 +16,19 @@ import { Angulartics2Module } from 'angulartics2';
 import { Angulartics2GoogleTagManager } from 'angulartics2/gtm';
 
 import { AppRoutingModule } from './app-routing.module';
+import { AuthModule } from './features/auth/auth.module';
+import { DashboardModule } from './features/dashboard/dashboard.module';
 import { HomeModule } from './features/home/home.module';
-import { TrackerAppModule } from './features/tracker-app/tracker-app.module';
+import { TrackerModule } from './features/tracker/tracker.module';
 import { SharedModule } from './shared/shared.module';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
+import { NavComponent } from './components/nav/nav.component';
 
-import { reducers } from './reducers/root.reducer';
+import { AuthGuard } from './features/auth/guards/auth.guard';
 
-import { CustomRouterStateSerializer } from './shared/utils/router.utils';
+import { CustomRouterStateSerializer, reducers } from './reducers/root.reducer';
 
 import { environment } from '../environments/environment';
 import './rxjs-operators';
@@ -32,11 +36,13 @@ import './rxjs-operators';
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent
+    HeaderComponent,
+    NavComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    FontAwesomeModule,
     AppRoutingModule,
     SharedModule,
     HttpClientModule,
@@ -51,11 +57,13 @@ import './rxjs-operators';
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     EffectsModule.forRoot([]),
     HomeModule,
-    TrackerAppModule
+    AuthModule,
+    TrackerModule,
+    DashboardModule
   ],
   providers: [{
     provide: RouterStateSerializer, useClass: CustomRouterStateSerializer
-  }],
+  }, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

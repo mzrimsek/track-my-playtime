@@ -7,7 +7,7 @@ import { AddTimerInfo } from '../models';
 export const START_TIMER = '[Timer] Start Timer';
 export class StartTimer implements Action {
   readonly type = START_TIMER;
-  constructor() { }
+  constructor(public startTime: number) { }
 }
 
 export const RESET_TIMER = '[Timer] Reset Timer';

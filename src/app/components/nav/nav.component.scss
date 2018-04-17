@@ -1,4 +1,4 @@
-@import "../../../../../variables.scss";
+@import "../../../variables.scss";
 
 .nav {
   display: flex;
@@ -7,12 +7,16 @@
   height: 100vh;
   background: $background-dark;
   color: $text-light;
+  width: $sidebar-width;
+  position: fixed;
 
   .main {
     padding: 0px 15px;
+
     .banner {
       display: flex;
       justify-content: center;
+      text-align: center;
       margin: 30px 0px;
 
       a{
@@ -27,13 +31,8 @@
       list-style: none;
 
       li{
-        display: flex;
-        align-items: center;
-        height: 45px;
-        padding: 0px 10px;
         border-radius: 8px;
         margin-bottom: 5px;
-
 
         &.active {
           background: $background-dark-accent;
@@ -47,7 +46,20 @@
         a{
           color: $text-light;
           text-decoration: none;
-          pointer-events: none;
+
+          display: flex;
+          align-items: center;
+          height: 45px;
+          padding: 0px 10px;
+
+          .icon {
+            margin-right: 5px;
+            pointer-events: none;
+          }
+
+          .text {
+            pointer-events: none;
+          }
         }
       }
     }
@@ -85,18 +97,22 @@
 
 @media only screen  and (max-width : $medium-breakpoint) {
   .nav {
+    width: $small-sidebar-width;
+
     .main {
       ul {
         li {
-          justify-content: center;
-          height: 60px;
+          a {
+            justify-content: center;
+            height: 60px;
 
-          .icon {
-            font-size: 2em;
-          }
+            .icon {
+              font-size: 2em;
+            }
 
-          .text {
-            display: none;
+            .text {
+              display: none;
+            }
           }
         }
       }

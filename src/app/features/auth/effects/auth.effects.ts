@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 
 import { Actions, Effect } from '@ngrx/effects';
 
+import * as historyActions from '../../../features/tracker/actions/history.actions';
+import * as platformsActions from '../../../features/tracker/actions/platforms.actions';
 import * as userActions from '../../auth/actions/user.actions';
-import * as historyActions from '../actions/history.actions';
-import * as platformsActions from '../actions/platforms.actions';
 
 @Injectable()
 export class AuthEffects {
@@ -17,7 +17,7 @@ export class AuthEffects {
       .map(action => action as userActions.Authenticated)
       .mergeMap(action => [
         new platformsActions.LoadOptions(),
-        new historyActions.LoadHistoryItems(action.payload.uid)
+        new historyActions.LoadHistoryItems(action.user.uid)
       ]);
 
   @Effect() logout$ =

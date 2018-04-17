@@ -4,10 +4,10 @@ import * as fromHistory from './history.reducer';
 import * as fromPlatforms from './platforms.reducer';
 import * as fromTimer from './timer.reducer';
 
-import { HistoryGrouping, HistoryListItem, TimerInfo } from '../models';
+import { HistoryListItem, TimerInfo } from '../models';
 
-import { formatElapsedTime, getElapsedTime } from '../../../shared/utils/date.utils';
-import { getDateFromHistoryListItem } from '../utils/history.utils';
+import { formatDate } from '../../../shared/utils/date.utils';
+import { getHistoryGroupingList, getHistoryListItemsMap } from '../utils/history.utils';
 
 export interface TrackerState {
   timer: fromTimer.State;
@@ -30,13 +30,7 @@ export const _selectTimer = createSelector(_selectTrackerState, state => state.t
 export const _selectHistory = createSelector(_selectTrackerState, state => state.history);
 export const _selectPlatforms = createSelector(_selectTrackerState, state => state.platforms);
 
-export const _selectTimerStartTime = createSelector(_selectTimer, state => state.startTime);
-export const _selectTimerInfo = createSelector(_selectTimer, _selectTimerStartTime,
-  (timer, startDate) =>
-    <TimerInfo>{
-      ...timer,
-      startDate
-    });
+export const _selectTimerInfo = createSelector(_selectTimer, timer => timer as TimerInfo);
 
 export const { selectAll: _selectAllHistory } = fromHistory.adapter.getSelectors(_selectHistory);
 export const _selectHistoryItems = createSelector(_selectAllHistory,
@@ -45,45 +39,33 @@ export const _selectHistoryItems = createSelector(_selectAllHistory,
       ...entity,
       dateRange: [
         new Date(entity.startTime),
-        new Date(entity.endTime)
+        new Date(entity.endTime),
       ]
     }));
 export const _selectSortedHistoryItems = createSelector(_selectHistoryItems, items => items.sort((a, b) => b.startTime - a.startTime));
-export const _selectHistoryItemsGroupedByDate = createSelector(_selectSortedHistoryItems, items => {
-  const map: Map<string, HistoryListItem[]> = new Map();
-  items.forEach((item) => {
-    const key = getDateFromHistoryListItem(item);
-    const collection = map.get(key);
-    if (!collection) {
-      map.set(key, [item]);
-    } else {
-      collection.push(item);
-    }
-  });
-  return map;
+export const _selectHistoryGroupingsByDate = createSelector(_selectSortedHistoryItems, items => {
+  const historyListItemsMap = getHistoryListItemsMap(items, item => formatDate(item.dateRange[0]));
+  return getHistoryGroupingList(historyListItemsMap);
 });
-export const _selectGroupedHistoryItems = createSelector(_selectHistoryItemsGroupedByDate, map => {
-  let groupings: HistoryGrouping[] = [];
-  map.forEach((value: HistoryListItem[], key: string) => {
-    const elapsedTime = value.map(item => getElapsedTime(item.startTime, item.endTime)).reduce((a, b) => a + b, 0);
-    const newGrouping = <HistoryGrouping>{
-      date: key,
-      totalTime: formatElapsedTime(elapsedTime),
-      historyItems: value
-    };
-    groupings = [...groupings, newGrouping];
-  });
-  return groupings;
+export const _selectHistoryGroupingsByPlatform = createSelector(_selectSortedHistoryItems, items => {
+  const historyListItemsMap = getHistoryListItemsMap(items, item => item.platform);
+  return getHistoryGroupingList(historyListItemsMap);
+});
+export const _selectHistoryGroupingsByGame = createSelector(_selectSortedHistoryItems, items => {
+  const historyListItemsMap = getHistoryListItemsMap(items, item => item.game);
+  return getHistoryGroupingList(historyListItemsMap);
 });
 export const _selectHistoryLoading = createSelector(_selectHistory, history => history.loading);
 
 export const _selectPlatformsOptions = createSelector(_selectPlatforms, platforms => platforms.options);
 
-const trackerComponentSelectors = {
+const trackerSelectors = {
   timerInfo: _selectTimerInfo,
-  historyGroupings: _selectGroupedHistoryItems,
+  historyGroupingsByDate: _selectHistoryGroupingsByDate,
+  historyGroupingsByPlatform: _selectHistoryGroupingsByPlatform,
+  historyGroupingsByGame: _selectHistoryGroupingsByGame,
   historyLoading: _selectHistoryLoading,
   platformsOptions: _selectPlatformsOptions
 };
 
-export default trackerComponentSelectors;
+export default trackerSelectors;

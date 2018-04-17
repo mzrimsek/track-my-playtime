@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, Router } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 
 import { select, Store } from '@ngrx/store';
 
@@ -12,12 +12,12 @@ import authComponentSelectors, { State } from '../reducers/root.reducer';
 export class AuthGuard implements CanActivate {
   constructor(private store: Store<State>, private router: Router) { }
 
-  canActivate(): Observable<boolean> {
+  canActivate(_route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
     return this.store.pipe(
       select(authComponentSelectors.isUserLoggedIn),
       map(authed => {
         if (!authed) {
-          this.router.navigate(['/login']);
+          this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
           return false;
         }
 

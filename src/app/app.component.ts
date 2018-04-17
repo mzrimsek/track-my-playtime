@@ -3,13 +3,11 @@ import { Router } from '@angular/router';
 
 import { Store } from '@ngrx/store';
 
+import { insertAnalyticsElements } from 'insert-analytics-elements/googleTagManager';
+
 import * as actions from './actions/app.actions';
 
 import { State } from './reducers/root.reducer';
-
-import {
-    getGoogleTagManagerNoScriptTag, getGoogleTagManagerScriptTag
-} from './utils/google-tag-manager.utils';
 
 import { environment } from '../environments/environment';
 
@@ -32,8 +30,7 @@ export class AppComponent {
 
   private insertGoogleTagManagerElements(googleTagManagerContainerId: string) {
     try {
-      document.head.insertAdjacentElement('afterbegin', getGoogleTagManagerScriptTag(googleTagManagerContainerId));
-      document.body.insertAdjacentElement('afterbegin', getGoogleTagManagerNoScriptTag(googleTagManagerContainerId));
+      insertAnalyticsElements(googleTagManagerContainerId);
     } catch (err) {
       this.store.dispatch(new actions.Error('Append Google Tag Manager Scripts', err.message));
     }
