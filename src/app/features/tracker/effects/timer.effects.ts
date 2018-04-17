@@ -7,7 +7,6 @@ import { Observable } from 'rxjs/Observable';
 import { HistoryService } from '../services/history.service';
 
 import * as appActions from '../../../actions/app.actions';
-import * as userActions from '../../auth/actions/user.actions';
 import * as timerActions from '../actions/timer.actions';
 
 @Injectable()
@@ -33,13 +32,6 @@ export class TimerEffects {
   @Effect() cancelTimer$ =
     this.actions$
       .ofType(timerActions.CANCEL_TIMER)
-      .mergeMap(() => [
-        new timerActions.ResetTimer()
-      ]);
-
-  @Effect() logout$ =
-    this.actions$
-      .ofType(userActions.LOGOUT)
       .mergeMap(() => [
         new timerActions.ResetTimer()
       ]);

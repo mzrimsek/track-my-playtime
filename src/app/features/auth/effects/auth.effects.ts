@@ -4,6 +4,7 @@ import { Actions, Effect } from '@ngrx/effects';
 
 import * as historyActions from '../../../features/tracker/actions/history.actions';
 import * as platformsActions from '../../../features/tracker/actions/platforms.actions';
+import * as timerActions from '../../../features/tracker/actions/timer.actions';
 import * as userActions from '../../auth/actions/user.actions';
 
 @Injectable()
@@ -24,6 +25,7 @@ export class AuthEffects {
     this.actions$
       .ofType(userActions.LOGOUT)
       .mergeMap(() => [
-        new historyActions.ClearHistoryItems()
+        new historyActions.ClearHistoryItems(),
+        new timerActions.ResetTimer()
       ]);
 }
