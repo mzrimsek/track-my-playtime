@@ -23,7 +23,7 @@ export class DashboardComponent implements OnInit {
   totalTime$: Observable<number>;
 
   dateGraphConfig: BarGraphConfig = {
-    view: [700, 400],
+    view: undefined,
     colorScheme: {
       domain: selectColorScheme('cool')
     },
@@ -40,7 +40,7 @@ export class DashboardComponent implements OnInit {
     axisTickFormatting: formatTime
   };
   gameGraphConfig: BarGraphConfig = {
-    view: [700, 400],
+    view: undefined,
     colorScheme: {
       domain: selectColorScheme('cool')
     },
@@ -57,7 +57,7 @@ export class DashboardComponent implements OnInit {
     axisTickFormatting: formatTime
   };
   platformGraphConfig: PieChartConfig = {
-    view: [700, 400],
+    view: undefined,
     colorScheme: {
       domain: selectColorScheme('cool')
     },

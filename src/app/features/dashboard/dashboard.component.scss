@@ -7,9 +7,46 @@
   }
 
   .dashboard {
+    height: 100%;
+
+    .header {
+      height: $dashboard-header-height;
+
+      .title {
+        font-size: 2em;
+        font-weight: bold;
+      }
+
+      .total {
+        font-size: 1.5em;
+        font-style: italic;
+      }
+    }
+
     .graphs {
-      .graph {
+      display: flex;
+      height: $graphs-height;
+
+      section {
         display: flex;
+        flex-direction: column;
+
+        .graph {
+          display: flex;
+          height: 50%;
+          width: 100%;
+        }
+      }
+
+      aside {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .graph {
+          display: flex;
+          height: 100%;
+        }
       }
     }
   }

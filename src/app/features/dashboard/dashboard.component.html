@@ -6,22 +6,28 @@
   <div class="dashboard"
        *ngIf="!(isHistoryDataLoading$ | async)">
 
-    <div>Total Time: {{ (totalTime$ | async) | time }}</div>
+    <div class="header">
+      <span class="title">Dashboard - </span>
+      <span class="total">{{ (totalTime$ | async) | time }} This Week</span>
+    </div>
+
     <div class="graphs">
-      <div class="time-vs-date graph">
-        <app-dashboard-time-date-graph [data]="timeVsDateGraphData$ | async"
-                                       [config]="dateGraphConfig"></app-dashboard-time-date-graph>
-      </div>
-
-      <div class="time-vs-platform graph">
-        <app-dashboard-time-platform-graph [data]="timeVsPlatformGraphData$ | async"
-                                           [config]="platformGraphConfig"></app-dashboard-time-platform-graph>
-      </div>
-
-      <div class="time-vs-game graph">
-        <app-dashboard-time-game-graph [data]="timeVsGameGraphData$ | async"
-                                       [config]="gameGraphConfig"></app-dashboard-time-game-graph>
-      </div>
+      <section>
+        <div class="time-vs-date graph">
+          <app-dashboard-time-date-graph [data]="timeVsDateGraphData$ | async"
+                                         [config]="dateGraphConfig"></app-dashboard-time-date-graph>
+        </div>
+        <div class="time-vs-game graph">
+          <app-dashboard-time-game-graph [data]="timeVsGameGraphData$ | async"
+                                         [config]="gameGraphConfig"></app-dashboard-time-game-graph>
+        </div>
+      </section>
+      <aside>
+        <div class="time-vs-platform graph">
+          <app-dashboard-time-platform-graph [data]="timeVsPlatformGraphData$ | async"
+                                             [config]="platformGraphConfig"></app-dashboard-time-platform-graph>
+        </div>
+      </aside>
     </div>
   </div>
 </div>
