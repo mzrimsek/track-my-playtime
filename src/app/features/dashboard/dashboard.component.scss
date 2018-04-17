@@ -34,8 +34,11 @@
         margin-right: 20px;
         width: 50%;
 
-        .graph {
+        .time-vs-date, .time-vs-game {
           height: 50%;
+          width: 100%;
+          padding: 10px;
+          background: $background-light;
 
           &:not(:last-child) {
             margin-bottom: 20px;
@@ -49,19 +52,15 @@
         align-items: center;
         width: 50%;
 
-        .graph {
+        .time-vs-platform {
           height: 100%;
+          width: 100%;
+          padding: 10px;
+          background: $background-light;
         }
       }
     }
   }
-}
-
-.graph {
-  display: flex;
-  width: 100%;
-  background: $background-light;
-  padding: 10px;
 }
 
 @media only screen  and (max-width : $small-breakpoint) {
@@ -81,17 +80,17 @@
         flex-direction: column;
 
         section {
-          height: 75%;
+          height: 66%;
           width: 100%;
           margin-right: 0px;
 
-          .graph {
+          .time-vs-date, .time-vs-game {
             margin-bottom: 20px;
           }
         }
 
         aside {
-          height: 25%;
+          height: 33%;
           width: 100%;
         }
       }
