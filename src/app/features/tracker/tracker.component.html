@@ -1,10 +1,17 @@
 <div class="content">
-  <app-tracker-timer [info]="timerInfo$ | async"
-                     [currentTime]="currentTime$ | async"
-                     [platformsOptions]="platformsOptions$ | async">
-  </app-tracker-timer>
+  <div *ngIf="historyLoading$ | async"
+       class="loading">
+    <app-shared-spinner></app-shared-spinner>
+  </div>
+  <div class="tracker"
+       *ngIf="!(historyLoading$ | async)">
+    <app-tracker-timer [info]="timerInfo$ | async"
+                       [currentTime]="currentTime$ | async"
+                       [platformsOptions]="platformsOptions$ | async">
+    </app-tracker-timer>
 
-  <app-tracker-history [groups]="historyGroupings$ | async"
-                       [platformsOptions]="platformsOptions$ | async"
-                       [loading]="historyLoading$ | async"></app-tracker-history>
+    <app-tracker-history [groups]="historyGroupings$ | async"
+                         [platformsOptions]="platformsOptions$ | async"
+                         [loading]="historyLoading$ | async"></app-tracker-history>
+  </div>
 </div>
