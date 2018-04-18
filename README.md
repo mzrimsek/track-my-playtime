@@ -15,3 +15,10 @@ A time tracker app specific to video games.
 * [FontAwesome](https://fontawesome.com/) (via [angular-fontawesome](https://github.com/FortAwesome/angular-fontawesome))
 * [Google Analytics](https://www.google.com/analytics) (via [Angulartics2](https://github.com/angulartics/angulartics2))
 * [D3](https://d3js.org/) (via [ngx-charts](https://github.com/swimlane/ngx-charts))
+
+## Development
+
+* Start the dev server: `ng serve`
+* Run karma tests: `ng test`
+* Run karma tests in headless mode: `npm run test:mocha`
+* Run karma tests the fun way: `npm run test:nyan`
