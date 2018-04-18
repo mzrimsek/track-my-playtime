@@ -5,7 +5,7 @@ import { reducer, State } from './timer.reducer';
 import { TimerInfo } from '../models';
 
 describe('Timer Reducer', () => {
-  it('Should clear timer info when Reset Time is dispatched', () => {
+  it('Should clear timer info when ResetTimer is dispatched', () => {
     const initialState: State = {
       game: 'some game',
       platform: 'an awesome platform',
@@ -19,7 +19,7 @@ describe('Timer Reducer', () => {
     });
   });
 
-  it('Should update game when Set Game is dispatched', () => {
+  it('Should update game when SetGame is dispatched', () => {
     const initialState: State = {
       game: 'some game',
       platform: 'an awesome platform',
@@ -35,7 +35,7 @@ describe('Timer Reducer', () => {
     });
   });
 
-  it('Should update platform when Set Platform is dispatched', () => {
+  it('Should update platform when SetPlatform is dispatched', () => {
     const initialState: State = {
       game: 'some game',
       platform: 'an awesome platform',
@@ -51,7 +51,7 @@ describe('Timer Reducer', () => {
     });
   });
 
-  it('Should update start time when Set Start Time is dispatched', () => {
+  it('Should update start time when SetStartTime is dispatched', () => {
     const initialState: State = {
       game: 'some game',
       platform: 'an awesome platform',
@@ -67,7 +67,7 @@ describe('Timer Reducer', () => {
     });
   });
 
-  it('Should set timer info when Load Timer Info Succeeded is dispatched', () => {
+  it('Should set timer info when LoadTimerInfoSucceeded is dispatched', () => {
     const initialState: State = {
       game: '',
       platform: '',

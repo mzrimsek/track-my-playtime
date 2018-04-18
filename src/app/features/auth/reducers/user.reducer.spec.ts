@@ -24,7 +24,7 @@ describe('User Reducer', () => {
     expect(newState).toEqual(user);
   });
 
-  it('Should clear user data when Not Authenticated is dispatched', () => {
+  it('Should clear user data when NotAuthenticated is dispatched', () => {
     const initialState: State = {
       uid: 'some uid',
       displayName: 'Jim Bob',

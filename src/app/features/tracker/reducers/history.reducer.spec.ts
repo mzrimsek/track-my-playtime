@@ -7,7 +7,7 @@ import {
 } from '../models';
 
 describe('History Reducer', () => {
-  it('Should add an item when Add New History Item is dispatched', () => {
+  it('Should add an item when AddNewHistoryItem is dispatched', () => {
     const initialState: State = {
       ids: [],
       entities: {},
@@ -26,7 +26,7 @@ describe('History Reducer', () => {
     });
   });
 
-  it('Should set loading to true when Load History Items is dispatched', () => {
+  it('Should set loading to true when LoadHistoryItems is dispatched', () => {
     const initialState: State = {
       ids: [],
       entities: {},
@@ -39,7 +39,7 @@ describe('History Reducer', () => {
     });
   });
 
-  it('Should add all items when Load History Items Succeeded is dispatched', () => {
+  it('Should add all items when LoadHistoryItemsSucceeded is dispatched', () => {
     const initialState: State = {
       ids: [],
       entities: {},
@@ -60,7 +60,7 @@ describe('History Reducer', () => {
     });
   });
 
-  it('Should remove correct item when Remove History Item Succeeded is dispatched', () => {
+  it('Should remove correct item when RemoveHistoryItemSucceeded is dispatched', () => {
     const item1 = getHistoryEntity('1');
     const item2 = getHistoryEntity('2');
     const initialState: State = {
@@ -83,7 +83,7 @@ describe('History Reducer', () => {
     });
   });
 
-  it('Should update correct item game when Update Game Succeeded is dispatched', () => {
+  it('Should update correct item game when UpdateGameSucceeded is dispatched', () => {
     const item1 = getHistoryEntity('1');
     const item2 = getHistoryEntity('2');
     const initialState: State = {
@@ -113,7 +113,7 @@ describe('History Reducer', () => {
     });
   });
 
-  it('Should update correct item platform when Update Platform Succeeded is dispatched', () => {
+  it('Should update correct item platform when UpdatePlatformSucceeded is dispatched', () => {
     const item1 = getHistoryEntity('1');
     const item2 = getHistoryEntity('2');
     const initialState: State = {
@@ -143,7 +143,7 @@ describe('History Reducer', () => {
     });
   });
 
-  it('Should update correct item elapsed time when Update Elapsed Time Succeeded is dispatched', () => {
+  it('Should update correct item elapsed time when UpdateElapsedTimeSucceeded is dispatched', () => {
     const item1 = getHistoryEntity('1');
     const item2 = getHistoryEntity('2');
     const initialState: State = {
@@ -175,7 +175,7 @@ describe('History Reducer', () => {
     });
   });
 
-  it('Should remove all items when Clear History Items is dispatched', () => {
+  it('Should remove all items when ClearHistoryItems is dispatched', () => {
     const item1 = getHistoryEntity('1');
     const item2 = getHistoryEntity('2');
     const initialState: State = {

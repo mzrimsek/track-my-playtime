@@ -20,7 +20,7 @@ describe('HomeComponent', () => {
     expect(component).toBeTruthy();
   }));
 
-  it('Should have correct tagline text', async(() => {
+  it('Should have correct tagline', async(() => {
     const tagline = 'Game Time Tracking Made Simple';
     expect(component.tagline).toBe(tagline);
   }));
