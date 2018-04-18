@@ -33,8 +33,9 @@ export class TimerEffects {
   @Effect() cancelTimer$ =
     this.actions$
       .ofType(timerActions.CANCEL_TIMER)
-      .switchMap(() => Observable.of(new timerActions.ResetTimer()))
-      .catch(err => Observable.of(new appActions.Error(timerActions.CANCEL_TIMER, err.message)));
+      .mergeMap(() => [
+        new timerActions.ResetTimer()
+      ]);
 
   @Effect() loadTimerInfo$ =
     this.actions$
