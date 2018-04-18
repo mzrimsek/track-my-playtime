@@ -2,38 +2,20 @@ import * as actions from '../actions/timer.actions';
 
 import { reducer, State } from './timer.reducer';
 
+import { TimerInfo } from '../models';
+
 describe('Timer Reducer', () => {
-  it('Should set start time and active when Start Time is dispatched', () => {
-    const initialState: State = {
-      game: '',
-      platform: '',
-      startTime: 0,
-      active: false
-    };
-    const startTime = 1234;
-
-    const newState = reducer(initialState, new actions.StartTimer(startTime));
-
-    expect(newState).toEqual({
-      ...initialState,
-      startTime,
-      active: true
-    });
-  });
-
   it('Should clear timer info when Reset Time is dispatched', () => {
     const initialState: State = {
       game: 'some game',
       platform: 'an awesome platform',
-      startTime: 1234541,
-      active: true
+      startTime: 1234541
     };
     const newState = reducer(initialState, new actions.ResetTimer());
     expect(newState).toEqual({
       game: '',
       platform: '',
-      startTime: 0,
-      active: false
+      startTime: 0
     });
   });
 
@@ -41,8 +23,7 @@ describe('Timer Reducer', () => {
     const initialState: State = {
       game: 'some game',
       platform: 'an awesome platform',
-      startTime: 1234541,
-      active: true
+      startTime: 1234541
     };
     const game = 'some different game';
 
@@ -58,8 +39,7 @@ describe('Timer Reducer', () => {
     const initialState: State = {
       game: 'some game',
       platform: 'an awesome platform',
-      startTime: 1234541,
-      active: true
+      startTime: 1234541
     };
     const platform = 'some different platform';
 
@@ -75,8 +55,7 @@ describe('Timer Reducer', () => {
     const initialState: State = {
       game: 'some game',
       platform: 'an awesome platform',
-      startTime: 1234541,
-      active: true
+      startTime: 1234541
     };
     const startTime = 15;
 
@@ -86,5 +65,22 @@ describe('Timer Reducer', () => {
       ...initialState,
       startTime
     });
+  });
+
+  it('Should set timer info when Load Timer Info Succeeded is dispatched', () => {
+    const initialState: State = {
+      game: '',
+      platform: '',
+      startTime: 0
+    };
+    const timerInfo: TimerInfo = {
+      game: 'some game',
+      platform: 'some platform',
+      startTime: 30000
+    };
+
+    const newState = reducer(initialState, new actions.LoadTimerInfoSucceeded(timerInfo));
+
+    expect(newState).toEqual(timerInfo);
   });
 });

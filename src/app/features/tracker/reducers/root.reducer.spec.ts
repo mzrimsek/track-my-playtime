@@ -18,8 +18,7 @@ describe('Tracker Root Reducer', () => {
         const timer: TimerState = {
           game: 'some cool game',
           platform: 'some awesome platform',
-          startTime: 1523563,
-          active: true
+          startTime: 1523563
         };
         const trackerState: TrackerState = {
           timer,
@@ -463,8 +462,7 @@ const getTimerInitialState = (): TimerState => {
   return {
     game: '',
     platform: '',
-    startTime: 0,
-    active: false
+    startTime: 0
   };
 };
 

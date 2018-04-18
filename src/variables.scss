@@ -17,7 +17,7 @@ $medium-breakpoint: 1224px;
 $small-breakpoint: 1024px;
 
 // tracker variables
-$sidebar-width: 210px;
+$sidebar-width: 215px;
 $small-sidebar-width: $sidebar-width/2;
 $content-width: calc(100% - #{$sidebar-width});
 $small-content-width: calc(100% - #{$small-sidebar-width});

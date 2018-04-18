@@ -7,5 +7,8 @@ service cloud.firestore {
     match /history/{userId}/items/{item} {
       allow read, write: if request.auth.uid == userId;
     }
+    match /timer/{userId} {
+      allow read, write: if request.auth.uid == userId;
+    }
   }
 }
