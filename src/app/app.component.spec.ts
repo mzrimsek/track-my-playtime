@@ -75,7 +75,6 @@ describe('AppComponent', () => {
     }));
 
     it('shouldShowHeader returns true', async(() => {
-      fixture.detectChanges();
       const shouldShowHeader = component.shouldShowHeader();
       expect(shouldShowHeader).toBe(true);
     }));
@@ -99,7 +98,6 @@ describe('AppComponent', () => {
     }));
 
     it('shouldShowHeader returns true', async(() => {
-      fixture.detectChanges();
       const shouldShowHeader = component.shouldShowHeader();
       expect(shouldShowHeader).toBe(true);
     }));
@@ -123,7 +121,6 @@ describe('AppComponent', () => {
     }));
 
     it('shouldShowHeader returns false', async(() => {
-      fixture.detectChanges();
       const shouldShowHeader = component.shouldShowHeader();
       expect(shouldShowHeader).toBe(false);
     }));
