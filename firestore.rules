@@ -8,7 +8,7 @@ service cloud.firestore {
       allow read, write: if request.auth.uid == userId;
     }
     match /timer/{userId} {
-      allow: read, write: if request.auth.uid == userId;
+      allow read, write: if request.auth.uid == userId;
     }
   }
 }
