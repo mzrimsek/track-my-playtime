@@ -37,8 +37,11 @@ export class TimerComponent implements OnInit {
 
   startTimer() {
     const startTime = new Date().getTime();
-    this.store.dispatch(new actions.StartTimer(startTime));
-    this.timerService.setTimer(this.userId, this.info);
+    this.store.dispatch(new actions.SetStartTime(startTime));
+    this.timerService.setTimer(this.userId, {
+      ...this.info,
+      startTime
+    });
   }
 
   stopTimer() {
@@ -55,13 +58,14 @@ export class TimerComponent implements OnInit {
 
   cancelTimer() {
     this.store.dispatch(new actions.CancelTimer());
+    this.timerService.resetTimer(this.userId);
   }
 
   setGame(gameEl: HTMLInputElement) {
     if (gameEl.value) {
       const game = gameEl.value;
       this.store.dispatch(new actions.SetGame(game));
-      if (this.info.active) {
+      if (this.info.startTime !== 0) {
         this.timerService.setGame(this.userId, game);
       }
     }
@@ -71,7 +75,7 @@ export class TimerComponent implements OnInit {
     if (platformEl.value) {
       const platform = platformEl.value;
       this.store.dispatch(new actions.SetPlatform(platform));
-      if (this.info.active) {
+      if (this.info.startTime !== 0) {
         this.timerService.setPlatform(this.userId, platform);
       }
     }
@@ -81,14 +85,14 @@ export class TimerComponent implements OnInit {
     if (startTimeEl.value) {
       const startTime = new Date(startTimeEl.value).getTime();
       this.store.dispatch(new actions.SetStartTime(startTime));
-      if (this.info.active) {
+      if (this.info.startTime !== 0) {
         this.timerService.setStartTime(this.userId, startTime);
       }
     }
   }
 
   openDateTimePicker(el: HTMLInputElement) {
-    if (this.info.active) {
+    if (this.info.startTime !== 0) {
       el.click();
     }
   }

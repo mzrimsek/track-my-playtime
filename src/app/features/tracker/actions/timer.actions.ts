@@ -4,12 +4,6 @@ import { HistoryEntity } from '../reducers/history.reducer';
 
 import { AddTimerInfo, TimerInfo } from '../models';
 
-export const START_TIMER = '[Timer] Start Timer';
-export class StartTimer implements Action {
-  readonly type = START_TIMER;
-  constructor(public startTime: number) { }
-}
-
 export const RESET_TIMER = '[Timer] Reset Timer';
 export class ResetTimer implements Action {
   readonly type = RESET_TIMER;
@@ -64,8 +58,7 @@ export class LoadTimerInfoSucceeded implements Action {
   constructor(public info: TimerInfo) { }
 }
 
-export type All = StartTimer |
-  ResetTimer |
+export type All = ResetTimer |
   SetGame |
   SetPlatform |
   SetStartTime |

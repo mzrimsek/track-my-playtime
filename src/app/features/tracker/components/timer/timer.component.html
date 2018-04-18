@@ -20,7 +20,7 @@
   </div>
 
   <div class="time"
-       [class.active]="info.active">
+       [class.active]="info.startTime !== 0">
     <div data-tracking-category="timerTime"
          (click)="openDateTimePicker(startTimeEl)">{{ info.startTime | elapsedTime:currentTime }}</div>
 
@@ -35,7 +35,7 @@
   </div>
 
   <div class="primary-action">
-    <div *ngIf="!info.active">
+    <div *ngIf="info.startTime === 0">
       <button data-tracking-category="timerStart"
               class="start fa-2x icon-button"
               (click)="startTimer()">
@@ -43,7 +43,7 @@
       </button>
     </div>
 
-    <div *ngIf="info.active">
+    <div *ngIf="info.startTime !== 0">
       <button data-tracking-category="timerStop"
               class="stop fa-2x icon-button"
               (click)="stopTimer()">
@@ -53,7 +53,7 @@
   </div>
 
   <div class="secondary-action">
-    <div *ngIf="info.active">
+    <div *ngIf="info.startTime !== 0">
       <button data-tracking-category="timerCancel"
               class="cancel fa-lg icon-button"
               (click)="cancelTimer()">

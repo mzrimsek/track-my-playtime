@@ -6,24 +6,16 @@ export interface State {
   game: string;
   platform: string;
   startTime: number;
-  active: boolean;
 }
 
 const initialState: State = {
   game: '',
   platform: '',
-  startTime: 0,
-  active: false
+  startTime: 0
 };
 
 export function reducer(state: State = initialState, action: actions.All): State {
   switch (action.type) {
-    case actions.START_TIMER: {
-      return tassign(state, {
-        startTime: action.startTime,
-        active: true
-      });
-    }
     case actions.RESET_TIMER: {
       return initialState;
     }
@@ -35,6 +27,9 @@ export function reducer(state: State = initialState, action: actions.All): State
     }
     case actions.SET_START_TIME: {
       return tassign(state, { startTime: action.startTime });
+    }
+    case actions.LOAD_TIMER_INFO_SUCCEEDED: {
+      return tassign(state, action.info);
     }
     default: {
       return state;

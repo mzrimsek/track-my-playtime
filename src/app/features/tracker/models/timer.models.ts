@@ -1,7 +1,6 @@
 export interface TimerInfo {
   game: string;
   platform: string;
-  active: boolean;
   startTime: number;
 }
 
