@@ -11,14 +11,14 @@ describe('GraphTooltipComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [GraphTooltipComponent, TimePipe]
-    })
-      .compileComponents();
-  }));
-
-  beforeEach(() => {
+    }).compileComponents();
     fixture = TestBed.createComponent(GraphTooltipComponent);
     component = fixture.componentInstance;
-  });
+  }));
+
+  it('Should create the component', async(() => {
+    expect(component).toBeTruthy();
+  }));
 
   it('Should have name value in name element', () => {
     component.model = {
