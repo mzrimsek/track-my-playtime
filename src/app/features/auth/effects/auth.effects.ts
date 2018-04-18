@@ -18,7 +18,8 @@ export class AuthEffects {
       .map(action => action as userActions.Authenticated)
       .mergeMap(action => [
         new platformsActions.LoadOptions(),
-        new historyActions.LoadHistoryItems(action.user.uid)
+        new historyActions.LoadHistoryItems(action.user.uid),
+        new timerActions.LoadTimerInfo(action.user.uid)
       ]);
 
   @Effect() logout$ =

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
+import { Observable } from 'rxjs/Observable';
 
 import { TimerInfo } from '../models';
 
@@ -37,6 +38,13 @@ export class TimerService {
       game: '',
       platform: '',
       startTime: 0
+    });
+  }
+
+  getTimerInfo(userId: string): Observable<TimerInfo> {
+    const timerDoc = this.timerCollection.doc<FirestoreTimerItem>(userId).valueChanges().first();
+    return timerDoc.map(timer => <TimerInfo>{
+      ...timer
     });
   }
 }
