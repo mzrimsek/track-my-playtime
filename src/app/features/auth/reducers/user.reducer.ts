@@ -2,10 +2,12 @@ import { tassign } from 'tassign';
 
 import * as actions from '../actions/user.actions';
 
-import { User } from '../models';
-
-// tslint:disable-next-line:no-empty-interface
-export interface State extends User { }
+export interface State {
+  uid: string;
+  displayName: string;
+  email: string;
+  photoURL: string;
+}
 
 const initialState: State = {
   uid: '',
