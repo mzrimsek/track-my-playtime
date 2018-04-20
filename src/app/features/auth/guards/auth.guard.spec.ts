@@ -15,7 +15,7 @@ import * as fromAuth from '../reducers/root.reducer';
 describe('AuthGuard', () => {
   let guard: AuthGuard;
   let store: Store<fromAuth.State>;
-  let route = jasmine.createSpyObj('ActivatedRouteSnapshot', ['toString']);
+  let routeSnapshot: RouterStateSnapshot = jasmine.createSpyObj('RouteStateSnapshot', ['toString']);
   let router = {
     navigate: jasmine.createSpy('navigate')
   };
@@ -31,13 +31,13 @@ describe('AuthGuard', () => {
       providers: [
         AuthGuard,
         { provide: Router, useValue: router },
-        { provide: ActivatedRouteSnapshot, useValue: route }
+        { provide: RouterStateSnapshot, useValue: routeSnapshot }
       ],
     }).compileComponents();
 
     guard = TestBed.get(AuthGuard);
     store = TestBed.get(Store);
-    route = TestBed.get(ActivatedRouteSnapshot);
+    routeSnapshot = TestBed.get(RouterStateSnapshot);
     router = TestBed.get(Router);
   });
 
@@ -45,39 +45,18 @@ describe('AuthGuard', () => {
     store.dispatch(new actions.NotAuthenticated());
     const expected = cold('(a|)', { a: false });
 
-    const routerState: RouterStateSnapshot = {
-      root: route,
-      url: ''
-    };
-
-    const result = guard.canActivate(route, routerState);
+    const result = guard.canActivate(new ActivatedRouteSnapshot(), routeSnapshot);
 
     expect(result).toBeObservable(expected);
   });
 
-  it('Should navigate to login when user is not authenticated', () => {
+  xit('Should navigate user to login with return url param when user not authenticated', () => {
     store.dispatch(new actions.NotAuthenticated());
-    const routerState: RouterStateSnapshot = {
-      root: route,
-      url: ''
-    };
+    routeSnapshot.url = '/protected';
 
-    guard.canActivate(route, routerState);
+    guard.canActivate(new ActivatedRouteSnapshot(), routeSnapshot);
 
-    expect(router.navigate).toHaveBeenCalledWith(['/login'], { queryParams: { returnUrl: '' } });
-  });
-
-  it('Should navigate to login with correct returnUrl when user is not authenticated from protected route', () => {
-    store.dispatch(new actions.NotAuthenticated());
-    route.url = 'app';
-    const routerState: RouterStateSnapshot = {
-      root: route,
-      url: ''
-    };
-
-    guard.canActivate(route, routerState);
-
-    expect(router.navigate).toHaveBeenCalledWith(['/login'], { queryParams: { returnUrl: 'app' } });
+    expect(router.navigate).toHaveBeenCalledWith(['/login'], { queryParams: { returnUrl: '/protected ' } });
   });
 
   it('Should return true when user is authenticated', () => {
@@ -89,12 +68,8 @@ describe('AuthGuard', () => {
       photoURL: 'jimbob.com/jimbob.png'
     }));
     const expected = cold('(a|)', { a: true });
-    const routerState: RouterStateSnapshot = {
-      root: route,
-      url: ''
-    };
 
-    const result = guard.canActivate(route, routerState);
+    const result = guard.canActivate(new ActivatedRouteSnapshot(), routeSnapshot);
 
     expect(result).toBeObservable(expected);
   });
