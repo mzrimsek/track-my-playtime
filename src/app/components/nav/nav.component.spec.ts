@@ -1,5 +1,6 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { combineReducers, StoreModule } from '@ngrx/store';
@@ -60,4 +61,43 @@ describe('NavComponent', () => {
   it('Should create the component', async(() => {
     expect(component).toBeTruthy();
   }));
+
+  describe('Nav Banner Link', () => {
+    let navBannerLink: any;
+
+    beforeEach(async(() => {
+      navBannerLink = fixture.debugElement.query(By.css('#navBannerLink'));
+    }));
+
+    it('Should have correct href', async(() => {
+      const href = navBannerLink.nativeElement.getAttribute('href');
+      expect(href).toBe('/app');
+    }));
+  });
+
+  describe('Nav Tracker Link', () => {
+    let navTrackerLink: any;
+
+    beforeEach(async(() => {
+      navTrackerLink = fixture.debugElement.query(By.css('#navTrackerLink'));
+    }));
+
+    it('Should have correct href', async(() => {
+      const href = navTrackerLink.nativeElement.getAttribute('href');
+      expect(href).toBe('/app/tracker');
+    }));
+  });
+
+  describe('Nav Dashboard Link', () => {
+    let navDashboardLink: any;
+
+    beforeEach(async(() => {
+      navDashboardLink = fixture.debugElement.query(By.css('#navDashboardLink'));
+    }));
+
+    it('Should have correct href', async(() => {
+      const href = navDashboardLink.nativeElement.getAttribute('href');
+      expect(href).toBe('/app/dashboard');
+    }));
+  });
 });
