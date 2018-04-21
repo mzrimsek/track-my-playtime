@@ -1,7 +1,6 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { LoginComponent } from '../../features/auth/components/login/login.component';
@@ -11,7 +10,6 @@ import { HeaderComponent } from './header.component';
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
   let fixture: ComponentFixture<HeaderComponent>;
-  let router: Router;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -37,7 +35,6 @@ describe('HeaderComponent', () => {
 
     fixture = TestBed.createComponent(HeaderComponent);
     component = fixture.componentInstance;
-    router = TestBed.get(Router);
     fixture.detectChanges();
   }));
 

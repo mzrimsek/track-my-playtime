@@ -15,7 +15,6 @@ import { TrackerComponent } from './features/tracker/tracker.component';
 import { GraphService } from './features/dashboard/services/graph.service';
 import { ClockService } from './features/tracker/services/clock.service';
 
-import { ElapsedTimePipe } from './shared/pipes/elapsed-time.pipe';
 import { TimePipe } from './shared/pipes/time.pipe';
 
 import * as actions from './actions/app.actions';
@@ -39,8 +38,7 @@ describe('AppComponent', () => {
         LoginComponent,
         TrackerComponent,
         DashboardComponent,
-        TimePipe,
-        ElapsedTimePipe
+        TimePipe
       ],
       imports: [
         RouterTestingModule.withRoutes([
