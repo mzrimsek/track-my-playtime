@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { combineReducers, StoreModule } from '@ngrx/store';
+import { combineReducers, Store, StoreModule } from '@ngrx/store';
 
 import { DashboardComponent } from '../../features/dashboard/dashboard.component';
 import { TrackerComponent } from '../../features/tracker/tracker.component';
@@ -13,12 +13,15 @@ import { UserService } from '../../features/auth/services/user.service';
 
 import { TimePipe } from '../../shared/pipes/time.pipe';
 
+import * as userActions from '../../features/auth/actions/user.actions';
+
 import * as fromAuth from '../../features/auth/reducers/root.reducer';
 import * as fromRoot from '../../reducers/root.reducer';
 
 describe('NavComponent', () => {
   let component: NavComponent;
   let fixture: ComponentFixture<NavComponent>;
+  let store: Store<fromAuth.State>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -29,21 +32,7 @@ describe('NavComponent', () => {
         TimePipe
       ],
       imports: [
-        RouterTestingModule.withRoutes([
-          {
-            path: 'app',
-            children: [
-              {
-                path: 'tracker',
-                component: TrackerComponent
-              },
-              {
-                path: 'dashboard',
-                component: DashboardComponent
-              }
-            ]
-          }
-        ]),
+        RouterTestingModule,
         StoreModule.forRoot({
           ...fromRoot.reducers,
           'auth': combineReducers(fromAuth.reducers)
@@ -52,6 +41,10 @@ describe('NavComponent', () => {
       providers: [UserService],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
+
+    store = TestBed.get(Store);
+
+    spyOn(store, 'dispatch').and.callThrough();
 
     fixture = TestBed.createComponent(NavComponent);
     component = fixture.componentInstance;
@@ -62,42 +55,30 @@ describe('NavComponent', () => {
     expect(component).toBeTruthy();
   }));
 
-  describe('Nav Banner Link', () => {
-    let navBannerLink: any;
+  it('Should have nav banner link with correct href', async(() => {
+    const navBannerLink = fixture.debugElement.query(By.css('#navBannerLink'));
+    const href = navBannerLink.nativeElement.getAttribute('href');
+    expect(href).toBe('/app');
+  }));
 
-    beforeEach(async(() => {
-      navBannerLink = fixture.debugElement.query(By.css('#navBannerLink'));
-    }));
+  it('Should have nav tracker link with correct href', async(() => {
+    const navTrackerLink = fixture.debugElement.query(By.css('#navTrackerLink'));
+    const href = navTrackerLink.nativeElement.getAttribute('href');
+    expect(href).toBe('/app/tracker');
+  }));
 
-    it('Should have correct href', async(() => {
-      const href = navBannerLink.nativeElement.getAttribute('href');
-      expect(href).toBe('/app');
-    }));
-  });
+  it('Should have nav dashboard link with correct href', async(() => {
+    const navDashboardLink = fixture.debugElement.query(By.css('#navDashboardLink'));
+    const href = navDashboardLink.nativeElement.getAttribute('href');
+    expect(href).toBe('/app/dashboard');
+  }));
 
-  describe('Nav Tracker Link', () => {
-    let navTrackerLink: any;
+  it('Should dispatch Logout on logout button click', async(() => {
+    const action = new userActions.Logout();
+    const button = fixture.nativeElement.querySelector('#logoutButton');
 
-    beforeEach(async(() => {
-      navTrackerLink = fixture.debugElement.query(By.css('#navTrackerLink'));
-    }));
+    button.click();
 
-    it('Should have correct href', async(() => {
-      const href = navTrackerLink.nativeElement.getAttribute('href');
-      expect(href).toBe('/app/tracker');
-    }));
-  });
-
-  describe('Nav Dashboard Link', () => {
-    let navDashboardLink: any;
-
-    beforeEach(async(() => {
-      navDashboardLink = fixture.debugElement.query(By.css('#navDashboardLink'));
-    }));
-
-    it('Should have correct href', async(() => {
-      const href = navDashboardLink.nativeElement.getAttribute('href');
-      expect(href).toBe('/app/dashboard');
-    }));
-  });
+    expect(store.dispatch).toHaveBeenCalledWith(action);
+  }));
 });

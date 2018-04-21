@@ -18,18 +18,7 @@ describe('HeaderComponent', () => {
         HomeComponent,
         LoginComponent
       ],
-      imports: [
-        RouterTestingModule.withRoutes([
-          {
-            path: '',
-            component: HomeComponent
-          },
-          {
-            path: 'login',
-            component: LoginComponent
-          }
-        ])
-      ],
+      imports: [RouterTestingModule],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
 

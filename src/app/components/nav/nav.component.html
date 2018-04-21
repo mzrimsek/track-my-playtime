@@ -34,7 +34,8 @@
       <div class="name">{{ user.displayName }}</div>
     </div>
 
-    <button data-tracking-category="navLogout"
+    <button id="logoutButton"
+            data-tracking-category="navLogout"
             class="logout icon-button"
             (click)="logout()">
       <fa-icon [icon]="icons.logout"></fa-icon>
