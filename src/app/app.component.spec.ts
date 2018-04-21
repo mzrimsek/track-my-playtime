@@ -4,20 +4,31 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { Store, StoreModule } from '@ngrx/store';
+import { combineReducers, Store, StoreModule } from '@ngrx/store';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './features/auth/components/login/login.component';
+import { DashboardComponent } from './features/dashboard/dashboard.component';
 import { HomeComponent } from './features/home/home.component';
+import { TrackerComponent } from './features/tracker/tracker.component';
+
+import { GraphService } from './features/dashboard/services/graph.service';
+import { ClockService } from './features/tracker/services/clock.service';
+
+import { ElapsedTimePipe } from './shared/pipes/elapsed-time.pipe';
+import { TimePipe } from './shared/pipes/time.pipe';
 
 import * as actions from './actions/app.actions';
 
-import { reducers, State } from './reducers/root.reducer';
+import * as fromTracker from './features/tracker/reducers/root.reducer';
+import * as fromRoot from './reducers/root.reducer';
+
+import './rxjs-operators';
 
 describe('AppComponent', () => {
   let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
-  let store: Store<State>;
+  let store: Store<fromRoot.State>;
   let router: Router;
 
   beforeEach(async(() => {
@@ -25,7 +36,11 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent,
         HomeComponent,
-        LoginComponent
+        LoginComponent,
+        TrackerComponent,
+        DashboardComponent,
+        TimePipe,
+        ElapsedTimePipe
       ],
       imports: [
         RouterTestingModule.withRoutes([
@@ -39,14 +54,28 @@ describe('AppComponent', () => {
           },
           {
             path: 'app',
-            children: []
+            children: [
+              {
+                path: 'tracker',
+                component: TrackerComponent
+              },
+              {
+                path: 'dashboard',
+                component: DashboardComponent
+              }
+            ]
           }
         ]),
         StoreModule.forRoot({
-          ...reducers
+          ...fromRoot.reducers,
+          'tracker': combineReducers(fromTracker.reducers)
         })
       ],
-      providers: [{ provide: APP_BASE_HREF, useValue: '/' }],
+      providers: [
+        { provide: APP_BASE_HREF, useValue: '/' },
+        GraphService,
+        ClockService
+      ],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
 
@@ -135,6 +164,31 @@ describe('AppComponent', () => {
       fixture.detectChanges();
       const nav = fixture.nativeElement.querySelector('app-nav');
       expect(nav).toBeTruthy();
+    }));
+  });
+
+  describe('On Tracker Route', () => {
+    beforeEach(async(() => {
+      router.navigate(['app/tracker']);
+    }));
+
+    // FIXME: This test fails when it is async?
+    it('Should show tracker component', () => {
+      fixture.detectChanges();
+      const tracker = fixture.nativeElement.querySelector('app-tracker');
+      expect(tracker).toBeTruthy();
+    });
+  });
+
+  describe('On Dashboard Route', () => {
+    beforeEach(async(() => {
+      router.navigate(['app/dashboard']);
+    }));
+
+    it('Should show dashboard component', async(() => {
+      fixture.detectChanges();
+      const dashboard = fixture.nativeElement.querySelector('app-dashboard');
+      expect(dashboard).toBeTruthy();
     }));
   });
 });

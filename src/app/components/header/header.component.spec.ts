@@ -56,11 +56,6 @@ describe('HeaderComponent', () => {
       const href = bannerLink.nativeElement.getAttribute('href');
       expect(href).toBe('/');
     }));
-
-    xit('Should navigate to correct location', async(() => {
-      bannerLink.nativeElement.click();
-      fail();
-    }));
   });
 
   describe('Login Link', () => {
@@ -73,11 +68,6 @@ describe('HeaderComponent', () => {
     it('Should have correct href', async(() => {
       const href = loginLink.nativeElement.getAttribute('href');
       expect(href).toBe('/login');
-    }));
-
-    xit('Should navigate to correct location', async(() => {
-      loginLink.nativeElement.click();
-      fail();
     }));
   });
 });
