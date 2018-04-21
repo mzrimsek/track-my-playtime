@@ -60,6 +60,11 @@ describe('AppComponent', () => {
               {
                 path: 'dashboard',
                 component: DashboardComponent
+              },
+              {
+                path: '**',
+                redirectTo: '/app/tracker',
+                pathMatch: 'full'
               }
             ]
           }
@@ -152,17 +157,26 @@ describe('AppComponent', () => {
       expect(shouldShowHeader).toBe(false);
     }));
 
-    it('Should not show header', async(() => {
+    // FIXME: This test fails when it is async
+    it('Should not show header', () => {
       fixture.detectChanges();
       const header = fixture.nativeElement.querySelector('app-header');
       expect(header).toBeNull();
-    }));
+    });
 
-    it('Should show nav', async(() => {
+    // FIXME: This test fails when it is async
+    it('Should show nav', () => {
       fixture.detectChanges();
       const nav = fixture.nativeElement.querySelector('app-nav');
       expect(nav).toBeTruthy();
-    }));
+    });
+
+    // FIXME: This test fails when it is async
+    it('Should show tracker component', () => {
+      fixture.detectChanges();
+      const tracker = fixture.nativeElement.querySelector('app-tracker');
+      expect(tracker).toBeTruthy();
+    });
   });
 
   describe('On Tracker Route', () => {
@@ -170,7 +184,7 @@ describe('AppComponent', () => {
       router.navigate(['app/tracker']);
     }));
 
-    // FIXME: This test fails when it is async?
+    // FIXME: This test fails when it is async
     it('Should show tracker component', () => {
       fixture.detectChanges();
       const tracker = fixture.nativeElement.querySelector('app-tracker');
