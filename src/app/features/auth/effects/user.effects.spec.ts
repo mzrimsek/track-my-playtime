@@ -38,7 +38,7 @@ describe('User Effects', () => {
       actions = hot('-a', { a: new userActions.GetUser() });
       const returnUrl = 'some/route';
       mockActivatedRoute.queryParams = { returnUrl };
-      const user = {
+      const user: User = {
         uid: 'some id',
         displayName: 'Jim Bob',
         email: 'jimbob@jimbob.com',
