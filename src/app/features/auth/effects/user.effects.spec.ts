@@ -11,6 +11,8 @@ import { UserEffects } from './user.effects';
 
 import * as userActions from '../actions/user.actions';
 
+import { User } from '../models';
+
 describe('User Effects', () => {
   let actions: any;
   let effects: UserEffects;
@@ -32,16 +34,31 @@ describe('User Effects', () => {
   });
 
   describe('Get User', () => {
-    it('Should dispatch Authenticated when user is authenticated', () => {
-      fail();
-    });
+    it('Should dispatch Authenticated and navigate to return url when user is authenticated', () => {
+      actions = hot('-a', { a: new userActions.GetUser() });
+      const returnUrl = 'some/route';
+      mockActivatedRoute.queryParams = { returnUrl };
+      const user = {
+        uid: 'some id',
+        displayName: 'Jim Bob',
+        email: 'jimbob@jimbob.com',
+        photoURL: 'jimbob.com/jimbob.png'
+      };
+      const expected = cold('-(b)', {
+        b: new userActions.Authenticated(user)
+      });
 
-    it('Should navigate to return url when user is authenticated', () => {
-      fail();
+      expect(effects.logout$).toBeObservable(expected);
+      expect(router.navigate).toHaveBeenCalledWith([returnUrl]);
     });
 
     it('Should dispatch NotAuthenticated when user is not authenticated', () => {
-      fail();
+      actions = hot('-a', { a: new userActions.GetUser() });
+      const expected = cold('-(b)', {
+        b: new userActions.NotAuthenticated()
+      });
+
+      expect(effects.getUser$).toBeObservable(expected);
     });
   });
 
@@ -57,6 +74,7 @@ describe('User Effects', () => {
       const expected = cold('-(b)', {
         b: new userActions.NotAuthenticated()
       });
+
       expect(effects.logout$).toBeObservable(expected);
       expect(router.navigate).toHaveBeenCalledWith(['login']);
     });
@@ -73,6 +91,9 @@ const fakeSignOutHandler = (): Promise<any> => {
 const angularFireAuthStub = {
   authState: fakeAuthState,
   auth: {
+    signInWithPopup: Promise.resolve({
+      user: fakeAuthState
+    }),
     signOut: jasmine
       .createSpy('signOut')
       .and
