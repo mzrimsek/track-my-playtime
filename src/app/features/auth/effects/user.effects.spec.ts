@@ -2,7 +2,6 @@ import { TestBed } from '@angular/core/testing';
 
 import { provideMockActions } from '@ngrx/effects/testing';
 
-import { AuthEffects } from './auth.effects';
 import { UserEffects } from './user.effects';
 
 describe('User Effects', () => {
@@ -12,7 +11,7 @@ describe('User Effects', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
-        AuthEffects,
+        UserEffects,
         provideMockActions(() => actions)
       ]
     });
@@ -20,14 +19,32 @@ describe('User Effects', () => {
   });
 
   describe('Get User', () => {
+    it('Should dispatch Authenticated when user is authenticated', () => {
 
+    });
+
+    it('Should navigate to return url when user is authenticated', () => {
+
+    });
+
+    it('Should dispatch NotAuthenticated when user is not authenticated', () => {
+
+    });
   });
 
   describe('Google Login', () => {
+    it('Should dispatch GetUser', () => {
 
+    });
   });
 
   describe('Logout', () => {
+    it('Should dispatch NotAuthenticated', () => {
 
+    });
+
+    it('Should navgiate to login', () => {
+
+    });
   });
 });
