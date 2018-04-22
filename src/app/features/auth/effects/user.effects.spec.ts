@@ -48,7 +48,7 @@ describe('User Effects', () => {
         b: new userActions.Authenticated(user)
       });
 
-      expect(effects.logout$).toBeObservable(expected);
+      expect(effects.getUser$).toBeObservable(expected);
       expect(router.navigate).toHaveBeenCalledWith([returnUrl]);
     });
 
