@@ -15,3 +15,4 @@ A time tracker app specific to video games.
 * [FontAwesome](https://fontawesome.com/) (via [angular-fontawesome](https://github.com/FortAwesome/angular-fontawesome))
 * [Google Analytics](https://www.google.com/analytics) (via [Angulartics2](https://github.com/angulartics/angulartics2))
 * [D3](https://d3js.org/) (via [ngx-charts](https://github.com/swimlane/ngx-charts))
+* [Adsense](https://www.google.com/adsense/start/) via ([ng2-adsense](https://github.com/scttcper/ng2-adsense))
