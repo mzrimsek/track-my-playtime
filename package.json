@@ -42,6 +42,7 @@
     "firebase": "4.12.1",
     "insert-analytics-elements": "0.0.2",
     "ng-pick-datetime": "^5.2.5",
+    "ng2-adsense": "^5.2.0",
     "rxjs": "^5.5.10",
     "tassign": "^1.0.0",
     "uuid": "^3.2.1",

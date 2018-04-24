@@ -7,6 +7,10 @@ export interface Environment {
     namespace: string;
   };
   googleTagManager: string;
+  adsense: {
+    client: string;
+    navAdSlot: string;
+  };
 }
 
 interface FirebaseConfig {

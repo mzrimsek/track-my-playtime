@@ -15,5 +15,9 @@ export const environment: Environment = {
     domain: 'https://trackmyplaytime.com',
     namespace: 'e3f55957-93ab-507a-9c01-86eb4e4bc347'
   },
-  googleTagManager: 'GTM-MTTF78T'
+  googleTagManager: 'GTM-MTTF78T',
+  adsense: {
+    client: 'ca-pub-5689921718615200',
+    navAdSlot: '5589551149'
+  }
 };
