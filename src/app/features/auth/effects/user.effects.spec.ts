@@ -34,7 +34,22 @@ describe('User Effects', () => {
   });
 
   describe('Get User', () => {
-    it('Should dispatch Authenticated and navigate to return url when user is authenticated', () => {
+    it('Should dispatch Authenticated', () => {
+      actions = hot('-a', { a: new userActions.GetUser() });
+      const user: User = {
+        uid: 'some id',
+        displayName: 'Jim Bob',
+        email: 'jimbob@jimbob.com',
+        photoURL: 'jimbob.com/jimbob.png'
+      };
+      const expected = cold('-(b)', {
+        b: new userActions.Authenticated(user)
+      });
+
+      expect(effects.getUser$).toBeObservable(expected);
+    });
+
+    it('Should navigate to return url when user is authenticated', () => {
       actions = hot('-a', { a: new userActions.GetUser() });
       const returnUrl = 'some/route';
       mockActivatedRoute.queryParams = { returnUrl };

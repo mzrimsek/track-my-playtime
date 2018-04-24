@@ -46,6 +46,10 @@ describe('History Effects', () => {
 
       expect(effects.loadHistoryItems$).toBeObservable(expected);
     });
+
+    it('Should call HistoryService getHistoryList', () => {
+      fail();
+    });
   });
 
   describe('Save Timer Info Succeeded', () => {
@@ -73,6 +77,10 @@ describe('History Effects', () => {
 
       expect(effects.removeHistoryItem$).toBeObservable(expected);
     });
+
+    it('Should call HistoryService deleteHistoryItem', () => {
+      fail();
+    });
   });
 
   describe('Update Game', () => {
@@ -89,6 +97,10 @@ describe('History Effects', () => {
       });
 
       expect(effects.updateGame$).toBeObservable(expected);
+    });
+
+    it('Should call HistoryService updateGame', () => {
+      fail();
     });
   });
 
@@ -107,6 +119,10 @@ describe('History Effects', () => {
 
       expect(effects.updatePlatform$).toBeObservable(expected);
     });
+
+    it('Should call HistoryService updatePlatform', () => {
+      fail();
+    });
   });
 
   describe('Update Elapsed Time', () => {
@@ -124,6 +140,10 @@ describe('History Effects', () => {
       });
 
       expect(effects.updateElapsedTime$).toBeObservable(expected);
+    });
+
+    it('Should call HistoryService updateElapsedTime', () => {
+      fail();
     });
   });
 });

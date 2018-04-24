@@ -39,6 +39,10 @@ describe('Platforms Effects', () => {
 
       expect(effects.loadOptions$).toBeObservable(expected);
     });
+
+    it('Should call PlatformsService getPlatformsOptions', () => {
+      fail();
+    });
   });
 });
 
