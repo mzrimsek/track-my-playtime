@@ -4,6 +4,7 @@ import { provideMockActions } from '@ngrx/effects/testing';
 
 import { cold, hot } from 'jasmine-marbles';
 import { Observable } from 'rxjs/Observable';
+import { ReplaySubject } from 'rxjs/ReplaySubject';
 
 import { TimerEffects } from './timer.effects';
 
@@ -11,6 +12,10 @@ import { HistoryService } from '../services/history.service';
 import { TimerService } from '../services/timer.service';
 
 import * as timerActions from '../actions/timer.actions';
+
+import { HistoryEntity } from '../reducers/history.reducer';
+
+import { AddTimerInfo, TimerInfo } from '../models';
 
 import '../../../rxjs-operators';
 
@@ -32,35 +37,100 @@ describe('Timer Effects', () => {
 
   describe('Save Timer Info', () => {
     it('Should dispatch SaveTimerInfoSucceeded and ResetTimer', () => {
-      fail();
+      const action = new timerActions.SaveTimerInfo({
+        userId: 'some user id',
+        game: 'some game',
+        platform: 'some platform',
+        startTime: 3000,
+        endTime: 6000
+      });
+
+      actions = hot('-a', { a: action });
+      const expected = cold('-(bc)', {
+        b: new timerActions.SaveTimerInfoSucceeded(mockItem),
+        c: new timerActions.ResetTimer()
+      });
+
+      expect(effects.saveTimerInfo$).toBeObservable(expected);
     });
 
-    it('Should call HistorySrevice saveTimerInfo', () => {
+    it('Should call HistoryService saveTimerInfo', () => {
+      const action = new timerActions.SaveTimerInfo({
+        userId: 'some user id',
+        ...mockInfo,
+        endTime: 6000
+      });
 
+      actions = new ReplaySubject(1);
+      actions.next(action);
+
+      const historyService = TestBed.get(HistoryService);
+      const spy = spyOn(historyService, 'saveTimerInfo');
+      effects.saveTimerInfo$.subscribe(() => {
+        expect(spy).toHaveBeenCalled();
+      });
     });
   });
 
   describe('Cancel Timer', () => {
     it('Should dispatch ResetTimer', () => {
-      fail();
+      actions = hot('-a', { a: new timerActions.CancelTimer() });
+      const expected = cold('-(b)', {
+        b: new timerActions.ResetTimer()
+      });
+      expect(effects.cancelTimer$).toBeObservable(expected);
     });
   });
 
   describe('Load Timer Info', () => {
     it('Should dispatch LoadTimerInfoSucceeded', () => {
-      fail();
+      const action = new timerActions.LoadTimerInfo('user id');
+
+      actions = hot('-a', { a: action });
+      const expected = cold('-(b)', {
+        b: new timerActions.LoadTimerInfoSucceeded(mockInfo)
+      });
+
+      expect(effects.loadTimerInfo$).toBeObservable(expected);
     });
 
     it('Should call TimerService getTimerInfo', () => {
-      fail();
+      const action = new timerActions.LoadTimerInfo('user id');
+
+      actions = new ReplaySubject(1);
+      actions.next(action);
+
+      const timerService = TestBed.get(TimerService);
+      const spy = spyOn(timerService, 'getTimerInfo');
+      effects.loadTimerInfo$.subscribe(() => {
+        expect(spy).toHaveBeenCalled();
+      });
     });
   });
 });
 
-class MockTimerService {
+const mockInfo: TimerInfo = {
+  game: 'some game',
+  platform: 'some platform',
+  startTime: 3000
+};
 
+class MockTimerService {
+  getTimerInfo(_userId: string): Observable<TimerInfo> {
+    return Observable.of(mockInfo);
+  }
 }
 
-class MockHistoryService {
+const mockItem: HistoryEntity = {
+  id: 'some id',
+  game: 'some game',
+  platform: 'some platform',
+  startTime: 3000,
+  endTime: 6000
+};
 
+class MockHistoryService {
+  saveTimerInfo(_info: AddTimerInfo): Observable<HistoryEntity> {
+    return Observable.of(mockItem);
+  }
 }

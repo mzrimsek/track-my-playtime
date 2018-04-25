@@ -4,6 +4,7 @@ import { provideMockActions } from '@ngrx/effects/testing';
 
 import { cold, hot } from 'jasmine-marbles';
 import { Observable } from 'rxjs/Observable';
+import { ReplaySubject } from 'rxjs/ReplaySubject';
 
 import { PlatformsEffects } from './platforms.effects';
 
@@ -41,7 +42,16 @@ describe('Platforms Effects', () => {
     });
 
     it('Should call PlatformsService getPlatformsOptions', () => {
-      fail();
+      const action = new platformsActions.LoadOptions();
+
+      actions = new ReplaySubject(1);
+      actions.next(action);
+
+      const platformsService = TestBed.get(PlatformsService);
+      const spy = spyOn(platformsService, 'getPlatformsOptions');
+      effects.loadOptions$.subscribe(() => {
+        expect(spy).toHaveBeenCalled();
+      });
     });
   });
 });

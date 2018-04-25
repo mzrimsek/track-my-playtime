@@ -6,6 +6,7 @@ import { provideMockActions } from '@ngrx/effects/testing';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { cold, hot } from 'jasmine-marbles';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { ReplaySubject } from 'rxjs/ReplaySubject';
 
 import { UserEffects } from './user.effects';
 
@@ -50,21 +51,15 @@ describe('User Effects', () => {
     });
 
     it('Should navigate to return url when user is authenticated', () => {
-      actions = hot('-a', { a: new userActions.GetUser() });
       const returnUrl = 'some/route';
       mockActivatedRoute.queryParams = { returnUrl };
-      const user: User = {
-        uid: 'some id',
-        displayName: 'Jim Bob',
-        email: 'jimbob@jimbob.com',
-        photoURL: 'jimbob.com/jimbob.png'
-      };
-      const expected = cold('-(b)', {
-        b: new userActions.Authenticated(user)
-      });
 
-      expect(effects.getUser$).toBeObservable(expected);
-      expect(router.navigate).toHaveBeenCalledWith([returnUrl]);
+      actions = new ReplaySubject(1);
+      actions.next(new userActions.GetUser());
+
+      effects.getUser$.subscribe(() => {
+        expect(router.navigate).toHaveBeenCalledWith([returnUrl]);
+      });
     });
 
     it('Should dispatch NotAuthenticated when user is not authenticated', () => {
@@ -79,7 +74,11 @@ describe('User Effects', () => {
 
   describe('Google Login', () => {
     it('Should dispatch GetUser', () => {
-      fail();
+      actions = hot('-a', { a: new userActions.GoogleLogin() });
+      const expected = cold('-(b)', {
+        b: new userActions.GetUser()
+      });
+      expect(effects.googleLogin$).toBeObservable(expected);
     });
   });
 
@@ -91,7 +90,15 @@ describe('User Effects', () => {
       });
 
       expect(effects.logout$).toBeObservable(expected);
-      expect(router.navigate).toHaveBeenCalledWith(['login']);
+    });
+
+    it('Should navigate to login', () => {
+      actions = new ReplaySubject(1);
+      actions.next(new userActions.Logout());
+
+      effects.logout$.subscribe(() => {
+        expect(router.navigate).toHaveBeenCalledWith(['login']);
+      });
     });
   });
 });

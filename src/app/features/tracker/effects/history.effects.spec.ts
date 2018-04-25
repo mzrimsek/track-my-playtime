@@ -4,6 +4,7 @@ import { provideMockActions } from '@ngrx/effects/testing';
 
 import { cold, hot } from 'jasmine-marbles';
 import { Observable } from 'rxjs/Observable';
+import { ReplaySubject } from 'rxjs/ReplaySubject';
 
 import { HistoryEffects } from './history.effects';
 
@@ -48,7 +49,16 @@ describe('History Effects', () => {
     });
 
     it('Should call HistoryService getHistoryList', () => {
-      fail();
+      const action = new historyActions.LoadHistoryItems('some user id');
+
+      actions = new ReplaySubject(1);
+      actions.next(action);
+
+      const historyService = TestBed.get(HistoryService);
+      const spy = spyOn(historyService, 'getHistoryList');
+      effects.loadHistoryItems$.subscribe(() => {
+        expect(spy).toHaveBeenCalled();
+      });
     });
   });
 
@@ -79,7 +89,16 @@ describe('History Effects', () => {
     });
 
     it('Should call HistoryService deleteHistoryItem', () => {
-      fail();
+      const action = new historyActions.RemoveHistoryItem('some user id', 'some item id');
+
+      actions = new ReplaySubject(1);
+      actions.next(action);
+
+      const historyService = TestBed.get(HistoryService);
+      const spy = spyOn(historyService, 'deleteHistoryItem');
+      effects.removeHistoryItem$.subscribe(() => {
+        expect(spy).toHaveBeenCalled();
+      });
     });
   });
 
@@ -100,7 +119,20 @@ describe('History Effects', () => {
     });
 
     it('Should call HistoryService updateGame', () => {
-      fail();
+      const payload: UpdateHistoryItemGamePayload = {
+        itemId: '1',
+        game: 'new game'
+      };
+      const action = new historyActions.UpdateGame('some user id', payload);
+
+      actions = new ReplaySubject(1);
+      actions.next(action);
+
+      const historyService = TestBed.get(HistoryService);
+      const spy = spyOn(historyService, 'updateGame');
+      effects.updateGame$.subscribe(() => {
+        expect(spy).toHaveBeenCalled();
+      });
     });
   });
 
@@ -121,7 +153,20 @@ describe('History Effects', () => {
     });
 
     it('Should call HistoryService updatePlatform', () => {
-      fail();
+      const payload: UpdateHistoryItemPlatformPayload = {
+        itemId: '1',
+        platform: 'new platform'
+      };
+      const action = new historyActions.UpdatePlatform('some user id', payload);
+
+      actions = new ReplaySubject(1);
+      actions.next(action);
+
+      const historyService = TestBed.get(HistoryService);
+      const spy = spyOn(historyService, 'updatePlatform');
+      effects.updatePlatform$.subscribe(() => {
+        expect(spy).toHaveBeenCalled();
+      });
     });
   });
 
@@ -143,7 +188,21 @@ describe('History Effects', () => {
     });
 
     it('Should call HistoryService updateElapsedTime', () => {
-      fail();
+      const payload: UpdateHistoryItemTimesPayload = {
+        itemId: '1',
+        startTime: 6000,
+        endTime: 9000
+      };
+      const action = new historyActions.UpdateElapsedTime('some user id', payload);
+
+      actions = new ReplaySubject(1);
+      actions.next(action);
+
+      const historyService = TestBed.get(HistoryService);
+      const spy = spyOn(historyService, 'updateElapsedTime');
+      effects.updateElapsedTime$.subscribe(() => {
+        expect(spy).toHaveBeenCalled();
+      });
     });
   });
 });
