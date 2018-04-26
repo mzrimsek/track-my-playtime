@@ -4,4 +4,4 @@ languages:
 - javascript
 exclude:
 - .*\.conf.js
-- .*\polyfills.ts
+- .*/polyfills.ts
