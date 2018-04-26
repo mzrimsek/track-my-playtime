@@ -24,6 +24,7 @@ import '../../../rxjs-operators';
 describe('History Effects', () => {
   let actions: any;
   let effects: HistoryEffects;
+  let historyService: HistoryService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -34,6 +35,7 @@ describe('History Effects', () => {
       ]
     });
     effects = TestBed.get(HistoryEffects);
+    historyService = TestBed.get(HistoryService);
   });
 
   describe('Load History Items', () => {
@@ -54,10 +56,9 @@ describe('History Effects', () => {
       actions = new ReplaySubject(1);
       actions.next(action);
 
-      const historyService = TestBed.get(HistoryService);
-      const spy = spyOn(historyService, 'getHistoryList').and.callThrough();
+      spyOn(historyService, 'getHistoryList').and.callThrough();
       effects.loadHistoryItems$.subscribe(() => {
-        expect(spy).toHaveBeenCalled();
+        expect(historyService.getHistoryList).toHaveBeenCalled();
       });
     });
   });
@@ -94,10 +95,9 @@ describe('History Effects', () => {
       actions = new ReplaySubject(1);
       actions.next(action);
 
-      const historyService = TestBed.get(HistoryService);
-      const spy = spyOn(historyService, 'deleteHistoryItem').and.callThrough();
+      spyOn(historyService, 'deleteHistoryItem').and.callThrough();
       effects.removeHistoryItem$.subscribe(() => {
-        expect(spy).toHaveBeenCalled();
+        expect(historyService.deleteHistoryItem).toHaveBeenCalled();
       });
     });
   });
@@ -128,10 +128,9 @@ describe('History Effects', () => {
       actions = new ReplaySubject(1);
       actions.next(action);
 
-      const historyService = TestBed.get(HistoryService);
-      const spy = spyOn(historyService, 'updateGame').and.callThrough();
+      spyOn(historyService, 'updateGame').and.callThrough();
       effects.updateGame$.subscribe(() => {
-        expect(spy).toHaveBeenCalled();
+        expect(historyService.updateGame).toHaveBeenCalled();
       });
     });
   });
@@ -162,10 +161,9 @@ describe('History Effects', () => {
       actions = new ReplaySubject(1);
       actions.next(action);
 
-      const historyService = TestBed.get(HistoryService);
-      const spy = spyOn(historyService, 'updatePlatform').and.callThrough();
+      spyOn(historyService, 'updatePlatform').and.callThrough();
       effects.updatePlatform$.subscribe(() => {
-        expect(spy).toHaveBeenCalled();
+        expect(historyService.updatePlatform).toHaveBeenCalled();
       });
     });
   });
@@ -198,10 +196,9 @@ describe('History Effects', () => {
       actions = new ReplaySubject(1);
       actions.next(action);
 
-      const historyService = TestBed.get(HistoryService);
-      const spy = spyOn(historyService, 'updateElapsedTime').and.callThrough();
+      spyOn(historyService, 'updateElapsedTime').and.callThrough();
       effects.updateElapsedTime$.subscribe(() => {
-        expect(spy).toHaveBeenCalled();
+        expect(historyService.updateElapsedTime).toHaveBeenCalled();
       });
     });
   });

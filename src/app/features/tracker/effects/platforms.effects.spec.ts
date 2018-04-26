@@ -17,6 +17,7 @@ import '../../../rxjs-operators';
 describe('Platforms Effects', () => {
   let actions: any;
   let effects: PlatformsEffects;
+  let platformsService: PlatformsService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -27,6 +28,7 @@ describe('Platforms Effects', () => {
       ]
     });
     effects = TestBed.get(PlatformsEffects);
+    platformsService = TestBed.get(PlatformsService);
   });
 
   describe('Load Options', () => {
@@ -47,10 +49,9 @@ describe('Platforms Effects', () => {
       actions = new ReplaySubject(1);
       actions.next(action);
 
-      const platformsService = TestBed.get(PlatformsService);
-      const spy = spyOn(platformsService, 'getPlatformsOptions').and.callThrough();
+      spyOn(platformsService, 'getPlatformsOptions').and.callThrough();
       effects.loadOptions$.subscribe(() => {
-        expect(spy).toHaveBeenCalled();
+        expect(platformsService.getPlatformsOptions).toHaveBeenCalled();
       });
     });
   });

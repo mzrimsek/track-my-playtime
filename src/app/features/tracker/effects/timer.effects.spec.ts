@@ -22,6 +22,8 @@ import '../../../rxjs-operators';
 describe('Timer Effects', () => {
   let actions: any;
   let effects: TimerEffects;
+  let timerService: TimerService;
+  let historyService: HistoryService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -33,6 +35,8 @@ describe('Timer Effects', () => {
       ]
     });
     effects = TestBed.get(TimerEffects);
+    timerService = TestBed.get(TimerService);
+    historyService = TestBed.get(HistoryService);
   });
 
   describe('Save Timer Info', () => {
@@ -64,10 +68,9 @@ describe('Timer Effects', () => {
       actions = new ReplaySubject(1);
       actions.next(action);
 
-      const historyService = TestBed.get(HistoryService);
-      const spy = spyOn(historyService, 'saveTimerInfo').and.callThrough();
+      spyOn(historyService, 'saveTimerInfo').and.callThrough();
       effects.saveTimerInfo$.subscribe(() => {
-        expect(spy).toHaveBeenCalled();
+        expect(historyService.saveTimerInfo).toHaveBeenCalled();
       });
     });
   });
@@ -100,10 +103,9 @@ describe('Timer Effects', () => {
       actions = new ReplaySubject(1);
       actions.next(action);
 
-      const timerService = TestBed.get(TimerService);
-      const spy = spyOn(timerService, 'getTimerInfo').and.callThrough();
+      spyOn(timerService, 'getTimerInfo').and.callThrough();
       effects.loadTimerInfo$.subscribe(() => {
-        expect(spy).toHaveBeenCalled();
+        expect(timerService.getTimerInfo).toHaveBeenCalled();
       });
     });
   });
