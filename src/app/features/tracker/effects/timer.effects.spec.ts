@@ -65,7 +65,7 @@ describe('Timer Effects', () => {
       actions.next(action);
 
       const historyService = TestBed.get(HistoryService);
-      const spy = spyOn(historyService, 'saveTimerInfo');
+      const spy = spyOn(historyService, 'saveTimerInfo').and.callThrough();
       effects.saveTimerInfo$.subscribe(() => {
         expect(spy).toHaveBeenCalled();
       });
@@ -101,7 +101,7 @@ describe('Timer Effects', () => {
       actions.next(action);
 
       const timerService = TestBed.get(TimerService);
-      const spy = spyOn(timerService, 'getTimerInfo');
+      const spy = spyOn(timerService, 'getTimerInfo').and.callThrough();
       effects.loadTimerInfo$.subscribe(() => {
         expect(spy).toHaveBeenCalled();
       });

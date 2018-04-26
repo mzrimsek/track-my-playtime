@@ -55,7 +55,7 @@ describe('History Effects', () => {
       actions.next(action);
 
       const historyService = TestBed.get(HistoryService);
-      const spy = spyOn(historyService, 'getHistoryList');
+      const spy = spyOn(historyService, 'getHistoryList').and.callThrough();
       effects.loadHistoryItems$.subscribe(() => {
         expect(spy).toHaveBeenCalled();
       });
@@ -95,7 +95,7 @@ describe('History Effects', () => {
       actions.next(action);
 
       const historyService = TestBed.get(HistoryService);
-      const spy = spyOn(historyService, 'deleteHistoryItem');
+      const spy = spyOn(historyService, 'deleteHistoryItem').and.callThrough();
       effects.removeHistoryItem$.subscribe(() => {
         expect(spy).toHaveBeenCalled();
       });
@@ -129,7 +129,7 @@ describe('History Effects', () => {
       actions.next(action);
 
       const historyService = TestBed.get(HistoryService);
-      const spy = spyOn(historyService, 'updateGame');
+      const spy = spyOn(historyService, 'updateGame').and.callThrough();
       effects.updateGame$.subscribe(() => {
         expect(spy).toHaveBeenCalled();
       });
@@ -163,7 +163,7 @@ describe('History Effects', () => {
       actions.next(action);
 
       const historyService = TestBed.get(HistoryService);
-      const spy = spyOn(historyService, 'updatePlatform');
+      const spy = spyOn(historyService, 'updatePlatform').and.callThrough();
       effects.updatePlatform$.subscribe(() => {
         expect(spy).toHaveBeenCalled();
       });
@@ -199,7 +199,7 @@ describe('History Effects', () => {
       actions.next(action);
 
       const historyService = TestBed.get(HistoryService);
-      const spy = spyOn(historyService, 'updateElapsedTime');
+      const spy = spyOn(historyService, 'updateElapsedTime').and.callThrough();
       effects.updateElapsedTime$.subscribe(() => {
         expect(spy).toHaveBeenCalled();
       });

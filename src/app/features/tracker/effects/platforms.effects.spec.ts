@@ -48,7 +48,7 @@ describe('Platforms Effects', () => {
       actions.next(action);
 
       const platformsService = TestBed.get(PlatformsService);
-      const spy = spyOn(platformsService, 'getPlatformsOptions');
+      const spy = spyOn(platformsService, 'getPlatformsOptions').and.callThrough();
       effects.loadOptions$.subscribe(() => {
         expect(spy).toHaveBeenCalled();
       });
