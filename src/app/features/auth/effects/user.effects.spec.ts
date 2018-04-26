@@ -70,6 +70,10 @@ describe('User Effects', () => {
 
       expect(effects.getUser$).toBeObservable(expected);
     });
+
+    it('Should dispatch Error on error', () => {
+      fail();
+    });
   });
 
   describe('Google Login', () => {
@@ -79,6 +83,10 @@ describe('User Effects', () => {
         b: new userActions.GetUser()
       });
       expect(effects.googleLogin$).toBeObservable(expected);
+    });
+
+    it('Should dispatch Error on error', () => {
+      fail();
     });
   });
 
@@ -99,6 +107,10 @@ describe('User Effects', () => {
       effects.logout$.subscribe(() => {
         expect(router.navigate).toHaveBeenCalledWith(['login']);
       });
+    });
+
+    it('Should dispatch Error on error', () => {
+      fail();
     });
   });
 });

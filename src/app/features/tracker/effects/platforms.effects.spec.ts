@@ -10,6 +10,7 @@ import { PlatformsEffects } from './platforms.effects';
 
 import { PlatformsService } from '../services/platforms.service';
 
+import * as appActions from '../../../actions/app.actions';
 import * as platformsActions from '../actions/platforms.actions';
 
 import '../../../rxjs-operators';
@@ -40,6 +41,19 @@ describe('Platforms Effects', () => {
         b: new platformsActions.LoadOptionsSucceeded(mockOptions)
       });
 
+      expect(effects.loadOptions$).toBeObservable(expected);
+    });
+
+    it('Should dispatch Error on error', () => {
+      const action = new platformsActions.LoadOptions();
+      const message = 'Something went terribly wrong';
+
+      actions = hot('-a', { a: action });
+      const expected = cold('-(b)', {
+        b: new appActions.Error(platformsActions.LOAD_OPTIONS, message)
+      });
+
+      spyOn(platformsService, 'getPlatformsOptions').and.callFake(() => Observable.throw({ message }));
       expect(effects.loadOptions$).toBeObservable(expected);
     });
 

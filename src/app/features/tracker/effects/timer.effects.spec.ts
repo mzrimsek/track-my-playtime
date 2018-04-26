@@ -11,6 +11,7 @@ import { TimerEffects } from './timer.effects';
 import { HistoryService } from '../services/history.service';
 import { TimerService } from '../services/timer.service';
 
+import * as appActions from '../../../actions/app.actions';
 import * as timerActions from '../actions/timer.actions';
 
 import { HistoryEntity } from '../reducers/history.reducer';
@@ -58,6 +59,25 @@ describe('Timer Effects', () => {
       expect(effects.saveTimerInfo$).toBeObservable(expected);
     });
 
+    it('Should dispatch Error on error', () => {
+      const action = new timerActions.SaveTimerInfo({
+        userId: 'some user id',
+        game: 'some game',
+        platform: 'some platform',
+        startTime: 3000,
+        endTime: 6000
+      });
+      const message = 'Something went terribly wrong';
+
+      actions = hot('-a', { a: action });
+      const expected = cold('-(b)', {
+        b: new appActions.Error(timerActions.SAVE_TIMER_INFO, message)
+      });
+
+      spyOn(historyService, 'saveTimerInfo').and.callFake(() => Observable.throw({ message }));
+      expect(effects.saveTimerInfo$).toBeObservable(expected);
+    });
+
     it('Should call HistoryService saveTimerInfo', () => {
       const action = new timerActions.SaveTimerInfo({
         userId: 'some user id',
@@ -94,6 +114,19 @@ describe('Timer Effects', () => {
         b: new timerActions.LoadTimerInfoSucceeded(mockInfo)
       });
 
+      expect(effects.loadTimerInfo$).toBeObservable(expected);
+    });
+
+    it('Should dispatch Error on error', () => {
+      const action = new timerActions.LoadTimerInfo('user id');
+      const message = 'Something went terribly wrong';
+
+      actions = hot('-a', { a: action });
+      const expected = cold('-(b)', {
+        b: new appActions.Error(timerActions.LOAD_TIMER_INFO, message)
+      });
+
+      spyOn(timerService, 'getTimerInfo').and.callFake(() => Observable.throw({ message }));
       expect(effects.loadTimerInfo$).toBeObservable(expected);
     });
 
