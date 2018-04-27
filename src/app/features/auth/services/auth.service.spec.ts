@@ -9,8 +9,6 @@ import { AuthService } from './auth.service';
 describe('Auth Service', () => {
   let service: AuthService;
   let afAuth: AngularFireAuth;
-  let isAuth$: Subscription;
-  let isAuthRef: boolean;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -22,15 +20,6 @@ describe('Auth Service', () => {
 
     service = TestBed.get(AuthService);
     afAuth = TestBed.get(AngularFireAuth);
-
-    isAuth$ = service.getAuthState()
-      .map(user => user !== null)
-      .subscribe(isAuth => isAuthRef = isAuth);
-  });
-
-  afterEach(() => {
-    fakeAuthState.next(null);
-    isAuth$.unsubscribe();
   });
 
   it('Should be created', () => {
@@ -38,24 +27,41 @@ describe('Auth Service', () => {
   });
 
   describe('getAuthState', () => {
+    let isAuth$: Subscription;
+    let isAuthRef: boolean;
+
+    beforeEach(() => {
+      isAuth$ = service.getAuthState()
+        .map(user => user !== null)
+        .subscribe(isAuth => isAuthRef = isAuth);
+    });
+
+    afterEach(() => {
+      fakeAuthState.next(null);
+      isAuth$.unsubscribe();
+    });
+
     it('Should return null when not authenticated', () => {
-      fail();
+      expect(isAuthRef).toBe(false);
     });
 
     it('Should return user info when authenticated ', () => {
-      fail();
+      service.signInWithGoogle();
+      expect(isAuthRef).toBe(true);
     });
   });
 
   describe('signInWithGoogle', () => {
     it('Should call AngularFireAuth signInWithPopup', () => {
-      fail();
+      service.signInWithGoogle();
+      expect(afAuth.auth.signInWithPopup).toHaveBeenCalled();
     });
   });
 
   describe('signOut', () => {
     it('Should call AngularFireAuth signOut', () => {
-      fail();
+      service.signOut();
+      expect(afAuth.auth.signOut).toHaveBeenCalled();
     });
   });
 });
@@ -67,9 +73,9 @@ const mockUser = {
   photoURL: 'jimbob.com/jimbob.png'
 };
 
-const fakeAuthState = new BehaviorSubject(null);
+const fakeAuthState: BehaviorSubject<any> = new BehaviorSubject(null);
 
-const fakeSignInHandler = (_provider: any): Promise<any> => {
+const fakeSignInHandler = (): Promise<any> => {
   fakeAuthState.next(mockUser);
   return Promise.resolve(mockUser);
 };
@@ -81,6 +87,14 @@ const fakeSignOutHandler = (): Promise<any> => {
 
 const angularFireAuthStub = {
   authState: fakeAuthState,
-  signInWithPopup: () => { },
-  signOut: () => { }
+  auth: {
+    signInWithPopup: jasmine
+      .createSpy('signInWithPopup')
+      .and
+      .callFake(fakeSignInHandler),
+    signOut: jasmine
+      .createSpy('signOut')
+      .and
+      .callFake(fakeSignOutHandler)
+  }
 };
