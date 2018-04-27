@@ -25,17 +25,13 @@ export class TimerEffects {
           new timerActions.SaveTimerInfoSucceeded(item),
           new timerActions.ResetTimer()
         ])
-        .catch(err =>
-          Observable.of(new appActions.Error(timerActions.SAVE_TIMER_INFO, err.message))
-        )
+        .catch(err => Observable.of(new appActions.Error(timerActions.SAVE_TIMER_INFO, err.message)))
       );
 
   @Effect() cancelTimer$ =
     this.actions$
       .ofType(timerActions.CANCEL_TIMER)
-      .mergeMap(() => [
-        new timerActions.ResetTimer()
-      ]);
+      .map(() => new timerActions.ResetTimer());
 
   @Effect() loadTimerInfo$ =
     this.actions$
@@ -43,8 +39,7 @@ export class TimerEffects {
       .map(action => action as timerActions.LoadTimerInfo)
       .map(action => action.userId)
       .switchMap(userId => this.timerService.getTimerInfo(userId)
-        .map(data => new timerActions.LoadTimerInfoSucceeded(data)))
-      .catch(err =>
-        Observable.of(new appActions.Error(timerActions.LOAD_TIMER_INFO, err.message))
+        .map(data => new timerActions.LoadTimerInfoSucceeded(data))
+        .catch(err => Observable.of(new appActions.Error(timerActions.LOAD_TIMER_INFO, err.message)))
       );
 }

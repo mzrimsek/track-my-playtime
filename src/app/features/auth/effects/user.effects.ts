@@ -25,15 +25,13 @@ export class UserEffects {
       .switchMap(() => this.authService.getAuthState()
         .map(authData => {
           if (authData) {
-            const returnUrl = this.getReturnUrl();
+            const returnUrl = this.route.snapshot.queryParams['returnUrl'] || 'app';
             this.router.navigate([returnUrl]);
             return this.getAuthenticatedAction(authData);
           }
           return new userActions.NotAuthenticated();
         })
-        .catch(err =>
-          Observable.of(new appActions.Error(userActions.GET_USER, err.message))
-        )
+        .catch(err => Observable.of(new appActions.Error(userActions.GET_USER, err.message)))
       );
 
   @Effect() googleLogin$ =
@@ -41,12 +39,8 @@ export class UserEffects {
       .ofType(userActions.GOOGLE_LOGIN)
       .map(action => action as userActions.GoogleLogin)
       .switchMap(() => this.authService.signInWithGoogle()
-        .map(() => {
-          return new userActions.GetUser();
-        })
-        .catch(err =>
-          Observable.of(new appActions.Error(userActions.GOOGLE_LOGIN, err.message))
-        )
+        .map(() => new userActions.GetUser())
+        .catch(err => Observable.of(new appActions.Error(userActions.GOOGLE_LOGIN, err.message)))
       );
 
   @Effect() logout$ =
@@ -58,14 +52,8 @@ export class UserEffects {
           this.router.navigate(['login']);
           return new userActions.NotAuthenticated();
         })
-        .catch(err =>
-          Observable.of(new appActions.Error(userActions.LOGOUT, err.message))
-        )
+        .catch(err => Observable.of(new appActions.Error(userActions.LOGOUT, err.message)))
       );
-
-  private getReturnUrl(): string {
-    return this.route.snapshot.queryParams['returnUrl'] || 'app';
-  }
 
   private getAuthenticatedAction(authData: AuthUser): userActions.Authenticated {
     const user = <User>{
