@@ -24,7 +24,12 @@ describe('Auth Effects', () => {
         provideMockActions(() => actions)
       ]
     });
+
     effects = TestBed.get(AuthEffects);
+  });
+
+  it('Should be created', () => {
+    expect(effects).toBeTruthy();
   });
 
   describe('Authenticated', () => {

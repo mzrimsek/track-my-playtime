@@ -35,8 +35,13 @@ describe('History Effects', () => {
         { provide: HistoryService, useClass: MockHistoryService }
       ]
     });
+
     effects = TestBed.get(HistoryEffects);
     historyService = TestBed.get(HistoryService);
+  });
+
+  it('Should be created', () => {
+    expect(effects).toBeTruthy();
   });
 
   describe('Load History Items', () => {

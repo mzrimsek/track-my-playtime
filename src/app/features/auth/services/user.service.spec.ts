@@ -32,6 +32,10 @@ describe('User Service', () => {
     spyOn(store, 'dispatch').and.callThrough();
   });
 
+  it('Should be created', () => {
+    expect(service).toBeTruthy();
+  });
+
   describe('getUser', () => {
     it('Should return the user', () => {
       const user: User = {

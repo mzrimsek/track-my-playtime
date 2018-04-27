@@ -28,8 +28,13 @@ describe('Platforms Effects', () => {
         { provide: PlatformsService, useClass: MockPlatformsService }
       ]
     });
+
     effects = TestBed.get(PlatformsEffects);
     platformsService = TestBed.get(PlatformsService);
+  });
+
+  it('Should be created', () => {
+    expect(effects).toBeTruthy();
   });
 
   describe('Load Options', () => {

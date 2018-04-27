@@ -41,6 +41,10 @@ describe('AuthGuard', () => {
     router = TestBed.get(Router);
   });
 
+  it('Should be created', () => {
+    expect(guard).toBeTruthy();
+  });
+
   it('Should return false when user not authenticated', () => {
     store.dispatch(new actions.NotAuthenticated());
     const expected = cold('(a|)', { a: false });

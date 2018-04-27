@@ -35,9 +35,14 @@ describe('Timer Effects', () => {
         { provide: HistoryService, useClass: MockHistoryService }
       ]
     });
+
     effects = TestBed.get(TimerEffects);
     timerService = TestBed.get(TimerService);
     historyService = TestBed.get(HistoryService);
+  });
+
+  it('Should be created', () => {
+    expect(effects).toBeTruthy();
   });
 
   describe('Save Timer Info', () => {

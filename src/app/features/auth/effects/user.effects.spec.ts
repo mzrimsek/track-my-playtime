@@ -1,18 +1,19 @@
 import { TestBed } from '@angular/core/testing';
 import { ActivatedRoute, Router } from '@angular/router';
 
+import { User as AuthUser } from '@firebase/auth-types';
 import { provideMockActions } from '@ngrx/effects/testing';
 
-import { AngularFireAuth } from 'angularfire2/auth';
 import { cold, hot } from 'jasmine-marbles';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs/Observable';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 
 import { UserEffects } from './user.effects';
 
-import * as userActions from '../actions/user.actions';
+import { AuthService } from '../services/auth.service';
 
-import { User } from '../models';
+import * as appActions from '../../../actions/app.actions';
+import * as userActions from '../actions/user.actions';
 
 describe('User Effects', () => {
   let actions: any;
@@ -20,59 +21,94 @@ describe('User Effects', () => {
   const router = {
     navigate: jasmine.createSpy('navigate')
   };
+  let authService: AuthService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
         UserEffects,
         provideMockActions(() => actions),
-        { provide: AngularFireAuth, useValue: angularFireAuthStub },
+        { provide: AuthService, useClass: MockAuthService },
         { provide: Router, useValue: router },
         { provide: ActivatedRoute, useValue: mockActivatedRoute }
       ]
     });
+
     effects = TestBed.get(UserEffects);
+    authService = TestBed.get(AuthService);
+  });
+
+  it('Should be created', () => {
+    expect(effects).toBeTruthy();
   });
 
   describe('Get User', () => {
-    it('Should dispatch Authenticated', () => {
-      actions = hot('-a', { a: new userActions.GetUser() });
-      const user: User = {
-        uid: 'some id',
-        displayName: 'Jim Bob',
-        email: 'jimbob@jimbob.com',
-        photoURL: 'jimbob.com/jimbob.png'
-      };
-      const expected = cold('-(b)', {
-        b: new userActions.Authenticated(user)
+    describe('Authenticated User', () => {
+      it('Should dispatch Authenticated', () => {
+        actions = hot('-a', { a: new userActions.GetUser() });
+
+        const expected = cold('-(b)', {
+          b: new userActions.Authenticated(mockUser)
+        });
+
+        authService.signInWithGoogle();
+        expect(effects.getUser$).toBeObservable(expected);
       });
 
-      expect(effects.getUser$).toBeObservable(expected);
+      it('Should navigate to "app" with no return url', () => {
+        actions = new ReplaySubject(1);
+        actions.next(new userActions.GetUser());
+
+        effects.getUser$.subscribe(() => {
+          expect(router.navigate).toHaveBeenCalledWith(['app']);
+        });
+      });
+
+      it('Should navigate to return url', () => {
+        const returnUrl = 'some/route';
+        mockActivatedRoute.snapshot.queryParams.returnUrl = returnUrl;
+
+        actions = new ReplaySubject(1);
+        actions.next(new userActions.GetUser());
+
+        effects.getUser$.subscribe(() => {
+          expect(router.navigate).toHaveBeenCalledWith([returnUrl]);
+        });
+      });
     });
 
-    it('Should navigate to return url when user is authenticated', () => {
-      const returnUrl = 'some/route';
-      mockActivatedRoute.queryParams = { returnUrl };
+    describe('Not Authenticated User', () => {
+      it('Should dispatch NotAuthenticated', () => {
+        actions = hot('-a', { a: new userActions.GetUser() });
 
-      actions = new ReplaySubject(1);
-      actions.next(new userActions.GetUser());
+        const expected = cold('-(b)', {
+          b: new userActions.NotAuthenticated()
+        });
 
-      effects.getUser$.subscribe(() => {
-        expect(router.navigate).toHaveBeenCalledWith([returnUrl]);
+        expect(effects.getUser$).toBeObservable(expected);
       });
-    });
-
-    it('Should dispatch NotAuthenticated when user is not authenticated', () => {
-      actions = hot('-a', { a: new userActions.GetUser() });
-      const expected = cold('-(b)', {
-        b: new userActions.NotAuthenticated()
-      });
-
-      expect(effects.getUser$).toBeObservable(expected);
     });
 
     it('Should dispatch Error on error', () => {
-      fail();
+      const message = 'Something went terribly wrong';
+      actions = hot('-a', { a: new userActions.GetUser() });
+
+      const expected = cold('-(b)', {
+        b: new appActions.Error(userActions.GET_USER, message)
+      });
+
+      spyOn(authService, 'getAuthState').and.callFake(() => Observable.throw({ message }));
+      expect(effects.getUser$).toBeObservable(expected);
+    });
+
+    it('Should call UserService getAuthState', () => {
+      actions = new ReplaySubject(1);
+      actions.next(new userActions.GetUser());
+
+      spyOn(authService, 'getAuthState').and.callThrough();
+      effects.getUser$.subscribe(() => {
+        expect(authService.getAuthState).toHaveBeenCalled();
+      });
     });
   });
 
@@ -86,12 +122,30 @@ describe('User Effects', () => {
     });
 
     it('Should dispatch Error on error', () => {
-      fail();
+      const message = 'Something went terribly wrong';
+      actions = hot('-a', { a: new userActions.GoogleLogin() });
+
+      const expected = cold('-(b)', {
+        b: new appActions.Error(userActions.GOOGLE_LOGIN, message)
+      });
+
+      spyOn(authService, 'signInWithGoogle').and.callFake(() => Observable.throw({ message }));
+      expect(effects.googleLogin$).toBeObservable(expected);
+    });
+
+    it('Should call UserService signInWithGoogle', () => {
+      actions = new ReplaySubject(1);
+      actions.next(new userActions.GoogleLogin());
+
+      spyOn(authService, 'signInWithGoogle').and.callThrough();
+      effects.googleLogin$.subscribe(() => {
+        expect(authService.signInWithGoogle).toHaveBeenCalled();
+      });
     });
   });
 
   describe('Logout', () => {
-    it('Should dispatch NotAuthenticated and navigate to login', () => {
+    it('Should dispatch NotAuthenticated', () => {
       actions = hot('-a', { a: new userActions.Logout() });
       const expected = cold('-(b)', {
         b: new userActions.NotAuthenticated()
@@ -110,31 +164,62 @@ describe('User Effects', () => {
     });
 
     it('Should dispatch Error on error', () => {
-      fail();
+      const message = 'Something went terribly wrong';
+      actions = hot('-a', { a: new userActions.Logout() });
+
+      const expected = cold('-(b)', {
+        b: new appActions.Error(userActions.LOGOUT, message)
+      });
+
+      spyOn(authService, 'signOut').and.callFake(() => Observable.throw({ message }));
+      expect(effects.logout$).toBeObservable(expected);
+    });
+
+    it('Should call UserService signOut', () => {
+      actions = new ReplaySubject(1);
+      actions.next(new userActions.Logout());
+
+      spyOn(authService, 'signOut').and.callThrough();
+      effects.logout$.subscribe(() => {
+        expect(authService.signOut).toHaveBeenCalled();
+      });
     });
   });
 });
 
-const fakeAuthState = new BehaviorSubject(null);
-
-const fakeSignOutHandler = (): Promise<any> => {
-  fakeAuthState.next(null);
-  return Promise.resolve();
-};
-
-const angularFireAuthStub = {
-  authState: fakeAuthState,
-  auth: {
-    signInWithPopup: Promise.resolve({
-      user: fakeAuthState
-    }),
-    signOut: jasmine
-      .createSpy('signOut')
-      .and
-      .callFake(fakeSignOutHandler),
-  },
-};
-
 const mockActivatedRoute = {
-  queryParams: {}
+  snapshot: {
+    queryParams: {
+      returnUrl: ''
+    }
+  }
 };
+
+const mockUser = {
+  uid: 'some id',
+  displayName: 'Jim Bob',
+  email: 'jimbob@jimbob.com',
+  photoURL: 'jimbob.com/jimbob.png'
+};
+
+class MockAuthService {
+  private authState: Observable<any>;
+
+  constructor() {
+    this.authState = Observable.of(null);
+  }
+
+  getAuthState(): Observable<AuthUser | null> {
+    return this.authState;
+  }
+
+  signInWithGoogle(): Observable<any> {
+    this.authState = Observable.of(mockUser);
+    return Observable.of('Logged in with Google');
+  }
+
+  signOut(): Observable<any> {
+    this.authState = Observable.of(null);
+    return Observable.of('Logged out');
+  }
+}
