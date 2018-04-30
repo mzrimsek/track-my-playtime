@@ -51,6 +51,10 @@ describe('Graph Service', () => {
         });
       });
     });
+
+    describe('When data in range', () => {
+
+    });
   });
 
   describe('getTimeVsPlatformGraphData', () => {
