@@ -55,24 +55,28 @@ describe('User Effects', () => {
         expect(effects.getUser$).toBeObservable(expected);
       });
 
-      it('Should navigate to "app" with no return url', () => {
-        actions = new ReplaySubject(1);
-        actions.next(new userActions.GetUser());
+      describe('Without return url', () => {
+        it('Should navigate to "app"', () => {
+          actions = new ReplaySubject(1);
+          actions.next(new userActions.GetUser());
 
-        effects.getUser$.subscribe(() => {
-          expect(router.navigate).toHaveBeenCalledWith(['app']);
+          effects.getUser$.subscribe(() => {
+            expect(router.navigate).toHaveBeenCalledWith(['app']);
+          });
         });
       });
 
-      it('Should navigate to return url', () => {
-        const returnUrl = 'some/route';
-        mockActivatedRoute.snapshot.queryParams.returnUrl = returnUrl;
+      describe('With return url', () => {
+        it('Should navigate to return url', () => {
+          const returnUrl = 'some/route';
+          mockActivatedRoute.snapshot.queryParams.returnUrl = returnUrl;
 
-        actions = new ReplaySubject(1);
-        actions.next(new userActions.GetUser());
+          actions = new ReplaySubject(1);
+          actions.next(new userActions.GetUser());
 
-        effects.getUser$.subscribe(() => {
-          expect(router.navigate).toHaveBeenCalledWith([returnUrl]);
+          effects.getUser$.subscribe(() => {
+            expect(router.navigate).toHaveBeenCalledWith([returnUrl]);
+          });
         });
       });
     });
