@@ -14,6 +14,7 @@ describe('TimeDateGraphComponent', () => {
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
+
     fixture = TestBed.createComponent(TimeDateGraphComponent);
     component = fixture.componentInstance;
   }));

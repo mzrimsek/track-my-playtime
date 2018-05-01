@@ -31,8 +31,6 @@ describe('Graph Service', () => {
 
     service = TestBed.get(GraphService);
     store = TestBed.get(Store);
-
-    spyOn(store, 'dispatch').and.callThrough();
   });
 
   it('Should be created', () => {

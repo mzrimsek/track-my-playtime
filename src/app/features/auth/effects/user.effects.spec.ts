@@ -67,7 +67,6 @@ describe('User Effects', () => {
       });
 
       describe('With return url', () => {
-
         // FIXME: How to properly mutate the return url to make this test pass
         xit('Should navigate to return url', () => {
           const returnUrl = 'some/route';

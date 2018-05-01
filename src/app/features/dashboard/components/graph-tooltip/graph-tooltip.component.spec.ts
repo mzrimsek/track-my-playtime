@@ -15,6 +15,7 @@ describe('GraphTooltipComponent', () => {
         TimePipe
       ]
     }).compileComponents();
+
     fixture = TestBed.createComponent(GraphTooltipComponent);
     component = fixture.componentInstance;
   }));

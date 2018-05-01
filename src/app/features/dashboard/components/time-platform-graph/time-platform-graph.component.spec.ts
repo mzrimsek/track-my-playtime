@@ -14,6 +14,7 @@ describe('TimePlatformGraphComponent', () => {
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
+
     fixture = TestBed.createComponent(TimePlatformGraphComponent);
     component = fixture.componentInstance;
   }));
