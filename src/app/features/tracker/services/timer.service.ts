@@ -49,7 +49,7 @@ export class TimerService {
   }
 }
 
-interface FirestoreTimerItem {
+export interface FirestoreTimerItem {
   game: string;
   platform: string;
   startTime: number;
