@@ -21,7 +21,7 @@ import { AddTimerInfo, TimerInfo } from '../../models';
 export class TimerComponent implements OnInit {
 
   @Input() info: TimerInfo;
-  @Input() currentTime: number;
+  @Input() currentTime = 0;
   @Input() platformsOptions: string[] = [];
   userId = '';
   icons = {

@@ -15,7 +15,6 @@ import { GraphDataItem } from './models';
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
   let fixture: ComponentFixture<DashboardComponent>;
-  let graphService: GraphService;
 
   const initTests = () => {
     TestBed.configureTestingModule({
@@ -27,7 +26,6 @@ describe('DashboardComponent', () => {
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
 
-    graphService = TestBed.get(GraphService);
     fixture = TestBed.createComponent(DashboardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
