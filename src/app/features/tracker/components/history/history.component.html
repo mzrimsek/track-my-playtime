@@ -16,9 +16,13 @@
           <div class="elapsedTime">{{ group.totalTime | time }}</div>
         </div>
 
-        <app-tracker-history-entry *ngFor="let historyItem of group.historyItems"
-                                   [item]="historyItem"
-                                   [platformsOptions]="platformsOptions"></app-tracker-history-entry>
+        <div class="history-entries">
+          <div class="history-entry"
+               *ngFor="let historyItem of group.historyItems">
+            <app-tracker-history-entry [item]="historyItem"
+                                       [platformsOptions]="platformsOptions"></app-tracker-history-entry>
+          </div>
+        </div>
       </div>
     </div>
 
