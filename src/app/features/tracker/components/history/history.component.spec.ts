@@ -127,7 +127,8 @@ describe('HistoryComponent', () => {
   // tslint:disable-next-line:component-selector
   selector: 'test-wrapper',
   template: `
-    <app-tracker-history [loading]="loading" [groups]="groups"></app-tracker-history>
+    <app-tracker-history [loading]="loading"
+                         [groups]="groups"></app-tracker-history>
   `
 })
 class TestWrapperComponent implements OnInit {
