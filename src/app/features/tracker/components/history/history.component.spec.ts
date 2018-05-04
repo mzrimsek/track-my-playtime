@@ -49,20 +49,20 @@ describe('HistoryComponent', () => {
     }));
 
     describe('When groups is empty', () => {
-      it('Should show "no groups" element', () => {
+      it('Should show "no groups" element', async(() => {
         const noGroups = fixture.nativeElement.querySelector('.no-groups');
         expect(noGroups).toBeTruthy();
-      });
+      }));
 
-      it('Should show "no groups" message', () => {
+      it('Should show "no groups" message', async(() => {
         const noGroups = fixture.nativeElement.querySelector('.no-groups');
         expect(noGroups.innerText).toBe('Nothing to show...get tracking!');
-      });
+      }));
 
-      it('Should not show any groups', () => {
+      it('Should not show any groups', async(() => {
         const groups = fixture.nativeElement.querySelector('.groups');
         expect(groups).toBeNull();
-      });
+      }));
     });
 
     describe('When groups has data', () => {
@@ -93,9 +93,9 @@ describe('HistoryComponent', () => {
         groups = fixture.nativeElement.querySelector('.groups');
       }));
 
-      it('Should show the correct number of groups', () => {
+      it('Should show the correct number of groups', async(() => {
         expect(groups.children.length).toBe(1);
-      });
+      }));
 
       describe('Group information', () => {
         let group: any;
@@ -114,10 +114,10 @@ describe('HistoryComponent', () => {
           expect(elapsedTime.innerText).toBe('00:00:06');
         }));
 
-        it('Should have correct number of history entries', () => {
+        it('Should have correct number of history entries', async(() => {
           const historyEntries = group.querySelector('.history-entries');
           expect(historyEntries.children.length).toBe(2);
-        });
+        }));
       });
     });
   });
