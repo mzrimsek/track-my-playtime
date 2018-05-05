@@ -11,18 +11,21 @@ import { UserService } from '../../../auth/services/user.service';
 
 import { ElapsedTimePipe } from '../../../../shared/pipes/elapsed-time.pipe';
 
+import * as actions from '../../actions/history.actions';
+
 import * as fromRoot from '../../../../reducers/root.reducer';
 import * as fromTracker from '../../reducers/root.reducer';
 
-import { HistoryListItem } from '../../models';
+import {
+    HistoryListItem, UpdateHistoryItemGamePayload, UpdateHistoryItemPlatformPayload,
+    UpdateHistoryItemTimesPayload
+} from '../../models';
 
 describe('HistoryEntryComponent', () => {
-  let component: TestWrapperComponent;
-  let fixture: ComponentFixture<TestWrapperComponent>;
   let store: Store<fromRoot.State>;
   let userService: UserService;
 
-  beforeEach(async(() => {
+  const initTests = () => {
     TestBed.configureTestingModule({
       declarations: [
         TestWrapperComponent,
@@ -43,24 +46,123 @@ describe('HistoryEntryComponent', () => {
     userService = TestBed.get(UserService);
 
     spyOn(store, 'dispatch').and.callThrough();
+  };
 
-    fixture = TestBed.createComponent(TestWrapperComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  }));
+  describe('Wrapper Component Tests', () => {
+    let component: TestWrapperComponent;
+    let fixture: ComponentFixture<TestWrapperComponent>;
 
-  it('Should create the component', async(() => {
-    expect(component).toBeTruthy();
-  }));
+    beforeEach(async(() => {
+      initTests();
 
-  it('Should call UserService getUser', () => {
-    expect(userService.getUser).toHaveBeenCalled();
+      fixture = TestBed.createComponent(TestWrapperComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    }));
+
+    it('Should create the component', async(() => {
+      expect(component).toBeTruthy();
+    }));
+
+    it('Should call UserService getUser', () => {
+      expect(userService.getUser).toHaveBeenCalled();
+    });
+
+    describe('Action dispatching', () => {
+      it('Should dispatch UpdateGame when game text changes', () => {
+        const game = 'some awesome game';
+        const payload: UpdateHistoryItemGamePayload = {
+          itemId: testItem.id,
+          game
+        };
+        const action = new actions.UpdateGame(testUserId, payload);
+        const gameEl = fixture.nativeElement.querySelector('.game input');
+
+        gameEl.value = game;
+        gameEl.dispatchEvent(new Event('change'));
+        fixture.detectChanges();
+
+        expect(store.dispatch).toHaveBeenCalledWith(action);
+      });
+
+      it('Should dispatch UpdatePlatform when platform option changes', () => {
+        const payload: UpdateHistoryItemPlatformPayload = {
+          itemId: testItem.id,
+          platform: testPlatforms[0]
+        };
+        const action = new actions.UpdatePlatform(testUserId, payload);
+        const platformEl = fixture.nativeElement.querySelector('.platform select');
+
+        platformEl.selectedIndex = 1;
+        platformEl.dispatchEvent(new Event('change'));
+        fixture.detectChanges();
+
+        expect(store.dispatch).toHaveBeenCalledWith(action);
+      });
+    });
+
+    it('Should dispatch UpdateElaspedTime when date time value changes', () => {
+      const payload: UpdateHistoryItemTimesPayload = {
+        itemId: testItem.id,
+        startTime: 3000,
+        endTime: 6000
+      };
+      const action = new actions.UpdateElapsedTime(testUserId, payload);
+      const dateTimeEl = fixture.nativeElement.querySelector('.date-time-picker input');
+
+      dateTimeEl.value = '05/03/2018 11:58 PM';
+      dateTimeEl.dispatchEvent(new Event('change'));
+      fixture.detectChanges();
+
+      expect(store.dispatch).toHaveBeenCalledWith(action);
+    });
+
+    it('Should dispatch RemoveHistoryItem when remove button is clicked', () => {
+      const action = new actions.RemoveHistoryItem(testUserId, testItem.id);
+      const removeButtonEl = fixture.nativeElement.querySelector('.remove');
+
+      removeButtonEl.click();
+
+      expect(store.dispatch).toHaveBeenCalledWith(action);
+    });
+  });
+
+  describe('Native Component Tests', () => {
+    let component: HistoryEntryComponent;
+    let fixture: ComponentFixture<HistoryEntryComponent>;
+
+    beforeEach(async(() => {
+      initTests();
+
+      fixture = TestBed.createComponent(HistoryEntryComponent);
+      component = fixture.componentInstance;
+      component.item = testItem;
+      fixture.detectChanges();
+    }));
+
+    it('Should create the component', async(() => {
+      expect(component).toBeTruthy();
+    }));
+
+    it('Should call UserService getUser', () => {
+      expect(userService.getUser).toHaveBeenCalled();
+    });
+
+    it('Should call openDateTimePicker when elapsed time is clicked', () => {
+      const timeStartEndEl = fixture.nativeElement.querySelector('.time .start-end');
+      spyOn(component, 'openDateTimePicker');
+
+      timeStartEndEl.click();
+
+      expect(component.openDateTimePicker).toHaveBeenCalled();
+    });
   });
 });
 
+const testUserId = 'some id';
 const userServiceStub = {
   getUser: jasmine.createSpy('getUser').and.returnValue({
-    uid: 'some id',
+    uid: testUserId,
     displayName: 'Jim Bob',
     email: 'jimbob@jimbob.com',
     photoURL: 'jimbob.com/jimbob.png'
@@ -78,6 +180,11 @@ const testItem: HistoryListItem = {
   dateRange: [start, end]
 };
 
+const testPlatforms = [
+  'PS4',
+  'Xbox One'
+];
+
 @Component({
   // tslint:disable-next-line:component-selector
   selector: 'test-wrapper',
@@ -89,7 +196,7 @@ const testItem: HistoryListItem = {
 })
 class TestWrapperComponent implements OnInit {
   item: HistoryListItem = testItem;
-  platformsOptions: string[] = [];
+  platformsOptions: string[] = testPlatforms;
   dateRange: Date[] = [];
 
   ngOnInit() { }
