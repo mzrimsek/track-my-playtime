@@ -1,4 +1,4 @@
-import { Component, NO_ERRORS_SCHEMA, OnInit } from '@angular/core';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { combineReducers, Store, StoreModule } from '@ngrx/store';
@@ -24,11 +24,12 @@ import {
 describe('HistoryEntryComponent', () => {
   let store: Store<fromRoot.State>;
   let userService: UserService;
+  let component: HistoryEntryComponent;
+  let fixture: ComponentFixture<HistoryEntryComponent>;
 
-  const initTests = () => {
+  beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        TestWrapperComponent,
         HistoryEntryComponent,
         ElapsedTimePipe
       ],
@@ -46,116 +47,85 @@ describe('HistoryEntryComponent', () => {
     userService = TestBed.get(UserService);
 
     spyOn(store, 'dispatch').and.callThrough();
-  };
 
-  describe('Wrapper Component Tests', () => {
-    let component: TestWrapperComponent;
-    let fixture: ComponentFixture<TestWrapperComponent>;
+    fixture = TestBed.createComponent(HistoryEntryComponent);
+    component = fixture.componentInstance;
+    component.item = testItem;
+    component.platformsOptions = testPlatforms;
+    fixture.detectChanges();
+  }));
 
-    beforeEach(async(() => {
-      initTests();
+  it('Should create the component', async(() => {
+    expect(component).toBeTruthy();
+  }));
 
-      fixture = TestBed.createComponent(TestWrapperComponent);
-      component = fixture.componentInstance;
-      fixture.detectChanges();
-    }));
-
-    it('Should create the component', async(() => {
-      expect(component).toBeTruthy();
-    }));
-
-    it('Should call UserService getUser', () => {
-      expect(userService.getUser).toHaveBeenCalled();
-    });
-
-    describe('Action dispatching', () => {
-      it('Should dispatch UpdateGame when game text changes', () => {
-        const game = 'some awesome game';
-        const payload: UpdateHistoryItemGamePayload = {
-          itemId: testItem.id,
-          game
-        };
-        const action = new actions.UpdateGame(testUserId, payload);
-        const gameEl = fixture.nativeElement.querySelector('.game input');
-
-        gameEl.value = game;
-        gameEl.dispatchEvent(new Event('change'));
-        fixture.detectChanges();
-
-        expect(store.dispatch).toHaveBeenCalledWith(action);
-      });
-
-      it('Should dispatch UpdatePlatform when platform option changes', () => {
-        const payload: UpdateHistoryItemPlatformPayload = {
-          itemId: testItem.id,
-          platform: testPlatforms[0]
-        };
-        const action = new actions.UpdatePlatform(testUserId, payload);
-        const platformEl = fixture.nativeElement.querySelector('.platform select');
-
-        platformEl.selectedIndex = 1;
-        platformEl.dispatchEvent(new Event('change'));
-        fixture.detectChanges();
-
-        expect(store.dispatch).toHaveBeenCalledWith(action);
-      });
-    });
-
-    it('Should dispatch UpdateElaspedTime when date time value changes', () => {
-      const payload: UpdateHistoryItemTimesPayload = {
-        itemId: testItem.id,
-        startTime: 3000,
-        endTime: 6000
-      };
-      const action = new actions.UpdateElapsedTime(testUserId, payload);
-      const dateTimeEl = fixture.nativeElement.querySelector('.date-time-picker input');
-
-      dateTimeEl.value = '05/03/2018 11:58 PM';
-      dateTimeEl.dispatchEvent(new Event('change'));
-      fixture.detectChanges();
-
-      expect(store.dispatch).toHaveBeenCalledWith(action);
-    });
-
-    it('Should dispatch RemoveHistoryItem when remove button is clicked', () => {
-      const action = new actions.RemoveHistoryItem(testUserId, testItem.id);
-      const removeButtonEl = fixture.nativeElement.querySelector('.remove');
-
-      removeButtonEl.click();
-
-      expect(store.dispatch).toHaveBeenCalledWith(action);
-    });
+  it('Should call UserService getUser', () => {
+    expect(userService.getUser).toHaveBeenCalled();
   });
 
-  describe('Native Component Tests', () => {
-    let component: HistoryEntryComponent;
-    let fixture: ComponentFixture<HistoryEntryComponent>;
+  it('Should dispatch UpdateGame when game text changes', () => {
+    const game = 'some awesome game';
+    const payload: UpdateHistoryItemGamePayload = {
+      itemId: testItem.id,
+      game
+    };
+    const action = new actions.UpdateGame(testUserId, payload);
+    const gameEl = fixture.nativeElement.querySelector('.game input');
 
-    beforeEach(async(() => {
-      initTests();
+    gameEl.value = game;
+    gameEl.dispatchEvent(new Event('change'));
+    fixture.detectChanges();
 
-      fixture = TestBed.createComponent(HistoryEntryComponent);
-      component = fixture.componentInstance;
-      component.item = testItem;
-      fixture.detectChanges();
-    }));
+    expect(store.dispatch).toHaveBeenCalledWith(action);
+  });
 
-    it('Should create the component', async(() => {
-      expect(component).toBeTruthy();
-    }));
+  it('Should dispatch UpdatePlatform when platform option changes', () => {
+    const payload: UpdateHistoryItemPlatformPayload = {
+      itemId: testItem.id,
+      platform: testPlatforms[0]
+    };
+    const action = new actions.UpdatePlatform(testUserId, payload);
+    const platformEl = fixture.nativeElement.querySelector('.platform select');
 
-    it('Should call UserService getUser', () => {
-      expect(userService.getUser).toHaveBeenCalled();
-    });
+    platformEl.selectedIndex = 1;
+    platformEl.dispatchEvent(new Event('change'));
+    fixture.detectChanges();
 
-    it('Should call openDateTimePicker when elapsed time is clicked', () => {
-      const timeStartEndEl = fixture.nativeElement.querySelector('.time .start-end');
-      spyOn(component, 'openDateTimePicker');
+    expect(store.dispatch).toHaveBeenCalledWith(action);
+  });
 
-      timeStartEndEl.click();
+  it('Should dispatch UpdateElaspedTime when date time value changes', () => {
+    const payload: UpdateHistoryItemTimesPayload = {
+      itemId: testItem.id,
+      startTime: 3000,
+      endTime: 6000
+    };
+    const action = new actions.UpdateElapsedTime(testUserId, payload);
+    const dateTimeEl = fixture.nativeElement.querySelector('.date-time-picker input');
 
-      expect(component.openDateTimePicker).toHaveBeenCalled();
-    });
+    dateTimeEl.value = new Date(payload.startTime) + '~' + new Date(payload.endTime);
+    dateTimeEl.dispatchEvent(new Event('dateTimeChange'));
+    fixture.detectChanges();
+
+    expect(store.dispatch).toHaveBeenCalledWith(action);
+  });
+
+  it('Should dispatch RemoveHistoryItem when remove button is clicked', () => {
+    const action = new actions.RemoveHistoryItem(testUserId, testItem.id);
+    const removeButtonEl = fixture.nativeElement.querySelector('.remove');
+
+    removeButtonEl.click();
+
+    expect(store.dispatch).toHaveBeenCalledWith(action);
+  });
+
+  it('Should call openDateTimePicker when elapsed time is clicked', () => {
+    const timeStartEndEl = fixture.nativeElement.querySelector('.time .start-end');
+    spyOn(component, 'openDateTimePicker');
+
+    timeStartEndEl.click();
+
+    expect(component.openDateTimePicker).toHaveBeenCalled();
   });
 });
 
@@ -184,20 +154,3 @@ const testPlatforms = [
   'PS4',
   'Xbox One'
 ];
-
-@Component({
-  // tslint:disable-next-line:component-selector
-  selector: 'test-wrapper',
-  template: `
-    <app-tracker-history-entry [item]="item"
-                               [platformsOptions]="platformsOptions"
-                               [dateRange]="dateRange"></app-tracker-history-entry>
-  `
-})
-class TestWrapperComponent implements OnInit {
-  item: HistoryListItem = testItem;
-  platformsOptions: string[] = testPlatforms;
-  dateRange: Date[] = [];
-
-  ngOnInit() { }
-}
