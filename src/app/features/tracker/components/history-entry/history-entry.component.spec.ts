@@ -59,11 +59,11 @@ describe('HistoryEntryComponent', () => {
     expect(component).toBeTruthy();
   }));
 
-  it('Should call UserService getUser', () => {
+  it('Should call UserService getUser', async(() => {
     expect(userService.getUser).toHaveBeenCalled();
-  });
+  }));
 
-  it('Should dispatch UpdateGame when game text changes', () => {
+  it('Should dispatch UpdateGame when game text changes', async(() => {
     const game = 'some awesome game';
     const payload: UpdateHistoryItemGamePayload = {
       itemId: testItem.id,
@@ -77,9 +77,9 @@ describe('HistoryEntryComponent', () => {
     fixture.detectChanges();
 
     expect(store.dispatch).toHaveBeenCalledWith(action);
-  });
+  }));
 
-  it('Should dispatch UpdatePlatform when platform option changes', () => {
+  it('Should dispatch UpdatePlatform when platform option changes', async(() => {
     const payload: UpdateHistoryItemPlatformPayload = {
       itemId: testItem.id,
       platform: testPlatforms[0]
@@ -92,9 +92,9 @@ describe('HistoryEntryComponent', () => {
     fixture.detectChanges();
 
     expect(store.dispatch).toHaveBeenCalledWith(action);
-  });
+  }));
 
-  it('Should dispatch UpdateElaspedTime when date time value changes', () => {
+  it('Should dispatch UpdateElaspedTime when date time value changes', async(() => {
     const payload: UpdateHistoryItemTimesPayload = {
       itemId: testItem.id,
       startTime: 3000,
@@ -108,25 +108,25 @@ describe('HistoryEntryComponent', () => {
     fixture.detectChanges();
 
     expect(store.dispatch).toHaveBeenCalledWith(action);
-  });
+  }));
 
-  it('Should dispatch RemoveHistoryItem when remove button is clicked', () => {
+  it('Should dispatch RemoveHistoryItem when remove button is clicked', async(() => {
     const action = new actions.RemoveHistoryItem(testUserId, testItem.id);
     const removeButtonEl = fixture.nativeElement.querySelector('.remove');
 
     removeButtonEl.click();
 
     expect(store.dispatch).toHaveBeenCalledWith(action);
-  });
+  }));
 
-  it('Should call openDateTimePicker when elapsed time is clicked', () => {
+  it('Should call openDateTimePicker when elapsed time is clicked', async(() => {
     const timeStartEndEl = fixture.nativeElement.querySelector('.time .start-end');
     spyOn(component, 'openDateTimePicker');
 
     timeStartEndEl.click();
 
     expect(component.openDateTimePicker).toHaveBeenCalled();
-  });
+  }));
 });
 
 const testUserId = 'some id';
