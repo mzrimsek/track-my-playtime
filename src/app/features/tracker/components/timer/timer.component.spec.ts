@@ -59,7 +59,7 @@ describe('TimerComponent', () => {
     fixture.detectChanges();
   };
 
-  describe('Timer Inactive', () => {
+  describe('Render', () => {
     beforeEach(async(() => {
       initTests();
     }));
@@ -71,6 +71,12 @@ describe('TimerComponent', () => {
     it('Should call UserService getUser', () => {
       expect(userService.getUser).toHaveBeenCalled();
     });
+  });
+
+  describe('Timer Inactive', () => {
+    beforeEach(async(() => {
+      initTests();
+    }));
 
     it('Should show start button', async(() => {
       const startButton = fixture.nativeElement.querySelector('.primary-action .start');
