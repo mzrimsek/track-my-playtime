@@ -9,12 +9,10 @@ import { GraphService } from './services/graph.service';
 
 import { TimePipe } from '../../shared/pipes/time.pipe';
 
-import { GraphDataItem } from './models';
-
-// FIXME: Not totally satisfied with how these tests are set up
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
   let fixture: ComponentFixture<DashboardComponent>;
+  let graphService: GraphService;
 
   const initTests = () => {
     TestBed.configureTestingModule({
@@ -22,9 +20,11 @@ describe('DashboardComponent', () => {
         DashboardComponent,
         TimePipe
       ],
-      providers: [{ provide: GraphService, useClass: MockGraphService }],
+      providers: [{ provide: GraphService, useValue: graphServiceStub }],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
+
+    graphService = TestBed.get(GraphService);
 
     fixture = TestBed.createComponent(DashboardComponent);
     component = fixture.componentInstance;
@@ -39,11 +39,30 @@ describe('DashboardComponent', () => {
     it('Should create the component', async(() => {
       expect(component).toBeTruthy();
     }));
+
+    it('Should call GraphService getTimeVsDateGraphData', async(() => {
+      expect(graphService.getTimeVsDateGraphData).toHaveBeenCalled();
+    }));
+
+    it('Should call GraphService getTimeVsPlatformGraphData', async(() => {
+      expect(graphService.getTimeVsPlatformGraphData).toHaveBeenCalled();
+    }));
+
+    it('Should call GraphService getTimeVsGameGraphData', async(() => {
+      expect(graphService.getTimeVsGameGraphData).toHaveBeenCalled();
+    }));
+
+    it('Should call GraphService isHistoryDataLoading', async(() => {
+      expect(graphService.isHistoryDataLoading).toHaveBeenCalled();
+    }));
   });
 
   describe('When data is loading', () => {
     beforeEach(async(() => {
-      loading = true;
+      graphServiceStub.isHistoryDataLoading = jasmine
+        .createSpy('isHistoryDataLoading')
+        .and
+        .returnValue(Observable.of(true));
       initTests();
     }));
 
@@ -60,7 +79,10 @@ describe('DashboardComponent', () => {
 
   describe('When data is loaded', () => {
     beforeEach(async(() => {
-      loading = false;
+      graphServiceStub.isHistoryDataLoading = jasmine
+        .createSpy('isHistoryDataLoading')
+        .and
+        .returnValue(Observable.of(false));
       initTests();
     }));
 
@@ -81,28 +103,24 @@ describe('DashboardComponent', () => {
   });
 });
 
-let loading: boolean;
-
-class MockGraphService {
-  getTimeVsDateGraphData(): Observable<GraphDataItem[]> {
-    return Observable.of([{
+const graphServiceStub = {
+  getTimeVsDateGraphData: jasmine
+    .createSpy('getTimeVsDateGraphData')
+    .and
+    .returnValue(Observable.of([{
       name: '',
       value: 10
     }, {
       name: '',
       value: 50
-    }]);
-  }
-
-  getTimeVsPlatformGraphData(): Observable<GraphDataItem[]> {
-    return Observable.of([]);
-  }
-
-  getTimeVsGameGraphData(): Observable<GraphDataItem[]> {
-    return Observable.of([]);
-  }
-
-  isHistoryDataLoading(): Observable<boolean> {
-    return Observable.of(loading);
-  }
-}
+    }])),
+  getTimeVsPlatformGraphData: jasmine
+    .createSpy('getTimeVsPlatformGraphData')
+    .and
+    .returnValue(Observable.of([])),
+  getTimeVsGameGraphData: jasmine
+    .createSpy('getTimeVsGameGraphData')
+    .and
+    .returnValue(Observable.of([])),
+  isHistoryDataLoading: jasmine.createSpy('isHistoryDataLoading')
+};
