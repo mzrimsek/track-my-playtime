@@ -55,6 +55,7 @@ describe('TimerComponent', () => {
     component = fixture.componentInstance;
     component.info = testInfo;
     component.platformsOptions = testPlatforms;
+    component.currentTime = testCurrentTime;
     fixture.detectChanges();
   };
 
@@ -84,6 +85,11 @@ describe('TimerComponent', () => {
     it('Should not show cancel button', async(() => {
       const cancelButton = fixture.nativeElement.querySelector('.secondary-action .cancel');
       expect(cancelButton).toBeNull();
+    }));
+
+    it('Should show correct elapsed time', async(() => {
+      const timerStartEl = fixture.nativeElement.querySelector('.time > div');
+      expect(timerStartEl.innerText).toBe('00:00:00');
     }));
 
     describe('Start Button Click', () => {
@@ -166,10 +172,10 @@ describe('TimerComponent', () => {
 
     describe('Start Time', () => {
       it('Should call openDateTimePicker on click', async(() => {
-        const timeStartEndEl = fixture.nativeElement.querySelector('.time > div');
+        const timerStartEl = fixture.nativeElement.querySelector('.time > div');
         spyOn(component, 'openDateTimePicker');
 
-        timeStartEndEl.click();
+        timerStartEl.click();
 
         expect(component.openDateTimePicker).toHaveBeenCalled();
       }));
@@ -208,6 +214,7 @@ describe('TimerComponent', () => {
 
     beforeEach(async(() => {
       testInfo.startTime = subHours(end, 1).getTime();
+      testCurrentTime = end.getTime();
       initTests();
     }));
 
@@ -224,6 +231,11 @@ describe('TimerComponent', () => {
     it('Should show cancel button', async(() => {
       const cancelButton = fixture.nativeElement.querySelector('.secondary-action .cancel');
       expect(cancelButton).toBeTruthy();
+    }));
+
+    it('Should show correct elapsed time', async(() => {
+      const timerStartEl = fixture.nativeElement.querySelector('.time > div');
+      expect(timerStartEl.innerText).toBe('01:00:00');
     }));
 
     describe('Stop Button Click', () => {
@@ -326,6 +338,8 @@ const timerServiceStub = {
   setStartTime: jasmine.createSpy('setStartTime'),
   resetTimer: jasmine.createSpy('resetTimer')
 };
+
+let testCurrentTime = 0;
 
 const testInfo: TimerInfo = {
   game: 'some game',
