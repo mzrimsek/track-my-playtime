@@ -31,6 +31,8 @@ describe('Graph Service', () => {
 
     service = TestBed.get(GraphService);
     store = TestBed.get(Store);
+
+    spyOn(store, 'select').and.callThrough();
   });
 
   it('Should be created', () => {
@@ -38,6 +40,11 @@ describe('Graph Service', () => {
   });
 
   describe('getTimeVsDateGraphData', () => {
+    it('Should select history groupings by date', () => {
+      service.getTimeVsDateGraphData();
+      expect(store.select).toHaveBeenCalledWith(fromTracker._selectHistoryGroupingsByDate);
+    });
+
     describe('When no data in range', () => {
       it('Should return seven empty data points', () => {
         const result = service.getTimeVsDateGraphData();
@@ -88,6 +95,11 @@ describe('Graph Service', () => {
   });
 
   describe('getTimeVsPlatformGraphData', () => {
+    it('Should select history groupings by platform', () => {
+      service.getTimeVsPlatformGraphData();
+      expect(store.select).toHaveBeenCalledWith(fromTracker._selectHistoryGroupingsByPlatform);
+    });
+
     it('Should return nothing when no data in range', () => {
       const result = service.getTimeVsPlatformGraphData();
       result.subscribe(res => {
@@ -111,6 +123,11 @@ describe('Graph Service', () => {
   });
 
   describe('getTimeVsGameGraphData', () => {
+    it('Should select history groupings by game', () => {
+      service.getTimeVsGameGraphData();
+      expect(store.select).toHaveBeenCalledWith(fromTracker._selectHistoryGroupingsByGame);
+    });
+
     it('Should return nothing when no data in range', () => {
       const result = service.getTimeVsGameGraphData();
       result.subscribe(res => {
@@ -134,6 +151,11 @@ describe('Graph Service', () => {
   });
 
   describe('isHistoryDataLoading', () => {
+    it('Should select history loading', () => {
+      service.isHistoryDataLoading();
+      expect(store.select).toHaveBeenCalledWith(fromTracker._selectHistoryLoading);
+    });
+
     it('Should return false when nothing loading', () => {
       const result = service.isHistoryDataLoading();
       result.subscribe(res => {

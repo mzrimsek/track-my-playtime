@@ -37,6 +37,9 @@ describe('AuthGuard', () => {
 
     guard = TestBed.get(AuthGuard);
     store = TestBed.get(Store);
+
+    spyOn(store, 'select').and.callThrough();
+
     routerStateSnapshot = TestBed.get(RouterStateSnapshot);
     router = TestBed.get(Router);
   });
@@ -72,6 +75,11 @@ describe('AuthGuard', () => {
     const result = guard.canActivate(new ActivatedRouteSnapshot(), routerStateSnapshot);
 
     expect(result).toBeObservable(expected);
+  });
+
+  it('Should select user logged in', () => {
+    guard.canActivate(new ActivatedRouteSnapshot(), routerStateSnapshot);
+    expect(store.select).toHaveBeenCalledWith(fromAuth._selectUserLoggedIn);
   });
 });
 

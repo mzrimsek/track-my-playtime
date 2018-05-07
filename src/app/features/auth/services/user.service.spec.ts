@@ -30,6 +30,7 @@ describe('User Service', () => {
     store = TestBed.get(Store);
 
     spyOn(store, 'dispatch').and.callThrough();
+    spyOn(store, 'select').and.callThrough();
   });
 
   it('Should be created', () => {
@@ -37,7 +38,22 @@ describe('User Service', () => {
   });
 
   describe('getUser', () => {
-    it('Should return the user', () => {
+    it('Should select user', () => {
+      service.getUser();
+      expect(store.select).toHaveBeenCalledWith(fromAuth._selectUserData);
+    });
+
+    it('Should return default data when not authenticated', () => {
+      const result = service.getUser();
+      expect(result).toEqual({
+        uid: '',
+        displayName: '',
+        email: '',
+        photoURL: ''
+      });
+    });
+
+    it('Should return the user when authenticated', () => {
       const user: User = {
         uid: 'some id',
         displayName: 'Jim Bob',

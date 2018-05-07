@@ -12,11 +12,10 @@ import { User } from '../models';
 export class UserService {
 
   private user: User;
-  constructor(private store: Store<State>) {
-    this.store.select(authComponentSelectors.user).subscribe(user => this.user = user);
-  }
+  constructor(private store: Store<State>) { }
 
   getUser(): User {
+    this.store.select(authComponentSelectors.user).subscribe(user => this.user = user);
     return this.user;
   }
 
