@@ -15,6 +15,7 @@ import { AuthService } from '../services/auth.service';
 import * as appActions from '../../../actions/app.actions';
 import * as userActions from '../actions/user.actions';
 
+// FIXME: I still think these tests need some work
 describe('User Effects', () => {
   let actions: any;
   let effects: UserEffects;
@@ -23,7 +24,7 @@ describe('User Effects', () => {
   };
   let authService: AuthService;
 
-  beforeEach(() => {
+  const initTests = () => {
     TestBed.configureTestingModule({
       providers: [
         UserEffects,
@@ -36,26 +37,34 @@ describe('User Effects', () => {
 
     effects = TestBed.get(UserEffects);
     authService = TestBed.get(AuthService);
-  });
+  };
 
-  it('Should be created', () => {
-    expect(effects).toBeTruthy();
+  describe('Inject', () => {
+    beforeEach(() => {
+      initTests();
+    });
+
+    it('Should be created', () => {
+      expect(effects).toBeTruthy();
+    });
   });
 
   describe('Get User', () => {
     describe('Authenticated User', () => {
-      it('Should dispatch Authenticated', () => {
-        actions = hot('-a', { a: new userActions.GetUser() });
-
-        const expected = cold('-(b)', {
-          b: new userActions.Authenticated(mockUser)
+      describe('Without return url', () => {
+        beforeEach(() => {
+          initTests();
+          authService.signInWithGoogle();
         });
 
-        authService.signInWithGoogle();
-        expect(effects.getUser$).toBeObservable(expected);
-      });
+        it('Should dispatch Authenticated', () => {
+          actions = hot('-a', { a: new userActions.GetUser() });
+          const expected = cold('-(b)', {
+            b: new userActions.Authenticated(mockUser)
+          });
+          expect(effects.getUser$).toBeObservable(expected);
+        });
 
-      describe('Without return url', () => {
         it('Should navigate to "app"', () => {
           actions = new ReplaySubject(1);
           actions.next(new userActions.GetUser());
@@ -67,11 +76,23 @@ describe('User Effects', () => {
       });
 
       describe('With return url', () => {
-        // FIXME: How to properly mutate the return url to make this test pass
-        xit('Should navigate to return url', () => {
-          const returnUrl = 'some/route';
-          mockActivatedRoute.snapshot.queryParams.returnUrl = returnUrl;
+        const returnUrl = 'some/route';
 
+        beforeEach(() => {
+          mockActivatedRoute.snapshot.queryParams.returnUrl = returnUrl;
+          initTests();
+          authService.signInWithGoogle();
+        });
+
+        it('Should dispatch Authenticated', () => {
+          actions = hot('-a', { a: new userActions.GetUser() });
+          const expected = cold('-(b)', {
+            b: new userActions.Authenticated(mockUser)
+          });
+          expect(effects.getUser$).toBeObservable(expected);
+        });
+
+        it('Should navigate to return url', () => {
           actions = new ReplaySubject(1);
           actions.next(new userActions.GetUser());
 
@@ -83,13 +104,16 @@ describe('User Effects', () => {
     });
 
     describe('Not Authenticated User', () => {
+      beforeEach(() => {
+        initTests();
+        authService.signOut();
+      });
+
       it('Should dispatch NotAuthenticated', () => {
         actions = hot('-a', { a: new userActions.GetUser() });
-
         const expected = cold('-(b)', {
           b: new userActions.NotAuthenticated()
         });
-
         expect(effects.getUser$).toBeObservable(expected);
       });
     });
@@ -118,6 +142,10 @@ describe('User Effects', () => {
   });
 
   describe('Google Login', () => {
+    beforeEach(() => {
+      initTests();
+    });
+
     it('Should dispatch GetUser', () => {
       actions = hot('-a', { a: new userActions.GoogleLogin() });
       const expected = cold('-(b)', {
@@ -150,6 +178,10 @@ describe('User Effects', () => {
   });
 
   describe('Logout', () => {
+    beforeEach(() => {
+      initTests();
+    });
+
     it('Should dispatch NotAuthenticated', () => {
       actions = hot('-a', { a: new userActions.Logout() });
       const expected = cold('-(b)', {
