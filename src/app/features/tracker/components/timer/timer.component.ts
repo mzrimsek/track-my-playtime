@@ -21,7 +21,7 @@ import { AddTimerInfo, TimerInfo } from '../../models';
 export class TimerComponent implements OnInit {
 
   @Input() info: TimerInfo;
-  @Input() currentTime: number;
+  @Input() currentTime = 0;
   @Input() platformsOptions: string[] = [];
   userId = '';
   icons = {
@@ -36,11 +36,10 @@ export class TimerComponent implements OnInit {
   ngOnInit() { }
 
   startTimer() {
-    const startTime = new Date().getTime();
-    this.store.dispatch(new actions.SetStartTime(startTime));
+    this.store.dispatch(new actions.SetStartTime(this.getNowTime()));
     this.timerService.setTimer(this.userId, {
       ...this.info,
-      startTime
+      startTime: this.getNowTime()
     });
   }
 
@@ -50,7 +49,7 @@ export class TimerComponent implements OnInit {
       game: this.info.game,
       platform: this.info.platform,
       startTime: this.info.startTime,
-      endTime: new Date().getTime()
+      endTime: this.getNowTime()
     };
     this.store.dispatch(new actions.SaveTimerInfo(info));
     this.timerService.resetTimer(this.userId);
@@ -95,6 +94,10 @@ export class TimerComponent implements OnInit {
     if (this.info.startTime !== 0) {
       el.click();
     }
+  }
+
+  getNowTime(): number {
+    return new Date().getTime();
   }
 
   getCurrentTimeDate(): Date {

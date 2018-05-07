@@ -3,7 +3,7 @@ import * as actions from '../actions/platforms.actions';
 import { reducer, State } from './platforms.reducer';
 
 describe('Platforms Reducer', () => {
-  it('Should set options when Load Options Succeeded is dispatched', () => {
+  it('Should set options when LoadOptionsSucceeded is dispatched', () => {
     const initialState: State = {
       options: []
     };

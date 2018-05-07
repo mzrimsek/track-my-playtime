@@ -19,7 +19,7 @@ export class PlatformsService {
   }
 }
 
-interface FirestorePlatformsItem {
+export interface FirestorePlatformsItem {
   index: number;
   option: string;
 }

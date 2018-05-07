@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
+  tagline = 'Game Time Tracking Made Simple';
   constructor() { }
 
   ngOnInit() { }

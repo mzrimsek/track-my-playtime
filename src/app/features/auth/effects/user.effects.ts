@@ -4,9 +4,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { User as AuthUser } from '@firebase/auth-types';
 import { Actions, Effect } from '@ngrx/effects';
 
-import { AngularFireAuth } from 'angularfire2/auth';
-import * as firebase from 'firebase';
 import { Observable } from 'rxjs/Observable';
+
+import { AuthService } from '../services/auth.service';
 
 import * as appActions from '../../../actions/app.actions';
 import * as userActions from '../actions/user.actions';
@@ -16,61 +16,44 @@ import { User } from '../models';
 @Injectable()
 export class UserEffects {
 
-  constructor(private actions$: Actions, private afAuth: AngularFireAuth, private router: Router, private route: ActivatedRoute) { }
+  constructor(private actions$: Actions, private authService: AuthService, private router: Router, private route: ActivatedRoute) { }
 
   @Effect() getUser$ =
     this.actions$
       .ofType(userActions.GET_USER)
       .map(action => action as userActions.GetUser)
-      .switchMap(() => this.afAuth.authState
+      .switchMap(() => this.authService.getAuthState()
         .map(authData => {
           if (authData) {
-            const returnUrl = this.getReturnUrl();
+            const returnUrl = this.route.snapshot.queryParams['returnUrl'] || 'app';
             this.router.navigate([returnUrl]);
             return this.getAuthenticatedAction(authData);
           }
           return new userActions.NotAuthenticated();
         })
-        .catch(err =>
-          Observable.of(new appActions.Error(userActions.GET_USER, err.message))
-        )
+        .catch(err => Observable.of(new appActions.Error(userActions.GET_USER, err.message)))
       );
 
   @Effect() googleLogin$ =
     this.actions$
       .ofType(userActions.GOOGLE_LOGIN)
       .map(action => action as userActions.GoogleLogin)
-      .switchMap(() => Observable.fromPromise(this.googleLogin())
-        .map(() => {
-          return new userActions.GetUser();
-        })
-        .catch(err =>
-          Observable.of(new appActions.Error(userActions.GET_USER, err.message))
-        )
+      .switchMap(() => this.authService.signInWithGoogle()
+        .map(() => new userActions.GetUser())
+        .catch(err => Observable.of(new appActions.Error(userActions.GOOGLE_LOGIN, err.message)))
       );
 
   @Effect() logout$ =
     this.actions$
       .ofType(userActions.LOGOUT)
       .map(action => action as userActions.Logout)
-      .switchMap(() => Observable.of(this.afAuth.auth.signOut())
+      .switchMap(() => this.authService.signOut()
         .map(() => {
           this.router.navigate(['login']);
           return new userActions.NotAuthenticated();
         })
-        .catch(err =>
-          Observable.of(new appActions.Error(userActions.GET_USER, err.message))
-        )
+        .catch(err => Observable.of(new appActions.Error(userActions.LOGOUT, err.message)))
       );
-
-  private googleLogin(): Promise<any> {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    return this.afAuth.auth.signInWithPopup(provider);
-  }
-
-  private getReturnUrl(): string {
-    return this.route.snapshot.queryParams['returnUrl'] || 'app';
-  }
 
   private getAuthenticatedAction(authData: AuthUser): userActions.Authenticated {
     const user = <User>{

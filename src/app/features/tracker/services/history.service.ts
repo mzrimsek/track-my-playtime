@@ -55,7 +55,7 @@ export class HistoryService {
     return Observable.of(payload);
   }
 
-  private getNewHistoryItem(info: AddTimerInfo): FirestoreHistoryItem {
+  getNewHistoryItem(info: AddTimerInfo): FirestoreHistoryItem {
     const id = getUUID(info.userId);
     return {
       id,
@@ -82,7 +82,7 @@ export class HistoryService {
   }
 }
 
-interface FirestoreHistoryItem {
+export interface FirestoreHistoryItem {
   id: string;
   game: string;
   platform: string;

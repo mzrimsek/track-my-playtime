@@ -5,9 +5,9 @@ import { formatTime, getElapsedTimeInSeconds } from '../../shared/utils/date.uti
 @Pipe({ name: 'elapsedTime' })
 export class ElapsedTimePipe implements PipeTransform {
 
-  transform(startTime: number, endTime: number): string {
-    const elapsedTime = getElapsedTimeInSeconds(startTime, endTime);
-    return elapsedTime >= 0 && this.canCalculate(startTime, endTime) ? formatTime(elapsedTime) : '00:00:00';
+  transform(startTimeInMS: number, endTimeInMS: number): string {
+    const elapsedTime = getElapsedTimeInSeconds(startTimeInMS, endTimeInMS);
+    return elapsedTime >= 0 && this.canCalculate(startTimeInMS, endTimeInMS) ? formatTime(elapsedTime) : '00:00:00';
   }
 
   canCalculate(startTime: number, endTime: number): boolean {
