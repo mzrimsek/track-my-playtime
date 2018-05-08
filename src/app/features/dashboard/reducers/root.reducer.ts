@@ -22,9 +22,11 @@ export const _selectDateRange = createSelector(_selectDashboardFeature, state =>
 export const _selectDateList = createSelector(_selectDateRange, dateRange => {
   return eachDay(dateRange.startDay, dateRange.endDay);
 });
+export const _selectRangeType = createSelector(_selectDateRange, dateRange => dateRange.type);
 
 const dashboardComponentSelectors = {
-  dateList: _selectDateList
+  dateList: _selectDateList,
+  rangeType: _selectRangeType
 };
 
 export default dashboardComponentSelectors;

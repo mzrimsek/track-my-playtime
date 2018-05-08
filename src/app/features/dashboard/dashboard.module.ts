@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { StoreModule } from '@ngrx/store';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 
@@ -21,6 +22,7 @@ import { reducers } from './reducers/root.reducer';
 @NgModule({
   imports: [
     CommonModule,
+    FontAwesomeModule,
     NgxChartsModule,
     SharedModule,
     StoreModule.forFeature('dashboard', reducers),

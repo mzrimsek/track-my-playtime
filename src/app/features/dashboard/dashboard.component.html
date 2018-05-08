@@ -8,13 +8,20 @@
 
     <div class="header">
       <span class="title">Dashboard - </span>
-      <span class="total">{{ (totalTime$ | async) | time }} This Week</span>
-      <select #dateRangeEl
-              (change)="updateDateRange(dateRangeEl)">
-        <option value="this-week">This Week</option>
-        <option value="last-week">Last Week</option>
-        <option value="this-month">This Month</option>
-      </select>
+      <span class="total">{{ (totalTime$ | async) | time }} </span>
+      <div class="range-options drop-shadow">
+        <select #dateRangeEl
+                [value]="this.dateRangeType$ | async"
+                (change)="updateDateRange(dateRangeEl)">
+          <option value="THIS_WEEK">This Week</option>
+          <option value="LAST_WEEK">Last Week</option>
+          <option value="THIS_MONTH">This Month</option>
+          <option value="LAST_MONTH">Last Month</option>
+        </select>
+        <span (click)="clickDateRangeOptionSelect(dateRangeEl)">
+          <fa-icon [icon]="icons.arrowDown"></fa-icon>
+        </span>
+      </div>
     </div>
 
     <div class="graphs">

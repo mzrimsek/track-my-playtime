@@ -22,6 +22,33 @@
         font-size: 1.5em;
         font-style: italic;
       }
+
+      .range-options {
+        display: inline-block;
+        background: $background-dark-accent;
+        color: $text-light;
+        padding: 5px;
+
+        select {
+          font-size: $base-font-size;
+          font-family: $base-font-family;
+          background: inherit;
+          color: inherit;
+          font-size: 1.5em;
+          font-style: italic;
+          outline: none;
+          border: none;
+          appearance: none;
+
+          &:hover {
+            cursor: inherit;
+          }
+        }
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
     }
 
     .graphs {

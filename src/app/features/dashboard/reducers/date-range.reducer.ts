@@ -3,27 +3,23 @@ import { tassign } from 'tassign';
 
 import * as actions from '../actions/date-range.actions';
 
+export type DateRangeType = 'THIS_WEEK' | 'LAST_WEEK' | 'THIS_MONTH' | 'LAST_MONTH';
+
 export interface State {
   startDay: Date;
   endDay: Date;
+  type: DateRangeType;
 }
 
 const now = new Date();
 const initialState: State = {
   startDay: startOfWeek(now),
-  endDay: endOfWeek(now)
+  endDay: endOfWeek(now),
+  type: 'THIS_WEEK'
 };
 
 export function reducer(state: State = initialState, action: actions.All): State {
   switch (action.type) {
-    case actions.SET_START_DAY: {
-      const startDay = new Date(action.start);
-      return tassign(state, { startDay });
-    }
-    case actions.SET_END_DAY: {
-      const endDay = new Date(action.end);
-      return tassign(state, { endDay });
-    }
     case actions.SET_THIS_WEEK: {
       return initialState;
     }
@@ -33,7 +29,8 @@ export function reducer(state: State = initialState, action: actions.All): State
       const endLastWeek = subDays(startThisWeek, 1);
       return tassign(state, {
         startDay: startLastWeek,
-        endDay: endLastWeek
+        endDay: endLastWeek,
+        type: 'LAST_WEEK'
       });
     }
     case actions.SET_THIS_MONTH: {
@@ -41,7 +38,18 @@ export function reducer(state: State = initialState, action: actions.All): State
       const endMonth = endOfMonth(now);
       return tassign(state, {
         startDay: startMonth,
-        endDay: endMonth
+        endDay: endMonth,
+        type: 'THIS_MONTH'
+      });
+    }
+    case actions.SET_LAST_MONTH: {
+      const startThisMonth = startOfMonth(now);
+      const endLastMonth = subDays(startThisMonth, 1);
+      const startLastMonth = startOfMonth(endLastMonth);
+      return tassign(state, {
+        startDay: startLastMonth,
+        endDay: endLastMonth,
+        type: 'LAST_MONTH'
       });
     }
     default: {
