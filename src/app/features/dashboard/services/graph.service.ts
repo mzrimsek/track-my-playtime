@@ -5,18 +5,18 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
 import trackerSelectors, { State as TrackerState } from '../../tracker/reducers/root.reducer';
+import dashboardSelectors, { State as DashboardState } from '../reducers/root.reducer';
 
 import { GraphDataItem } from '../models';
 
-import { getWeek } from '../../../shared/utils/date.utils';
 import { filterGroupingsByDateRange, mapToGraphData, padDateGraphData } from '../utils/graph.utils';
 
 @Injectable()
 export class GraphService {
 
   private dateRange: Date[] = [];
-  constructor(private trackerStore: Store<TrackerState>) {
-    this.dateRange = getWeek(new Date());
+  constructor(private trackerStore: Store<TrackerState>, private dashboardStore: Store<DashboardState>) {
+    this.dashboardStore.select(dashboardSelectors.dateList).subscribe(dateList => this.dateRange = dateList);
   }
 
   getTimeVsDateGraphData(): Observable<GraphDataItem[]> {
