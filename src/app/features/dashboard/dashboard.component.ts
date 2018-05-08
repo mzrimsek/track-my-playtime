@@ -1,8 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Store } from '@ngrx/store';
+
 import { Observable } from 'rxjs/Observable';
 
 import { GraphService } from './services/graph.service';
+
+import * as actions from './actions/date-range.actions';
+
+import { State } from './reducers/root.reducer';
 
 import { BarGraphConfig, GraphDataItem, PieChartConfig } from './models';
 
@@ -62,7 +68,8 @@ export class DashboardComponent implements OnInit {
     explodeSlices: false,
     doughnut: true
   };
-  constructor(private graphService: GraphService) { }
+
+  constructor(private graphService: GraphService, private store: Store<State>) { }
 
   ngOnInit() {
     this.timeVsDateGraphData$ = this.graphService.getTimeVsDateGraphData();
@@ -70,5 +77,25 @@ export class DashboardComponent implements OnInit {
     this.timeVsGameGraphData$ = this.graphService.getTimeVsGameGraphData();
     this.isHistoryDataLoading$ = this.graphService.isHistoryDataLoading();
     this.totalTime$ = this.timeVsDateGraphData$.map(x => x.reduce((a, b) => a + b.value, 0));
+  }
+
+  updateDateRange(dateRangeEl: HTMLSelectElement) {
+    switch (dateRangeEl.value) {
+      case 'this-week': {
+        this.store.dispatch(new actions.SetThisWeek());
+        break;
+      }
+      case 'last-week': {
+        this.store.dispatch(new actions.SetLastWeek());
+        break;
+      }
+      case 'this-month': {
+        this.store.dispatch(new actions.SetThisMonth());
+        break;
+      }
+      default: {
+        this.store.dispatch(new actions.SetThisWeek());
+      }
+    }
   }
 }
