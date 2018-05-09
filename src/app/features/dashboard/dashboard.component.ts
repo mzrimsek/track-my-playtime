@@ -74,14 +74,6 @@ export class DashboardComponent implements OnInit {
   constructor(private trackerStore: Store<TrackerState>, private dashboardStore: Store<DashboardState>) { }
 
   ngOnInit() {
-    this.initGraphData();
-
-    this.isHistoryDataLoading$ = this.trackerStore.select(trackerSelectors.historyLoading);
-    this.totalTime$ = this.timeVsDateGraphData$.map(x => x.reduce((a, b) => a + b.value, 0));
-    this.dateRangeType$ = this.dashboardStore.select(dashboardSelectors.rangeType);
-  }
-
-  private initGraphData() {
     const dateList = this.dashboardStore.select(dashboardSelectors.dateList);
     const groupingsByDate = this.trackerStore.select(trackerSelectors.historyGroupingsByDate);
     const groupingsByPlatform = this.trackerStore.select(trackerSelectors.historyGroupingsByPlatform);
@@ -90,5 +82,9 @@ export class DashboardComponent implements OnInit {
     this.timeVsDateGraphData$ = getPaddedGraphData(groupingsByDate, dateList);
     this.timeVsPlatformGraphData$ = getGraphData(groupingsByPlatform, dateList);
     this.timeVsGameGraphData$ = getGraphData(groupingsByGame, dateList);
+
+    this.isHistoryDataLoading$ = this.trackerStore.select(trackerSelectors.historyLoading);
+    this.totalTime$ = this.timeVsDateGraphData$.map(x => x.reduce((a, b) => a + b.value, 0));
+    this.dateRangeType$ = this.dashboardStore.select(dashboardSelectors.rangeType);
   }
 }
