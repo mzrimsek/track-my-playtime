@@ -1,18 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 
-import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import { Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs/Observable';
 
 import { GraphService } from './services/graph.service';
 
-import * as actions from './actions/date-range.actions';
-
-import { DateRangeType } from './reducers/date-range.reducer';
 import dashboardComponentSelectors, { State } from './reducers/root.reducer';
 
-import { BarGraphConfig, GraphDataItem, PieChartConfig } from './models';
+import { BarGraphConfig, DateRangeType, GraphDataItem, PieChartConfig } from './models';
 
 import { formatTime } from '../../shared/utils/date.utils';
 import { selectColorScheme } from './utils/colorScheme.utils';
@@ -31,12 +27,7 @@ export class DashboardComponent implements OnInit {
   isHistoryDataLoading$: Observable<boolean>;
   totalTime$: Observable<number>;
 
-  icons = {
-    arrowDown: faCaretDown
-  };
-
   dateRangeType$: Observable<DateRangeType>;
-
   private barGraphBaseConfig: BarGraphConfig = {
     view: undefined,
     colorScheme: {
@@ -81,48 +72,12 @@ export class DashboardComponent implements OnInit {
   constructor(private graphService: GraphService, private store: Store<State>) { }
 
   ngOnInit() {
-    this.getDashboardData();
-  }
-
-  getDashboardData() {
     this.timeVsDateGraphData$ = this.graphService.getTimeVsDateGraphData();
     this.timeVsPlatformGraphData$ = this.graphService.getTimeVsPlatformGraphData();
     this.timeVsGameGraphData$ = this.graphService.getTimeVsGameGraphData();
 
     this.isHistoryDataLoading$ = this.graphService.isHistoryDataLoading();
     this.totalTime$ = this.timeVsDateGraphData$.map(x => x.reduce((a, b) => a + b.value, 0));
-
     this.dateRangeType$ = this.store.select(dashboardComponentSelectors.rangeType);
-  }
-
-  updateDateRange(dateRangeEl: HTMLSelectElement) {
-    switch (dateRangeEl.value) {
-      case 'THIS_WEEK': {
-        this.store.dispatch(new actions.SetThisWeek());
-        break;
-      }
-      case 'LAST_WEEK': {
-        this.store.dispatch(new actions.SetLastWeek());
-        break;
-      }
-      case 'THIS_MONTH': {
-        this.store.dispatch(new actions.SetThisMonth());
-        break;
-      }
-      case 'LAST_MONTH': {
-        this.store.dispatch(new actions.SetLastMonth());
-        break;
-      }
-      default: {
-        this.store.dispatch(new actions.SetThisWeek());
-      }
-    }
-    this.getDashboardData();
-  }
-
-  clickDateRangeOptionSelect(el: HTMLSelectElement) {
-    console.log('click');
-    console.log(el);
-    el.click();
   }
 }

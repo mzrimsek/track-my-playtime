@@ -3,7 +3,7 @@ import { tassign } from 'tassign';
 
 import * as actions from '../actions/date-range.actions';
 
-export type DateRangeType = 'THIS_WEEK' | 'LAST_WEEK' | 'THIS_MONTH' | 'LAST_MONTH';
+import { DateRangeType } from '../models';
 
 export interface State {
   startDay: Date;
