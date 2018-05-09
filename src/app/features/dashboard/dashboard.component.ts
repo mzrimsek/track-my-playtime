@@ -4,14 +4,16 @@ import { Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs/Observable';
 
-import { GraphService } from './services/graph.service';
-
-import dashboardSelectors, { State } from './reducers/root.reducer';
+import trackerSelectors, {
+    State as TrackerState
+} from '../../features/tracker/reducers/root.reducer';
+import dashboardSelectors, { State as DashboardState } from './reducers/root.reducer';
 
 import { BarGraphConfig, DateRangeType, GraphDataItem, PieChartConfig } from './models';
 
 import { formatTime } from '../../shared/utils/date.utils';
 import { selectColorScheme } from './utils/colorScheme.utils';
+import { getGraphData, getPaddedGraphData } from './utils/graph-data.utils';
 
 @Component({
   selector: 'app-dashboard',
@@ -44,7 +46,7 @@ export class DashboardComponent implements OnInit {
     xAxisLabel: '',
     yAxisLabel: '',
     axisTickFormatting: formatTime,
-    scaleMax: 36000
+    scaleMax: 3600 * 10
   };
   dateGraphConfig: BarGraphConfig = {
     ...this.barGraphBaseConfig,
@@ -69,15 +71,24 @@ export class DashboardComponent implements OnInit {
     doughnut: true
   };
 
-  constructor(private graphService: GraphService, private store: Store<State>) { }
+  constructor(private trackerStore: Store<TrackerState>, private dashboardStore: Store<DashboardState>) { }
 
   ngOnInit() {
-    this.timeVsDateGraphData$ = this.graphService.getTimeVsDateGraphData();
-    this.timeVsPlatformGraphData$ = this.graphService.getTimeVsPlatformGraphData();
-    this.timeVsGameGraphData$ = this.graphService.getTimeVsGameGraphData();
+    this.initGraphData();
 
-    this.isHistoryDataLoading$ = this.graphService.isHistoryDataLoading();
+    this.isHistoryDataLoading$ = this.trackerStore.select(trackerSelectors.historyLoading);
     this.totalTime$ = this.timeVsDateGraphData$.map(x => x.reduce((a, b) => a + b.value, 0));
-    this.dateRangeType$ = this.store.select(dashboardSelectors.rangeType);
+    this.dateRangeType$ = this.dashboardStore.select(dashboardSelectors.rangeType);
+  }
+
+  private initGraphData() {
+    const dateList = this.dashboardStore.select(dashboardSelectors.dateList);
+    const groupingsByDate = this.trackerStore.select(trackerSelectors.historyGroupingsByDate);
+    const groupingsByPlatform = this.trackerStore.select(trackerSelectors.historyGroupingsByPlatform);
+    const groupingsByGame = this.trackerStore.select(trackerSelectors.historyGroupingsByGame);
+
+    this.timeVsDateGraphData$ = getPaddedGraphData(groupingsByDate, dateList);
+    this.timeVsPlatformGraphData$ = getGraphData(groupingsByPlatform, dateList);
+    this.timeVsGameGraphData$ = getGraphData(groupingsByGame, dateList);
   }
 }
