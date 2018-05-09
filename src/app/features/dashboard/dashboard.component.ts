@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { GraphService } from './services/graph.service';
 
-import dashboardComponentSelectors, { State } from './reducers/root.reducer';
+import dashboardSelectors, { State } from './reducers/root.reducer';
 
 import { BarGraphConfig, DateRangeType, GraphDataItem, PieChartConfig } from './models';
 
@@ -78,6 +78,6 @@ export class DashboardComponent implements OnInit {
 
     this.isHistoryDataLoading$ = this.graphService.isHistoryDataLoading();
     this.totalTime$ = this.timeVsDateGraphData$.map(x => x.reduce((a, b) => a + b.value, 0));
-    this.dateRangeType$ = this.store.select(dashboardComponentSelectors.rangeType);
+    this.dateRangeType$ = this.store.select(dashboardSelectors.rangeType);
   }
 }

@@ -24,9 +24,9 @@ export const _selectDateList = createSelector(_selectDateRange, dateRange => {
 });
 export const _selectRangeType = createSelector(_selectDateRange, dateRange => dateRange.type);
 
-const dashboardComponentSelectors = {
+const dashboardSelectors = {
   dateList: _selectDateList,
   rangeType: _selectRangeType
 };
 
-export default dashboardComponentSelectors;
+export default dashboardSelectors;
