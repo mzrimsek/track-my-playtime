@@ -2,7 +2,8 @@
   <span class="title">Dashboard - </span>
   <span class="total">{{ totalTime | time }} </span>
   <div class="range-options drop-shadow">
-    <select #dateRangeEl
+    <select data-tracking-category="dashboardDateRange"
+            #dateRangeEl
             [value]="rangeType"
             (change)="updateDateRange(dateRangeEl)">
       <option value="THIS_WEEK">This Week</option>
