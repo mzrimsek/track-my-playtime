@@ -15,8 +15,6 @@ import {
 } from './components/time-platform-graph/time-platform-graph.component';
 import { DashboardComponent } from './dashboard.component';
 
-import { GraphService } from './services/graph.service';
-
 import { reducers } from './reducers/root.reducer';
 
 @NgModule({
@@ -33,7 +31,6 @@ import { reducers } from './reducers/root.reducer';
     TimePlatformGraphComponent,
     GraphTooltipComponent,
     HeaderComponent
-  ],
-  providers: [GraphService]
+  ]
 })
 export class DashboardModule { }
