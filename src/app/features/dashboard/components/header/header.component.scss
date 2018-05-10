@@ -4,12 +4,12 @@
   height: $dashboard-header-height;
 
   .title {
-    font-size: 2em;
+    font-size: 1.5em;
     font-weight: bold;
   }
 
   .total {
-    font-size: 1.5em;
+    font-size: 1.25em;
     font-style: italic;
   }
 
@@ -24,7 +24,7 @@
       font-family: $base-font-family;
       background: inherit;
       color: inherit;
-      font-size: 1.5em;
+      font-size: 1.25em;
       font-style: italic;
       outline: none;
       border: none;
@@ -40,3 +40,12 @@
     }
   }
 }
+
+@media only screen  and (max-width : $small-breakpoint) {
+  .header {
+    .title {
+     display: none;
+    }
+  }
+}
+

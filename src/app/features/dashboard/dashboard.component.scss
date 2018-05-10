@@ -11,73 +11,55 @@
     padding: 20px;
 
     .graphs {
-      display: flex;
       height: $graphs-height;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 50% 50%;
+      grid-template-rows: 50% 50%;
 
-      section {
-        display: flex;
-        flex-direction: column;
-        margin-right: 20px;
-        width: 50%;
-
-        .time-vs-date, .time-vs-game {
-          height: 50%;
-          width: 100%;
-          padding: 10px;
-          background: $background-light;
-
-          &:not(:last-child) {
-            margin-bottom: 20px;
-          }
-        }
+      // TRY CSS GRID!!! 2 x 2
+      > div {
+        padding: 10px;
+        background: $background-light;
       }
 
-      aside {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 50%;
+      .time-vs-date {
+        grid-column: 1 / span 1;
+        grid-row: 1 / span 1;
+        margin-right: 10px;
+        margin-bottom: 10px;
+      }
 
-        .time-vs-platform {
-          height: 100%;
-          width: 100%;
-          padding: 10px;
-          background: $background-light;
-        }
+      .time-vs-game {
+        grid-column: 1 / span 1;
+        grid-row: 2 / span 1;
+        margin-right: 10px;
+        margin-top: 10px;
+      }
+
+      .time-vs-platform {
+        grid-column: 2 / span 1;
+        grid-row: 1 / span 2;
+        margin-left: 10px;
       }
     }
   }
 }
-
 @media only screen  and (max-width : $small-breakpoint) {
   .content {
     .dashboard {
-      .header {
-        .title {
-          font-size: 1.5em;
-        }
-
-        .total {
-          font-size: 1em;
-        }
-      }
-
       .graphs {
+        display: flex;
         flex-direction: column;
+        justify-content: space-evenly;
 
-        section {
-          height: 66%;
-          width: 100%;
-          margin-right: 0px;
-
-          .time-vs-date, .time-vs-game {
-            margin-bottom: 20px;
-          }
+        .time-vs-date, .time-vs-game {
+          height: 100%;
+          margin: 0px 0px 20px 0px;
         }
 
-        aside {
-          height: 33%;
-          width: 100%;
+        .time-vs-platform {
+          margin: 0px;
         }
       }
     }
