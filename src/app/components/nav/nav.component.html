@@ -1,7 +1,8 @@
 <div class="nav">
   <div class="main">
     <div class="banner">
-      <a [attr.data-tracking-category]="bannerRoute.trackingCategory"
+      <a id="navBannerLink"
+         [attr.data-tracking-category]="bannerRoute.trackingCategory"
          [routerLink]="bannerRoute.router">{{ bannerRoute.caption }}</a>
     </div>
 
@@ -11,7 +12,8 @@
             [routerLinkActive]="['active']"
             [routerLinkActiveOptions]="{ exact: route.exact }">
 
-          <a [attr.data-tracking-category]="route.trackingCategory"
+          <a [id]="route.trackingCategory + 'Link'"
+             [attr.data-tracking-category]="route.trackingCategory"
              [routerLink]="route.router">
             <span class="icon">
               <fa-icon [icon]="route.icon"></fa-icon>
@@ -22,6 +24,8 @@
 
         </li>
       </ul>
+
+      <ng-adsense></ng-adsense>
     </nav>
   </div>
 
@@ -32,7 +36,8 @@
       <div class="name">{{ user.displayName }}</div>
     </div>
 
-    <button data-tracking-category="navLogout"
+    <button id="logoutButton"
+            data-tracking-category="navLogout"
             class="logout icon-button"
             (click)="logout()">
       <fa-icon [icon]="icons.logout"></fa-icon>

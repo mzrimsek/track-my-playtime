@@ -17,7 +17,7 @@ export class NavComponent implements OnInit {
 
   bannerRoute: RouteEntry = {
     caption: 'Track My Playtime',
-    router: ['app/tracker'],
+    router: ['app'],
     trackingCategory: 'navBanner'
   };
 

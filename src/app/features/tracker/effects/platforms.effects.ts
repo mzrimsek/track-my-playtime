@@ -18,11 +18,7 @@ export class PlatformsEffects {
     this.actions$
       .ofType(platformsActions.LOAD_OPTIONS)
       .switchMap(() => this.platformsService.getPlatformsOptions()
-        .map(data => {
-          return new platformsActions.LoadOptionsSucceeded(data);
-        })
-        .catch(err =>
-          Observable.of(new appActions.Error(platformsActions.LOAD_OPTIONS, err.message))
-        )
+        .map(data => new platformsActions.LoadOptionsSucceeded(data))
+        .catch(err => Observable.of(new appActions.Error(platformsActions.LOAD_OPTIONS, err.message)))
       );
 }

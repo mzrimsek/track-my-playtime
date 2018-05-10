@@ -1,0 +1,51 @@
+@import "../../../../../variables.scss";
+
+.header {
+  height: $dashboard-header-height;
+
+  .title {
+    font-size: 1.5em;
+    font-weight: bold;
+  }
+
+  .total {
+    font-size: 1.25em;
+    font-style: italic;
+  }
+
+  .range-options {
+    display: inline-block;
+    background: $background-dark-accent;
+    color: $text-light;
+    padding: 5px;
+
+    select {
+      font-size: $base-font-size;
+      font-family: $base-font-family;
+      background: inherit;
+      color: inherit;
+      font-size: 1.25em;
+      font-style: italic;
+      outline: none;
+      border: none;
+      appearance: none;
+
+      &:hover {
+        cursor: inherit;
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+@media only screen  and (max-width : $small-breakpoint) {
+  .header {
+    .title {
+     display: none;
+    }
+  }
+}
+

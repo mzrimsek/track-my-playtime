@@ -10,17 +10,21 @@ describe('GraphTooltipComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [GraphTooltipComponent, TimePipe]
-    })
-      .compileComponents();
-  }));
+      declarations: [
+        GraphTooltipComponent,
+        TimePipe
+      ]
+    }).compileComponents();
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(GraphTooltipComponent);
     component = fixture.componentInstance;
-  });
+  }));
 
-  it('Should have name value in name element', () => {
+  it('Should create the component', async(() => {
+    expect(component).toBeTruthy();
+  }));
+
+  it('Should have name value in name element', async(() => {
     component.model = {
       name: 'Some Game',
       value: 0
@@ -30,9 +34,9 @@ describe('GraphTooltipComponent', () => {
     const nameElement = fixture.nativeElement.querySelector('.name');
 
     expect(nameElement.innerText).toBe('Some Game');
-  });
+  }));
 
-  it('Should have formatted time in value element', () => {
+  it('Should have formatted time in value element', async(() => {
     component.model = {
       name: 'Some Game',
       value: 180 // value is in seconds
@@ -42,5 +46,5 @@ describe('GraphTooltipComponent', () => {
     const nameElement = fixture.nativeElement.querySelector('.value');
 
     expect(nameElement.innerText).toBe('00:03:00');
-  });
+  }));
 });

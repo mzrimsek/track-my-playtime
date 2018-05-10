@@ -1,8 +1,6 @@
-import { addDays, subDays } from 'date-fns';
+import { addDays, eachDay, subDays } from 'date-fns';
 
-import {
-    formatDate, formatTime, getElapsedTimeInSeconds, getWeek, isInDateRange
-} from './date.utils';
+import { formatDate, formatTime, getElapsedTimeInSeconds, isInDateRange } from './date.utils';
 
 const MINUTE = 60;
 const HOUR = MINUTE * 60;
@@ -64,29 +62,10 @@ describe('Date Utils', () => {
     });
   });
 
-  describe('getWeek', () => {
-    it('Can get the week for a day', () => {
-      const date = new Date(2018, 3, 7); // Saturday, April 7th, 2018
-      const result = getWeek(date);
-      expect(result).toEqual([
-        new Date(2018, 3, 1),
-        new Date(2018, 3, 2),
-        new Date(2018, 3, 3),
-        new Date(2018, 3, 4),
-        new Date(2018, 3, 5),
-        new Date(2018, 3, 6),
-        new Date(2018, 3, 7)
-      ]);
-    });
-  });
-
   describe('isInDateRange', () => {
-    let start: Date;
-    let range: Date[];
-    beforeEach(() => {
-      start = new Date(2018, 3, 1);
-      range = getWeek(start);
-    });
+    const start = new Date(2018, 3, 1);
+    const end = new Date(2018, 3, 6);
+    const range = eachDay(start, end);
 
     it('Should return true for the first day of the range', () => {
       const result = isInDateRange(start, range);
@@ -94,25 +73,24 @@ describe('Date Utils', () => {
     });
 
     it('Should return true for the last day of the range', () => {
-      const date = range[range.length - 1];
-      const result = isInDateRange(date, range);
+      const result = isInDateRange(end, range);
       expect(result).toBe(true);
     });
 
     it('Should return true for a day in the middle of the range', () => {
-      const date = new Date(2018, 3, 4);
+      const date = addDays(start, 2);
       const result = isInDateRange(date, range);
       expect(result).toBe(true);
     });
 
     it('Should return false for a day before the first day of the range', () => {
-      const date = subDays(range[0], 3);
+      const date = subDays(start, 3);
       const result = isInDateRange(date, range);
       expect(result).toBe(false);
     });
 
     it('Should return false for a day after the last day of the range', () => {
-      const date = addDays(range[range.length - 1], 3);
+      const date = addDays(end, 3);
       const result = isInDateRange(date, range);
       expect(result).toBe(false);
     });
