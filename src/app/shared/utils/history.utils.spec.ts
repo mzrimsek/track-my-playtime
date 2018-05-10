@@ -1,9 +1,11 @@
 import { addDays, eachDay, subDays } from 'date-fns';
+import { Observable } from 'rxjs/Observable';
 
 import { HistoryGrouping, HistoryListItem } from '../models';
 
 import {
-    filterGroupingsByDateRange, getHistoryGroupingList, getHistoryListItemsMap
+    filterGroupingsByDateRange, filterGroupingsByDateRangeObservables, getHistoryGroupingList,
+    getHistoryListItemsMap
 } from './history.utils';
 
 describe('History Utils', () => {
@@ -269,6 +271,91 @@ describe('History Utils', () => {
           ]
         }]
       }]);
+    });
+  });
+
+  describe('filterGroupingsByDateRangeObservables', () => {
+    const start = new Date(2018, 3, 1);
+    const end = addDays(start, 6);
+    const inRange = addDays(start, 3);
+    const outOfRangeAhead = addDays(start, 15);
+    const outOfRangeBehind = subDays(start, 3);
+    const range = eachDay(start, end);
+    const game = 'some game';
+
+    it('Should filter history items outside of date range', () => {
+      const grouping = getHistoryGrouping(game, 0);
+      grouping.historyItems = [{
+        id: 'some id 4',
+        game,
+        platform: 'some platform',
+        startTime: outOfRangeAhead.getTime(),
+        endTime: outOfRangeAhead.getTime(),
+        dateRange: [
+          outOfRangeAhead,
+          outOfRangeAhead
+        ]
+      }, {
+        id: 'some id 3',
+        game,
+        platform: 'some platform',
+        startTime: inRange.getTime(),
+        endTime: inRange.getTime(),
+        dateRange: [
+          inRange,
+          inRange
+        ]
+      }, {
+        id: 'some id 2',
+        game,
+        platform: 'some platform',
+        startTime: start.getTime(),
+        endTime: start.getTime(),
+        dateRange: [
+          start,
+          start
+        ]
+      }, {
+        id: 'some id',
+        game,
+        platform: 'some other platform',
+        startTime: outOfRangeBehind.getTime(),
+        endTime: outOfRangeBehind.getTime(),
+        dateRange: [
+          outOfRangeBehind,
+          outOfRangeBehind
+        ]
+      }];
+
+      const result = filterGroupingsByDateRangeObservables(Observable.of([grouping]), Observable.of(range));
+
+      result.subscribe(res => {
+        expect(res).toEqual([{
+          key: game,
+          totalTime: 0,
+          historyItems: [{
+            id: 'some id 3',
+            game,
+            platform: 'some platform',
+            startTime: inRange.getTime(),
+            endTime: inRange.getTime(),
+            dateRange: [
+              inRange,
+              inRange
+            ]
+          }, {
+            id: 'some id 2',
+            game,
+            platform: 'some platform',
+            startTime: start.getTime(),
+            endTime: start.getTime(),
+            dateRange: [
+              start,
+              start
+            ]
+          }]
+        }]);
+      });
     });
   });
 });

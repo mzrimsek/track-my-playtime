@@ -1,3 +1,5 @@
+import { Observable } from 'rxjs/Observable';
+
 import { HistoryGrouping, HistoryListItem } from '../models';
 
 import { getElapsedTimeInSeconds, isInDateRange } from './date.utils';
@@ -54,3 +56,10 @@ const getFilteredGrouping = (grouping: HistoryGrouping, dateRange: Date[]): Hist
     historyItems
   };
 };
+
+export const filterGroupingsByDateRangeObservables =
+  (groupings: Observable<HistoryGrouping[]>, dateRange: Observable<Date[]>): Observable<HistoryGrouping[]> => {
+    return groupings.combineLatest(dateRange, (groups, dates) => {
+      return filterGroupingsByDateRange(groups, dates);
+    });
+  };

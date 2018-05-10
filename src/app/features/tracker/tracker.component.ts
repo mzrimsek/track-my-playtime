@@ -12,6 +12,8 @@ import trackerSelectors, { State as TrackerState } from './reducers/root.reducer
 import { HistoryGrouping } from '../../shared/models';
 import { TimerInfo } from './models';
 
+import { filterGroupingsByDateRangeObservables } from '../../shared/utils/history.utils';
+
 @Component({
   selector: 'app-tracker',
   templateUrl: './tracker.component.html',
@@ -32,7 +34,10 @@ export class TrackerComponent implements OnInit {
     this.currentTime$ = this.clockService.getCurrentTime();
     this.platformsOptions$ = this.trackerStore.select(trackerSelectors.platformsOptions);
 
-    this.historyGroupings$ = this.sharedStore.select(sharedSelectors.historyGroupingsByDate);
+    const historyGroupings = this.sharedStore.select(sharedSelectors.historyGroupingsByDate);
+    const datesToShow = this.trackerStore.select(trackerSelectors.datesToShow);
+    this.historyGroupings$ = filterGroupingsByDateRangeObservables(historyGroupings, datesToShow);
+
     this.historyLoading$ = this.sharedStore.select(sharedSelectors.historyLoading);
   }
 }
