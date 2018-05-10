@@ -3,7 +3,7 @@ import { startOfDay, subDays } from 'date-fns';
 import { State as DisplayState } from './display.reducer';
 import { State as PlatformsState } from './platforms.reducer';
 import {
-    _selectDateListToShow, _selectDaysToShow, _selectPlatformsOptions, _selectTimerInfo, State,
+    _selectDateListToShow, _selectEntriesToShow, _selectPlatformsOptions, _selectTimerInfo, State,
     TrackerState
 } from './root.reducer';
 import { State as TimerState } from './timer.reducer';
@@ -52,68 +52,25 @@ describe('Tracker Root Reducer', () => {
   });
 
   describe('Display State Selectors', () => {
-    describe('_selectDaysToShow', () => {
-      it('Should return the daysToShow', () => {
-        const daysToShow = 7;
+    describe('_selectEntriesToShow', () => {
+      it('Should return the entriesToShow', () => {
+        const entriesToShow = 7;
         const trackerState: TrackerState = {
           timer: getTimerInitialState(),
           platforms: getPlatformsInitialState(),
           display: {
-            daysToShow
+            entriesToShow
           }
         };
         const state: State = { tracker: trackerState };
 
-        const result = _selectDaysToShow(state);
+        const result = _selectEntriesToShow(state);
 
-        expect(result).toBe(daysToShow);
-      });
-    });
-
-    describe('_selectDateListToShow', () => {
-      it('Should return same number of entries as daysToShow', () => {
-        const daysToShow = 7;
-        const trackerState: TrackerState = {
-          timer: getTimerInitialState(),
-          platforms: getPlatformsInitialState(),
-          display: {
-            daysToShow
-          }
-        };
-        const state: State = { tracker: trackerState };
-
-        const result = _selectDateListToShow(state);
-
-        expect(result.length).toBe(daysToShow);
-      });
-      it('Should return the dates to show', () => {
-        const trackerState: TrackerState = {
-          timer: getTimerInitialState(),
-          platforms: getPlatformsInitialState(),
-          display: {
-            daysToShow: 7
-          }
-        };
-        const state: State = { tracker: trackerState };
-
-        const result = _selectDateListToShow(state);
-
-        const today = startOfDay(new Date());
-        expect(result).toEqual([
-          today,
-          subDays(today, 1),
-          subDays(today, 2),
-          subDays(today, 3),
-          subDays(today, 4),
-          subDays(today, 5),
-          subDays(today, 6)
-        ]);
+        expect(result).toBe(entriesToShow);
       });
     });
   });
 });
-
-
 
 const getTimerInitialState = (): TimerState => {
   return {
@@ -131,6 +88,6 @@ const getPlatformsInitialState = (): PlatformsState => {
 
 const getDisplayInitialState = (): DisplayState => {
   return {
-    daysToShow: 7
+    entriesToShow: 7
   };
 };

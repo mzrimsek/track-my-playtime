@@ -33,17 +33,12 @@ export const _selectTimerInfo = createSelector(_selectTimer, timer => timer as T
 
 export const _selectPlatformsOptions = createSelector(_selectPlatforms, platforms => platforms.options);
 
-export const _selectDaysToShow = createSelector(_selectDisplay, display => display.daysToShow);
-export const _selectDateListToShow = createSelector(_selectDaysToShow, days => {
-  const lastDayToShow = new Date();
-  const firstDayToShow = subDays(lastDayToShow, days - 1);
-  return eachDay(firstDayToShow, lastDayToShow).reverse();
-});
+export const _selectEntriesToShow = createSelector(_selectDisplay, display => display.entriesToShow);
 
 const trackerSelectors = {
   timerInfo: _selectTimerInfo,
   platformsOptions: _selectPlatformsOptions,
-  datesToShow: _selectDateListToShow
+  entriesToShow: _selectEntriesToShow
 };
 
 export default trackerSelectors;
