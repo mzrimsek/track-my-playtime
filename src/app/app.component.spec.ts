@@ -21,6 +21,7 @@ import * as actions from './actions/app.actions';
 import * as fromDashboard from './features/dashboard/reducers/root.reducer';
 import * as fromTracker from './features/tracker/reducers/root.reducer';
 import * as fromRoot from './reducers/root.reducer';
+import * as fromShared from './shared/reducers/root.reducer';
 
 import './rxjs-operators';
 
@@ -71,6 +72,7 @@ describe('AppComponent', () => {
         ]),
         StoreModule.forRoot({
           ...fromRoot.reducers,
+          'shared': combineReducers(fromShared.reducers),
           'tracker': combineReducers(fromTracker.reducers),
           'dashboard': combineReducers(fromDashboard.reducers)
         })

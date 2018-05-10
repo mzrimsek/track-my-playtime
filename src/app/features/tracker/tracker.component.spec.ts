@@ -25,6 +25,7 @@ describe('Tracker Component', () => {
       imports: [
         StoreModule.forRoot({
           ...fromRoot.reducers,
+          'shared': combineReducers(fromShared.reducers),
           'tracker': combineReducers(fromTracker.reducers)
         })
       ],
