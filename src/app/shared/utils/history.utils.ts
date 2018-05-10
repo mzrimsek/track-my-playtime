@@ -1,6 +1,6 @@
 import { HistoryGrouping, HistoryListItem } from '../models';
 
-import { getElapsedTimeInSeconds } from '../../../shared/utils/date.utils';
+import { getElapsedTimeInSeconds } from './date.utils';
 
 type HistoryListItemsMapKeyFunction = (item: HistoryListItem) => string;
 type HistoryListItemsMap = Map<string, HistoryListItem[]>;
