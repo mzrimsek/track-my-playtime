@@ -1,4 +1,4 @@
-import { addDays, eachDay, format, isSameDay, startOfWeek } from 'date-fns';
+import { format, isSameDay } from 'date-fns';
 
 export const formatTime = (timeInSeconds: number): string => {
   const hours = Math.floor(timeInSeconds / 3600);
@@ -17,12 +17,6 @@ const getZeroPaddingTime = (time: number): string => {
 
 export const formatDate = (date: Date): string => {
   return format(date, 'M/D/YYYY');
-};
-
-export const getWeek = (date: Date): Date[] => {
-  const start = startOfWeek(date);
-  const end = addDays(start, 6);
-  return eachDay(start, end);
 };
 
 export const isInDateRange = (dateToCheck: Date, dateRange: Date[]): boolean => {

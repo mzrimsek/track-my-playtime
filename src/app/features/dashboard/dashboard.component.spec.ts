@@ -1,69 +1,79 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Observable } from 'rxjs/Observable';
+import { combineReducers, Store, StoreModule } from '@ngrx/store';
 
 import { DashboardComponent } from './dashboard.component';
 
-import { GraphService } from './services/graph.service';
-
 import { TimePipe } from '../../shared/pipes/time.pipe';
+
+import * as historyActions from '../../features/tracker/actions/history.actions';
+
+import * as fromTracker from '../../features/tracker/reducers/root.reducer';
+import * as fromRoot from '../../reducers/root.reducer';
+import * as fromDashboard from './reducers/root.reducer';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
   let fixture: ComponentFixture<DashboardComponent>;
-  let graphService: GraphService;
+  let store: Store<fromTracker.State>;
 
-  const initTests = () => {
+  beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
         DashboardComponent,
         TimePipe
       ],
-      providers: [{ provide: GraphService, useValue: graphServiceStub }],
+      imports: [
+        StoreModule.forRoot({
+          ...fromRoot.reducers,
+          'tracker': combineReducers(fromTracker.reducers),
+          'dashboard': combineReducers(fromDashboard.reducers)
+        })
+      ],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
 
-    graphService = TestBed.get(GraphService);
+    store = TestBed.get(Store);
+    spyOn(store, 'select').and.callThrough();
 
     fixture = TestBed.createComponent(DashboardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  };
+  }));
 
-  describe('Render', () => {
-    beforeEach(async(() => {
-      initTests();
-    }));
+  it('Should create the component', async(() => {
+    expect(component).toBeTruthy();
+  }));
 
-    it('Should create the component', async(() => {
-      expect(component).toBeTruthy();
-    }));
+  it('Should select date list', async(() => {
+    expect(store.select).toHaveBeenCalledWith(fromDashboard._selectDateList);
+  }));
 
-    it('Should call GraphService getTimeVsDateGraphData', async(() => {
-      expect(graphService.getTimeVsDateGraphData).toHaveBeenCalled();
-    }));
-
-    it('Should call GraphService getTimeVsPlatformGraphData', async(() => {
-      expect(graphService.getTimeVsPlatformGraphData).toHaveBeenCalled();
-    }));
-
-    it('Should call GraphService getTimeVsGameGraphData', async(() => {
-      expect(graphService.getTimeVsGameGraphData).toHaveBeenCalled();
-    }));
-
-    it('Should call GraphService isHistoryDataLoading', async(() => {
-      expect(graphService.isHistoryDataLoading).toHaveBeenCalled();
-    }));
+  it('Should select date range type', () => {
+    expect(store.select).toHaveBeenCalledWith(fromDashboard._selectRangeType);
   });
+
+  it('Should select groupings by date', async(() => {
+    expect(store.select).toHaveBeenCalledWith(fromTracker._selectHistoryGroupingsByDate);
+  }));
+
+  it('Should select groupings by platform', async(() => {
+    expect(store.select).toHaveBeenCalledWith(fromTracker._selectHistoryGroupingsByPlatform);
+  }));
+
+  it('Should select groupings by game', async(() => {
+    expect(store.select).toHaveBeenCalledWith(fromTracker._selectHistoryGroupingsByGame);
+  }));
+
+  it('Should select history loading', async(() => {
+    expect(store.select).toHaveBeenCalledWith(fromTracker._selectHistoryLoading);
+  }));
 
   describe('When data is loading', () => {
     beforeEach(async(() => {
-      graphServiceStub.isHistoryDataLoading = jasmine
-        .createSpy('isHistoryDataLoading')
-        .and
-        .returnValue(Observable.of(true));
-      initTests();
+      store.dispatch(new historyActions.LoadHistoryItems(''));
+      fixture.detectChanges();
     }));
 
     it('Should show loading spinner', async(() => {
@@ -79,11 +89,8 @@ describe('DashboardComponent', () => {
 
   describe('When data is loaded', () => {
     beforeEach(async(() => {
-      graphServiceStub.isHistoryDataLoading = jasmine
-        .createSpy('isHistoryDataLoading')
-        .and
-        .returnValue(Observable.of(false));
-      initTests();
+      store.dispatch(new historyActions.LoadHistoryItemsSucceeded([]));
+      fixture.detectChanges();
     }));
 
     it('Should not show loading spinner', async(() => {
@@ -95,32 +102,5 @@ describe('DashboardComponent', () => {
       const dashboard = fixture.nativeElement.querySelector('.dashboard');
       expect(dashboard).toBeTruthy();
     }));
-
-    it('Should show header with total time', async(() => {
-      const header = fixture.nativeElement.querySelector('.header .total');
-      expect(header.innerText).toBe('00:01:00 This Week');
-    }));
   });
 });
-
-const graphServiceStub = {
-  getTimeVsDateGraphData: jasmine
-    .createSpy('getTimeVsDateGraphData')
-    .and
-    .returnValue(Observable.of([{
-      name: '',
-      value: 10
-    }, {
-      name: '',
-      value: 50
-    }])),
-  getTimeVsPlatformGraphData: jasmine
-    .createSpy('getTimeVsPlatformGraphData')
-    .and
-    .returnValue(Observable.of([])),
-  getTimeVsGameGraphData: jasmine
-    .createSpy('getTimeVsGameGraphData')
-    .and
-    .returnValue(Observable.of([])),
-  isHistoryDataLoading: jasmine.createSpy('isHistoryDataLoading')
-};

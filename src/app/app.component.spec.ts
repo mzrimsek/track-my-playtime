@@ -12,13 +12,13 @@ import { DashboardComponent } from './features/dashboard/dashboard.component';
 import { HomeComponent } from './features/home/home.component';
 import { TrackerComponent } from './features/tracker/tracker.component';
 
-import { GraphService } from './features/dashboard/services/graph.service';
 import { ClockService } from './features/tracker/services/clock.service';
 
 import { TimePipe } from './shared/pipes/time.pipe';
 
 import * as actions from './actions/app.actions';
 
+import * as fromDashboard from './features/dashboard/reducers/root.reducer';
 import * as fromTracker from './features/tracker/reducers/root.reducer';
 import * as fromRoot from './reducers/root.reducer';
 
@@ -71,12 +71,12 @@ describe('AppComponent', () => {
         ]),
         StoreModule.forRoot({
           ...fromRoot.reducers,
-          'tracker': combineReducers(fromTracker.reducers)
+          'tracker': combineReducers(fromTracker.reducers),
+          'dashboard': combineReducers(fromDashboard.reducers)
         })
       ],
       providers: [
         { provide: APP_BASE_HREF, useValue: '/' },
-        GraphService,
         ClockService
       ],
       schemas: [NO_ERRORS_SCHEMA]

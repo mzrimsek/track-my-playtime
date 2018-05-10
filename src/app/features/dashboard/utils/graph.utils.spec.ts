@@ -1,9 +1,8 @@
-import { addDays, subDays } from 'date-fns';
+import { addDays, eachDay, subDays } from 'date-fns';
 
 import { HistoryGrouping } from '../../tracker/models';
 import { GraphDataItem } from '../models';
 
-import { getWeek } from '../../../shared/utils/date.utils';
 import {
     DEFAULT_KEY, filterGroupingsByDateRange, mapToGraphData, padDateGraphData
 } from './graph.utils';
@@ -71,21 +70,13 @@ describe('Graph Utils', () => {
   });
 
   describe('filterGroupingsByDateRange', () => {
-    let start: Date;
-    let inRange: Date;
-    let outOfRangeAhead: Date;
-    let outOfRangeBehind: Date;
-    let range: Date[];
-    let game: string;
-
-    beforeEach(() => {
-      start = new Date(2018, 3, 1);
-      inRange = addDays(start, 3);
-      outOfRangeAhead = addDays(start, 15);
-      outOfRangeBehind = subDays(start, 3);
-      range = getWeek(start);
-      game = 'some game';
-    });
+    const start = new Date(2018, 3, 1);
+    const end = addDays(start, 6);
+    const inRange = addDays(start, 3);
+    const outOfRangeAhead = addDays(start, 15);
+    const outOfRangeBehind = subDays(start, 3);
+    const range = eachDay(start, end);
+    const game = 'some game';
 
     it('Should filter history items outside of date range', () => {
       const grouping = getHistoryGrouping(game, 0);
@@ -246,7 +237,9 @@ describe('Graph Utils', () => {
         name: '4/6/2018',
         value: 500
       }];
-      const range = getWeek(new Date(2018, 3, 1));
+      const start = new Date(2018, 3, 1);
+      const end = addDays(start, 6);
+      const range = eachDay(start, end);
 
       const result = padDateGraphData(items, range);
 

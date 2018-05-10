@@ -6,10 +6,8 @@
   <div class="dashboard"
        *ngIf="!(isHistoryDataLoading$ | async)">
 
-    <div class="header">
-      <span class="title">Dashboard - </span>
-      <span class="total">{{ (totalTime$ | async) | time }} This Week</span>
-    </div>
+    <app-dashboard-header [rangeType]="this.dateRangeType$ | async"
+                          [totalTime]="this.totalTime$ | async"></app-dashboard-header>
 
     <div class="graphs">
       <section>

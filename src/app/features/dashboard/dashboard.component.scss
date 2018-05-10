@@ -10,20 +10,6 @@
     height: 100%;
     padding: 20px;
 
-    .header {
-      height: $dashboard-header-height;
-
-      .title {
-        font-size: 2em;
-        font-weight: bold;
-      }
-
-      .total {
-        font-size: 1.5em;
-        font-style: italic;
-      }
-    }
-
     .graphs {
       display: flex;
       height: $graphs-height;
