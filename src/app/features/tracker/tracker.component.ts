@@ -8,7 +8,8 @@ import { ClockService } from './services/clock.service';
 
 import trackerSelectors, { State } from './reducers/root.reducer';
 
-import { HistoryGrouping, TimerInfo } from './models';
+import { HistoryGrouping } from '../../shared/models';
+import { TimerInfo } from './models';
 
 @Component({
   selector: 'app-tracker',

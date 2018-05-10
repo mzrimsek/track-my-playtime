@@ -1,6 +1,6 @@
 import { addDays, eachDay, subDays } from 'date-fns';
 
-import { HistoryGrouping } from '../../tracker/models';
+import { HistoryGrouping } from '../../../shared/models';
 import { GraphDataItem } from '../models';
 
 import {

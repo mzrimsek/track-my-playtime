@@ -19,7 +19,7 @@ import * as fromTracker from '../../reducers/root.reducer';
 import {
     HistoryListItem, UpdateHistoryItemGamePayload, UpdateHistoryItemPlatformPayload,
     UpdateHistoryItemTimesPayload
-} from '../../models';
+} from '../../../../shared/models';
 
 describe('HistoryEntryComponent', () => {
   let store: Store<fromRoot.State>;

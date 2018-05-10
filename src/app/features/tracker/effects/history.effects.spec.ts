@@ -18,7 +18,7 @@ import { HistoryEntity } from '../reducers/history.reducer';
 
 import {
     UpdateHistoryItemGamePayload, UpdateHistoryItemPlatformPayload, UpdateHistoryItemTimesPayload
-} from '../models';
+} from '../../../shared/models';
 
 import '../../../rxjs-operators';
 

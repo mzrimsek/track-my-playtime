@@ -5,7 +5,7 @@ import { HistoryComponent } from './history.component';
 
 import { TimePipe } from '../../../../shared/pipes/time.pipe';
 
-import { HistoryGrouping } from '../../models';
+import { HistoryGrouping } from '../../../../shared/models';
 
 describe('HistoryComponent', () => {
   let component: TestWrapperComponent;

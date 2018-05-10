@@ -4,7 +4,7 @@ import { HistoryEntity, reducer, State } from './history.reducer';
 
 import {
     UpdateHistoryItemGamePayload, UpdateHistoryItemPlatformPayload, UpdateHistoryItemTimesPayload
-} from '../models';
+} from '../../../shared/models';
 
 describe('History Reducer', () => {
   it('Should add an item when AddNewHistoryItem is dispatched', () => {

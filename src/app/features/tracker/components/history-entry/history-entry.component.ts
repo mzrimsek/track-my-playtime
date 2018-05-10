@@ -12,7 +12,7 @@ import { State } from '../../reducers/root.reducer';
 import {
     HistoryListItem, UpdateHistoryItemGamePayload, UpdateHistoryItemPlatformPayload,
     UpdateHistoryItemTimesPayload
-} from '../../models';
+} from '../../../../shared/models';
 
 @Component({
   selector: 'app-tracker-history-entry',

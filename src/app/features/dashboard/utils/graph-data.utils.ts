@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs/Observable';
 
-import { HistoryGrouping } from '../../tracker/models';
+import { HistoryGrouping } from '../../../shared/models';
 import { GraphDataItem } from '../models';
 
 import { filterGroupingsByDateRange, mapToGraphData, padDateGraphData } from './graph.utils';

@@ -6,9 +6,9 @@ import { Observable } from 'rxjs/Observable';
 import { HistoryEntity } from '../reducers/history.reducer';
 
 import {
-    AddTimerInfo, UpdateHistoryItemGamePayload, UpdateHistoryItemPlatformPayload,
-    UpdateHistoryItemTimesPayload
-} from '../models';
+    UpdateHistoryItemGamePayload, UpdateHistoryItemPlatformPayload, UpdateHistoryItemTimesPayload
+} from '../../../shared/models';
+import { AddTimerInfo } from '../models';
 
 import { getUUID } from '../../../shared/utils/uuid.utils';
 

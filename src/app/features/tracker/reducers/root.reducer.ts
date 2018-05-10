@@ -4,10 +4,13 @@ import * as fromHistory from './history.reducer';
 import * as fromPlatforms from './platforms.reducer';
 import * as fromTimer from './timer.reducer';
 
-import { HistoryListItem, TimerInfo } from '../models';
+import { HistoryListItem } from '../../../shared/models';
+import { TimerInfo } from '../models';
 
 import { formatDate } from '../../../shared/utils/date.utils';
-import { getHistoryGroupingList, getHistoryListItemsMap } from '../utils/history.utils';
+import {
+    getHistoryGroupingList, getHistoryListItemsMap
+} from '../../../shared/utils/history.utils';
 
 export interface TrackerState {
   timer: fromTimer.State;
