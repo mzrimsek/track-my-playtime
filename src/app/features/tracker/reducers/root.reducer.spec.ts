@@ -1,12 +1,10 @@
-import { startOfDay, subDays } from 'date-fns';
-
 import { State as DisplayState } from './display.reducer';
 import { State as PlatformsState } from './platforms.reducer';
 import {
-    _selectDateListToShow, _selectEntriesToShow, _selectPlatformsOptions, _selectTimerInfo, State,
-    TrackerState
+    _selectEntriesToShow, _selectPlatformsOptions, _selectTimerInfo, State, TrackerState
 } from './root.reducer';
 import { State as TimerState } from './timer.reducer';
+
 
 describe('Tracker Root Reducer', () => {
   describe('Timer State Selectors', () => {

@@ -1,7 +1,5 @@
 import { ActionReducerMap, createFeatureSelector, createSelector } from '@ngrx/store';
 
-import { eachDay, subDays } from 'date-fns';
-
 import * as fromDisplay from './display.reducer';
 import * as fromPlatforms from './platforms.reducer';
 import * as fromTimer from './timer.reducer';
