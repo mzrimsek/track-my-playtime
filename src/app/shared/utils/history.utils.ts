@@ -2,7 +2,6 @@ import { HistoryGrouping, HistoryListItem } from '../models';
 
 import { getElapsedTimeInSeconds, isInDateRange } from './date.utils';
 
-
 type HistoryListItemsMapKeyFunction = (item: HistoryListItem) => string;
 type HistoryListItemsMap = Map<string, HistoryListItem[]>;
 
