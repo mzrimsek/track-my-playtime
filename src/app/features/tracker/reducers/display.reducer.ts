@@ -7,7 +7,7 @@ export interface State {
 }
 
 const initialState: State = {
-  entriesToShow: 7
+  entriesToShow: 4
 };
 
 export function reducer(state: State = initialState, action: actions.All): State {

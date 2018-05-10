@@ -13,7 +13,7 @@ import { State } from '../../reducers/root.reducer';
 })
 export class LoadMoreComponent implements OnInit {
 
-  AMOUNT_TO_LOAD = 7;
+  AMOUNT_TO_LOAD = 4;
   constructor(private store: Store<State>) { }
 
   loadMoreEntries() {
