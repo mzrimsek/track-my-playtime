@@ -1,6 +1,6 @@
 import { HistoryGrouping, HistoryListItem } from '../models';
 
-import { getElapsedTimeInSeconds } from './date.utils';
+import { getElapsedTimeInSeconds, isInDateRange } from './date.utils';
 
 type HistoryListItemsMapKeyFunction = (item: HistoryListItem) => string;
 type HistoryListItemsMap = Map<string, HistoryListItem[]>;
@@ -31,4 +31,26 @@ export const getHistoryGroupingList = (map: HistoryListItemsMap): HistoryGroupin
     groupings = [...groupings, newGrouping];
   });
   return groupings;
+};
+
+export const filterGroupingsByDateRange = (groupings: HistoryGrouping[], dateRange: Date[]): HistoryGrouping[] => {
+  const groupingsToGraph: HistoryGrouping[] = [];
+  groupings.forEach(grouping => {
+    const groupingHasHistoryItemInRange = grouping.historyItems.some(item => isInDateRange(item.dateRange[0], dateRange));
+    if (groupingHasHistoryItemInRange) {
+      const filtedGrouping = getFilteredGrouping(grouping, dateRange);
+      groupingsToGraph.push(filtedGrouping);
+    }
+  });
+  return groupingsToGraph;
+};
+
+const getFilteredGrouping = (grouping: HistoryGrouping, dateRange: Date[]): HistoryGrouping => {
+  const historyItems = grouping.historyItems.filter(item => isInDateRange(item.dateRange[0], dateRange));
+  const totalTime = historyItems.map(item => getElapsedTimeInSeconds(item.startTime, item.endTime)).reduce((a, b) => a + b, 0);
+  return {
+    key: grouping.key,
+    totalTime,
+    historyItems
+  };
 };

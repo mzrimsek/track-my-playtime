@@ -3,7 +3,8 @@ import { Observable } from 'rxjs/Observable';
 import { HistoryGrouping } from '../../../shared/models';
 import { GraphDataItem } from '../models';
 
-import { filterGroupingsByDateRange, mapToGraphData, padDateGraphData } from './graph.utils';
+import { filterGroupingsByDateRange } from '../../../shared/utils/history.utils';
+import { mapToGraphData, padDateGraphData } from './graph.utils';
 
 export const getPaddedGraphData =
   (groupings: Observable<HistoryGrouping[]>, dateRange: Observable<Date[]>): Observable<GraphDataItem[]> => {

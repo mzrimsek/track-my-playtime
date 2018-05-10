@@ -1,6 +1,10 @@
-import { HistoryListItem } from '../models';
+import { addDays, eachDay, subDays } from 'date-fns';
 
-import { getHistoryGroupingList, getHistoryListItemsMap } from './history.utils';
+import { HistoryGrouping, HistoryListItem } from '../models';
+
+import {
+    filterGroupingsByDateRange, getHistoryGroupingList, getHistoryListItemsMap
+} from './history.utils';
 
 describe('History Utils', () => {
   describe('getHistoryListItemsMap', () => {
@@ -111,6 +115,162 @@ describe('History Utils', () => {
       });
     });
   });
+
+  describe('filterGroupingsByDateRange', () => {
+    const start = new Date(2018, 3, 1);
+    const end = addDays(start, 6);
+    const inRange = addDays(start, 3);
+    const outOfRangeAhead = addDays(start, 15);
+    const outOfRangeBehind = subDays(start, 3);
+    const range = eachDay(start, end);
+    const game = 'some game';
+
+    it('Should filter history items outside of date range', () => {
+      const grouping = getHistoryGrouping(game, 0);
+      grouping.historyItems = [{
+        id: 'some id 4',
+        game,
+        platform: 'some platform',
+        startTime: outOfRangeAhead.getTime(),
+        endTime: outOfRangeAhead.getTime(),
+        dateRange: [
+          outOfRangeAhead,
+          outOfRangeAhead
+        ]
+      }, {
+        id: 'some id 3',
+        game,
+        platform: 'some platform',
+        startTime: inRange.getTime(),
+        endTime: inRange.getTime(),
+        dateRange: [
+          inRange,
+          inRange
+        ]
+      }, {
+        id: 'some id 2',
+        game,
+        platform: 'some platform',
+        startTime: start.getTime(),
+        endTime: start.getTime(),
+        dateRange: [
+          start,
+          start
+        ]
+      }, {
+        id: 'some id',
+        game,
+        platform: 'some other platform',
+        startTime: outOfRangeBehind.getTime(),
+        endTime: outOfRangeBehind.getTime(),
+        dateRange: [
+          outOfRangeBehind,
+          outOfRangeBehind
+        ]
+      }];
+
+      const result = filterGroupingsByDateRange([grouping], range);
+
+      expect(result).toEqual([{
+        key: game,
+        totalTime: 0,
+        historyItems: [{
+          id: 'some id 3',
+          game,
+          platform: 'some platform',
+          startTime: inRange.getTime(),
+          endTime: inRange.getTime(),
+          dateRange: [
+            inRange,
+            inRange
+          ]
+        }, {
+          id: 'some id 2',
+          game,
+          platform: 'some platform',
+          startTime: start.getTime(),
+          endTime: start.getTime(),
+          dateRange: [
+            start,
+            start
+          ]
+        }]
+      }]);
+    });
+
+    it('Should update total time', () => {
+      const grouping = getHistoryGrouping(game, 7000);
+      grouping.historyItems = [{
+        id: 'some id 4',
+        game,
+        platform: 'some platform',
+        startTime: outOfRangeAhead.getTime(),
+        endTime: outOfRangeAhead.getTime() + 2000,
+        dateRange: [
+          outOfRangeAhead,
+          new Date(outOfRangeAhead.getTime() + 2000)
+        ]
+      }, {
+        id: 'some id 3',
+        game,
+        platform: 'some platform',
+        startTime: inRange.getTime(),
+        endTime: inRange.getTime() + 1000,
+        dateRange: [
+          inRange,
+          new Date(inRange.getTime() + 1000)
+        ]
+      }, {
+        id: 'some id 2',
+        game,
+        platform: 'some platform',
+        startTime: start.getTime(),
+        endTime: start.getTime() + 1000,
+        dateRange: [
+          start,
+          new Date(start.getTime() + 1000)
+        ]
+      }, {
+        id: 'some id',
+        game,
+        platform: 'some other platform',
+        startTime: outOfRangeBehind.getTime(),
+        endTime: outOfRangeBehind.getTime() + 3000,
+        dateRange: [
+          outOfRangeBehind,
+          new Date(outOfRangeBehind.getTime() + 3000)
+        ]
+      }];
+
+      const result = filterGroupingsByDateRange([grouping], range);
+
+      expect(result).toEqual([{
+        key: game,
+        totalTime: 2, // time on history items is in milliseconds; total time is in seconds
+        historyItems: [{
+          id: 'some id 3',
+          game,
+          platform: 'some platform',
+          startTime: inRange.getTime(),
+          endTime: inRange.getTime() + 1000,
+          dateRange: [
+            inRange,
+            new Date(inRange.getTime() + 1000)
+          ]
+        }, {
+          id: 'some id 2',
+          game,
+          platform: 'some platform',
+          startTime: start.getTime(),
+          endTime: start.getTime() + 1000,
+          dateRange: [
+            start,
+            new Date(start.getTime() + 1000)
+          ]
+        }]
+      }]);
+    });
+  });
 });
 
 const getHistoryListItem = (game: string, startTime = 0, endTime = 0): HistoryListItem => {
@@ -121,5 +281,13 @@ const getHistoryListItem = (game: string, startTime = 0, endTime = 0): HistoryLi
     startTime,
     endTime,
     dateRange: [new Date(startTime), new Date(endTime)]
+  };
+};
+
+const getHistoryGrouping = (key: string, totalTime: number): HistoryGrouping => {
+  return {
+    key,
+    totalTime,
+    historyItems: []
   };
 };
