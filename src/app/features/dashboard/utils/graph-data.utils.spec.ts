@@ -1,7 +1,7 @@
 import { addDays, eachDay, subDays } from 'date-fns';
 import { Observable } from 'rxjs/Observable';
 
-import { HistoryGrouping } from '../../tracker/models';
+import { HistoryGrouping } from '../../../shared/models';
 
 import { formatDate } from '../../../shared/utils/date.utils';
 import { getGraphData, getPaddedGraphData } from './graph-data.utils';

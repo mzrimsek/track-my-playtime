@@ -3,12 +3,12 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
 
-import { HistoryEntity } from '../reducers/history.reducer';
+import { HistoryEntity } from '../../../shared/reducers/history.reducer';
 
 import {
-    AddTimerInfo, UpdateHistoryItemGamePayload, UpdateHistoryItemPlatformPayload,
-    UpdateHistoryItemTimesPayload
-} from '../models';
+    UpdateHistoryItemGamePayload, UpdateHistoryItemPlatformPayload, UpdateHistoryItemTimesPayload
+} from '../../../shared/models';
+import { AddTimerInfo } from '../models';
 
 import { getUUID } from '../../../shared/utils/uuid.utils';
 

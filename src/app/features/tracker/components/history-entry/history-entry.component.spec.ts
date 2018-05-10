@@ -11,7 +11,7 @@ import { UserService } from '../../../auth/services/user.service';
 
 import { ElapsedTimePipe } from '../../../../shared/pipes/elapsed-time.pipe';
 
-import * as actions from '../../actions/history.actions';
+import * as actions from '../../../../shared/actions/history.actions';
 
 import * as fromRoot from '../../../../reducers/root.reducer';
 import * as fromTracker from '../../reducers/root.reducer';
@@ -19,7 +19,7 @@ import * as fromTracker from '../../reducers/root.reducer';
 import {
     HistoryListItem, UpdateHistoryItemGamePayload, UpdateHistoryItemPlatformPayload,
     UpdateHistoryItemTimesPayload
-} from '../../models';
+} from '../../../../shared/models';
 
 describe('HistoryEntryComponent', () => {
   let store: Store<fromRoot.State>;

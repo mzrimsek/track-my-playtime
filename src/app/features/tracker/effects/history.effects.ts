@@ -7,7 +7,7 @@ import { Observable } from 'rxjs/Observable';
 import { HistoryService } from '../services/history.service';
 
 import * as appActions from '../../../actions/app.actions';
-import * as historyActions from '../actions/history.actions';
+import * as historyActions from '../../../shared/actions/history.actions';
 import * as timerActions from '../actions/timer.actions';
 
 @Injectable()

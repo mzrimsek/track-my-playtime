@@ -6,9 +6,9 @@ import { Observable } from 'rxjs/Observable';
 import { FirestoreHistoryItem, HistoryService } from './history.service';
 
 import {
-    AddTimerInfo, UpdateHistoryItemGamePayload, UpdateHistoryItemPlatformPayload,
-    UpdateHistoryItemTimesPayload
-} from '../models';
+    UpdateHistoryItemGamePayload, UpdateHistoryItemPlatformPayload, UpdateHistoryItemTimesPayload
+} from '../../../shared/models';
+import { AddTimerInfo } from '../models';
 
 describe('History Service', () => {
   let service: HistoryService;
