@@ -1,0 +1,15 @@
+@import "../../../../../variables.scss";
+
+.load-more {
+  button {
+    font-size: 1.1em;
+    background: $background-dark-accent;
+    color: $text-light;
+    padding: 5px;
+    border: none;
+
+    &:hover{
+      cursor: pointer;
+    }
+  }
+}
