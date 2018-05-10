@@ -4,7 +4,7 @@ import { eachDay } from 'date-fns';
 
 import * as fromDateRange from './date-range.reducer';
 
-interface DashboardState {
+export interface DashboardState {
   dateRange: fromDateRange.State;
 }
 
