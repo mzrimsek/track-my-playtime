@@ -25,8 +25,8 @@ export function reducer(state: State = initialState, action: actions.All): State
     }
     case actions.SET_LAST_WEEK: {
       const startThisWeek = startOfWeek(now);
-      const startLastWeek = subDays(startThisWeek, 7);
       const endLastWeek = subDays(startThisWeek, 1);
+      const startLastWeek = startOfWeek(endLastWeek);
       return tassign(state, {
         startDay: startLastWeek,
         endDay: endLastWeek,
