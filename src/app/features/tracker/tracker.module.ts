@@ -12,6 +12,7 @@ import { SharedModule } from '../../shared/shared.module';
 
 import { HistoryEntryComponent } from './components/history-entry/history-entry.component';
 import { HistoryComponent } from './components/history/history.component';
+import { LoadMoreComponent } from './components/load-more/load-more.component';
 import { TimerComponent } from './components/timer/timer.component';
 import { TrackerComponent } from './tracker.component';
 
@@ -38,7 +39,7 @@ import { reducers } from './reducers/root.reducer';
     EffectsModule.forFeature([TimerEffects, HistoryEffects, PlatformsEffects]),
     SharedModule
   ],
-  declarations: [TrackerComponent, TimerComponent, HistoryComponent, HistoryEntryComponent],
+  declarations: [TrackerComponent, TimerComponent, HistoryComponent, HistoryEntryComponent, LoadMoreComponent],
   providers: [ClockService, HistoryService, PlatformsService, UserService, TimerService]
 })
 export class TrackerModule { }
