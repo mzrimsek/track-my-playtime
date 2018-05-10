@@ -5,7 +5,7 @@ import { HistoryGrouping } from '../../../shared/models';
 export const takeFrom =
   (groupings: Observable<HistoryGrouping[]>, amount: Observable<number>): Observable<HistoryGrouping[]> => {
     return groupings.combineLatest(amount, (groups, num) => {
-      return num >= groups.length ? groups : groups.splice(0, num);
+      return num >= groups.length ? groups : groups.slice(0, num);
     });
   };
 
