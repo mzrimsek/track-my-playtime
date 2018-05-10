@@ -7,16 +7,16 @@ import { DashboardComponent } from './dashboard.component';
 
 import { TimePipe } from '../../shared/pipes/time.pipe';
 
-import * as historyActions from '../../features/tracker/actions/history.actions';
+import * as historyActions from '../../shared/actions/history.actions';
 
-import * as fromTracker from '../../features/tracker/reducers/root.reducer';
 import * as fromRoot from '../../reducers/root.reducer';
+import * as fromShared from '../../shared/reducers/root.reducer';
 import * as fromDashboard from './reducers/root.reducer';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
   let fixture: ComponentFixture<DashboardComponent>;
-  let store: Store<fromTracker.State>;
+  let store: Store<fromRoot.State>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -27,7 +27,7 @@ describe('DashboardComponent', () => {
       imports: [
         StoreModule.forRoot({
           ...fromRoot.reducers,
-          'tracker': combineReducers(fromTracker.reducers),
+          'shared': combineReducers(fromShared.reducers),
           'dashboard': combineReducers(fromDashboard.reducers)
         })
       ],
@@ -55,19 +55,19 @@ describe('DashboardComponent', () => {
   });
 
   it('Should select groupings by date', async(() => {
-    expect(store.select).toHaveBeenCalledWith(fromTracker._selectHistoryGroupingsByDate);
+    expect(store.select).toHaveBeenCalledWith(fromShared._selectHistoryGroupingsByDate);
   }));
 
   it('Should select groupings by platform', async(() => {
-    expect(store.select).toHaveBeenCalledWith(fromTracker._selectHistoryGroupingsByPlatform);
+    expect(store.select).toHaveBeenCalledWith(fromShared._selectHistoryGroupingsByPlatform);
   }));
 
   it('Should select groupings by game', async(() => {
-    expect(store.select).toHaveBeenCalledWith(fromTracker._selectHistoryGroupingsByGame);
+    expect(store.select).toHaveBeenCalledWith(fromShared._selectHistoryGroupingsByGame);
   }));
 
   it('Should select history loading', async(() => {
-    expect(store.select).toHaveBeenCalledWith(fromTracker._selectHistoryLoading);
+    expect(store.select).toHaveBeenCalledWith(fromShared._selectHistoryLoading);
   }));
 
   describe('When data is loading', () => {

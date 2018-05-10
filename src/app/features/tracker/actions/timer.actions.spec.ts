@@ -1,6 +1,6 @@
 import * as actions from './timer.actions';
 
-import { HistoryEntity } from '../reducers/history.reducer';
+import { HistoryEntity } from '../../../shared/reducers/history.reducer';
 
 import { AddTimerInfo, TimerInfo } from '../models';
 

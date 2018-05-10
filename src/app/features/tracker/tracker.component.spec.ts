@@ -8,6 +8,7 @@ import { TrackerComponent } from './tracker.component';
 import { ClockService } from './services/clock.service';
 
 import * as fromRoot from '../../reducers/root.reducer';
+import * as fromShared from '../../shared/reducers/root.reducer';
 import * as fromTracker from './reducers/root.reducer';
 
 describe('Tracker Component', () => {
@@ -58,11 +59,11 @@ describe('Tracker Component', () => {
   });
 
   it('Should select history groupings by date', () => {
-    expect(store.select).toHaveBeenCalledWith(fromTracker._selectHistoryGroupingsByDate);
+    expect(store.select).toHaveBeenCalledWith(fromShared._selectHistoryGroupingsByDate);
   });
 
   it('Should select history loading', () => {
-    expect(store.select).toHaveBeenCalledWith(fromTracker._selectHistoryLoading);
+    expect(store.select).toHaveBeenCalledWith(fromShared._selectHistoryLoading);
   });
 });
 

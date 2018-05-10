@@ -14,7 +14,7 @@ import { TimerService } from '../services/timer.service';
 import * as appActions from '../../../actions/app.actions';
 import * as timerActions from '../actions/timer.actions';
 
-import { HistoryEntity } from '../reducers/history.reducer';
+import { HistoryEntity } from '../../../shared/reducers/history.reducer';
 
 import { AddTimerInfo, TimerInfo } from '../models';
 

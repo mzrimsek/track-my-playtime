@@ -4,9 +4,7 @@ import { Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs/Observable';
 
-import trackerSelectors, {
-    State as TrackerState
-} from '../../features/tracker/reducers/root.reducer';
+import sharedSelectors, { State as SharedState } from '../../shared/reducers/root.reducer';
 import dashboardSelectors, { State as DashboardState } from './reducers/root.reducer';
 
 import { BarGraphConfig, DateRangeType, GraphDataItem, PieChartConfig } from './models';
@@ -71,19 +69,19 @@ export class DashboardComponent implements OnInit {
     doughnut: true
   };
 
-  constructor(private trackerStore: Store<TrackerState>, private dashboardStore: Store<DashboardState>) { }
+  constructor(private sharedStore: Store<SharedState>, private dashboardStore: Store<DashboardState>) { }
 
   ngOnInit() {
     const dateList = this.dashboardStore.select(dashboardSelectors.dateList);
-    const groupingsByDate = this.trackerStore.select(trackerSelectors.historyGroupingsByDate);
-    const groupingsByPlatform = this.trackerStore.select(trackerSelectors.historyGroupingsByPlatform);
-    const groupingsByGame = this.trackerStore.select(trackerSelectors.historyGroupingsByGame);
+    const groupingsByDate = this.sharedStore.select(sharedSelectors.historyGroupingsByDate);
+    const groupingsByPlatform = this.sharedStore.select(sharedSelectors.historyGroupingsByPlatform);
+    const groupingsByGame = this.sharedStore.select(sharedSelectors.historyGroupingsByGame);
 
     this.timeVsDateGraphData$ = getPaddedGraphData(groupingsByDate, dateList);
     this.timeVsPlatformGraphData$ = getGraphData(groupingsByPlatform, dateList);
     this.timeVsGameGraphData$ = getGraphData(groupingsByGame, dateList);
 
-    this.isHistoryDataLoading$ = this.trackerStore.select(trackerSelectors.historyLoading);
+    this.isHistoryDataLoading$ = this.sharedStore.select(sharedSelectors.historyLoading);
     this.totalTime$ = this.timeVsDateGraphData$.map(x => x.reduce((a, b) => a + b.value, 0));
     this.dateRangeType$ = this.dashboardStore.select(dashboardSelectors.rangeType);
   }
