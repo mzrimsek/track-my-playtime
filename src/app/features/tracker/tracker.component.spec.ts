@@ -3,11 +3,16 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { combineReducers, Store, StoreModule } from '@ngrx/store';
 
+import { addDays } from 'date-fns';
+
 import { TrackerComponent } from './tracker.component';
 
 import { ClockService } from './services/clock.service';
 
+import * as historyActions from '../../shared/actions/history.actions';
+
 import * as fromRoot from '../../reducers/root.reducer';
+import * as fromShared from '../../shared/reducers/root.reducer';
 import * as fromTracker from './reducers/root.reducer';
 
 describe('Tracker Component', () => {
@@ -24,6 +29,7 @@ describe('Tracker Component', () => {
       imports: [
         StoreModule.forRoot({
           ...fromRoot.reducers,
+          'shared': combineReducers(fromShared.reducers),
           'tracker': combineReducers(fromTracker.reducers)
         })
       ],
@@ -58,11 +64,91 @@ describe('Tracker Component', () => {
   });
 
   it('Should select history groupings by date', () => {
-    expect(store.select).toHaveBeenCalledWith(fromTracker._selectHistoryGroupingsByDate);
+    expect(store.select).toHaveBeenCalledWith(fromShared._selectHistoryGroupingsByDate);
   });
 
   it('Should select history loading', () => {
-    expect(store.select).toHaveBeenCalledWith(fromTracker._selectHistoryLoading);
+    expect(store.select).toHaveBeenCalledWith(fromShared._selectHistoryLoading);
+  });
+
+  it('Should select entries to show', () => {
+    expect(store.select).toHaveBeenCalledWith(fromTracker._selectEntriesToShow);
+  });
+
+  describe('Load More Button', () => {
+    const start = new Date();
+    it('Should be visible when there are more groupings to show', () => {
+      const action = new historyActions.LoadHistoryItemsSucceeded([{
+        id: '1',
+        game: 'some game',
+        platform: 'some platform',
+        startTime: start.getTime(),
+        endTime: start.getTime() + 3000
+      }, {
+        id: '2',
+        game: 'some game',
+        platform: 'some platform',
+        startTime: addDays(start, 1).getTime(),
+        endTime: addDays(start, 1).getTime() + 3000
+      }, {
+        id: '3',
+        game: 'some game',
+        platform: 'some platform',
+        startTime: addDays(start, 2).getTime(),
+        endTime: addDays(start, 2).getTime() + 3000
+      }, {
+        id: '4',
+        game: 'some game',
+        platform: 'some platform',
+        startTime: addDays(start, 3).getTime(),
+        endTime: addDays(start, 3).getTime() + 3000
+      }, {
+        id: '5',
+        game: 'some game',
+        platform: 'some platform',
+        startTime: addDays(start, 4).getTime(),
+        endTime: addDays(start, 4).getTime() + 3000
+      }]);
+      store.dispatch(action);
+      fixture.detectChanges();
+
+      const loadMoreButton = fixture.nativeElement.querySelector('app-tracker-load-more');
+
+      expect(loadMoreButton).toBeTruthy();
+    });
+
+    it('Should not be visible when all groupings are shown', () => {
+      const action = new historyActions.LoadHistoryItemsSucceeded([{
+        id: '1',
+        game: 'some game',
+        platform: 'some platform',
+        startTime: start.getTime(),
+        endTime: start.getTime() + 3000
+      }, {
+        id: '2',
+        game: 'some game',
+        platform: 'some platform',
+        startTime: addDays(start, 1).getTime(),
+        endTime: addDays(start, 1).getTime() + 3000
+      }, {
+        id: '3',
+        game: 'some game',
+        platform: 'some platform',
+        startTime: addDays(start, 2).getTime(),
+        endTime: addDays(start, 2).getTime() + 3000
+      }]);
+      store.dispatch(action);
+      fixture.detectChanges();
+
+      const loadMoreButton = fixture.nativeElement.querySelector('app-tracker-load-more');
+
+      expect(loadMoreButton).toBeNull();
+    });
+
+    it('Should not be visible when no groupings to show', () => {
+      const loadMoreButton = fixture.nativeElement.querySelector('app-tracker-load-more');
+      expect(loadMoreButton).toBeNull();
+    });
   });
 });
 

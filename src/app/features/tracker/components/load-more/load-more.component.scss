@@ -1,0 +1,17 @@
+@import "../../../../../variables.scss";
+
+.load-more {
+  button {
+    display: flex;
+    align-items: center;
+    font-size: 1.1em;
+    background: $background-dark-accent;
+    color: $text-light;
+    padding: 10px;
+    border: none;
+
+    &:hover{
+      cursor: pointer;
+    }
+  }
+}

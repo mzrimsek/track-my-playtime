@@ -5,14 +5,14 @@ import { Store } from '@ngrx/store';
 
 import { UserService } from '../../../auth/services/user.service';
 
-import * as actions from '../../actions/history.actions';
+import * as actions from '../../../../shared/actions/history.actions';
 
 import { State } from '../../reducers/root.reducer';
 
 import {
     HistoryListItem, UpdateHistoryItemGamePayload, UpdateHistoryItemPlatformPayload,
     UpdateHistoryItemTimesPayload
-} from '../../models';
+} from '../../../../shared/models';
 
 @Component({
   selector: 'app-tracker-history-entry',

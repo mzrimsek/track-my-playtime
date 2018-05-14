@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 
-import { HistoryEntity } from '../reducers/history.reducer';
+import { HistoryEntity } from '../../../shared/reducers/history.reducer';
 
 import { AddTimerInfo, TimerInfo } from '../models';
 
