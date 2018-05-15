@@ -1,9 +1,10 @@
 <div class="timer drop-shadow">
   <div class="game">
-    <ng-select [items]="trackedGames"
-               [addTag]="true"
+    <ng-select data-tracking-category="timerGame"
                placeholder="Game name"
-               [(ngModel)]="info.game === '' ? null : info.game"
+               [items]="trackedGames"
+               [addTag]="true"
+               [(ngModel)]="info.game"
                (change)="setGame()"></ng-select>
   </div>
 
