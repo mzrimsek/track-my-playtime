@@ -46,12 +46,17 @@ export const _selectHistoryGroupingsByGame = createSelector(_selectSortedHistory
   return getHistoryGroupingList(historyListItemsMap);
 });
 export const _selectHistoryLoading = createSelector(_selectHistory, history => history.loading);
+export const _selectTrackedGames = createSelector(_selectSortedHistoryItems, items => {
+  const games = items.map(item => item.game);
+  return Array.from(new Set(games));
+});
 
 const sharedSelectors = {
   historyGroupingsByDate: _selectHistoryGroupingsByDate,
   historyGroupingsByPlatform: _selectHistoryGroupingsByPlatform,
   historyGroupingsByGame: _selectHistoryGroupingsByGame,
-  historyLoading: _selectHistoryLoading
+  historyLoading: _selectHistoryLoading,
+  historyTrackedGames: _selectTrackedGames
 };
 
 export default sharedSelectors;

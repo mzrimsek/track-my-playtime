@@ -127,13 +127,13 @@ describe('TimerComponent', () => {
       let gameEl: any;
 
       beforeEach(async(() => {
-        gameEl = fixture.nativeElement.querySelector('.game input');
+        gameEl = fixture.nativeElement.querySelector('.game ng-select');
       }));
 
       it('Should dispatch SetGame', async(() => {
         const action = new actions.SetGame(game);
 
-        gameEl.value = game;
+        component.game = game;
         gameEl.dispatchEvent(new Event('change'));
         fixture.detectChanges();
 
@@ -141,7 +141,7 @@ describe('TimerComponent', () => {
       }));
 
       it('Should not call TimerService setGame', () => {
-        gameEl.value = game;
+        component.game = game;
         gameEl.dispatchEvent(new Event('change'));
         fixture.detectChanges();
 
@@ -289,9 +289,9 @@ describe('TimerComponent', () => {
     describe('Game', () => {
       it('Should call TimerService setGame when game value changes', async(() => {
         const game = 'some crazy new game';
-        const gameEl = fixture.nativeElement.querySelector('.game input');
+        const gameEl = fixture.nativeElement.querySelector('.game ng-select');
 
-        gameEl.value = game;
+        component.game = game;
         gameEl.dispatchEvent(new Event('change'));
         fixture.detectChanges();
 
