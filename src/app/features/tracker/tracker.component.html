@@ -7,7 +7,8 @@
 
   <app-tracker-history [groups]="historyGroupings$ | async"
                        [platformsOptions]="platformsOptions$ | async"
-                       [loading]="historyLoading$ | async"></app-tracker-history>
+                       [loading]="historyLoading$ | async"
+                       [trackedGames]="trackedGames$ | async"></app-tracker-history>
 
   <div *ngIf="this.showLoadMoreButton$ | async"
        class="load-more">

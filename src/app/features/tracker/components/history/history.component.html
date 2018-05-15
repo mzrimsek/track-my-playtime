@@ -20,7 +20,8 @@
           <div class="history-entry"
                *ngFor="let historyItem of group.historyItems">
             <app-tracker-history-entry [item]="historyItem"
-                                       [platformsOptions]="platformsOptions"></app-tracker-history-entry>
+                                       [platformsOptions]="platformsOptions"
+                                       [trackedGames]="trackedGames"></app-tracker-history-entry>
           </div>
         </div>
       </div>
