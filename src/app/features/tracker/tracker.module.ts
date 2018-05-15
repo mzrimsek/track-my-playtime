@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { NgSelectModule } from '@ng-select/ng-select';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
@@ -32,6 +33,7 @@ import { reducers } from './reducers/root.reducer';
   imports: [
     CommonModule,
     FontAwesomeModule,
+    NgSelectModule,
     FormsModule,
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
