@@ -3,7 +3,8 @@ import { addDays, addHours } from 'date-fns';
 import { HistoryEntity, State as HistoryState } from './history.reducer';
 import {
     _selectHistoryGroupingsByDate, _selectHistoryGroupingsByGame, _selectHistoryGroupingsByPlatform,
-    _selectHistoryItems, _selectHistoryLoading, _selectSortedHistoryItems, SharedState, State
+    _selectHistoryItems, _selectHistoryLoading, _selectSortedHistoryItems, _selectTrackedGames,
+    SharedState, State
 } from './root.reducer';
 
 import { formatDate } from '../utils/date.utils';
@@ -390,6 +391,41 @@ describe('Shared Root Reducer', () => {
         const result = _selectHistoryLoading(state);
 
         expect(result).toBe(false);
+      });
+    });
+
+    describe('_selectTrackedGames', () => {
+      it('Should return games in order of last played', () => {
+        const item1: HistoryEntity = {
+          id: '1',
+          game: 'some game',
+          platform: 'some platform',
+          startTime: 1000,
+          endTime: 1500
+        };
+        const item2: HistoryEntity = {
+          id: '2',
+          game: 'some other game',
+          platform: 'some other platform',
+          startTime: 3000,
+          endTime: 3500
+        };
+        const history: HistoryState = {
+          ids: [item1.id, item2.id],
+          entities: {
+            [item1.id]: item1,
+            [item2.id]: item2,
+          },
+          loading: false
+        };
+        const sharedState: SharedState = {
+          history
+        };
+        const state: State = { shared: sharedState };
+
+        const result = _selectTrackedGames(state);
+
+        expect(result).toEqual(['some other game', 'some game']);
       });
     });
   });
