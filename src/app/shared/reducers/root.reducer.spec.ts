@@ -395,7 +395,7 @@ describe('Shared Root Reducer', () => {
     });
 
     describe('_selectTrackedGames', () => {
-      it('Should return games in order of last played', () => {
+      it('Should return unique games in order of last played', () => {
         const item1: HistoryEntity = {
           id: '1',
           game: 'some game',
@@ -410,11 +410,19 @@ describe('Shared Root Reducer', () => {
           startTime: 3000,
           endTime: 3500
         };
+        const item3: HistoryEntity = {
+          id: '3',
+          game: 'some other game',
+          platform: 'some other platform',
+          startTime: 4000,
+          endTime: 4500
+        };
         const history: HistoryState = {
-          ids: [item1.id, item2.id],
+          ids: [item1.id, item2.id, item3.id],
           entities: {
             [item1.id]: item1,
             [item2.id]: item2,
+            [item3.id]: item3
           },
           loading: false
         };
