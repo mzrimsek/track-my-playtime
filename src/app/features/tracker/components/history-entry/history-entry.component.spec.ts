@@ -72,7 +72,7 @@ describe('HistoryEntryComponent', () => {
     const action = new actions.UpdateGame(testUserId, payload);
     const gameEl = fixture.nativeElement.querySelector('.game ng-select');
 
-    component.item.game = game;
+    component.game = game;
     gameEl.dispatchEvent(new Event('change'));
     fixture.detectChanges();
 

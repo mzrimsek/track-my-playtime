@@ -133,7 +133,7 @@ describe('TimerComponent', () => {
       it('Should dispatch SetGame', async(() => {
         const action = new actions.SetGame(game);
 
-        component.info.game = game;
+        component.game = game;
         gameEl.dispatchEvent(new Event('change'));
         fixture.detectChanges();
 
@@ -141,7 +141,7 @@ describe('TimerComponent', () => {
       }));
 
       it('Should not call TimerService setGame', () => {
-        gameEl.value = game;
+        component.game = game;
         gameEl.dispatchEvent(new Event('change'));
         fixture.detectChanges();
 
@@ -291,7 +291,7 @@ describe('TimerComponent', () => {
         const game = 'some crazy new game';
         const gameEl = fixture.nativeElement.querySelector('.game ng-select');
 
-        component.info.game = game;
+        component.game = game;
         gameEl.dispatchEvent(new Event('change'));
         fixture.detectChanges();
 
