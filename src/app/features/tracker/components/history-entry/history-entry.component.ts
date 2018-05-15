@@ -26,6 +26,7 @@ export class HistoryEntryComponent implements OnInit {
   @Input() platformsOptions: string[] = [];
   @Input() dateRange: Date[] = [];
   @Input() trackedGames: string[] = [];
+  @Input() game: string | null = null;
   userId = '';
   icons = {
     remove: faTrash
@@ -37,10 +38,10 @@ export class HistoryEntryComponent implements OnInit {
   ngOnInit() { }
 
   updateGame() {
-    if (this.item.game) {
+    if (this.game) {
       const payload = <UpdateHistoryItemGamePayload>{
         itemId: this.item.id,
-        game: this.item.game
+        game: this.game
       };
       this.store.dispatch(new actions.UpdateGame(this.userId, payload));
     }
