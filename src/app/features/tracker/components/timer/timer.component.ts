@@ -24,6 +24,7 @@ export class TimerComponent implements OnInit {
   @Input() currentTime = 0;
   @Input() platformsOptions: string[] = [];
   @Input() trackedGames: string[] = [];
+  @Input() game: string | null = null;
   userId = '';
   icons = {
     start: faPlayCircle,
@@ -62,8 +63,8 @@ export class TimerComponent implements OnInit {
   }
 
   setGame() {
-    if (this.info.game) {
-      const game = this.info.game;
+    if (this.game) {
+      const game = this.game;
       this.store.dispatch(new actions.SetGame(game));
       if (this.info.startTime !== 0) {
         this.timerService.setGame(this.userId, game);

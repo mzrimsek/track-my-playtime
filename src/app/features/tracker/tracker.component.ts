@@ -24,6 +24,7 @@ export class TrackerComponent implements OnInit {
   timerInfo$: Observable<TimerInfo>;
   currentTime$: Observable<number>;
   platformsOptions$: Observable<string[]>;
+  game$: Observable<string | null>;
 
   historyGroupings$: Observable<HistoryGrouping[]>;
   historyLoading$: Observable<boolean>;
@@ -36,6 +37,7 @@ export class TrackerComponent implements OnInit {
     this.timerInfo$ = this.trackerStore.select(trackerSelectors.timerInfo);
     this.currentTime$ = this.clockService.getCurrentTime();
     this.platformsOptions$ = this.trackerStore.select(trackerSelectors.platformsOptions);
+    this.game$ = this.timerInfo$.map(info => info.game ? info.game : null);
 
     const historyGroupings = this.sharedStore.select(sharedSelectors.historyGroupingsByDate);
     const entriesToShow = this.trackerStore.select(trackerSelectors.entriesToShow);

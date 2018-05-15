@@ -2,7 +2,8 @@
   <app-tracker-timer [info]="timerInfo$ | async"
                      [currentTime]="currentTime$ | async"
                      [platformsOptions]="platformsOptions$ | async"
-                     [trackedGames]="trackedGames$ | async">
+                     [trackedGames]="trackedGames$ | async"
+                     [game]="game$ | async">
   </app-tracker-timer>
 
   <app-tracker-history [groups]="historyGroupings$ | async"
