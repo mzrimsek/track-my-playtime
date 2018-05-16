@@ -78,7 +78,7 @@
 @media only screen and (max-width: $small-breakpoint) {
   .history-entry {
     .display-element {
-      font-size: $small-font-size - 2px;
+      font-size: calc(#{$small-font-size} - 2px);
     }
 
     .game {
@@ -90,19 +90,13 @@
     }
 
     .platform {
-      width: 25%;
-
       select {
         text-overflow: ellipsis;
       }
     }
 
     .time {
-      width: 35%;
-    }
-
-    .primary-action {
-      width: 10%;
+      width: 45%;
     }
   }
 }
