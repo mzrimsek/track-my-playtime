@@ -91,6 +91,10 @@
     .logout {
       font-size: $base-font-size;
       color: $text-light;
+
+      .text {
+        display: none;
+      }
     }
   }
 }
@@ -122,6 +126,62 @@
       .info {
         .name {
           display: none;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width : $small-breakpoint) {
+  .nav {
+    width: 100%;
+    height: $small-nav-height;
+    justify-content: initial;
+    z-index: 9999;
+
+    .main {
+      .banner {
+        margin: 10px 0px;
+      }
+
+      ul {
+        li {
+          a {
+            height: 20px;
+            padding: 0px 5px;
+
+            .icon {
+              display: none;
+            }
+
+            .text {
+              display: block;
+            }
+          }
+        }
+      }
+
+      ng-adsense {
+        display: none;
+      }
+    }
+
+    .user {
+      padding: 5px;
+
+      .info {
+        display: none;
+      }
+
+      .logout {
+        font-size: $small-font-size;
+
+        .icon {
+          display: none;
+        }
+
+        .text {
+          display: block;
         }
       }
     }

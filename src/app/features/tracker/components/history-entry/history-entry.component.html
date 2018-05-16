@@ -1,7 +1,7 @@
 <div class="history-entry">
   <div class="game">
     <ng-select data-tracking-category="historyEntryGame"
-               placeholder="Game name"
+               placeholder="Game"
                [items]="trackedGames"
                [addTag]="true"
                [(ngModel)]="game"
@@ -13,7 +13,7 @@
             #platformEl
             [value]="item.platform"
             (change)="updatePlatform(platformEl)">
-      <option value="">Select Platform</option>
+      <option value="">Platform</option>
       <option *ngFor="let option of platformsOptions"
               value="{{ option }}">{{ option }}</option>
     </select>

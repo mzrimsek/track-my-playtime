@@ -44,21 +44,37 @@
     }
   }
 }
+
 @media only screen  and (max-width : $small-breakpoint) {
   .content {
     .dashboard {
-      .graphs {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
+      padding: 10px;
+      margin-top: $small-nav-height;
 
-        .time-vs-date, .time-vs-game {
-          height: 100%;
-          margin: 0px 0px 20px 0px;
+      .graphs {
+        height: $small-graphs-height;
+        grid-template-columns: 100%;
+        grid-template-rows: 33% 33% 33%;
+
+        .time-vs-date {
+          grid-column: 1 / span 1;
+          grid-row: 1 / span 1;
+          margin-right: 0px;
+          margin-bottom: 10px;
+        }
+
+        .time-vs-game {
+          grid-column: 1 / span 1;
+          grid-row: 2 / span 1;
+          margin-right: 0px;
+          margin-top: 0px;
+          margin-bottom: 10px;
         }
 
         .time-vs-platform {
-          margin: 0px;
+          grid-column: 1 / span 1;
+          grid-row: 3 / span 1;
+          margin-left: 0px;
         }
       }
     }

@@ -1,5 +1,6 @@
 // global variables
 $base-font-size: 20px;
+$small-font-size: 15px;
 $base-font-family: Arial, Helvetica, sans-serif;
 
 $background-dark: #533a7b;
@@ -14,7 +15,7 @@ $bad-action-color: red;
 $neutral-action-color: grey;
 
 $medium-breakpoint: 1224px;
-$small-breakpoint: 1024px;
+$small-breakpoint: 500px;
 
 // tracker variables
 $sidebar-width: 215px;
@@ -35,3 +36,8 @@ $box-width: 400px;
 // dashboard variables
 $dashboard-header-height: 60px;
 $graphs-height: calc(100% - #{$dashboard-header-height});
+$small-dashboard-header-height: 40px;
+$small-graphs-height: calc(100% - #{$small-dashboard-header-height});
+
+// nav variables
+$small-nav-height: 130px;

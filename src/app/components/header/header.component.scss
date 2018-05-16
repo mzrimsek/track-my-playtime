@@ -15,6 +15,7 @@
 
     a {
       color: $text-light;
+      font-weight: bold;
     }
   }
 
@@ -32,6 +33,18 @@
       &:active {
         color: $text-light;
       }
+    }
+  }
+}
+
+@media only screen  and (max-width : $small-breakpoint) {
+  .header {
+    .banner {
+      margin-left: 15px;
+    }
+
+    .login {
+      margin-right: 15px;
     }
   }
 }

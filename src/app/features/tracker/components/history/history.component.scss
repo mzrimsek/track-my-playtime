@@ -11,7 +11,6 @@
   .groups {
     .history-group {
       background: $background-light;
-      margin-bottom: 20px;
 
       .overall-data {
         display: flex;
@@ -19,11 +18,29 @@
         padding: 20px;
         font-weight: bold;
       }
+
+      &:not(:last-child) {
+        margin-bottom: 20px;
+      }
     }
   }
 
   .no-groups {
     text-align: center;
     padding: 10px 10px;
+  }
+}
+
+@media only screen  and (max-width : $small-breakpoint) {
+  .history {
+    margin-top: calc(#{$timer-height} + #{$small-nav-height} + 20px);
+
+    .groups {
+      .history-group {
+        .overall-data {
+          padding: 10px;
+        }
+      }
+    }
   }
 }
