@@ -127,3 +127,9 @@
     }
   }
 }
+
+@media only screen and (max-width : $small-breakpoint) {
+  .nav {
+    display: none;
+  }
+}

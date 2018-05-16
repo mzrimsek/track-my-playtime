@@ -107,6 +107,12 @@
 
 @media only screen and (max-width: $small-breakpoint) {
   .timer {
+    width: 100%;
+
+    .display-element {
+      font-size: $small-font-size;
+    }
+
     .game {
       width: 30%;
 

@@ -58,6 +58,17 @@ fa-icon {
   }
 }
 
+@media only screen  and (max-width : $small-breakpoint) {
+  body {
+    font-size: $small-font-size;
+  }
+
+  .content {
+    width: 100%;
+    margin-left: 0px;
+  }
+}
+
 :focus {outline:none;}
 ::-moz-focus-inner {border:0;}
 

@@ -27,3 +27,13 @@
     padding: 10px 10px;
   }
 }
+
+@media only screen  and (max-width : $small-breakpoint) {
+  .groups {
+    .history-group {
+      .overall-data {
+        padding: 10px;
+      }
+    }
+  }
+}
