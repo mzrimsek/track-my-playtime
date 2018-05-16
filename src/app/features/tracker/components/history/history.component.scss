@@ -11,13 +11,16 @@
   .groups {
     .history-group {
       background: $background-light;
-      margin-bottom: 20px;
 
       .overall-data {
         display: flex;
         justify-content: space-between;
         padding: 20px;
         font-weight: bold;
+      }
+
+      &:not(:last-child) {
+        margin-bottom: 20px;
       }
     }
   }
