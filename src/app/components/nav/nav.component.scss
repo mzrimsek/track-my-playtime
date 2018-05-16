@@ -91,6 +91,10 @@
     .logout {
       font-size: $base-font-size;
       color: $text-light;
+
+      .text {
+        display: none;
+      }
     }
   }
 }
@@ -171,6 +175,14 @@
 
       .logout {
         font-size: $small-font-size;
+
+        .icon {
+          display: none;
+        }
+
+        .text {
+          display: block;
+        }
       }
     }
   }
