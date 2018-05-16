@@ -32,10 +32,14 @@
 }
 
 @media only screen  and (max-width : $small-breakpoint) {
-  .groups {
-    .history-group {
-      .overall-data {
-        padding: 10px;
+  .history {
+    margin-top: calc(#{$timer-height} + #{$small-nav-height} + 20px);
+
+    .groups {
+      .history-group {
+        .overall-data {
+          padding: 10px;
+        }
       }
     }
   }

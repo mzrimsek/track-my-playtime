@@ -108,6 +108,7 @@
 @media only screen and (max-width: $small-breakpoint) {
   .timer {
     width: 100%;
+    margin-top: $small-nav-height;
 
     .display-element {
       font-size: $small-font-size;
