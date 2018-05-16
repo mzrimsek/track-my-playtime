@@ -9,7 +9,6 @@
   }
 
   .total {
-    font-size: 1.25em;
     font-style: italic;
   }
 
@@ -24,7 +23,6 @@
       font-family: $base-font-family;
       background: inherit;
       color: inherit;
-      font-size: 1.25em;
       font-style: italic;
       outline: none;
       border: none;
@@ -43,9 +41,20 @@
 
 @media only screen  and (max-width : $small-breakpoint) {
   .header {
+    height: $small-dashboard-header-height;
+
     .title {
-     display: none;
+      font-size: 1.25em;
+    }
+
+    .total {
+      font-size: $small-font-size;
+    }
+
+    .range-options {
+      select {
+        font-size: $small-font-size;
+      }
     }
   }
 }
-

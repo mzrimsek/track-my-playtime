@@ -36,3 +36,5 @@ $box-width: 400px;
 // dashboard variables
 $dashboard-header-height: 60px;
 $graphs-height: calc(100% - #{$dashboard-header-height});
+$small-dashboard-header-height: 40px;
+$small-graphs-height: calc(100% - #{$small-dashboard-header-height})
