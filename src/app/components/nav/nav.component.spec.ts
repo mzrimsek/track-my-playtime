@@ -73,6 +73,12 @@ describe('NavComponent', () => {
     expect(href).toBe('/app/dashboard');
   }));
 
+  it('Should have nav library link with correct href', async(() => {
+    const navLibraryLink = fixture.debugElement.query(By.css('#navLibraryLink'));
+    const href = navLibraryLink.nativeElement.getAttribute('href');
+    expect(href).toBe('/app/library');
+  }));
+
   it('Should dispatch Logout on logout button click', async(() => {
     const action = new userActions.Logout();
     const button = fixture.nativeElement.querySelector('#logoutButton');
