@@ -33,7 +33,7 @@
 
 @media only screen  and (max-width : $small-breakpoint) {
   .history {
-    margin-top: calc(#{$timer-height} + #{$small-nav-height} + 20px);
+    margin-top: calc(#{$timer-height} + #{$small-nav-banner-height} + 20px);
 
     .groups {
       .history-group {

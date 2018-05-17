@@ -19,6 +19,10 @@
       text-align: center;
       margin: 30px 0px;
 
+      .menu {
+        display:none;
+      }
+
       a{
         text-decoration: none;
         color: $text-light;
@@ -26,39 +30,41 @@
       }
     }
 
-    ul {
-      padding: 0;
-      list-style: none;
+    nav {
+      ul {
+        padding: 0;
+        list-style: none;
 
-      li{
-        border-radius: 8px;
-        margin-bottom: 5px;
+        li{
+          border-radius: 8px;
+          margin-bottom: 5px;
 
-        &.active {
-          background: $background-dark-accent;
-        }
-
-        &:hover {
-          background: $background-dark-accent;
-          cursor: pointer;
-        }
-
-        a{
-          color: $text-light;
-          text-decoration: none;
-
-          display: flex;
-          align-items: center;
-          height: 45px;
-          padding: 0px 10px;
-
-          .icon {
-            margin-right: 5px;
-            pointer-events: none;
+          &.active {
+            background: $background-dark-accent;
           }
 
-          .text {
-            pointer-events: none;
+          &:hover {
+            background: $background-dark-accent;
+            cursor: pointer;
+          }
+
+          a{
+            color: $text-light;
+            text-decoration: none;
+
+            display: flex;
+            align-items: center;
+            height: 45px;
+            padding: 0px 10px;
+
+            .icon {
+              margin-right: 5px;
+              pointer-events: none;
+            }
+
+            .text {
+              pointer-events: none;
+            }
           }
         }
       }
@@ -104,18 +110,20 @@
     width: $small-sidebar-width;
 
     .main {
-      ul {
-        li {
-          a {
-            justify-content: center;
-            height: 60px;
+      nav {
+        ul {
+          li {
+            a {
+              justify-content: center;
+              height: 60px;
 
-            .icon {
-              font-size: 2em;
-            }
+              .icon {
+                font-size: 2em;
+              }
 
-            .text {
-              display: none;
+              .text {
+                display: none;
+              }
             }
           }
         }
@@ -136,33 +144,52 @@
   .nav {
     width: 100%;
     height: $small-nav-height;
-    justify-content: initial;
     z-index: 70;
+
+    &.hide {
+      height: $small-nav-banner-height;
+
+      .main {
+        nav, ng-adsense {
+          display: none;
+        }
+      }
+      .user {
+        display: none;
+      }
+    }
 
     .main {
       .banner {
         margin: 10px 0px;
-      }
 
-      ul {
-        li {
-          a {
-            height: 20px;
-            padding: 0px 5px;
+        .menu {
+          display: flex;
+          justify-self: flex-start;
 
-            .icon {
-              display: none;
-            }
-
-            .text {
-              display: block;
-            }
+          &:hover {
+            cursor: pointer;
           }
         }
       }
 
-      ng-adsense {
-        display: none;
+      nav {
+        ul {
+          li {
+            a {
+              height: 20px;
+              padding: 0px 5px;
+
+              .icon {
+                display: none;
+              }
+
+              .text {
+                display: block;
+              }
+            }
+          }
+        }
       }
     }
 
