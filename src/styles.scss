@@ -27,10 +27,6 @@ body {
   position: initial;
 }
 
-.cdk-overlay-pane {
-  z-index: 90;
-}
-
 .icon-button {
   background: none;
   border: none;
@@ -70,6 +66,12 @@ fa-icon {
   .content {
     width: 100%;
     margin-left: 0px;
+  }
+
+  .cdk-overlay-pane {
+    top: 10% !important;
+    right: 10% !important;
+    bottom: 10% !important;
   }
 }
 
