@@ -27,6 +27,10 @@ body {
   position: initial;
 }
 
+.cdk-overlay-pane {
+  z-index: 90;
+}
+
 .icon-button {
   background: none;
   border: none;
