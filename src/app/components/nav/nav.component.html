@@ -3,7 +3,8 @@
   <div class="main">
     <div class="banner">
       <div class="menu"
-           (click)="toggleNav()">
+           (click)="toggleNav()"
+           data-tracking-category="navBannerMenu">
         <fa-icon *ngIf="hideNavContents"
                  [icon]="icons.menu"></fa-icon>
         <fa-icon *ngIf="!hideNavContents"
