@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { SharedModule } from '../../shared/shared.module';
 
+import { ListItemComponent } from './components/list-item/list-item.component';
 import { LibraryComponent } from './library.component';
 
 @NgModule({
@@ -10,6 +11,6 @@ import { LibraryComponent } from './library.component';
     CommonModule,
     SharedModule
   ],
-  declarations: [LibraryComponent]
+  declarations: [LibraryComponent, ListItemComponent]
 })
 export class LibraryModule { }

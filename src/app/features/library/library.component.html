@@ -1,3 +1,8 @@
-<p>
-  library works!
-</p>
+<div class="content">
+  <div class="library">
+    <div class="item"
+         *ngFor="let item of (libraryEntries$ | async)">
+      <app-library-list-item [item]="item"></app-library-list-item>
+    </div>
+  </div>
+</div>
