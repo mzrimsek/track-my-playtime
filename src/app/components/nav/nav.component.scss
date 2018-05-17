@@ -166,10 +166,15 @@
         .menu {
           display: flex;
           justify-self: flex-start;
+          font-size: 1.25em;
 
           &:hover {
             cursor: pointer;
           }
+        }
+
+        a {
+          width: 100%;
         }
       }
 
