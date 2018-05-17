@@ -20,6 +20,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AuthModule } from './features/auth/auth.module';
 import { DashboardModule } from './features/dashboard/dashboard.module';
 import { HomeModule } from './features/home/home.module';
+import { LibraryModule } from './features/library/library.module';
 import { TrackerModule } from './features/tracker/tracker.module';
 import { SharedModule } from './shared/shared.module';
 
@@ -64,7 +65,8 @@ import './rxjs-operators';
     HomeModule,
     AuthModule,
     TrackerModule,
-    DashboardModule
+    DashboardModule,
+    LibraryModule
   ],
   providers: [{
     provide: RouterStateSerializer, useClass: CustomRouterStateSerializer
