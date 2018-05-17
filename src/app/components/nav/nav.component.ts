@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { faClock } from '@fortawesome/free-regular-svg-icons';
-import { faChartBar, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faChartBar, faSignOutAlt, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 import { UserService } from '../../features/auth/services/user.service';
 
@@ -20,7 +20,6 @@ export class NavComponent implements OnInit {
     router: ['app'],
     trackingCategory: 'navBanner'
   };
-
   routes: RouteEntry[] = [
     {
       caption: 'Tracker',
@@ -37,9 +36,12 @@ export class NavComponent implements OnInit {
       trackingCategory: 'navDashboard'
     }
   ];
+  hideNavContents = true;
   user: User;
   icons = {
-    logout: faSignOutAlt
+    logout: faSignOutAlt,
+    menu: faBars,
+    close: faTimes
   };
   constructor(private userService: UserService) {
     this.user = this.userService.getUser();
@@ -49,5 +51,9 @@ export class NavComponent implements OnInit {
 
   logout() {
     this.userService.logout();
+  }
+
+  toggleNav() {
+    this.hideNavContents = !this.hideNavContents;
   }
 }

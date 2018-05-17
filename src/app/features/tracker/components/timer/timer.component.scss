@@ -8,7 +8,7 @@
   padding: 0px 10px;
   position: fixed;
   width: $content-width;
-  z-index: 9999;
+  z-index: 50;
 
   .display-element {
     font-size: $base-font-size;
@@ -107,6 +107,13 @@
 
 @media only screen and (max-width: $small-breakpoint) {
   .timer {
+    width: 100%;
+    margin-top: $small-nav-banner-height;
+
+    .display-element {
+      font-size: $small-font-size;
+    }
+
     .game {
       width: 30%;
 

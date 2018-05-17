@@ -13,7 +13,7 @@
   }
 
   .display-element {
-    font-size: $base-font-size - 3px;
+    font-size: $small-font-size;
     font-family: $base-font-family;
     width: 100%;
     padding: 5px;
@@ -77,6 +77,10 @@
 
 @media only screen and (max-width: $small-breakpoint) {
   .history-entry {
+    .display-element {
+      font-size: calc(#{$small-font-size} - 2px);
+    }
+
     .game {
       width: 30%;
 
@@ -86,19 +90,13 @@
     }
 
     .platform {
-      width: 25%;
-
       select {
         text-overflow: ellipsis;
       }
     }
 
     .time {
-      width: 35%;
-    }
-
-    .primary-action {
-      width: 10%;
+      width: 45%;
     }
   }
 }

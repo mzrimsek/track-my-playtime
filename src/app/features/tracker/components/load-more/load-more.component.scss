@@ -1,9 +1,12 @@
 @import "../../../../../variables.scss";
 
 .load-more {
+  margin: 20px 0px;
+
   button {
     display: flex;
     align-items: center;
+    justify-self: center;
     font-size: 1.1em;
     background: $background-dark-accent;
     color: $text-light;

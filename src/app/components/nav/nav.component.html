@@ -1,6 +1,15 @@
-<div class="nav">
+<div class="nav"
+     [class.hide]="hideNavContents">
   <div class="main">
     <div class="banner">
+      <div class="menu"
+           (click)="toggleNav()"
+           data-tracking-category="navBannerMenu">
+        <fa-icon *ngIf="hideNavContents"
+                 [icon]="icons.menu"></fa-icon>
+        <fa-icon *ngIf="!hideNavContents"
+                 [icon]="icons.close"></fa-icon>
+      </div>
       <a id="navBannerLink"
          [attr.data-tracking-category]="bannerRoute.trackingCategory"
          [routerLink]="bannerRoute.router">{{ bannerRoute.caption }}</a>
@@ -40,7 +49,10 @@
             data-tracking-category="navLogout"
             class="logout icon-button"
             (click)="logout()">
-      <fa-icon [icon]="icons.logout"></fa-icon>
+      <span class="text">Logout</span>
+      <span class="icon">
+        <fa-icon [icon]="icons.logout"></fa-icon>
+      </span>
     </button>
   </div>
 </div>

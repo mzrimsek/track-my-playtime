@@ -1,7 +1,7 @@
 <div class="timer drop-shadow">
   <div class="game">
     <ng-select data-tracking-category="timerGame"
-               placeholder="Game name"
+               placeholder="Game"
                [items]="trackedGames"
                [addTag]="true"
                [(ngModel)]="game"
@@ -13,7 +13,7 @@
             #platformEl
             [value]="info.platform"
             (change)="setPlatform(platformEl)">
-      <option value="">Select Platform</option>
+      <option value="">Platform</option>
       <option *ngFor="let option of platformsOptions"
               value="{{ option }}">{{ option }}</option>
     </select>
