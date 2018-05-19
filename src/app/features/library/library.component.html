@@ -1,6 +1,7 @@
 <div class="content">
   <div class="table">
-    <ngx-datatable [rows]="libraryEntries$ | async"
+    <ngx-datatable class="material"
+                   [rows]="libraryEntries$ | async"
                    [columns]="columns"
                    [rowHeight]="'auto'"></ngx-datatable>
   </div>
