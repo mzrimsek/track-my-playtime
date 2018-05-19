@@ -18,6 +18,12 @@ import { mapGroupings } from './utils/library-data.utils';
 export class LibraryComponent implements OnInit {
 
   libraryEntries$: Observable<LibraryEntry[]>;
+  columns = [
+    { prop: 'game' },
+    { name: 'Total Time' },
+    { name: 'First Played' },
+    { name: 'Last Played' }
+  ];
   constructor(private sharedStore: Store<SharedState>) { }
 
   ngOnInit() {

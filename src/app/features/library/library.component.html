@@ -1,3 +1,9 @@
 <div class="content">
-  <app-library-table [data]="libraryEntries$ | async"></app-library-table>>
+  <div class="table">
+    <ngx-datatable [rows]="libraryEntries$ | async"
+                   [columns]="columns"
+                   [rowHeight]="'auto'"
+                   [virtualization]="false"></ngx-datatable>
+  </div>
+
 </div>
