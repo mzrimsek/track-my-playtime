@@ -1,16 +1,19 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+
 import { SharedModule } from '../../shared/shared.module';
 
-import { ListItemComponent } from './components/list-item/list-item.component';
+import { TableComponent } from './components/table/table.component';
 import { LibraryComponent } from './library.component';
 
 @NgModule({
   imports: [
     CommonModule,
+    NgxDatatableModule,
     SharedModule
   ],
-  declarations: [LibraryComponent, ListItemComponent]
+  declarations: [LibraryComponent, TableComponent]
 })
 export class LibraryModule { }
