@@ -3,7 +3,6 @@ import { Observable } from 'rxjs/Observable';
 
 import { HistoryGrouping } from '../../../shared/models';
 
-import { formatDate } from '../../../shared/utils/date.utils';
 import { mapGroupings } from './library-data.utils';
 
 describe('Library Data Utils', () => {
@@ -15,13 +14,13 @@ describe('Library Data Utils', () => {
         expect(res).toEqual([{
           game: 'game 1',
           totalTime: '00:00:02',
-          firstPlayed: formatDate(start),
-          lastPlayed: formatDate(addDays(start, 1))
+          firstPlayed: start.getTime(),
+          lastPlayed: addDays(start, 1).getTime() + 2000
         }, {
           game: 'game 2',
           totalTime: '00:00:04',
-          firstPlayed: formatDate(addDays(start, 3)),
-          lastPlayed: formatDate(addDays(start, 4))
+          firstPlayed: addDays(start, 3).getTime(),
+          lastPlayed: addDays(start, 4).getTime() + 3000
         }]);
       });
     });

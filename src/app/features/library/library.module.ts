@@ -5,7 +5,6 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 import { SharedModule } from '../../shared/shared.module';
 
-import { TableComponent } from './components/table/table.component';
 import { LibraryComponent } from './library.component';
 
 @NgModule({
@@ -14,6 +13,6 @@ import { LibraryComponent } from './library.component';
     NgxDatatableModule,
     SharedModule
   ],
-  declarations: [LibraryComponent, TableComponent]
+  declarations: [LibraryComponent]
 })
 export class LibraryModule { }
