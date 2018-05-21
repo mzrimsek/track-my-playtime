@@ -1,15 +1,20 @@
 <div class="content">
   <div class="table">
-    <ngx-datatable class="material"
-                   [rows]="libraryEntries$ | async"
-                   [rowHeight]="'auto'">
-      <ngx-datatable-column name="Game"></ngx-datatable-column>
-      <ngx-datatable-column name="Total Time"></ngx-datatable-column>
-      <ngx-datatable-column name="First Played">
+    <ngx-datatable [rows]="libraryEntries$ | async"
+                   [rowHeight]="'auto'"
+                   [columnMode]="'flex'"
+                   [sorts]="[{prop: 'game', dir: 'asc'}]">
+      <ngx-datatable-column name="Game"
+                            [flexGrow]="2"></ngx-datatable-column>
+      <ngx-datatable-column name="Total Time"
+                            [flexGrow]="1"></ngx-datatable-column>
+      <ngx-datatable-column name="First Played"
+                            [flexGrow]="1">
         <ng-template let-value="value"
                      ngx-datatable-cell-template>{{ value | date:'MM/d/yyyy' }}</ng-template>
       </ngx-datatable-column>
-      <ngx-datatable-column name="Last Played">
+      <ngx-datatable-column name="Last Played"
+                            [flexGrow]="1">
         <ng-template let-value="value"
                      ngx-datatable-cell-template>{{ value | date:'MM/d/yyyy' }}</ng-template>
       </ngx-datatable-column>
