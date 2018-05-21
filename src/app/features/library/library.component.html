@@ -2,7 +2,17 @@
   <div class="table">
     <ngx-datatable class="material"
                    [rows]="libraryEntries$ | async"
-                   [columns]="columns"
-                   [rowHeight]="'auto'"></ngx-datatable>
+                   [rowHeight]="'auto'">
+      <ngx-datatable-column name="Game"></ngx-datatable-column>
+      <ngx-datatable-column name="Total Time"></ngx-datatable-column>
+      <ngx-datatable-column name="First Played">
+        <ng-template let-value="value"
+                     ngx-datatable-cell-template>{{ value | date:'MM/d/yyyy' }}</ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Last Played">
+        <ng-template let-value="value"
+                     ngx-datatable-cell-template>{{ value | date:'MM/d/yyyy' }}</ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
   </div>
 </div>
