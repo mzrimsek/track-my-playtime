@@ -1,6 +1,7 @@
 <div class="content">
-  <div class="table">
-    <ngx-datatable [rows]="libraryEntries$ | async"
+  <div class="table drop-shadow">
+    <ngx-datatable class="material striped"
+                   [rows]="libraryEntries$ | async"
                    [rowHeight]="'auto'"
                    [columnMode]="'flex'"
                    [sorts]="[{prop: 'game', dir: 'asc'}]">

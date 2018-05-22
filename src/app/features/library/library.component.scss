@@ -1,7 +1,15 @@
+@import "../../../variables.scss";
+
 .content {
-  padding: 10px;
+  padding: 20px;
 
   .table {
     width: 100%;
+    background: $background-light;
+
+    .ngx-datatable.material {
+      background: $background-light;
+      box-shadow: none;
+    }
   }
 }
