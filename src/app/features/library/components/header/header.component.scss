@@ -1,0 +1,28 @@
+@import "../../../../../variables.scss";
+
+.header {
+  height: $dashboard-header-height;
+
+  .title {
+    font-size: 1.5em;
+    font-weight: bold;
+  }
+
+  .total {
+    font-style: italic;
+  }
+}
+
+@media only screen  and (max-width : $small-breakpoint) {
+  .header {
+    height: $small-dashboard-header-height;
+
+    .title {
+      font-size: 1.25em;
+    }
+
+    .total {
+      font-size: $small-font-size;
+    }
+  }
+}

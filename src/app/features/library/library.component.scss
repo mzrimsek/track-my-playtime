@@ -13,3 +13,12 @@
     }
   }
 }
+
+@media only screen  and (max-width : $small-breakpoint) {
+  .content {
+    .table {
+      padding: 10px;
+      margin-top: $small-nav-banner-height;
+    }
+  }
+}

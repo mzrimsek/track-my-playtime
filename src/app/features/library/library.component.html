@@ -1,4 +1,6 @@
 <div class="content">
+  <app-library-header [gameCount]="(libraryEntries$ | async).length"></app-library-header>
+
   <div class="table drop-shadow">
     <ngx-datatable class="material striped"
                    [rows]="libraryEntries$ | async"
