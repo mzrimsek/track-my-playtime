@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 import { faClock } from '@fortawesome/free-regular-svg-icons';
-import { faBars, faChartBar, faSignOutAlt, faTimes } from '@fortawesome/free-solid-svg-icons';
+import {
+    faBars, faChartBar, faList, faSignOutAlt, faTimes
+} from '@fortawesome/free-solid-svg-icons';
 
 import { UserService } from '../../features/auth/services/user.service';
 
@@ -34,6 +36,13 @@ export class NavComponent implements OnInit {
       exact: true,
       icon: faChartBar,
       trackingCategory: 'navDashboard'
+    },
+    {
+      caption: 'Library',
+      router: ['app/library'],
+      exact: true,
+      icon: faList,
+      trackingCategory: 'navLibrary'
     }
   ];
   hideNavContents = true;

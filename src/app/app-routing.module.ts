@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './features/auth/components/login/login.component';
 import { DashboardComponent } from './features/dashboard/dashboard.component';
 import { HomeComponent } from './features/home/home.component';
+import { LibraryComponent } from './features/library/library.component';
 import { TrackerComponent } from './features/tracker/tracker.component';
 
 import { AuthGuard } from './features/auth/guards/auth.guard';
@@ -28,6 +29,10 @@ const routes: Routes = [
       {
         path: 'dashboard',
         component: DashboardComponent
+      },
+      {
+        path: 'library',
+        component: LibraryComponent
       },
       {
         path: '**',

@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './features/auth/components/login/login.component';
 import { DashboardComponent } from './features/dashboard/dashboard.component';
 import { HomeComponent } from './features/home/home.component';
+import { LibraryComponent } from './features/library/library.component';
 import { TrackerComponent } from './features/tracker/tracker.component';
 
 import { ClockService } from './features/tracker/services/clock.service';
@@ -39,6 +40,7 @@ describe('AppComponent', () => {
         LoginComponent,
         TrackerComponent,
         DashboardComponent,
+        LibraryComponent,
         TimePipe
       ],
       imports: [
@@ -61,6 +63,10 @@ describe('AppComponent', () => {
               {
                 path: 'dashboard',
                 component: DashboardComponent
+              },
+              {
+                path: 'library',
+                component: LibraryComponent
               },
               {
                 path: '**',
@@ -159,21 +165,18 @@ describe('AppComponent', () => {
       expect(shouldShowHeader).toBe(false);
     }));
 
-    // FIXME: This test fails when it is async
     it('Should not show header', () => {
       fixture.detectChanges();
       const header = fixture.nativeElement.querySelector('app-header');
       expect(header).toBeNull();
     });
 
-    // FIXME: This test fails when it is async
     it('Should show nav', () => {
       fixture.detectChanges();
       const nav = fixture.nativeElement.querySelector('app-nav');
       expect(nav).toBeTruthy();
     });
 
-    // FIXME: This test fails when it is async
     it('Should show tracker component', () => {
       fixture.detectChanges();
       const tracker = fixture.nativeElement.querySelector('app-tracker');
@@ -186,7 +189,6 @@ describe('AppComponent', () => {
       router.navigate(['app/tracker']);
     }));
 
-    // FIXME: This test fails when it is async
     it('Should show tracker component', () => {
       fixture.detectChanges();
       const tracker = fixture.nativeElement.querySelector('app-tracker');
@@ -203,6 +205,18 @@ describe('AppComponent', () => {
       fixture.detectChanges();
       const dashboard = fixture.nativeElement.querySelector('app-dashboard');
       expect(dashboard).toBeTruthy();
+    }));
+  });
+
+  describe('On Library Route', () => {
+    beforeEach(async(() => {
+      router.navigate(['app/library']);
+    }));
+
+    it('Should show library component', async(() => {
+      fixture.detectChanges();
+      const library = fixture.nativeElement.querySelector('app-library');
+      expect(library).toBeTruthy();
     }));
   });
 });

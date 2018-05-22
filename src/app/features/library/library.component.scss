@@ -1,0 +1,27 @@
+@import "../../../variables.scss";
+
+.content {
+  padding: 20px;
+
+  .loading {
+    display: flex;
+    justify-content: center;
+  }
+
+  .table {
+    width: 100%;
+    background: $background-light;
+    margin-bottom: 20px;
+
+    .ngx-datatable.material {
+      background: $background-light;
+      box-shadow: none;
+    }
+  }
+}
+
+@media only screen  and (max-width : $small-breakpoint) {
+  .content {
+    margin-top: $small-nav-banner-height;
+  }
+}
