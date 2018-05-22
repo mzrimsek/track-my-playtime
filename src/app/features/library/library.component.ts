@@ -18,10 +18,12 @@ import { mapGroupings } from './utils/library-data.utils';
 export class LibraryComponent implements OnInit {
 
   libraryEntries$: Observable<LibraryEntry[]>;
+  isHistoryDataLoading$: Observable<boolean>;
   constructor(private sharedStore: Store<SharedState>) { }
 
   ngOnInit() {
     const gameGroupings = this.sharedStore.select(sharedSelectors.historyGroupingsByGame);
     this.libraryEntries$ = mapGroupings(gameGroupings);
+    this.isHistoryDataLoading$ = this.sharedStore.select(sharedSelectors.historyLoading);
   }
 }
