@@ -11,6 +11,7 @@
   .table {
     width: 100%;
     background: $background-light;
+    margin-bottom: 20px;
 
     .ngx-datatable.material {
       background: $background-light;
@@ -21,9 +22,6 @@
 
 @media only screen  and (max-width : $small-breakpoint) {
   .content {
-    .table {
-      padding: 10px;
-      margin-top: $small-nav-banner-height;
-    }
+    margin-top: $small-nav-banner-height;
   }
 }
