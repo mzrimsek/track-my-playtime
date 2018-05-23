@@ -1,6 +1,6 @@
 {
   "name": "track-my-playtime",
-  "version": "0.1.6",
+  "version": "0.2.0",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
@@ -34,7 +34,8 @@
     "@ngrx/router-store": "^5.2.0",
     "@ngrx/store": "^5.2.0",
     "@ngrx/store-devtools": "^5.2.0",
-    "@swimlane/ngx-charts": "^7.3.0",
+    "@swimlane/ngx-charts": "^7.4.0",
+    "@swimlane/ngx-datatable": "^11.3.0",
     "@types/uuid": "^3.4.3",
     "angularfire2": "5.0.0-rc.6",
     "angulartics2": "5.3.0",

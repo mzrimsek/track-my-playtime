@@ -28,6 +28,7 @@ export class DashboardComponent implements OnInit {
   totalTime$: Observable<number>;
 
   dateRangeType$: Observable<DateRangeType>;
+
   private barGraphBaseConfig: BarGraphConfig = {
     view: undefined,
     colorScheme: {
@@ -68,7 +69,6 @@ export class DashboardComponent implements OnInit {
     explodeSlices: false,
     doughnut: true
   };
-
   constructor(private sharedStore: Store<SharedState>, private dashboardStore: Store<DashboardState>) { }
 
   ngOnInit() {
