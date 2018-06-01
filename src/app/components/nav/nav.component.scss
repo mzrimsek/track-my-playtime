@@ -25,8 +25,22 @@
 
       a{
         text-decoration: none;
-        color: $text-light;
-        font-size: 1.1em;
+
+        .text {
+          color: $text-light;
+          font-size: 1.1em;
+          display: none;
+          font-weight: bold;
+          text-transform: uppercase;
+        }
+
+        .no-text-logo {
+          display: none;
+        }
+
+        img {
+          width: 100%;
+        }
       }
     }
 
@@ -105,11 +119,23 @@
   }
 }
 
-@media only screen  and (max-width : $medium-breakpoint) {
+@media only screen and (max-width : $medium-breakpoint) {
   .nav {
     width: $small-sidebar-width;
 
     .main {
+      .banner {
+        a {
+          .no-text-logo {
+            display: block;
+          }
+
+          .text-logo {
+            display: none;
+          }
+        }
+      }
+
       nav {
         ul {
           li {
@@ -160,7 +186,7 @@
 
     .main {
       .banner {
-        margin: 10px 0px;
+        margin: 6px 0px;
 
         .menu {
           display: flex;
@@ -172,8 +198,16 @@
           }
         }
 
-        a {
+        a{
           width: 100%;
+
+          .text {
+            display: block;
+          }
+
+          .text-logo, .no-text-logo {
+            display: none;
+          }
         }
       }
 

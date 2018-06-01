@@ -12,7 +12,13 @@
       </div>
       <a id="navBannerLink"
          [attr.data-tracking-category]="bannerRoute.trackingCategory"
-         [routerLink]="bannerRoute.router">{{ bannerRoute.caption }}</a>
+         [routerLink]="bannerRoute.router">
+        <span class="text">{{ bannerRoute.caption }}</span>
+        <img class="text-logo"
+             src="../../../assets/wht_512x.png">
+        <img class="no-text-logo"
+             src="../../../assets/wht_512x512.png">
+      </a>
     </div>
 
     <nav>
