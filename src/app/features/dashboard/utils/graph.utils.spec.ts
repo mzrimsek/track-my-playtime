@@ -3,7 +3,7 @@ import { addDays, eachDay } from 'date-fns';
 import { HistoryGrouping } from '../../../shared/models';
 import { GraphDataItem } from '../models';
 
-import { DEFAULT_KEY, mapToGraphData, padDateGraphData } from './graph.utils';
+import { DEFAULT_KEY, mapToGraphData, padDateGraphData, sortGraphDataByValue } from './graph.utils';
 
 describe('Graph Utils', () => {
   describe('mapToGraphData', () => {
@@ -106,6 +106,32 @@ describe('Graph Utils', () => {
       }, {
         name: '4/7/2018',
         value: 0
+      }]);
+    });
+  });
+
+  describe('sortGraphDataByValue', () => {
+    it('Should return sorted data', () => {
+      const items: GraphDataItem[] = [{
+        name: 'Game 1',
+        value: 1000
+      }, {
+        name: 'Game 2',
+        value: 2000
+      }, {
+        name: 'Game 3',
+        value: 500
+      }];
+      const result = sortGraphDataByValue(items);
+      expect(result).toEqual([{
+        name: 'Game 2',
+        value: 2000
+      }, {
+        name: 'Game 1',
+        value: 1000
+      }, {
+        name: 'Game 3',
+        value: 500
       }]);
     });
   });

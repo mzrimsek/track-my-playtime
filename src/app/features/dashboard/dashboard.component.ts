@@ -11,7 +11,7 @@ import { BarGraphConfig, DateRangeType, GraphDataItem, PieChartConfig } from './
 
 import { formatTime } from '../../shared/utils/date.utils';
 import { selectColorScheme } from './utils/colorScheme.utils';
-import { getGraphData, getPaddedGraphData } from './utils/graph-data.utils';
+import { getGraphData, getPaddedGraphData, getSortedGraphData } from './utils/graph-data.utils';
 
 @Component({
   selector: 'app-dashboard',
@@ -79,7 +79,7 @@ export class DashboardComponent implements OnInit {
 
     this.timeVsDateGraphData$ = getPaddedGraphData(groupingsByDate, dateList);
     this.timeVsPlatformGraphData$ = getGraphData(groupingsByPlatform, dateList);
-    this.timeVsGameGraphData$ = getGraphData(groupingsByGame, dateList);
+    this.timeVsGameGraphData$ = getSortedGraphData(groupingsByGame, dateList);
 
     this.isHistoryDataLoading$ = this.sharedStore.select(sharedSelectors.historyLoading);
     this.totalTime$ = this.timeVsDateGraphData$.map(x => x.reduce((a, b) => a + b.value, 0));

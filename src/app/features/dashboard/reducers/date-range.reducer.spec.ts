@@ -16,12 +16,14 @@ describe('Date Range Reducer', () => {
     const newState = reducer(initialState, new actions.SetLastWeek());
 
     it('Should have correct start day', () => {
-      const startLastWeek = subDays(startDay, 7);
+      const startThisWeek = startOfWeek(now);
+      const startLastWeek = subDays(startThisWeek, 7);
       expect(formatDate(newState.startDay)).toBe(formatDate(startLastWeek));
     });
 
     it('Should have correct end day', () => {
-      const endLastWeek = subDays(startDay, 1);
+      const startThisWeek = startOfWeek(now);
+      const endLastWeek = subDays(startThisWeek, 1);
       expect(formatDate(newState.endDay)).toBe(formatDate(endLastWeek));
     });
 
@@ -34,12 +36,12 @@ describe('Date Range Reducer', () => {
     const newState = reducer(initialState, new actions.SetThisMonth());
 
     it('Should have correct start day', () => {
-      const startThisMonth = startOfMonth(startDay);
+      const startThisMonth = startOfMonth(now);
       expect(formatDate(newState.startDay)).toBe(formatDate(startThisMonth));
     });
 
     it('Should have correct end day', () => {
-      const endThisMonth = endOfMonth(startDay);
+      const endThisMonth = endOfMonth(now);
       expect(formatDate(newState.endDay)).toBe(formatDate(endThisMonth));
     });
 
@@ -52,14 +54,14 @@ describe('Date Range Reducer', () => {
     const newState = reducer(initialState, new actions.SetLastMonth());
 
     it('Should have correct start day', () => {
-      const startThisMonth = startOfMonth(startDay);
+      const startThisMonth = startOfMonth(now);
       const endLastMonth = subDays(startThisMonth, 1);
       const startLastMonth = startOfMonth(endLastMonth);
       expect(formatDate(newState.startDay)).toBe(formatDate(startLastMonth));
     });
 
     it('Should have correct end day', () => {
-      const startThisMonth = startOfMonth(startDay);
+      const startThisMonth = startOfMonth(now);
       const endLastMonth = subDays(startThisMonth, 1);
       expect(formatDate(newState.endDay)).toBe(formatDate(endLastMonth));
     });
@@ -71,10 +73,8 @@ describe('Date Range Reducer', () => {
 });
 
 const now = new Date();
-const startDay = startOfWeek(now);
-const endDay = endOfWeek(now);
 const initialState: State = {
-  startDay,
-  endDay,
+  startDay: startOfWeek(now),
+  endDay: endOfWeek(now),
   type: 'THIS_WEEK'
 };
