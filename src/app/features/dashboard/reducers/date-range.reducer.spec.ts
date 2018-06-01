@@ -1,4 +1,4 @@
-import { endOfMonth, endOfWeek, startOfDay, startOfMonth, startOfWeek, subDays } from 'date-fns';
+import { endOfMonth, endOfWeek, startOfMonth, startOfWeek, subDays } from 'date-fns';
 
 import * as actions from '../actions/date-range.actions';
 
