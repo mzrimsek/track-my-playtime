@@ -30,6 +30,10 @@ export const padDateGraphData = (graphItems: GraphDataItem[], dateRange: Date[])
   return paddedGraphItems;
 };
 
+export const sortGraphDataByValue = (items: GraphDataItem[]): GraphDataItem[] => {
+  return items.sort((a, b) => b.value - a.value);
+};
+
 const getGraphDataItemIfInRange = (items: GraphDataItem[], rangeDate: Date): GraphDataItem | undefined => {
   for (let i = 0; i < items.length; i++) {
     const itemDate = new Date(items[i].name);
