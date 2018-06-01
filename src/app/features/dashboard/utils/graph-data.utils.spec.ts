@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { HistoryGrouping } from '../../../shared/models';
 
 import { formatDate } from '../../../shared/utils/date.utils';
-import { getGraphData, getPaddedGraphData } from './graph-data.utils';
+import { getGraphData, getPaddedGraphData, getSortedGraphData } from './graph-data.utils';
 
 describe('Graph Data Utils', () => {
   describe('getPaddedGraphData', () => {
@@ -91,6 +91,28 @@ describe('Graph Data Utils', () => {
         }, {
           name: formatDate(addDays(start, 4)),
           value: 4
+        }]);
+      });
+    });
+  });
+
+  describe('getSortedGraphData', () => {
+    it('Should return nothing when no data in range', () => {
+      const result = getSortedGraphData(Observable.of([]), Observable.of(dateRange));
+      result.subscribe(res => {
+        expect(res.length).toBe(0);
+      });
+    });
+
+    it('Should return correct data when in range', () => {
+      const result = getSortedGraphData(Observable.of(testGroupings), Observable.of(dateRange));
+      result.subscribe(res => {
+        expect(res).toEqual([{
+          name: formatDate(addDays(start, 4)),
+          value: 4
+        }, {
+          name: formatDate(start),
+          value: 1
         }]);
       });
     });
