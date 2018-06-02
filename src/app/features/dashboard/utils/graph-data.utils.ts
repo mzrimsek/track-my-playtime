@@ -8,30 +8,27 @@ import { mapToGraphData, padDateGraphData, sortGraphDataByValue } from './graph.
 
 type GraphDataModifier = (items: GraphDataItem[], dates: Date[]) => GraphDataItem[];
 
-export const getPaddedGraphData =
-  (groupings: Observable<HistoryGrouping[]>, dateRange: Observable<Date[]>): Observable<GraphDataItem[]> => {
-    const modifier: GraphDataModifier = (items: GraphDataItem[], dates: Date[]) => {
-      const reversed = items.reverse();
-      return padDateGraphData(reversed, dates);
-    };
-    return processGraphData(groupings, dateRange, modifier);
-  };
-
 export const getGraphData =
-  (groupings: Observable<HistoryGrouping[]>, dateRange: Observable<Date[]>): Observable<GraphDataItem[]> => {
-    return processGraphData(groupings, dateRange, x => x);
-  };
-
-export const getSortedGraphData =
-  (groupings: Observable<HistoryGrouping[]>, dateRange: Observable<Date[]>): Observable<GraphDataItem[]> => {
-    return processGraphData(groupings, dateRange, sortGraphDataByValue);
-  };
-
-const processGraphData =
-  (groupings: Observable<HistoryGrouping[]>, dateRange: Observable<Date[]>, modifier: GraphDataModifier): Observable<GraphDataItem[]> => {
+  (groupings: Observable<HistoryGrouping[]>,
+    dateRange: Observable<Date[]>,
+    modifier: GraphDataModifier = x => x): Observable<GraphDataItem[]> => {
     return groupings.combineLatest(dateRange, (groups, dates) => {
       const groupingsToGraph = filterGroupingsByDateRange(groups, dates);
       const graphItems = mapToGraphData(groupingsToGraph);
       return modifier(graphItems, dates);
     });
+  };
+
+export const getPaddedGraphData =
+  (groupings: Observable<HistoryGrouping[]>, dateRange: Observable<Date[]>): Observable<GraphDataItem[]> => {
+    const modifier: GraphDataModifier = (items, dates) => {
+      const reversed = items.reverse();
+      return padDateGraphData(reversed, dates);
+    };
+    return getGraphData(groupings, dateRange, modifier);
+  };
+
+export const getSortedGraphData =
+  (groupings: Observable<HistoryGrouping[]>, dateRange: Observable<Date[]>): Observable<GraphDataItem[]> => {
+    return getGraphData(groupings, dateRange, sortGraphDataByValue);
   };
