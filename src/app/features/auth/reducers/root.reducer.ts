@@ -12,7 +12,7 @@ export interface State {
   auth: AuthState;
 }
 
-export const reducers: ActionReducerMap<AuthState> = {
+export const reducers: ActionReducerMap<AuthState, any> = {
   user: fromUser.reducer
 };
 

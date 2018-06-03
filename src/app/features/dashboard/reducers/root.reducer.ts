@@ -12,7 +12,7 @@ export interface State {
   dashboard: DashboardState;
 }
 
-export const reducers: ActionReducerMap<DashboardState> = {
+export const reducers: ActionReducerMap<DashboardState, any> = {
   dateRange: fromDateRange.reducer
 };
 
