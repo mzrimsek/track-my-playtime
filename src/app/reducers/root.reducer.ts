@@ -10,7 +10,7 @@ export interface State {
   error: fromError.State;
 }
 
-export const reducers: ActionReducerMap<State> = {
+export const reducers: ActionReducerMap<State, any> = {
   router: fromRouter.routerReducer,
   error: fromError.reducer
 };

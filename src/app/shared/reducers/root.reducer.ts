@@ -15,7 +15,7 @@ export interface State {
   shared: SharedState;
 }
 
-export const reducers: ActionReducerMap<SharedState> = {
+export const reducers: ActionReducerMap<SharedState, any> = {
   history: fromHistory.reducer
 };
 
