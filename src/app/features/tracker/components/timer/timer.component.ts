@@ -31,11 +31,11 @@ export class TimerComponent implements OnInit {
     stop: faStopCircle,
     cancel: faBan
   };
-  constructor(private store: Store<State>, private userService: UserService, private timerService: TimerService) {
+  constructor(private store: Store<State>, private userService: UserService, private timerService: TimerService) { }
+
+  ngOnInit() {
     this.userId = this.userService.getUser().uid;
   }
-
-  ngOnInit() { }
 
   startTimer() {
     this.store.dispatch(new actions.SetStartTime(this.getNowTime()));

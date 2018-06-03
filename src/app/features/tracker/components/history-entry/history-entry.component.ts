@@ -31,11 +31,11 @@ export class HistoryEntryComponent implements OnInit {
   icons = {
     remove: faTrash
   };
-  constructor(private store: Store<State>, private userService: UserService) {
+  constructor(private store: Store<State>, private userService: UserService) { }
+
+  ngOnInit() {
     this.userId = this.userService.getUser().uid;
   }
-
-  ngOnInit() { }
 
   updateGame() {
     if (this.game) {
