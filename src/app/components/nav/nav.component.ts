@@ -52,11 +52,11 @@ export class NavComponent implements OnInit {
     menu: faBars,
     close: faTimes
   };
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService) { }
+
+  ngOnInit() {
     this.user = this.userService.getUser();
   }
-
-  ngOnInit() { }
 
   logout() {
     this.userService.logout();
