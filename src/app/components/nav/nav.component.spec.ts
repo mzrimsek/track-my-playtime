@@ -79,6 +79,12 @@ describe('NavComponent', () => {
     expect(href).toBe('/app/library');
   }));
 
+  it('Should have nav completion link with correct href', async(() => {
+    const navCompletionLink = fixture.debugElement.query(By.css('#navCompletionLink'));
+    const href = navCompletionLink.nativeElement.getAttribute('href');
+    expect(href).toBe('/app/completion');
+  }));
+
   it('Should dispatch Logout on logout button click', async(() => {
     const action = new userActions.Logout();
     const button = fixture.nativeElement.querySelector('#logoutButton');

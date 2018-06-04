@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { LoginComponent } from './features/auth/components/login/login.component';
+import { CompletionComponent } from './features/completion/completion.component';
 import { DashboardComponent } from './features/dashboard/dashboard.component';
 import { HomeComponent } from './features/home/home.component';
 import { LibraryComponent } from './features/library/library.component';
@@ -33,6 +34,10 @@ const routes: Routes = [
       {
         path: 'library',
         component: LibraryComponent
+      },
+      {
+        path: 'completion',
+        component: CompletionComponent
       },
       {
         path: '**',
