@@ -17,7 +17,7 @@ before_script:
   - npm install -g  --silent @angular/cli
 
 script:
-  - ng test --single-run
+  - ng test --watch=false
   - if [ "$TRAVIS_BRANCH" == "master" ]; then ng build --prod; fi
   - if [ "$TRAVIS_BRANCH" != "master" ]; then ng build; fi
 
