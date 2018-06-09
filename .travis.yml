@@ -15,7 +15,6 @@ before_install:
 
 before_script:
   - npm install -g @angular/cli
-  - npm install -g codecov
   - npm install coveralls
 
 script:
@@ -25,7 +24,6 @@ script:
   - if [ "$TRAVIS_BRANCH" != "master" ]; then ng build; fi
 
 after_script:
-  - codecov
   - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
 
 deploy:
