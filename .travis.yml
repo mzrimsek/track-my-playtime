@@ -26,7 +26,7 @@ script:
 
 after_script:
   - codecov
-  - cat ./coverage/coverage.lcov | ./node_modules/coveralls/bin/coveralls.js
+  - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
 
 deploy:
   - provider: firebase
