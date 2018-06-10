@@ -14,12 +14,17 @@ before_install:
  - sudo dpkg -i google-chrome*.deb
 
 before_script:
-  - npm install -g  --silent @angular/cli
+  - npm install -g @angular/cli
+  - npm install coveralls
 
 script:
-  - ng test --single-run
-  - if [ "$TRAVIS_BRANCH" == "master" ]; then ng build --prod; fi
+  - ng test --watch=false --code-coverage
+  - ng e2e
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then ng build --prod --aot; fi
   - if [ "$TRAVIS_BRANCH" != "master" ]; then ng build; fi
+
+after_script:
+  - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
 
 deploy:
   - provider: firebase
