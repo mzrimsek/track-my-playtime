@@ -28,3 +28,5 @@ export interface UpdateHistoryItemTimesPayload {
   startTime: number;
   endTime: number;
 }
+
+export type UpdatePayload = UpdateHistoryItemGamePayload | UpdateHistoryItemPlatformPayload | UpdateHistoryItemTimesPayload;

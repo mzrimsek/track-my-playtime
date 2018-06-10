@@ -4,9 +4,7 @@ import { tassign } from 'tassign';
 
 import * as actions from '../actions/history.actions';
 
-import {
-    UpdateHistoryItemGamePayload, UpdateHistoryItemPlatformPayload, UpdateHistoryItemTimesPayload
-} from '../models';
+import { UpdatePayload } from '../models';
 
 export interface HistoryEntity {
   id: string;
@@ -20,7 +18,6 @@ export interface State extends EntityState<HistoryEntity> {
   loading: boolean;
 }
 
-export type UpdatePayload = UpdateHistoryItemGamePayload | UpdateHistoryItemPlatformPayload | UpdateHistoryItemTimesPayload;
 const getUpdatedState = (payload: UpdatePayload, currentState: State): State => {
   const { itemId: id, ...changes } = payload;
   return adapter.updateOne({
