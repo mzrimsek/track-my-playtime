@@ -16,7 +16,7 @@ export interface State {
   tracker: TrackerState;
 }
 
-export const reducers: ActionReducerMap<TrackerState> = {
+export const reducers: ActionReducerMap<TrackerState, any> = {
   timer: fromTimer.reducer,
   platforms: fromPlatforms.reducer,
   display: fromDisplay.reducer
