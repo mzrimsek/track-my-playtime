@@ -7,8 +7,8 @@ describe('track-my-playtime App', () => {
     page = new AppPage();
   });
 
-  it('should display welcome message', () => {
+  it('Should display tagline message', () => {
     page.navigateTo();
-    expect(page.getWelcomeMessage()).toEqual('GAME TIME TRACKING MADE SIMPLE');
+    expect(page.getTaglineMessage()).toEqual('GAME TIME TRACKING MADE SIMPLE');
   });
 });
