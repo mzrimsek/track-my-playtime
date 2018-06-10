@@ -24,7 +24,7 @@ script:
   - if [ "$TRAVIS_BRANCH" != "master" ]; then ng build; fi
 
 after_script:
-  - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
+  - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage
 
 deploy:
   - provider: firebase
