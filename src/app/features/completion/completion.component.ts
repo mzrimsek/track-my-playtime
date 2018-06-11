@@ -6,6 +6,8 @@ import { Observable } from 'rxjs/Observable';
 
 import sharedSelectors, { State as SharedState } from '../../shared/reducers/root.reducer';
 
+import { HistoryGrouping } from '../../shared/models';
+
 @Component({
   selector: 'app-completion',
   templateUrl: './completion.component.html',
@@ -13,12 +15,10 @@ import sharedSelectors, { State as SharedState } from '../../shared/reducers/roo
 })
 export class CompletionComponent implements OnInit {
 
-  trackedGames$: Observable<string[]>;
-  platformsOptions$: Observable<string[]>;
+  historyItems$: Observable<HistoryGrouping[]>;
   constructor(private sharedStore: Store<SharedState>) { }
 
   ngOnInit() {
-    this.trackedGames$ = this.sharedStore.select(sharedSelectors.historyTrackedGames);
-    this.platformsOptions$ = this.sharedStore.select(sharedSelectors.platformsOptions);
+    this.historyItems$ = this.sharedStore.select(sharedSelectors.historyGroupingsByGame);
   }
 }

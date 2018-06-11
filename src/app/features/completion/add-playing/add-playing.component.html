@@ -4,9 +4,9 @@
   <div class="game">
     <ng-select data-tracking-category="addPlayingGame"
                placeholder="Game"
-               [items]="trackedGames"
-               [addTag]="true"
-               [(ngModel)]="info.game"></ng-select>
+               [items]="getGames()"
+               [(ngModel)]="info.game"
+               (change)="setPlatforms()"></ng-select>
   </div>
 
   <div class="platform">
@@ -14,7 +14,7 @@
             #platformEl
             [value]="info.platform">
       <option value="">Platform</option>
-      <option *ngFor="let option of platformsOptions"
+      <option *ngFor="let option of platforms"
               value="{{ option }}">{{ option }}</option>
     </select>
   </div>

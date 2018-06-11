@@ -17,11 +17,6 @@ describe('AddPlayingComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(AddPlayingComponent);
     component = fixture.componentInstance;
-    component.info = {
-      game: '',
-      platform: '',
-      startTime: 0
-    };
     fixture.detectChanges();
   });
 
