@@ -1,6 +1,6 @@
 import * as actions from '../actions/platforms.actions';
 
-import { reducer, State } from './platforms.reducer';
+import { reducer, State } from '../reducers/platforms.reducer';
 
 describe('Platforms Reducer', () => {
   it('Should set options when LoadOptionsSucceeded is dispatched', () => {

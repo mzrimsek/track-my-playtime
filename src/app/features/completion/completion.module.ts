@@ -12,6 +12,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { CompletionComponent } from './completion.component';
 import { CompletedComponent } from './components/completed/completed.component';
 import { PlayingComponent } from './components/playing/playing.component';
+import { AddPlayingComponent } from './add-playing/add-playing.component';
 
 @NgModule({
   imports: [
@@ -23,6 +24,6 @@ import { PlayingComponent } from './components/playing/playing.component';
     OwlNativeDateTimeModule,
     SharedModule
   ],
-  declarations: [CompletionComponent, CompletedComponent, PlayingComponent]
+  declarations: [CompletionComponent, CompletedComponent, PlayingComponent, AddPlayingComponent]
 })
 export class CompletionModule { }

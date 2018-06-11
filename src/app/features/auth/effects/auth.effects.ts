@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 
 import { Actions, Effect } from '@ngrx/effects';
 
-import * as platformsActions from '../../../features/tracker/actions/platforms.actions';
 import * as timerActions from '../../../features/tracker/actions/timer.actions';
 import * as historyActions from '../../../shared/actions/history.actions';
+import * as platformsActions from '../../../shared/actions/platforms.actions';
 import * as userActions from '../../auth/actions/user.actions';
 
 @Injectable()

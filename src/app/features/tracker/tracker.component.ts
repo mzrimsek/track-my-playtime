@@ -36,7 +36,6 @@ export class TrackerComponent implements OnInit {
   ngOnInit() {
     this.timerInfo$ = this.trackerStore.select(trackerSelectors.timerInfo);
     this.currentTime$ = this.clockService.getCurrentTime();
-    this.platformsOptions$ = this.trackerStore.select(trackerSelectors.platformsOptions);
     this.game$ = this.timerInfo$.map(info => info.game ? info.game : null);
 
     const historyGroupings = this.sharedStore.select(sharedSelectors.historyGroupingsByDate);
@@ -48,5 +47,6 @@ export class TrackerComponent implements OnInit {
     this.showLoadMoreButton$ = hasMoreToDisplay(historyGroupings, filteredGroupings);
 
     this.trackedGames$ = this.sharedStore.select(sharedSelectors.historyTrackedGames);
+    this.platformsOptions$ = this.sharedStore.select(sharedSelectors.platformsOptions);
   }
 }

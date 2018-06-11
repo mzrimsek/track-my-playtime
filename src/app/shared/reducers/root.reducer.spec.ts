@@ -1,10 +1,11 @@
 import { addDays, addHours } from 'date-fns';
 
+import { State as PlatformsState } from '../reducers/platforms.reducer';
 import { HistoryEntity, State as HistoryState } from './history.reducer';
 import {
     _selectHistoryGroupingsByDate, _selectHistoryGroupingsByGame, _selectHistoryGroupingsByPlatform,
-    _selectHistoryItems, _selectHistoryLoading, _selectSortedHistoryItems, _selectTrackedGames,
-    SharedState, State
+    _selectHistoryItems, _selectHistoryLoading, _selectPlatformsOptions, _selectSortedHistoryItems,
+    _selectTrackedGames, SharedState, State
 } from './root.reducer';
 
 import { formatDate } from '../utils/date.utils';
@@ -15,6 +16,7 @@ describe('Shared Root Reducer', () => {
       it('Should return an empty list when there are no items', () => {
         const sharedState: SharedState = {
           history: getHistoryInitialState(),
+          platforms: getPlatformsInitialState()
         };
         const state: State = { shared: sharedState };
 
@@ -45,7 +47,8 @@ describe('Shared Root Reducer', () => {
           loading: false
         };
         const sharedState: SharedState = {
-          history
+          history,
+          platforms: getPlatformsInitialState()
         };
         const state: State = { shared: sharedState };
 
@@ -82,7 +85,8 @@ describe('Shared Root Reducer', () => {
           loading: false
         };
         const sharedState: SharedState = {
-          history
+          history,
+          platforms: getPlatformsInitialState()
         };
         const state: State = { shared: sharedState };
 
@@ -130,7 +134,8 @@ describe('Shared Root Reducer', () => {
           loading: false
         };
         const sharedState: SharedState = {
-          history
+          history,
+          platforms: getPlatformsInitialState()
         };
         const state: State = { shared: sharedState };
 
@@ -186,7 +191,8 @@ describe('Shared Root Reducer', () => {
           loading: false
         };
         const sharedState: SharedState = {
-          history
+          history,
+          platforms: getPlatformsInitialState()
         };
         const state: State = { shared: sharedState };
 
@@ -256,7 +262,8 @@ describe('Shared Root Reducer', () => {
           loading: false
         };
         const sharedState: SharedState = {
-          history
+          history,
+          platforms: getPlatformsInitialState()
         };
         const state: State = { shared: sharedState };
 
@@ -326,7 +333,8 @@ describe('Shared Root Reducer', () => {
           loading: false
         };
         const sharedState: SharedState = {
-          history
+          history,
+          platforms: getPlatformsInitialState()
         };
         const state: State = { shared: sharedState };
 
@@ -369,7 +377,8 @@ describe('Shared Root Reducer', () => {
             ids: [],
             entities: {},
             loading: true
-          }
+          },
+          platforms: getPlatformsInitialState()
         };
         const state: State = { shared: sharedState };
 
@@ -384,7 +393,8 @@ describe('Shared Root Reducer', () => {
             ids: [],
             entities: {},
             loading: false
-          }
+          },
+          platforms: getPlatformsInitialState()
         };
         const state: State = { shared: sharedState };
 
@@ -427,13 +437,33 @@ describe('Shared Root Reducer', () => {
           loading: false
         };
         const sharedState: SharedState = {
-          history
+          history,
+          platforms: getPlatformsInitialState()
         };
         const state: State = { shared: sharedState };
 
         const result = _selectTrackedGames(state);
 
         expect(result).toEqual(['some other game', 'some game']);
+      });
+    });
+  });
+
+  describe('Platforms State Selectors', () => {
+    describe('_selectPlatformsOptions', () => {
+      it('Should return the platforms options', () => {
+        const options = ['Game Box 720', 'Nipkendo Scratch', 'Dudestation 69'];
+        const sharedState: SharedState = {
+          history: getHistoryInitialState(),
+          platforms: {
+            options
+          },
+        };
+        const state: State = { shared: sharedState };
+
+        const result = _selectPlatformsOptions(state);
+
+        expect(result).toEqual(options);
       });
     });
   });
@@ -444,5 +474,11 @@ const getHistoryInitialState = (): HistoryState => {
     ids: [],
     entities: {},
     loading: false
+  };
+};
+
+const getPlatformsInitialState = (): PlatformsState => {
+  return {
+    options: []
   };
 };

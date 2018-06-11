@@ -60,7 +60,7 @@ describe('Tracker Component', () => {
   });
 
   it('Should select platforms options', () => {
-    expect(store.select).toHaveBeenCalledWith(fromTracker._selectPlatformsOptions);
+    expect(store.select).toHaveBeenCalledWith(fromShared._selectPlatformsOptions);
   });
 
   it('Should select history groupings by date', () => {

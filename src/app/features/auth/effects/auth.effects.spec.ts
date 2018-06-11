@@ -6,9 +6,9 @@ import { cold, hot } from 'jasmine-marbles';
 
 import { AuthEffects } from './auth.effects';
 
-import * as platformsActions from '../../../features/tracker/actions/platforms.actions';
 import * as timerActions from '../../../features/tracker/actions/timer.actions';
 import * as historyActions from '../../../shared/actions/history.actions';
+import * as platformsActions from '../../../shared/actions/platforms.actions';
 import * as userActions from '../actions/user.actions';
 
 import '../../../rxjs-operators';

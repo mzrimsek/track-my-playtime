@@ -1,6 +1,7 @@
 import { ActionReducerMap, createFeatureSelector, createSelector } from '@ngrx/store';
 
 import * as fromHistory from './history.reducer';
+import * as fromPlatforms from './platforms.reducer';
 
 import { HistoryListItem } from '../models';
 
@@ -9,6 +10,7 @@ import { getHistoryGroupingList, getHistoryListItemsMap } from '../utils/history
 
 export interface SharedState {
   history: fromHistory.State;
+  platforms: fromPlatforms.State;
 }
 
 export interface State {
@@ -16,11 +18,13 @@ export interface State {
 }
 
 export const reducers: ActionReducerMap<SharedState, any> = {
-  history: fromHistory.reducer
+  history: fromHistory.reducer,
+  platforms: fromPlatforms.reducer
 };
 
 export const _selectSharedState = createFeatureSelector<SharedState>('shared');
 export const _selectHistory = createSelector(_selectSharedState, state => state.history);
+export const _selectPlatforms = createSelector(_selectSharedState, state => state.platforms);
 
 export const { selectAll: _selectAllHistory } = fromHistory.adapter.getSelectors(_selectHistory);
 export const _selectHistoryItems = createSelector(_selectAllHistory,
@@ -51,12 +55,15 @@ export const _selectTrackedGames = createSelector(_selectSortedHistoryItems, ite
   return Array.from(new Set(games));
 });
 
+export const _selectPlatformsOptions = createSelector(_selectPlatforms, platforms => platforms.options);
+
 const sharedSelectors = {
   historyGroupingsByDate: _selectHistoryGroupingsByDate,
   historyGroupingsByPlatform: _selectHistoryGroupingsByPlatform,
   historyGroupingsByGame: _selectHistoryGroupingsByGame,
   historyLoading: _selectHistoryLoading,
-  historyTrackedGames: _selectTrackedGames
+  historyTrackedGames: _selectTrackedGames,
+  platformsOptions: _selectPlatformsOptions
 };
 
 export default sharedSelectors;

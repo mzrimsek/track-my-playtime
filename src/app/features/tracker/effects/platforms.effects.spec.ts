@@ -11,7 +11,7 @@ import { PlatformsEffects } from './platforms.effects';
 import { PlatformsService } from '../services/platforms.service';
 
 import * as appActions from '../../../actions/app.actions';
-import * as platformsActions from '../actions/platforms.actions';
+import * as platformsActions from '../../../shared/actions/platforms.actions';
 
 import '../../../rxjs-operators';
 

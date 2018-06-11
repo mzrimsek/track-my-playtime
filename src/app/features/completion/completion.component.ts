@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Store } from '@ngrx/store';
+
+import { Observable } from 'rxjs/Observable';
+
+import sharedSelectors, { State as SharedState } from '../../shared/reducers/root.reducer';
+
 @Component({
   selector: 'app-completion',
   templateUrl: './completion.component.html',
@@ -7,7 +13,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CompletionComponent implements OnInit {
 
-  constructor() { }
+  trackedGames$: Observable<string[]>;
+  platformsOptions$: Observable<string[]>;
+  constructor(private sharedStore: Store<SharedState>) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.trackedGames$ = this.sharedStore.select(sharedSelectors.historyTrackedGames);
+    this.platformsOptions$ = this.sharedStore.select(sharedSelectors.platformsOptions);
+  }
 }

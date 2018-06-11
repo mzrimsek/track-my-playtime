@@ -3,6 +3,8 @@
     Completion
 
     <div class="games">
+      <app-completion-add-playing [trackedGames]="trackedGames$ | async"
+                                  [platformsOptions]="platformsOptions$ | async"></app-completion-add-playing>
       <div class="playing drop-shadow">
         <app-completion-playing></app-completion-playing>
       </div>

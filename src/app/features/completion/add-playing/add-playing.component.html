@@ -1,0 +1,30 @@
+<div class="add-playing drop-shadow">
+  Add Game to Playing
+
+  <div class="game">
+    <ng-select data-tracking-category="addPlayingGame"
+               placeholder="Game"
+               [items]="trackedGames"
+               [addTag]="true"
+               [(ngModel)]="info.game"></ng-select>
+  </div>
+
+  <div class="platform">
+    <select data-tracking-category="addPlayingPlatform"
+            #platformEl
+            [value]="info.platform">
+      <option value="">Platform</option>
+      <option *ngFor="let option of platformsOptions"
+              value="{{ option }}">{{ option }}</option>
+    </select>
+  </div>
+
+  <div class="date-time-picker">
+    <input #startTimeEl
+           [owlDateTime]="startTimeDT"
+           [owlDateTimeTrigger]="startTimeDT"
+           [(ngModel)]="info.startTime">
+    <owl-date-time #startTimeDT
+                   [pickerType]="'calendar'"></owl-date-time>
+  </div>
+</div>

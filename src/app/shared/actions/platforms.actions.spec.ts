@@ -1,4 +1,4 @@
-import * as actions from './platforms.actions';
+import * as actions from '../actions/platforms.actions';
 
 describe('Platforms Actions', () => {
   describe('LoadOptions', () => {
