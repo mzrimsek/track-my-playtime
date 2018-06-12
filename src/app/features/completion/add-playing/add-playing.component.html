@@ -23,7 +23,7 @@
     <select data-tracking-category="addPlayingStarttime"
             #platformEl
             [value]="info.startTime">
-      <option value="">Start Date</option>
+      <option value="">Start Time</option>
       <option *ngFor="let option of dates"
               value="{{ option }}">{{ option | date:'M/d/y hh:mm a' }}</option>
     </select>
