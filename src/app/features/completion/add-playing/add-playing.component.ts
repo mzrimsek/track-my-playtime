@@ -13,6 +13,7 @@ export class AddPlayingComponent implements OnInit {
 
   @Input() gameGroupings: HistoryGrouping[] = [];
   platforms: string[] = [];
+  dates: number[] = [];
   info: AddPlayingGame = {
     game: '',
     platform: '',
@@ -26,13 +27,17 @@ export class AddPlayingComponent implements OnInit {
     return this.gameGroupings.map(item => item.key);
   }
 
-  setPlatforms() {
+  updateSelection() {
     const groupingForSelectedGame = this.gameGroupings.find(grouping => grouping.key === this.info.game);
     if (groupingForSelectedGame) {
       const platformsForSelectedGame = groupingForSelectedGame.historyItems.map(item => item.platform);
       this.platforms = Array.from(new Set(platformsForSelectedGame));
+
+      const datesForSelectedGame = groupingForSelectedGame.historyItems.map(item => item.startTime);
+      this.dates = Array.from(new Set(datesForSelectedGame)).reverse();
     } else {
       this.platforms = [];
+      this.dates = [];
     }
   }
 }
