@@ -6,7 +6,9 @@ import * as fromPlatforms from './platforms.reducer';
 import { HistoryListItem } from '../models';
 
 import { formatDate } from '../utils/date.utils';
-import { getHistoryGroupingList, getHistoryListItemsMap } from '../utils/history.utils';
+import {
+    getHistoryGroupingList, getHistoryListItemsMap, getUniqueFrom
+} from '../utils/history.utils';
 
 export interface SharedState {
   history: fromHistory.State;
@@ -50,10 +52,7 @@ export const _selectHistoryGroupingsByGame = createSelector(_selectSortedHistory
   return getHistoryGroupingList(historyListItemsMap);
 });
 export const _selectHistoryLoading = createSelector(_selectHistory, history => history.loading);
-export const _selectTrackedGames = createSelector(_selectSortedHistoryItems, items => {
-  const games = items.map(item => item.game);
-  return Array.from(new Set(games));
-});
+export const _selectTrackedGames = createSelector(_selectSortedHistoryItems, items => getUniqueFrom(items, item => item.game));
 
 export const _selectPlatformsOptions = createSelector(_selectPlatforms, platforms => platforms.options);
 

@@ -3,7 +3,7 @@ import { addDays, eachDay, subDays } from 'date-fns';
 import { HistoryGrouping, HistoryListItem } from '../models';
 
 import {
-    filterGroupingsByDateRange, getHistoryGroupingList, getHistoryListItemsMap
+    filterGroupingsByDateRange, getHistoryGroupingList, getHistoryListItemsMap, getUniqueFrom
 } from './history.utils';
 
 describe('History Utils', () => {
@@ -17,9 +17,9 @@ describe('History Utils', () => {
     it('Can map a list of items with same key', () => {
       const game = 'Awesome Game';
       const items = [
-        getHistoryListItem(game),
-        getHistoryListItem(game),
-        getHistoryListItem(game)
+        getHistoryListItem(game, ''),
+        getHistoryListItem(game, ''),
+        getHistoryListItem(game, '')
       ];
 
       const result = getHistoryListItemsMap(items, item => item.game);
@@ -34,9 +34,9 @@ describe('History Utils', () => {
       const game1 = 'Awesome Game';
       const game2 = game1 + '2';
       const items = [
-        getHistoryListItem(game1),
-        getHistoryListItem(game1),
-        getHistoryListItem(game2)
+        getHistoryListItem(game1, ''),
+        getHistoryListItem(game1, ''),
+        getHistoryListItem(game2, '')
       ];
 
       const result = getHistoryListItemsMap(items, item => item.game);
@@ -64,8 +64,8 @@ describe('History Utils', () => {
     it('Should return a list with same length as the map size', () => {
       const game = 'Awesome Game';
       const items = [
-        getHistoryListItem(game),
-        getHistoryListItem(game + '2')
+        getHistoryListItem(game, ''),
+        getHistoryListItem(game + '2', '')
       ];
       const map = getHistoryListItemsMap(items, item => item.game);
 
@@ -78,7 +78,7 @@ describe('History Utils', () => {
       it('Should set the key', () => {
         const game = 'Awesome Game';
         const items = [
-          getHistoryListItem(game)
+          getHistoryListItem(game, '')
         ];
         const map = getHistoryListItemsMap(items, item => item.game);
 
@@ -91,8 +91,8 @@ describe('History Utils', () => {
         const game = 'Awesome Game';
         const now = new Date().getTime();
         const items = [
-          getHistoryListItem(game, now, now + (30 * 1000)),
-          getHistoryListItem(game, now, now + (60 * 1000))
+          getHistoryListItem(game, '', now, now + (30 * 1000)),
+          getHistoryListItem(game, '', now, now + (60 * 1000))
         ];
         const map = getHistoryListItemsMap(items, item => item.game);
 
@@ -104,8 +104,8 @@ describe('History Utils', () => {
       it('Should set the history items', () => {
         const game = 'Awesome Game';
         const items = [
-          getHistoryListItem(game),
-          getHistoryListItem(game)
+          getHistoryListItem(game, ''),
+          getHistoryListItem(game, '')
         ];
         const map = getHistoryListItemsMap(items, item => item.game);
 
@@ -128,45 +128,17 @@ describe('History Utils', () => {
     it('Should filter history items outside of date range', () => {
       const grouping = getHistoryGrouping(game, 0);
       grouping.historyItems = [{
-        id: 'some id 4',
-        game,
-        platform: 'some platform',
-        startTime: outOfRangeAhead.getTime(),
-        endTime: outOfRangeAhead.getTime(),
-        dateRange: [
-          outOfRangeAhead,
-          outOfRangeAhead
-        ]
+        ...getHistoryListItem(game, 'some platform', outOfRangeAhead.getTime(), outOfRangeAhead.getTime()),
+        id: 'some id 4'
       }, {
-        id: 'some id 3',
-        game,
-        platform: 'some platform',
-        startTime: inRange.getTime(),
-        endTime: inRange.getTime(),
-        dateRange: [
-          inRange,
-          inRange
-        ]
+        ...getHistoryListItem(game, 'some platform', inRange.getTime(), inRange.getTime()),
+        id: 'some id 3'
       }, {
-        id: 'some id 2',
-        game,
-        platform: 'some platform',
-        startTime: start.getTime(),
-        endTime: start.getTime(),
-        dateRange: [
-          start,
-          start
-        ]
+        ...getHistoryListItem(game, 'some platform', start.getTime(), start.getTime()),
+        id: 'some id 2'
       }, {
-        id: 'some id',
-        game,
-        platform: 'some other platform',
-        startTime: outOfRangeBehind.getTime(),
-        endTime: outOfRangeBehind.getTime(),
-        dateRange: [
-          outOfRangeBehind,
-          outOfRangeBehind
-        ]
+        ...getHistoryListItem(game, 'some platform', outOfRangeBehind.getTime(), outOfRangeBehind.getTime()),
+        id: 'some id'
       }];
 
       const result = filterGroupingsByDateRange([grouping], range);
@@ -201,45 +173,17 @@ describe('History Utils', () => {
     it('Should update total time', () => {
       const grouping = getHistoryGrouping(game, 7000);
       grouping.historyItems = [{
-        id: 'some id 4',
-        game,
-        platform: 'some platform',
-        startTime: outOfRangeAhead.getTime(),
-        endTime: outOfRangeAhead.getTime() + 2000,
-        dateRange: [
-          outOfRangeAhead,
-          new Date(outOfRangeAhead.getTime() + 2000)
-        ]
+        ...getHistoryListItem(game, 'some platform', outOfRangeAhead.getTime(), outOfRangeAhead.getTime() + 2000),
+        id: 'some id 4'
       }, {
-        id: 'some id 3',
-        game,
-        platform: 'some platform',
-        startTime: inRange.getTime(),
-        endTime: inRange.getTime() + 1000,
-        dateRange: [
-          inRange,
-          new Date(inRange.getTime() + 1000)
-        ]
+        ...getHistoryListItem(game, 'some platform', inRange.getTime(), inRange.getTime() + 1000),
+        id: 'some id 3'
       }, {
-        id: 'some id 2',
-        game,
-        platform: 'some platform',
-        startTime: start.getTime(),
-        endTime: start.getTime() + 1000,
-        dateRange: [
-          start,
-          new Date(start.getTime() + 1000)
-        ]
+        ...getHistoryListItem(game, 'some platform', start.getTime(), start.getTime() + 1000),
+        id: 'some id 2'
       }, {
-        id: 'some id',
-        game,
-        platform: 'some other platform',
-        startTime: outOfRangeBehind.getTime(),
-        endTime: outOfRangeBehind.getTime() + 3000,
-        dateRange: [
-          outOfRangeBehind,
-          new Date(outOfRangeBehind.getTime() + 3000)
-        ]
+        ...getHistoryListItem(game, 'some platform', outOfRangeBehind.getTime(), outOfRangeBehind.getTime() + 3000),
+        id: 'some id'
       }];
 
       const result = filterGroupingsByDateRange([grouping], range);
@@ -271,18 +215,42 @@ describe('History Utils', () => {
       }]);
     });
   });
+
+  describe('getUniqueFrom', () => {
+    it('Should return list of unique games', () => {
+      const items: HistoryListItem[] = [
+        getHistoryListItem('Game 3', ''),
+        getHistoryListItem('Game 1', ''),
+        getHistoryListItem('Game 1', ''),
+        getHistoryListItem('Game 2', '')
+      ];
+      const result = getUniqueFrom(items, item => item.game);
+      expect(result).toEqual(['Game 3', 'Game 1', 'Game 2']);
+    });
+
+    it('Should return list of unique games', () => {
+      const items: HistoryListItem[] = [
+        getHistoryListItem('', 'Platform 1'),
+        getHistoryListItem('', 'Platform 3'),
+        getHistoryListItem('', 'Platform 2'),
+        getHistoryListItem('', 'Platform 3')
+      ];
+      const result = getUniqueFrom(items, item => item.platform);
+      expect(result).toEqual(['Platform 1', 'Platform 3', 'Platform 2']);
+    });
+  });
 });
 
-const getHistoryListItem = (game: string, startTime = 0, endTime = 0): HistoryListItem => {
+function getHistoryListItem(game: string, platform: string, startTime = 0, endTime = 0): HistoryListItem {
   return <HistoryListItem>{
     id: 'totally a unique id',
     game,
-    platform: 'the best platform ever',
+    platform,
     startTime,
     endTime,
     dateRange: [new Date(startTime), new Date(endTime)]
   };
-};
+}
 
 const getHistoryGrouping = (key: string, totalTime: number): HistoryGrouping => {
   return {

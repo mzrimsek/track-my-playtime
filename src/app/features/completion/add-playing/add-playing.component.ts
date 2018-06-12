@@ -3,6 +3,8 @@ import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core
 import { HistoryGrouping } from '../../../shared/models';
 import { AddPlayingGame } from '../models';
 
+import { getUniqueFrom } from '../../../shared/utils/history.utils';
+
 @Component({
   selector: 'app-completion-add-playing',
   templateUrl: './add-playing.component.html',
@@ -29,15 +31,7 @@ export class AddPlayingComponent implements OnInit {
 
   updateSelection() {
     const groupingForSelectedGame = this.gameGroupings.find(grouping => grouping.key === this.info.game);
-    if (groupingForSelectedGame) {
-      const platformsForSelectedGame = groupingForSelectedGame.historyItems.map(item => item.platform);
-      this.platforms = Array.from(new Set(platformsForSelectedGame));
-
-      const datesForSelectedGame = groupingForSelectedGame.historyItems.map(item => item.startTime);
-      this.dates = Array.from(new Set(datesForSelectedGame)).reverse();
-    } else {
-      this.platforms = [];
-      this.dates = [];
-    }
+    this.platforms = groupingForSelectedGame ? getUniqueFrom(groupingForSelectedGame.historyItems, item => item.platform) : [];
+    this.dates = groupingForSelectedGame ? groupingForSelectedGame.historyItems.map(item => item.startTime).reverse() : [];
   }
 }
