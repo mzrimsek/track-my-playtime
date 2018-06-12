@@ -31,6 +31,8 @@ export class AddPlayingComponent implements OnInit {
     if (groupingForSelectedGame) {
       const platformsForSelectedGame = groupingForSelectedGame.historyItems.map(item => item.platform);
       this.platforms = Array.from(new Set(platformsForSelectedGame));
+    } else {
+      this.platforms = [];
     }
   }
 }
