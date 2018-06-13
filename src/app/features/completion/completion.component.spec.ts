@@ -3,10 +3,11 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { combineReducers, StoreModule } from '@ngrx/store';
 
-import { CompletionComponent } from './completion.component'; 
+import { CompletionComponent } from './completion.component';
 
 import * as fromRoot from '../../reducers/root.reducer';
 import * as fromShared from '../../shared/reducers/root.reducer';
+import * as fromCompletion from './reducers/root.reducer';
 
 describe('CompletionComponent', () => {
   let component: CompletionComponent;
@@ -18,7 +19,8 @@ describe('CompletionComponent', () => {
       imports: [
         StoreModule.forRoot({
           ...fromRoot.reducers,
-          'shared': combineReducers(fromShared.reducers)
+          'shared': combineReducers(fromShared.reducers),
+          'completion': combineReducers(fromCompletion.reducers)
         })
       ],
       schemas: [NO_ERRORS_SCHEMA]
@@ -29,7 +31,7 @@ describe('CompletionComponent', () => {
     fixture.detectChanges();
   }));
 
-  it('should create the component', () => {
+  it('Should create the component', () => {
     expect(component).toBeTruthy();
   });
 });

@@ -1,18 +1,18 @@
 <div class="add-playing drop-shadow">
-  Add Game to Playing
-
   <div class="game">
     <ng-select data-tracking-category="addPlayingGame"
                placeholder="Game"
-               [items]="getGames()"
-               [(ngModel)]="info.game"
-               (change)="updateSelection()"></ng-select>
+               [items]="games"
+               [(ngModel)]="game"
+               (change)="setGame()"
+               (clear)="resetInfo()"></ng-select>
   </div>
 
   <div class="platform">
     <select data-tracking-category="addPlayingPlatform"
             #platformEl
-            [value]="info.platform">
+            [value]="info.platform"
+            (change)="setPlatform(platformEl)">
       <option value="">Platform</option>
       <option *ngFor="let option of platforms"
               value="{{ option }}">{{ option }}</option>
@@ -20,12 +20,15 @@
   </div>
 
   <div class="startTime">
-    <select data-tracking-category="addPlayingStarttime"
-            #platformEl
-            [value]="info.startTime">
-      <option value="">Start Time</option>
+    <select data-tracking-category="addPlayingStartTime"
+            #startTimeEl
+            [value]="info.startTime"
+            (change)="setStartTime(startTimeEl)">
+      <option value="0">Start Time</option>
       <option *ngFor="let option of dates"
               value="{{ option }}">{{ option | date:'M/d/y hh:mm a' }}</option>
     </select>
   </div>
+
+  <button data-tracking-category="addPlayingAdd">Add Game to Playing</button>
 </div>

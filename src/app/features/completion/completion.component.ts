@@ -5,8 +5,10 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
 import sharedSelectors, { State as SharedState } from '../../shared/reducers/root.reducer';
+import completionSelectors, { State as CompletionState } from './reducers/root.reducer';
 
 import { HistoryGrouping } from '../../shared/models';
+import { AddPlaying } from './models';
 
 @Component({
   selector: 'app-completion',
@@ -15,10 +17,17 @@ import { HistoryGrouping } from '../../shared/models';
 })
 export class CompletionComponent implements OnInit {
 
-  historyItems$: Observable<HistoryGrouping[]>;
-  constructor(private sharedStore: Store<SharedState>) { }
+  historyGroupings$: Observable<HistoryGrouping[]>;
+  games$: Observable<string[]>;
+  addPlayingInfo$: Observable<AddPlaying>;
+  game$: Observable<string | null>;
+  constructor(private sharedStore: Store<SharedState>, private completionStore: Store<CompletionState>) { }
 
   ngOnInit() {
-    this.historyItems$ = this.sharedStore.select(sharedSelectors.historyGroupingsByGame);
+    this.historyGroupings$ = this.sharedStore.select(sharedSelectors.historyGroupingsByGame);
+    this.games$ = this.historyGroupings$.map(groupings => groupings.map(item => item.key));
+
+    this.addPlayingInfo$ = this.completionStore.select(completionSelectors.addPlayingInfo);
+    this.game$ = this.addPlayingInfo$.map(info => info.game ? info.game : null);
   }
 }

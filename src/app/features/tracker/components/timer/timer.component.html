@@ -5,7 +5,8 @@
                [items]="trackedGames"
                [addTag]="true"
                [(ngModel)]="game"
-               (change)="setGame()"></ng-select>
+               (change)="setGame()"
+               (clear)="resetGame()"></ng-select>
   </div>
 
   <div class="platform">

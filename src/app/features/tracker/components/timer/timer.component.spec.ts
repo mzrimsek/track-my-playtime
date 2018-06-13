@@ -128,23 +128,37 @@ describe('TimerComponent', () => {
 
       beforeEach(async(() => {
         gameEl = fixture.nativeElement.querySelector('.game ng-select');
+        component.game = game;
+        gameEl.dispatchEvent(new Event('change'));
+        fixture.detectChanges();
       }));
 
       it('Should dispatch SetGame', async(() => {
         const action = new actions.SetGame(game);
-
-        component.game = game;
-        gameEl.dispatchEvent(new Event('change'));
-        fixture.detectChanges();
-
         expect(store.dispatch).toHaveBeenCalledWith(action);
       }));
 
       it('Should not call TimerService setGame', () => {
-        component.game = game;
-        gameEl.dispatchEvent(new Event('change'));
-        fixture.detectChanges();
+        expect(timerService.setGame).not.toHaveBeenCalled();
+      });
+    });
 
+    describe('Game Value Clears', () => {
+      let gameEl: any;
+
+      beforeEach(async(() => {
+        gameEl = fixture.nativeElement.querySelector('.game ng-select');
+        component.game = null;
+        gameEl.dispatchEvent(new Event('clear'));
+        fixture.detectChanges();
+      }));
+
+      it('Should dispatch SetGame', async(() => {
+        const action = new actions.SetGame('');
+        expect(store.dispatch).toHaveBeenCalledWith(action);
+      }));
+
+      it('Should not call TimerService setGame', () => {
         expect(timerService.setGame).not.toHaveBeenCalled();
       });
     });
@@ -154,24 +168,19 @@ describe('TimerComponent', () => {
 
       beforeEach(async(() => {
         platformEl = fixture.nativeElement.querySelector('.platform select');
+        platformEl.selectedIndex = 2;
+        platformEl.dispatchEvent(new Event('change'));
+        fixture.detectChanges();
       }));
 
       it('Should dispatch SetPlatform', async(() => {
         const platform = testPlatforms[1];
         const action = new actions.SetPlatform(platform);
 
-        platformEl.selectedIndex = 2;
-        platformEl.dispatchEvent(new Event('change'));
-        fixture.detectChanges();
-
         expect(store.dispatch).toHaveBeenCalledWith(action);
       }));
 
       it('Should not call TimerService setPlatform', () => {
-        platformEl.selectedIndex = 2;
-        platformEl.dispatchEvent(new Event('change'));
-        fixture.detectChanges();
-
         expect(timerService.setPlatform).not.toHaveBeenCalled();
       });
     });
@@ -192,23 +201,17 @@ describe('TimerComponent', () => {
 
         beforeEach(async(() => {
           dateTimeEl = fixture.nativeElement.querySelector('.date-time-picker input');
+          dateTimeEl.value = new Date(startTime);
+          dateTimeEl.dispatchEvent(new Event('dateTimeChange'));
+          fixture.detectChanges();
         }));
 
         it('Should dispatch SetStartTime', async(() => {
           const action = new actions.SetStartTime(startTime);
-
-          dateTimeEl.value = new Date(startTime);
-          dateTimeEl.dispatchEvent(new Event('dateTimeChange'));
-          fixture.detectChanges();
-
           expect(store.dispatch).toHaveBeenCalledWith(action);
         }));
 
         it('Should not call TimerService setStartTime', async(() => {
-          dateTimeEl.value = new Date(startTime);
-          dateTimeEl.dispatchEvent(new Event('dateTimeChange'));
-          fixture.detectChanges();
-
           expect(timerService.setStartTime).not.toHaveBeenCalled();
         }));
       });
@@ -296,6 +299,17 @@ describe('TimerComponent', () => {
         fixture.detectChanges();
 
         expect(timerService.setGame).toHaveBeenCalledWith(testUserId, game);
+      }));
+
+      it('Should call TimerService setGame when game value clears', async(() => {
+        const game = null;
+        const gameEl = fixture.nativeElement.querySelector('.game ng-select');
+
+        component.game = game;
+        gameEl.dispatchEvent(new Event('clear'));
+        fixture.detectChanges();
+
+        expect(timerService.setGame).toHaveBeenCalledWith(testUserId, '');
       }));
     });
 
