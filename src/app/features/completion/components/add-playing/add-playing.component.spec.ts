@@ -80,17 +80,9 @@ describe('AddPlayingComponent', () => {
       fixture.detectChanges();
     }));
 
-    it('Should dispatch SetGame', async(() => {
-      const action = new actions.SetGame('');
+    it('Should dispatch Reset', async(() => {
+      const action = new actions.Reset();
       expect(store.dispatch).toHaveBeenCalledWith(action);
-    }));
-
-    it('Should update platforms', async(() => {
-      expect(component.platforms).toEqual([]);
-    }));
-
-    it('Should update dates', async(() => {
-      expect(component.dates).toEqual([]);
     }));
   });
 

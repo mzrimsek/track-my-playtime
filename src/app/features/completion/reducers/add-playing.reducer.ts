@@ -25,6 +25,9 @@ export function reducer(state: State = initialState, action: actions.All): State
     case actions.SET_STARTTIME: {
       return tassign(state, { startTime: action.startTime });
     }
+    case actions.RESET: {
+      return initialState;
+    }
     default: {
       return state;
     }

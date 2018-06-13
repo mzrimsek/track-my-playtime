@@ -18,6 +18,13 @@ export class SetStartTime implements Action {
   constructor(public startTime: number) { }
 }
 
+export const RESET = '[Add Playing] Reset';
+export class Reset implements Action {
+  readonly type = RESET;
+  constructor() { }
+}
+
 export type All = SetGame |
   SetPlatform |
-  SetStartTime;
+  SetStartTime |
+  Reset;

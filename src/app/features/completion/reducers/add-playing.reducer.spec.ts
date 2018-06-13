@@ -50,4 +50,18 @@ describe('Playing Reducer', () => {
       startTime
     });
   });
+
+  it('Should set to initialState when Reset is dispatched', () => {
+    const initialState: State = {
+      game: 'some game',
+      platform: 'some platform',
+      startTime: 241235
+    };
+    const result = reducer(initialState, new actions.Reset());
+    expect(result).toEqual({
+      game: '',
+      platform: '',
+      startTime: 0
+    });
+  });
 });

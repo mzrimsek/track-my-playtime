@@ -44,10 +44,6 @@ export class AddPlayingComponent implements OnInit {
     }
   }
 
-  resetPlatform() {
-    this.store.dispatch(new actions.SetPlatform(''));
-  }
-
   setStartTime(startTimeEl: HTMLSelectElement) {
     if (startTimeEl.value) {
       const startTime = Number.parseInt(startTimeEl.value);
@@ -56,9 +52,7 @@ export class AddPlayingComponent implements OnInit {
   }
 
   resetInfo() {
-    this.store.dispatch(new actions.SetGame(''));
-    this.store.dispatch(new actions.SetPlatform(''));
-    this.store.dispatch(new actions.SetStartTime(0));
+    this.store.dispatch(new actions.Reset());
     this.updateOptions();
   }
 

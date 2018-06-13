@@ -36,4 +36,11 @@ describe('Add Playing Actions', () => {
       expect(action.startTime).toBe(15);
     });
   });
+
+  describe('Reset', () => {
+    it('Should have correct type', () => {
+      const action = new actions.Reset();
+      expect(action.type).toBe(actions.RESET);
+    });
+  });
 });
