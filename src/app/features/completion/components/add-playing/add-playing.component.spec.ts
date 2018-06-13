@@ -10,6 +10,8 @@ import * as actions from '../../actions/add-playing.actions';
 import * as fromRoot from '../../../../reducers/root.reducer';
 import * as fromCompletion from '../../reducers/root.reducer';
 
+import { HistoryGrouping } from '../../../../shared/models';
+
 describe('AddPlayingComponent', () => {
   let store: Store<fromRoot.State>;
   let component: AddPlayingComponent;
@@ -38,6 +40,8 @@ describe('AddPlayingComponent', () => {
       platform: '',
       startTime: 0
     };
+    component.gameGroupings = testGroupings;
+    component.games = ['Game 1'];
     fixture.detectChanges();
   }));
 
@@ -46,23 +50,22 @@ describe('AddPlayingComponent', () => {
   }));
 
   describe('Game Value Changes', () => {
-    const game = 'some crazy new game';
     let gameEl: any;
 
     beforeEach(async(() => {
       gameEl = fixture.nativeElement.querySelector('.game ng-select');
-      component.game = game;
+      component.game = testGame;
       gameEl.dispatchEvent(new Event('change'));
       fixture.detectChanges();
     }));
 
     it('Should dispatch SetGame', async(() => {
-      const action = new actions.SetGame(game);
+      const action = new actions.SetGame(testGame);
       expect(store.dispatch).toHaveBeenCalledWith(action);
     }));
 
     it('Should update platforms', async(() => {
-      fail();
+      expect(component.platforms).toEqual(['Platform 1', 'Platform 2']);
     }));
   });
 
@@ -94,6 +97,11 @@ describe('AddPlayingComponent', () => {
     let platformEl: any;
 
     beforeEach(async(() => {
+      const gameEl = fixture.nativeElement.querySelector('.game ng-select');
+      component.game = testGame;
+      gameEl.dispatchEvent(new Event('change'));
+      fixture.detectChanges();
+
       platformEl = fixture.nativeElement.querySelector('.platform select');
       platformEl.selectedIndex = 2;
       platformEl.dispatchEvent(new Event('change'));
@@ -101,11 +109,13 @@ describe('AddPlayingComponent', () => {
     }));
 
     it('Should dispatch SetPlatform', async(() => {
-      fail();
+      const platform = component.platforms[1];
+      const action = new actions.SetPlatform(platform);
+      expect(store.dispatch).toHaveBeenCalledWith(action);
     }));
 
     it('Should update dates', async(() => {
-      fail();
+      expect(component.dates).toEqual([1000]);
     }));
   });
 
@@ -113,14 +123,55 @@ describe('AddPlayingComponent', () => {
     let startTimeEl: any;
 
     beforeEach(async(() => {
+      const gameEl = fixture.nativeElement.querySelector('.game ng-select');
+      component.game = testGame;
+      gameEl.dispatchEvent(new Event('change'));
+      fixture.detectChanges();
+
+      const platformEl = fixture.nativeElement.querySelector('.platform select');
+      platformEl.selectedIndex = 2;
+      platformEl.dispatchEvent(new Event('change'));
+      fixture.detectChanges();
+
       startTimeEl = fixture.nativeElement.querySelector('.startTime select');
-      startTimeEl.selectedIndex = 2;
+      startTimeEl.selectedIndex = 1;
       startTimeEl.dispatchEvent(new Event('change'));
       fixture.detectChanges();
     }));
 
     it('Should dispatch SetStartTime', async(() => {
-      fail();
+      const startTime = component.dates[0];
+      const action = new actions.SetStartTime(startTime);
+      expect(store.dispatch).toHaveBeenCalledWith(action);
     }));
   });
 });
+
+const testGame = 'Game 1';
+
+const testGroupings: HistoryGrouping[] = [{
+  key: testGame,
+  historyItems: [{
+    id: '3',
+    game: testGame,
+    platform: 'Platform 1',
+    startTime: 5000,
+    endTime: 6000,
+    dateRange: [new Date(5000), new Date(6000)]
+  }, {
+    id: '2',
+    game: testGame,
+    platform: 'Platform 1',
+    startTime: 3000,
+    endTime: 4000,
+    dateRange: [new Date(3000), new Date(4000)]
+  }, {
+    id: '1',
+    game: testGame,
+    platform: 'Platform 2',
+    startTime: 1000,
+    endTime: 2000,
+    dateRange: [new Date(1000), new Date(2000)]
+  }],
+  totalTime: 3
+}];
