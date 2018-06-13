@@ -33,7 +33,7 @@ export class AddPlayingComponent implements OnInit {
     if (this.game) {
       const game = this.game;
       this.store.dispatch(new actions.SetGame(game));
-      this.updateOptions();
+      this.updatePlatforms();
     }
   }
 
@@ -41,6 +41,7 @@ export class AddPlayingComponent implements OnInit {
     if (platformEl.value) {
       const platform = platformEl.value;
       this.store.dispatch(new actions.SetPlatform(platform));
+      this.updateDates(platform);
     }
   }
 
@@ -53,12 +54,20 @@ export class AddPlayingComponent implements OnInit {
 
   resetInfo() {
     this.store.dispatch(new actions.Reset());
-    this.updateOptions();
+    this.platforms = [];
+    this.dates = [];
   }
 
-  private updateOptions() {
+  // TODO: Move these into a utils file
+  private updatePlatforms() {
     const selectedGameGrouping = this.gameGroupings.find(grouping => grouping.key === this.game);
     this.platforms = selectedGameGrouping ? getUniqueFrom(selectedGameGrouping.historyItems, item => item.platform) : [];
-    this.dates = selectedGameGrouping ? selectedGameGrouping.historyItems.map(item => item.startTime).reverse() : [];
+  }
+
+  private updateDates(platform: string) {
+    const selectedGameGrouping = this.gameGroupings.find(grouping => grouping.key === this.game);
+    this.dates = selectedGameGrouping ? selectedGameGrouping.historyItems
+      .filter(item => item.platform === platform)
+      .map(item => item.startTime).reverse() : [];
   }
 }
