@@ -1,6 +1,6 @@
 import { HistoryGrouping, HistoryListItem } from '../models';
 
-import { getUniqueFrom } from './history-filter.utils';
+import { filterPlatforms, filterStartTimes, getUniqueFrom } from './history-filter.utils';
 
 describe('History Filter Utils', () => {
   describe('getUniqueFrom', () => {
@@ -28,45 +28,109 @@ describe('History Filter Utils', () => {
   });
 
   describe('filterPlatforms', () => {
+    it('Should return empty when no groupings', () => {
+      const result = filterPlatforms([], null);
+      expect(result).toEqual([]);
+    });
+
     it('Should return empty when game is empty string', () => {
-      fail();
+      const groupings: HistoryGrouping[] = [
+        getHistoryGrouping('Game 1', 0)
+      ];
+      const result = filterPlatforms(groupings, '');
+      expect(result).toEqual([]);
     });
 
     it('Should return empty when game is null', () => {
-      fail();
+      const groupings: HistoryGrouping[] = [
+        getHistoryGrouping('Game 1', 0)
+      ];
+      const result = filterPlatforms(groupings, null);
+      expect(result).toEqual([]);
     });
 
     it('Should return empty when game does not match', () => {
-      fail();
+      const groupings: HistoryGrouping[] = [
+        getHistoryGrouping('Game 1', 0)
+      ];
+      const result = filterPlatforms(groupings, 'Not Game 1');
+      expect(result).toEqual([]);
     });
 
     it('Should return unqiue platforms when game matches', () => {
-      fail();
+      const grouping = getHistoryGrouping(testGame, 0);
+      grouping.historyItems = [
+        getHistoryListItem(testGame, 'Some platform'),
+        getHistoryListItem(testGame, 'Some platform'),
+        getHistoryListItem(testGame, 'Some other platform')
+      ];
+      const groupings: HistoryGrouping[] = [grouping];
+
+      const result = filterPlatforms(groupings, testGame);
+
+      expect(result).toEqual(['Some platform', 'Some other platform']);
     });
   });
 
   describe('filterStartTimes', () => {
+    it('Should return empty when no groupings', () => {
+      const result = filterStartTimes([], null, '');
+      expect(result).toEqual([]);
+    });
+
     it('Should return empty when game is empty string', () => {
-      fail();
+      const groupings: HistoryGrouping[] = [
+        getHistoryGrouping('Game 1', 0)
+      ];
+      const result = filterStartTimes(groupings, '', '');
+      expect(result).toEqual([]);
     });
 
     it('Should return empty when game is null', () => {
-      fail();
+      const groupings: HistoryGrouping[] = [
+        getHistoryGrouping('Game 1', 0)
+      ];
+      const result = filterStartTimes(groupings, null, '');
+      expect(result).toEqual([]);
     });
 
     it('Should return empty when game does not match', () => {
-      fail();
+      const groupings: HistoryGrouping[] = [
+        getHistoryGrouping('Game 1', 0)
+      ];
+      const result = filterStartTimes(groupings, 'Not Game 1', '');
+      expect(result).toEqual([]);
     });
 
     it('Should return empty when game matches but platform does not', () => {
-      fail();
+      const grouping = getHistoryGrouping(testGame, 2);
+      grouping.historyItems = [
+        getHistoryListItem(testGame, 'Some other platform', 6000, 8000)
+      ];
+      const groupings: HistoryGrouping[] = [grouping];
+
+      const result = filterStartTimes(groupings, testGame, 'Some platform');
+
+      expect(result).toEqual([]);
     });
 
     it('Should return unqiue start times when game and platform matches', () => {
-      fail();
+      const grouping = getHistoryGrouping(testGame, 6.5);
+      grouping.historyItems = [
+        getHistoryListItem(testGame, 'Some other platform', 6000, 8000),
+        getHistoryListItem(testGame, 'Some platform', 1000, 5000),
+        getHistoryListItem(testGame, 'Some platform', 100, 800)
+      ];
+      const groupings: HistoryGrouping[] = [grouping];
+
+      const result = filterStartTimes(groupings, testGame, 'Some platform');
+
+      expect(result).toEqual([100, 1000]);
     });
   });
 });
+
+const testGame = 'Game 1';
 
 const getHistoryListItem = (game: string, platform: string, startTime = 0, endTime = 0): HistoryListItem => {
   return <HistoryListItem>{

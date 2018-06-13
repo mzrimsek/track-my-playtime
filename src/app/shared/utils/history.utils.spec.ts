@@ -3,7 +3,7 @@ import { addDays, eachDay, subDays } from 'date-fns';
 import { HistoryGrouping, HistoryListItem } from '../models';
 
 import {
-    filterGroupingsByDateRange, getHistoryGroupingList, getHistoryListItemsMap, getUniqueFrom
+    filterGroupingsByDateRange, getHistoryGroupingList, getHistoryListItemsMap
 } from './history.utils';
 
 describe('History Utils', () => {
@@ -215,30 +215,6 @@ describe('History Utils', () => {
       }]);
     });
   });
-
-  describe('getUniqueFrom', () => {
-    it('Should return list of unique games', () => {
-      const items: HistoryListItem[] = [
-        getHistoryListItem('Game 3', ''),
-        getHistoryListItem('Game 1', ''),
-        getHistoryListItem('Game 1', ''),
-        getHistoryListItem('Game 2', '')
-      ];
-      const result = getUniqueFrom(items, item => item.game);
-      expect(result).toEqual(['Game 3', 'Game 1', 'Game 2']);
-    });
-
-    it('Should return list of unique games', () => {
-      const items: HistoryListItem[] = [
-        getHistoryListItem('', 'Platform 1'),
-        getHistoryListItem('', 'Platform 3'),
-        getHistoryListItem('', 'Platform 2'),
-        getHistoryListItem('', 'Platform 3')
-      ];
-      const result = getUniqueFrom(items, item => item.platform);
-      expect(result).toEqual(['Platform 1', 'Platform 3', 'Platform 2']);
-    });
-  });
 });
 
 const getHistoryListItem = (game: string, platform: string, startTime = 0, endTime = 0): HistoryListItem => {
@@ -250,7 +226,7 @@ const getHistoryListItem = (game: string, platform: string, startTime = 0, endTi
     endTime,
     dateRange: [new Date(startTime), new Date(endTime)]
   };
-}
+};
 
 const getHistoryGrouping = (key: string, totalTime: number): HistoryGrouping => {
   return {
