@@ -2,7 +2,7 @@ import { HistoryGrouping, HistoryListItem } from '../models';
 
 import { getElapsedTimeInSeconds, isInDateRange } from './date.utils';
 
-type HistoryListItemKeyFunction = (item: HistoryListItem) => string;
+export type HistoryListItemKeyFunction = (item: HistoryListItem) => string;
 type HistoryListItemsMap = Map<string, HistoryListItem[]>;
 
 export const getHistoryListItemsMap = (items: HistoryListItem[], keyFunction: HistoryListItemKeyFunction): HistoryListItemsMap => {
@@ -53,9 +53,4 @@ const getFilteredGrouping = (grouping: HistoryGrouping, dateRange: Date[]): Hist
     totalTime,
     historyItems
   };
-};
-
-export const getUniqueFrom = (items: HistoryListItem[], keyFunction: HistoryListItemKeyFunction): string[] => {
-  const data = items.map(keyFunction);
-  return Array.from(new Set(data));
 };

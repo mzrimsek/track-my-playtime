@@ -9,7 +9,7 @@ import { State } from '../../reducers/root.reducer';
 import { HistoryGrouping } from '../../../../shared/models';
 import { AddPlaying } from '../../models';
 
-import { getUniqueFrom } from '../../../../shared/utils/history.utils';
+import { filterPlatforms, filterStartTimes } from '../../../../shared/utils/history-filter.utils';
 
 @Component({
   selector: 'app-completion-add-playing',
@@ -33,7 +33,7 @@ export class AddPlayingComponent implements OnInit {
     if (this.game) {
       const game = this.game;
       this.store.dispatch(new actions.SetGame(game));
-      this.updatePlatforms();
+      this.platforms = filterPlatforms(this.gameGroupings, this.game);
     }
   }
 
@@ -41,7 +41,7 @@ export class AddPlayingComponent implements OnInit {
     if (platformEl.value) {
       const platform = platformEl.value;
       this.store.dispatch(new actions.SetPlatform(platform));
-      this.updateDates(platform);
+      this.dates = filterStartTimes(this.gameGroupings, this.game, platform);
     }
   }
 
@@ -56,18 +56,5 @@ export class AddPlayingComponent implements OnInit {
     this.store.dispatch(new actions.Reset());
     this.platforms = [];
     this.dates = [];
-  }
-
-  // TODO: Move these into a utils file
-  private updatePlatforms() {
-    const selectedGameGrouping = this.gameGroupings.find(grouping => grouping.key === this.game);
-    this.platforms = selectedGameGrouping ? getUniqueFrom(selectedGameGrouping.historyItems, item => item.platform) : [];
-  }
-
-  private updateDates(platform: string) {
-    const selectedGameGrouping = this.gameGroupings.find(grouping => grouping.key === this.game);
-    this.dates = selectedGameGrouping ? selectedGameGrouping.historyItems
-      .filter(item => item.platform === platform)
-      .map(item => item.startTime).reverse() : [];
   }
 }

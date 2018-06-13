@@ -64,10 +64,6 @@ describe('AddPlayingComponent', () => {
     it('Should update platforms', async(() => {
       fail();
     }));
-
-    it('Should update dates', async(() => {
-      fail();
-    }));
   });
 
   describe('Game Value Clears', () => {
@@ -97,6 +93,10 @@ describe('AddPlayingComponent', () => {
     }));
 
     it('Should dispatch SetPlatform', async(() => {
+      fail();
+    }));
+
+    it('Should update dates', async(() => {
       fail();
     }));
   });

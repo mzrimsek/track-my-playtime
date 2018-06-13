@@ -6,9 +6,8 @@ import * as fromPlatforms from './platforms.reducer';
 import { HistoryListItem } from '../models';
 
 import { formatDate } from '../utils/date.utils';
-import {
-    getHistoryGroupingList, getHistoryListItemsMap, getUniqueFrom
-} from '../utils/history.utils';
+import { getUniqueFrom } from '../utils/history-filter.utils';
+import { getHistoryGroupingList, getHistoryListItemsMap } from '../utils/history.utils';
 
 export interface SharedState {
   history: fromHistory.State;

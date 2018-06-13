@@ -241,7 +241,7 @@ describe('History Utils', () => {
   });
 });
 
-function getHistoryListItem(game: string, platform: string, startTime = 0, endTime = 0): HistoryListItem {
+const getHistoryListItem = (game: string, platform: string, startTime = 0, endTime = 0): HistoryListItem => {
   return <HistoryListItem>{
     id: 'totally a unique id',
     game,
