@@ -80,6 +80,14 @@ describe('AddPlayingComponent', () => {
       const action = new actions.Reset();
       expect(store.dispatch).toHaveBeenCalledWith(action);
     }));
+
+    it('Should update platforms', () => {
+      expect(component.platforms).toEqual([]);
+    });
+
+    it('Should update dates', () => {
+      expect(component.dates).toEqual([]);
+    });
   });
 
   describe('Platform Option Changes', () => {
