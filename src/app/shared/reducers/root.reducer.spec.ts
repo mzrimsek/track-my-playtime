@@ -15,8 +15,8 @@ describe('Shared Root Reducer', () => {
     describe('_selectHistoryItems', () => {
       it('Should return an empty list when there are no items', () => {
         const sharedState: SharedState = {
-          history: getHistoryInitialState(),
-          platforms: getPlatformsInitialState()
+          history: initialHistoryState,
+          platforms: initialPlatformsState
         };
         const state: State = { shared: sharedState };
 
@@ -48,7 +48,7 @@ describe('Shared Root Reducer', () => {
         };
         const sharedState: SharedState = {
           history,
-          platforms: getPlatformsInitialState()
+          platforms: initialPlatformsState
         };
         const state: State = { shared: sharedState };
 
@@ -86,7 +86,7 @@ describe('Shared Root Reducer', () => {
         };
         const sharedState: SharedState = {
           history,
-          platforms: getPlatformsInitialState()
+          platforms: initialPlatformsState
         };
         const state: State = { shared: sharedState };
 
@@ -135,7 +135,7 @@ describe('Shared Root Reducer', () => {
         };
         const sharedState: SharedState = {
           history,
-          platforms: getPlatformsInitialState()
+          platforms: initialPlatformsState
         };
         const state: State = { shared: sharedState };
 
@@ -192,7 +192,7 @@ describe('Shared Root Reducer', () => {
         };
         const sharedState: SharedState = {
           history,
-          platforms: getPlatformsInitialState()
+          platforms: initialPlatformsState
         };
         const state: State = { shared: sharedState };
 
@@ -263,7 +263,7 @@ describe('Shared Root Reducer', () => {
         };
         const sharedState: SharedState = {
           history,
-          platforms: getPlatformsInitialState()
+          platforms: initialPlatformsState
         };
         const state: State = { shared: sharedState };
 
@@ -334,7 +334,7 @@ describe('Shared Root Reducer', () => {
         };
         const sharedState: SharedState = {
           history,
-          platforms: getPlatformsInitialState()
+          platforms: initialPlatformsState
         };
         const state: State = { shared: sharedState };
 
@@ -378,7 +378,7 @@ describe('Shared Root Reducer', () => {
             entities: {},
             loading: true
           },
-          platforms: getPlatformsInitialState()
+          platforms: initialPlatformsState
         };
         const state: State = { shared: sharedState };
 
@@ -394,7 +394,7 @@ describe('Shared Root Reducer', () => {
             entities: {},
             loading: false
           },
-          platforms: getPlatformsInitialState()
+          platforms: initialPlatformsState
         };
         const state: State = { shared: sharedState };
 
@@ -438,7 +438,7 @@ describe('Shared Root Reducer', () => {
         };
         const sharedState: SharedState = {
           history,
-          platforms: getPlatformsInitialState()
+          platforms: initialPlatformsState
         };
         const state: State = { shared: sharedState };
 
@@ -454,7 +454,7 @@ describe('Shared Root Reducer', () => {
       it('Should return the platforms options', () => {
         const options = ['Game Box 720', 'Nipkendo Scratch', 'Dudestation 69'];
         const sharedState: SharedState = {
-          history: getHistoryInitialState(),
+          history: initialHistoryState,
           platforms: {
             options
           },
@@ -469,16 +469,12 @@ describe('Shared Root Reducer', () => {
   });
 });
 
-const getHistoryInitialState = (): HistoryState => {
-  return {
-    ids: [],
-    entities: {},
-    loading: false
-  };
+const initialHistoryState: HistoryState = {
+  ids: [],
+  entities: {},
+  loading: false
 };
 
-const getPlatformsInitialState = (): PlatformsState => {
-  return {
-    options: []
-  };
+const initialPlatformsState: PlatformsState = {
+  options: []
 };

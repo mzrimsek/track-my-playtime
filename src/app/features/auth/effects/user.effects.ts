@@ -31,8 +31,7 @@ export class UserEffects {
           }
           return new userActions.NotAuthenticated();
         })
-        .catch(err => Observable.of(new appActions.Error(userActions.GET_USER, err.message)))
-      );
+        .catch(err => Observable.of(new appActions.Error(userActions.GET_USER, err.message))));
 
   @Effect() googleLogin$ =
     this.actions$
@@ -40,8 +39,7 @@ export class UserEffects {
       .map(action => action as userActions.GoogleLogin)
       .switchMap(() => this.authService.signInWithGoogle()
         .map(() => new userActions.GetUser())
-        .catch(err => Observable.of(new appActions.Error(userActions.GOOGLE_LOGIN, err.message)))
-      );
+        .catch(err => Observable.of(new appActions.Error(userActions.GOOGLE_LOGIN, err.message))));
 
   @Effect() logout$ =
     this.actions$
@@ -52,8 +50,7 @@ export class UserEffects {
           this.router.navigate(['login']);
           return new userActions.NotAuthenticated();
         })
-        .catch(err => Observable.of(new appActions.Error(userActions.LOGOUT, err.message)))
-      );
+        .catch(err => Observable.of(new appActions.Error(userActions.LOGOUT, err.message))));
 
   private getAuthenticatedAction(authData: AuthUser): userActions.Authenticated {
     const user = <User>{

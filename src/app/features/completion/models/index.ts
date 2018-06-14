@@ -1,1 +1,1 @@
-export * from './completion.models';
+export * from './add-playing.models';

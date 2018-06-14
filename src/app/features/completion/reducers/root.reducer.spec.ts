@@ -1,4 +1,5 @@
 import { State as AddPlayingState } from './add-playing.reducer';
+import { State as ProgressState } from './progress.reducer';
 import { _selectAddPlayingInfo, CompletionState, State } from './root.reducer';
 
 describe('Completion Root Reducer', () => {
@@ -11,7 +12,8 @@ describe('Completion Root Reducer', () => {
           startTime: 1523563
         };
         const completionState: CompletionState = {
-          addPlaying
+          addPlaying,
+          progress: initialProgressState
         };
         const state: State = { completion: completionState };
 
@@ -22,3 +24,9 @@ describe('Completion Root Reducer', () => {
     });
   });
 });
+
+const initialProgressState: ProgressState = {
+  ids: [],
+  entities: {},
+  loading: false
+};

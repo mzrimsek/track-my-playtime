@@ -18,14 +18,6 @@ export interface State extends EntityState<HistoryEntity> {
   loading: boolean;
 }
 
-const getUpdatedState = (payload: UpdatePayload, currentState: State): State => {
-  const { itemId: id, ...changes } = payload;
-  return adapter.updateOne({
-    id,
-    changes
-  }, currentState);
-};
-
 export const adapter: EntityAdapter<HistoryEntity> = createEntityAdapter<HistoryEntity>();
 const initialState: State = adapter.getInitialState({
   loading: false
@@ -63,3 +55,11 @@ export function reducer(state: State = initialState, action: actions.All): State
     }
   }
 }
+
+const getUpdatedState = (payload: UpdatePayload, currentState: State): State => {
+  const { itemId: id, ...changes } = payload;
+  return adapter.updateOne({
+    id,
+    changes
+  }, currentState);
+};

@@ -8,7 +8,7 @@ import sharedSelectors, { State as SharedState } from '../../shared/reducers/roo
 import completionSelectors, { State as CompletionState } from './reducers/root.reducer';
 
 import { HistoryGrouping } from '../../shared/models';
-import { AddPlaying } from './models';
+import { AddPlayingInfo } from './models';
 
 @Component({
   selector: 'app-completion',
@@ -19,7 +19,7 @@ export class CompletionComponent implements OnInit {
 
   historyGroupings$: Observable<HistoryGrouping[]>;
   games$: Observable<string[]>;
-  addPlayingInfo$: Observable<AddPlaying>;
+  addPlayingInfo$: Observable<AddPlayingInfo>;
   game$: Observable<string | null>;
   constructor(private sharedStore: Store<SharedState>, private completionStore: Store<CompletionState>) { }
 

@@ -43,4 +43,49 @@ describe('Add Playing Actions', () => {
       expect(action.type).toBe(actions.RESET);
     });
   });
+
+  describe('Save', () => {
+    it('Should have correct type', () => {
+      const action = new actions.Save({
+        userId: '',
+        startEntryId: ''
+      });
+      expect(action.type).toBe(actions.SAVE);
+    });
+
+    it('Should have correct data', () => {
+      const action = new actions.Save({
+        userId: 'some user id',
+        startEntryId: 'some entry id',
+      });
+      expect(action.addPlaying).toEqual({
+        userId: 'some user id',
+        startEntryId: 'some entry id',
+      });
+    });
+  });
+
+  describe('Save Succeeded', () => {
+    it('Should have correct type', () => {
+      const action = new actions.SaveSucceeded({
+        id: '',
+        startEntryId: '',
+        endEntryId: ''
+      });
+      expect(action.type).toBe(actions.SAVE_SUCCEEDED);
+    });
+
+    it('Should have correct data', () => {
+      const action = new actions.SaveSucceeded({
+        id: 'some id',
+        startEntryId: 'some entry id',
+        endEntryId: ''
+      });
+      expect(action.item).toEqual({
+        id: 'some id',
+        startEntryId: 'some entry id',
+        endEntryId: ''
+      });
+    });
+  });
 });

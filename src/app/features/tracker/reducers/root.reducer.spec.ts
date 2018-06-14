@@ -13,7 +13,7 @@ describe('Tracker Root Reducer', () => {
         };
         const trackerState: TrackerState = {
           timer,
-          display: getDisplayInitialState()
+          display: initialDisplayState
         };
         const state: State = { tracker: trackerState };
 
@@ -29,7 +29,7 @@ describe('Tracker Root Reducer', () => {
       it('Should return the entriesToShow', () => {
         const entriesToShow = 7;
         const trackerState: TrackerState = {
-          timer: getTimerInitialState(),
+          timer: initialTimerState,
           display: {
             entriesToShow
           }
@@ -44,16 +44,12 @@ describe('Tracker Root Reducer', () => {
   });
 });
 
-const getTimerInitialState = (): TimerState => {
-  return {
-    game: '',
-    platform: '',
-    startTime: 0
-  };
+const initialTimerState: TimerState = {
+  game: '',
+  platform: '',
+  startTime: 0
 };
 
-const getDisplayInitialState = (): DisplayState => {
-  return {
-    entriesToShow: 7
-  };
+const initialDisplayState: DisplayState = {
+  entriesToShow: 7
 };

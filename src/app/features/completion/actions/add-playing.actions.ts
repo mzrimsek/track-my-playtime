@@ -1,5 +1,9 @@
 import { Action } from '@ngrx/store';
 
+import { ProgressEntity } from '../reducers/progress.reducer';
+
+import { AddPlaying } from '../models';
+
 export const SET_GAME = '[Add Playing] Set Game';
 export class SetGame implements Action {
   readonly type = SET_GAME;
@@ -24,7 +28,21 @@ export class Reset implements Action {
   constructor() { }
 }
 
+export const SAVE = '[Add Playing] Save';
+export class Save implements Action {
+  readonly type = SAVE;
+  constructor(public addPlaying: AddPlaying) { }
+}
+
+export const SAVE_SUCCEEDED = '[Add Playing] Save Succeeded';
+export class SaveSucceeded implements Action {
+  readonly type = SAVE_SUCCEEDED;
+  constructor(public item: ProgressEntity) { }
+}
+
 export type All = SetGame |
   SetPlatform |
   SetStartTime |
-  Reset;
+  Reset |
+  Save |
+  SaveSucceeded;
