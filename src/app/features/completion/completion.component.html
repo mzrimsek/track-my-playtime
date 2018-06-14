@@ -8,7 +8,8 @@
                                   [game]="game$ | async"
                                   [info]="addPlayingInfo$ | async"></app-completion-add-playing>
       <div class="playing drop-shadow">
-        <app-completion-playing></app-completion-playing>
+        <app-completion-playing [items]="playing$ | async"
+                                [gameGroupings]="historyGroupings$ | async"></app-completion-playing>>
       </div>
       <div class="completed drop-shadow">
         <app-completion-completed></app-completion-completed>

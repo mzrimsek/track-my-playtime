@@ -11,7 +11,9 @@ import { SharedModule } from '../../shared/shared.module';
 
 import { CompletionComponent } from './completion.component';
 import { AddPlayingComponent } from './components/add-playing/add-playing.component';
+import { CompletedItemComponent } from './components/completed-item/completed-item.component';
 import { CompletedComponent } from './components/completed/completed.component';
+import { PlayingItemComponent } from './components/playing-item/playing-item.component';
 import { PlayingComponent } from './components/playing/playing.component';
 
 import { AddPlayingEffects } from './effects/add-playing.effects';
@@ -19,6 +21,8 @@ import { ProgressEffects } from './effects/progress.effects';
 
 import { UserService } from '../auth/services/user.service';
 import { ProgressService } from './services/progress.service';
+
+import { TimePipe } from '../../shared/pipes/time.pipe';
 
 import { reducers } from './reducers/root.reducer';
 
@@ -32,7 +36,13 @@ import { reducers } from './reducers/root.reducer';
     EffectsModule.forFeature([AddPlayingEffects, ProgressEffects]),
     SharedModule
   ],
-  declarations: [CompletionComponent, CompletedComponent, PlayingComponent, AddPlayingComponent],
-  providers: [UserService, ProgressService]
+  declarations: [
+    CompletionComponent,
+    CompletedComponent,
+    PlayingComponent,
+    AddPlayingComponent,
+    PlayingItemComponent,
+    CompletedItemComponent],
+  providers: [UserService, ProgressService, TimePipe]
 })
 export class CompletionModule { }

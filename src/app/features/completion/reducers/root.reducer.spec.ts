@@ -1,6 +1,8 @@
 import { State as AddPlayingState } from './add-playing.reducer';
 import { State as ProgressState } from './progress.reducer';
-import { _selectAddPlayingInfo, CompletionState, State } from './root.reducer';
+import {
+    _selectAddPlayingInfo, _selectCompletedProgress, _selectPlayingProgress, CompletionState, State
+} from './root.reducer';
 
 describe('Completion Root Reducer', () => {
   describe('AddPlaying State Selectors', () => {
@@ -23,7 +25,163 @@ describe('Completion Root Reducer', () => {
       });
     });
   });
+
+  describe('Progress State Selectors', () => {
+    describe('_selectPlayingProgress', () => {
+      it('Should return an empty list when there are no items', () => {
+        const completionState: CompletionState = {
+          addPlaying: initialAddPlayingState,
+          progress: initialProgressState
+        };
+        const state: State = { completion: completionState };
+
+        const result = _selectPlayingProgress(state);
+
+        expect(result.length).toBe(0);
+      });
+
+      it('Should return an empty list when all have end entry ids', () => {
+        const progress: ProgressState = {
+          ids: ['1', '2'],
+          entities: {
+            '1': {
+              id: '1',
+              startEntryId: 'start 1',
+              endEntryId: 'end 1'
+            },
+            '2': {
+              id: '2',
+              startEntryId: 'start 2',
+              endEntryId: 'end 2'
+            }
+          },
+          loading: false
+        };
+        const completionState: CompletionState = {
+          addPlaying: initialAddPlayingState,
+          progress
+        };
+        const state: State = { completion: completionState };
+
+        const result = _selectPlayingProgress(state);
+
+        expect(result.length).toBe(0);
+      });
+
+      it('Should return correct items', () => {
+        const progress: ProgressState = {
+          ids: ['1', '2'],
+          entities: {
+            '1': {
+              id: '1',
+              startEntryId: 'start 1',
+              endEntryId: 'end 1'
+            },
+            '2': {
+              id: '2',
+              startEntryId: 'start 2',
+              endEntryId: ''
+            }
+          },
+          loading: false
+        };
+        const completionState: CompletionState = {
+          addPlaying: initialAddPlayingState,
+          progress
+        };
+        const state: State = { completion: completionState };
+
+        const result = _selectPlayingProgress(state);
+
+        expect(result).toEqual([{
+          id: '2',
+          startEntryId: 'start 2',
+          endEntryId: ''
+        }]);
+      });
+    });
+
+    describe('_selectCompletedProgress', () => {
+      it('Should return an empty list when there are no items', () => {
+        const completionState: CompletionState = {
+          addPlaying: initialAddPlayingState,
+          progress: initialProgressState
+        };
+        const state: State = { completion: completionState };
+
+        const result = _selectCompletedProgress(state);
+
+        expect(result.length).toBe(0);
+      });
+
+      it('Should return an empty list when none have end entry ids', () => {
+        const progress: ProgressState = {
+          ids: ['1', '2'],
+          entities: {
+            '1': {
+              id: '1',
+              startEntryId: 'start 1',
+              endEntryId: ''
+            },
+            '2': {
+              id: '2',
+              startEntryId: 'start 2',
+              endEntryId: ''
+            }
+          },
+          loading: false
+        };
+        const completionState: CompletionState = {
+          addPlaying: initialAddPlayingState,
+          progress
+        };
+        const state: State = { completion: completionState };
+
+        const result = _selectCompletedProgress(state);
+
+        expect(result.length).toBe(0);
+      });
+
+      it('Should return correct items', () => {
+        const progress: ProgressState = {
+          ids: ['1', '2'],
+          entities: {
+            '1': {
+              id: '1',
+              startEntryId: 'start 1',
+              endEntryId: 'end 1'
+            },
+            '2': {
+              id: '2',
+              startEntryId: 'start 2',
+              endEntryId: ''
+            }
+          },
+          loading: false
+        };
+        const completionState: CompletionState = {
+          addPlaying: initialAddPlayingState,
+          progress
+        };
+        const state: State = { completion: completionState };
+
+        const result = _selectCompletedProgress(state);
+
+        expect(result).toEqual([{
+          id: '1',
+          startEntryId: 'start 1',
+          endEntryId: 'end 1'
+        }]);
+      });
+    });
+  });
 });
+
+const initialAddPlayingState: AddPlayingState = {
+  game: '',
+  platform: '',
+  startTime: 0
+};
 
 const initialProgressState: ProgressState = {
   ids: [],

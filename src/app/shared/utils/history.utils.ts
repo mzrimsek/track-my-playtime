@@ -6,14 +6,14 @@ export type HistoryListItemKeyFunction = (item: HistoryListItem) => string;
 type HistoryListItemsMap = Map<string, HistoryListItem[]>;
 
 export const getHistoryListItemsMap = (items: HistoryListItem[], keyFunction: HistoryListItemKeyFunction): HistoryListItemsMap => {
-  const map: HistoryListItemsMap = new Map();
+  const map: HistoryListItemsMap = new Map<string, HistoryListItem[]>();
   items.forEach((item) => {
     const key = keyFunction(item);
     const collection = map.get(key);
-    if (!collection) {
-      map.set(key, [item]);
-    } else {
+    if (collection) {
       collection.push(item);
+    } else {
+      map.set(key, [item]);
     }
   });
   return map;

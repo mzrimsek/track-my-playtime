@@ -3,7 +3,7 @@ import { ActionReducerMap, createFeatureSelector, createSelector } from '@ngrx/s
 import * as fromPlaying from './add-playing.reducer';
 import * as fromProgress from './progress.reducer';
 
-import { AddPlayingInfo } from '../models';
+import { AddPlayingInfo, ProgressItem } from '../models';
 
 export interface CompletionState {
   addPlaying: fromPlaying.State;
@@ -25,8 +25,18 @@ export const _selectProgress = createSelector(_selectCompletionState, state => s
 
 export const _selectAddPlayingInfo = createSelector(_selectPlaying, playing => playing as AddPlayingInfo);
 
+export const { selectAll: _selectAllProgress } = fromProgress.adapter.getSelectors(_selectProgress);
+export const _selectPlayingProgress = createSelector(_selectAllProgress,
+  entities => entities.filter(entity => entity.endEntryId === '')
+    .map(entity => entity as ProgressItem));
+export const _selectCompletedProgress = createSelector(_selectAllProgress,
+  entities => entities.filter(entity => entity.endEntryId !== '')
+    .map(entity => entity as ProgressItem));
+
 const completionSelectors = {
-  addPlayingInfo: _selectAddPlayingInfo
+  addPlayingInfo: _selectAddPlayingInfo,
+  playing: _selectPlayingProgress,
+  completed: _selectCompletedProgress
 };
 
 export default completionSelectors;

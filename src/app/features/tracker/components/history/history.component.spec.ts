@@ -16,7 +16,7 @@ describe('HistoryComponent', () => {
       declarations: [
         TestWrapperComponent,
         HistoryComponent,
-        TimePipe,
+        TimePipe
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
