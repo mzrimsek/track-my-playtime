@@ -32,5 +32,8 @@ export class CompletionComponent implements OnInit {
 
     this.addPlayingInfo$ = this.completionStore.select(completionSelectors.addPlayingInfo);
     this.game$ = this.addPlayingInfo$.map(info => info.game ? info.game : null);
+
+    this.playing$ = this.completionStore.select(completionSelectors.playing);
+    this.completed$ = this.completionStore.select(completionSelectors.completed);
   }
 }
