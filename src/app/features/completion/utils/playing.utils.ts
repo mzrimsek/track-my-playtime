@@ -15,7 +15,7 @@ export const getHistoryListItemMap = (gameGroupings: HistoryGrouping[]): History
   return map;
 };
 
-export const filterGameGrouping = (grouping: HistoryGrouping | undefined, startEntry: HistoryListItem): HistoryListItem[] => {
+export const filterHistoryItemsFrom = (grouping: HistoryGrouping | undefined, startEntry: HistoryListItem): HistoryListItem[] => {
   return grouping ? grouping.historyItems.filter(historyItem =>
     historyItem.platform === startEntry.platform && historyItem.startTime > startEntry.startTime) : [];
 };
@@ -33,7 +33,7 @@ export const getPlayingItem = (historyItems: HistoryListItem[], startEntry: Hist
 export const getPlayingDisplayData =
   (item: ProgressItem, gameGroupings: HistoryGrouping[], startEntryData: HistoryListItem): PlayingDisplayData => {
     const gameGrouping = gameGroupings.find(grouping => grouping.key === startEntryData.game);
-    const filtered = filterGameGrouping(gameGrouping, startEntryData);
+    const filtered = filterHistoryItemsFrom(gameGrouping, startEntryData);
     const endDates = filtered.map(historyItem => historyItem.endTime);
     const playingItem = getPlayingItem(filtered, startEntryData);
 
