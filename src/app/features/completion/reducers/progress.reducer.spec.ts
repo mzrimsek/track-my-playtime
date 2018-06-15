@@ -2,6 +2,8 @@ import * as actions from '../actions/progress.actions';
 
 import { ProgressEntity, reducer, State } from './progress.reducer';
 
+import { MarkCompletePayload } from '../models';
+
 describe('Progress Reducer', () => {
   it('Should add an item when AddNewProgressItem is dispatched', () => {
     const initialState: State = {
@@ -80,6 +82,36 @@ describe('Progress Reducer', () => {
   });
 
   it('Should remove all items when ClearProgressItems is dispatched', () => {
+    const item1 = getProgressEntity('1');
+    const item2 = getProgressEntity('2', 'some end entry id');
+    const initialState: State = {
+      ids: [item1.id, item2.id],
+      entities: {
+        [item1.id]: item1,
+        [item2.id]: item2
+      },
+      loading: false
+    };
+    const markCompletePayload: MarkCompletePayload = {
+      itemId: item1.id,
+      endEntryId: 'some end entry id'
+    };
+
+    const newState = reducer(initialState, new actions.MarkCompleteSucceeded(markCompletePayload));
+
+    expect(newState).toEqual({
+      ...initialState,
+      entities: {
+        [item1.id]: {
+          ...item1,
+          endEntryId: markCompletePayload.endEntryId
+        },
+        [item2.id]: item2
+      }
+    });
+  });
+
+  it('Should update correct item endEntryId when MarkCompleteSuccessful is dispatched ', () => {
     const item1 = getProgressEntity('1');
     const item2 = getProgressEntity('2', 'some end entry id');
     const initialState: State = {

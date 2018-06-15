@@ -86,6 +86,56 @@ describe('Progress Actions', () => {
     });
   });
 
+  describe('MarkComplete', () => {
+    it('Should have correct type', () => {
+      const action = new actions.MarkComplete('some user id', {
+        itemId: 'some item id',
+        endEntryId: 'some end id'
+      });
+      expect(action.type).toBe(actions.MARK_COMPLETE);
+    });
+
+    it('Should have correct userId', () => {
+      const action = new actions.MarkComplete('some user id', {
+        itemId: 'some item id',
+        endEntryId: 'some end id'
+      });
+      expect(action.userId).toBe('some user id');
+    });
+
+    it('Should have correct payload', () => {
+      const action = new actions.MarkComplete('some user id', {
+        itemId: 'some item id',
+        endEntryId: 'some end id'
+      });
+      expect(action.payload).toEqual({
+        itemId: 'some item id',
+        endEntryId: 'some end id'
+      });
+    });
+  });
+
+  describe('MarkCompleteSucceeded', () => {
+    it('Should have correct type', () => {
+      const action = new actions.MarkCompleteSucceeded({
+        itemId: 'some item id',
+        endEntryId: 'some end id'
+      });
+      expect(action.type).toBe(actions.MARK_COMPLETE_SUCCEEDED);
+    });
+
+    it('Should have correct payload', () => {
+      const action = new actions.MarkCompleteSucceeded({
+        itemId: 'some item id',
+        endEntryId: 'some end id'
+      });
+      expect(action.payload).toEqual({
+        itemId: 'some item id',
+        endEntryId: 'some end id'
+      });
+    });
+  });
+
   describe('ClearProgressItems', () => {
     it('Should have correct type', () => {
       const action = new actions.ClearProgressItems();

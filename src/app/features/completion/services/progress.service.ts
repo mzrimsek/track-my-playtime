@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { ProgressEntity } from '../reducers/progress.reducer';
 
-import { AddPlaying } from '../models';
+import { AddPlaying, MarkCompletePayload } from '../models';
 
 import { getUUID } from '../../../shared/utils/uuid.utils';
 
@@ -36,6 +36,11 @@ export class ProgressService {
       startEntryId: addPlaying.startEntryId,
       endEntryId: ''
     };
+  }
+
+  markCompleted(userId: string, payload: MarkCompletePayload): Observable<MarkCompletePayload> {
+    // update item with end value
+    return Observable.of(payload);
   }
 
   private getUserItemCollection(userId: string): AngularFirestoreCollection<FirestoreProgressItem> {

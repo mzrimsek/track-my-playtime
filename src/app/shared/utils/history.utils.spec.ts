@@ -3,7 +3,7 @@ import { addDays, eachDay, subDays } from 'date-fns';
 import { HistoryGrouping, HistoryListItem } from '../models';
 
 import {
-    filterGroupingsByDateRange, getHistoryGroupingList, getHistoryListItemsMap
+    filterGroupingsByDateRange, getElapsedTimeFrom, getHistoryGroupingList, getHistoryListItemsMap
 } from './history.utils';
 
 describe('History Utils', () => {
@@ -213,6 +213,33 @@ describe('History Utils', () => {
           ]
         }]
       }]);
+    });
+  });
+
+  describe('getElapsedTimeFrom', () => {
+    it('Should return 0 when list is empty', () => {
+      const result = getElapsedTimeFrom([]);
+      expect(result).toBe(0);
+    });
+
+    it('Should return correct seconds', () => {
+      const items: HistoryListItem[] = [{
+        id: '1',
+        game: '',
+        platform: '',
+        startTime: 1000,
+        endTime: 3000,
+        dateRange: [new Date(1000), new Date(3000)]
+      }, {
+        id: '2',
+        game: '',
+        platform: '',
+        startTime: 1000,
+        endTime: 2000,
+        dateRange: [new Date(1000), new Date(2000)]
+      }];
+      const result = getElapsedTimeFrom(items);
+      expect(result).toBe(3);
     });
   });
 });

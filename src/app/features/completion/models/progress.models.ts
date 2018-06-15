@@ -6,7 +6,7 @@ export interface ProgressItem {
   endEntryId: string;
 }
 
-export interface Playing {
+export interface PlayingItem {
   game: string;
   platform: string;
   startTime: number;
@@ -18,7 +18,7 @@ export interface DisplayPlaying {
   startEntryData: HistoryListItem;
 }
 
-export interface Completed {
+export interface CompletedItem {
   game: string;
   platform: string;
   startTime: number;
@@ -30,4 +30,9 @@ export interface DisplayCompleted {
   item: ProgressItem;
   startEntryData: HistoryListItem;
   endEntryData: HistoryListItem;
+}
+
+export interface MarkCompletePayload {
+  itemId: string;
+  endEntryId: string;
 }

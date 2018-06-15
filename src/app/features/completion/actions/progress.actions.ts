@@ -2,6 +2,8 @@ import { Action } from '@ngrx/store';
 
 import { ProgressEntity } from '../reducers/progress.reducer';
 
+import { MarkCompletePayload } from '../models';
+
 export const ADD_NEW_PROGRESS_ITEM = '[Progress] Add New Progress Item';
 export class AddNewProgressItem implements Action {
   readonly type = ADD_NEW_PROGRESS_ITEM;
@@ -32,6 +34,18 @@ export class RemoveProgressItemSucceeded implements Action {
   constructor(public itemId: string) { }
 }
 
+export const MARK_COMPLETE = '[Progress] Mark Complete';
+export class MarkComplete implements Action {
+  readonly type = MARK_COMPLETE;
+  constructor(public userId: string, public payload: MarkCompletePayload) { }
+}
+
+export const MARK_COMPLETE_SUCCEEDED = '[Progress] Mark Complete Succeeded';
+export class MarkCompleteSucceeded implements Action {
+  readonly type = MARK_COMPLETE_SUCCEEDED;
+  constructor(public payload: MarkCompletePayload) { }
+}
+
 export const CLEAR_PROGRESS_ITEMS = '[Progress] Clear Items';
 export class ClearProgressItems implements Action {
   readonly type = CLEAR_PROGRESS_ITEMS;
@@ -43,4 +57,6 @@ export type All = AddNewProgressItem |
   LoadProgressItemsSucceeded |
   RemoveProgressItem |
   RemoveProgressItemSucceeded |
+  MarkComplete |
+  MarkCompleteSucceeded |
   ClearProgressItems;

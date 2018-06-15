@@ -1,3 +1,14 @@
 <p>
-  {{ getPlaying().game }} {{ getPlaying().platform }} {{ getPlaying().startTime }} {{ getPlaying().timePlayed | time }}
+  {{ getPlaying().game }} {{ getPlaying().platform }} {{ getPlaying().startTime | date:'M/d/y hh:mm a' }} {{ getPlaying().timePlayed
+  | time }}
+</p>
+<p *ngIf="showExtra">
+  <select data-tracking-category="markCompletedEndTime"
+          #endTimeEl
+          [value]="endTime"
+          (change)="setEndTime(endTimeEl)">
+    <option value="0">End Time</option>
+    <option *ngFor="let option of dates"
+            value="{{ option }}">{{ option | date:'M/d/y hh:mm a' }}</option>
+  </select>
 </p>

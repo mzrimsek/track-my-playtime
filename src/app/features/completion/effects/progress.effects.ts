@@ -28,4 +28,13 @@ export class ProgressEffects {
       .ofType(addPlayingActions.SAVE_SUCCEEDED)
       .map(action => action as addPlayingActions.SaveSucceeded)
       .map(action => new progressActions.AddNewProgressItem(action.item));
+
+  // this needs tested
+  @Effect() markCompleted$ =
+    this.actions$
+      .ofType(progressActions.MARK_COMPLETE)
+      .map(action => action as progressActions.MarkComplete)
+      .switchMap(action => this.progressService.markCompleted(action.userId, action.payload)
+        .map(data => new progressActions.MarkCompleteSucceeded(data))
+        .catch(err => Observable.of(new appActions.Error(progressActions.MARK_COMPLETE, err.message))));
 }

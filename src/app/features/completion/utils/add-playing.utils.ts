@@ -6,5 +6,6 @@ export const findMatchingHistoryEntry = (groupings: HistoryGrouping[], info: Add
   return selectedGameGrouping ? selectedGameGrouping.historyItems.find(item =>
     item.game === info.game &&
     item.platform === info.platform &&
-    item.startTime === info.startTime) : undefined;
+    item.startTime === info.startTime)
+    : undefined;
 };

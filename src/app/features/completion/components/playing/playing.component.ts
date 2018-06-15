@@ -17,7 +17,7 @@ export class PlayingComponent implements OnInit {
 
   ngOnInit() { }
 
-  // Move this to a utils file and test it
+  // Move these to a utils file and test it
   getDisplayData() {
     const historyListItemMap = new Map<string, HistoryListItem>();
     this.gameGroupings.forEach(grouping => {
@@ -36,7 +36,6 @@ export class PlayingComponent implements OnInit {
         });
       }
     });
-
     return displayData;
   }
 }

@@ -22,10 +22,9 @@ export const getHistoryListItemsMap = (items: HistoryListItem[], keyFunction: Hi
 export const getHistoryGroupingList = (map: HistoryListItemsMap): HistoryGrouping[] => {
   let groupings: HistoryGrouping[] = [];
   map.forEach((value: HistoryListItem[], key: string) => {
-    const elapsedTime = value.map(item => getElapsedTimeInSeconds(item.startTime, item.endTime)).reduce((a, b) => a + b, 0);
     const newGrouping = <HistoryGrouping>{
       key,
-      totalTime: elapsedTime,
+      totalTime: getElapsedTimeFrom(value),
       historyItems: value
     };
     groupings = [...groupings, newGrouping];
@@ -53,4 +52,8 @@ const getFilteredGrouping = (grouping: HistoryGrouping, dateRange: Date[]): Hist
     totalTime,
     historyItems
   };
+};
+
+export const getElapsedTimeFrom = (items: HistoryListItem[]): number => {
+  return items.map(item => getElapsedTimeInSeconds(item.startTime, item.endTime)).reduce((a, b) => a + b, 0);
 };
