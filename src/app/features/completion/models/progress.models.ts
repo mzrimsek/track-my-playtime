@@ -16,6 +16,8 @@ export interface PlayingItem {
 export interface DisplayPlaying {
   item: ProgressItem;
   startEntryData: HistoryListItem;
+  playingItem: PlayingItem;
+  endDates: number[];
 }
 
 export interface CompletedItem {

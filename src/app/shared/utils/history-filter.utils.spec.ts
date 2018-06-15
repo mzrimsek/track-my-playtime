@@ -168,7 +168,8 @@ describe('History Filter Utils', () => {
     it('Should return empty when game matches and platform matches but no start time in range', () => {
       const grouping = getHistoryGrouping(testGame, 2);
       grouping.historyItems = [
-        getHistoryListItem(testGame, 'Some other platform', 6000, 8000)
+        getHistoryListItem(testGame, 'Some other platform', 6000, 8000),
+        getHistoryListItem(testGame, 'Some platform', 1000, 5000)
       ];
       const groupings: HistoryGrouping[] = [grouping];
 
@@ -186,7 +187,7 @@ describe('History Filter Utils', () => {
       ];
       const groupings: HistoryGrouping[] = [grouping];
 
-      const result = filterEndTimes(groupings, getHistoryListItem(testGame, 'Some platform', 900, 1000));
+      const result = filterEndTimes(groupings, getHistoryListItem(testGame, 'Some platform', 100, 800));
 
       expect(result).toEqual([5000]);
     });

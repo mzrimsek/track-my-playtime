@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { FirestoreProgressItem, ProgressService } from './progress.service';
 
-import { AddPlaying } from '../models';
+import { AddPlaying, MarkCompletePayload } from '../models';
 
 describe('ProgressService', () => {
   let service: ProgressService;
@@ -124,6 +124,73 @@ describe('ProgressService', () => {
           startEntryId: newItem.startEntryId,
           endEntryId: ''
         });
+      });
+    });
+  });
+
+  describe('markCompleted', () => {
+    const payload: MarkCompletePayload = {
+      itemId: 'some item id',
+      endEntryId: 'some end entry id'
+    };
+
+    it('Should call progress collection doc with user id', () => {
+      const userId = 'user id';
+      service.markCompleted(userId, payload);
+      expect(progressCollectionStub.doc).toHaveBeenCalledWith(userId);
+    });
+
+    it('Should call progress document collection with "items"', () => {
+      service.markCompleted('', payload);
+      expect(progressDocumentStub.collection).toHaveBeenCalledWith('items');
+    });
+
+    it('Should call item collection doc with payload item id', () => {
+      service.markCompleted('', payload);
+      expect(itemsCollectionStub.doc).toHaveBeenCalledWith(payload.itemId);
+    });
+
+    it('Should call item document update with correct end entry id', () => {
+      service.markCompleted('', payload);
+      expect(itemDocumentStub.update).toHaveBeenCalledWith({ endEntryId: payload.endEntryId });
+    });
+
+    it('Should return correct data', () => {
+      const result = service.markCompleted('', payload);
+      result.subscribe(res => {
+        expect(res).toEqual(payload);
+      });
+    });
+  });
+
+  describe('Remove', () => {
+    it('Should call progress collection doc with user id', () => {
+      const userId = 'user id';
+      service.remove(userId, '');
+      expect(progressCollectionStub.doc).toHaveBeenCalledWith(userId);
+    });
+
+    it('Should call progress document collection with "items"', () => {
+      service.remove('', '');
+      expect(progressDocumentStub.collection).toHaveBeenCalledWith('items');
+    });
+
+    it('Should call item collection doc with item id', () => {
+      const itemId = 'some item id';
+      service.remove('', itemId);
+      expect(itemsCollectionStub.doc).toHaveBeenCalledWith(itemId);
+    });
+
+    it('Should call item document delete', () => {
+      service.remove('', '');
+      expect(itemDocumentStub.delete).toHaveBeenCalled();
+    });
+
+    it('Should return correct data', () => {
+      const itemId = 'some item id';
+      const result = service.remove('', itemId);
+      result.subscribe(res => {
+        expect(res).toBe(itemId);
       });
     });
   });

@@ -1,3 +1,4 @@
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { combineReducers, Store, StoreModule } from '@ngrx/store';
@@ -30,6 +31,7 @@ describe('PlayingItemComponent', () => {
         })
       ],
       providers: [{ provide: UserService, useValue: userServiceStub }],
+      schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
 
     userService = TestBed.get(UserService);
@@ -52,7 +54,14 @@ describe('PlayingItemComponent', () => {
         startTime: 3000,
         endTime: 6000,
         dateRange: [new Date(3000), new Date(6000)]
-      }
+      },
+      playingItem: {
+        game: 'some game',
+        platform: 'some platform',
+        startTime: 3000,
+        timePlayed: 3
+      },
+      endDates: []
     };
     fixture.detectChanges();
   }));

@@ -10,9 +10,7 @@ import * as progressActions from '../../actions/progress.actions';
 import { State } from '../../reducers/root.reducer';
 
 import { HistoryGrouping } from '../../../../shared/models';
-import { DisplayPlaying, PlayingItem } from '../../models';
-
-import { getElapsedTimeFrom } from '../../../../shared/utils/history.utils';
+import { DisplayPlaying } from '../../models';
 
 @Component({
   selector: 'app-completion-playing-item',
@@ -24,32 +22,13 @@ export class PlayingItemComponent implements OnInit {
 
   @Input() displayData: DisplayPlaying;
   @Input() gameGroupings: HistoryGrouping[] = [];
-  dates: number[] = [];
-  showExtra = false;
+  showExtra = true;
   userId = '';
   endTime = 0;
   constructor(private store: Store<State>, private userService: UserService) { }
 
   ngOnInit() {
     this.userId = this.userService.getUser().uid;
-  }
-
-  // move this into some utils and test it
-  getPlaying(): PlayingItem {
-    let timePlayed = 0;
-    const gameGrouping = this.gameGroupings.find(grouping => grouping.key === this.displayData.startEntryData.game);
-    if (gameGrouping) {
-      const filtered = gameGrouping.historyItems.filter(item =>
-        item.platform === this.displayData.startEntryData.platform && item.startTime >= this.displayData.startEntryData.startTime);
-      this.dates = filtered.map(item => item.endTime);
-      timePlayed = getElapsedTimeFrom(filtered);
-    }
-    return {
-      game: this.displayData.startEntryData.game,
-      platform: this.displayData.startEntryData.platform,
-      startTime: this.displayData.startEntryData.startTime,
-      timePlayed
-    };
   }
 
   toggleShowExtra() {

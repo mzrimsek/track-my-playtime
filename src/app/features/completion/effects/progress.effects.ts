@@ -29,7 +29,6 @@ export class ProgressEffects {
       .map(action => action as addPlayingActions.SaveSucceeded)
       .map(action => new progressActions.AddNewProgressItem(action.item));
 
-  // this needs tested
   @Effect() markCompleted$ =
     this.actions$
       .ofType(progressActions.MARK_COMPLETE)
@@ -37,4 +36,12 @@ export class ProgressEffects {
       .switchMap(action => this.progressService.markCompleted(action.userId, action.payload)
         .map(data => new progressActions.MarkCompleteSucceeded(data))
         .catch(err => Observable.of(new appActions.Error(progressActions.MARK_COMPLETE, err.message))));
+
+  @Effect() removeProgressItem$ =
+    this.actions$
+      .ofType(progressActions.REMOVE_PROGRESS_ITEM)
+      .map(action => action as progressActions.RemoveProgressItem)
+      .switchMap(action => this.progressService.remove(action.userId, action.itemId)
+        .map(data => new progressActions.RemoveProgressItemSucceeded(data))
+        .catch(err => Observable.of(new appActions.Error(progressActions.REMOVE_PROGRESS_ITEM, err.message))));
 }

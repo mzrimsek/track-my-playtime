@@ -29,6 +29,17 @@ export class ProgressService {
     return Observable.of(newItem as ProgressEntity);
   }
 
+  markCompleted(userId: string, payload: MarkCompletePayload): Observable<MarkCompletePayload> {
+    const { itemId, endEntryId } = payload;
+    this.getUserItemCollection(userId).doc(itemId).update({ endEntryId });
+    return Observable.of(payload);
+  }
+
+  remove(userId: string, itemId: string): Observable<string> {
+    this.getUserItemCollection(userId).doc(itemId).delete();
+    return Observable.of(itemId);
+  }
+
   getNewProgressItem(addPlaying: AddPlaying): FirestoreProgressItem {
     const id = getUUID(addPlaying.userId);
     return {
@@ -36,11 +47,6 @@ export class ProgressService {
       startEntryId: addPlaying.startEntryId,
       endEntryId: ''
     };
-  }
-
-  markCompleted(userId: string, payload: MarkCompletePayload): Observable<MarkCompletePayload> {
-    // update item with end value
-    return Observable.of(payload);
   }
 
   private getUserItemCollection(userId: string): AngularFirestoreCollection<FirestoreProgressItem> {
