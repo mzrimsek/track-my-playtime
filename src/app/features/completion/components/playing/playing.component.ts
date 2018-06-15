@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 
-import { HistoryGrouping, HistoryListItem } from '../../../../shared/models';
-import { DisplayPlaying, PlayingItem, ProgressItem } from '../../models';
+import { HistoryGrouping } from '../../../../shared/models';
+import { PlayingDisplayData, ProgressItem } from '../../models';
 
-import { getElapsedTimeFrom } from '../../../../shared/utils/history.utils';
+import { getHistoryListItemMap, getPlayingDisplayData } from '../../utils/playing.utils';
 
 @Component({
   selector: 'app-completion-playing',
@@ -19,42 +19,17 @@ export class PlayingComponent implements OnInit {
 
   ngOnInit() { }
 
-  // Move these to a utils file and test it
   getDisplayData() {
-    const historyListItemMap = new Map<string, HistoryListItem>();
-    this.gameGroupings.forEach(grouping => {
-      grouping.historyItems.forEach(item => {
-        historyListItemMap.set(item.id, item);
-      });
-    });
+    const historyListItemMap = getHistoryListItemMap(this.gameGroupings);
 
-    const displayData: DisplayPlaying[] = [];
+    const displayData: PlayingDisplayData[] = [];
     this.items.forEach(item => {
       const startEntryData = historyListItemMap.get(item.startEntryId);
-
       if (startEntryData) {
-        let timePlayed = 0;
-        let endDates: number[] = [];
-        const gameGrouping = this.gameGroupings.find(grouping => grouping.key === startEntryData.game);
-        if (gameGrouping) {
-          const filtered = gameGrouping.historyItems.filter(historyItem =>
-            historyItem.platform === startEntryData.platform && historyItem.startTime > startEntryData.startTime);
-          endDates = filtered.map(historyItem => historyItem.endTime);
-          timePlayed = getElapsedTimeFrom(filtered);
+        const displayDataItem = getPlayingDisplayData(item, this.gameGroupings, startEntryData);
+        if (displayDataItem) {
+          displayData.push(displayDataItem);
         }
-        const playingItem: PlayingItem = {
-          game: startEntryData.game,
-          platform: startEntryData.platform,
-          startTime: startEntryData.startTime,
-          timePlayed
-        };
-
-        displayData.push({
-          item,
-          startEntryData,
-          playingItem,
-          endDates
-        });
       }
     });
     return displayData;

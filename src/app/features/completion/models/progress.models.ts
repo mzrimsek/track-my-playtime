@@ -13,7 +13,7 @@ export interface PlayingItem {
   timePlayed: number;
 }
 
-export interface DisplayPlaying {
+export interface PlayingDisplayData {
   item: ProgressItem;
   startEntryData: HistoryListItem;
   playingItem: PlayingItem;

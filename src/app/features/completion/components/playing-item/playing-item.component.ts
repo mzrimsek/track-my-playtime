@@ -10,7 +10,7 @@ import * as progressActions from '../../actions/progress.actions';
 import { State } from '../../reducers/root.reducer';
 
 import { HistoryGrouping } from '../../../../shared/models';
-import { DisplayPlaying } from '../../models';
+import { PlayingDisplayData } from '../../models';
 
 @Component({
   selector: 'app-completion-playing-item',
@@ -20,7 +20,7 @@ import { DisplayPlaying } from '../../models';
 })
 export class PlayingItemComponent implements OnInit {
 
-  @Input() displayData: DisplayPlaying;
+  @Input() displayData: PlayingDisplayData;
   @Input() gameGroupings: HistoryGrouping[] = [];
   showExtra = true;
   userId = '';
