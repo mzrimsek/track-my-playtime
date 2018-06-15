@@ -44,3 +44,11 @@ export const getPlayingDisplayData =
       endDates
     };
   };
+
+export const getEndItem = (gameGroupings: HistoryGrouping[], startItem: HistoryListItem, endTime: number): HistoryListItem | undefined => {
+  const gameGrouping = gameGroupings.find(grouping => grouping.key === startItem.game);
+  return gameGrouping ? gameGrouping.historyItems.find(item =>
+    item.game === startItem.game &&
+    item.platform === startItem.platform &&
+    item.endTime === endTime) : undefined;
+};

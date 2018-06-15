@@ -2,8 +2,8 @@ import { HistoryGrouping, HistoryListItem } from '../../../shared/models';
 import { ProgressItem } from '../models';
 
 import {
-    filterHistoryItemsFrom, getHistoryListItemMap, getPlayingDisplayData, getPlayingItem,
-    HistoryListItemMap
+    filterHistoryItemsFrom, getEndItem, getHistoryListItemMap, getPlayingDisplayData,
+    getPlayingItem, HistoryListItemMap
 } from './playing.utils';
 
 describe('Playing Utils', () => {
@@ -147,6 +147,54 @@ describe('Playing Utils', () => {
           timePlayed: 2
         },
         endDates: [6000, 4000]
+      });
+    });
+  });
+
+  describe('getEndItem', () => {
+    it('Should return undefined when there are no groupings', () => {
+      const startEntry: HistoryListItem = {
+        id: '1',
+        game: testGame,
+        platform: 'Platform 1',
+        startTime: 2000,
+        endTime: 2500,
+        dateRange: [new Date(2000), new Date(2500)]
+      };
+      const result = getEndItem([], startEntry, 0);
+      expect(result).toBeUndefined();
+    });
+
+    it('Should return undefined when there is no match', () => {
+      const startEntry: HistoryListItem = {
+        id: '1',
+        game: testGame,
+        platform: 'Platform 1',
+        startTime: 2000,
+        endTime: 2500,
+        dateRange: [new Date(2000), new Date(2500)]
+      };
+      const result = getEndItem(testGroupings, startEntry, 0);
+      expect(result).toBeUndefined();
+    });
+
+    it('Should return correct history item when there is a match', () => {
+      const startEntry: HistoryListItem = {
+        id: '1',
+        game: testGame,
+        platform: 'Platform 1',
+        startTime: 2000,
+        endTime: 2500,
+        dateRange: [new Date(2000), new Date(2500)]
+      };
+      const result = getEndItem(testGroupings, startEntry, 6000);
+      expect(result).toEqual({
+        id: '3',
+        game: testGame,
+        platform: 'Platform 1',
+        startTime: 5000,
+        endTime: 6000,
+        dateRange: [new Date(5000), new Date(6000)]
       });
     });
   });

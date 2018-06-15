@@ -12,6 +12,8 @@ import { State } from '../../reducers/root.reducer';
 import { HistoryGrouping } from '../../../../shared/models';
 import { PlayingDisplayData } from '../../models';
 
+import { getEndItem } from '../../utils/playing.utils';
+
 @Component({
   selector: 'app-completion-playing-item',
   templateUrl: './playing-item.component.html',
@@ -39,24 +41,15 @@ export class PlayingItemComponent implements OnInit {
     this.store.dispatch(new progressActions.RemoveProgressItem(this.userId, this.displayData.item.id));
   }
 
-  // move this to some utils and test it
   markComplete() {
-    const gameGrouping = this.gameGroupings.find(grouping => grouping.key === this.displayData.startEntryData.game);
-    if (gameGrouping) {
-      const endItem = gameGrouping.historyItems.find(item =>
-        item.game === this.displayData.startEntryData.game &&
-        item.platform === this.displayData.startEntryData.platform &&
-        item.endTime === this.endTime);
-      if (endItem) {
-        this.store.dispatch(new progressActions.MarkComplete(this.userId, {
-          itemId: this.displayData.item.id,
-          endEntryId: endItem.id
-        }));
-      } else {
-        this.store.dispatch(new appActions.Error(progressActions.MARK_COMPLETE, 'No matching history item found.'));
-      }
+    const endItem = getEndItem(this.gameGroupings, this.displayData.startEntryData, this.endTime);
+    if (endItem) {
+      this.store.dispatch(new progressActions.MarkComplete(this.userId, {
+        itemId: this.displayData.item.id,
+        endEntryId: endItem.id
+      }));
     } else {
-      this.store.dispatch(new appActions.Error(progressActions.MARK_COMPLETE, 'No matching history grouping found.'));
+      this.store.dispatch(new appActions.Error(progressActions.MARK_COMPLETE, 'No matching history item found.'));
     }
   }
 
