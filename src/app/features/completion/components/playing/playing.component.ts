@@ -27,9 +27,7 @@ export class PlayingComponent implements OnInit {
       const startEntryData = historyListItemMap.get(item.startEntryId);
       if (startEntryData) {
         const displayDataItem = getPlayingDisplayData(item, this.gameGroupings, startEntryData);
-        if (displayDataItem) {
-          displayData.push(displayDataItem);
-        }
+        displayData.push(displayDataItem);
       }
     });
     return displayData;
