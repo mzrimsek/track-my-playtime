@@ -44,7 +44,7 @@ export const filterGroupingsByDateRange = (groupings: HistoryGrouping[], dateRan
   return groupingsToGraph;
 };
 
-const getFilteredGrouping = (grouping: HistoryGrouping, dateRange: Date[]): HistoryGrouping => {
+export const getFilteredGrouping = (grouping: HistoryGrouping, dateRange: Date[]): HistoryGrouping => {
   const historyItems = grouping.historyItems.filter(item => isInDateRange(item.dateRange[0], dateRange));
   const totalTime = historyItems.map(item => getElapsedTimeInSeconds(item.startTime, item.endTime)).reduce((a, b) => a + b, 0);
   return {

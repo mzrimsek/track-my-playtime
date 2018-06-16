@@ -3,7 +3,8 @@ import { addDays, eachDay, subDays } from 'date-fns';
 import { HistoryGrouping, HistoryListItem } from '../models';
 
 import {
-    filterGroupingsByDateRange, getElapsedTimeFrom, getHistoryGroupingList, getHistoryListItemsMap
+    filterGroupingsByDateRange, getElapsedTimeFrom, getFilteredGrouping, getHistoryGroupingList,
+    getHistoryListItemsMap
 } from './history.utils';
 
 describe('History Utils', () => {
@@ -116,7 +117,7 @@ describe('History Utils', () => {
     });
   });
 
-  describe('filterGroupingsByDateRange', () => {
+  describe('getFilteredGrouping', () => {
     const start = new Date(2018, 3, 1);
     const end = addDays(start, 6);
     const inRange = addDays(start, 3);
@@ -141,7 +142,77 @@ describe('History Utils', () => {
         id: 'some id'
       }];
 
-      const result = filterGroupingsByDateRange([grouping], range);
+      const result = getFilteredGrouping(grouping, range);
+
+      expect(result).toEqual({
+        key: game,
+        totalTime: 0,
+        historyItems: [{
+          id: 'some id 3',
+          game,
+          platform: 'some platform',
+          startTime: inRange.getTime(),
+          endTime: inRange.getTime(),
+          dateRange: [
+            inRange,
+            inRange
+          ]
+        }, {
+          id: 'some id 2',
+          game,
+          platform: 'some platform',
+          startTime: start.getTime(),
+          endTime: start.getTime(),
+          dateRange: [
+            start,
+            start
+          ]
+        }]
+      });
+    });
+  });
+
+  describe('filterGroupingsByDateRange', () => {
+    const start = new Date(2018, 3, 1);
+    const end = addDays(start, 6);
+    const inRange = addDays(start, 3);
+    const outOfRangeAhead = addDays(start, 15);
+    const outOfRangeBehind = subDays(start, 3);
+    const range = eachDay(start, end);
+    const game = 'some game';
+
+    it('Should filter history items outside of date range', () => {
+      const grouping1 = getHistoryGrouping(game, 0);
+      grouping1.historyItems = [{
+        ...getHistoryListItem(game, 'some platform', outOfRangeAhead.getTime(), outOfRangeAhead.getTime()),
+        id: 'some id 4'
+      }, {
+        ...getHistoryListItem(game, 'some platform', inRange.getTime(), inRange.getTime()),
+        id: 'some id 3'
+      }, {
+        ...getHistoryListItem(game, 'some platform', start.getTime(), start.getTime()),
+        id: 'some id 2'
+      }, {
+        ...getHistoryListItem(game, 'some platform', outOfRangeBehind.getTime(), outOfRangeBehind.getTime()),
+        id: 'some id'
+      }];
+
+      const grouping2 = getHistoryGrouping(game, 0);
+      grouping2.historyItems = [{
+        ...getHistoryListItem(game, 'some platform', inRange.getTime() + 1000, inRange.getTime() + 1000),
+        id: 'some id 8'
+      }, {
+        ...getHistoryListItem(game, 'some platform', inRange.getTime(), inRange.getTime()),
+        id: 'some id 7'
+      }, {
+        ...getHistoryListItem(game, 'some platform', start.getTime(), start.getTime()),
+        id: 'some id 6'
+      }, {
+        ...getHistoryListItem(game, 'some platform', outOfRangeBehind.getTime(), outOfRangeBehind.getTime()),
+        id: 'some id 5'
+      }];
+
+      const result = filterGroupingsByDateRange([grouping1, grouping2], range);
 
       expect(result).toEqual([{
         key: game,
@@ -158,6 +229,40 @@ describe('History Utils', () => {
           ]
         }, {
           id: 'some id 2',
+          game,
+          platform: 'some platform',
+          startTime: start.getTime(),
+          endTime: start.getTime(),
+          dateRange: [
+            start,
+            start
+          ]
+        }]
+      }, {
+        key: game,
+        totalTime: 0,
+        historyItems: [{
+          id: 'some id 8',
+          game,
+          platform: 'some platform',
+          startTime: inRange.getTime() + 1000,
+          endTime: inRange.getTime() + 1000,
+          dateRange: [
+            new Date(inRange.getTime() + 1000),
+            new Date(inRange.getTime() + 1000)
+          ]
+        }, {
+          id: 'some id 7',
+          game,
+          platform: 'some platform',
+          startTime: inRange.getTime(),
+          endTime: inRange.getTime(),
+          dateRange: [
+            inRange,
+            inRange
+          ]
+        }, {
+          id: 'some id 6',
           game,
           platform: 'some platform',
           startTime: start.getTime(),
