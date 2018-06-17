@@ -54,6 +54,6 @@ export class PlayingItemComponent implements OnInit {
   }
 
   setEndTime(endTimeEl: HTMLSelectElement) {
-    this.endTime = endTimeEl.value === '0' ? 0 : Number.parseInt(endTimeEl.value);
+    this.endTime = Number.parseInt(endTimeEl.value);
   }
 }
