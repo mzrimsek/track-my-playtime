@@ -24,7 +24,7 @@ export class PlayingItemComponent implements OnInit {
 
   @Input() displayData: PlayingDisplayData;
   @Input() gameGroupings: HistoryGrouping[] = [];
-  showExtra = true;
+  showExtra = false;
   userId = '';
   constructor(private store: Store<State>, private userService: UserService) { }
 
