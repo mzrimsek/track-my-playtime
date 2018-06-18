@@ -9,13 +9,11 @@
 </div>
 <div *ngIf="showExtra">
   <select data-tracking-category="markCompletedEndTime"
-          #endTimeEl
-          [value]="endTime"
-          (change)="setEndTime(endTimeEl)">
+          #endTimeEl>
     <option value="0">End Time</option>
     <option *ngFor="let option of displayData.endDates"
             value="{{ option }}">{{ option | date:'M/d/y hh:mm a' }}</option>
   </select>
   <button data-tracking-category="markCompletedSave"
-          (click)="markComplete()">Mark Completed</button>
+          (click)="markComplete(endTimeEl)">Mark Completed</button>
 </div>

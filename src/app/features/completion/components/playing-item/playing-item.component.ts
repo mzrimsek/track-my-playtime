@@ -26,7 +26,6 @@ export class PlayingItemComponent implements OnInit {
   @Input() gameGroupings: HistoryGrouping[] = [];
   showExtra = true;
   userId = '';
-  endTime = 0;
   constructor(private store: Store<State>, private userService: UserService) { }
 
   ngOnInit() {
@@ -41,8 +40,9 @@ export class PlayingItemComponent implements OnInit {
     this.store.dispatch(new progressActions.RemoveProgressItem(this.userId, this.displayData.item.id));
   }
 
-  markComplete() {
-    const endItem = getEndItem(this.gameGroupings, this.displayData.startEntryData, this.endTime);
+  markComplete(endTimeEl: HTMLSelectElement) {
+    const endTime = Number.parseInt(endTimeEl.value);
+    const endItem = getEndItem(this.gameGroupings, this.displayData.startEntryData, endTime);
     if (endItem) {
       this.store.dispatch(new progressActions.MarkComplete(this.userId, {
         itemId: this.displayData.item.id,
@@ -51,9 +51,5 @@ export class PlayingItemComponent implements OnInit {
     } else {
       this.store.dispatch(new appActions.Error(progressActions.MARK_COMPLETE, 'No matching history item found.'));
     }
-  }
-
-  setEndTime(endTimeEl: HTMLSelectElement) {
-    this.endTime = Number.parseInt(endTimeEl.value);
   }
 }
