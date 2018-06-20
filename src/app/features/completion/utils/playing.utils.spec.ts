@@ -51,7 +51,7 @@ describe('Playing Utils', () => {
         historyItems: [],
         totalTime: 0
       }, {
-          id: '1',
+          id: 'some id',
           game: testGame,
           platform: 'Platform 1',
           startTime: 6000,
@@ -63,7 +63,7 @@ describe('Playing Utils', () => {
 
     it('Should return empty if there are groupings but no match', () => {
       const result = filterHistoryItemsFrom(testGroupings[0], {
-        id: '1',
+        id: 'some id',
         game: testGame,
         platform: 'Platform 1',
         startTime: 6000,
@@ -75,12 +75,12 @@ describe('Playing Utils', () => {
 
     it('Should return correctly filtered items when there is a match', () => {
       const result = filterHistoryItemsFrom(testGroupings[0], {
-        id: '1',
+        id: 'some id',
         game: testGame,
         platform: 'Platform 1',
-        startTime: 2000,
-        endTime: 2500,
-        dateRange: [new Date(2000), new Date(2500)]
+        startTime: 3000,
+        endTime: 4000,
+        dateRange: [new Date(3000), new Date(4000)]
       });
       expect(result).toEqual([{
         id: '3',
@@ -103,7 +103,7 @@ describe('Playing Utils', () => {
   describe('getPlayingItem', () => {
     it('Should return correct data', () => {
       const result = getPlayingItem(testGroupings[0].historyItems, {
-        id: '1',
+        id: 'some id',
         game: testGame,
         platform: 'Platform 1',
         startTime: 2000,
@@ -154,7 +154,7 @@ describe('Playing Utils', () => {
   describe('getEndItem', () => {
     it('Should return undefined when there are no groupings', () => {
       const startEntry: HistoryListItem = {
-        id: '1',
+        id: 'some id',
         game: testGame,
         platform: 'Platform 1',
         startTime: 2000,
@@ -167,7 +167,7 @@ describe('Playing Utils', () => {
 
     it('Should return undefined when there is no match', () => {
       const startEntry: HistoryListItem = {
-        id: '1',
+        id: 'some id',
         game: testGame,
         platform: 'Platform 1',
         startTime: 2000,
@@ -180,7 +180,7 @@ describe('Playing Utils', () => {
 
     it('Should return correct history item when there is a match', () => {
       const startEntry: HistoryListItem = {
-        id: '1',
+        id: 'some id',
         game: testGame,
         platform: 'Platform 1',
         startTime: 2000,

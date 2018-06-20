@@ -17,7 +17,7 @@ export const getHistoryListItemMap = (gameGroupings: HistoryGrouping[]): History
 
 export const filterHistoryItemsFrom = (grouping: HistoryGrouping | undefined, startEntry: HistoryListItem): HistoryListItem[] => {
   return grouping ? grouping.historyItems.filter(historyItem =>
-    historyItem.platform === startEntry.platform && historyItem.startTime > startEntry.startTime) : [];
+    historyItem.platform === startEntry.platform && historyItem.startTime >= startEntry.startTime) : [];
 };
 
 export const getPlayingItem = (historyItems: HistoryListItem[], startEntry: HistoryListItem): PlayingItem => {
