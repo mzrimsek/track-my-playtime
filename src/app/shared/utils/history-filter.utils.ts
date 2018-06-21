@@ -25,3 +25,8 @@ export const filterEndTimes = (groupings: HistoryGrouping[], startItem: HistoryL
     .filter(item => item.platform === startItem.platform && item.startTime > startItem.startTime)
     .map(item => item.endTime).reverse() : [];
 };
+
+export const filterHistoryItemsFrom = (grouping: HistoryGrouping | undefined, startEntry: HistoryListItem): HistoryListItem[] => {
+  return grouping ? grouping.historyItems.filter(historyItem =>
+    historyItem.platform === startEntry.platform && historyItem.startTime >= startEntry.startTime) : [];
+};

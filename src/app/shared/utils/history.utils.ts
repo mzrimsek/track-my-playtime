@@ -3,7 +3,8 @@ import { HistoryGrouping, HistoryListItem } from '../models';
 import { getElapsedTimeInSeconds, isInDateRange } from './date.utils';
 
 export type HistoryListItemKeyFunction = (item: HistoryListItem) => string;
-type HistoryListItemsMap = Map<string, HistoryListItem[]>;
+export type HistoryListItemsMap = Map<string, HistoryListItem[]>;
+export type HistoryListItemMap = Map<string, HistoryListItem>;
 
 export const getHistoryListItemsMap = (items: HistoryListItem[], keyFunction: HistoryListItemKeyFunction): HistoryListItemsMap => {
   const map: HistoryListItemsMap = new Map<string, HistoryListItem[]>();
@@ -56,4 +57,14 @@ export const getFilteredGrouping = (grouping: HistoryGrouping, dateRange: Date[]
 
 export const getElapsedTimeFrom = (items: HistoryListItem[]): number => {
   return items.map(item => getElapsedTimeInSeconds(item.startTime, item.endTime)).reduce((a, b) => a + b, 0);
+};
+
+export const getHistoryListItemMap = (gameGroupings: HistoryGrouping[]): HistoryListItemMap => {
+  const map: HistoryListItemMap = new Map<string, HistoryListItem>();
+  gameGroupings.forEach(grouping => {
+    grouping.historyItems.forEach(item => {
+      map.set(item.id, item);
+    });
+  });
+  return map;
 };

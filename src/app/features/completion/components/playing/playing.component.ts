@@ -3,7 +3,8 @@ import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core
 import { Dictionary, HistoryGrouping } from '../../../../shared/models';
 import { MarkCompleteItem, PlayingDisplayData, ProgressItem } from '../../models';
 
-import { getHistoryListItemMap, getPlayingDisplayData } from '../../utils/playing.utils';
+import { getHistoryListItemMap } from '../../../../shared/utils/history.utils';
+import { getPlayingDisplayData } from '../../utils/playing.utils';
 
 @Component({
   selector: 'app-completion-playing',

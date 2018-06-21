@@ -1,24 +1,8 @@
 import { Dictionary, HistoryGrouping, HistoryListItem } from '../../../shared/models';
 import { MarkCompleteItem, PlayingDisplayData, PlayingItem, ProgressItem } from '../models';
 
+import { filterHistoryItemsFrom } from '../../../shared/utils/history-filter.utils';
 import { getElapsedTimeFrom } from '../../../shared/utils/history.utils';
-
-export type HistoryListItemMap = Map<string, HistoryListItem>;
-
-export const getHistoryListItemMap = (gameGroupings: HistoryGrouping[]): HistoryListItemMap => {
-  const map: HistoryListItemMap = new Map<string, HistoryListItem>();
-  gameGroupings.forEach(grouping => {
-    grouping.historyItems.forEach(item => {
-      map.set(item.id, item);
-    });
-  });
-  return map;
-};
-
-export const filterHistoryItemsFrom = (grouping: HistoryGrouping | undefined, startEntry: HistoryListItem): HistoryListItem[] => {
-  return grouping ? grouping.historyItems.filter(historyItem =>
-    historyItem.platform === startEntry.platform && historyItem.startTime >= startEntry.startTime) : [];
-};
 
 export const getPlayingItem = (historyItems: HistoryListItem[], startEntry: HistoryListItem): PlayingItem => {
   const timePlayed = getElapsedTimeFrom(historyItems);
