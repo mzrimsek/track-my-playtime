@@ -13,7 +13,8 @@
                                 [markCompleteEntities]="markCompleteEntities$ | async"></app-completion-playing>
       </div>
       <div class="completed drop-shadow">
-        <app-completion-completed></app-completion-completed>
+        <app-completion-completed [items]="completed$ | async"
+                                  [gameGroupings]="historyGroupings$ | async"></app-completion-completed>
       </div>
     </div>
   </div>

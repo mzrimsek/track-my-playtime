@@ -1,3 +1,8 @@
-<p>
-  completed-item works!
-</p>
+<div>
+  {{ displayData.completedItem.game }} {{ displayData.completedItem.platform }} {{ displayData.completedItem.startTime | date:'M/d/y
+  hh:mm a' }} {{ displayData.completedItem.endTime | date:'M/d/y hh:mm a' }} {{ displayData.completedItem.timePlayed | time
+  }}
+
+  <button data-tracking-category="completedRemove"
+          (click)="remove()"> Some remove icon</button>
+</div>

@@ -1,4 +1,14 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+
+import { Store } from '@ngrx/store';
+
+import { UserService } from '../../../auth/services/user.service';
+
+import * as progressActions from '../../actions/progress.actions';
+
+import { State } from '../../reducers/root.reducer';
+
+import { CompletedDisplayData } from '../../models';
 
 @Component({
   selector: 'app-completion-completed-item',
@@ -8,7 +18,15 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 })
 export class CompletedItemComponent implements OnInit {
 
-  constructor() { }
+  @Input() displayData: CompletedDisplayData;
+  userId = '';
+  constructor(private store: Store<State>, private userService: UserService) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.userId = this.userService.getUser().uid;
+  }
+
+  remove() {
+    this.store.dispatch(new progressActions.RemoveProgressItem(this.userId, this.displayData.item.id));
+  }
 }
