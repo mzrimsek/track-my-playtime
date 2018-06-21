@@ -31,10 +31,9 @@ export interface CompletedItem {
   timePlayed: number;
 }
 
-export interface DisplayCompleted {
+export interface CompletedDisplayData {
   item: ProgressItem;
-  startEntryData: HistoryListItem;
-  endEntryData: HistoryListItem;
+  completedItem: CompletedItem;
 }
 
 export interface MarkCompletePayload {

@@ -19,14 +19,13 @@ export const filterStartTimes = (groupings: HistoryGrouping[], game: string | nu
     .map(item => item.startTime).reverse() : [];
 };
 
-export const filterEndTimes = (groupings: HistoryGrouping[], startItem: HistoryListItem): number[] => {
-  const selectedGameGrouping = groupings.find(grouping => grouping.key === startItem.game);
-  return selectedGameGrouping ? selectedGameGrouping.historyItems
-    .filter(item => item.platform === startItem.platform && item.startTime > startItem.startTime)
-    .map(item => item.endTime).reverse() : [];
-};
-
-export const filterHistoryItemsFrom = (grouping: HistoryGrouping | undefined, startEntry: HistoryListItem): HistoryListItem[] => {
+export const filterHistoryItemsAfter = (grouping: HistoryGrouping | undefined, startEntry: HistoryListItem): HistoryListItem[] => {
   return grouping ? grouping.historyItems.filter(historyItem =>
     historyItem.platform === startEntry.platform && historyItem.startTime >= startEntry.startTime) : [];
 };
+
+export const filterHistoryItemsBetween =
+  (grouping: HistoryGrouping | undefined, startEntry: HistoryListItem, endEntry: HistoryListItem): HistoryListItem[] => {
+    const filtered = filterHistoryItemsAfter(grouping, startEntry);
+    return filtered.filter(item => item.endTime <= endEntry.endTime);
+  };

@@ -1,10 +1,10 @@
 import { Dictionary, HistoryGrouping, HistoryListItem } from '../../../shared/models';
 import { MarkCompleteItem, PlayingDisplayData, PlayingItem, ProgressItem } from '../models';
 
-import { filterHistoryItemsFrom } from '../../../shared/utils/history-filter.utils';
+import { filterHistoryItemsAfter } from '../../../shared/utils/history-filter.utils';
 import { getElapsedTimeFrom } from '../../../shared/utils/history.utils';
 
-export const getPlayingItem = (historyItems: HistoryListItem[], startEntry: HistoryListItem): PlayingItem => {
+const getPlayingItem = (historyItems: HistoryListItem[], startEntry: HistoryListItem): PlayingItem => {
   const timePlayed = getElapsedTimeFrom(historyItems);
   return {
     game: startEntry.game,
@@ -19,7 +19,7 @@ export const getPlayingDisplayData = (item: ProgressItem,
   startEntryData: HistoryListItem,
   markCompleteEntities: Dictionary<MarkCompleteItem>): PlayingDisplayData => {
   const gameGrouping = gameGroupings.find(grouping => grouping.key === startEntryData.game);
-  const filtered = filterHistoryItemsFrom(gameGrouping, startEntryData);
+  const filtered = filterHistoryItemsAfter(gameGrouping, startEntryData);
   const endDates = filtered.map(historyItem => historyItem.endTime);
   const playingItem = getPlayingItem(filtered, startEntryData);
   const markComplete = markCompleteEntities[item.id];

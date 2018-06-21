@@ -1,28 +1,9 @@
 import { Dictionary, HistoryGrouping, HistoryListItem } from '../../../shared/models';
 import { MarkCompleteItem, ProgressItem } from '../models';
 
-import { getEndItem, getPlayingDisplayData, getPlayingItem } from './playing.utils';
+import { getEndItem, getPlayingDisplayData } from './playing.utils';
 
 describe('Playing Utils', () => {
-  describe('getPlayingItem', () => {
-    it('Should return correct data', () => {
-      const result = getPlayingItem(testGroupings[0].historyItems, {
-        id: 'some id',
-        game: testGame,
-        platform: 'Platform 1',
-        startTime: 2000,
-        endTime: 2500,
-        dateRange: [new Date(2000), new Date(2500)]
-      });
-      expect(result).toEqual({
-        game: testGame,
-        platform: 'Platform 1',
-        startTime: 2000,
-        timePlayed: 3
-      });
-    });
-  });
-
   describe('getPlayingDisplayData', () => {
     it('Should return correct data', () => {
       const progressItem: ProgressItem = {
