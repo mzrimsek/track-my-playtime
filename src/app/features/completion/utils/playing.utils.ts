@@ -1,5 +1,5 @@
-import { HistoryGrouping, HistoryListItem } from '../../../shared/models';
-import { PlayingDisplayData, PlayingItem, ProgressItem } from '../models';
+import { Dictionary, HistoryGrouping, HistoryListItem } from '../../../shared/models';
+import { MarkCompleteItem, PlayingDisplayData, PlayingItem, ProgressItem } from '../models';
 
 import { getElapsedTimeFrom } from '../../../shared/utils/history.utils';
 
@@ -30,20 +30,24 @@ export const getPlayingItem = (historyItems: HistoryListItem[], startEntry: Hist
   };
 };
 
-export const getPlayingDisplayData =
-  (item: ProgressItem, gameGroupings: HistoryGrouping[], startEntryData: HistoryListItem): PlayingDisplayData => {
-    const gameGrouping = gameGroupings.find(grouping => grouping.key === startEntryData.game);
-    const filtered = filterHistoryItemsFrom(gameGrouping, startEntryData);
-    const endDates = filtered.map(historyItem => historyItem.endTime);
-    const playingItem = getPlayingItem(filtered, startEntryData);
+export const getPlayingDisplayData = (item: ProgressItem,
+  gameGroupings: HistoryGrouping[],
+  startEntryData: HistoryListItem,
+  markCompleteEntities: Dictionary<MarkCompleteItem>): PlayingDisplayData => {
+  const gameGrouping = gameGroupings.find(grouping => grouping.key === startEntryData.game);
+  const filtered = filterHistoryItemsFrom(gameGrouping, startEntryData);
+  const endDates = filtered.map(historyItem => historyItem.endTime);
+  const playingItem = getPlayingItem(filtered, startEntryData);
+  const markComplete = markCompleteEntities[item.id];
 
-    return {
-      item,
-      startEntryData,
-      playingItem,
-      endDates
-    };
+  return {
+    item,
+    startEntryData,
+    playingItem,
+    endDates,
+    markComplete
   };
+};
 
 export const getEndItem = (gameGroupings: HistoryGrouping[], startItem: HistoryListItem, endTime: number): HistoryListItem | undefined => {
   const gameGrouping = gameGroupings.find(grouping => grouping.key === startItem.game);

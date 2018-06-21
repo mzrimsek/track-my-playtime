@@ -1,5 +1,5 @@
-import { HistoryGrouping, HistoryListItem } from '../../../shared/models';
-import { ProgressItem } from '../models';
+import { Dictionary, HistoryGrouping, HistoryListItem } from '../../../shared/models';
+import { MarkCompleteItem, ProgressItem } from '../models';
 
 import {
     filterHistoryItemsFrom, getEndItem, getHistoryListItemMap, getPlayingDisplayData,
@@ -134,8 +134,15 @@ describe('Playing Utils', () => {
         endTime: 2500,
         dateRange: [new Date(2000), new Date(2500)]
       };
+      const entities: Dictionary<MarkCompleteItem> = {
+        'some id': {
+          id: 'some id',
+          showExtra: false,
+          endTime: 0
+        }
+      };
 
-      const result = getPlayingDisplayData(progressItem, testGroupings, startEntry);
+      const result = getPlayingDisplayData(progressItem, testGroupings, startEntry, entities);
 
       expect(result).toEqual({
         item: progressItem,
@@ -146,7 +153,12 @@ describe('Playing Utils', () => {
           startTime: 2000,
           timePlayed: 2
         },
-        endDates: [6000, 4000]
+        endDates: [6000, 4000],
+        markComplete: {
+          id: 'some id',
+          showExtra: false,
+          endTime: 0
+        }
       });
     });
   });

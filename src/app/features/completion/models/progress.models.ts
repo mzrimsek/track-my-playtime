@@ -1,5 +1,7 @@
 import { HistoryListItem } from '../../../shared/models';
 
+import { MarkCompleteItem } from './mark-complete.model';
+
 export interface ProgressItem {
   id: string;
   startEntryId: string;
@@ -18,6 +20,7 @@ export interface PlayingDisplayData {
   startEntryData: HistoryListItem;
   playingItem: PlayingItem;
   endDates: number[];
+  markComplete: MarkCompleteItem;
 }
 
 export interface CompletedItem {

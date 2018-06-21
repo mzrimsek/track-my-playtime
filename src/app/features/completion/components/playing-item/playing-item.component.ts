@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { UserService } from '../../../auth/services/user.service';
 
 import * as appActions from '../../../../actions/app.actions';
+import * as markCompleteActions from '../../actions/mark-complete.actions';
 import * as progressActions from '../../actions/progress.actions';
 
 import { State } from '../../reducers/root.reducer';
@@ -24,7 +25,6 @@ export class PlayingItemComponent implements OnInit {
 
   @Input() displayData: PlayingDisplayData;
   @Input() gameGroupings: HistoryGrouping[] = [];
-  showExtra = false;
   userId = '';
   constructor(private store: Store<State>, private userService: UserService) { }
 
@@ -33,16 +33,20 @@ export class PlayingItemComponent implements OnInit {
   }
 
   toggleShowExtra() {
-    this.showExtra = !this.showExtra;
+    this.store.dispatch(new markCompleteActions.SetShowExtra(this.displayData.item.id, !this.displayData.markComplete.showExtra));
   }
 
   remove() {
     this.store.dispatch(new progressActions.RemoveProgressItem(this.userId, this.displayData.item.id));
   }
 
-  markComplete(endTimeEl: HTMLSelectElement) {
+  setEndTime(endTimeEl: HTMLSelectElement) {
     const endTime = Number.parseInt(endTimeEl.value);
-    const endItem = getEndItem(this.gameGroupings, this.displayData.startEntryData, endTime);
+    this.store.dispatch(new markCompleteActions.SetEndTime(this.displayData.item.id, endTime));
+  }
+
+  markComplete() {
+    const endItem = getEndItem(this.gameGroupings, this.displayData.startEntryData, this.displayData.markComplete.endTime);
     if (endItem) {
       this.store.dispatch(new progressActions.MarkComplete(this.userId, {
         itemId: this.displayData.item.id,

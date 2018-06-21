@@ -11,6 +11,7 @@ import * as historyActions from '../../../shared/actions/history.actions';
 import * as platformsActions from '../../../shared/actions/platforms.actions';
 import * as userActions from '../../auth/actions/user.actions';
 import * as addPlayingActions from '../../completion/actions/add-playing.actions';
+import * as markCompleteActions from '../../completion/actions/mark-complete.actions';
 import * as progressActions from '../../completion/actions/progress.actions';
 
 import '../../../rxjs-operators';
@@ -59,11 +60,12 @@ describe('Auth Effects', () => {
   describe('Logout', () => {
     it('Should dispatch actions to clear user data', () => {
       actions = hot('-a', { a: new userActions.Logout() });
-      const expected = cold('-(bcde)', {
+      const expected = cold('-(bcdef)', {
         b: new historyActions.ClearHistoryItems(),
         c: new timerActions.ResetTimer(),
         d: new progressActions.ClearProgressItems(),
-        e: new addPlayingActions.Reset()
+        e: new addPlayingActions.Reset(),
+        f: new markCompleteActions.ClearItems()
       });
 
       expect(effects.logout$).toBeObservable(expected);

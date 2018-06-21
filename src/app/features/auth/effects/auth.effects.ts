@@ -7,6 +7,7 @@ import * as historyActions from '../../../shared/actions/history.actions';
 import * as platformsActions from '../../../shared/actions/platforms.actions';
 import * as userActions from '../../auth/actions/user.actions';
 import * as addPlayingActions from '../../completion/actions/add-playing.actions';
+import * as markCompleteActions from '../../completion/actions/mark-complete.actions';
 import * as progressActions from '../../completion/actions/progress.actions';
 
 @Injectable()
@@ -32,6 +33,7 @@ export class AuthEffects {
         new historyActions.ClearHistoryItems(),
         new timerActions.ResetTimer(),
         new progressActions.ClearProgressItems(),
-        new addPlayingActions.Reset()
+        new addPlayingActions.Reset(),
+        new markCompleteActions.ClearItems()
       ]);
 }

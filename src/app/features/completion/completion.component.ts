@@ -7,8 +7,8 @@ import { Observable } from 'rxjs/Observable';
 import sharedSelectors, { State as SharedState } from '../../shared/reducers/root.reducer';
 import completionSelectors, { State as CompletionState } from './reducers/root.reducer';
 
-import { HistoryGrouping } from '../../shared/models';
-import { AddPlayingInfo, ProgressItem } from './models';
+import { Dictionary, HistoryGrouping } from '../../shared/models';
+import { AddPlayingInfo, MarkCompleteItem, ProgressItem } from './models';
 
 @Component({
   selector: 'app-completion',
@@ -24,6 +24,8 @@ export class CompletionComponent implements OnInit {
 
   playing$: Observable<ProgressItem[]>;
   completed$: Observable<ProgressItem[]>;
+
+  markCompleteEntities$: Observable<Dictionary<MarkCompleteItem>>;
   constructor(private sharedStore: Store<SharedState>, private completionStore: Store<CompletionState>) { }
 
   ngOnInit() {
@@ -35,5 +37,7 @@ export class CompletionComponent implements OnInit {
 
     this.playing$ = this.completionStore.select(completionSelectors.playing);
     this.completed$ = this.completionStore.select(completionSelectors.completed);
+
+    this.markCompleteEntities$ = this.completionStore.select(completionSelectors.markCompleteEntities);
   }
 }

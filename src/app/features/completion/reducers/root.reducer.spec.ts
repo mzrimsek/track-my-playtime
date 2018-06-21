@@ -1,4 +1,5 @@
 import { State as AddPlayingState } from './add-playing.reducer';
+import { State as MarkCompleteState } from './mark-complete.reducer';
 import { State as ProgressState } from './progress.reducer';
 import {
     _selectAddPlayingInfo, _selectCompletedProgress, _selectPlayingProgress, CompletionState, State
@@ -15,7 +16,8 @@ describe('Completion Root Reducer', () => {
         };
         const completionState: CompletionState = {
           addPlaying,
-          progress: initialProgressState
+          progress: initialProgressState,
+          markComplete: initialMarkCompleteState
         };
         const state: State = { completion: completionState };
 
@@ -31,7 +33,8 @@ describe('Completion Root Reducer', () => {
       it('Should return an empty list when there are no items', () => {
         const completionState: CompletionState = {
           addPlaying: initialAddPlayingState,
-          progress: initialProgressState
+          progress: initialProgressState,
+          markComplete: initialMarkCompleteState
         };
         const state: State = { completion: completionState };
 
@@ -59,7 +62,8 @@ describe('Completion Root Reducer', () => {
         };
         const completionState: CompletionState = {
           addPlaying: initialAddPlayingState,
-          progress
+          progress,
+          markComplete: initialMarkCompleteState
         };
         const state: State = { completion: completionState };
 
@@ -87,7 +91,8 @@ describe('Completion Root Reducer', () => {
         };
         const completionState: CompletionState = {
           addPlaying: initialAddPlayingState,
-          progress
+          progress,
+          markComplete: initialMarkCompleteState
         };
         const state: State = { completion: completionState };
 
@@ -105,7 +110,8 @@ describe('Completion Root Reducer', () => {
       it('Should return an empty list when there are no items', () => {
         const completionState: CompletionState = {
           addPlaying: initialAddPlayingState,
-          progress: initialProgressState
+          progress: initialProgressState,
+          markComplete: initialMarkCompleteState
         };
         const state: State = { completion: completionState };
 
@@ -133,7 +139,8 @@ describe('Completion Root Reducer', () => {
         };
         const completionState: CompletionState = {
           addPlaying: initialAddPlayingState,
-          progress
+          progress,
+          markComplete: initialMarkCompleteState
         };
         const state: State = { completion: completionState };
 
@@ -161,7 +168,8 @@ describe('Completion Root Reducer', () => {
         };
         const completionState: CompletionState = {
           addPlaying: initialAddPlayingState,
-          progress
+          progress,
+          markComplete: initialMarkCompleteState
         };
         const state: State = { completion: completionState };
 
@@ -187,4 +195,9 @@ const initialProgressState: ProgressState = {
   ids: [],
   entities: {},
   loading: false
+};
+
+const initialMarkCompleteState: MarkCompleteState = {
+  ids: [],
+  entities: {}
 };

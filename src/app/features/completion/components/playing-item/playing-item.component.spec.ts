@@ -61,7 +61,12 @@ describe('PlayingItemComponent', () => {
         startTime: 3000,
         timePlayed: 3
       },
-      endDates: []
+      endDates: [],
+      markComplete: {
+        id: '1',
+        showExtra: false,
+        endTime: 0
+      }
     };
     fixture.detectChanges();
   }));

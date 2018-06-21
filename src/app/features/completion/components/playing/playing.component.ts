@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 
-import { HistoryGrouping } from '../../../../shared/models';
-import { PlayingDisplayData, ProgressItem } from '../../models';
+import { Dictionary, HistoryGrouping } from '../../../../shared/models';
+import { MarkCompleteItem, PlayingDisplayData, ProgressItem } from '../../models';
 
 import { getHistoryListItemMap, getPlayingDisplayData } from '../../utils/playing.utils';
 
@@ -15,6 +15,7 @@ export class PlayingComponent implements OnInit {
 
   @Input() items: ProgressItem[] = [];
   @Input() gameGroupings: HistoryGrouping[] = [];
+  @Input() markCompleteEntities: Dictionary<MarkCompleteItem>;
   constructor() { }
 
   ngOnInit() { }
@@ -26,7 +27,7 @@ export class PlayingComponent implements OnInit {
     this.items.forEach(item => {
       const startEntryData = historyListItemMap.get(item.startEntryId);
       if (startEntryData) {
-        const displayDataItem = getPlayingDisplayData(item, this.gameGroupings, startEntryData);
+        const displayDataItem = getPlayingDisplayData(item, this.gameGroupings, startEntryData, this.markCompleteEntities);
         displayData.push(displayDataItem);
       }
     });

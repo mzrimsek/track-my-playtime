@@ -12,6 +12,7 @@ import { ProgressService } from '../services/progress.service';
 
 import * as appActions from '../../../actions/app.actions';
 import * as addPlayingActions from '../actions/add-playing.actions';
+import * as markCompleteActions from '../actions/mark-complete.actions';
 import * as progressActions from '../actions/progress.actions';
 
 import { ProgressEntity } from '../reducers/progress.reducer';
@@ -41,12 +42,13 @@ describe('Progress Effects', () => {
   });
 
   describe('Load Progress Items', () => {
-    it('Should dispatch LoadProgressItemsSucceeded', () => {
+    it('Should dispatch LoadProgressItemsSucceeded and LoadItems', () => {
       const action = new progressActions.LoadProgressItems('some user id');
 
       actions = hot('-a', { a: action });
-      const expected = cold('-(b)', {
-        b: new progressActions.LoadProgressItemsSucceeded([mockItem])
+      const expected = cold('-(bc)', {
+        b: new progressActions.LoadProgressItemsSucceeded([mockItem, mockItemNoEnd]),
+        c: new markCompleteActions.LoadItems([mockItemNoEnd.id])
       });
 
       expect(effects.loadProgressItems$).toBeObservable(expected);
@@ -79,30 +81,28 @@ describe('Progress Effects', () => {
   });
 
   describe('Save Add Playing Succeeded', () => {
-    it('Should dispatch AddNewProgressItem', () => {
+    it('Should dispatch AddNewProgressItem and AddNewItem', () => {
       const action = new addPlayingActions.SaveSucceeded(mockItem);
 
       actions = hot('-a', { a: action });
-      const expected = cold('-(b)', {
-        b: new progressActions.AddNewProgressItem(mockItem)
+      const expected = cold('-(bc)', {
+        b: new progressActions.AddNewProgressItem(mockItem),
+        c: new markCompleteActions.AddNewItem(mockItem.id)
       });
 
       expect(effects.saveAddPlayingSucceeded$).toBeObservable(expected);
     });
   });
 
-  describe('Mark Completed', () => {
-
-  });
-
   describe('Remove Progress Item', () => {
-    it('Should dispatch RemoveProgressItemSucceeded', () => {
+    it('Should dispatch RemoveProgressItemSucceeded and Remove', () => {
       const itemId = 'some item id';
       const action = new progressActions.RemoveProgressItem('some user id', itemId);
 
       actions = hot('-a', { a: action });
-      const expected = cold('-(b)', {
-        b: new progressActions.RemoveProgressItemSucceeded(itemId)
+      const expected = cold('-(bc)', {
+        b: new progressActions.RemoveProgressItemSucceeded(itemId),
+        c: new markCompleteActions.Remove(itemId)
       });
 
       expect(effects.removeProgressItem$).toBeObservable(expected);
@@ -143,8 +143,9 @@ describe('Progress Effects', () => {
       const action = new progressActions.MarkComplete('some user id', payload);
 
       actions = hot('-a', { a: action });
-      const expected = cold('-(b)', {
-        b: new progressActions.MarkCompleteSucceeded(payload)
+      const expected = cold('-(bc)', {
+        b: new progressActions.MarkCompleteSucceeded(payload),
+        c: new markCompleteActions.Remove(payload.itemId)
       });
 
       expect(effects.markCompleted$).toBeObservable(expected);
@@ -189,9 +190,15 @@ const mockItem: ProgressEntity = {
   endEntryId: 'some end id'
 };
 
+const mockItemNoEnd: ProgressEntity = {
+  id: 'some id 2',
+  startEntryId: 'some start id 2',
+  endEntryId: ''
+};
+
 class MockProgressService {
   getProgressList(_userId: string): Observable<ProgressEntity[]> {
-    return Observable.of([mockItem]);
+    return Observable.of([mockItem, mockItemNoEnd]);
   }
   remove(_userId: string, itemId: string): Observable<string> {
     return Observable.of(itemId);
