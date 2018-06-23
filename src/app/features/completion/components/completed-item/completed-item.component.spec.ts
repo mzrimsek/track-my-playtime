@@ -59,19 +59,19 @@ describe('CompletedItemComponent', () => {
     fixture.detectChanges();
   }));
 
-  it('Should create the component', () => {
+  it('Should create the component', async(() => {
     expect(component).toBeTruthy();
-  });
+  }));
 
-  it('Should call UserService getUser', () => {
+  it('Should call UserService getUser', async(() => {
     expect(userService.getUser).toHaveBeenCalled();
-  });
+  }));
 
-  it('Should dispatch RemoveProgressItem when remove button is clicked', () => {
+  it('Should dispatch RemoveProgressItem when remove button is clicked', async(() => {
     const removeButton = fixture.nativeElement.querySelector('button');
     removeButton.click();
     expect(store.dispatch).toHaveBeenCalledWith(new progressActions.RemoveProgressItem(testUserId, '1'));
-  });
+  }));
 });
 
 const testUserId = 'some id';

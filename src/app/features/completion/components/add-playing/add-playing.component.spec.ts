@@ -55,9 +55,9 @@ describe('AddPlayingComponent', () => {
     expect(component).toBeTruthy();
   }));
 
-  it('Should call UserService getUser', () => {
+  it('Should call UserService getUser', async(() => {
     expect(userService.getUser).toHaveBeenCalled();
-  });
+  }));
 
   describe('Game Value Changes', () => {
     let gameEl: any;
@@ -94,13 +94,13 @@ describe('AddPlayingComponent', () => {
       expect(store.dispatch).toHaveBeenCalledWith(action);
     }));
 
-    it('Should update platforms', () => {
+    it('Should update platforms', async(() => {
       expect(component.platforms).toEqual([]);
-    });
+    }));
 
-    it('Should update dates', () => {
+    it('Should update dates', async(() => {
       expect(component.dates).toEqual([]);
-    });
+    }));
   });
 
   // TODO: Make these tests better
@@ -177,13 +177,13 @@ describe('AddPlayingComponent', () => {
         fixture.detectChanges();
       }));
 
-      it('Should dispatch Save', () => {
+      it('Should dispatch Save', async(() => {
         const action = new actions.Save({
           userId: testUserId,
           startEntryId: '2'
         });
         expect(store.dispatch).toHaveBeenCalledWith(action);
-      });
+      }));
     });
 
     describe('Without Match', () => {
@@ -193,10 +193,10 @@ describe('AddPlayingComponent', () => {
         fixture.detectChanges();
       }));
 
-      it('Should dispatch Error', () => {
+      it('Should dispatch Error', async(() => {
         const action = new appActions.Error(actions.SAVE, 'No matching history item found.');
         expect(store.dispatch).toHaveBeenCalledWith(action);
-      });
+      }));
     });
   });
 });

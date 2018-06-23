@@ -69,39 +69,43 @@ describe('PlayingItemComponent', () => {
     fixture.detectChanges();
   }));
 
-  it('Should create the component', () => {
+  it('Should create the component', async(() => {
     expect(component).toBeTruthy();
-  });
+  }));
 
-  it('Should call UserService getUser', () => {
+  it('Should call UserService getUser', async(() => {
     expect(userService.getUser).toHaveBeenCalled();
-  });
+  }));
 
   describe('Show Extra button clicked', () => {
-    it('Should dispatch SetShowExtra with true when showExtra is false', () => {
-      const toggleShowExtraButton = fixture.nativeElement.querySelector('#markCompletedShowExtra');
+    let toggleShowExtraButton: any;
+
+    beforeEach(async(() => {
+      toggleShowExtraButton = fixture.nativeElement.querySelector('#markCompletedShowExtra');
+    }));
+
+    it('Should dispatch SetShowExtra with true when showExtra is false', async(() => {
       toggleShowExtraButton.click();
       expect(store.dispatch).toHaveBeenCalledWith(new markCompleteActions.SetShowExtra('1', true));
-    });
+    }));
 
-    it('Should dispatch SetShowExtra with false when showExtra is true', () => {
+    it('Should dispatch SetShowExtra with false when showExtra is true', async(() => {
       component.displayData.markComplete.showExtra = true;
       fixture.detectChanges();
-      const toggleShowExtraButton = fixture.nativeElement.querySelector('#markCompletedShowExtra');
 
       toggleShowExtraButton.click();
 
       expect(store.dispatch).toHaveBeenCalledWith(new markCompleteActions.SetShowExtra('1', false));
-    });
+    }));
   });
 
-  it('Should dispatch RemoveProgressItem when remove button is clicked', () => {
+  it('Should dispatch RemoveProgressItem when remove button is clicked', async(() => {
     const removeButton = fixture.nativeElement.querySelector('#markCompletedRemove');
     removeButton.click();
     expect(store.dispatch).toHaveBeenCalledWith(new progressActions.RemoveProgressItem(testUserId, '1'));
-  });
+  }));
 
-  it('Should dispatch SetEndTime when end time select changes', () => {
+  it('Should dispatch SetEndTime when end time select changes', async(() => {
     component.displayData.markComplete.showExtra = true;
     const endTimeSelect = fixture.nativeElement.querySelector('.extra select');
 
@@ -110,16 +114,22 @@ describe('PlayingItemComponent', () => {
     fixture.detectChanges();
 
     expect(store.dispatch).toHaveBeenCalledWith(new markCompleteActions.SetEndTime('1', 6000));
-  });
+  }));
 
   describe('Mark Complete button clicked', () => {
-    it('Should dispatch Error when no matching history item', () => {
-      fail();
-    });
+    let markCompleteButton: any;
 
-    it('Should dispatch MarkComplete when there is a matching history item', () => {
+    beforeEach(async(() => {
+      markCompleteButton = fixture.nativeElement.querySelector('#markCompletedSave');
+    }));
+
+    it('Should dispatch Error when no matching history item', async(() => {
       fail();
-    });
+    }));
+
+    it('Should dispatch MarkComplete when there is a matching history item', async(() => {
+      fail();
+    }));
   });
 });
 

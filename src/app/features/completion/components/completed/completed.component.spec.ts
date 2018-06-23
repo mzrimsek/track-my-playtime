@@ -18,17 +18,17 @@ describe('CompletedComponent', () => {
     fixture.detectChanges();
   }));
 
-  it('Should create the component', () => {
+  it('Should create the component', async(() => {
     expect(component).toBeTruthy();
-  });
+  }));
 
   describe('getDisplayData', () => {
-    it('Should return empty when no items', () => {
+    it('Should return empty when no items', async(() => {
       const result = component.getDisplayData();
       expect(result.length).toBe(0);
-    });
+    }));
 
-    it('Should return empty when no item start entry match', () => {
+    it('Should return empty when no item start entry match', async(() => {
       component.items = [{
         id: '1',
         startEntryId: 'some start id',
@@ -53,9 +53,9 @@ describe('CompletedComponent', () => {
       const result = component.getDisplayData();
 
       expect(result.length).toBe(0);
-    });
+    }));
 
-    it('Should return correct data when item start entry matches', () => {
+    it('Should return correct data when item start entry matches', async(() => {
       component.items = [{
         id: '1',
         startEntryId: 'some start id',
@@ -100,6 +100,6 @@ describe('CompletedComponent', () => {
           timePlayed: 4
         }
       }]);
-    });
+    }));
   });
 });
