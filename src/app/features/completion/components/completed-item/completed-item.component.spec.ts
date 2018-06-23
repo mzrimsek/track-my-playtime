@@ -9,6 +9,8 @@ import { UserService } from '../../../auth/services/user.service';
 
 import { TimePipe } from '../../../../shared/pipes/time.pipe';
 
+import * as progressActions from '../../actions/progress.actions';
+
 import * as fromRoot from '../../../../reducers/root.reducer';
 import * as fromCompletion from '../../reducers/root.reducer';
 
@@ -63,6 +65,12 @@ describe('CompletedItemComponent', () => {
 
   it('Should call UserService getUser', () => {
     expect(userService.getUser).toHaveBeenCalled();
+  });
+
+  it('Should dispatch RemoveProgressItem when remove button is clicked', () => {
+    const removeButton = fixture.nativeElement.querySelector('button');
+    removeButton.click();
+    expect(store.dispatch).toHaveBeenCalledWith(new progressActions.RemoveProgressItem(testUserId, '1'));
   });
 });
 
