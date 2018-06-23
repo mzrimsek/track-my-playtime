@@ -9,6 +9,7 @@ import { UserService } from '../../../auth/services/user.service';
 
 import { TimePipe } from '../../../../shared/pipes/time.pipe';
 
+import * as appActions from '../../../../actions/app.actions';
 import * as markCompleteActions from '../../actions/mark-complete.actions';
 import * as progressActions from '../../actions/progress.actions';
 
@@ -106,9 +107,8 @@ describe('PlayingItemComponent', () => {
   }));
 
   it('Should dispatch SetEndTime when end time select changes', async(() => {
-    component.displayData.markComplete.showExtra = true;
     const endTimeSelect = fixture.nativeElement.querySelector('.extra select');
-
+    component.displayData.markComplete.showExtra = true;
     endTimeSelect.selectedIndex = 1;
     endTimeSelect.dispatchEvent(new Event('change'));
     fixture.detectChanges();
@@ -124,11 +124,24 @@ describe('PlayingItemComponent', () => {
     }));
 
     it('Should dispatch Error when no matching history item', async(() => {
-      fail();
+      component.displayData.markComplete.endTime = 8000;
+      fixture.detectChanges();
+
+      markCompleteButton.click();
+
+      expect(store.dispatch).toHaveBeenCalledWith(new appActions.Error(progressActions.MARK_COMPLETE, 'No matching history item found.'));
     }));
 
     it('Should dispatch MarkComplete when there is a matching history item', async(() => {
-      fail();
+      component.displayData.markComplete.endTime = 6000;
+      fixture.detectChanges();
+
+      markCompleteButton.click();
+
+      expect(store.dispatch).toHaveBeenCalledWith(new progressActions.MarkComplete(testUserId, {
+        itemId: '1',
+        endEntryId: 'start 1'
+      }));
     }));
   });
 });
