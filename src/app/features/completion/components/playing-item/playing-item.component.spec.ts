@@ -59,7 +59,7 @@ describe('PlayingItemComponent', () => {
         dateRange: [new Date(3000), new Date(6000)]
       },
       timePlayed: 3,
-      endDates: [],
+      endDates: [6000],
       markComplete: {
         id: '1',
         showExtra: false,
@@ -102,7 +102,14 @@ describe('PlayingItemComponent', () => {
   });
 
   it('Should dispatch SetEndTime when end time select changes', () => {
-    fail();
+    component.displayData.markComplete.showExtra = true;
+    const endTimeSelect = fixture.nativeElement.querySelector('.extra select');
+
+    endTimeSelect.selectedIndex = 1;
+    endTimeSelect.dispatchEvent(new Event('change'));
+    fixture.detectChanges();
+
+    expect(store.dispatch).toHaveBeenCalledWith(new markCompleteActions.SetEndTime('1', 6000));
   });
 
   describe('Mark Complete button clicked', () => {
