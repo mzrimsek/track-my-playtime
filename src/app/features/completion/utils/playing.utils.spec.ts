@@ -32,12 +32,7 @@ describe('Playing Utils', () => {
       expect(result).toEqual({
         item: progressItem,
         startEntryData: startEntry,
-        playingItem: {
-          game: testGame,
-          platform: 'Platform 1',
-          startTime: 2000,
-          timePlayed: 2
-        },
+        timePlayed: 2,
         endDates: [6000, 4000],
         markComplete: {
           id: 'some id',

@@ -8,17 +8,10 @@ export interface ProgressItem {
   endEntryId: string;
 }
 
-export interface PlayingItem {
-  game: string;
-  platform: string;
-  startTime: number;
-  timePlayed: number;
-}
-
 export interface PlayingDisplayData {
   item: ProgressItem;
   startEntryData: HistoryListItem;
-  playingItem: PlayingItem;
+  timePlayed: number;
   endDates: number[];
   markComplete: MarkCompleteItem;
 }

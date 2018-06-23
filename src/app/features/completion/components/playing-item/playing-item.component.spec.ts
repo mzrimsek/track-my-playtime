@@ -55,12 +55,7 @@ describe('PlayingItemComponent', () => {
         endTime: 6000,
         dateRange: [new Date(3000), new Date(6000)]
       },
-      playingItem: {
-        game: 'some game',
-        platform: 'some platform',
-        startTime: 3000,
-        timePlayed: 3
-      },
+      timePlayed: 3,
       endDates: [],
       markComplete: {
         id: '1',

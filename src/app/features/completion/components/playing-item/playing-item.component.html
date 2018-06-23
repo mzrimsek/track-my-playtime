@@ -1,6 +1,6 @@
 <div>
-  {{ displayData.playingItem.game }} {{ displayData.playingItem.platform }} {{ displayData.playingItem.startTime | date:'M/d/y
-  hh:mm a' }} {{ displayData.playingItem.timePlayed | time }}
+  {{ displayData.startEntryData.game }} {{ displayData.startEntryData.platform }} {{ displayData.startEntryData.startTime |
+  date:'M/d/y hh:mm a' }} {{ displayData.timePlayed | time }}
 
   <button data-tracking-category="markCompletedShowExtra"
           (click)="toggleShowExtra()">Some check mark icon</button>
