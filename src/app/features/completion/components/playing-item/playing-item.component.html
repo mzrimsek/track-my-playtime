@@ -2,12 +2,15 @@
   {{ displayData.startEntryData.game }} {{ displayData.startEntryData.platform }} {{ displayData.startEntryData.startTime |
   date:'M/d/y hh:mm a' }} {{ displayData.timePlayed | time }}
 
-  <button data-tracking-category="markCompletedShowExtra"
+  <button id="markCompletedShowExtra"
+          data-tracking-category="markCompletedShowExtra"
           (click)="toggleShowExtra()">Some check mark icon</button>
-  <button data-tracking-category="markCompletedRemove"
+  <button id="markCompletedRemove"
+          data-tracking-category="markCompletedRemove"
           (click)="remove()"> Some remove icon</button>
 </div>
-<div *ngIf="displayData.markComplete.showExtra">
+<div class="extra"
+     *ngIf="displayData.markComplete.showExtra">
   <select data-tracking-category="markCompletedEndTime"
           #endTimeEl
           [value]="displayData.markComplete.endTime"
@@ -16,6 +19,7 @@
     <option *ngFor="let option of displayData.endDates"
             value="{{ option }}">{{ option | date:'M/d/y hh:mm a' }}</option>
   </select>
-  <button data-tracking-category="markCompletedSave"
+  <button id="markCompletedSave"
+          data-tracking-category="markCompletedSave"
           (click)="markComplete()">Mark Completed</button>
 </div>

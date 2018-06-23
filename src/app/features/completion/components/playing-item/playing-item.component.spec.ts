@@ -9,6 +9,9 @@ import { UserService } from '../../../auth/services/user.service';
 
 import { TimePipe } from '../../../../shared/pipes/time.pipe';
 
+import * as markCompleteActions from '../../actions/mark-complete.actions';
+import * as progressActions from '../../actions/progress.actions';
+
 import * as fromRoot from '../../../../reducers/root.reducer';
 import * as fromCompletion from '../../reducers/root.reducer';
 
@@ -72,6 +75,44 @@ describe('PlayingItemComponent', () => {
 
   it('Should call UserService getUser', () => {
     expect(userService.getUser).toHaveBeenCalled();
+  });
+
+  describe('Show Extra button clicked', () => {
+    it('Should dispatch SetShowExtra with true when showExtra is false', () => {
+      const toggleShowExtraButton = fixture.nativeElement.querySelector('#markCompletedShowExtra');
+      toggleShowExtraButton.click();
+      expect(store.dispatch).toHaveBeenCalledWith(new markCompleteActions.SetShowExtra('1', true));
+    });
+
+    it('Should dispatch SetShowExtra with false when showExtra is true', () => {
+      component.displayData.markComplete.showExtra = true;
+      fixture.detectChanges();
+      const toggleShowExtraButton = fixture.nativeElement.querySelector('#markCompletedShowExtra');
+
+      toggleShowExtraButton.click();
+
+      expect(store.dispatch).toHaveBeenCalledWith(new markCompleteActions.SetShowExtra('1', false));
+    });
+  });
+
+  it('Should dispatch RemoveProgressItem when remove button is clicked', () => {
+    const removeButton = fixture.nativeElement.querySelector('#markCompletedRemove');
+    removeButton.click();
+    expect(store.dispatch).toHaveBeenCalledWith(new progressActions.RemoveProgressItem(testUserId, '1'));
+  });
+
+  it('Should dispatch SetEndTime when end time select changes', () => {
+    fail();
+  });
+
+  describe('Mark Complete button clicked', () => {
+    it('Should dispatch Error when no matching history item', () => {
+      fail();
+    });
+
+    it('Should dispatch MarkComplete when there is a matching history item', () => {
+      fail();
+    });
   });
 });
 
