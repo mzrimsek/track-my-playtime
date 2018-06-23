@@ -18,7 +18,7 @@ describe('PlayingComponent', () => {
     fixture.detectChanges();
   }));
 
-  it('should create the component', () => {
+  it('Should create the component', () => {
     expect(component).toBeTruthy();
   });
 
