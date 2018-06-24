@@ -78,71 +78,74 @@ describe('PlayingItemComponent', () => {
     expect(userService.getUser).toHaveBeenCalled();
   }));
 
-  describe('Show Extra button clicked', () => {
-    let toggleShowExtraButton: any;
-
-    beforeEach(async(() => {
-      toggleShowExtraButton = fixture.nativeElement.querySelector('#markCompletedShowExtra');
-    }));
-
-    it('Should dispatch SetShowExtra with true when showExtra is false', async(() => {
+  describe('When show extra is false', () => {
+    it('Should dispatch SetShowExtra with true when markComplete button clicked', async(() => {
+      const toggleShowExtraButton = fixture.nativeElement.querySelector('#markCompletedShowExtra');
       toggleShowExtraButton.click();
       expect(store.dispatch).toHaveBeenCalledWith(new markCompleteActions.SetShowExtra('1', true));
     }));
 
-    it('Should dispatch SetShowExtra with false when showExtra is true', async(() => {
-      component.displayData.markComplete.showExtra = true;
-      fixture.detectChanges();
-
-      toggleShowExtraButton.click();
-
-      expect(store.dispatch).toHaveBeenCalledWith(new markCompleteActions.SetShowExtra('1', false));
+    it('Should not display extra section', async(() => {
+      const extraSection = fixture.nativeElement.querySelector('.extra');
+      expect(extraSection).toBeFalsy();
     }));
   });
 
-  it('Should dispatch RemoveProgressItem when remove button is clicked', async(() => {
-    const removeButton = fixture.nativeElement.querySelector('#markCompletedRemove');
-    removeButton.click();
-    expect(store.dispatch).toHaveBeenCalledWith(new progressActions.RemoveProgressItem(testUserId, '1'));
-  }));
-
-  it('Should dispatch SetEndTime when end time select changes', async(() => {
-    const endTimeSelect = fixture.nativeElement.querySelector('.extra select');
-    component.displayData.markComplete.showExtra = true;
-    endTimeSelect.selectedIndex = 1;
-    endTimeSelect.dispatchEvent(new Event('change'));
-    fixture.detectChanges();
-
-    expect(store.dispatch).toHaveBeenCalledWith(new markCompleteActions.SetEndTime('1', 6000));
-  }));
-
-  describe('Mark Complete button clicked', () => {
-    let markCompleteButton: any;
-
+  describe('When show extra is true', () => {
     beforeEach(async(() => {
-      markCompleteButton = fixture.nativeElement.querySelector('#markCompletedSave');
+      component.displayData.markComplete.showExtra = true;
+      fixture.detectChanges();
     }));
 
-    it('Should dispatch Error when no matching history item', async(() => {
-      component.displayData.markComplete.endTime = 8000;
-      fixture.detectChanges();
-
-      markCompleteButton.click();
-
-      expect(store.dispatch).toHaveBeenCalledWith(new appActions.Error(progressActions.MARK_COMPLETE, 'No matching history item found.'));
+    it('Should dispatch SetShowExtra with false when markComplete button clicked', async(() => {
+      const toggleShowExtraButton = fixture.nativeElement.querySelector('#markCompletedShowExtra');
+      toggleShowExtraButton.click();
+      expect(store.dispatch).toHaveBeenCalledWith(new markCompleteActions.SetShowExtra('1', false));
     }));
 
-    it('Should dispatch MarkComplete when there is a matching history item', async(() => {
-      component.displayData.markComplete.endTime = 6000;
+    it('Should display extra section', async(() => {
+      const extraSection = fixture.nativeElement.querySelector('.extra');
+      expect(extraSection).toBeTruthy();
+    }));
+
+    it('Should dispatch SetEndTime when end time select changes', async(() => {
+      const endTimeSelect = fixture.nativeElement.querySelector('.extra select');
+
+      endTimeSelect.selectedIndex = 1;
+      endTimeSelect.dispatchEvent(new Event('change'));
       fixture.detectChanges();
 
-      markCompleteButton.click();
+      expect(store.dispatch).toHaveBeenCalledWith(new markCompleteActions.SetEndTime('1', 6000));
+    }));
 
-      expect(store.dispatch).toHaveBeenCalledWith(new progressActions.MarkComplete(testUserId, {
-        itemId: '1',
-        endEntryId: 'start 1'
+    describe('Mark Complete button clicked', () => {
+      let markCompleteButton: any;
+
+      beforeEach(async(() => {
+        markCompleteButton = fixture.nativeElement.querySelector('#markCompletedSave');
       }));
-    }));
+
+      it('Should dispatch Error when no matching history item', async(() => {
+        component.displayData.markComplete.endTime = 8000;
+        fixture.detectChanges();
+
+        markCompleteButton.click();
+
+        expect(store.dispatch).toHaveBeenCalledWith(new appActions.Error(progressActions.MARK_COMPLETE, 'No matching history item found.'));
+      }));
+
+      it('Should dispatch MarkComplete when there is a matching history item', async(() => {
+        component.displayData.markComplete.endTime = 6000;
+        fixture.detectChanges();
+
+        markCompleteButton.click();
+
+        expect(store.dispatch).toHaveBeenCalledWith(new progressActions.MarkComplete(testUserId, {
+          itemId: '1',
+          endEntryId: 'start 1'
+        }));
+      }));
+    });
   });
 });
 
