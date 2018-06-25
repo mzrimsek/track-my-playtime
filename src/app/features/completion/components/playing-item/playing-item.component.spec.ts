@@ -104,12 +104,12 @@ describe('PlayingItemComponent', () => {
     }));
 
     it('Should display extra section', async(() => {
-      const extraSection = fixture.nativeElement.querySelector('.extra');
+      const extraSection = fixture.nativeElement.querySelector('.playing-item .extra');
       expect(extraSection).toBeTruthy();
     }));
 
     it('Should dispatch SetEndTime when end time select changes', async(() => {
-      const endTimeSelect = fixture.nativeElement.querySelector('.extra select');
+      const endTimeSelect = fixture.nativeElement.querySelector('.playing-item .extra select');
 
       endTimeSelect.selectedIndex = 1;
       endTimeSelect.dispatchEvent(new Event('change'));
