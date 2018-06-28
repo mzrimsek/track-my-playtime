@@ -116,6 +116,18 @@ describe('PlayingItemComponent', () => {
       }));
 
       it('Should dispatch MarkComplete when there is a matching history item', async(() => {
+        component.gameGroupings = [{
+          key: 'some game',
+          historyItems: [{
+            id: 'start 1',
+            game: 'some game',
+            platform: 'some platform',
+            startTime: 3000,
+            endTime: 6000,
+            dateRange: [new Date(3000), new Date(6000)]
+          }],
+          totalTime: 3
+        }];
         testDisplayData.markComplete.endTime = 6000;
         fixture.detectChanges();
 
