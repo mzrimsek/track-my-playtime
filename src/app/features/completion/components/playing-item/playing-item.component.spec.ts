@@ -66,6 +66,12 @@ describe('PlayingItemComponent', () => {
       expect(store.dispatch).toHaveBeenCalledWith(new markCompleteActions.SetShowExtra('1', true));
     }));
 
+    it('Should dispatch RemoveProgressItem when remove button is clicked', async(() => {
+      const removeButton = fixture.nativeElement.querySelector('#markCompletedRemove');
+      removeButton.click();
+      expect(store.dispatch).toHaveBeenCalledWith(new progressActions.RemoveProgressItem(testUserId, '1'));
+    }));
+
     it('Should not display extra section', async(() => {
       const extraSection = fixture.nativeElement.querySelector('.extra');
       expect(extraSection).toBeFalsy();
