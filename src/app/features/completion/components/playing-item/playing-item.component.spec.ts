@@ -16,6 +16,8 @@ import * as progressActions from '../../actions/progress.actions';
 import * as fromRoot from '../../../../reducers/root.reducer';
 import * as fromCompletion from '../../reducers/root.reducer';
 
+import { PlayingDisplayData } from '../../models';
+
 describe('PlayingItemComponent', () => {
   let store: Store<fromRoot.State>;
   let component: PlayingItemComponent;
@@ -45,28 +47,7 @@ describe('PlayingItemComponent', () => {
 
     fixture = TestBed.createComponent(PlayingItemComponent);
     component = fixture.componentInstance;
-    component.displayData = {
-      item: {
-        id: '1',
-        startEntryId: 'start 1',
-        endEntryId: ''
-      },
-      startEntryData: {
-        id: 'start 1',
-        game: 'some game',
-        platform: 'some platform',
-        startTime: 3000,
-        endTime: 6000,
-        dateRange: [new Date(3000), new Date(6000)]
-      },
-      timePlayed: 3,
-      endDates: [6000],
-      markComplete: {
-        id: '1',
-        showExtra: false,
-        endTime: 0
-      }
-    };
+    component.displayData = testDisplayData;
     fixture.detectChanges();
   }));
 
@@ -93,7 +74,7 @@ describe('PlayingItemComponent', () => {
 
   describe('When show extra is true', () => {
     beforeEach(async(() => {
-      component.displayData.markComplete.showExtra = true;
+      testDisplayData.markComplete.showExtra = true;
       fixture.detectChanges();
     }));
 
@@ -126,7 +107,7 @@ describe('PlayingItemComponent', () => {
       }));
 
       it('Should dispatch Error when no matching history item', async(() => {
-        component.displayData.markComplete.endTime = 8000;
+        testDisplayData.markComplete.endTime = 8000;
         fixture.detectChanges();
 
         markCompleteButton.click();
@@ -135,7 +116,7 @@ describe('PlayingItemComponent', () => {
       }));
 
       it('Should dispatch MarkComplete when there is a matching history item', async(() => {
-        component.displayData.markComplete.endTime = 6000;
+        testDisplayData.markComplete.endTime = 6000;
         fixture.detectChanges();
 
         markCompleteButton.click();
@@ -157,4 +138,27 @@ const userServiceStub = {
     email: 'jimbob@jimbob.com',
     photoURL: 'jimbob.com/jimbob.png'
   })
+};
+
+const testDisplayData: PlayingDisplayData = {
+  item: {
+    id: '1',
+    startEntryId: 'start 1',
+    endEntryId: ''
+  },
+  startEntryData: {
+    id: 'start 1',
+    game: 'some game',
+    platform: 'some platform',
+    startTime: 3000,
+    endTime: 6000,
+    dateRange: [new Date(3000), new Date(6000)]
+  },
+  timePlayed: 3,
+  endDates: [6000],
+  markComplete: {
+    id: '1',
+    showExtra: false,
+    endTime: 0
+  }
 };
