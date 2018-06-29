@@ -5,7 +5,8 @@ import { Observable } from 'rxjs/Observable';
 
 import { FirestoreProgressItem, ProgressService } from './progress.service';
 
-import { AddPlaying, MarkCompletePayload } from '../models';
+import { MarkCompletePayload } from '../../../shared/models';
+import { AddPlaying } from '../models';
 
 describe('ProgressService', () => {
   let service: ProgressService;

@@ -1,5 +1,4 @@
-import { HistoryGrouping, HistoryListItem } from '../../../shared/models';
-import { ProgressItem } from '../models';
+import { HistoryGrouping, HistoryListItem, ProgressItem } from '../../../shared/models';
 
 import { getCompletedDisplayData } from './completed.utils';
 
