@@ -1,5 +1,5 @@
-import { Dictionary, HistoryGrouping, HistoryListItem } from '../../../shared/models';
-import { MarkCompleteItem, PlayingDisplayData, ProgressItem } from '../models';
+import { Dictionary, HistoryGrouping, HistoryListItem, ProgressItem } from '../../../shared/models';
+import { MarkCompleteItem, PlayingDisplayData } from '../models';
 
 import { filterHistoryItemsAfter } from '../../../shared/utils/history-filter.utils';
 import { getElapsedTimeFrom } from '../../../shared/utils/history.utils';

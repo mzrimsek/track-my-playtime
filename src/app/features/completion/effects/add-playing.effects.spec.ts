@@ -13,7 +13,7 @@ import { ProgressService } from '../services/progress.service';
 import * as appActions from '../../../actions/app.actions';
 import * as addPlayingActions from '../actions/add-playing.actions';
 
-import { ProgressEntity } from '../reducers/progress.reducer';
+import { ProgressEntity } from '../../../shared/reducers/progress.reducer';
 
 import { AddPlaying } from '../models';
 

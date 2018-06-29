@@ -11,13 +11,13 @@ import { ProgressEffects } from './progress.effects';
 import { ProgressService } from '../services/progress.service';
 
 import * as appActions from '../../../actions/app.actions';
+import * as progressActions from '../../../shared/actions/progress.actions';
 import * as addPlayingActions from '../actions/add-playing.actions';
 import * as markCompleteActions from '../actions/mark-complete.actions';
-import * as progressActions from '../actions/progress.actions';
 
-import { ProgressEntity } from '../reducers/progress.reducer';
+import { ProgressEntity } from '../../../shared/reducers/progress.reducer';
 
-import { MarkCompletePayload } from '../models';
+import { MarkCompletePayload } from '../../../shared/models';
 
 describe('Progress Effects', () => {
   let actions: any;

@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 
-import { ProgressEntity } from '../reducers/progress.reducer';
+import { ProgressEntity } from '../../../shared/reducers/progress.reducer';
 
 import { AddPlaying } from '../models';
 

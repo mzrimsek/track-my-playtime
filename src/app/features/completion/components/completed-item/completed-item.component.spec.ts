@@ -9,7 +9,7 @@ import { UserService } from '../../../auth/services/user.service';
 
 import { TimePipe } from '../../../../shared/pipes/time.pipe';
 
-import * as progressActions from '../../actions/progress.actions';
+import * as progressActions from '../../../../shared/actions/progress.actions';
 
 import * as fromRoot from '../../../../reducers/root.reducer';
 import * as fromCompletion from '../../reducers/root.reducer';

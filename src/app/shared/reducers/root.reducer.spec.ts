@@ -2,10 +2,12 @@ import { addDays, addHours } from 'date-fns';
 
 import { State as PlatformsState } from '../reducers/platforms.reducer';
 import { HistoryEntity, State as HistoryState } from './history.reducer';
+import { State as ProgressState } from './progress.reducer';
 import {
-    _selectHistoryGroupingsByDate, _selectHistoryGroupingsByGame, _selectHistoryGroupingsByPlatform,
-    _selectHistoryItems, _selectHistoryLoading, _selectPlatformsOptions, _selectSortedHistoryItems,
-    _selectTrackedGames, SharedState, State
+    _selectCompletedProgress, _selectHistoryGroupingsByDate, _selectHistoryGroupingsByGame,
+    _selectHistoryGroupingsByPlatform, _selectHistoryItems, _selectHistoryLoading,
+    _selectPlatformsOptions, _selectPlayingProgress, _selectSortedHistoryItems, _selectTrackedGames,
+    SharedState, State
 } from './root.reducer';
 
 import { formatDate } from '../utils/date.utils';
@@ -16,7 +18,8 @@ describe('Shared Root Reducer', () => {
       it('Should return an empty list when there are no items', () => {
         const sharedState: SharedState = {
           history: initialHistoryState,
-          platforms: initialPlatformsState
+          platforms: initialPlatformsState,
+          progress: initialProgressState
         };
         const state: State = { shared: sharedState };
 
@@ -48,7 +51,8 @@ describe('Shared Root Reducer', () => {
         };
         const sharedState: SharedState = {
           history,
-          platforms: initialPlatformsState
+          platforms: initialPlatformsState,
+          progress: initialProgressState
         };
         const state: State = { shared: sharedState };
 
@@ -86,7 +90,8 @@ describe('Shared Root Reducer', () => {
         };
         const sharedState: SharedState = {
           history,
-          platforms: initialPlatformsState
+          platforms: initialPlatformsState,
+          progress: initialProgressState
         };
         const state: State = { shared: sharedState };
 
@@ -135,7 +140,8 @@ describe('Shared Root Reducer', () => {
         };
         const sharedState: SharedState = {
           history,
-          platforms: initialPlatformsState
+          platforms: initialPlatformsState,
+          progress: initialProgressState
         };
         const state: State = { shared: sharedState };
 
@@ -192,7 +198,8 @@ describe('Shared Root Reducer', () => {
         };
         const sharedState: SharedState = {
           history,
-          platforms: initialPlatformsState
+          platforms: initialPlatformsState,
+          progress: initialProgressState
         };
         const state: State = { shared: sharedState };
 
@@ -263,7 +270,8 @@ describe('Shared Root Reducer', () => {
         };
         const sharedState: SharedState = {
           history,
-          platforms: initialPlatformsState
+          platforms: initialPlatformsState,
+          progress: initialProgressState
         };
         const state: State = { shared: sharedState };
 
@@ -334,7 +342,8 @@ describe('Shared Root Reducer', () => {
         };
         const sharedState: SharedState = {
           history,
-          platforms: initialPlatformsState
+          platforms: initialPlatformsState,
+          progress: initialProgressState
         };
         const state: State = { shared: sharedState };
 
@@ -374,11 +383,11 @@ describe('Shared Root Reducer', () => {
       it('Should return true if loading is true', () => {
         const sharedState: SharedState = {
           history: {
-            ids: [],
-            entities: {},
+            ...initialHistoryState,
             loading: true
           },
-          platforms: initialPlatformsState
+          platforms: initialPlatformsState,
+          progress: initialProgressState
         };
         const state: State = { shared: sharedState };
 
@@ -389,12 +398,9 @@ describe('Shared Root Reducer', () => {
 
       it('Should return false if loading is false', () => {
         const sharedState: SharedState = {
-          history: {
-            ids: [],
-            entities: {},
-            loading: false
-          },
-          platforms: initialPlatformsState
+          history: initialHistoryState,
+          platforms: initialPlatformsState,
+          progress: initialProgressState
         };
         const state: State = { shared: sharedState };
 
@@ -438,7 +444,8 @@ describe('Shared Root Reducer', () => {
         };
         const sharedState: SharedState = {
           history,
-          platforms: initialPlatformsState
+          platforms: initialPlatformsState,
+          progress: initialProgressState
         };
         const state: State = { shared: sharedState };
 
@@ -458,12 +465,169 @@ describe('Shared Root Reducer', () => {
           platforms: {
             options
           },
+          progress: initialProgressState
         };
         const state: State = { shared: sharedState };
 
         const result = _selectPlatformsOptions(state);
 
         expect(result).toEqual(options);
+      });
+    });
+  });
+
+  describe('Progress State Selectors', () => {
+    describe('_selectPlayingProgress', () => {
+      it('Should return an empty list when there are no items', () => {
+        const sharedState: SharedState = {
+          history: initialHistoryState,
+          platforms: initialPlatformsState,
+          progress: initialProgressState
+        };
+        const state: State = { shared: sharedState };
+
+        const result = _selectPlayingProgress(state);
+
+        expect(result.length).toBe(0);
+      });
+
+      it('Should return an empty list when all have end entry ids', () => {
+        const progress: ProgressState = {
+          ids: ['1', '2'],
+          entities: {
+            '1': {
+              id: '1',
+              startEntryId: 'start 1',
+              endEntryId: 'end 1'
+            },
+            '2': {
+              id: '2',
+              startEntryId: 'start 2',
+              endEntryId: 'end 2'
+            }
+          },
+          loading: false
+        };
+        const sharedState: SharedState = {
+          history: initialHistoryState,
+          platforms: initialPlatformsState,
+          progress
+        };
+        const state: State = { shared: sharedState };
+
+        const result = _selectPlayingProgress(state);
+
+        expect(result.length).toBe(0);
+      });
+
+      it('Should return correct items', () => {
+        const progress: ProgressState = {
+          ids: ['1', '2'],
+          entities: {
+            '1': {
+              id: '1',
+              startEntryId: 'start 1',
+              endEntryId: 'end 1'
+            },
+            '2': {
+              id: '2',
+              startEntryId: 'start 2',
+              endEntryId: ''
+            }
+          },
+          loading: false
+        };
+        const sharedState: SharedState = {
+          history: initialHistoryState,
+          platforms: initialPlatformsState,
+          progress
+        };
+        const state: State = { shared: sharedState };
+
+        const result = _selectPlayingProgress(state);
+
+        expect(result).toEqual([{
+          id: '2',
+          startEntryId: 'start 2',
+          endEntryId: ''
+        }]);
+      });
+    });
+
+    describe('_selectCompletedProgress', () => {
+      it('Should return an empty list when there are no items', () => {
+        const sharedState: SharedState = {
+          history: initialHistoryState,
+          platforms: initialPlatformsState,
+          progress: initialProgressState
+        };
+        const state: State = { shared: sharedState };
+
+        const result = _selectCompletedProgress(state);
+
+        expect(result.length).toBe(0);
+      });
+
+      it('Should return an empty list when none have end entry ids', () => {
+        const progress: ProgressState = {
+          ids: ['1', '2'],
+          entities: {
+            '1': {
+              id: '1',
+              startEntryId: 'start 1',
+              endEntryId: ''
+            },
+            '2': {
+              id: '2',
+              startEntryId: 'start 2',
+              endEntryId: ''
+            }
+          },
+          loading: false
+        };
+        const sharedState: SharedState = {
+          history: initialHistoryState,
+          platforms: initialPlatformsState,
+          progress
+        };
+        const state: State = { shared: sharedState };
+
+        const result = _selectCompletedProgress(state);
+
+        expect(result.length).toBe(0);
+      });
+
+      it('Should return correct items', () => {
+        const progress: ProgressState = {
+          ids: ['1', '2'],
+          entities: {
+            '1': {
+              id: '1',
+              startEntryId: 'start 1',
+              endEntryId: 'end 1'
+            },
+            '2': {
+              id: '2',
+              startEntryId: 'start 2',
+              endEntryId: ''
+            }
+          },
+          loading: false
+        };
+        const sharedState: SharedState = {
+          history: initialHistoryState,
+          platforms: initialPlatformsState,
+          progress
+        };
+        const state: State = { shared: sharedState };
+
+        const result = _selectCompletedProgress(state);
+
+        expect(result).toEqual([{
+          id: '1',
+          startEntryId: 'start 1',
+          endEntryId: 'end 1'
+        }]);
       });
     });
   });
@@ -477,4 +641,10 @@ const initialHistoryState: HistoryState = {
 
 const initialPlatformsState: PlatformsState = {
   options: []
+};
+
+const initialProgressState: ProgressState = {
+  ids: [],
+  entities: {},
+  loading: false
 };

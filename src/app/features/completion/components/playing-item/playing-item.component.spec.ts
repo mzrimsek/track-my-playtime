@@ -10,13 +10,13 @@ import { UserService } from '../../../auth/services/user.service';
 import { TimePipe } from '../../../../shared/pipes/time.pipe';
 
 import * as appActions from '../../../../actions/app.actions';
+import * as progressActions from '../../../../shared/actions/progress.actions';
 import * as markCompleteActions from '../../actions/mark-complete.actions';
-import * as progressActions from '../../actions/progress.actions';
 
 import * as fromRoot from '../../../../reducers/root.reducer';
 import * as fromCompletion from '../../reducers/root.reducer';
 
-import { PlayingDisplayData } from '../../models';
+import { PlayingDisplayData } from '../../../../shared/models';
 
 describe('PlayingItemComponent', () => {
   let store: Store<fromRoot.State>;

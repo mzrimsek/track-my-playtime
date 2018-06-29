@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 
-import { HistoryGrouping } from '../../../../shared/models';
-import { CompletedDisplayData, ProgressItem } from '../../models';
+import { HistoryGrouping, ProgressItem } from '../../../../shared/models';
+import { CompletedDisplayData } from '../../models';
 
 import { getHistoryListItemMap } from '../../../../shared/utils/history.utils';
 import { getCompletedDisplayData } from '../../utils/completed.utils';

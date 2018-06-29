@@ -49,11 +49,11 @@ describe('CompletionComponent', () => {
   });
 
   it('Should select playing progress items', () => {
-    expect(store.select).toHaveBeenCalledWith(fromCompletion._selectPlayingProgress);
+    expect(store.select).toHaveBeenCalledWith(fromShared._selectPlayingProgress);
   });
 
   it('Should select completed progress items', () => {
-    expect(store.select).toHaveBeenCalledWith(fromCompletion._selectCompletedProgress);
+    expect(store.select).toHaveBeenCalledWith(fromShared._selectCompletedProgress);
   });
 
   it('Should select mark complete entities', () => {

@@ -2,8 +2,9 @@ import { ActionReducerMap, createFeatureSelector, createSelector } from '@ngrx/s
 
 import * as fromHistory from './history.reducer';
 import * as fromPlatforms from './platforms.reducer';
+import * as fromProgress from './progress.reducer';
 
-import { HistoryListItem } from '../models';
+import { HistoryListItem, ProgressItem } from '../models';
 
 import { formatDate } from '../utils/date.utils';
 import { getUniqueFrom } from '../utils/history-filter.utils';
@@ -12,6 +13,7 @@ import { getHistoryGroupingList, getHistoryListItemsMap } from '../utils/history
 export interface SharedState {
   history: fromHistory.State;
   platforms: fromPlatforms.State;
+  progress: fromProgress.State;
 }
 
 export interface State {
@@ -20,12 +22,14 @@ export interface State {
 
 export const reducers: ActionReducerMap<SharedState, any> = {
   history: fromHistory.reducer,
-  platforms: fromPlatforms.reducer
+  platforms: fromPlatforms.reducer,
+  progress: fromProgress.reducer
 };
 
 export const _selectSharedState = createFeatureSelector<SharedState>('shared');
 export const _selectHistory = createSelector(_selectSharedState, state => state.history);
 export const _selectPlatforms = createSelector(_selectSharedState, state => state.platforms);
+export const _selectProgress = createSelector(_selectSharedState, state => state.progress);
 
 export const { selectAll: _selectAllHistory } = fromHistory.adapter.getSelectors(_selectHistory);
 export const _selectHistoryItems = createSelector(_selectAllHistory,
@@ -55,13 +59,23 @@ export const _selectTrackedGames = createSelector(_selectSortedHistoryItems, ite
 
 export const _selectPlatformsOptions = createSelector(_selectPlatforms, platforms => platforms.options);
 
+export const { selectAll: _selectAllProgress } = fromProgress.adapter.getSelectors(_selectProgress);
+export const _selectPlayingProgress = createSelector(_selectAllProgress,
+  entities => entities.filter(entity => entity.endEntryId === '')
+    .map(entity => entity as ProgressItem));
+export const _selectCompletedProgress = createSelector(_selectAllProgress,
+  entities => entities.filter(entity => entity.endEntryId !== '')
+    .map(entity => entity as ProgressItem));
+
 const sharedSelectors = {
   historyGroupingsByDate: _selectHistoryGroupingsByDate,
   historyGroupingsByPlatform: _selectHistoryGroupingsByPlatform,
   historyGroupingsByGame: _selectHistoryGroupingsByGame,
   historyLoading: _selectHistoryLoading,
   historyTrackedGames: _selectTrackedGames,
-  platformsOptions: _selectPlatformsOptions
+  platformsOptions: _selectPlatformsOptions,
+  progressPlaying: _selectPlayingProgress,
+  progressCompleted: _selectCompletedProgress
 };
 
 export default sharedSelectors;

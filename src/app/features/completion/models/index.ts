@@ -1,3 +1,3 @@
 export * from './add-playing.models';
-export * from './progress.models';
-export * from './mark-complete.model';
+export * from './mark-complete.models';
+export * from './display-data.models';

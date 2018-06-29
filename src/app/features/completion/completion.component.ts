@@ -7,8 +7,8 @@ import { Observable } from 'rxjs/Observable';
 import sharedSelectors, { State as SharedState } from '../../shared/reducers/root.reducer';
 import completionSelectors, { State as CompletionState } from './reducers/root.reducer';
 
-import { Dictionary, HistoryGrouping } from '../../shared/models';
-import { AddPlayingInfo, MarkCompleteItem, ProgressItem } from './models';
+import { Dictionary, HistoryGrouping, ProgressItem } from '../../shared/models';
+import { AddPlayingInfo, MarkCompleteItem } from './models';
 
 @Component({
   selector: 'app-completion',
@@ -35,8 +35,8 @@ export class CompletionComponent implements OnInit {
     this.addPlayingInfo$ = this.completionStore.select(completionSelectors.addPlayingInfo);
     this.game$ = this.addPlayingInfo$.map(info => info.game ? info.game : null);
 
-    this.playing$ = this.completionStore.select(completionSelectors.playing);
-    this.completed$ = this.completionStore.select(completionSelectors.completed);
+    this.playing$ = this.sharedStore.select(sharedSelectors.progressPlaying);
+    this.completed$ = this.sharedStore.select(sharedSelectors.progressCompleted);
 
     this.markCompleteEntities$ = this.completionStore.select(completionSelectors.markCompleteEntities);
   }

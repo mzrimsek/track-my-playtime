@@ -5,8 +5,8 @@ import { Store } from '@ngrx/store';
 import { UserService } from '../../../auth/services/user.service';
 
 import * as appActions from '../../../../actions/app.actions';
+import * as progressActions from '../../../../shared/actions/progress.actions';
 import * as markCompleteActions from '../../actions/mark-complete.actions';
-import * as progressActions from '../../actions/progress.actions';
 
 import { State } from '../../reducers/root.reducer';
 

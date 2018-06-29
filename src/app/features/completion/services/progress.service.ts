@@ -3,9 +3,10 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
 
-import { ProgressEntity } from '../reducers/progress.reducer';
+import { ProgressEntity } from '../../../shared/reducers/progress.reducer';
 
-import { AddPlaying, MarkCompletePayload } from '../models';
+import { MarkCompletePayload } from '../../../shared/models';
+import { AddPlaying } from '../models';
 
 import { getUUID } from '../../../shared/utils/uuid.utils';
 
