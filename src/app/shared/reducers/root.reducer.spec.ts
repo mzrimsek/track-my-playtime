@@ -103,12 +103,14 @@ describe('Shared Root Reducer', () => {
             item1Start,
             item1End
           ],
+          locked: false,
         }, {
           ...item2,
           dateRange: [
             item2Start,
             item2End
-          ]
+          ],
+          locked: false
         }]);
       });
     });
@@ -152,13 +154,15 @@ describe('Shared Root Reducer', () => {
           dateRange: [
             new Date(item2.startTime),
             new Date(item2.endTime)
-          ]
+          ],
+          locked: false
         }, {
           ...item1,
           dateRange: [
             new Date(item1.startTime),
             new Date(item1.endTime)
-          ]
+          ],
+          locked: false
         }]);
       });
     });
@@ -213,7 +217,8 @@ describe('Shared Root Reducer', () => {
             dateRange: [
               addDays(startDate, 1),
               addDays(startDate, 1)
-            ]
+            ],
+            locked: false
           }]
         }, {
           key: formatDate(startDate),
@@ -223,13 +228,15 @@ describe('Shared Root Reducer', () => {
             dateRange: [
               startDate,
               startDate
-            ]
+            ],
+            locked: false
           }, {
             ...item2,
             dateRange: [
               startDate,
               startDate
-            ]
+            ],
+            locked: false
           }]
         }]);
       });
@@ -285,13 +292,15 @@ describe('Shared Root Reducer', () => {
             dateRange: [
               new Date(2000),
               new Date(2000)
-            ]
+            ],
+            locked: false
           }, {
             ...item1,
             dateRange: [
               new Date(1000),
               new Date(1000)
-            ]
+            ],
+            locked: false
           }]
         }, {
           key: platform + '2',
@@ -301,7 +310,8 @@ describe('Shared Root Reducer', () => {
             dateRange: [
               new Date(1000),
               new Date(1000)
-            ]
+            ],
+            locked: false
           }]
         }]);
       });
@@ -357,13 +367,15 @@ describe('Shared Root Reducer', () => {
             dateRange: [
               new Date(2000),
               new Date(2000)
-            ]
+            ],
+            locked: false
           }, {
             ...item1,
             dateRange: [
               new Date(1000),
               new Date(1000)
-            ]
+            ],
+            locked: false
           }]
         }, {
           key: game + '2',
@@ -373,7 +385,8 @@ describe('Shared Root Reducer', () => {
             dateRange: [
               new Date(2000),
               new Date(2000)
-            ]
+            ],
+            locked: false
           }]
         }]);
       });

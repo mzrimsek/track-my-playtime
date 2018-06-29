@@ -210,21 +210,24 @@ const testGroupings: HistoryGrouping[] = [{
     platform: 'Platform 1',
     startTime: 5000,
     endTime: 6000,
-    dateRange: [new Date(5000), new Date(6000)]
+    dateRange: [new Date(5000), new Date(6000)],
+    locked: false
   }, {
     id: '2',
     game: testGame,
     platform: 'Platform 1',
     startTime: 3000,
     endTime: 4000,
-    dateRange: [new Date(3000), new Date(4000)]
+    dateRange: [new Date(3000), new Date(4000)],
+    locked: false
   }, {
     id: '1',
     game: testGame,
     platform: 'Platform 2',
     startTime: 1000,
     endTime: 2000,
-    dateRange: [new Date(1000), new Date(2000)]
+    dateRange: [new Date(1000), new Date(2000)],
+    locked: false
   }],
   totalTime: 3
 }];

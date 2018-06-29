@@ -130,7 +130,8 @@ describe('PlayingItemComponent', () => {
             platform: 'some platform',
             startTime: 3000,
             endTime: 6000,
-            dateRange: [new Date(3000), new Date(6000)]
+            dateRange: [new Date(3000), new Date(6000)],
+            locked: false
           }],
           totalTime: 3
         }];
@@ -170,7 +171,8 @@ const testDisplayData: PlayingDisplayData = {
     platform: 'some platform',
     startTime: 3000,
     endTime: 6000,
-    dateRange: [new Date(3000), new Date(6000)]
+    dateRange: [new Date(3000), new Date(6000)],
+    locked: false
   },
   timePlayed: 3,
   endDates: [6000],

@@ -131,7 +131,8 @@ const testGroupings: HistoryGrouping[] = [{
     platform: 'platform 2',
     startTime: subDays(start, 1).getTime(),
     endTime: subDays(start, 1).getTime() + 2000,
-    dateRange: [subDays(start, 1), subDays(start, 1)]
+    dateRange: [subDays(start, 1), subDays(start, 1)],
+    locked: false
   }],
   totalTime: 2
 }, {
@@ -142,7 +143,8 @@ const testGroupings: HistoryGrouping[] = [{
     platform: 'platform 1',
     startTime: start.getTime(),
     endTime: start.getTime() + 1000,
-    dateRange: [start, start]
+    dateRange: [start, start],
+    locked: false
   }],
   totalTime: 1
 }, {
@@ -153,14 +155,16 @@ const testGroupings: HistoryGrouping[] = [{
     platform: 'platform 1',
     startTime: addDays(start, 4).getTime(),
     endTime: addDays(start, 4).getTime() + 3000,
-    dateRange: [addDays(start, 4), addDays(start, 4)]
+    dateRange: [addDays(start, 4), addDays(start, 4)],
+    locked: false
   }, {
     id: '4',
     game: 'game 2',
     platform: 'platform 2',
     startTime: addDays(start, 4).getTime(),
     endTime: addDays(start, 4).getTime() + 1000,
-    dateRange: [addDays(start, 4), addDays(start, 4)]
+    dateRange: [addDays(start, 4), addDays(start, 4)],
+    locked: false
   }],
   totalTime: 4
 }];

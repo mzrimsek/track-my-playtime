@@ -31,15 +31,24 @@ export const _selectHistory = createSelector(_selectSharedState, state => state.
 export const _selectPlatforms = createSelector(_selectSharedState, state => state.platforms);
 export const _selectProgress = createSelector(_selectSharedState, state => state.progress);
 
+export const { selectAll: _selectAllProgress } = fromProgress.adapter.getSelectors(_selectProgress);
+export const _selectPlayingProgress = createSelector(_selectAllProgress,
+  entities => entities.filter(entity => entity.endEntryId === '')
+    .map(entity => entity as ProgressItem));
+export const _selectCompletedProgress = createSelector(_selectAllProgress,
+  entities => entities.filter(entity => entity.endEntryId !== '')
+    .map(entity => entity as ProgressItem));
+
 export const { selectAll: _selectAllHistory } = fromHistory.adapter.getSelectors(_selectHistory);
-export const _selectHistoryItems = createSelector(_selectAllHistory,
-  entities => entities.map(
-    entity => <HistoryListItem>{
-      ...entity,
+export const _selectHistoryItems = createSelector(_selectAllHistory, _selectAllProgress,
+  (historyEntries, progress) => historyEntries.map(
+    historyEntry => <HistoryListItem>{
+      ...historyEntry,
       dateRange: [
-        new Date(entity.startTime),
-        new Date(entity.endTime),
-      ]
+        new Date(historyEntry.startTime),
+        new Date(historyEntry.endTime),
+      ],
+      locked: progress.some(x => x.startEntryId === historyEntry.id || x.endEntryId === historyEntry.id)
     }));
 export const _selectSortedHistoryItems = createSelector(_selectHistoryItems, items => items.sort((a, b) => b.startTime - a.startTime));
 export const _selectHistoryGroupingsByDate = createSelector(_selectSortedHistoryItems, items => {
@@ -58,14 +67,6 @@ export const _selectHistoryLoading = createSelector(_selectHistory, history => h
 export const _selectTrackedGames = createSelector(_selectSortedHistoryItems, items => getUniqueFrom(items, item => item.game));
 
 export const _selectPlatformsOptions = createSelector(_selectPlatforms, platforms => platforms.options);
-
-export const { selectAll: _selectAllProgress } = fromProgress.adapter.getSelectors(_selectProgress);
-export const _selectPlayingProgress = createSelector(_selectAllProgress,
-  entities => entities.filter(entity => entity.endEntryId === '')
-    .map(entity => entity as ProgressItem));
-export const _selectCompletedProgress = createSelector(_selectAllProgress,
-  entities => entities.filter(entity => entity.endEntryId !== '')
-    .map(entity => entity as ProgressItem));
 
 const sharedSelectors = {
   historyGroupingsByDate: _selectHistoryGroupingsByDate,

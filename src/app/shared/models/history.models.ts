@@ -5,6 +5,7 @@ export interface HistoryListItem {
   startTime: number;
   endTime: number;
   dateRange: [Date, Date];
+  locked: boolean;
 }
 
 export interface HistoryGrouping {

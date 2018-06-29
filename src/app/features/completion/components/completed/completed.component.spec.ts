@@ -43,7 +43,8 @@ describe('CompletedComponent', () => {
             platform: 'some platform',
             startTime: 1000,
             endTime: 4000,
-            dateRange: [new Date(1000), new Date(4000)]
+            dateRange: [new Date(1000), new Date(4000)],
+            locked: false
           }],
           totalTime: 3
         }
@@ -70,14 +71,16 @@ describe('CompletedComponent', () => {
             platform: 'some platform',
             startTime: 5000,
             endTime: 6000,
-            dateRange: [new Date(5000), new Date(6000)]
+            dateRange: [new Date(5000), new Date(6000)],
+            locked: false
           }, {
             id: 'some start id',
             game: 'some game',
             platform: 'some platform',
             startTime: 1000,
             endTime: 4000,
-            dateRange: [new Date(1000), new Date(4000)]
+            dateRange: [new Date(1000), new Date(4000)],
+            locked: false
           }],
           totalTime: 4
         }

@@ -156,7 +156,8 @@ describe('History Utils', () => {
           dateRange: [
             inRange,
             inRange
-          ]
+          ],
+          locked: false
         }, {
           id: 'some id 2',
           game,
@@ -166,7 +167,8 @@ describe('History Utils', () => {
           dateRange: [
             start,
             start
-          ]
+          ],
+          locked: false
         }]
       });
     });
@@ -226,7 +228,8 @@ describe('History Utils', () => {
           dateRange: [
             inRange,
             inRange
-          ]
+          ],
+          locked: false
         }, {
           id: 'some id 2',
           game,
@@ -236,7 +239,8 @@ describe('History Utils', () => {
           dateRange: [
             start,
             start
-          ]
+          ],
+          locked: false
         }]
       }, {
         key: game,
@@ -250,7 +254,8 @@ describe('History Utils', () => {
           dateRange: [
             new Date(inRange.getTime() + 1000),
             new Date(inRange.getTime() + 1000)
-          ]
+          ],
+          locked: false
         }, {
           id: 'some id 7',
           game,
@@ -260,7 +265,8 @@ describe('History Utils', () => {
           dateRange: [
             inRange,
             inRange
-          ]
+          ],
+          locked: false
         }, {
           id: 'some id 6',
           game,
@@ -270,7 +276,8 @@ describe('History Utils', () => {
           dateRange: [
             start,
             start
-          ]
+          ],
+          locked: false
         }]
       }]);
     });
@@ -305,7 +312,8 @@ describe('History Utils', () => {
           dateRange: [
             inRange,
             new Date(inRange.getTime() + 1000)
-          ]
+          ],
+          locked: false
         }, {
           id: 'some id 2',
           game,
@@ -315,7 +323,8 @@ describe('History Utils', () => {
           dateRange: [
             start,
             new Date(start.getTime() + 1000)
-          ]
+          ],
+          locked: false
         }]
       }]);
     });
@@ -334,14 +343,16 @@ describe('History Utils', () => {
         platform: '',
         startTime: 1000,
         endTime: 3000,
-        dateRange: [new Date(1000), new Date(3000)]
+        dateRange: [new Date(1000), new Date(3000)],
+        locked: false
       }, {
         id: '2',
         game: '',
         platform: '',
         startTime: 1000,
         endTime: 2000,
-        dateRange: [new Date(1000), new Date(2000)]
+        dateRange: [new Date(1000), new Date(2000)],
+        locked: false
       }];
       const result = getElapsedTimeFrom(items);
       expect(result).toBe(3);
@@ -362,7 +373,8 @@ describe('History Utils', () => {
         platform: 'Platform 1',
         startTime: 5000,
         endTime: 6000,
-        dateRange: [new Date(5000), new Date(6000)]
+        dateRange: [new Date(5000), new Date(6000)],
+        locked: false
       });
       expected.set('2', {
         id: '2',
@@ -370,7 +382,8 @@ describe('History Utils', () => {
         platform: 'Platform 1',
         startTime: 3000,
         endTime: 4000,
-        dateRange: [new Date(3000), new Date(4000)]
+        dateRange: [new Date(3000), new Date(4000)],
+        locked: false
       });
       expected.set('1', {
         id: '1',
@@ -378,7 +391,8 @@ describe('History Utils', () => {
         platform: 'Platform 2',
         startTime: 1000,
         endTime: 2000,
-        dateRange: [new Date(1000), new Date(2000)]
+        dateRange: [new Date(1000), new Date(2000)],
+        locked: false
       });
       const result = getHistoryListItemMap(testGroupings);
       expect(result).toEqual(expected);
@@ -393,7 +407,8 @@ const getHistoryListItem = (game: string, platform: string, startTime = 0, endTi
     platform,
     startTime,
     endTime,
-    dateRange: [new Date(startTime), new Date(endTime)]
+    dateRange: [new Date(startTime), new Date(endTime)],
+    locked: false
   };
 };
 
@@ -415,21 +430,24 @@ const testGroupings: HistoryGrouping[] = [{
     platform: 'Platform 1',
     startTime: 5000,
     endTime: 6000,
-    dateRange: [new Date(5000), new Date(6000)]
+    dateRange: [new Date(5000), new Date(6000)],
+    locked: false
   }, {
     id: '2',
     game: testGame,
     platform: 'Platform 1',
     startTime: 3000,
     endTime: 4000,
-    dateRange: [new Date(3000), new Date(4000)]
+    dateRange: [new Date(3000), new Date(4000)],
+    locked: false
   }, {
     id: '1',
     game: testGame,
     platform: 'Platform 2',
     startTime: 1000,
     endTime: 2000,
-    dateRange: [new Date(1000), new Date(2000)]
+    dateRange: [new Date(1000), new Date(2000)],
+    locked: false
   }],
   totalTime: 3
 }];

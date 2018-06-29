@@ -43,7 +43,8 @@ describe('PlayingComponent', () => {
             platform: 'some platform',
             startTime: 1000,
             endTime: 4000,
-            dateRange: [new Date(1000), new Date(4000)]
+            dateRange: [new Date(1000), new Date(4000)],
+            locked: false
           }],
           totalTime: 3
         }
@@ -70,7 +71,8 @@ describe('PlayingComponent', () => {
             platform: 'some platform',
             startTime: 1000,
             endTime: 4000,
-            dateRange: [new Date(1000), new Date(4000)]
+            dateRange: [new Date(1000), new Date(4000)],
+            locked: false
           }],
           totalTime: 3
         }
@@ -98,7 +100,8 @@ describe('PlayingComponent', () => {
           platform: 'some platform',
           startTime: 1000,
           endTime: 4000,
-          dateRange: [new Date(1000), new Date(4000)]
+          dateRange: [new Date(1000), new Date(4000)],
+          locked: false
         },
         timePlayed: 3,
         endDates: [4000],
