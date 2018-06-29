@@ -4,6 +4,7 @@
                placeholder="Game"
                [items]="trackedGames"
                [addTag]="true"
+               [selectOnTab]="true"
                [(ngModel)]="game"
                (change)="setGame()"
                (clear)="resetGame()"></ng-select>
