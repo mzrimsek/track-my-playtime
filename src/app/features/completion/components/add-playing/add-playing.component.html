@@ -3,6 +3,7 @@
     <ng-select data-tracking-category="addPlayingGame"
                placeholder="Game"
                [items]="games"
+               [selectOnTab]="true"
                [(ngModel)]="game"
                (change)="setGame()"
                (clear)="resetInfo()"></ng-select>
