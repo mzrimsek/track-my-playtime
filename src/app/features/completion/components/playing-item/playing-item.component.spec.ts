@@ -16,7 +16,7 @@ import * as markCompleteActions from '../../actions/mark-complete.actions';
 import * as fromRoot from '../../../../reducers/root.reducer';
 import * as fromCompletion from '../../reducers/root.reducer';
 
-import { PlayingDisplayData } from '../../../../shared/models';
+import { PlayingDisplayData } from '../../models';
 
 describe('PlayingItemComponent', () => {
   let store: Store<fromRoot.State>;
