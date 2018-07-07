@@ -28,6 +28,7 @@ import { PlatformsService } from './services/platforms.service';
 import { TimerService } from './services/timer.service';
 
 import { reducers } from './reducers/root.reducer';
+import { LockedHistoryEntryComponent } from './components/locked-history-entry/locked-history-entry.component';
 
 @NgModule({
   imports: [
@@ -41,7 +42,7 @@ import { reducers } from './reducers/root.reducer';
     EffectsModule.forFeature([TimerEffects, HistoryEffects, PlatformsEffects]),
     SharedModule
   ],
-  declarations: [TrackerComponent, TimerComponent, HistoryComponent, HistoryEntryComponent, LoadMoreComponent],
+  declarations: [TrackerComponent, TimerComponent, HistoryComponent, HistoryEntryComponent, LoadMoreComponent, LockedHistoryEntryComponent],
   providers: [ClockService, HistoryService, PlatformsService, UserService, TimerService]
 })
 export class TrackerModule { }
