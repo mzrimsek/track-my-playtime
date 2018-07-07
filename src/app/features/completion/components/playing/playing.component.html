@@ -1,7 +1,8 @@
-Playing
-
-<div class="playing-item"
-     *ngFor="let data of getDisplayData()">
-  <app-completion-playing-item [displayData]="data"
-                               [gameGroupings]="gameGroupings"></app-completion-playing-item>
+<div class="playing">
+  {{ getDisplayData().length }} in Progress
+  <div class="playing-item"
+       *ngFor="let data of getDisplayData()">
+    <app-completion-playing-item [displayData]="data"
+                                 [gameGroupings]="gameGroupings"></app-completion-playing-item>
+  </div>
 </div>
