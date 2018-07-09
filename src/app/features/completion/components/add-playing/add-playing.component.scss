@@ -8,4 +8,37 @@
   padding: 0px 10px;
   width: 100%;
   margin-bottom: 20px;
+
+  .display-element {
+    font-size: $base-font-size;
+    font-family: $base-font-family;
+    width: 100%;
+    padding: 5px;
+    background: $background-light;
+  }
+
+  .game {
+    width: 55%;
+
+    input {
+      @extend .display-element;
+      outline: none;
+      border: none;
+    }
+  }
+
+  .platform, .startTime {
+    width: 20%;
+
+    select {
+      @extend .display-element;
+      outline: none;
+      border: none;
+      appearance: none;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
 }
