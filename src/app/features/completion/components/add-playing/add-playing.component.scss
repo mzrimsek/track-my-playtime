@@ -1,0 +1,11 @@
+@import "../../../../../variables.scss";
+
+.add-playing {
+  display: flex;
+  align-items: center;
+  background: $background-light;
+  height: $timer-height;
+  padding: 0px 10px;
+  width: 100%;
+  margin-bottom: 20px;
+}
