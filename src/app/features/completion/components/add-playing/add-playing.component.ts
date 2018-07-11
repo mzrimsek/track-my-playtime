@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 
+import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 import { Store } from '@ngrx/store';
 
 import { UserService } from '../../../auth/services/user.service';
@@ -30,6 +31,9 @@ export class AddPlayingComponent implements OnInit {
   platforms: string[] = [];
   dates: number[] = [];
   userId = '';
+  icons = {
+    add: faPlusSquare
+  };
   constructor(private store: Store<State>, private userService: UserService) { }
 
   ngOnInit() {
