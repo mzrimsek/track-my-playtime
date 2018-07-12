@@ -114,6 +114,7 @@ describe('AddPlayingComponent', () => {
       fixture.detectChanges();
 
       platformEl = fixture.nativeElement.querySelector('.platform select');
+      platformEl.disabled = false;
       platformEl.selectedIndex = 2;
       platformEl.dispatchEvent(new Event('change'));
       fixture.detectChanges();
@@ -141,11 +142,13 @@ describe('AddPlayingComponent', () => {
       fixture.detectChanges();
 
       const platformEl = fixture.nativeElement.querySelector('.platform select');
+      platformEl.disabled = false;
       platformEl.selectedIndex = 2;
       platformEl.dispatchEvent(new Event('change'));
       fixture.detectChanges();
 
       startTimeEl = fixture.nativeElement.querySelector('.startTime select');
+      startTimeEl.disabled = false;
       startTimeEl.selectedIndex = 1;
       startTimeEl.dispatchEvent(new Event('change'));
       fixture.detectChanges();
