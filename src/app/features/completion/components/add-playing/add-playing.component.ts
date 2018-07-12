@@ -49,11 +49,9 @@ export class AddPlayingComponent implements OnInit {
   }
 
   setPlatform(platformEl: HTMLSelectElement) {
-    if (platformEl.value) {
-      const platform = platformEl.value;
-      this.store.dispatch(new actions.SetPlatform(platform));
-      this.dates = filterStartTimes(this.gameGroupings, this.game, platform);
-    }
+    const platform = platformEl.value;
+    this.store.dispatch(new actions.SetPlatform(platform));
+    this.dates = filterStartTimes(this.gameGroupings, this.game, platform);
   }
 
   setStartTime(startTimeEl: HTMLSelectElement) {

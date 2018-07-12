@@ -17,10 +17,17 @@ const initialState: State = {
 export function reducer(state: State = initialState, action: actions.All): State {
   switch (action.type) {
     case actions.SET_GAME: {
-      return tassign(state, { game: action.game });
+      return tassign(state, {
+        game: action.game,
+        platform: '',
+        startTime: 0
+      });
     }
     case actions.SET_PLATFORM: {
-      return tassign(state, { platform: action.platform });
+      return tassign(state, {
+        platform: action.platform,
+        startTime: 0
+      });
     }
     case actions.SET_STARTTIME: {
       return tassign(state, { startTime: action.startTime });
