@@ -6,15 +6,19 @@
                                 [info]="addPlayingInfo$ | async"></app-completion-add-playing>
     <div class="games">
       <div class="playing drop-shadow">
-        {{ (playing$ | async).length }} in Progress
-        <app-completion-playing [items]="playing$ | async"
-                                [gameGroupings]="historyGroupings$ | async"
-                                [markCompleteEntities]="markCompleteEntities$ | async"></app-completion-playing>
+        {{ (playingDisplayData$ | async).length }} in Progress
+        <div class="playing-item"
+             *ngFor="let data of (playingDisplayData$ | async)">
+          <app-completion-playing-item [displayData]="data"
+                                       [gameGroupings]="historyGroupings$ | async"></app-completion-playing-item>
+        </div>
       </div>
       <div class="completed drop-shadow">
-        {{ (completed$ | async).length }} Completed
-        <app-completion-completed [items]="completed$ | async"
-                                  [gameGroupings]="historyGroupings$ | async"></app-completion-completed>
+        {{ (completedDisplayData$ | async).length }} Completed
+        <div class="completed-item"
+             *ngFor="let data of (completedDisplayData$ | async)">
+          <app-completion-completed-item [displayData]="data"></app-completion-completed-item>
+        </div>
       </div>
     </div>
   </div>

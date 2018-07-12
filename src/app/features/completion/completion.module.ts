@@ -12,9 +12,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { CompletionComponent } from './completion.component';
 import { AddPlayingComponent } from './components/add-playing/add-playing.component';
 import { CompletedItemComponent } from './components/completed-item/completed-item.component';
-import { CompletedComponent } from './components/completed/completed.component';
 import { PlayingItemComponent } from './components/playing-item/playing-item.component';
-import { PlayingComponent } from './components/playing/playing.component';
 
 import { AddPlayingEffects } from './effects/add-playing.effects';
 import { ProgressEffects } from './effects/progress.effects';
@@ -38,8 +36,6 @@ import { reducers } from './reducers/root.reducer';
   ],
   declarations: [
     CompletionComponent,
-    CompletedComponent,
-    PlayingComponent,
     AddPlayingComponent,
     PlayingItemComponent,
     CompletedItemComponent],
