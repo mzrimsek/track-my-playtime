@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 
+import { faCheck, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Store } from '@ngrx/store';
 
 import { UserService } from '../../../auth/services/user.service';
@@ -26,6 +27,10 @@ export class PlayingItemComponent implements OnInit {
   @Input() displayData: PlayingDisplayData;
   @Input() gameGroupings: HistoryGrouping[] = [];
   userId = '';
+  icons = {
+    complete: faCheck,
+    remove: faTrash
+  };
   constructor(private store: Store<State>, private userService: UserService) { }
 
   ngOnInit() {

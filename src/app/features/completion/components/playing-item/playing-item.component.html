@@ -1,14 +1,30 @@
 <div class="playing-item">
-  <div>
-    {{ displayData.startEntryData.game }} {{ displayData.startEntryData.platform }} {{ displayData.startEntryData.startTime |
-    date:'M/d/y hh:mm a' }} {{ displayData.timePlayed | time }}
+  <div class="main">
+    <div class="info">
+      <div class="game-info">
+        <div class="game">{{ displayData.startEntryData.game }}</div>
+        <div class="platform">({{ displayData.startEntryData.platform }})</div>
+      </div>
+      <div class="time">
+        <div class="played">Played: {{ displayData.timePlayed | time }}</div>
+        <div class="start">Started: {{ displayData.startEntryData.startTime | date:'M/d/y - hh:mm a' }} </div>
+      </div>
+    </div>
 
-    <button id="markCompletedShowExtra"
-            data-tracking-category="markCompletedShowExtra"
-            (click)="toggleShowExtra()">Some check mark icon</button>
-    <button id="markCompletedRemove"
-            data-tracking-category="markCompletedRemove"
-            (click)="remove()"> Some remove icon</button>
+    <div class="actions">
+      <button id="markCompletedShowExtra"
+              data-tracking-category="markCompletedShowExtra"
+              class="fa-2x icon-button complete"
+              (click)="toggleShowExtra()">
+        <fa-icon [icon]="icons.complete"></fa-icon>
+      </button>
+      <button id="markCompletedRemove"
+              data-tracking-category="markCompletedRemove"
+              class="fa-2x icon-button remove"
+              (click)="remove()">
+        <fa-icon [icon]="icons.remove"></fa-icon>
+      </button>
+    </div>
   </div>
   <div class="extra"
        *ngIf="displayData.markComplete.showExtra">

@@ -1,0 +1,56 @@
+@import "../../../../../variables.scss";
+
+.playing-item {
+  .display-element {
+    font-size: $base-font-size;
+    font-family: $base-font-family;
+    width: 100%;
+    padding: 5px;
+    background: $background-light;
+  }
+
+  .main {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    .info {
+      display: flex;
+      flex-direction: column;
+
+      .game-info {
+        display: flex;
+        align-items: center;
+
+        .game {
+          font-weight: bold;
+        }
+
+        .platform {
+          font-style: italic;
+          opacity: .8;
+          font-size: 85%;
+          margin-left: 5px;
+        }
+      }
+
+      .time {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+
+    .actions {
+      display: flex;
+
+      .complete {
+        color: $good-action-color;
+        margin-right: 10px;
+      }
+
+      .remove {
+        color: $neutral-action-color;
+      }
+    }
+  }
+}

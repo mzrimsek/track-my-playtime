@@ -10,8 +10,7 @@
           <span class="count">{{ (playingDisplayData$ | async).length }}</span> in Progress
         </div>
         <div class="items">
-          <div class="playing-item"
-               *ngFor="let data of (playingDisplayData$ | async)">
+          <div *ngFor="let data of (playingDisplayData$ | async)">
             <app-completion-playing-item [displayData]="data"
                                          [gameGroupings]="historyGroupings$ | async"></app-completion-playing-item>
           </div>
@@ -22,8 +21,7 @@
           <span class="count">{{ (completedDisplayData$ | async).length }}</span> Completed
         </div>
         <div class="items">
-          <div class="completed-item"
-               *ngFor="let data of (completedDisplayData$ | async)">
+          <div *ngFor="let data of (completedDisplayData$ | async)">
             <app-completion-completed-item [displayData]="data"></app-completion-completed-item>
           </div>
         </div>
