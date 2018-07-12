@@ -6,11 +6,13 @@
                                 [info]="addPlayingInfo$ | async"></app-completion-add-playing>
     <div class="games">
       <div class="playing drop-shadow">
+        {{ (playing$ | async).length }} in Progress
         <app-completion-playing [items]="playing$ | async"
                                 [gameGroupings]="historyGroupings$ | async"
                                 [markCompleteEntities]="markCompleteEntities$ | async"></app-completion-playing>
       </div>
       <div class="completed drop-shadow">
+        {{ (completed$ | async).length }} Completed
         <app-completion-completed [items]="completed$ | async"
                                   [gameGroupings]="historyGroupings$ | async"></app-completion-completed>
       </div>
