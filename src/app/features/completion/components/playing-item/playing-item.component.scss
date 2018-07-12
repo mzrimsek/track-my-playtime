@@ -1,6 +1,8 @@
 @import "../../../../../variables.scss";
 
 .playing-item {
+  border-bottom: 1px solid darken($background-light, 10%);
+
   .display-element {
     font-size: $base-font-size;
     font-family: $base-font-family;
@@ -50,6 +52,21 @@
 
       .remove {
         color: $neutral-action-color;
+      }
+    }
+  }
+
+  .extra {
+    display: flex;
+
+    select {
+      @extend .display-element;
+      outline: none;
+      border: none;
+      appearance: none;
+
+      &:hover {
+        cursor: pointer;
       }
     }
   }
