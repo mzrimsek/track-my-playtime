@@ -20,7 +20,7 @@ export class CompletedComponent implements OnInit {
 
   ngOnInit() { }
 
-  getDisplayData() {
+  getDisplayData(): CompletedDisplayData[] {
     const historyListItemMap = getHistoryListItemMap(this.gameGroupings);
 
     const displayData: CompletedDisplayData[] = [];

@@ -21,7 +21,7 @@ export class PlayingComponent implements OnInit {
 
   ngOnInit() { }
 
-  getDisplayData() {
+  getDisplayData(): PlayingDisplayData[] {
     const historyListItemMap = getHistoryListItemMap(this.gameGroupings);
 
     const displayData: PlayingDisplayData[] = [];
