@@ -17,7 +17,7 @@
   }
 
   .game {
-    width: 55%;
+    width: 45%;
 
     input {
       @extend .display-element;
@@ -26,9 +26,17 @@
     }
   }
 
-  .platform, .startTime {
+  .platform {
+    @extend .display-element-select;
     width: 20%;
+  }
 
+  .startTime {
+    @extend .display-element-select;
+    width: 30%;
+  }
+
+  .display-element-select {
     select {
       @extend .display-element;
       outline: none;
@@ -38,12 +46,48 @@
       &:hover {
         cursor: pointer;
       }
+
+      &:disabled {
+        cursor: initial;
+      }
     }
   }
 
   .save {
+    width: 5%;
+
     button {
       color: $good-action-color;
+
+      &:disabled {
+        cursor: initial;
+        color: $neutral-action-color;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: $small-breakpoint) {
+  .add-playing {
+    .display-element {
+      font-size: $small-font-size;
+    }
+
+    .game {
+      width: 30%;
+      font-size: $small-font-size;
+
+      input {
+        text-overflow: ellipsis;
+      }
+    }
+
+    .platform, .startTime {
+      width: 30%;
+
+      select {
+        text-overflow: ellipsis;
+      }
     }
   }
 }

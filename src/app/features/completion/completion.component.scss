@@ -26,10 +26,8 @@
   }
 }
 
-@media only screen  and (max-width : $small-breakpoint) {
+@media only screen  and (max-width : $medium-breakpoint) {
   .content {
-    margin-top: $small-nav-banner-height;
-
     .completion {
       .games {
         flex-direction: column;
@@ -48,5 +46,11 @@
         }
       }
     }
+  }
+}
+
+@media only screen  and (max-width : $small-breakpoint) {
+  .content {
+    margin-top: $small-nav-banner-height;
   }
 }
