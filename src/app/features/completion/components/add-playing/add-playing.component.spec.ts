@@ -163,10 +163,11 @@ describe('AddPlayingComponent', () => {
 
     beforeEach(async(() => {
       saveButtonEl = fixture.nativeElement.querySelector('.save button');
+      saveButtonEl.disabled = false;
     }));
 
     describe('With Match', () => {
-      beforeEach(async(() => {
+      it('Should dispatch Save', async(() => {
         component.game = testGame;
         component.info = {
           game: testGame,
@@ -175,26 +176,23 @@ describe('AddPlayingComponent', () => {
         };
         saveButtonEl.click();
         fixture.detectChanges();
-      }));
-
-      it('Should dispatch Save', async(() => {
         const action = new actions.Save({
           userId: testUserId,
           startEntryId: '2'
         });
+
         expect(store.dispatch).toHaveBeenCalledWith(action);
       }));
     });
 
     describe('Without Match', () => {
-      beforeEach(async(() => {
+      it('Should dispatch Error', async(() => {
         component.game = null;
         saveButtonEl.click();
         fixture.detectChanges();
-      }));
 
-      it('Should dispatch Error', async(() => {
         const action = new appActions.Error(actions.SAVE, 'No matching history item found.');
+
         expect(store.dispatch).toHaveBeenCalledWith(action);
       }));
     });
