@@ -60,14 +60,24 @@ describe('PlayingItemComponent', () => {
   }));
 
   describe('When show extra is false', () => {
+    it('Should display extra section open button', async(() => {
+      const toggleShowExtraButton = fixture.nativeElement.querySelector('.actions .complete');
+      expect(toggleShowExtraButton).toBeTruthy();
+    }));
+
+    it('Should not display extra section close button', async(() => {
+      const toggleShowExtraButton = fixture.nativeElement.querySelector('.actions .close');
+      expect(toggleShowExtraButton).toBeFalsy();
+    }));
+
     it('Should dispatch SetShowExtra with true when markComplete button clicked', async(() => {
-      const toggleShowExtraButton = fixture.nativeElement.querySelector('#markCompletedShowExtra');
+      const toggleShowExtraButton = fixture.nativeElement.querySelector('.actions .complete');
       toggleShowExtraButton.click();
       expect(store.dispatch).toHaveBeenCalledWith(new markCompleteActions.SetShowExtra('1', true));
     }));
 
     it('Should dispatch RemoveProgressItem when remove button is clicked', async(() => {
-      const removeButton = fixture.nativeElement.querySelector('#markCompletedRemove');
+      const removeButton = fixture.nativeElement.querySelector('.actions .remove');
       removeButton.click();
       expect(store.dispatch).toHaveBeenCalledWith(new progressActions.RemoveProgressItem(testUserId, '1'));
     }));
@@ -84,8 +94,18 @@ describe('PlayingItemComponent', () => {
       fixture.detectChanges();
     }));
 
+    it('Should not display extra section open button', async(() => {
+      const toggleShowExtraButton = fixture.nativeElement.querySelector('.actions .complete');
+      expect(toggleShowExtraButton).toBeFalsy();
+    }));
+
+    it('Should display extra section close button', async(() => {
+      const toggleShowExtraButton = fixture.nativeElement.querySelector('.actions .close');
+      expect(toggleShowExtraButton).toBeTruthy();
+    }));
+
     it('Should dispatch SetShowExtra with false when markComplete button clicked', async(() => {
-      const toggleShowExtraButton = fixture.nativeElement.querySelector('#markCompletedShowExtra');
+      const toggleShowExtraButton = fixture.nativeElement.querySelector('.actions .close');
       toggleShowExtraButton.click();
       expect(store.dispatch).toHaveBeenCalledWith(new markCompleteActions.SetShowExtra('1', false));
     }));
@@ -109,7 +129,8 @@ describe('PlayingItemComponent', () => {
       let markCompleteButton: any;
 
       beforeEach(async(() => {
-        markCompleteButton = fixture.nativeElement.querySelector('#markCompletedSave');
+        markCompleteButton = fixture.nativeElement.querySelector('.extra .complete button');
+        markCompleteButton.disabled = false;
       }));
 
       it('Should dispatch Error when no matching history item', async(() => {

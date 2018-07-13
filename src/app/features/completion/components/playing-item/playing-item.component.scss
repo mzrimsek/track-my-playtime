@@ -2,6 +2,7 @@
 
 .playing-item {
   border-bottom: 1px solid darken($background-light, 10%);
+  padding: 10px;
 
   .display-element {
     font-size: $base-font-size;
@@ -50,6 +51,11 @@
         margin-right: 10px;
       }
 
+      .close {
+        color: $bad-action-color;
+        margin-right: 10px;
+      }
+
       .remove {
         color: $neutral-action-color;
       }
@@ -58,15 +64,30 @@
 
   .extra {
     display: flex;
+    justify-content: space-evenly;
+    padding: 10px;
+    background: darken($background-light, 20%);
 
-    select {
-      @extend .display-element;
-      outline: none;
-      border: none;
-      appearance: none;
+    .endTime   {
+      width: 50%;
 
-      &:hover {
-        cursor: pointer;
+      select {
+        @extend .display-element;
+        outline: none;
+        border: none;
+        appearance: none;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+
+    .complete {
+      width: 50%;
+
+      button {
+        width: 100%;
       }
     }
   }

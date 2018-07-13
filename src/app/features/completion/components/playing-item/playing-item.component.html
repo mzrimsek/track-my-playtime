@@ -6,38 +6,48 @@
         <div class="platform">({{ displayData.startEntryData.platform }})</div>
       </div>
       <div class="time">
-        <div class="played">Played: {{ displayData.timePlayed | time }}</div>
+        <div class="played">Playtime: {{ displayData.timePlayed | time }}</div>
         <div class="start">Started: {{ displayData.startEntryData.startTime | date:'M/d/y - hh:mm a' }} </div>
       </div>
     </div>
 
     <div class="actions">
-      <button id="markCompletedShowExtra"
+      <button *ngIf="!displayData.markComplete.showExtra"
               data-tracking-category="markCompletedShowExtra"
               class="fa-2x icon-button complete"
               (click)="toggleShowExtra()">
         <fa-icon [icon]="icons.complete"></fa-icon>
       </button>
-      <button id="markCompletedRemove"
-              data-tracking-category="markCompletedRemove"
+      <button *ngIf="displayData.markComplete.showExtra"
+              data-tracking-category="markCompletedCloseExtra"
+              class="fa-2x icon-button close"
+              (click)="toggleShowExtra()">
+        <fa-icon [icon]="icons.close"></fa-icon>
+      </button>
+      <button data-tracking-category="markCompletedRemove"
               class="fa-2x icon-button remove"
               (click)="remove()">
         <fa-icon [icon]="icons.remove"></fa-icon>
       </button>
     </div>
   </div>
+
   <div class="extra"
        *ngIf="displayData.markComplete.showExtra">
-    <select data-tracking-category="markCompletedEndTime"
-            #endTimeEl
-            [value]="displayData.markComplete.endTime"
-            (change)="setEndTime(endTimeEl)">
-      <option value="0">End Time</option>
-      <option *ngFor="let option of displayData.endDates"
-              value="{{ option }}">{{ option | date:'M/d/y hh:mm a' }}</option>
-    </select>
-    <button id="markCompletedSave"
-            data-tracking-category="markCompletedSave"
-            (click)="markComplete()">Mark Completed</button>
+    <div class="endTime">
+      <select data-tracking-category="markCompletedEndTime"
+              #endTimeEl
+              [value]="displayData.markComplete.endTime"
+              (change)="setEndTime(endTimeEl)">
+        <option value="0">End Time</option>
+        <option *ngFor="let option of displayData.endDates"
+                value="{{ option }}">{{ option | date:'M/d/y hh:mm a' }}</option>
+      </select>
+    </div>
+    <div class="complete">
+      <button data-tracking-category="markCompletedSave"
+              [disabled]="displayData.markComplete.endTime === 0"
+              (click)="markComplete()">Mark Completed</button>
+    </div>
   </div>
 </div>
