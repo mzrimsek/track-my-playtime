@@ -89,19 +89,20 @@ describe('PlayingItemComponent', () => {
   });
 
   describe('When show extra is true', () => {
-    beforeEach(async(() => {
+    beforeEach(() => {
       testDisplayData.markComplete.showExtra = true;
       fixture.detectChanges();
-    }));
-
-    it('Should not display extra section open button', async(() => {
-      const toggleShowExtraButton = fixture.nativeElement.querySelector('.actions .complete');
-      expect(toggleShowExtraButton).toBeFalsy();
-    }));
+    });
 
     it('Should display extra section close button', async(() => {
       const toggleShowExtraButton = fixture.nativeElement.querySelector('.actions .close');
       expect(toggleShowExtraButton).toBeTruthy();
+    }));
+
+    it('Should not display extra section open button', async(() => {
+      const toggleShowExtraButton = fixture.nativeElement.querySelector('.actions .complete');
+      console.log(toggleShowExtraButton);
+      expect(toggleShowExtraButton).toBeFalsy();
     }));
 
     it('Should dispatch SetShowExtra with false when markComplete button clicked', async(() => {
@@ -111,7 +112,7 @@ describe('PlayingItemComponent', () => {
     }));
 
     it('Should display extra section', async(() => {
-      const extraSection = fixture.nativeElement.querySelector('.playing-item .extra');
+      const extraSection = fixture.nativeElement.querySelector('.extra');
       expect(extraSection).toBeTruthy();
     }));
 
