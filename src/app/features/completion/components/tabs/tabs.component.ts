@@ -9,7 +9,7 @@ import { State } from '../../reducers/root.reducer';
 import { TabType } from '../../models';
 
 @Component({
-  selector: 'app-tabs',
+  selector: 'app-completion-tabs',
   templateUrl: './tabs.component.html',
   styleUrls: ['./tabs.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

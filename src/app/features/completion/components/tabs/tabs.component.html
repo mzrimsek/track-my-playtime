@@ -1,6 +1,8 @@
 <div class="tabs">
   <div class="tab"
-       [class.active]="visibleTab === 'PLAYING'">{{ playingCount }} in Progress</div>
+       [class.active]="visibleTab === 'PLAYING'"
+       (click)="setVisibleTab('PLAYING')">{{ playingCount }} in Progress</div>
   <div class="tab"
-       [class.active]="visibleTab === 'COMPLETED'">{{ completedCount }} Completed</div>
+       [class.active]="visibleTab === 'COMPLETED'"
+       (click)="setVisibleTab('COMPLETED')">{{ completedCount }} Completed</div>
 </div>

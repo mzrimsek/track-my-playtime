@@ -5,6 +5,9 @@
                                 [game]="game$ | async"
                                 [info]="addPlayingInfo$ | async"></app-completion-add-playing>
     <div class="games">
+      <app-completion-tabs [visibleTab]="visibleTab$ | async"
+                           [playingCount]="(playingDisplayData$ | async).length"
+                           [completedCount]="(completedDisplayData$ | async).length"></app-completion-tabs>
       <div *ngIf="(visibleTab$ | async) === 'PLAYING'"
            class="playing drop-shadow">
         <div class="title">
