@@ -70,6 +70,7 @@
 
     .endTime   {
       width: 50%;
+      margin-right: 5px;
 
       select {
         @extend .display-element;
@@ -85,9 +86,23 @@
 
     .complete {
       width: 50%;
+      margin-left: 5px;
 
       button {
         width: 100%;
+        background: $background-dark;
+        color: $text-light;
+        border: none;
+        height: 100%;
+
+        &:disabled {
+          background: lighten($background-dark, 20%);
+          cursor: not-allowed;
+        }
+
+        &:hover:enabled {
+          cursor: pointer;
+        }
       }
     }
   }
