@@ -5,7 +5,8 @@
                                 [game]="game$ | async"
                                 [info]="addPlayingInfo$ | async"></app-completion-add-playing>
     <div class="games">
-      <div class="playing drop-shadow">
+      <div *ngIf="(visibleTab$ | async) === 'PLAYING'"
+           class="playing drop-shadow">
         <div class="title">
           <span class="count">{{ (playingDisplayData$ | async).length }}</span> in Progress
         </div>
@@ -16,7 +17,8 @@
           </div>
         </div>
       </div>
-      <div class="completed drop-shadow">
+      <div *ngIf="(visibleTab$ | async) === 'COMPLETED'"
+           class="completed drop-shadow">
         <div class="title">
           <span class="count">{{ (completedDisplayData$ | async).length }}</span> Completed
         </div>

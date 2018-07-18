@@ -1,6 +1,7 @@
 import { State as AddPlayingState } from './add-playing.reducer';
 import { State as MarkCompleteState } from './mark-complete.reducer';
-import { _selectAddPlayingInfo, CompletionState, State } from './root.reducer';
+import { _selectAddPlayingInfo, _selectVisibleTab, CompletionState, State } from './root.reducer';
+import { State as TabState } from './tab.reducer';
 
 describe('Completion Root Reducer', () => {
   describe('AddPlaying State Selectors', () => {
@@ -13,7 +14,8 @@ describe('Completion Root Reducer', () => {
         };
         const completionState: CompletionState = {
           addPlaying,
-          markComplete: initialMarkCompleteState
+          markComplete: initialMarkCompleteState,
+          tab: initialTabState
         };
         const state: State = { completion: completionState };
 
@@ -23,9 +25,39 @@ describe('Completion Root Reducer', () => {
       });
     });
   });
+
+  describe('Tab State Selectors', () => {
+    describe('_selectVisibleTab', () => {
+      it('Should return the visible tab', () => {
+        const tab: TabState = {
+          tab: 'COMPLETED'
+        };
+        const completionState: CompletionState = {
+          addPlaying: initialAddPlayingState,
+          markComplete: initialMarkCompleteState,
+          tab
+        };
+        const state: State = { completion: completionState };
+
+        const result = _selectVisibleTab(state);
+
+        expect(result).toEqual('COMPLETED');
+      });
+    });
+  });
 });
+
+const initialAddPlayingState: AddPlayingState = {
+  game: '',
+  platform: '',
+  startTime: 0
+};
 
 const initialMarkCompleteState: MarkCompleteState = {
   ids: [],
   entities: {}
+};
+
+const initialTabState: TabState = {
+  tab: 'PLAYING'
 };
