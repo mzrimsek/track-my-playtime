@@ -8,7 +8,7 @@ import sharedSelectors, { State as SharedState } from '../../shared/reducers/roo
 import completionSelectors, { State as CompletionState } from './reducers/root.reducer';
 
 import { HistoryGrouping } from '../../shared/models';
-import { AddPlayingInfo, CompletedDisplayData, CompletionTabs, PlayingDisplayData } from './models';
+import { AddPlayingInfo, CompletedDisplayData, PlayingDisplayData, TabType } from './models';
 
 import {
     getCompletedDisplayDataItems, getPlayingDisplayDataItems
@@ -29,7 +29,7 @@ export class CompletionComponent implements OnInit {
   playingDisplayData$: Observable<PlayingDisplayData[]>;
   completedDisplayData$: Observable<CompletedDisplayData[]>;
 
-  visibleTab$: Observable<CompletionTabs>;
+  visibleTab$: Observable<TabType>;
   constructor(private sharedStore: Store<SharedState>, private completionStore: Store<CompletionState>) { }
 
   ngOnInit() {

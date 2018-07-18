@@ -23,6 +23,7 @@ import { ProgressService } from './services/progress.service';
 import { TimePipe } from '../../shared/pipes/time.pipe';
 
 import { reducers } from './reducers/root.reducer';
+import { TabsComponent } from './components/tabs/tabs.component';
 
 @NgModule({
   imports: [
@@ -38,7 +39,8 @@ import { reducers } from './reducers/root.reducer';
     CompletionComponent,
     AddPlayingComponent,
     PlayingItemComponent,
-    CompletedItemComponent],
+    CompletedItemComponent,
+    TabsComponent],
   providers: [UserService, ProgressService, TimePipe]
 })
 export class CompletionModule { }

@@ -2,10 +2,10 @@ import { tassign } from 'tassign';
 
 import * as actions from '../actions/tab.actions';
 
-import { CompletionTabs } from '../models';
+import { TabType } from '../models';
 
 export interface State {
-  tab: CompletionTabs;
+  tab: TabType;
 }
 
 const initialState: State = {

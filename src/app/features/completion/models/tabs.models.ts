@@ -1,1 +1,1 @@
-export type CompletionTabs = 'PLAYING' | 'COMPLETED';
+export type TabType = 'PLAYING' | 'COMPLETED';
