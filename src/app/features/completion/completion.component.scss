@@ -6,54 +6,11 @@
 
     .games {
       display: flex;
-      justify-content: space-between;
+      flex-direction: column;
       margin: 20px;
 
-
-      .playing, .completed {
-        width: 50%;
+      .items {
         background: $background-light;
-
-        .title {
-          background: $background-dark;
-          color: $text-light;
-          padding: 10px;
-
-          .count {
-            font-weight: bold;
-          }
-        }
-      }
-
-      .playing {
-        margin-right: 10px;
-      }
-
-      .completed {
-        margin-left: 10px;
-      }
-    }
-  }
-}
-
-@media only screen  and (max-width : $medium-breakpoint) {
-  .content {
-    .completion {
-      .games {
-        flex-direction: column;
-
-        .playing, .completed {
-          margin: 0px;
-          width: 100%;
-        }
-
-        .playing {
-          margin-bottom: 10px;
-        }
-
-        .completed {
-          margin-top: 10px;
-        }
       }
     }
   }

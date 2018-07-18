@@ -8,29 +8,22 @@
       <app-completion-tabs [visibleTab]="visibleTab$ | async"
                            [playingCount]="(playingDisplayData$ | async).length"
                            [completedCount]="(completedDisplayData$ | async).length"></app-completion-tabs>
+
       <div *ngIf="(visibleTab$ | async) === 'PLAYING'"
-           class="playing drop-shadow">
-        <div class="title">
-          <span class="count">{{ (playingDisplayData$ | async).length }}</span> in Progress
-        </div>
-        <div class="items">
-          <div *ngFor="let data of (playingDisplayData$ | async)">
-            <app-completion-playing-item [displayData]="data"
-                                         [gameGroupings]="historyGroupings$ | async"></app-completion-playing-item>
-          </div>
+           class="items drop-shadow">
+        <div *ngFor="let data of (playingDisplayData$ | async)">
+          <app-completion-playing-item [displayData]="data"
+                                       [gameGroupings]="historyGroupings$ | async"></app-completion-playing-item>
         </div>
       </div>
+
       <div *ngIf="(visibleTab$ | async) === 'COMPLETED'"
-           class="completed drop-shadow">
-        <div class="title">
-          <span class="count">{{ (completedDisplayData$ | async).length }}</span> Completed
-        </div>
-        <div class="items">
-          <div *ngFor="let data of (completedDisplayData$ | async)">
-            <app-completion-completed-item [displayData]="data"></app-completion-completed-item>
-          </div>
+           class="items drop-shadow">
+        <div *ngFor="let data of (completedDisplayData$ | async)">
+          <app-completion-completed-item [displayData]="data"></app-completion-completed-item>
         </div>
       </div>
+
     </div>
   </div>
 </div>
