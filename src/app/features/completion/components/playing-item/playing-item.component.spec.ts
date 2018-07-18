@@ -24,7 +24,7 @@ describe('PlayingItemComponent', () => {
   let fixture: ComponentFixture<PlayingItemComponent>;
   let userService: UserService;
 
-  beforeEach(async(() => {
+  const initTests = () => {
     TestBed.configureTestingModule({
       declarations: [
         PlayingItemComponent,
@@ -49,17 +49,27 @@ describe('PlayingItemComponent', () => {
     component = fixture.componentInstance;
     component.displayData = testDisplayData;
     fixture.detectChanges();
-  }));
+  };
 
-  it('Should create the component', async(() => {
-    expect(component).toBeTruthy();
-  }));
+  describe('Render', () => {
+    beforeEach(async(() => {
+      initTests();
+    }));
 
-  it('Should call UserService getUser', async(() => {
-    expect(userService.getUser).toHaveBeenCalled();
-  }));
+    it('Should create the component', async(() => {
+      expect(component).toBeTruthy();
+    }));
+
+    it('Should call UserService getUser', async(() => {
+      expect(userService.getUser).toHaveBeenCalled();
+    }));
+  });
 
   describe('When show extra is false', () => {
+    beforeEach(async(() => {
+      initTests();
+    }));
+
     it('Should display extra section open button', async(() => {
       const toggleShowExtraButton = fixture.nativeElement.querySelector('.actions .complete');
       expect(toggleShowExtraButton).toBeTruthy();
@@ -91,7 +101,7 @@ describe('PlayingItemComponent', () => {
   describe('When show extra is true', () => {
     beforeEach(async(() => {
       testDisplayData.markComplete.showExtra = true;
-      fixture.detectChanges();
+      initTests();
     }));
 
     it('Should display extra section close button', async(() => {
