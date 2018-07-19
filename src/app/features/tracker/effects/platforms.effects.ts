@@ -7,7 +7,7 @@ import { Observable } from 'rxjs/Observable';
 import { PlatformsService } from '../services/platforms.service';
 
 import * as appActions from '../../../actions/app.actions';
-import * as platformsActions from '../actions/platforms.actions';
+import * as platformsActions from '../../../shared/actions/platforms.actions';
 
 @Injectable()
 export class PlatformsEffects {
@@ -19,6 +19,5 @@ export class PlatformsEffects {
       .ofType(platformsActions.LOAD_OPTIONS)
       .switchMap(() => this.platformsService.getPlatformsOptions()
         .map(data => new platformsActions.LoadOptionsSucceeded(data))
-        .catch(err => Observable.of(new appActions.Error(platformsActions.LOAD_OPTIONS, err.message)))
-      );
+        .catch(err => Observable.of(new appActions.Error(platformsActions.LOAD_OPTIONS, err.message))));
 }

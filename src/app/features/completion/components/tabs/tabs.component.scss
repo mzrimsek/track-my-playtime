@@ -1,0 +1,30 @@
+@import "../../../../../variables.scss";
+
+.tabs {
+  display: flex;
+  width: 100%;
+
+  .tab {
+    width: 100%;
+
+    .title {
+      background: lighten($background-dark, 20%);
+      color: $text-light;
+      padding: 10px;
+
+      .count {
+        font-weight: bold;
+      }
+    }
+
+    &.active {
+      .title {
+        background: $background-dark;
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

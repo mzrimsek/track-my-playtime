@@ -1,0 +1,23 @@
+@import "../../../variables.scss";
+
+.content {
+  .completion {
+    height: 100%;
+
+    .games {
+      display: flex;
+      flex-direction: column;
+      margin: 20px;
+
+      .items {
+        background: $background-light;
+      }
+    }
+  }
+}
+
+@media only screen  and (max-width : $small-breakpoint) {
+  .content {
+    margin-top: $small-nav-banner-height;
+  }
+}

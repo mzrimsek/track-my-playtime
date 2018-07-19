@@ -1,0 +1,21 @@
+<div class="completed-item">
+  <div class="info">
+    <div class="game-info">
+      <div class="game">{{ displayData.completedItem.game }}</div>
+      <div class="platform">({{ displayData.completedItem.platform }})</div>
+    </div>
+    <div class="time">
+      <div class="played">Playtime: {{ displayData.completedItem.timePlayed | time }}</div>
+      <div class="start">Start: {{ displayData.completedItem.startTime | date:'M/d/y - hh:mm a' }}</div>
+      <div class="end">End: {{ displayData.completedItem.endTime | date:'M/d/y - hh:mm a' }}</div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button data-tracking-category="completedItemRemove"
+            class="fa-2x icon-button remove"
+            (click)="remove()">
+      <fa-icon [icon]="icons.remove"></fa-icon>
+    </button>
+  </div>
+</div>

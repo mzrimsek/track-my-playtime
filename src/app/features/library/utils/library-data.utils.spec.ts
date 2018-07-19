@@ -36,14 +36,16 @@ const testGroupings: HistoryGrouping[] = [{
     platform: 'platform 2',
     startTime: addDays(start, 1).getTime(),
     endTime: addDays(start, 1).getTime() + 2000,
-    dateRange: [addDays(start, 1), addDays(start, 1)]
+    dateRange: [addDays(start, 1), addDays(start, 1)],
+    locked: false
   }, {
     id: '1',
     game: 'game 1',
     platform: 'platform 1',
     startTime: start.getTime(),
     endTime: start.getTime() + 1000,
-    dateRange: [start, start]
+    dateRange: [start, start],
+    locked: false
   }],
   totalTime: 2
 }, {
@@ -54,14 +56,16 @@ const testGroupings: HistoryGrouping[] = [{
     platform: 'platform 1',
     startTime: addDays(start, 4).getTime(),
     endTime: addDays(start, 4).getTime() + 3000,
-    dateRange: [addDays(start, 4), addDays(start, 4)]
+    dateRange: [addDays(start, 4), addDays(start, 4)],
+    locked: false
   }, {
     id: '4',
     game: 'game 2',
     platform: 'platform 2',
     startTime: addDays(start, 3).getTime(),
     endTime: addDays(start, 3).getTime() + 1000,
-    dateRange: [addDays(start, 3), addDays(start, 3)]
+    dateRange: [addDays(start, 3), addDays(start, 3)],
+    locked: false
   }],
   totalTime: 4
 }];

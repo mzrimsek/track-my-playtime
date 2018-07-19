@@ -18,6 +18,7 @@ import { AdsenseModule } from 'ng2-adsense';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AuthModule } from './features/auth/auth.module';
+import { CompletionModule } from './features/completion/completion.module';
 import { DashboardModule } from './features/dashboard/dashboard.module';
 import { HomeModule } from './features/home/home.module';
 import { LibraryModule } from './features/library/library.module';
@@ -66,7 +67,8 @@ import './rxjs-operators';
     AuthModule,
     TrackerModule,
     DashboardModule,
-    LibraryModule
+    LibraryModule,
+    CompletionModule
   ],
   providers: [{
     provide: RouterStateSerializer, useClass: CustomRouterStateSerializer

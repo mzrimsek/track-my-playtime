@@ -1,0 +1,17 @@
+<div class="tabs">
+  <div class="tab playing"
+       [class.active]="visibleTab === 'PLAYING'"
+       (click)="setVisibleTab('PLAYING')">
+    <div class="title">
+      <span class="count">{{ playingCount }}</span> in Progress
+    </div>
+  </div>
+
+  <div class="tab completed"
+       [class.active]="visibleTab === 'COMPLETED'"
+       (click)="setVisibleTab('COMPLETED')">
+    <div class="title">
+      <span class="count">{{ completedCount }}</span> Completed
+    </div>
+  </div>
+</div>

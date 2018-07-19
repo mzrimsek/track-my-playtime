@@ -6,8 +6,10 @@
            (click)="toggleNav()"
            data-tracking-category="navBannerMenu">
         <fa-icon *ngIf="hideNavContents"
+                 id="showMenuIcon"
                  [icon]="icons.menu"></fa-icon>
         <fa-icon *ngIf="!hideNavContents"
+                 id="hideMenuIcon"
                  [icon]="icons.close"></fa-icon>
       </div>
       <a id="navBannerLink"

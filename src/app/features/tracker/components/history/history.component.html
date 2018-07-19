@@ -19,10 +19,14 @@
         <div class="history-entries">
           <div class="history-entry"
                *ngFor="let historyItem of group.historyItems">
-            <app-tracker-history-entry [item]="historyItem"
+            <app-tracker-history-entry *ngIf="!historyItem.locked"
+                                       [item]="historyItem"
                                        [platformsOptions]="platformsOptions"
                                        [trackedGames]="trackedGames"
                                        [game]="historyItem.game ? historyItem.game : null"></app-tracker-history-entry>
+
+            <app-tracker-locked-history-entry *ngIf="historyItem.locked"
+                                              [item]="historyItem"></app-tracker-locked-history-entry>
           </div>
         </div>
       </div>

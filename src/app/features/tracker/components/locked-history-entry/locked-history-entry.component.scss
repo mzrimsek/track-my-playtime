@@ -1,0 +1,62 @@
+@import "../../../../../variables.scss";
+
+.locked-history-entry {
+  display: flex;
+  align-items: center;
+  background: $background-light;
+  height: $history-entry-height;
+  padding: 0px 10px;
+  border-bottom: 1px solid darken($background-light, 10%);
+
+  &:hover {
+    background: darken($background-light, 5%);
+  }
+
+  .display-element {
+    font-size: $small-font-size;
+    font-family: $base-font-family;
+    width: 100%;
+    padding: 5px;
+    background: none;
+  }
+
+  .game {
+    width: 55%;
+  }
+
+  .platform {
+    width: 20%;
+  }
+
+  .time {
+    @extend .display-element;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    width: 20%;
+  }
+
+  .lock {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 5%;
+    color: lighten($neutral-action-color, 20%);
+  }
+}
+
+@media only screen and (max-width: $small-breakpoint) {
+  .locked-history-entry {
+    .display-element {
+      font-size: calc(#{$small-font-size} - 2px);
+    }
+
+    .game {
+      width: 30%;
+    }
+
+    .time {
+      width: 45%;
+    }
+  }
+}

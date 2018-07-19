@@ -5,6 +5,7 @@ export interface HistoryListItem {
   startTime: number;
   endTime: number;
   dateRange: [Date, Date];
+  locked: boolean;
 }
 
 export interface HistoryGrouping {
@@ -28,3 +29,5 @@ export interface UpdateHistoryItemTimesPayload {
   startTime: number;
   endTime: number;
 }
+
+export type UpdatePayload = UpdateHistoryItemGamePayload | UpdateHistoryItemPlatformPayload | UpdateHistoryItemTimesPayload;

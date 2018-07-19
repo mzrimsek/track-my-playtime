@@ -1,0 +1,11 @@
+<div class="locked-history-entry">
+  <div class="game">{{ item.game }}</div>
+  <div class="platform">{{ item.platform }}</div>
+  <div class="time">
+    <div class="start-end">{{ item.startTime | date:'shortTime' }} - {{ item.endTime | date:'shortTime' }}</div>
+    <div class="elapsed">{{ item.startTime | elapsedTime:item.endTime }}</div>
+  </div>
+  <div class="lock">
+    <fa-icon [icon]="icons.lock"></fa-icon>
+  </div>
+</div>

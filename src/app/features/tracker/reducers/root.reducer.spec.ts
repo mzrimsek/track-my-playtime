@@ -1,10 +1,6 @@
 import { State as DisplayState } from './display.reducer';
-import { State as PlatformsState } from './platforms.reducer';
-import {
-    _selectEntriesToShow, _selectPlatformsOptions, _selectTimerInfo, State, TrackerState
-} from './root.reducer';
+import { _selectEntriesToShow, _selectTimerInfo, State, TrackerState } from './root.reducer';
 import { State as TimerState } from './timer.reducer';
-
 
 describe('Tracker Root Reducer', () => {
   describe('Timer State Selectors', () => {
@@ -17,8 +13,7 @@ describe('Tracker Root Reducer', () => {
         };
         const trackerState: TrackerState = {
           timer,
-          platforms: getPlatformsInitialState(),
-          display: getDisplayInitialState()
+          display: initialDisplayState
         };
         const state: State = { tracker: trackerState };
 
@@ -29,33 +24,12 @@ describe('Tracker Root Reducer', () => {
     });
   });
 
-  describe('Platforms State Selectors', () => {
-    describe('_selectPlatformsOptions', () => {
-      it('Should return the platforms options', () => {
-        const options = ['Game Box 720', 'Nipkendo Scratch', 'Dudestation 69'];
-        const trackerState: TrackerState = {
-          timer: getTimerInitialState(),
-          platforms: {
-            options
-          },
-          display: getDisplayInitialState()
-        };
-        const state: State = { tracker: trackerState };
-
-        const result = _selectPlatformsOptions(state);
-
-        expect(result).toEqual(options);
-      });
-    });
-  });
-
   describe('Display State Selectors', () => {
     describe('_selectEntriesToShow', () => {
       it('Should return the entriesToShow', () => {
         const entriesToShow = 7;
         const trackerState: TrackerState = {
-          timer: getTimerInitialState(),
-          platforms: getPlatformsInitialState(),
+          timer: initialTimerState,
           display: {
             entriesToShow
           }
@@ -70,22 +44,12 @@ describe('Tracker Root Reducer', () => {
   });
 });
 
-const getTimerInitialState = (): TimerState => {
-  return {
-    game: '',
-    platform: '',
-    startTime: 0
-  };
+const initialTimerState: TimerState = {
+  game: '',
+  platform: '',
+  startTime: 0
 };
 
-const getPlatformsInitialState = (): PlatformsState => {
-  return {
-    options: []
-  };
-};
-
-const getDisplayInitialState = (): DisplayState => {
-  return {
-    entriesToShow: 7
-  };
+const initialDisplayState: DisplayState = {
+  entriesToShow: 7
 };

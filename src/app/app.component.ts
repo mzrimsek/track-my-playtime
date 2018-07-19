@@ -20,19 +20,11 @@ export class AppComponent {
 
   constructor(private store: Store<State>, private router: Router) {
     this.store.dispatch(new actions.InitializeApplication());
-    this.insertGoogleTagManagerElements(environment.googleTagManager);
+    insertAnalyticsElements(environment.googleTagManager);
   }
 
   shouldShowHeader(): boolean {
     const currentRoute = this.router.url;
     return currentRoute.indexOf('/app') === -1;
-  }
-
-  private insertGoogleTagManagerElements(googleTagManagerContainerId: string) {
-    try {
-      insertAnalyticsElements(googleTagManagerContainerId);
-    } catch (err) {
-      this.store.dispatch(new actions.Error('Append Google Tag Manager Scripts', err.message));
-    }
   }
 }

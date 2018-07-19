@@ -190,9 +190,9 @@ describe('History Reducer', () => {
     const newState = reducer(initialState, new actions.ClearHistoryItems());
 
     expect(newState).toEqual({
-      ...initialState,
       ids: [],
-      entities: {}
+      entities: {},
+      loading: false
     });
   });
 });

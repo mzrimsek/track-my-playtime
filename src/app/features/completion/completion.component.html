@@ -1,0 +1,29 @@
+<div class="content">
+  <div class="completion">
+    <app-completion-add-playing [gameGroupings]="historyGroupings$ | async"
+                                [games]="games$ | async"
+                                [game]="game$ | async"
+                                [info]="addPlayingInfo$ | async"></app-completion-add-playing>
+    <div class="games">
+      <app-completion-tabs [visibleTab]="visibleTab$ | async"
+                           [playingCount]="(playingDisplayData$ | async).length"
+                           [completedCount]="(completedDisplayData$ | async).length"></app-completion-tabs>
+
+      <div *ngIf="(visibleTab$ | async) === 'PLAYING'"
+           class="items drop-shadow">
+        <div *ngFor="let data of (playingDisplayData$ | async)">
+          <app-completion-playing-item [displayData]="data"
+                                       [gameGroupings]="historyGroupings$ | async"></app-completion-playing-item>
+        </div>
+      </div>
+
+      <div *ngIf="(visibleTab$ | async) === 'COMPLETED'"
+           class="items drop-shadow">
+        <div *ngFor="let data of (completedDisplayData$ | async)">
+          <app-completion-completed-item [displayData]="data"></app-completion-completed-item>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

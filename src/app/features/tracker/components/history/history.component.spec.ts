@@ -16,7 +16,7 @@ describe('HistoryComponent', () => {
       declarations: [
         TestWrapperComponent,
         HistoryComponent,
-        TimePipe,
+        TimePipe
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
@@ -77,7 +77,8 @@ describe('HistoryComponent', () => {
             platform: 'some platform',
             startTime: 7000,
             endTime: 10000,
-            dateRange: [new Date('5/2/2018'), new Date('5/2/2018')]
+            dateRange: [new Date('5/2/2018'), new Date('5/2/2018')],
+            locked: false
           },
           {
             id: '2',
@@ -85,7 +86,8 @@ describe('HistoryComponent', () => {
             platform: 'some platform 2',
             startTime: 3000,
             endTime: 6000,
-            dateRange: [new Date('5/2/2018'), new Date('5/2/2018')]
+            dateRange: [new Date('5/2/2018'), new Date('5/2/2018')],
+            locked: false
           }],
           totalTime: 6
         }];

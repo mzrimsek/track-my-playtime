@@ -4,6 +4,8 @@ import { tassign } from 'tassign';
 
 import * as actions from '../actions/history.actions';
 
+import { UpdatePayload } from '../models';
+
 export interface HistoryEntity {
   id: string;
   game: string;
@@ -37,32 +39,13 @@ export function reducer(state: State = initialState, action: actions.All): State
       return adapter.removeOne(action.itemId, state);
     }
     case actions.UPDATE_GAME_SUCCEEDED: {
-      const { itemId, game } = action.payload;
-      return adapter.updateOne({
-        id: itemId,
-        changes: {
-          game
-        }
-      }, state);
+      return getUpdatedState(action.payload, state);
     }
     case actions.UPDATE_PLATFORM_SUCCEEDED: {
-      const { itemId, platform } = action.payload;
-      return adapter.updateOne({
-        id: itemId,
-        changes: {
-          platform
-        }
-      }, state);
+      return getUpdatedState(action.payload, state);
     }
     case actions.UPDATE_ELAPSED_TIME_SUCCEEDED: {
-      const { itemId, startTime, endTime } = action.payload;
-      return adapter.updateOne({
-        id: itemId,
-        changes: {
-          startTime,
-          endTime
-        }
-      }, state);
+      return getUpdatedState(action.payload, state);
     }
     case actions.CLEAR_HISTORY_ITEMS: {
       return adapter.removeAll(state);
@@ -72,3 +55,11 @@ export function reducer(state: State = initialState, action: actions.All): State
     }
   }
 }
+
+const getUpdatedState = (payload: UpdatePayload, currentState: State): State => {
+  const { itemId: id, ...changes } = payload;
+  return adapter.updateOne({
+    id,
+    changes
+  }, currentState);
+};

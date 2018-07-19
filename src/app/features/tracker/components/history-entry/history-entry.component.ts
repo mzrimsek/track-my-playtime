@@ -24,7 +24,6 @@ export class HistoryEntryComponent implements OnInit {
 
   @Input() item: HistoryListItem;
   @Input() platformsOptions: string[] = [];
-  @Input() dateRange: Date[] = [];
   @Input() trackedGames: string[] = [];
   @Input() game: string | null = null;
   userId = '';

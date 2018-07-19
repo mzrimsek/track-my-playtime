@@ -1,14 +1,14 @@
 {
   "name": "track-my-playtime",
-  "version": "0.2.4",
+  "version": "0.3.0",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --prod",
     "test": "ng test",
-    "test:mocha": "ng test --config ./karma.headless.conf.js --reporters mocha",
-    "test:nyan": "ng test --config ./karma.headless.conf.js --reporters nyan",
+    "test:mocha": "ng test --karma-config ./config/karma/karma.mocha.conf.js",
+    "test:nyan": "ng test --karma-config ./config/karma/karma.nyan.conf.js",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
