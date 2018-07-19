@@ -3,6 +3,17 @@
 
   <div class="main">
     <app-nav *ngIf="!shouldShowHeader()"></app-nav>
-    <router-outlet></router-outlet>
+
+    <div *ngIf="!shouldShowHeader() && !(userDataLoaded$ | async)"
+         class="content loading">
+      <div class="logo">
+        <img src="../../../assets/wht_512x.png">
+      </div>
+      <app-shared-spinner></app-shared-spinner>
+    </div>
+
+    <div *ngIf="!shouldShowHeader() && (userDataLoaded$ | async) || shouldShowHeader()">
+      <router-outlet></router-outlet>
+    </div>
   </div>
 </div>
