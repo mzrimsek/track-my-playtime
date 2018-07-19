@@ -67,10 +67,6 @@ describe('Tracker Component', () => {
     expect(store.select).toHaveBeenCalledWith(fromShared._selectHistoryGroupingsByDate);
   });
 
-  it('Should select history loading', () => {
-    expect(store.select).toHaveBeenCalledWith(fromShared._selectHistoryLoading);
-  });
-
   it('Should select entries to show', () => {
     expect(store.select).toHaveBeenCalledWith(fromTracker._selectEntriesToShow);
   });

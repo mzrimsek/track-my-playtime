@@ -45,10 +45,6 @@ describe('LibraryComponent', () => {
     expect(store.select).toHaveBeenCalledWith(fromShared._selectHistoryGroupingsByGame);
   });
 
-  it('Should select history loading', async(() => {
-    expect(store.select).toHaveBeenCalledWith(fromShared._selectHistoryLoading);
-  }));
-
   describe('When data is loading', () => {
     beforeEach(async(() => {
       store.dispatch(new historyActions.LoadHistoryItems(''));
