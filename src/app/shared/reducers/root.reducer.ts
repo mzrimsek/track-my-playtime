@@ -70,7 +70,7 @@ export const _selectPlatformsOptions = createSelector(_selectPlatforms, platform
 export const _selectPlatformsLoaded = createSelector(_selectPlatformsOptions, platformOptions => platformOptions.length !== 0);
 
 export const _selectUserDataLoaded = createSelector(_selectHistory, _selectProgress, _selectPlatformsLoaded,
-  (history, progress, platformsLoaded) => history.loading && progress.loading && platformsLoaded);
+  (history, progress, platformsLoaded) => !history.loading && !progress.loading && platformsLoaded);
 
 const sharedSelectors = {
   historyGroupingsByDate: _selectHistoryGroupingsByDate,
