@@ -15,7 +15,7 @@ import * as fromCompletion from '../../reducers/root.reducer';
 
 import { HistoryGrouping } from '../../../../shared/models';
 
-import { filterPlatforms } from '../../../../shared/utils/history-filter.utils';
+import { filterPlatforms, filterStartTimes } from '../../../../shared/utils/history-filter.utils';
 
 describe('AddPlayingComponent', () => {
   let store: Store<fromRoot.State>;
@@ -103,27 +103,20 @@ describe('AddPlayingComponent', () => {
     }));
   });
 
-  // TODO: Make these tests better
   describe('StartTime Option Changes', () => {
-    let startTimeEl: any;
+    it('Should dispatch SetStartTime', async(() => {
+      const platform = component.platforms[1];
+      component.dates = filterStartTimes(testGroupings, testGame, platform);
 
-    beforeEach(async(() => {
-      const platformEl = fixture.nativeElement.querySelector('.platform select');
-      platformEl.disabled = false;
-      platformEl.selectedIndex = 2;
-      platformEl.dispatchEvent(new Event('change'));
-      fixture.detectChanges();
-
-      startTimeEl = fixture.nativeElement.querySelector('.startTime select');
+      const startTimeEl = fixture.nativeElement.querySelector('.startTime select');
       startTimeEl.disabled = false;
       startTimeEl.selectedIndex = 1;
       startTimeEl.dispatchEvent(new Event('change'));
       fixture.detectChanges();
-    }));
 
-    it('Should dispatch SetStartTime', async(() => {
       const startTime = component.dates[0];
       const action = new actions.SetStartTime(startTime);
+
       expect(store.dispatch).toHaveBeenCalledWith(action);
     }));
   });
