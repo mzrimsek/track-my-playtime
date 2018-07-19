@@ -102,6 +102,7 @@ describe('AppComponent', () => {
     store = TestBed.get(Store);
 
     spyOn(store, 'dispatch').and.callThrough();
+    spyOn(store, 'select').and.callThrough();
 
     fixture = TestBed.createComponent(AppComponent);
     component = fixture.componentInstance;
@@ -116,6 +117,10 @@ describe('AppComponent', () => {
     const action = new actions.InitializeApplication();
     expect(store.dispatch).toHaveBeenCalledWith(action);
   }));
+
+  it('Should select userDataLoaded', () => {
+    expect(store.select).toHaveBeenCalledWith(fromShared._selectUserDataLoaded);
+  });
 
   describe('On Base Route', () => {
     beforeEach(async(() => {
