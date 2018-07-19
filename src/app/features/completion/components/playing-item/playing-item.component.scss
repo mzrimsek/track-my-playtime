@@ -96,7 +96,7 @@
         height: 100%;
 
         &:disabled {
-          background: lighten($background-dark, 20%);
+          background: $background-dark-accent;
           cursor: not-allowed;
         }
 

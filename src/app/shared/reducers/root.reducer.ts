@@ -67,6 +67,10 @@ export const _selectHistoryLoading = createSelector(_selectHistory, history => h
 export const _selectTrackedGames = createSelector(_selectSortedHistoryItems, items => getUniqueFrom(items, item => item.game));
 
 export const _selectPlatformsOptions = createSelector(_selectPlatforms, platforms => platforms.options);
+export const _selectPlatformsLoaded = createSelector(_selectPlatformsOptions, platformOptions => platformOptions.length !== 0);
+
+export const _selectUserDataLoaded = createSelector(_selectHistory, _selectProgress, _selectPlatformsLoaded,
+  (history, progress, platformsLoaded) => history.loading && progress.loading && platformsLoaded);
 
 const sharedSelectors = {
   historyGroupingsByDate: _selectHistoryGroupingsByDate,
@@ -76,7 +80,8 @@ const sharedSelectors = {
   historyTrackedGames: _selectTrackedGames,
   platformsOptions: _selectPlatformsOptions,
   progressPlaying: _selectPlayingProgress,
-  progressCompleted: _selectCompletedProgress
+  progressCompleted: _selectCompletedProgress,
+  userDataLoaded: _selectUserDataLoaded
 };
 
 export default sharedSelectors;

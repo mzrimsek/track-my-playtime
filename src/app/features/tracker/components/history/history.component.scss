@@ -1,21 +1,19 @@
 @import "../../../../../variables.scss";
 
 .history {
-  margin-top: $timer-height + 20px;
-
-  .loading {
-    display: flex;
-    justify-content: center;
-  }
+  margin: $timer-height + 20px 20px 20px 20px;
 
   .groups {
     .history-group {
       background: $background-light;
+      margin-bottom: 20px;
 
       .overall-data {
+        background: $background-dark;
+        color: $text-light;
         display: flex;
         justify-content: space-between;
-        padding: 20px;
+        padding: 10px;
         font-weight: bold;
       }
 
