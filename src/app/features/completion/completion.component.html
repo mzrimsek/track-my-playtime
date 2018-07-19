@@ -3,7 +3,9 @@
     <app-completion-add-playing [gameGroupings]="historyGroupings$ | async"
                                 [games]="games$ | async"
                                 [game]="game$ | async"
-                                [info]="addPlayingInfo$ | async"></app-completion-add-playing>
+                                [info]="addPlayingInfo$ | async"
+                                [platforms]="potentialPlatforms$ | async"
+                                [dates]="potentialDates$ | async"></app-completion-add-playing>
     <div class="games">
       <app-completion-tabs [visibleTab]="visibleTab$ | async"
                            [playingCount]="(playingDisplayData$ | async).length"
