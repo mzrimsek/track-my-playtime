@@ -15,6 +15,8 @@ import * as fromCompletion from '../../reducers/root.reducer';
 
 import { HistoryGrouping } from '../../../../shared/models';
 
+import { filterPlatforms } from '../../../../shared/utils/history-filter.utils';
+
 describe('AddPlayingComponent', () => {
   let store: Store<fromRoot.State>;
   let component: AddPlayingComponent;
@@ -47,7 +49,8 @@ describe('AddPlayingComponent', () => {
       startTime: 0
     };
     component.gameGroupings = testGroupings;
-    component.games = ['Game 1'];
+    component.games = [testGame];
+    component.platforms = filterPlatforms(testGroupings, testGame);
     fixture.detectChanges();
   }));
 
@@ -60,74 +63,43 @@ describe('AddPlayingComponent', () => {
   }));
 
   describe('Game Value Changes', () => {
-    let gameEl: any;
-
-    beforeEach(async(() => {
-      gameEl = fixture.nativeElement.querySelector('.game ng-select');
-      component.game = testGame;
-      gameEl.dispatchEvent(new Event('change'));
-      fixture.detectChanges();
-    }));
-
     it('Should dispatch SetGame', async(() => {
-      const action = new actions.SetGame(testGame);
-      expect(store.dispatch).toHaveBeenCalledWith(action);
-    }));
-
-    it('Should update platforms', async(() => {
-      expect(component.platforms).toEqual(['Platform 1', 'Platform 2']);
-    }));
-  });
-
-  describe('Game Value Clears', () => {
-    let gameEl: any;
-
-    beforeEach(async(() => {
-      gameEl = fixture.nativeElement.querySelector('.game ng-select');
-      component.game = null;
-      gameEl.dispatchEvent(new Event('clear'));
-      fixture.detectChanges();
-    }));
-
-    it('Should dispatch Reset', async(() => {
-      const action = new actions.Reset();
-      expect(store.dispatch).toHaveBeenCalledWith(action);
-    }));
-
-    it('Should update platforms', async(() => {
-      expect(component.platforms).toEqual([]);
-    }));
-
-    it('Should update dates', async(() => {
-      expect(component.dates).toEqual([]);
-    }));
-  });
-
-  // TODO: Make these tests better
-  describe('Platform Option Changes', () => {
-    let platformEl: any;
-
-    beforeEach(async(() => {
       const gameEl = fixture.nativeElement.querySelector('.game ng-select');
       component.game = testGame;
       gameEl.dispatchEvent(new Event('change'));
       fixture.detectChanges();
 
-      platformEl = fixture.nativeElement.querySelector('.platform select');
+      const action = new actions.SetGame(testGame);
+
+      expect(store.dispatch).toHaveBeenCalledWith(action);
+    }));
+  });
+
+  describe('Game Value Clears', () => {
+    it('Should dispatch Reset', async(() => {
+      const gameEl = fixture.nativeElement.querySelector('.game ng-select');
+      component.game = null;
+      gameEl.dispatchEvent(new Event('clear'));
+      fixture.detectChanges();
+
+      const action = new actions.Reset();
+
+      expect(store.dispatch).toHaveBeenCalledWith(action);
+    }));
+  });
+
+  describe('Platform Option Changes', () => {
+    it('Should dispatch SetPlatform', async(() => {
+      const platformEl = fixture.nativeElement.querySelector('.platform select');
       platformEl.disabled = false;
       platformEl.selectedIndex = 2;
       platformEl.dispatchEvent(new Event('change'));
       fixture.detectChanges();
-    }));
 
-    it('Should dispatch SetPlatform', async(() => {
       const platform = component.platforms[1];
       const action = new actions.SetPlatform(platform);
-      expect(store.dispatch).toHaveBeenCalledWith(action);
-    }));
 
-    it('Should update dates', async(() => {
-      expect(component.dates).toEqual([1000]);
+      expect(store.dispatch).toHaveBeenCalledWith(action);
     }));
   });
 
@@ -136,11 +108,6 @@ describe('AddPlayingComponent', () => {
     let startTimeEl: any;
 
     beforeEach(async(() => {
-      const gameEl = fixture.nativeElement.querySelector('.game ng-select');
-      component.game = testGame;
-      gameEl.dispatchEvent(new Event('change'));
-      fixture.detectChanges();
-
       const platformEl = fixture.nativeElement.querySelector('.platform select');
       platformEl.disabled = false;
       platformEl.selectedIndex = 2;
