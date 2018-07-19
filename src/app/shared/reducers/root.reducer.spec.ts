@@ -6,8 +6,8 @@ import { State as ProgressState } from './progress.reducer';
 import {
     _selectCompletedProgress, _selectHistoryGroupingsByDate, _selectHistoryGroupingsByGame,
     _selectHistoryGroupingsByPlatform, _selectHistoryItems, _selectHistoryLoading,
-    _selectPlatformsOptions, _selectPlayingProgress, _selectSortedHistoryItems, _selectTrackedGames,
-    SharedState, State
+    _selectPlatformsLoaded, _selectPlatformsOptions, _selectPlayingProgress,
+    _selectSortedHistoryItems, _selectTrackedGames, _selectUserDataLoaded, SharedState, State
 } from './root.reducer';
 
 import { formatDate } from '../utils/date.utils';
@@ -487,6 +487,38 @@ describe('Shared Root Reducer', () => {
         expect(result).toEqual(options);
       });
     });
+
+    describe('_selectPlatformsLoaded', () => {
+      it('Should return false when no platforms options', () => {
+        const sharedState: SharedState = {
+          history: initialHistoryState,
+          platforms: {
+            options: []
+          },
+          progress: initialProgressState
+        };
+        const state: State = { shared: sharedState };
+
+        const result = _selectPlatformsLoaded(state);
+
+        expect(result).toBe(false);
+      });
+
+      it('Should return true when there are platforms options', () => {
+        const sharedState: SharedState = {
+          history: initialHistoryState,
+          platforms: {
+            options: ['Game Box 720', 'Nipkendo Scratch', 'Dudestation 69']
+          },
+          progress: initialProgressState
+        };
+        const state: State = { shared: sharedState };
+
+        const result = _selectPlatformsLoaded(state);
+
+        expect(result).toBe(true);
+      });
+    });
   });
 
   describe('Progress State Selectors', () => {
@@ -641,6 +673,94 @@ describe('Shared Root Reducer', () => {
           startEntryId: 'start 1',
           endEntryId: 'end 1'
         }]);
+      });
+    });
+  });
+
+  describe('Combined State Selectors', () => {
+    describe('_selectUserDataLoaded', () => {
+      it('Should return false when history is not loaded', () => {
+        const sharedState: SharedState = {
+          history: {
+            ...initialHistoryState,
+            loading: true
+          },
+          platforms: {
+            options: ['platform 1', 'platform 2']
+          },
+          progress: {
+            ...initialProgressState,
+            loading: false
+          }
+        };
+        const state: State = { shared: sharedState };
+
+        const result = _selectUserDataLoaded(state);
+
+        expect(result).toBe(false);
+      });
+
+      it('Should return false when progress is not loaded', () => {
+        const sharedState: SharedState = {
+          history: {
+            ...initialHistoryState,
+            loading: false
+          },
+          platforms: {
+            options: ['platform 1', 'platform 2']
+          },
+          progress: {
+            ...initialProgressState,
+            loading: true
+          }
+        };
+        const state: State = { shared: sharedState };
+
+        const result = _selectUserDataLoaded(state);
+
+        expect(result).toBe(false);
+      });
+
+      it('Should return false when platforms are not loaded', () => {
+        const sharedState: SharedState = {
+          history: {
+            ...initialHistoryState,
+            loading: false
+          },
+          platforms: {
+            options: []
+          },
+          progress: {
+            ...initialProgressState,
+            loading: false
+          }
+        };
+        const state: State = { shared: sharedState };
+
+        const result = _selectUserDataLoaded(state);
+
+        expect(result).toBe(false);
+      });
+
+      it('Should return true when all data is loaded', () => {
+        const sharedState: SharedState = {
+          history: {
+            ...initialHistoryState,
+            loading: false
+          },
+          platforms: {
+            options: ['platform 1', 'platform 2']
+          },
+          progress: {
+            ...initialProgressState,
+            loading: false
+          }
+        };
+        const state: State = { shared: sharedState };
+
+        const result = _selectUserDataLoaded(state);
+
+        expect(result).toBe(true);
       });
     });
   });

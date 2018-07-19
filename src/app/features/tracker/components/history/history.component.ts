@@ -12,7 +12,6 @@ export class HistoryComponent implements OnInit {
 
   @Input() groups: HistoryGrouping[] = [];
   @Input() platformsOptions: string[] = [];
-  @Input() loading = false;
   @Input() trackedGames: string[] = [];
   constructor() { }
 

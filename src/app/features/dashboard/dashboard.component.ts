@@ -26,7 +26,6 @@ export class DashboardComponent implements OnInit {
   timeVsPlatformGraphData$: Observable<GraphDataItem[]>;
   timeVsGameGraphData$: Observable<GraphDataItem[]>;
 
-  isHistoryDataLoading$: Observable<boolean>;
   totalTime$: Observable<number>;
 
   dateRangeType$: Observable<DateRangeType>;
@@ -80,7 +79,6 @@ export class DashboardComponent implements OnInit {
     this.timeVsPlatformGraphData$ = getGraphData(groupingsByPlatform, dateList);
     this.timeVsGameGraphData$ = getSortedGraphData(groupingsByGame, dateList);
 
-    this.isHistoryDataLoading$ = this.sharedStore.select(sharedSelectors.historyLoading);
     this.totalTime$ = this.timeVsDateGraphData$.map(x => x.reduce((a, b) => a + b.value, 0));
     this.dateRangeType$ = this.dashboardStore.select(dashboardSelectors.rangeType);
   }

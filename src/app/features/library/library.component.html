@@ -1,13 +1,6 @@
 <div class="content">
-  <div *ngIf="isHistoryDataLoading$ | async"
-       class="loading">
-    <app-shared-spinner></app-shared-spinner>
-  </div>
-
-  <div class="library"
-       *ngIf="!(isHistoryDataLoading$ | async)">
+  <div class="library">
     <app-library-header [gameCount]="(libraryEntries$ | async).length"></app-library-header>
-
     <div class="table drop-shadow">
       <ngx-datatable class="material striped"
                      [rows]="libraryEntries$ | async"

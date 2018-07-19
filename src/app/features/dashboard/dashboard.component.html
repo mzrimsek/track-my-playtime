@@ -1,11 +1,5 @@
 <div class="content">
-  <div *ngIf="isHistoryDataLoading$ | async"
-       class="loading">
-    <app-shared-spinner></app-shared-spinner>
-  </div>
-  <div class="dashboard"
-       *ngIf="!(isHistoryDataLoading$ | async)">
-
+  <div class="dashboard">
     <app-dashboard-header [rangeType]="this.dateRangeType$ | async"
                           [totalTime]="this.totalTime$ | async"></app-dashboard-header>
 

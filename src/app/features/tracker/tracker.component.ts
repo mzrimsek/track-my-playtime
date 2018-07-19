@@ -27,7 +27,6 @@ export class TrackerComponent implements OnInit {
   game$: Observable<string | null>;
 
   historyGroupings$: Observable<HistoryGrouping[]>;
-  historyLoading$: Observable<boolean>;
   showLoadMoreButton$: Observable<boolean>;
 
   trackedGames$: Observable<string[]>;
@@ -43,7 +42,6 @@ export class TrackerComponent implements OnInit {
     const filteredGroupings = takeFrom(historyGroupings, entriesToShow);
 
     this.historyGroupings$ = filteredGroupings;
-    this.historyLoading$ = this.sharedStore.select(sharedSelectors.historyLoading);
     this.showLoadMoreButton$ = hasMoreToDisplay(historyGroupings, filteredGroupings);
 
     this.trackedGames$ = this.sharedStore.select(sharedSelectors.historyTrackedGames);
