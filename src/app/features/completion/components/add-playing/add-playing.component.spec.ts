@@ -50,7 +50,6 @@ describe('AddPlayingComponent', () => {
     };
     component.gameGroupings = testGroupings;
     component.games = [testGame];
-    component.platforms = filterPlatforms(testGroupings, testGame);
     fixture.detectChanges();
   }));
 
@@ -90,6 +89,8 @@ describe('AddPlayingComponent', () => {
 
   describe('Platform Option Changes', () => {
     it('Should dispatch SetPlatform', async(() => {
+      component.platforms = filterPlatforms(testGroupings, testGame);
+
       const platformEl = fixture.nativeElement.querySelector('.platform select');
       platformEl.disabled = false;
       platformEl.selectedIndex = 2;
@@ -105,6 +106,7 @@ describe('AddPlayingComponent', () => {
 
   describe('StartTime Option Changes', () => {
     it('Should dispatch SetStartTime', async(() => {
+      component.platforms = filterPlatforms(testGroupings, testGame);
       const platform = component.platforms[1];
       component.dates = filterStartTimes(testGroupings, testGame, platform);
 
