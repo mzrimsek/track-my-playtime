@@ -13,7 +13,6 @@ import { State } from '../../reducers/root.reducer';
 import { HistoryGrouping } from '../../../../shared/models';
 import { AddPlaying, AddPlayingInfo } from '../../models';
 
-import { filterPlatforms, filterStartTimes } from '../../../../shared/utils/history-filter.utils';
 import { findMatchingHistoryEntry } from '../../utils/add-playing.utils';
 
 @Component({
@@ -28,8 +27,8 @@ export class AddPlayingComponent implements OnInit {
   @Input() games: string[];
   @Input() game: string | null = null;
   @Input() info: AddPlayingInfo;
-  platforms: string[] = [];
-  dates: number[] = [];
+  @Input() platforms: string[] = [];
+  @Input() dates: number[] = [];
   userId = '';
   icons = {
     add: faPlusSquare
@@ -44,27 +43,21 @@ export class AddPlayingComponent implements OnInit {
     if (this.game) {
       const game = this.game;
       this.store.dispatch(new actions.SetGame(game));
-      this.platforms = filterPlatforms(this.gameGroupings, this.game);
     }
   }
 
   setPlatform(platformEl: HTMLSelectElement) {
     const platform = platformEl.value;
     this.store.dispatch(new actions.SetPlatform(platform));
-    this.dates = filterStartTimes(this.gameGroupings, this.game, platform);
   }
 
   setStartTime(startTimeEl: HTMLSelectElement) {
-    if (startTimeEl.value) {
-      const startTime = Number.parseInt(startTimeEl.value);
-      this.store.dispatch(new actions.SetStartTime(startTime));
-    }
+    const startTime = Number.parseInt(startTimeEl.value);
+    this.store.dispatch(new actions.SetStartTime(startTime));
   }
 
   resetInfo() {
     this.store.dispatch(new actions.Reset());
-    this.platforms = [];
-    this.dates = [];
   }
 
   savePlaying() {

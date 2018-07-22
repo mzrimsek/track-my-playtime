@@ -1,4 +1,4 @@
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { Component, NO_ERRORS_SCHEMA, OnInit } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { combineReducers, Store, StoreModule } from '@ngrx/store';
@@ -14,16 +14,22 @@ import * as fromRoot from '../../../../reducers/root.reducer';
 import * as fromCompletion from '../../reducers/root.reducer';
 
 import { HistoryGrouping } from '../../../../shared/models';
+import { AddPlayingInfo } from '../../models';
+
+import { filterPlatforms, filterStartTimes } from '../../../../shared/utils/history-filter.utils';
 
 describe('AddPlayingComponent', () => {
   let store: Store<fromRoot.State>;
-  let component: AddPlayingComponent;
-  let fixture: ComponentFixture<AddPlayingComponent>;
+  let component: TestWrapperComponent;
+  let fixture: ComponentFixture<TestWrapperComponent>;
   let userService: UserService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [AddPlayingComponent],
+      declarations: [
+        TestWrapperComponent,
+        AddPlayingComponent
+      ],
       imports: [
         StoreModule.forRoot({
           ...fromRoot.reducers,
@@ -39,15 +45,8 @@ describe('AddPlayingComponent', () => {
 
     spyOn(store, 'dispatch').and.callThrough();
 
-    fixture = TestBed.createComponent(AddPlayingComponent);
+    fixture = TestBed.createComponent(TestWrapperComponent);
     component = fixture.componentInstance;
-    component.info = {
-      game: '',
-      platform: '',
-      startTime: 0
-    };
-    component.gameGroupings = testGroupings;
-    component.games = ['Game 1'];
     fixture.detectChanges();
   }));
 
@@ -60,85 +59,39 @@ describe('AddPlayingComponent', () => {
   }));
 
   describe('Game Value Changes', () => {
-    let gameEl: any;
-
-    beforeEach(async(() => {
-      gameEl = fixture.nativeElement.querySelector('.game ng-select');
+    it('Should dispatch SetGame', async(() => {
+      const gameEl = fixture.nativeElement.querySelector('.game ng-select');
       component.game = testGame;
+      fixture.detectChanges();
+
       gameEl.dispatchEvent(new Event('change'));
       fixture.detectChanges();
-    }));
 
-    it('Should dispatch SetGame', async(() => {
       const action = new actions.SetGame(testGame);
-      expect(store.dispatch).toHaveBeenCalledWith(action);
-    }));
 
-    it('Should update platforms', async(() => {
-      expect(component.platforms).toEqual(['Platform 1', 'Platform 2']);
+      expect(store.dispatch).toHaveBeenCalledWith(action);
     }));
   });
 
   describe('Game Value Clears', () => {
-    let gameEl: any;
-
-    beforeEach(async(() => {
-      gameEl = fixture.nativeElement.querySelector('.game ng-select');
+    it('Should dispatch Reset', async(() => {
+      const gameEl = fixture.nativeElement.querySelector('.game ng-select');
       component.game = null;
+      fixture.detectChanges();
+
       gameEl.dispatchEvent(new Event('clear'));
       fixture.detectChanges();
-    }));
 
-    it('Should dispatch Reset', async(() => {
       const action = new actions.Reset();
+
       expect(store.dispatch).toHaveBeenCalledWith(action);
-    }));
-
-    it('Should update platforms', async(() => {
-      expect(component.platforms).toEqual([]);
-    }));
-
-    it('Should update dates', async(() => {
-      expect(component.dates).toEqual([]);
     }));
   });
 
-  // TODO: Make these tests better
   describe('Platform Option Changes', () => {
-    let platformEl: any;
-
-    beforeEach(async(() => {
-      const gameEl = fixture.nativeElement.querySelector('.game ng-select');
-      component.game = testGame;
-      gameEl.dispatchEvent(new Event('change'));
-      fixture.detectChanges();
-
-      platformEl = fixture.nativeElement.querySelector('.platform select');
-      platformEl.disabled = false;
-      platformEl.selectedIndex = 2;
-      platformEl.dispatchEvent(new Event('change'));
-      fixture.detectChanges();
-    }));
-
     it('Should dispatch SetPlatform', async(() => {
-      const platform = component.platforms[1];
-      const action = new actions.SetPlatform(platform);
-      expect(store.dispatch).toHaveBeenCalledWith(action);
-    }));
-
-    it('Should update dates', async(() => {
-      expect(component.dates).toEqual([1000]);
-    }));
-  });
-
-  // TODO: Make these tests better
-  describe('StartTime Option Changes', () => {
-    let startTimeEl: any;
-
-    beforeEach(async(() => {
-      const gameEl = fixture.nativeElement.querySelector('.game ng-select');
       component.game = testGame;
-      gameEl.dispatchEvent(new Event('change'));
+      component.platforms = filterPlatforms(testGroupings, testGame);
       fixture.detectChanges();
 
       const platformEl = fixture.nativeElement.querySelector('.platform select');
@@ -147,16 +100,30 @@ describe('AddPlayingComponent', () => {
       platformEl.dispatchEvent(new Event('change'));
       fixture.detectChanges();
 
-      startTimeEl = fixture.nativeElement.querySelector('.startTime select');
+      const platform = component.platforms[1];
+      const action = new actions.SetPlatform(platform);
+
+      expect(store.dispatch).toHaveBeenCalledWith(action);
+    }));
+  });
+
+  describe('StartTime Option Changes', () => {
+    it('Should dispatch SetStartTime', async(() => {
+      component.game = testGame;
+      component.platforms = filterPlatforms(testGroupings, testGame);
+      const platform = component.platforms[1];
+      component.dates = filterStartTimes(testGroupings, testGame, platform);
+      fixture.detectChanges();
+
+      const startTimeEl = fixture.nativeElement.querySelector('.startTime select');
       startTimeEl.disabled = false;
       startTimeEl.selectedIndex = 1;
       startTimeEl.dispatchEvent(new Event('change'));
       fixture.detectChanges();
-    }));
 
-    it('Should dispatch SetStartTime', async(() => {
       const startTime = component.dates[0];
       const action = new actions.SetStartTime(startTime);
+
       expect(store.dispatch).toHaveBeenCalledWith(action);
     }));
   });
@@ -171,12 +138,13 @@ describe('AddPlayingComponent', () => {
 
     describe('With Match', () => {
       it('Should dispatch Save', async(() => {
-        component.game = testGame;
         component.info = {
           game: testGame,
           platform: 'Platform 1',
           startTime: 3000
         };
+        fixture.detectChanges();
+
         saveButtonEl.click();
         fixture.detectChanges();
         const action = new actions.Save({
@@ -201,6 +169,33 @@ describe('AddPlayingComponent', () => {
     });
   });
 });
+
+@Component({
+  // tslint:disable-next-line:component-selector
+  selector: 'test-wrapper',
+  template: `
+    <app-completion-add-playing [gameGroupings]="gameGroupings"
+                                [games]="games"
+                                [game]="game"
+                                [info]="info"
+                                [platforms]="platforms"
+                                [dates]="dates"></app-completion-add-playing>
+`
+})
+class TestWrapperComponent implements OnInit {
+  gameGroupings: HistoryGrouping[] = testGroupings;
+  games: string[] = [testGame];
+  game: string | null;
+  info: AddPlayingInfo = {
+    game: '',
+    platform: '',
+    startTime: 0
+  };
+  platforms: string[] = [];
+  dates: number[] = [];
+
+  ngOnInit() { }
+}
 
 const testGame = 'Game 1';
 const testGroupings: HistoryGrouping[] = [{

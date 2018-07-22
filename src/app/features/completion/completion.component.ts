@@ -10,6 +10,7 @@ import completionSelectors, { State as CompletionState } from './reducers/root.r
 import { HistoryGrouping } from '../../shared/models';
 import { AddPlayingInfo, CompletedDisplayData, PlayingDisplayData, TabType } from './models';
 
+import { filterPlatforms, filterStartTimes } from '../../shared/utils/history-filter.utils';
 import {
     getCompletedDisplayDataItems, getPlayingDisplayDataItems
 } from './utils/display-data.utils';
@@ -25,6 +26,8 @@ export class CompletionComponent implements OnInit {
   games$: Observable<string[]>;
   addPlayingInfo$: Observable<AddPlayingInfo>;
   game$: Observable<string | null>;
+  potentialPlatforms$: Observable<string[]>;
+  potentialDates$: Observable<number[]>;
 
   playingDisplayData$: Observable<PlayingDisplayData[]>;
   completedDisplayData$: Observable<CompletedDisplayData[]>;
@@ -37,6 +40,12 @@ export class CompletionComponent implements OnInit {
     this.games$ = this.historyGroupings$.map(groupings => groupings.map(item => item.key));
     this.addPlayingInfo$ = this.completionStore.select(completionSelectors.addPlayingInfo);
     this.game$ = this.addPlayingInfo$.map(info => info.game ? info.game : null);
+    this.potentialPlatforms$ = this.historyGroupings$.combineLatest(this.addPlayingInfo$, (groupings, info) => {
+      return filterPlatforms(groupings, info.game);
+    });
+    this.potentialDates$ = this.historyGroupings$.combineLatest(this.addPlayingInfo$, (groupings, info) => {
+      return filterStartTimes(groupings, info.game, info.platform);
+    });
 
     const playingProgressItems = this.sharedStore.select(sharedSelectors.progressPlaying);
     const completedProgerssItems = this.sharedStore.select(sharedSelectors.progressCompleted);

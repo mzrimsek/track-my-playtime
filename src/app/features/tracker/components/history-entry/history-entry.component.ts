@@ -47,13 +47,11 @@ export class HistoryEntryComponent implements OnInit {
   }
 
   updatePlatform(platformEl: HTMLSelectElement) {
-    if (platformEl.value) {
-      const payload = <UpdateHistoryItemPlatformPayload>{
-        itemId: this.item.id,
-        platform: platformEl.value
-      };
-      this.store.dispatch(new actions.UpdatePlatform(this.userId, payload));
-    }
+    const payload = <UpdateHistoryItemPlatformPayload>{
+      itemId: this.item.id,
+      platform: platformEl.value
+    };
+    this.store.dispatch(new actions.UpdatePlatform(this.userId, payload));
   }
 
   remove() {
