@@ -72,13 +72,18 @@ export class TimerComponent implements OnInit {
     }
   }
 
+  resetGame() {
+    this.store.dispatch(new actions.SetGame(''));
+    if (this.info.startTime !== 0) {
+      this.timerService.setGame(this.userId, '');
+    }
+  }
+
   setPlatform(platformEl: HTMLSelectElement) {
-    if (platformEl.value) {
-      const platform = platformEl.value;
-      this.store.dispatch(new actions.SetPlatform(platform));
-      if (this.info.startTime !== 0) {
-        this.timerService.setPlatform(this.userId, platform);
-      }
+    const platform = platformEl.value;
+    this.store.dispatch(new actions.SetPlatform(platform));
+    if (this.info.startTime !== 0) {
+      this.timerService.setPlatform(this.userId, platform);
     }
   }
 

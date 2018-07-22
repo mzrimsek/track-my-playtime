@@ -5,7 +5,7 @@ export class AppPage {
     return browser.get('/');
   }
 
-  getWelcomeMessage() {
+  getTaglineMessage() {
     return element(by.css('app-root app-home .home .tagline')).getText();
   }
 }

@@ -208,6 +208,13 @@ describe('History Service', () => {
       service.updateGame('', payload);
       expect(itemDocumentStub.update).toHaveBeenCalledWith({ game: payload.game });
     });
+
+    it('Should return correct data', () => {
+      const result = service.updateGame('', payload);
+      result.subscribe(res => {
+        expect(res).toEqual(payload);
+      });
+    });
   });
 
   describe('updatePlatform', () => {
@@ -235,6 +242,13 @@ describe('History Service', () => {
     it('Should call item document update with correct platform', () => {
       service.updatePlatform('', payload);
       expect(itemDocumentStub.update).toHaveBeenCalledWith({ platform: payload.platform });
+    });
+
+    it('Should return correct data', () => {
+      const result = service.updatePlatform('', payload);
+      result.subscribe(res => {
+        expect(res).toEqual(payload);
+      });
     });
   });
 
@@ -266,6 +280,13 @@ describe('History Service', () => {
       expect(itemDocumentStub.update).toHaveBeenCalledWith({
         startTime: payload.startTime,
         endTime: payload.endTime
+      });
+    });
+
+    it('Should return correct data', () => {
+      const result = service.updateElapsedTime('', payload);
+      result.subscribe(res => {
+        expect(res).toEqual(payload);
       });
     });
   });

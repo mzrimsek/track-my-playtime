@@ -5,8 +5,6 @@ import { combineReducers, Store, StoreModule } from '@ngrx/store';
 
 import { LibraryComponent } from './library.component';
 
-import * as historyActions from '../../shared/actions/history.actions';
-
 import * as fromRoot from '../../reducers/root.reducer';
 import * as fromShared from '../../shared/reducers/root.reducer';
 
@@ -43,43 +41,5 @@ describe('LibraryComponent', () => {
 
   it('Should select groupings by game', () => {
     expect(store.select).toHaveBeenCalledWith(fromShared._selectHistoryGroupingsByGame);
-  });
-
-  it('Should select history loading', async(() => {
-    expect(store.select).toHaveBeenCalledWith(fromShared._selectHistoryLoading);
-  }));
-
-  describe('When data is loading', () => {
-    beforeEach(async(() => {
-      store.dispatch(new historyActions.LoadHistoryItems(''));
-      fixture.detectChanges();
-    }));
-
-    it('Should show loading spinner', async(() => {
-      const spinner = fixture.nativeElement.querySelector('app-shared-spinner');
-      expect(spinner).toBeTruthy();
-    }));
-
-    it('Should not show library', async(() => {
-      const library = fixture.nativeElement.querySelector('.library');
-      expect(library).toBeNull();
-    }));
-  });
-
-  describe('When data is loaded', () => {
-    beforeEach(async(() => {
-      store.dispatch(new historyActions.LoadHistoryItemsSucceeded([]));
-      fixture.detectChanges();
-    }));
-
-    it('Should not show loading spinner', async(() => {
-      const spinner = fixture.nativeElement.querySelector('app-shared-spinner');
-      expect(spinner).toBeNull();
-    }));
-
-    it('Should show library', async(() => {
-      const library = fixture.nativeElement.querySelector('.library');
-      expect(library).toBeTruthy();
-    }));
   });
 });

@@ -21,8 +21,7 @@ export class HistoryEffects {
       .map(action => action as historyActions.LoadHistoryItems)
       .switchMap(action => this.historyService.getHistoryList(action.userId)
         .map(data => new historyActions.LoadHistoryItemsSucceeded(data))
-        .catch(err => Observable.of(new appActions.Error(historyActions.LOAD_HISTORY_ITEMS, err.message)))
-      );
+        .catch(err => Observable.of(new appActions.Error(historyActions.LOAD_HISTORY_ITEMS, err.message))));
 
   @Effect() saveTimerInfoSucceeded$ =
     this.actions$
@@ -36,8 +35,7 @@ export class HistoryEffects {
       .map(action => action as historyActions.RemoveHistoryItem)
       .switchMap(action => this.historyService.deleteHistoryItem(action.userId, action.itemId)
         .map(itemId => new historyActions.RemoveHistoryItemSucceeded(itemId))
-        .catch(err => Observable.of(new appActions.Error(historyActions.REMOVE_HISTORY_ITEM, err.message)))
-      );
+        .catch(err => Observable.of(new appActions.Error(historyActions.REMOVE_HISTORY_ITEM, err.message))));
 
   @Effect() updateGame$ =
     this.actions$
@@ -45,8 +43,7 @@ export class HistoryEffects {
       .map(action => action as historyActions.UpdateGame)
       .switchMap(action => this.historyService.updateGame(action.userId, action.payload)
         .map(payload => new historyActions.UpdateGameSucceeded(payload))
-        .catch(err => Observable.of(new appActions.Error(historyActions.UPDATE_GAME, err.message)))
-      );
+        .catch(err => Observable.of(new appActions.Error(historyActions.UPDATE_GAME, err.message))));
 
   @Effect() updatePlatform$ =
     this.actions$
@@ -54,8 +51,7 @@ export class HistoryEffects {
       .map(action => action as historyActions.UpdatePlatform)
       .switchMap(action => this.historyService.updatePlatform(action.userId, action.payload)
         .map(payload => new historyActions.UpdatePlatformSucceeded(payload))
-        .catch(err => Observable.of(new appActions.Error(historyActions.UPDATE_PLATFORM, err.message)))
-      );
+        .catch(err => Observable.of(new appActions.Error(historyActions.UPDATE_PLATFORM, err.message))));
 
   @Effect() updateElapsedTime$ =
     this.actions$
@@ -63,6 +59,5 @@ export class HistoryEffects {
       .map(action => action as historyActions.UpdateElapsedTime)
       .switchMap(action => this.historyService.updateElapsedTime(action.userId, action.payload)
         .map(payload => new historyActions.UpdateElapsedTimeSucceeded(payload))
-        .catch(err => Observable.of(new appActions.Error(historyActions.UPDATE_ELAPSED_TIME, err.message)))
-      );
+        .catch(err => Observable.of(new appActions.Error(historyActions.UPDATE_ELAPSED_TIME, err.message))));
 }

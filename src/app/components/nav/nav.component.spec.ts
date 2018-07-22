@@ -79,6 +79,12 @@ describe('NavComponent', () => {
     expect(href).toBe('/app/library');
   }));
 
+  it('Should have nav completion link with correct href', async(() => {
+    const navCompletionLink = fixture.debugElement.query(By.css('#navCompletionLink'));
+    const href = navCompletionLink.nativeElement.getAttribute('href');
+    expect(href).toBe('/app/completion');
+  }));
+
   it('Should dispatch Logout on logout button click', async(() => {
     const action = new userActions.Logout();
     const button = fixture.nativeElement.querySelector('#logoutButton');
@@ -87,4 +93,51 @@ describe('NavComponent', () => {
 
     expect(store.dispatch).toHaveBeenCalledWith(action);
   }));
+
+  describe('Mobile', () => {
+    describe('Nav Hidden', () => {
+      it('Should change hideNavContents to false when menu icon clicked', () => {
+        const navtoggleMenuIcon = fixture.debugElement.query(By.css('.nav .main .banner .menu'));
+        navtoggleMenuIcon.nativeElement.click();
+        fixture.detectChanges();
+
+        expect(component.hideNavContents).toBe(false);
+      });
+
+      it('Should show menu open icon', () => {
+        const navMenuOpenIcon = fixture.debugElement.query(By.css('#showMenuIcon'));
+        expect(navMenuOpenIcon).toBeTruthy();
+      });
+
+      it('Should not show menu close icon', () => {
+        const navMenuCloseIcon = fixture.debugElement.query(By.css('#hideMenuIcon'));
+        expect(navMenuCloseIcon).toBeNull();
+      });
+    });
+
+    describe('Nav Shown', () => {
+      it('Should change hideNavContents to true when menu icon clicked', () => {
+        const navtoggleMenuIcon = fixture.debugElement.query(By.css('.nav .main .banner .menu'));
+        component.hideNavContents = false;
+        navtoggleMenuIcon.nativeElement.click();
+        fixture.detectChanges();
+
+        expect(component.hideNavContents).toBe(true);
+      });
+
+      it('Should show menu close icon', () => {
+        component.hideNavContents = false;
+        fixture.detectChanges();
+        const navMenuCloseIcon = fixture.debugElement.query(By.css('#hideMenuIcon'));
+        expect(navMenuCloseIcon).toBeTruthy();
+      });
+
+      it('Should not show menu open icon', () => {
+        component.hideNavContents = false;
+        fixture.detectChanges();
+        const navMenuOpenIcon = fixture.debugElement.query(By.css('#showMenuIcon'));
+        expect(navMenuOpenIcon).toBeNull();
+      });
+    });
+  });
 });

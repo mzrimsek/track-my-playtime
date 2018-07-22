@@ -7,7 +7,9 @@ import { Observable } from 'rxjs/Observable';
 import sharedSelectors, { State as SharedState } from '../../shared/reducers/root.reducer';
 import dashboardSelectors, { State as DashboardState } from './reducers/root.reducer';
 
-import { BarGraphConfig, DateRangeType, GraphDataItem, PieChartConfig } from './models';
+import {
+    BarGraphConfig, DateRangeType, GraphConfig, GraphDataItem, PieChartConfig
+} from './models';
 
 import { formatTime } from '../../shared/utils/date.utils';
 import { selectColorScheme } from './utils/colorScheme.utils';
@@ -24,12 +26,11 @@ export class DashboardComponent implements OnInit {
   timeVsPlatformGraphData$: Observable<GraphDataItem[]>;
   timeVsGameGraphData$: Observable<GraphDataItem[]>;
 
-  isHistoryDataLoading$: Observable<boolean>;
   totalTime$: Observable<number>;
 
   dateRangeType$: Observable<DateRangeType>;
 
-  private barGraphBaseConfig: BarGraphConfig = {
+  private graphConfig: GraphConfig = {
     view: undefined,
     colorScheme: {
       domain: selectColorScheme('cool')
@@ -37,6 +38,9 @@ export class DashboardComponent implements OnInit {
     showLegend: false,
     gradient: false,
     animations: true,
+  };
+  private barGraphBaseConfig: BarGraphConfig = {
+    ...this.graphConfig,
     showXAxis: true,
     showYAxis: true,
     showXAxisLabel: false,
@@ -58,13 +62,7 @@ export class DashboardComponent implements OnInit {
     yAxisLabel: 'Game'
   };
   platformGraphConfig: PieChartConfig = {
-    view: undefined,
-    colorScheme: {
-      domain: selectColorScheme('cool')
-    },
-    showLegend: false,
-    gradient: false,
-    animations: true,
+    ...this.graphConfig,
     showLabels: true,
     explodeSlices: false,
     doughnut: true
@@ -81,7 +79,6 @@ export class DashboardComponent implements OnInit {
     this.timeVsPlatformGraphData$ = getGraphData(groupingsByPlatform, dateList);
     this.timeVsGameGraphData$ = getSortedGraphData(groupingsByGame, dateList);
 
-    this.isHistoryDataLoading$ = this.sharedStore.select(sharedSelectors.historyLoading);
     this.totalTime$ = this.timeVsDateGraphData$.map(x => x.reduce((a, b) => a + b.value, 0));
     this.dateRangeType$ = this.dashboardStore.select(dashboardSelectors.rangeType);
   }

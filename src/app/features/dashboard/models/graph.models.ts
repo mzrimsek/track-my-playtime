@@ -3,7 +3,7 @@ export interface GraphDataItem {
   value: number;
 }
 
-interface GraphConfig {
+export interface GraphConfig {
   view: [number, number] | undefined;
   colorScheme: {
     domain: string[]

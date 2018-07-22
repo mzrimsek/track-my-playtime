@@ -60,15 +60,11 @@ describe('Tracker Component', () => {
   });
 
   it('Should select platforms options', () => {
-    expect(store.select).toHaveBeenCalledWith(fromTracker._selectPlatformsOptions);
+    expect(store.select).toHaveBeenCalledWith(fromShared._selectPlatformsOptions);
   });
 
   it('Should select history groupings by date', () => {
     expect(store.select).toHaveBeenCalledWith(fromShared._selectHistoryGroupingsByDate);
-  });
-
-  it('Should select history loading', () => {
-    expect(store.select).toHaveBeenCalledWith(fromShared._selectHistoryLoading);
   });
 
   it('Should select entries to show', () => {

@@ -147,7 +147,8 @@ const testItem: HistoryListItem = {
   platform: 'some platform',
   startTime: start.getTime(),
   endTime: end.getTime(),
-  dateRange: [start, end]
+  dateRange: [start, end],
+  locked: false
 };
 
 const testPlatforms = [

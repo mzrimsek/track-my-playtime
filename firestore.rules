@@ -10,5 +10,8 @@ service cloud.firestore {
     match /timer/{userId} {
       allow read, write: if request.auth.uid == userId;
     }
+    match /progress/{userId}/items/{item} {
+    	allow read, write: if request.auth.uid == userId;
+    }
   }
 }

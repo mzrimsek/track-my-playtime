@@ -7,8 +7,6 @@ import { DashboardComponent } from './dashboard.component';
 
 import { TimePipe } from '../../shared/pipes/time.pipe';
 
-import * as historyActions from '../../shared/actions/history.actions';
-
 import * as fromRoot from '../../reducers/root.reducer';
 import * as fromShared from '../../shared/reducers/root.reducer';
 import * as fromDashboard from './reducers/root.reducer';
@@ -65,42 +63,4 @@ describe('DashboardComponent', () => {
   it('Should select groupings by game', async(() => {
     expect(store.select).toHaveBeenCalledWith(fromShared._selectHistoryGroupingsByGame);
   }));
-
-  it('Should select history loading', async(() => {
-    expect(store.select).toHaveBeenCalledWith(fromShared._selectHistoryLoading);
-  }));
-
-  describe('When data is loading', () => {
-    beforeEach(async(() => {
-      store.dispatch(new historyActions.LoadHistoryItems(''));
-      fixture.detectChanges();
-    }));
-
-    it('Should show loading spinner', async(() => {
-      const spinner = fixture.nativeElement.querySelector('app-shared-spinner');
-      expect(spinner).toBeTruthy();
-    }));
-
-    it('Should not show dashboard', async(() => {
-      const dashboard = fixture.nativeElement.querySelector('.dashboard');
-      expect(dashboard).toBeNull();
-    }));
-  });
-
-  describe('When data is loaded', () => {
-    beforeEach(async(() => {
-      store.dispatch(new historyActions.LoadHistoryItemsSucceeded([]));
-      fixture.detectChanges();
-    }));
-
-    it('Should not show loading spinner', async(() => {
-      const spinner = fixture.nativeElement.querySelector('app-shared-spinner');
-      expect(spinner).toBeNull();
-    }));
-
-    it('Should show dashboard', async(() => {
-      const dashboard = fixture.nativeElement.querySelector('.dashboard');
-      expect(dashboard).toBeTruthy();
-    }));
-  });
 });

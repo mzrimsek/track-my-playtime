@@ -27,7 +27,6 @@ export class TrackerComponent implements OnInit {
   game$: Observable<string | null>;
 
   historyGroupings$: Observable<HistoryGrouping[]>;
-  historyLoading$: Observable<boolean>;
   showLoadMoreButton$: Observable<boolean>;
 
   trackedGames$: Observable<string[]>;
@@ -36,7 +35,6 @@ export class TrackerComponent implements OnInit {
   ngOnInit() {
     this.timerInfo$ = this.trackerStore.select(trackerSelectors.timerInfo);
     this.currentTime$ = this.clockService.getCurrentTime();
-    this.platformsOptions$ = this.trackerStore.select(trackerSelectors.platformsOptions);
     this.game$ = this.timerInfo$.map(info => info.game ? info.game : null);
 
     const historyGroupings = this.sharedStore.select(sharedSelectors.historyGroupingsByDate);
@@ -44,9 +42,9 @@ export class TrackerComponent implements OnInit {
     const filteredGroupings = takeFrom(historyGroupings, entriesToShow);
 
     this.historyGroupings$ = filteredGroupings;
-    this.historyLoading$ = this.sharedStore.select(sharedSelectors.historyLoading);
     this.showLoadMoreButton$ = hasMoreToDisplay(historyGroupings, filteredGroupings);
 
     this.trackedGames$ = this.sharedStore.select(sharedSelectors.historyTrackedGames);
+    this.platformsOptions$ = this.sharedStore.select(sharedSelectors.platformsOptions);
   }
 }

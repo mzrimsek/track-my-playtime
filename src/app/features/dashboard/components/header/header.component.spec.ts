@@ -98,7 +98,7 @@ describe('HeaderComponent', () => {
   template: `
     <app-dashboard-header [totalTime]="totalTime"
                           [rangeType]="rangeType"></app-dashboard-header>
-  `
+`
 })
 class TestWrapperComponent implements OnInit {
   totalTime = 0;

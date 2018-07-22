@@ -1,5 +1,4 @@
 import { endOfMonth, endOfWeek, startOfMonth, startOfWeek, subDays } from 'date-fns';
-import { tassign } from 'tassign';
 
 import * as actions from '../actions/date-range.actions';
 
@@ -11,12 +10,18 @@ export interface State {
   type: DateRangeType;
 }
 
-const now = new Date();
-const initialState: State = {
-  startDay: startOfWeek(now),
-  endDay: endOfWeek(now),
-  type: 'THIS_WEEK'
+const getState = (startDay: Date, endDay: Date, type: DateRangeType): State => {
+  return {
+    startDay,
+    endDay,
+    type
+  };
 };
+
+const now = new Date();
+const startWeek = startOfWeek(now);
+const endWeek = endOfWeek(now);
+const initialState: State = getState(startWeek, endWeek, 'THIS_WEEK');
 
 export function reducer(state: State = initialState, action: actions.All): State {
   switch (action.type) {
@@ -27,30 +32,18 @@ export function reducer(state: State = initialState, action: actions.All): State
       const startThisWeek = startOfWeek(now);
       const endLastWeek = subDays(startThisWeek, 1);
       const startLastWeek = startOfWeek(endLastWeek);
-      return tassign(state, {
-        startDay: startLastWeek,
-        endDay: endLastWeek,
-        type: 'LAST_WEEK'
-      });
+      return getState(startLastWeek, endLastWeek, 'LAST_WEEK');
     }
     case actions.SET_THIS_MONTH: {
       const startMonth = startOfMonth(now);
       const endMonth = endOfMonth(now);
-      return tassign(state, {
-        startDay: startMonth,
-        endDay: endMonth,
-        type: 'THIS_MONTH'
-      });
+      return getState(startMonth, endMonth, 'THIS_MONTH');
     }
     case actions.SET_LAST_MONTH: {
       const startThisMonth = startOfMonth(now);
       const endLastMonth = subDays(startThisMonth, 1);
       const startLastMonth = startOfMonth(endLastMonth);
-      return tassign(state, {
-        startDay: startLastMonth,
-        endDay: endLastMonth,
-        type: 'LAST_MONTH'
-      });
+      return getState(startLastMonth, endLastMonth, 'LAST_MONTH');
     }
     default: {
       return state;

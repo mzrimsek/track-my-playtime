@@ -1,0 +1,53 @@
+@import "../../../../../variables.scss";
+
+.completed-item {
+  border-bottom: 1px solid darken($background-light, 10%);
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+
+  .info {
+    display: flex;
+    flex-direction: column;
+
+    .game-info {
+      display: flex;
+      align-items: center;
+
+      .game {
+        font-weight: bold;
+      }
+
+      .platform {
+        font-style: italic;
+        opacity: .8;
+        font-size: 85%;
+        margin-left: 5px;
+      }
+    }
+
+    .time {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  .actions {
+    display: flex;
+
+    .complete {
+      color: $good-action-color;
+      margin-right: 10px;
+    }
+
+    .close {
+      color: $bad-action-color;
+      margin-right: 10px;
+    }
+
+    .remove {
+      color: $neutral-action-color;
+    }
+  }
+}

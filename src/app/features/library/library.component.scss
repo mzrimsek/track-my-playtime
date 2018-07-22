@@ -3,15 +3,9 @@
 .content {
   padding: 20px;
 
-  .loading {
-    display: flex;
-    justify-content: center;
-  }
-
   .table {
     width: 100%;
     background: $background-light;
-    margin-bottom: 20px;
 
     .ngx-datatable.material {
       background: $background-light;
