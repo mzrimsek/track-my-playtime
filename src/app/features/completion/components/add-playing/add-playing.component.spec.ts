@@ -135,7 +135,6 @@ describe('AddPlayingComponent', () => {
 
     describe('With Match', () => {
       it('Should dispatch Save', async(() => {
-        component.game = testGame;
         component.info = {
           game: testGame,
           platform: 'Platform 1',
