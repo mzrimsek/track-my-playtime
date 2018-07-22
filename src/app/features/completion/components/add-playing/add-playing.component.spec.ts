@@ -1,4 +1,4 @@
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { Component, NO_ERRORS_SCHEMA, OnInit } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { combineReducers, Store, StoreModule } from '@ngrx/store';
@@ -14,18 +14,22 @@ import * as fromRoot from '../../../../reducers/root.reducer';
 import * as fromCompletion from '../../reducers/root.reducer';
 
 import { HistoryGrouping } from '../../../../shared/models';
+import { AddPlayingInfo } from '../../models';
 
 import { filterPlatforms, filterStartTimes } from '../../../../shared/utils/history-filter.utils';
 
 describe('AddPlayingComponent', () => {
   let store: Store<fromRoot.State>;
-  let component: AddPlayingComponent;
-  let fixture: ComponentFixture<AddPlayingComponent>;
+  let component: TestWrapperComponent;
+  let fixture: ComponentFixture<TestWrapperComponent>;
   let userService: UserService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [AddPlayingComponent],
+      declarations: [
+        TestWrapperComponent,
+        AddPlayingComponent
+      ],
       imports: [
         StoreModule.forRoot({
           ...fromRoot.reducers,
@@ -41,15 +45,8 @@ describe('AddPlayingComponent', () => {
 
     spyOn(store, 'dispatch').and.callThrough();
 
-    fixture = TestBed.createComponent(AddPlayingComponent);
+    fixture = TestBed.createComponent(TestWrapperComponent);
     component = fixture.componentInstance;
-    component.info = {
-      game: '',
-      platform: '',
-      startTime: 0
-    };
-    component.gameGroupings = testGroupings;
-    component.games = [testGame];
     fixture.detectChanges();
   }));
 
@@ -65,6 +62,8 @@ describe('AddPlayingComponent', () => {
     it('Should dispatch SetGame', async(() => {
       const gameEl = fixture.nativeElement.querySelector('.game ng-select');
       component.game = testGame;
+      fixture.detectChanges();
+
       gameEl.dispatchEvent(new Event('change'));
       fixture.detectChanges();
 
@@ -78,6 +77,8 @@ describe('AddPlayingComponent', () => {
     it('Should dispatch Reset', async(() => {
       const gameEl = fixture.nativeElement.querySelector('.game ng-select');
       component.game = null;
+      fixture.detectChanges();
+
       gameEl.dispatchEvent(new Event('clear'));
       fixture.detectChanges();
 
@@ -91,6 +92,7 @@ describe('AddPlayingComponent', () => {
     it('Should dispatch SetPlatform', async(() => {
       component.game = testGame;
       component.platforms = filterPlatforms(testGroupings, testGame);
+      fixture.detectChanges();
 
       const platformEl = fixture.nativeElement.querySelector('.platform select');
       platformEl.disabled = false;
@@ -111,6 +113,7 @@ describe('AddPlayingComponent', () => {
       component.platforms = filterPlatforms(testGroupings, testGame);
       const platform = component.platforms[1];
       component.dates = filterStartTimes(testGroupings, testGame, platform);
+      fixture.detectChanges();
 
       const startTimeEl = fixture.nativeElement.querySelector('.startTime select');
       startTimeEl.disabled = false;
@@ -140,6 +143,8 @@ describe('AddPlayingComponent', () => {
           platform: 'Platform 1',
           startTime: 3000
         };
+        fixture.detectChanges();
+
         saveButtonEl.click();
         fixture.detectChanges();
         const action = new actions.Save({
@@ -164,6 +169,33 @@ describe('AddPlayingComponent', () => {
     });
   });
 });
+
+@Component({
+  // tslint:disable-next-line:component-selector
+  selector: 'test-wrapper',
+  template: `
+    <app-completion-add-playing [gameGroupings]="gameGroupings"
+                                [games]="games"
+                                [game]="game"
+                                [info]="info"
+                                [platforms]="platforms"
+                                [dates]="dates"></app-completion-add-playing>
+`
+})
+class TestWrapperComponent implements OnInit {
+  gameGroupings: HistoryGrouping[] = testGroupings;
+  games: string[] = [testGame];
+  game: string | null;
+  info: AddPlayingInfo = {
+    game: '',
+    platform: '',
+    startTime: 0
+  };
+  platforms: string[] = [];
+  dates: number[] = [];
+
+  ngOnInit() { }
+}
 
 const testGame = 'Game 1';
 const testGroupings: HistoryGrouping[] = [{
