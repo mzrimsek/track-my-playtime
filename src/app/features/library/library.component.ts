@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 
@@ -18,10 +18,30 @@ import { mapGroupings } from './utils/library-data.utils';
 export class LibraryComponent implements OnInit {
 
   libraryEntries$: Observable<LibraryEntry[]>;
+  numEntriesToShow = 5;
   constructor(private sharedStore: Store<SharedState>) { }
 
   ngOnInit() {
     const gameGroupings = this.sharedStore.select(sharedSelectors.historyGroupingsByGame);
     this.libraryEntries$ = mapGroupings(gameGroupings);
+    this.setNumEntriesToShow();
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize() {
+    this.setNumEntriesToShow();
+  }
+
+  private setNumEntriesToShow() {
+    const height = window.innerHeight;
+    let numToShow = 10;
+    if (height > 800) {
+      numToShow = height / 70;
+    } else if (height > 700) {
+      numToShow = height / 90;
+    } else {
+      numToShow = height / 110;
+    }
+    this.numEntriesToShow = Math.floor(numToShow);
   }
 }
