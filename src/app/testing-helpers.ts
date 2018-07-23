@@ -40,3 +40,9 @@ export const auth = {
     }
   }
 };
+
+export const tracker = {
+  clockServiceStub: {
+    getCurrentTime: jasmine.createSpy('getCurrentTime')
+  }
+};

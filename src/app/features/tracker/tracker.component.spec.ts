@@ -15,6 +15,8 @@ import * as fromRoot from '../../reducers/root.reducer';
 import * as fromShared from '../../shared/reducers/root.reducer';
 import * as fromTracker from './reducers/root.reducer';
 
+import { tracker } from '../../testing-helpers';
+
 describe('Tracker Component', () => {
   let store: Store<fromRoot.State>;
   let clockService: ClockService;
@@ -33,7 +35,7 @@ describe('Tracker Component', () => {
           'tracker': combineReducers(fromTracker.reducers)
         })
       ],
-      providers: [{ provide: ClockService, useValue: clockServiceStub }],
+      providers: [{ provide: ClockService, useValue: tracker.clockServiceStub }],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
 
@@ -147,7 +149,3 @@ describe('Tracker Component', () => {
     });
   });
 });
-
-const clockServiceStub = {
-  getCurrentTime: jasmine.createSpy('getCurrentTime')
-};
