@@ -19,6 +19,8 @@ import * as fromTracker from '../../reducers/root.reducer';
 
 import { TimerInfo } from '../../models';
 
+import { user } from '../../../../testing-helpers';
+
 describe('TimerComponent', () => {
   let store: Store<fromRoot.State>;
   let userService: UserService;
@@ -39,7 +41,7 @@ describe('TimerComponent', () => {
         })
       ],
       providers: [
-        { provide: UserService, useValue: userServiceStub },
+        { provide: UserService, useValue: user.userServiceStub },
         { provide: TimerService, useValue: timerServiceStub }
       ],
       schemas: [NO_ERRORS_SCHEMA]
@@ -115,7 +117,7 @@ describe('TimerComponent', () => {
 
       it('Should call TimerService setTimer', async(() => {
         startButton.click();
-        expect(timerService.setTimer).toHaveBeenCalledWith(testUserId, {
+        expect(timerService.setTimer).toHaveBeenCalledWith(user.mockUser.uid, {
           ...testInfo,
           startTime: start.getTime()
         });
@@ -257,7 +259,7 @@ describe('TimerComponent', () => {
 
       it('Should dispatch SaveTimerInfo', async(() => {
         const action = new actions.SaveTimerInfo({
-          userId: testUserId,
+          userId: user.mockUser.uid,
           ...testInfo,
           endTime: end.getTime()
         });
@@ -267,7 +269,7 @@ describe('TimerComponent', () => {
 
       it('Should call TimerService resetTimer', async(() => {
         stopButton.click();
-        expect(timerService.resetTimer).toHaveBeenCalledWith(testUserId);
+        expect(timerService.resetTimer).toHaveBeenCalledWith(user.mockUser.uid);
       }));
     });
 
@@ -285,7 +287,7 @@ describe('TimerComponent', () => {
 
       it('Should call TimerService resetTimer', async(() => {
         cancelButton.click();
-        expect(timerService.resetTimer).toHaveBeenCalledWith(testUserId);
+        expect(timerService.resetTimer).toHaveBeenCalledWith(user.mockUser.uid);
       }));
     });
 
@@ -298,7 +300,7 @@ describe('TimerComponent', () => {
         gameEl.dispatchEvent(new Event('change'));
         fixture.detectChanges();
 
-        expect(timerService.setGame).toHaveBeenCalledWith(testUserId, game);
+        expect(timerService.setGame).toHaveBeenCalledWith(user.mockUser.uid, game);
       }));
 
       it('Should call TimerService setGame when game value clears', async(() => {
@@ -309,7 +311,7 @@ describe('TimerComponent', () => {
         gameEl.dispatchEvent(new Event('clear'));
         fixture.detectChanges();
 
-        expect(timerService.setGame).toHaveBeenCalledWith(testUserId, '');
+        expect(timerService.setGame).toHaveBeenCalledWith(user.mockUser.uid, '');
       }));
     });
 
@@ -322,7 +324,7 @@ describe('TimerComponent', () => {
         platformEl.dispatchEvent(new Event('change'));
         fixture.detectChanges();
 
-        expect(timerService.setPlatform).toHaveBeenCalledWith(testUserId, platform);
+        expect(timerService.setPlatform).toHaveBeenCalledWith(user.mockUser.uid, platform);
       }));
     });
 
@@ -335,21 +337,11 @@ describe('TimerComponent', () => {
         dateTimeEl.dispatchEvent(new Event('dateTimeChange'));
         fixture.detectChanges();
 
-        expect(timerService.setStartTime).toHaveBeenCalledWith(testUserId, startTime);
+        expect(timerService.setStartTime).toHaveBeenCalledWith(user.mockUser.uid, startTime);
       }));
     });
   });
 });
-
-const testUserId = 'some id';
-const userServiceStub = {
-  getUser: jasmine.createSpy('getUser').and.returnValue({
-    uid: testUserId,
-    displayName: 'Jim Bob',
-    email: 'jimbob@jimbob.com',
-    photoURL: 'jimbob.com/jimbob.png'
-  })
-};
 
 const timerServiceStub = {
   setTimer: jasmine.createSpy('setTimer'),

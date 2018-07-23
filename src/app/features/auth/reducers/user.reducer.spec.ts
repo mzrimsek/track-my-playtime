@@ -2,7 +2,7 @@ import * as actions from '../actions/user.actions';
 
 import { reducer, State } from './user.reducer';
 
-import { User } from '../models';
+import { user } from '../../../testing-helpers';
 
 describe('User Reducer', () => {
   it('Should update user data when Authenticated is dispatched', () => {
@@ -12,24 +12,15 @@ describe('User Reducer', () => {
       email: '',
       photoURL: ''
     };
-    const user: User = {
-      uid: 'some uid',
-      displayName: 'Jim Bob',
-      email: 'jimbob@jimbob.com',
-      photoURL: 'jimbob.com/jimbob.png'
-    };
 
-    const newState = reducer(initialState, new actions.Authenticated(user));
+    const newState = reducer(initialState, new actions.Authenticated(user.mockUser));
 
-    expect(newState).toEqual(user);
+    expect(newState).toEqual(user.mockUser);
   });
 
   it('Should clear user data when NotAuthenticated is dispatched', () => {
     const initialState: State = {
-      uid: 'some uid',
-      displayName: 'Jim Bob',
-      email: 'jimbob@jimbob.com',
-      photoURL: 'jimbob.com/jimbob.png'
+      ...user.mockUser
     };
     const notAuthenticatedAction = new actions.NotAuthenticated();
 

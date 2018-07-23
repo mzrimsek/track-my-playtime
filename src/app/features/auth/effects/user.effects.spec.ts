@@ -15,6 +15,8 @@ import { AuthService } from '../services/auth.service';
 import * as appActions from '../../../actions/app.actions';
 import * as userActions from '../actions/user.actions';
 
+import { user } from '../../../testing-helpers';
+
 // FIXME: I still think these tests need some work
 describe('User Effects', () => {
   let actions: any;
@@ -60,7 +62,7 @@ describe('User Effects', () => {
         it('Should dispatch Authenticated', () => {
           actions = hot('-a', { a: new userActions.GetUser() });
           const expected = cold('-(b)', {
-            b: new userActions.Authenticated(mockUser)
+            b: new userActions.Authenticated(user.mockUser)
           });
           expect(effects.getUser$).toBeObservable(expected);
         });
@@ -87,7 +89,7 @@ describe('User Effects', () => {
         it('Should dispatch Authenticated', () => {
           actions = hot('-a', { a: new userActions.GetUser() });
           const expected = cold('-(b)', {
-            b: new userActions.Authenticated(mockUser)
+            b: new userActions.Authenticated(user.mockUser)
           });
           expect(effects.getUser$).toBeObservable(expected);
         });
@@ -232,13 +234,6 @@ const mockActivatedRoute = {
   }
 };
 
-const mockUser = {
-  uid: 'some id',
-  displayName: 'Jim Bob',
-  email: 'jimbob@jimbob.com',
-  photoURL: 'jimbob.com/jimbob.png'
-};
-
 class MockAuthService {
   private authState: Observable<any>;
 
@@ -251,7 +246,7 @@ class MockAuthService {
   }
 
   signInWithGoogle(): Observable<any> {
-    this.authState = Observable.of(mockUser);
+    this.authState = Observable.of(user.mockUser);
     return Observable.of('Logged in with Google');
   }
 

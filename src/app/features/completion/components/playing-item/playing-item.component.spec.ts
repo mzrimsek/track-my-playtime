@@ -18,6 +18,8 @@ import * as fromCompletion from '../../reducers/root.reducer';
 
 import { PlayingDisplayData } from '../../models';
 
+import { user } from '../../../../testing-helpers';
+
 describe('PlayingItemComponent', () => {
   let store: Store<fromRoot.State>;
   let component: PlayingItemComponent;
@@ -36,7 +38,7 @@ describe('PlayingItemComponent', () => {
           'completion': combineReducers(fromCompletion.reducers)
         })
       ],
-      providers: [{ provide: UserService, useValue: userServiceStub }],
+      providers: [{ provide: UserService, useValue: user.userServiceStub }],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
 
@@ -89,7 +91,7 @@ describe('PlayingItemComponent', () => {
     it('Should dispatch RemoveProgressItem when remove button is clicked', async(() => {
       const removeButton = fixture.nativeElement.querySelector('.actions .remove');
       removeButton.click();
-      expect(store.dispatch).toHaveBeenCalledWith(new progressActions.RemoveProgressItem(testUserId, '1'));
+      expect(store.dispatch).toHaveBeenCalledWith(new progressActions.RemoveProgressItem(user.mockUser.uid, '1'));
     }));
 
     it('Should not display extra section', async(() => {
@@ -171,7 +173,7 @@ describe('PlayingItemComponent', () => {
 
         markCompleteButton.click();
 
-        expect(store.dispatch).toHaveBeenCalledWith(new progressActions.MarkComplete(testUserId, {
+        expect(store.dispatch).toHaveBeenCalledWith(new progressActions.MarkComplete(user.mockUser.uid, {
           itemId: '1',
           endEntryId: 'start 1'
         }));
@@ -179,16 +181,6 @@ describe('PlayingItemComponent', () => {
     });
   });
 });
-
-const testUserId = 'some id';
-const userServiceStub = {
-  getUser: jasmine.createSpy('getUser').and.returnValue({
-    uid: testUserId,
-    displayName: 'Jim Bob',
-    email: 'jimbob@jimbob.com',
-    photoURL: 'jimbob.com/jimbob.png'
-  })
-};
 
 const testDisplayData: PlayingDisplayData = {
   item: {

@@ -18,6 +18,8 @@ import { AddPlayingInfo } from '../../models';
 
 import { filterPlatforms, filterStartTimes } from '../../../../shared/utils/history-filter.utils';
 
+import { user } from '../../../../testing-helpers';
+
 describe('AddPlayingComponent', () => {
   let store: Store<fromRoot.State>;
   let component: TestWrapperComponent;
@@ -36,7 +38,7 @@ describe('AddPlayingComponent', () => {
           'completion': combineReducers(fromCompletion.reducers)
         })
       ],
-      providers: [{ provide: UserService, useValue: userServiceStub }],
+      providers: [{ provide: UserService, useValue: user.userServiceStub }],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
 
@@ -148,7 +150,7 @@ describe('AddPlayingComponent', () => {
         saveButtonEl.click();
         fixture.detectChanges();
         const action = new actions.Save({
-          userId: testUserId,
+          userId: user.mockUser.uid,
           startEntryId: '2'
         });
 
@@ -227,13 +229,3 @@ const testGroupings: HistoryGrouping[] = [{
   }],
   totalTime: 3
 }];
-
-const testUserId = 'some id';
-const userServiceStub = {
-  getUser: jasmine.createSpy('getUser').and.returnValue({
-    uid: testUserId,
-    displayName: 'Jim Bob',
-    email: 'jimbob@jimbob.com',
-    photoURL: 'jimbob.com/jimbob.png'
-  })
-};
