@@ -14,10 +14,8 @@ import { TimerService } from '../services/timer.service';
 import * as appActions from '../../../actions/app.actions';
 import * as timerActions from '../actions/timer.actions';
 
-import { TimerInfo } from '../models';
-
 import '../../../rxjs-operators';
-import { history } from '../../../test-helpers';
+import { history, tracker } from '../../../test-helpers';
 
 describe('Timer Effects', () => {
   let actions: any;
@@ -30,7 +28,7 @@ describe('Timer Effects', () => {
       providers: [
         TimerEffects,
         provideMockActions(() => actions),
-        { provide: TimerService, useClass: MockTimerService },
+        { provide: TimerService, useClass: tracker.MockTimerService },
         { provide: HistoryService, useClass: history.MockHistoryService }
       ]
     });
@@ -56,7 +54,7 @@ describe('Timer Effects', () => {
 
       actions = hot('-a', { a: action });
       const expected = cold('-(bc)', {
-        b: new timerActions.SaveTimerInfoSucceeded(history.mockItem),
+        b: new timerActions.SaveTimerInfoSucceeded(history.mockEntity),
         c: new timerActions.ResetTimer()
       });
 
@@ -85,7 +83,7 @@ describe('Timer Effects', () => {
     it('Should call HistoryService saveTimerInfo', () => {
       const action = new timerActions.SaveTimerInfo({
         userId: 'some user id',
-        ...mockInfo,
+        ...tracker.testInfo,
         endTime: 6000
       });
 
@@ -115,7 +113,7 @@ describe('Timer Effects', () => {
 
       actions = hot('-a', { a: action });
       const expected = cold('-(b)', {
-        b: new timerActions.LoadTimerInfoSucceeded(mockInfo)
+        b: new timerActions.LoadTimerInfoSucceeded(tracker.testInfo)
       });
 
       expect(effects.loadTimerInfo$).toBeObservable(expected);
@@ -147,15 +145,3 @@ describe('Timer Effects', () => {
     });
   });
 });
-
-const mockInfo: TimerInfo = {
-  game: 'some game',
-  platform: 'some platform',
-  startTime: 3000
-};
-
-class MockTimerService {
-  getTimerInfo(_userId: string): Observable<TimerInfo> {
-    return Observable.of(mockInfo);
-  }
-}

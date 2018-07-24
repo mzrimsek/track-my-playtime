@@ -1,6 +1,8 @@
 import { _selectUserData, _selectUserLoggedIn, AuthState, State } from './root.reducer';
 import { State as UserState } from './user.reducer';
 
+import { user } from '../../../test-helpers';
+
 describe('Auth Root Reducer', () => {
   describe('User State Selectors', () => {
     describe('_selectUserLoggedIn', () => {
@@ -39,18 +41,15 @@ describe('Auth Root Reducer', () => {
 
     describe('_selectUserData', () => {
       it('Should return the user data', () => {
-        const user: UserState = {
-          uid: 'some uid',
-          displayName: 'Jim Bob',
-          email: 'jimbob@jimbob.com',
-          photoURL: 'jimbob.com/jimbob.png'
+        const userState: UserState = {
+          ...user.mockUser
         };
-        const authState: AuthState = { user };
+        const authState: AuthState = { user: userState };
         const state: State = { auth: authState };
 
         const result = _selectUserData(state);
 
-        expect(result).toEqual(user);
+        expect(result).toEqual(user.mockUser);
       });
     });
   });

@@ -1,5 +1,7 @@
 import { Observable } from 'rxjs/Observable';
 
+import { FirestoreHistoryItem } from '../features/tracker/services/history.service';
+
 import { HistoryEntity } from '../shared/reducers/history.reducer';
 
 import { AddTimerInfo } from '../features/tracker/models';
@@ -79,7 +81,7 @@ export namespace history {
     totalTime: 4
   }];
 
-  export const mockItem: HistoryEntity = {
+  export const mockEntity: HistoryEntity = {
     id: '1',
     game: 'some game',
     platform: 'some platform',
@@ -89,11 +91,11 @@ export namespace history {
 
   export class MockHistoryService {
     saveTimerInfo(_info: AddTimerInfo): Observable<HistoryEntity> {
-      return Observable.of(mockItem);
+      return Observable.of(mockEntity);
     }
 
     getHistoryList(_userId: string): Observable<HistoryEntity[]> {
-      return Observable.of([mockItem]);
+      return Observable.of([mockEntity]);
     }
 
     deleteHistoryItem(_userId: string, itemId: string): Observable<string> {
@@ -111,5 +113,32 @@ export namespace history {
     updateElapsedTime(_userId: string, payload: UpdateHistoryItemTimesPayload): Observable<UpdateHistoryItemTimesPayload> {
       return Observable.of(payload);
     }
+  }
+
+  export namespace firestore {
+    export const testHistoryItems: FirestoreHistoryItem[] = [];
+
+    export const itemDocumentStub = {
+      set: jasmine.createSpy('set'),
+      update: jasmine.createSpy('update'),
+      delete: jasmine.createSpy('delete')
+    };
+
+    export const itemsCollectionStub = {
+      doc: jasmine.createSpy('doc').and.returnValue(itemDocumentStub),
+      valueChanges: jasmine.createSpy('valueChanges').and.returnValue(Observable.of(testHistoryItems))
+    };
+
+    export const documentStub = {
+      collection: jasmine.createSpy('collection').and.returnValue(itemsCollectionStub)
+    };
+
+    export const collectionStub = {
+      doc: jasmine.createSpy('doc').and.returnValue(documentStub)
+    };
+
+    export const angularFirestoreStub = {
+      collection: jasmine.createSpy('collection').and.returnValue(collectionStub)
+    };
   }
 }

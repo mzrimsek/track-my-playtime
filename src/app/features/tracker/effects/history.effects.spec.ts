@@ -49,7 +49,7 @@ describe('History Effects', () => {
 
       actions = hot('-a', { a: action });
       const expected = cold('-(b)', {
-        b: new historyActions.LoadHistoryItemsSucceeded([history.mockItem])
+        b: new historyActions.LoadHistoryItemsSucceeded([history.mockEntity])
       });
 
       expect(effects.loadHistoryItems$).toBeObservable(expected);
@@ -83,11 +83,11 @@ describe('History Effects', () => {
 
   describe('Save Timer Info Succeeded', () => {
     it('Should dispatch AddNewHistoryItem', () => {
-      const action = new timerActions.SaveTimerInfoSucceeded(history.mockItem);
+      const action = new timerActions.SaveTimerInfoSucceeded(history.mockEntity);
 
       actions = hot('-a', { a: action });
       const expected = cold('-(b)', {
-        b: new historyActions.AddNewHistoryItem(history.mockItem)
+        b: new historyActions.AddNewHistoryItem(history.mockEntity)
       });
 
       expect(effects.saveTimerInfoSucceeded$).toBeObservable(expected);

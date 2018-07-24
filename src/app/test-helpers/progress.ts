@@ -1,5 +1,7 @@
 import { Observable } from 'rxjs/Observable';
 
+import { FirestoreProgressItem } from '../features/completion/services/progress.service';
+
 import { ProgressEntity } from '../shared/reducers/progress.reducer';
 
 import { AddPlaying } from '../features/completion/models';
@@ -40,4 +42,31 @@ export namespace progress {
       endEntryId
     };
   };
+
+  export namespace firestore {
+    export const testProgressItems: FirestoreProgressItem[] = [];
+
+    export const itemDocumentStub = {
+      set: jasmine.createSpy('set'),
+      update: jasmine.createSpy('update'),
+      delete: jasmine.createSpy('delete')
+    };
+
+    export const itemsCollectionStub = {
+      doc: jasmine.createSpy('doc').and.returnValue(itemDocumentStub),
+      valueChanges: jasmine.createSpy('valueChanges').and.returnValue(Observable.of(testProgressItems))
+    };
+
+    export const documentStub = {
+      collection: jasmine.createSpy('collection').and.returnValue(itemsCollectionStub)
+    };
+
+    export const collectionStub = {
+      doc: jasmine.createSpy('doc').and.returnValue(documentStub)
+    };
+
+    export const angularFirestoreStub = {
+      collection: jasmine.createSpy('collection').and.returnValue(collectionStub)
+    };
+  }
 }

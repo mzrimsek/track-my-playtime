@@ -17,8 +17,6 @@ import * as actions from '../../actions/timer.actions';
 import * as fromRoot from '../../../../reducers/root.reducer';
 import * as fromTracker from '../../reducers/root.reducer';
 
-import { TimerInfo } from '../../models';
-
 import { platforms, tracker, user } from '../../../../test-helpers';
 
 describe('TimerComponent', () => {
@@ -55,7 +53,7 @@ describe('TimerComponent', () => {
 
     fixture = TestBed.createComponent(TimerComponent);
     component = fixture.componentInstance;
-    component.info = testInfo;
+    component.info = tracker.testInfo;
     component.platformsOptions = platforms.testPlatforms;
     component.currentTime = testCurrentTime;
     fixture.detectChanges();
@@ -118,7 +116,7 @@ describe('TimerComponent', () => {
       it('Should call TimerService setTimer', async(() => {
         startButton.click();
         expect(timerService.setTimer).toHaveBeenCalledWith(user.mockUser.uid, {
-          ...testInfo,
+          ...tracker.testInfo,
           startTime: start.getTime()
         });
       }));
@@ -224,7 +222,7 @@ describe('TimerComponent', () => {
     const end = new Date();
 
     beforeEach(async(() => {
-      testInfo.startTime = subHours(end, 1).getTime();
+      tracker.testInfo.startTime = subHours(end, 1).getTime();
       testCurrentTime = end.getTime();
       initTests();
     }));
@@ -260,7 +258,7 @@ describe('TimerComponent', () => {
       it('Should dispatch SaveTimerInfo', async(() => {
         const action = new actions.SaveTimerInfo({
           userId: user.mockUser.uid,
-          ...testInfo,
+          ...tracker.testInfo,
           endTime: end.getTime()
         });
         stopButton.click();
@@ -344,9 +342,3 @@ describe('TimerComponent', () => {
 });
 
 let testCurrentTime = 0;
-
-const testInfo: TimerInfo = {
-  game: 'some game',
-  platform: 'some platform',
-  startTime: 0
-};

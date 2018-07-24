@@ -1,9 +1,10 @@
 import { TestBed } from '@angular/core/testing';
 
 import { AngularFirestore } from 'angularfire2/firestore';
-import { Observable } from 'rxjs/Observable';
 
-import { FirestorePlatformsItem, PlatformsService } from './platforms.service';
+import { PlatformsService } from './platforms.service';
+
+import { platforms } from '../../../test-helpers';
 
 describe('Platforms Service', () => {
   let service: PlatformsService;
@@ -13,7 +14,7 @@ describe('Platforms Service', () => {
     TestBed.configureTestingModule({
       providers: [
         PlatformsService,
-        { provide: AngularFirestore, useValue: angularFirestoreStub }
+        { provide: AngularFirestore, useValue: platforms.firestore.angularFirestoreStub }
       ]
     });
 
@@ -31,8 +32,8 @@ describe('Platforms Service', () => {
 
   describe('getPlatformsOptions', () => {
     afterEach(() => {
-      while (testPlatformsItems.length > 0) {
-        testPlatformsItems.pop();
+      while (platforms.firestore.testPlatformsItems.length > 0) {
+        platforms.firestore.testPlatformsItems.pop();
       }
     });
 
@@ -44,7 +45,7 @@ describe('Platforms Service', () => {
     });
 
     it('Should return correct data', () => {
-      testPlatformsItems.push({
+      platforms.firestore.testPlatformsItems.push({
         index: 3,
         option: 'Platform 1'
       }, {
@@ -60,13 +61,3 @@ describe('Platforms Service', () => {
     });
   });
 });
-
-const testPlatformsItems: FirestorePlatformsItem[] = [];
-
-const collectionStub = {
-  valueChanges: jasmine.createSpy('valueChanges').and.returnValue(Observable.of(testPlatformsItems))
-};
-
-const angularFirestoreStub = {
-  collection: jasmine.createSpy('collection').and.returnValue(collectionStub)
-};

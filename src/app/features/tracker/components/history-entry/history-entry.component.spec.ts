@@ -21,7 +21,7 @@ import {
     UpdateHistoryItemTimesPayload
 } from '../../../../shared/models';
 
-import { user } from '../../../../test-helpers';
+import { platforms, user } from '../../../../test-helpers';
 
 describe('HistoryEntryComponent', () => {
   let store: Store<fromRoot.State>;
@@ -53,7 +53,7 @@ describe('HistoryEntryComponent', () => {
     fixture = TestBed.createComponent(HistoryEntryComponent);
     component = fixture.componentInstance;
     component.item = testItem;
-    component.platformsOptions = testPlatforms;
+    component.platformsOptions = platforms.testPlatforms;
     fixture.detectChanges();
   }));
 
@@ -84,7 +84,7 @@ describe('HistoryEntryComponent', () => {
   it('Should dispatch UpdatePlatform when platform option changes', async(() => {
     const payload: UpdateHistoryItemPlatformPayload = {
       itemId: testItem.id,
-      platform: testPlatforms[0]
+      platform: platforms.testPlatforms[0]
     };
     const action = new actions.UpdatePlatform(user.mockUser.uid, payload);
     const platformEl = fixture.nativeElement.querySelector('.platform select');
@@ -142,8 +142,3 @@ const testItem: HistoryListItem = {
   dateRange: [start, end],
   locked: false
 };
-
-const testPlatforms = [
-  'PS4',
-  'Xbox One'
-];
