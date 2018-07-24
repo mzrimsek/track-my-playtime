@@ -10,6 +10,8 @@ import { LibraryEntry } from './models';
 
 import { mapGroupings } from './utils/library-data.utils';
 
+import { getNumEntriesToShow } from './utils/resize-utils';
+
 @Component({
   selector: 'app-library',
   templateUrl: './library.component.html',
@@ -24,23 +26,15 @@ export class LibraryComponent implements OnInit {
   ngOnInit() {
     const gameGroupings = this.sharedStore.select(sharedSelectors.historyGroupingsByGame);
     this.libraryEntries$ = mapGroupings(gameGroupings);
-    this.setNumEntriesToShow(window.innerHeight);
+    this.setNumEntriesToShow();
   }
 
   @HostListener('window:resize', ['$event'])
   onResize() {
-    this.setNumEntriesToShow(window.innerHeight);
+    this.setNumEntriesToShow();
   }
 
-  setNumEntriesToShow(height: number) {
-    let numToShow = 10;
-    if (height > 800) {
-      numToShow = height / 70;
-    } else if (height > 700) {
-      numToShow = height / 90;
-    } else {
-      numToShow = height / 110;
-    }
-    this.numEntriesToShow = Math.floor(numToShow);
+  setNumEntriesToShow() {
+    this.numEntriesToShow = getNumEntriesToShow(window.innerHeight);
   }
 }

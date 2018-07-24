@@ -46,7 +46,7 @@ describe('LibraryComponent', () => {
     expect(store.select).toHaveBeenCalledWith(fromShared._selectHistoryGroupingsByGame);
   });
 
-  it('Should call setNumEntriesToShow', () => {
+  it('Should call getNumEntriesToShow', () => {
     expect(component.setNumEntriesToShow).toHaveBeenCalled();
   });
 });
