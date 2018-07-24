@@ -27,6 +27,10 @@
       outline: none;
       border: none;
     }
+
+    ng-select {
+      font-size: $small-font-size;
+    }
   }
 
   .platform {
@@ -83,6 +87,10 @@
 
     .game {
       width: 30%;
+
+      ng-select {
+        font-size: $small-font-size;
+      }
 
       input {
         text-overflow: ellipsis;

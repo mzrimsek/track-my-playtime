@@ -1,11 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
 import { AngularFirestore } from 'angularfire2/firestore';
-import { Observable } from 'rxjs/Observable';
 
-import { FirestoreTimerItem, TimerService } from './timer.service';
+import { TimerService } from './timer.service';
 
 import { TimerInfo } from '../models';
+
+import { tracker } from '../../../test-helpers';
 
 describe('Timer Service', () => {
   let service: TimerService;
@@ -15,7 +16,7 @@ describe('Timer Service', () => {
     TestBed.configureTestingModule({
       providers: [
         TimerService,
-        { provide: AngularFirestore, useValue: angularFirestoreStub }
+        { provide: AngularFirestore, useValue: tracker.firestore.angularFirestoreStub }
       ]
     });
 
@@ -41,12 +42,12 @@ describe('Timer Service', () => {
     it('Should call collection doc with user id', () => {
       const userId = 'user id';
       service.setTimer(userId, newTimerInfo);
-      expect(collectionStub.doc).toHaveBeenCalledWith(userId);
+      expect(tracker.firestore.collectionStub.doc).toHaveBeenCalledWith(userId);
     });
 
     it('Should call document set with correct info', () => {
       service.setTimer('', newTimerInfo);
-      expect(documentStub.set).toHaveBeenCalledWith(newTimerInfo);
+      expect(tracker.firestore.documentStub.set).toHaveBeenCalledWith(newTimerInfo);
     });
   });
 
@@ -56,12 +57,12 @@ describe('Timer Service', () => {
     it('Should call collection doc with user id', () => {
       const userId = 'user id';
       service.setGame(userId, game);
-      expect(collectionStub.doc).toHaveBeenCalledWith(userId);
+      expect(tracker.firestore.collectionStub.doc).toHaveBeenCalledWith(userId);
     });
 
     it('Should call document set with correct game', () => {
       service.setGame('', game);
-      expect(documentStub.set).toHaveBeenCalledWith({ game }, { merge: true });
+      expect(tracker.firestore.documentStub.set).toHaveBeenCalledWith({ game }, { merge: true });
     });
   });
 
@@ -71,12 +72,12 @@ describe('Timer Service', () => {
     it('Should call collection doc with user id', () => {
       const userId = 'user id';
       service.setPlatform(userId, platform);
-      expect(collectionStub.doc).toHaveBeenCalledWith(userId);
+      expect(tracker.firestore.collectionStub.doc).toHaveBeenCalledWith(userId);
     });
 
     it('Should call document set with correct platform', () => {
       service.setPlatform('', platform);
-      expect(documentStub.set).toHaveBeenCalledWith({ platform }, { merge: true });
+      expect(tracker.firestore.documentStub.set).toHaveBeenCalledWith({ platform }, { merge: true });
     });
   });
 
@@ -86,12 +87,12 @@ describe('Timer Service', () => {
     it('Should call collection doc with user id', () => {
       const userId = 'user id';
       service.setStartTime(userId, startTime);
-      expect(collectionStub.doc).toHaveBeenCalledWith(userId);
+      expect(tracker.firestore.collectionStub.doc).toHaveBeenCalledWith(userId);
     });
 
     it('Should call document set with correct startTime', () => {
       service.setStartTime('', startTime);
-      expect(documentStub.set).toHaveBeenCalledWith({ startTime }, { merge: true });
+      expect(tracker.firestore.documentStub.set).toHaveBeenCalledWith({ startTime }, { merge: true });
     });
   });
 
@@ -99,12 +100,12 @@ describe('Timer Service', () => {
     it('Should call collection doc with user id', () => {
       const userId = 'user id';
       service.resetTimer(userId);
-      expect(collectionStub.doc).toHaveBeenCalledWith(userId);
+      expect(tracker.firestore.collectionStub.doc).toHaveBeenCalledWith(userId);
     });
 
     it('Should call document set with default info', () => {
       service.resetTimer('');
-      expect(documentStub.set).toHaveBeenCalledWith({
+      expect(tracker.firestore.documentStub.set).toHaveBeenCalledWith({
         game: '',
         platform: '',
         startTime: 0
@@ -116,33 +117,14 @@ describe('Timer Service', () => {
     it('Should call collection doc with user id', () => {
       const userId = 'user id';
       service.getTimerInfo(userId);
-      expect(collectionStub.doc).toHaveBeenCalledWith(userId);
+      expect(tracker.firestore.collectionStub.doc).toHaveBeenCalledWith(userId);
     });
 
     it('Should return correct data', () => {
       const result = service.getTimerInfo('');
       result.subscribe(res => {
-        expect(res).toEqual(testTimerItem);
+        expect(res).toEqual(tracker.firestore.testTimerItem);
       });
     });
   });
 });
-
-const testTimerItem: FirestoreTimerItem = {
-  game: 'some game',
-  platform: 'some platform',
-  startTime: 3000
-};
-
-const documentStub = {
-  valueChanges: jasmine.createSpy('valueChanges').and.returnValue(Observable.of(testTimerItem)),
-  set: jasmine.createSpy('set')
-};
-
-const collectionStub = {
-  doc: jasmine.createSpy('doc').and.returnValue(documentStub)
-};
-
-const angularFirestoreStub = {
-  collection: jasmine.createSpy('collection').and.returnValue(collectionStub)
-};

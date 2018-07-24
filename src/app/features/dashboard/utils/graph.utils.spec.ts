@@ -5,6 +5,8 @@ import { GraphDataItem } from '../models';
 
 import { DEFAULT_KEY, mapToGraphData, padDateGraphData, sortGraphDataByValue } from './graph.utils';
 
+import { history } from '../../../test-helpers';
+
 describe('Graph Utils', () => {
   describe('mapToGraphData', () => {
     it('Can map an empty list', () => {
@@ -15,9 +17,9 @@ describe('Graph Utils', () => {
 
     it('Can map a list with items', () => {
       const key = 'Some Key';
-      const grouping1 = getHistoryGrouping(key, 2000);
-      const grouping2 = getHistoryGrouping(key, 800);
-      const grouping3 = getHistoryGrouping(key, 12345);
+      const grouping1 = history.getHistoryGrouping(key, 2000);
+      const grouping2 = history.getHistoryGrouping(key, 800);
+      const grouping3 = history.getHistoryGrouping(key, 12345);
       const groupings = [grouping1, grouping2, grouping3];
 
       const result = mapToGraphData(groupings);
@@ -40,7 +42,7 @@ describe('Graph Utils', () => {
     describe('Builds each graph data item correctly', () => {
       it('Should set the key', () => {
         const key = 'Some Key';
-        const grouping = getHistoryGrouping(key, 2000);
+        const grouping = history.getHistoryGrouping(key, 2000);
 
         const result = mapToGraphData([grouping]);
 
@@ -49,7 +51,7 @@ describe('Graph Utils', () => {
 
       it('Should set the key to the default value when the key is empty', () => {
         const key = '';
-        const grouping = getHistoryGrouping(key, 2000);
+        const grouping = history.getHistoryGrouping(key, 2000);
 
         const result = mapToGraphData([grouping]);
 
@@ -58,7 +60,7 @@ describe('Graph Utils', () => {
 
       it('Should set the total time', () => {
         const totalTime = 2000;
-        const grouping = getHistoryGrouping('some key', totalTime);
+        const grouping = history.getHistoryGrouping('some key', totalTime);
 
         const result = mapToGraphData([grouping]);
 
@@ -136,11 +138,3 @@ describe('Graph Utils', () => {
     });
   });
 });
-
-const getHistoryGrouping = (key: string, totalTime: number): HistoryGrouping => {
-  return {
-    key,
-    totalTime,
-    historyItems: []
-  };
-};

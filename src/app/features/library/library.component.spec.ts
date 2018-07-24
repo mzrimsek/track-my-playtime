@@ -32,6 +32,9 @@ describe('LibraryComponent', () => {
 
     fixture = TestBed.createComponent(LibraryComponent);
     component = fixture.componentInstance;
+
+    spyOn(component, 'setNumEntriesToShow');
+
     fixture.detectChanges();
   }));
 
@@ -41,5 +44,9 @@ describe('LibraryComponent', () => {
 
   it('Should select groupings by game', () => {
     expect(store.select).toHaveBeenCalledWith(fromShared._selectHistoryGroupingsByGame);
+  });
+
+  it('Should call getNumEntriesToShow', () => {
+    expect(component.setNumEntriesToShow).toHaveBeenCalled();
   });
 });

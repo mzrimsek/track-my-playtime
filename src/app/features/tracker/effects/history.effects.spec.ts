@@ -14,13 +14,12 @@ import * as appActions from '../../../actions/app.actions';
 import * as historyActions from '../../../shared/actions/history.actions';
 import * as timerActions from '../actions/timer.actions';
 
-import { HistoryEntity } from '../../../shared/reducers/history.reducer';
-
 import {
     UpdateHistoryItemGamePayload, UpdateHistoryItemPlatformPayload, UpdateHistoryItemTimesPayload
 } from '../../../shared/models';
 
 import '../../../rxjs-operators';
+import { history } from '../../../test-helpers';
 
 describe('History Effects', () => {
   let actions: any;
@@ -32,7 +31,7 @@ describe('History Effects', () => {
       providers: [
         HistoryEffects,
         provideMockActions(() => actions),
-        { provide: HistoryService, useClass: MockHistoryService }
+        { provide: HistoryService, useClass: history.MockHistoryService }
       ]
     });
 
@@ -50,7 +49,7 @@ describe('History Effects', () => {
 
       actions = hot('-a', { a: action });
       const expected = cold('-(b)', {
-        b: new historyActions.LoadHistoryItemsSucceeded(mockItems)
+        b: new historyActions.LoadHistoryItemsSucceeded([history.mockEntity])
       });
 
       expect(effects.loadHistoryItems$).toBeObservable(expected);
@@ -84,11 +83,11 @@ describe('History Effects', () => {
 
   describe('Save Timer Info Succeeded', () => {
     it('Should dispatch AddNewHistoryItem', () => {
-      const action = new timerActions.SaveTimerInfoSucceeded(mockItems[0]);
+      const action = new timerActions.SaveTimerInfoSucceeded(history.mockEntity);
 
       actions = hot('-a', { a: action });
       const expected = cold('-(b)', {
-        b: new historyActions.AddNewHistoryItem(mockItems[0])
+        b: new historyActions.AddNewHistoryItem(history.mockEntity)
       });
 
       expect(effects.saveTimerInfoSucceeded$).toBeObservable(expected);
@@ -281,35 +280,3 @@ describe('History Effects', () => {
     });
   });
 });
-
-const mockItems: HistoryEntity[] = [
-  {
-    id: '1',
-    game: 'some game',
-    platform: 'some platform',
-    startTime: 3000,
-    endTime: 6000
-  }
-];
-
-class MockHistoryService {
-  getHistoryList(_userId: string): Observable<HistoryEntity[]> {
-    return Observable.of(mockItems);
-  }
-
-  deleteHistoryItem(_userId: string, itemId: string): Observable<string> {
-    return Observable.of(itemId);
-  }
-
-  updateGame(_userId: string, payload: UpdateHistoryItemGamePayload): Observable<UpdateHistoryItemGamePayload> {
-    return Observable.of(payload);
-  }
-
-  updatePlatform(_userId: string, payload: UpdateHistoryItemPlatformPayload): Observable<UpdateHistoryItemPlatformPayload> {
-    return Observable.of(payload);
-  }
-
-  updateElapsedTime(_userId: string, payload: UpdateHistoryItemTimesPayload): Observable<UpdateHistoryItemTimesPayload> {
-    return Observable.of(payload);
-  }
-}

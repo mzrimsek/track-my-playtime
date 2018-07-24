@@ -1,10 +1,11 @@
 import { TestBed } from '@angular/core/testing';
 
 import { AngularFireAuth } from 'angularfire2/auth';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Subscription } from 'rxjs/Subscription';
 
 import { AuthService } from './auth.service';
+
+import { auth } from '../../../test-helpers';
 
 describe('Auth Service', () => {
   let service: AuthService;
@@ -14,7 +15,7 @@ describe('Auth Service', () => {
     TestBed.configureTestingModule({
       providers: [
         AuthService,
-        { provide: AngularFireAuth, useValue: angularFireAuthStub }
+        { provide: AngularFireAuth, useValue: auth.angularFireAuthStub }
       ]
     });
 
@@ -32,12 +33,12 @@ describe('Auth Service', () => {
 
     beforeEach(() => {
       isAuth$ = service.getAuthState()
-        .map(user => user !== null)
+        .map(firebaseUser => firebaseUser !== null)
         .subscribe(isAuth => isAuthRef = isAuth);
     });
 
     afterEach(() => {
-      fakeAuthState.next(null);
+      auth.fakeAuthState.next(null);
       isAuth$.unsubscribe();
     });
 
@@ -65,36 +66,3 @@ describe('Auth Service', () => {
     });
   });
 });
-
-const mockUser = {
-  uid: 'some id',
-  displayName: 'Jim Bob',
-  email: 'jimbob@jimbob.com',
-  photoURL: 'jimbob.com/jimbob.png'
-};
-
-const fakeAuthState: BehaviorSubject<any> = new BehaviorSubject(null);
-
-const fakeSignInHandler = (): Promise<any> => {
-  fakeAuthState.next(mockUser);
-  return Promise.resolve(mockUser);
-};
-
-const fakeSignOutHandler = (): Promise<any> => {
-  fakeAuthState.next(null);
-  return Promise.resolve();
-};
-
-const angularFireAuthStub = {
-  authState: fakeAuthState,
-  auth: {
-    signInWithPopup: jasmine
-      .createSpy('signInWithPopup')
-      .and
-      .callFake(fakeSignInHandler),
-    signOut: jasmine
-      .createSpy('signOut')
-      .and
-      .callFake(fakeSignOutHandler)
-  }
-};

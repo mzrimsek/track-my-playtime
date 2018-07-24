@@ -1,10 +1,12 @@
 import * as actions from '../actions/history.actions';
 
-import { HistoryEntity, reducer, State } from './history.reducer';
+import { reducer, State } from './history.reducer';
 
 import {
     UpdateHistoryItemGamePayload, UpdateHistoryItemPlatformPayload, UpdateHistoryItemTimesPayload
 } from '../models';
+
+import { history } from '../../test-helpers';
 
 describe('History Reducer', () => {
   it('Should add an item when AddNewHistoryItem is dispatched', () => {
@@ -13,7 +15,7 @@ describe('History Reducer', () => {
       entities: {},
       loading: false
     };
-    const item = getHistoryEntity('1');
+    const item = history.getHistoryEntity('1');
 
     const newState = reducer(initialState, new actions.AddNewHistoryItem(item));
 
@@ -45,8 +47,8 @@ describe('History Reducer', () => {
       entities: {},
       loading: false
     };
-    const item1 = getHistoryEntity('1');
-    const item2 = getHistoryEntity('2');
+    const item1 = history.getHistoryEntity('1');
+    const item2 = history.getHistoryEntity('2');
 
     const newState = reducer(initialState, new actions.LoadHistoryItemsSucceeded([item1, item2]));
 
@@ -61,8 +63,8 @@ describe('History Reducer', () => {
   });
 
   it('Should remove correct item when RemoveHistoryItemSucceeded is dispatched', () => {
-    const item1 = getHistoryEntity('1');
-    const item2 = getHistoryEntity('2');
+    const item1 = history.getHistoryEntity('1');
+    const item2 = history.getHistoryEntity('2');
     const initialState: State = {
       ids: [item1.id, item2.id],
       entities: {
@@ -84,8 +86,8 @@ describe('History Reducer', () => {
   });
 
   it('Should update correct item game when UpdateGameSucceeded is dispatched', () => {
-    const item1 = getHistoryEntity('1');
-    const item2 = getHistoryEntity('2');
+    const item1 = history.getHistoryEntity('1');
+    const item2 = history.getHistoryEntity('2');
     const initialState: State = {
       ids: [item1.id, item2.id],
       entities: {
@@ -114,8 +116,8 @@ describe('History Reducer', () => {
   });
 
   it('Should update correct item platform when UpdatePlatformSucceeded is dispatched', () => {
-    const item1 = getHistoryEntity('1');
-    const item2 = getHistoryEntity('2');
+    const item1 = history.getHistoryEntity('1');
+    const item2 = history.getHistoryEntity('2');
     const initialState: State = {
       ids: [item1.id, item2.id],
       entities: {
@@ -144,8 +146,8 @@ describe('History Reducer', () => {
   });
 
   it('Should update correct item elapsed time when UpdateElapsedTimeSucceeded is dispatched', () => {
-    const item1 = getHistoryEntity('1');
-    const item2 = getHistoryEntity('2');
+    const item1 = history.getHistoryEntity('1');
+    const item2 = history.getHistoryEntity('2');
     const initialState: State = {
       ids: [item1.id, item2.id],
       entities: {
@@ -176,8 +178,8 @@ describe('History Reducer', () => {
   });
 
   it('Should remove all items when ClearHistoryItems is dispatched', () => {
-    const item1 = getHistoryEntity('1');
-    const item2 = getHistoryEntity('2');
+    const item1 = history.getHistoryEntity('1');
+    const item2 = history.getHistoryEntity('2');
     const initialState: State = {
       ids: [item1.id, item2.id],
       entities: {
@@ -196,13 +198,3 @@ describe('History Reducer', () => {
     });
   });
 });
-
-const getHistoryEntity = (id: string): HistoryEntity => {
-  return {
-    id,
-    game: 'some cool game',
-    platform: 'some awesome platform',
-    startTime: 12,
-    endTime: 83
-  };
-};

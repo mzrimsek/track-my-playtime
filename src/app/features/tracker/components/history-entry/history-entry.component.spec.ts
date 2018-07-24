@@ -21,6 +21,8 @@ import {
     UpdateHistoryItemTimesPayload
 } from '../../../../shared/models';
 
+import { platforms, user } from '../../../../test-helpers';
+
 describe('HistoryEntryComponent', () => {
   let store: Store<fromRoot.State>;
   let userService: UserService;
@@ -39,7 +41,7 @@ describe('HistoryEntryComponent', () => {
           'tracker': combineReducers(fromTracker.reducers)
         })
       ],
-      providers: [{ provide: UserService, useValue: userServiceStub }],
+      providers: [{ provide: UserService, useValue: user.userServiceStub }],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
 
@@ -51,7 +53,7 @@ describe('HistoryEntryComponent', () => {
     fixture = TestBed.createComponent(HistoryEntryComponent);
     component = fixture.componentInstance;
     component.item = testItem;
-    component.platformsOptions = testPlatforms;
+    component.platformsOptions = platforms.testPlatforms;
     fixture.detectChanges();
   }));
 
@@ -69,7 +71,7 @@ describe('HistoryEntryComponent', () => {
       itemId: testItem.id,
       game
     };
-    const action = new actions.UpdateGame(testUserId, payload);
+    const action = new actions.UpdateGame(user.mockUser.uid, payload);
     const gameEl = fixture.nativeElement.querySelector('.game ng-select');
 
     component.game = game;
@@ -82,9 +84,9 @@ describe('HistoryEntryComponent', () => {
   it('Should dispatch UpdatePlatform when platform option changes', async(() => {
     const payload: UpdateHistoryItemPlatformPayload = {
       itemId: testItem.id,
-      platform: testPlatforms[0]
+      platform: platforms.testPlatforms[0]
     };
-    const action = new actions.UpdatePlatform(testUserId, payload);
+    const action = new actions.UpdatePlatform(user.mockUser.uid, payload);
     const platformEl = fixture.nativeElement.querySelector('.platform select');
 
     platformEl.selectedIndex = 1;
@@ -100,7 +102,7 @@ describe('HistoryEntryComponent', () => {
       startTime: 3000,
       endTime: 6000
     };
-    const action = new actions.UpdateElapsedTime(testUserId, payload);
+    const action = new actions.UpdateElapsedTime(user.mockUser.uid, payload);
     const dateTimeEl = fixture.nativeElement.querySelector('.date-time-picker input');
 
     dateTimeEl.value = new Date(payload.startTime) + '~' + new Date(payload.endTime);
@@ -111,7 +113,7 @@ describe('HistoryEntryComponent', () => {
   }));
 
   it('Should dispatch RemoveHistoryItem when remove button is clicked', async(() => {
-    const action = new actions.RemoveHistoryItem(testUserId, testItem.id);
+    const action = new actions.RemoveHistoryItem(user.mockUser.uid, testItem.id);
     const removeButtonEl = fixture.nativeElement.querySelector('.remove');
 
     removeButtonEl.click();
@@ -129,16 +131,6 @@ describe('HistoryEntryComponent', () => {
   }));
 });
 
-const testUserId = 'some id';
-const userServiceStub = {
-  getUser: jasmine.createSpy('getUser').and.returnValue({
-    uid: testUserId,
-    displayName: 'Jim Bob',
-    email: 'jimbob@jimbob.com',
-    photoURL: 'jimbob.com/jimbob.png'
-  })
-};
-
 const start = new Date();
 const end = addMinutes(start, 15);
 const testItem: HistoryListItem = {
@@ -150,8 +142,3 @@ const testItem: HistoryListItem = {
   dateRange: [start, end],
   locked: false
 };
-
-const testPlatforms = [
-  'PS4',
-  'Xbox One'
-];

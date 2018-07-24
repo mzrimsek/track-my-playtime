@@ -16,7 +16,7 @@ import * as markCompleteActions from '../../actions/mark-complete.actions';
 import * as fromRoot from '../../../../reducers/root.reducer';
 import * as fromCompletion from '../../reducers/root.reducer';
 
-import { PlayingDisplayData } from '../../models';
+import { completion, user } from '../../../../test-helpers';
 
 describe('PlayingItemComponent', () => {
   let store: Store<fromRoot.State>;
@@ -36,7 +36,7 @@ describe('PlayingItemComponent', () => {
           'completion': combineReducers(fromCompletion.reducers)
         })
       ],
-      providers: [{ provide: UserService, useValue: userServiceStub }],
+      providers: [{ provide: UserService, useValue: user.userServiceStub }],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
 
@@ -47,7 +47,7 @@ describe('PlayingItemComponent', () => {
 
     fixture = TestBed.createComponent(PlayingItemComponent);
     component = fixture.componentInstance;
-    component.displayData = testDisplayData;
+    component.displayData = completion.testPlayingDisplayData;
     fixture.detectChanges();
   };
 
@@ -89,7 +89,7 @@ describe('PlayingItemComponent', () => {
     it('Should dispatch RemoveProgressItem when remove button is clicked', async(() => {
       const removeButton = fixture.nativeElement.querySelector('.actions .remove');
       removeButton.click();
-      expect(store.dispatch).toHaveBeenCalledWith(new progressActions.RemoveProgressItem(testUserId, '1'));
+      expect(store.dispatch).toHaveBeenCalledWith(new progressActions.RemoveProgressItem(user.mockUser.uid, '1'));
     }));
 
     it('Should not display extra section', async(() => {
@@ -100,7 +100,7 @@ describe('PlayingItemComponent', () => {
 
   describe('When show extra is true', () => {
     beforeEach(async(() => {
-      testDisplayData.markComplete.showExtra = true;
+      completion.testPlayingDisplayData.markComplete.showExtra = true;
       initTests();
     }));
 
@@ -144,7 +144,7 @@ describe('PlayingItemComponent', () => {
       }));
 
       it('Should dispatch Error when no matching history item', async(() => {
-        testDisplayData.markComplete.endTime = 8000;
+        completion.testPlayingDisplayData.markComplete.endTime = 8000;
         fixture.detectChanges();
 
         markCompleteButton.click();
@@ -166,12 +166,12 @@ describe('PlayingItemComponent', () => {
           }],
           totalTime: 3
         }];
-        testDisplayData.markComplete.endTime = 6000;
+        completion.testPlayingDisplayData.markComplete.endTime = 6000;
         fixture.detectChanges();
 
         markCompleteButton.click();
 
-        expect(store.dispatch).toHaveBeenCalledWith(new progressActions.MarkComplete(testUserId, {
+        expect(store.dispatch).toHaveBeenCalledWith(new progressActions.MarkComplete(user.mockUser.uid, {
           itemId: '1',
           endEntryId: 'start 1'
         }));
@@ -179,37 +179,3 @@ describe('PlayingItemComponent', () => {
     });
   });
 });
-
-const testUserId = 'some id';
-const userServiceStub = {
-  getUser: jasmine.createSpy('getUser').and.returnValue({
-    uid: testUserId,
-    displayName: 'Jim Bob',
-    email: 'jimbob@jimbob.com',
-    photoURL: 'jimbob.com/jimbob.png'
-  })
-};
-
-const testDisplayData: PlayingDisplayData = {
-  item: {
-    id: '1',
-    startEntryId: 'start 1',
-    endEntryId: ''
-  },
-  startEntryData: {
-    id: 'start 1',
-    game: 'some game',
-    platform: 'some platform',
-    startTime: 3000,
-    endTime: 6000,
-    dateRange: [new Date(3000), new Date(6000)],
-    locked: false
-  },
-  timePlayed: 3,
-  endDates: [6000],
-  markComplete: {
-    id: '1',
-    showExtra: false,
-    endTime: 0
-  }
-};
