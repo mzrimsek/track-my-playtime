@@ -15,7 +15,7 @@ import { AuthService } from '../services/auth.service';
 import * as appActions from '../../../actions/app.actions';
 import * as userActions from '../actions/user.actions';
 
-import { user } from '../../../testing/testing-helpers';
+import { user } from '../../../testing';
 
 // FIXME: I still think these tests need some work
 describe('User Effects', () => {

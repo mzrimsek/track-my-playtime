@@ -14,7 +14,7 @@ import * as progressActions from '../../../../shared/actions/progress.actions';
 import * as fromRoot from '../../../../reducers/root.reducer';
 import * as fromCompletion from '../../reducers/root.reducer';
 
-import { user } from '../../../../testing/testing-helpers';
+import { user } from '../../../../testing';
 
 describe('CompletedItemComponent', () => {
   let store: Store<fromRoot.State>;

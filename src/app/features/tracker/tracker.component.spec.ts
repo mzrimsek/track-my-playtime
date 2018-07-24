@@ -15,7 +15,7 @@ import * as fromRoot from '../../reducers/root.reducer';
 import * as fromShared from '../../shared/reducers/root.reducer';
 import * as fromTracker from './reducers/root.reducer';
 
-import { tracker } from '../../testing/testing-helpers';
+import { tracker } from '../../testing';
 
 describe('Tracker Component', () => {
   let store: Store<fromRoot.State>;
