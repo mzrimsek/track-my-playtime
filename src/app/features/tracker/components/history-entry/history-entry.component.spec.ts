@@ -8,6 +8,7 @@ import { addMinutes } from 'date-fns';
 import { HistoryEntryComponent } from './history-entry.component';
 
 import { UserService } from '../../../auth/services/user.service';
+import { TimerService } from '../../services/timer.service';
 
 import { ElapsedTimePipe } from '../../../../shared/pipes/elapsed-time.pipe';
 
@@ -21,7 +22,7 @@ import {
     UpdateHistoryItemTimesPayload
 } from '../../../../shared/models';
 
-import { platforms, user } from '../../../../test-helpers';
+import { platforms, tracker, user } from '../../../../test-helpers';
 
 describe('HistoryEntryComponent', () => {
   let store: Store<fromRoot.State>;
@@ -41,7 +42,10 @@ describe('HistoryEntryComponent', () => {
           'tracker': combineReducers(fromTracker.reducers)
         })
       ],
-      providers: [{ provide: UserService, useValue: user.userServiceStub }],
+      providers: [
+        { provide: UserService, useValue: user.userServiceStub },
+        { provide: TimerService, useValue: tracker.timerServiceStub }
+      ],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
 
