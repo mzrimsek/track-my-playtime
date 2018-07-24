@@ -1,6 +1,6 @@
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
-import { User } from './features/auth/models';
+import { User } from '../features/auth/models';
 
 const mockUser: User = {
   uid: 'some id',

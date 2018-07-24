@@ -21,7 +21,7 @@ import {
     UpdateHistoryItemTimesPayload
 } from '../../../../shared/models';
 
-import { user } from '../../../../testing-helpers';
+import { user } from '../../../../testing/testing-helpers';
 
 describe('HistoryEntryComponent', () => {
   let store: Store<fromRoot.State>;

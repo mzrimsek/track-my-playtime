@@ -2,7 +2,7 @@ import * as actions from '../actions/user.actions';
 
 import { reducer, State } from './user.reducer';
 
-import { user } from '../../../testing-helpers';
+import { user } from '../../../testing/testing-helpers';
 
 describe('User Reducer', () => {
   it('Should update user data when Authenticated is dispatched', () => {

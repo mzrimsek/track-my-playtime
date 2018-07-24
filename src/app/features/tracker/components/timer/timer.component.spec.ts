@@ -19,7 +19,7 @@ import * as fromTracker from '../../reducers/root.reducer';
 
 import { TimerInfo } from '../../models';
 
-import { user } from '../../../../testing-helpers';
+import { user } from '../../../../testing/testing-helpers';
 
 describe('TimerComponent', () => {
   let store: Store<fromRoot.State>;
