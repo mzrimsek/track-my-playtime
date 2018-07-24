@@ -18,22 +18,21 @@ import { mapGroupings } from './utils/library-data.utils';
 export class LibraryComponent implements OnInit {
 
   libraryEntries$: Observable<LibraryEntry[]>;
-  numEntriesToShow = 5;
+  numEntriesToShow = 10;
   constructor(private sharedStore: Store<SharedState>) { }
 
   ngOnInit() {
     const gameGroupings = this.sharedStore.select(sharedSelectors.historyGroupingsByGame);
     this.libraryEntries$ = mapGroupings(gameGroupings);
-    this.setNumEntriesToShow();
+    this.setNumEntriesToShow(window.innerHeight);
   }
 
   @HostListener('window:resize', ['$event'])
   onResize() {
-    this.setNumEntriesToShow();
+    this.setNumEntriesToShow(window.innerHeight);
   }
 
-  private setNumEntriesToShow() {
-    const height = window.innerHeight;
+  setNumEntriesToShow(height: number) {
     let numToShow = 10;
     if (height > 800) {
       numToShow = height / 70;
