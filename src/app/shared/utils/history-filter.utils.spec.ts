@@ -5,14 +5,16 @@ import {
     getUniqueFrom
 } from './history-filter.utils';
 
+import { history } from '../../testing';
+
 describe('History Filter Utils', () => {
   describe('getUniqueFrom', () => {
     it('Should return list of unique games', () => {
       const items: HistoryListItem[] = [
-        getHistoryListItem('Game 3', ''),
-        getHistoryListItem('Game 1', ''),
-        getHistoryListItem('Game 1', ''),
-        getHistoryListItem('Game 2', '')
+        history.getHistoryListItem('Game 3', ''),
+        history.getHistoryListItem('Game 1', ''),
+        history.getHistoryListItem('Game 1', ''),
+        history.getHistoryListItem('Game 2', '')
       ];
       const result = getUniqueFrom(items, item => item.game);
       expect(result).toEqual(['Game 3', 'Game 1', 'Game 2']);
@@ -20,10 +22,10 @@ describe('History Filter Utils', () => {
 
     it('Should return list of unique games', () => {
       const items: HistoryListItem[] = [
-        getHistoryListItem('', 'Platform 1'),
-        getHistoryListItem('', 'Platform 3'),
-        getHistoryListItem('', 'Platform 2'),
-        getHistoryListItem('', 'Platform 3')
+        history.getHistoryListItem('', 'Platform 1'),
+        history.getHistoryListItem('', 'Platform 3'),
+        history.getHistoryListItem('', 'Platform 2'),
+        history.getHistoryListItem('', 'Platform 3')
       ];
       const result = getUniqueFrom(items, item => item.platform);
       expect(result).toEqual(['Platform 1', 'Platform 3', 'Platform 2']);
@@ -38,7 +40,7 @@ describe('History Filter Utils', () => {
 
     it('Should return empty when game is empty string', () => {
       const groupings: HistoryGrouping[] = [
-        getHistoryGrouping('Game 1', 0)
+        history.getHistoryGrouping('Game 1', 0)
       ];
       const result = filterPlatforms(groupings, '');
       expect(result).toEqual([]);
@@ -46,7 +48,7 @@ describe('History Filter Utils', () => {
 
     it('Should return empty when game is null', () => {
       const groupings: HistoryGrouping[] = [
-        getHistoryGrouping('Game 1', 0)
+        history.getHistoryGrouping('Game 1', 0)
       ];
       const result = filterPlatforms(groupings, null);
       expect(result).toEqual([]);
@@ -54,18 +56,18 @@ describe('History Filter Utils', () => {
 
     it('Should return empty when game does not match', () => {
       const groupings: HistoryGrouping[] = [
-        getHistoryGrouping('Game 1', 0)
+        history.getHistoryGrouping('Game 1', 0)
       ];
       const result = filterPlatforms(groupings, 'Not Game 1');
       expect(result).toEqual([]);
     });
 
     it('Should return unqiue platforms when game matches', () => {
-      const grouping = getHistoryGrouping(testGame, 0);
+      const grouping = history.getHistoryGrouping(testGame, 0);
       grouping.historyItems = [
-        getHistoryListItem(testGame, 'Some platform'),
-        getHistoryListItem(testGame, 'Some platform'),
-        getHistoryListItem(testGame, 'Some other platform')
+        history.getHistoryListItem(testGame, 'Some platform'),
+        history.getHistoryListItem(testGame, 'Some platform'),
+        history.getHistoryListItem(testGame, 'Some other platform')
       ];
       const groupings: HistoryGrouping[] = [grouping];
 
@@ -83,7 +85,7 @@ describe('History Filter Utils', () => {
 
     it('Should return empty when game is empty string', () => {
       const groupings: HistoryGrouping[] = [
-        getHistoryGrouping('Game 1', 0)
+        history.getHistoryGrouping('Game 1', 0)
       ];
       const result = filterStartTimes(groupings, '', '');
       expect(result).toEqual([]);
@@ -91,7 +93,7 @@ describe('History Filter Utils', () => {
 
     it('Should return empty when game is null', () => {
       const groupings: HistoryGrouping[] = [
-        getHistoryGrouping('Game 1', 0)
+        history.getHistoryGrouping('Game 1', 0)
       ];
       const result = filterStartTimes(groupings, null, '');
       expect(result).toEqual([]);
@@ -99,16 +101,16 @@ describe('History Filter Utils', () => {
 
     it('Should return empty when game does not match', () => {
       const groupings: HistoryGrouping[] = [
-        getHistoryGrouping('Game 1', 0)
+        history.getHistoryGrouping('Game 1', 0)
       ];
       const result = filterStartTimes(groupings, 'Not Game 1', '');
       expect(result).toEqual([]);
     });
 
     it('Should return empty when game matches but platform does not', () => {
-      const grouping = getHistoryGrouping(testGame, 2);
+      const grouping = history.getHistoryGrouping(testGame, 2);
       grouping.historyItems = [
-        getHistoryListItem(testGame, 'Some other platform', 6000, 8000)
+        history.getHistoryListItem(testGame, 'Some other platform', 6000, 8000)
       ];
       const groupings: HistoryGrouping[] = [grouping];
 
@@ -118,11 +120,11 @@ describe('History Filter Utils', () => {
     });
 
     it('Should return unqiue start times when game and platform matches', () => {
-      const grouping = getHistoryGrouping(testGame, 6.5);
+      const grouping = history.getHistoryGrouping(testGame, 6.5);
       grouping.historyItems = [
-        getHistoryListItem(testGame, 'Some other platform', 6000, 8000),
-        getHistoryListItem(testGame, 'Some platform', 1000, 5000),
-        getHistoryListItem(testGame, 'Some platform', 100, 800)
+        history.getHistoryListItem(testGame, 'Some other platform', 6000, 8000),
+        history.getHistoryListItem(testGame, 'Some platform', 1000, 5000),
+        history.getHistoryListItem(testGame, 'Some platform', 100, 800)
       ];
       const groupings: HistoryGrouping[] = [grouping];
 
@@ -322,26 +324,6 @@ describe('History Filter Utils', () => {
 });
 
 const testGame = 'Game 1';
-
-const getHistoryListItem = (game: string, platform: string, startTime = 0, endTime = 0): HistoryListItem => {
-  return <HistoryListItem>{
-    id: 'totally a unique id',
-    game,
-    platform,
-    startTime,
-    endTime,
-    dateRange: [new Date(startTime), new Date(endTime)],
-    locked: false
-  };
-};
-
-const getHistoryGrouping = (key: string, totalTime: number): HistoryGrouping => {
-  return {
-    key,
-    totalTime,
-    historyItems: []
-  };
-};
 
 const testGroupings: HistoryGrouping[] = [{
   key: testGame,

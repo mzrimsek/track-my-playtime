@@ -19,7 +19,7 @@ import * as fromTracker from '../../reducers/root.reducer';
 
 import { TimerInfo } from '../../models';
 
-import { user } from '../../../../testing';
+import { tracker, user } from '../../../../testing';
 
 describe('TimerComponent', () => {
   let store: Store<fromRoot.State>;
@@ -42,7 +42,7 @@ describe('TimerComponent', () => {
       ],
       providers: [
         { provide: UserService, useValue: user.userServiceStub },
-        { provide: TimerService, useValue: timerServiceStub }
+        { provide: TimerService, useValue: tracker.timerServiceStub }
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
@@ -342,14 +342,6 @@ describe('TimerComponent', () => {
     });
   });
 });
-
-const timerServiceStub = {
-  setTimer: jasmine.createSpy('setTimer'),
-  setGame: jasmine.createSpy('setGame'),
-  setPlatform: jasmine.createSpy('setPlatform'),
-  setStartTime: jasmine.createSpy('setStartTime'),
-  resetTimer: jasmine.createSpy('resetTimer')
-};
 
 let testCurrentTime = 0;
 

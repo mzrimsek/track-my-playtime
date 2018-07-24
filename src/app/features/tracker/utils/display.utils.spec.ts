@@ -1,22 +1,24 @@
 import { Observable } from 'rxjs/Observable';
 
-import { HistoryGrouping, HistoryListItem } from '../../../shared/models';
+import { HistoryGrouping } from '../../../shared/models';
 
 import { hasMoreToDisplay, takeFrom } from './display.utils';
+
+import { history } from '../../../testing';
 
 describe('Display Utils', () => {
   let grouping1: HistoryGrouping;
   let grouping2: HistoryGrouping;
 
   beforeEach(() => {
-    grouping1 = getHistoryGrouping('5/3/2018', 5);
+    grouping1 = history.getHistoryGrouping('5/3/2018', 5);
     grouping1.historyItems = [
-      getHistoryListItem('game 1', 3000, 6000),
-      getHistoryListItem('game 2', 0, 2000)
+      history.getHistoryListItem('game 1', 'the best platform ever', 3000, 6000),
+      history.getHistoryListItem('game 2', 'the best platform ever', 0, 2000)
     ];
-    grouping2 = getHistoryGrouping('5/2/2018', 1);
+    grouping2 = history.getHistoryGrouping('5/2/2018', 1);
     grouping2.historyItems = [
-      getHistoryListItem('game 1', 0, 1000)
+      history.getHistoryListItem('game 1', 'the best platform ever', 0, 1000)
     ];
   });
 
@@ -59,22 +61,3 @@ describe('Display Utils', () => {
     });
   });
 });
-
-const getHistoryListItem = (game: string, startTime = 0, endTime = 0): HistoryListItem => {
-  return <HistoryListItem>{
-    id: 'totally a unique id',
-    game,
-    platform: 'the best platform ever',
-    startTime,
-    endTime,
-    dateRange: [new Date(startTime), new Date(endTime)]
-  };
-};
-
-const getHistoryGrouping = (key: string, totalTime: number): HistoryGrouping => {
-  return {
-    key,
-    totalTime,
-    historyItems: []
-  };
-};
