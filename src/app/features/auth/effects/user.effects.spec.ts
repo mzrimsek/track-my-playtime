@@ -1,7 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { User as AuthUser } from '@firebase/auth-types';
 import { provideMockActions } from '@ngrx/effects/testing';
 
 import { cold, hot } from 'jasmine-marbles';
@@ -15,7 +14,7 @@ import { AuthService } from '../services/auth.service';
 import * as appActions from '../../../actions/app.actions';
 import * as userActions from '../actions/user.actions';
 
-import { user } from '../../../testing';
+import { auth, routing, user } from '../../../test-helpers';
 
 // FIXME: I still think these tests need some work
 describe('User Effects', () => {
@@ -31,9 +30,9 @@ describe('User Effects', () => {
       providers: [
         UserEffects,
         provideMockActions(() => actions),
-        { provide: AuthService, useClass: MockAuthService },
+        { provide: AuthService, useClass: auth.MockAuthService },
         { provide: Router, useValue: router },
-        { provide: ActivatedRoute, useValue: mockActivatedRoute }
+        { provide: ActivatedRoute, useValue: routing.mockActivatedRoute }
       ]
     });
 
@@ -81,7 +80,7 @@ describe('User Effects', () => {
         const returnUrl = 'some/route';
 
         beforeEach(() => {
-          mockActivatedRoute.snapshot.queryParams.returnUrl = returnUrl;
+          routing.mockActivatedRoute.snapshot.queryParams.returnUrl = returnUrl;
           initTests();
           authService.signInWithGoogle();
         });
@@ -225,33 +224,3 @@ describe('User Effects', () => {
     });
   });
 });
-
-const mockActivatedRoute = {
-  snapshot: {
-    queryParams: {
-      returnUrl: ''
-    }
-  }
-};
-
-class MockAuthService {
-  private authState: Observable<any>;
-
-  constructor() {
-    this.authState = Observable.of(null);
-  }
-
-  getAuthState(): Observable<AuthUser | null> {
-    return this.authState;
-  }
-
-  signInWithGoogle(): Observable<any> {
-    this.authState = Observable.of(user.mockUser);
-    return Observable.of('Logged in with Google');
-  }
-
-  signOut(): Observable<any> {
-    this.authState = Observable.of(null);
-    return Observable.of('Logged out');
-  }
-}

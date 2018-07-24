@@ -4,7 +4,7 @@ import { HistoryGrouping } from '../../../shared/models';
 
 import { hasMoreToDisplay, takeFrom } from './display.utils';
 
-import { history } from '../../../testing';
+import { history } from '../../../test-helpers';
 
 describe('Display Utils', () => {
   let grouping1: HistoryGrouping;

@@ -18,7 +18,7 @@ import { AddPlayingInfo } from '../../models';
 
 import { filterPlatforms, filterStartTimes } from '../../../../shared/utils/history-filter.utils';
 
-import { user } from '../../../../testing';
+import { user } from '../../../../test-helpers';
 
 describe('AddPlayingComponent', () => {
   let store: Store<fromRoot.State>;

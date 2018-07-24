@@ -18,7 +18,7 @@ import * as fromCompletion from '../../reducers/root.reducer';
 
 import { PlayingDisplayData } from '../../models';
 
-import { user } from '../../../../testing';
+import { user } from '../../../../test-helpers';
 
 describe('PlayingItemComponent', () => {
   let store: Store<fromRoot.State>;

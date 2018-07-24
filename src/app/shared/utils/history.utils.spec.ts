@@ -7,7 +7,7 @@ import {
     getHistoryListItemMap, getHistoryListItemsMap, HistoryListItemMap
 } from './history.utils';
 
-import { history } from '../../testing';
+import { history } from '../../test-helpers';
 
 describe('History Utils', () => {
   describe('getHistoryListItemsMap', () => {

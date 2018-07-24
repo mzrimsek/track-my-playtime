@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs/Subscription';
 
 import { AuthService } from './auth.service';
 
-import { auth } from '../../../testing';
+import { auth } from '../../../test-helpers';
 
 describe('Auth Service', () => {
   let service: AuthService;

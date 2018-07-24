@@ -1,4 +1,7 @@
+import { User as AuthUser } from '@firebase/auth-types';
+
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs/Observable';
 
 import { user } from './user';
 
@@ -26,4 +29,26 @@ export namespace auth {
         .callFake(fakeSignOutHandler)
     }
   };
+
+  export class MockAuthService {
+    private authState: Observable<any>;
+
+    constructor() {
+      this.authState = Observable.of(null);
+    }
+
+    getAuthState(): Observable<AuthUser | null> {
+      return this.authState;
+    }
+
+    signInWithGoogle(): Observable<any> {
+      this.authState = Observable.of(user.mockUser);
+      return Observable.of('Logged in with Google');
+    }
+
+    signOut(): Observable<any> {
+      this.authState = Observable.of(null);
+      return Observable.of('Logged out');
+    }
+  }
 }
