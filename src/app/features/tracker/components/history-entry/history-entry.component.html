@@ -45,6 +45,12 @@
   </div>
 
   <div class="primary-action">
+    <button data-tracking-category="historyQuickstart"
+            class="fa-lg icon-button"
+            (click)="quickStart()">
+      <fa-icon [icon]="icons.quickStart"></fa-icon>
+    </button>
+
     <button data-tracking-category="historyEntryRemove"
             class="remove fa-lg icon-button"
             (click)="remove()">

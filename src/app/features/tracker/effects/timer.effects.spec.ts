@@ -113,7 +113,7 @@ describe('Timer Effects', () => {
 
       actions = hot('-a', { a: action });
       const expected = cold('-(b)', {
-        b: new timerActions.LoadTimerInfoSucceeded(tracker.testInfo)
+        b: new timerActions.SetTimerInfo(tracker.testInfo)
       });
 
       expect(effects.loadTimerInfo$).toBeObservable(expected);
