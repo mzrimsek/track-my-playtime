@@ -32,4 +32,12 @@ export namespace progress {
       return Observable.of(payload);
     }
   }
+
+  export const getProgressEntity = (id: string, endEntryId = ''): ProgressEntity => {
+    return {
+      id,
+      startEntryId: 'start entry id',
+      endEntryId
+    };
+  };
 }

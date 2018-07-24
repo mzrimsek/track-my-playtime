@@ -29,11 +29,29 @@ export namespace history {
     };
   };
 
+  export const getHistoryEntity = (id: string): HistoryEntity => {
+    return {
+      id,
+      game: 'some cool game',
+      platform: 'some awesome platform',
+      startTime: 12,
+      endTime: 83
+    };
+  };
+
   export const testGame = 'Game 1';
 
   export const testGroupings: HistoryGrouping[] = [{
     key: testGame,
     historyItems: [{
+      id: '4',
+      game: testGame,
+      platform: 'Platform 1',
+      startTime: 8000,
+      endTime: 9000,
+      dateRange: [new Date(8000), new Date(9000)],
+      locked: false
+    }, {
       id: '3',
       game: testGame,
       platform: 'Platform 1',
@@ -58,7 +76,7 @@ export namespace history {
       dateRange: [new Date(1000), new Date(2000)],
       locked: false
     }],
-    totalTime: 3
+    totalTime: 4
   }];
 
   export const mockItem: HistoryEntity = {

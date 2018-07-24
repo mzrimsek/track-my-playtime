@@ -63,15 +63,15 @@ describe('History Filter Utils', () => {
     });
 
     it('Should return unqiue platforms when game matches', () => {
-      const grouping = history.getHistoryGrouping(testGame, 0);
+      const grouping = history.getHistoryGrouping(history.testGame, 0);
       grouping.historyItems = [
-        history.getHistoryListItem(testGame, 'Some platform'),
-        history.getHistoryListItem(testGame, 'Some platform'),
-        history.getHistoryListItem(testGame, 'Some other platform')
+        history.getHistoryListItem(history.testGame, 'Some platform'),
+        history.getHistoryListItem(history.testGame, 'Some platform'),
+        history.getHistoryListItem(history.testGame, 'Some other platform')
       ];
       const groupings: HistoryGrouping[] = [grouping];
 
-      const result = filterPlatforms(groupings, testGame);
+      const result = filterPlatforms(groupings, history.testGame);
 
       expect(result).toEqual(['Some platform', 'Some other platform']);
     });
@@ -108,27 +108,27 @@ describe('History Filter Utils', () => {
     });
 
     it('Should return empty when game matches but platform does not', () => {
-      const grouping = history.getHistoryGrouping(testGame, 2);
+      const grouping = history.getHistoryGrouping(history.testGame, 2);
       grouping.historyItems = [
-        history.getHistoryListItem(testGame, 'Some other platform', 6000, 8000)
+        history.getHistoryListItem(history.testGame, 'Some other platform', 6000, 8000)
       ];
       const groupings: HistoryGrouping[] = [grouping];
 
-      const result = filterStartTimes(groupings, testGame, 'Some platform');
+      const result = filterStartTimes(groupings, history.testGame, 'Some platform');
 
       expect(result).toEqual([]);
     });
 
     it('Should return unqiue start times when game and platform matches', () => {
-      const grouping = history.getHistoryGrouping(testGame, 6.5);
+      const grouping = history.getHistoryGrouping(history.testGame, 6.5);
       grouping.historyItems = [
-        history.getHistoryListItem(testGame, 'Some other platform', 6000, 8000),
-        history.getHistoryListItem(testGame, 'Some platform', 1000, 5000),
-        history.getHistoryListItem(testGame, 'Some platform', 100, 800)
+        history.getHistoryListItem(history.testGame, 'Some other platform', 6000, 8000),
+        history.getHistoryListItem(history.testGame, 'Some platform', 1000, 5000),
+        history.getHistoryListItem(history.testGame, 'Some platform', 100, 800)
       ];
       const groupings: HistoryGrouping[] = [grouping];
 
-      const result = filterStartTimes(groupings, testGame, 'Some platform');
+      const result = filterStartTimes(groupings, history.testGame, 'Some platform');
 
       expect(result).toEqual([100, 1000]);
     });
@@ -138,7 +138,7 @@ describe('History Filter Utils', () => {
     it('Should return empty if grouping is undefined', () => {
       const result = filterHistoryItemsAfter(undefined, {
         id: 'some id',
-        game: testGame,
+        game: history.testGame,
         platform: 'Platform 1',
         startTime: 6000,
         endTime: 9000,
@@ -150,12 +150,12 @@ describe('History Filter Utils', () => {
 
     it('Should return empty if there is no grouping', () => {
       const result = filterHistoryItemsAfter({
-        key: testGame,
+        key: history.testGame,
         historyItems: [],
         totalTime: 0
       }, {
           id: 'some id',
-          game: testGame,
+          game: history.testGame,
           platform: 'Platform 1',
           startTime: 6000,
           endTime: 9000,
@@ -166,9 +166,9 @@ describe('History Filter Utils', () => {
     });
 
     it('Should return empty if there is a grouping but no match', () => {
-      const result = filterHistoryItemsAfter(testGroupings[0], {
+      const result = filterHistoryItemsAfter(history.testGroupings[0], {
         id: 'some id',
-        game: testGame,
+        game: history.testGame,
         platform: 'Platform 1',
         startTime: 9000,
         endTime: 10000,
@@ -179,9 +179,9 @@ describe('History Filter Utils', () => {
     });
 
     it('Should return correctly filtered items when there is a match', () => {
-      const result = filterHistoryItemsAfter(testGroupings[0], {
+      const result = filterHistoryItemsAfter(history.testGroupings[0], {
         id: 'some id',
-        game: testGame,
+        game: history.testGame,
         platform: 'Platform 1',
         startTime: 3000,
         endTime: 4000,
@@ -190,7 +190,7 @@ describe('History Filter Utils', () => {
       });
       expect(result).toEqual([{
         id: '4',
-        game: testGame,
+        game: history.testGame,
         platform: 'Platform 1',
         startTime: 8000,
         endTime: 9000,
@@ -198,7 +198,7 @@ describe('History Filter Utils', () => {
         locked: false
       }, {
         id: '3',
-        game: testGame,
+        game: history.testGame,
         platform: 'Platform 1',
         startTime: 5000,
         endTime: 6000,
@@ -206,7 +206,7 @@ describe('History Filter Utils', () => {
         locked: false
       }, {
         id: '2',
-        game: testGame,
+        game: history.testGame,
         platform: 'Platform 1',
         startTime: 3000,
         endTime: 4000,
@@ -220,7 +220,7 @@ describe('History Filter Utils', () => {
     it('Should return empty if grouping is undefined', () => {
       const result = filterHistoryItemsBetween(undefined, {
         id: 'some id',
-        game: testGame,
+        game: history.testGame,
         platform: 'Platform 1',
         startTime: 6000,
         endTime: 9000,
@@ -228,7 +228,7 @@ describe('History Filter Utils', () => {
         locked: false
       }, {
           id: 'some id 2',
-          game: testGame,
+          game: history.testGame,
           platform: 'Platform 1',
           startTime: 10000,
           endTime: 12000,
@@ -240,12 +240,12 @@ describe('History Filter Utils', () => {
 
     it('Should return empty if there is no grouping', () => {
       const result = filterHistoryItemsBetween({
-        key: testGame,
+        key: history.testGame,
         historyItems: [],
         totalTime: 0
       }, {
           id: 'some id',
-          game: testGame,
+          game: history.testGame,
           platform: 'Platform 1',
           startTime: 6000,
           endTime: 9000,
@@ -253,7 +253,7 @@ describe('History Filter Utils', () => {
           locked: false
         }, {
           id: 'some id 2',
-          game: testGame,
+          game: history.testGame,
           platform: 'Platform 1',
           startTime: 10000,
           endTime: 12000,
@@ -264,9 +264,9 @@ describe('History Filter Utils', () => {
     });
 
     it('Should return empty if there is a grouping but no match for start', () => {
-      const result = filterHistoryItemsBetween(testGroupings[0], {
+      const result = filterHistoryItemsBetween(history.testGroupings[0], {
         id: 'some id',
-        game: testGame,
+        game: history.testGame,
         platform: 'Platform 1',
         startTime: 9000,
         endTime: 10000,
@@ -274,7 +274,7 @@ describe('History Filter Utils', () => {
         locked: false
       }, {
           id: 'some id 2',
-          game: testGame,
+          game: history.testGame,
           platform: 'Platform 1',
           startTime: 10000,
           endTime: 12000,
@@ -285,9 +285,9 @@ describe('History Filter Utils', () => {
     });
 
     it('Should return correctly filtered items when there is a match start', () => {
-      const result = filterHistoryItemsBetween(testGroupings[0], {
+      const result = filterHistoryItemsBetween(history.testGroupings[0], {
         id: 'some id',
-        game: testGame,
+        game: history.testGame,
         platform: 'Platform 1',
         startTime: 3000,
         endTime: 4000,
@@ -295,7 +295,7 @@ describe('History Filter Utils', () => {
         locked: false
       }, {
           id: 'some id 2',
-          game: testGame,
+          game: history.testGame,
           platform: 'Platform 1',
           startTime: 4000,
           endTime: 6000,
@@ -304,7 +304,7 @@ describe('History Filter Utils', () => {
         });
       expect(result).toEqual([{
         id: '3',
-        game: testGame,
+        game: history.testGame,
         platform: 'Platform 1',
         startTime: 5000,
         endTime: 6000,
@@ -312,7 +312,7 @@ describe('History Filter Utils', () => {
         locked: false
       }, {
         id: '2',
-        game: testGame,
+        game: history.testGame,
         platform: 'Platform 1',
         startTime: 3000,
         endTime: 4000,
@@ -322,43 +322,3 @@ describe('History Filter Utils', () => {
     });
   });
 });
-
-const testGame = 'Game 1';
-
-const testGroupings: HistoryGrouping[] = [{
-  key: testGame,
-  historyItems: [{
-    id: '4',
-    game: testGame,
-    platform: 'Platform 1',
-    startTime: 8000,
-    endTime: 9000,
-    dateRange: [new Date(8000), new Date(9000)],
-    locked: false
-  }, {
-    id: '3',
-    game: testGame,
-    platform: 'Platform 1',
-    startTime: 5000,
-    endTime: 6000,
-    dateRange: [new Date(5000), new Date(6000)],
-    locked: false
-  }, {
-    id: '2',
-    game: testGame,
-    platform: 'Platform 1',
-    startTime: 3000,
-    endTime: 4000,
-    dateRange: [new Date(3000), new Date(4000)],
-    locked: false
-  }, {
-    id: '1',
-    game: testGame,
-    platform: 'Platform 2',
-    startTime: 1000,
-    endTime: 2000,
-    dateRange: [new Date(1000), new Date(2000)],
-    locked: false
-  }],
-  totalTime: 3
-}];
