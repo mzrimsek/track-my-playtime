@@ -19,7 +19,7 @@ import * as fromTracker from '../../reducers/root.reducer';
 
 import { TimerInfo } from '../../models';
 
-import { tracker, user } from '../../../../test-helpers';
+import { platforms, tracker, user } from '../../../../test-helpers';
 
 describe('TimerComponent', () => {
   let store: Store<fromRoot.State>;
@@ -56,7 +56,7 @@ describe('TimerComponent', () => {
     fixture = TestBed.createComponent(TimerComponent);
     component = fixture.componentInstance;
     component.info = testInfo;
-    component.platformsOptions = testPlatforms;
+    component.platformsOptions = platforms.testPlatforms;
     component.currentTime = testCurrentTime;
     fixture.detectChanges();
   };
@@ -176,7 +176,7 @@ describe('TimerComponent', () => {
       }));
 
       it('Should dispatch SetPlatform', async(() => {
-        const platform = testPlatforms[1];
+        const platform = platforms.testPlatforms[1];
         const action = new actions.SetPlatform(platform);
 
         expect(store.dispatch).toHaveBeenCalledWith(action);
@@ -317,7 +317,7 @@ describe('TimerComponent', () => {
 
     describe('Platform', () => {
       it('Should call TimerService  setPlatform when platform option changes', async(() => {
-        const platform = testPlatforms[1];
+        const platform = platforms.testPlatforms[1];
         const platformEl = fixture.nativeElement.querySelector('.platform select');
 
         platformEl.selectedIndex = 2;
@@ -350,8 +350,3 @@ const testInfo: TimerInfo = {
   platform: 'some platform',
   startTime: 0
 };
-
-const testPlatforms = [
-  'PS4',
-  'Xbox One'
-];

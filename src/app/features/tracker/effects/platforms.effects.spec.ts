@@ -14,6 +14,7 @@ import * as appActions from '../../../actions/app.actions';
 import * as platformsActions from '../../../shared/actions/platforms.actions';
 
 import '../../../rxjs-operators';
+import { platforms } from '../../../test-helpers';
 
 describe('Platforms Effects', () => {
   let actions: any;
@@ -25,7 +26,7 @@ describe('Platforms Effects', () => {
       providers: [
         PlatformsEffects,
         provideMockActions(() => actions),
-        { provide: PlatformsService, useClass: MockPlatformsService }
+        { provide: PlatformsService, useClass: platforms.MockPlatformsService }
       ]
     });
 
@@ -43,7 +44,7 @@ describe('Platforms Effects', () => {
 
       actions = hot('-a', { a: action });
       const expected = cold('-(b)', {
-        b: new platformsActions.LoadOptionsSucceeded(mockOptions)
+        b: new platformsActions.LoadOptionsSucceeded(platforms.testPlatforms)
       });
 
       expect(effects.loadOptions$).toBeObservable(expected);
@@ -75,15 +76,3 @@ describe('Platforms Effects', () => {
     });
   });
 });
-
-const mockOptions = [
-  'Game Box 720',
-  'Nipkendo Scratch',
-  'Dudestation 69'
-];
-
-class MockPlatformsService {
-  getPlatformsOptions(): Observable<string[]> {
-    return Observable.of(mockOptions);
-  }
-}

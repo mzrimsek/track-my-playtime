@@ -14,11 +14,10 @@ import { TimerService } from '../services/timer.service';
 import * as appActions from '../../../actions/app.actions';
 import * as timerActions from '../actions/timer.actions';
 
-import { HistoryEntity } from '../../../shared/reducers/history.reducer';
-
-import { AddTimerInfo, TimerInfo } from '../models';
+import { TimerInfo } from '../models';
 
 import '../../../rxjs-operators';
+import { history } from '../../../test-helpers';
 
 describe('Timer Effects', () => {
   let actions: any;
@@ -32,7 +31,7 @@ describe('Timer Effects', () => {
         TimerEffects,
         provideMockActions(() => actions),
         { provide: TimerService, useClass: MockTimerService },
-        { provide: HistoryService, useClass: MockHistoryService }
+        { provide: HistoryService, useClass: history.MockHistoryService }
       ]
     });
 
@@ -57,7 +56,7 @@ describe('Timer Effects', () => {
 
       actions = hot('-a', { a: action });
       const expected = cold('-(bc)', {
-        b: new timerActions.SaveTimerInfoSucceeded(mockItem),
+        b: new timerActions.SaveTimerInfoSucceeded(history.mockItem),
         c: new timerActions.ResetTimer()
       });
 
@@ -158,19 +157,5 @@ const mockInfo: TimerInfo = {
 class MockTimerService {
   getTimerInfo(_userId: string): Observable<TimerInfo> {
     return Observable.of(mockInfo);
-  }
-}
-
-const mockItem: HistoryEntity = {
-  id: 'some id',
-  game: 'some game',
-  platform: 'some platform',
-  startTime: 3000,
-  endTime: 6000
-};
-
-class MockHistoryService {
-  saveTimerInfo(_info: AddTimerInfo): Observable<HistoryEntity> {
-    return Observable.of(mockItem);
   }
 }

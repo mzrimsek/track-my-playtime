@@ -18,7 +18,7 @@ import { AddPlayingInfo } from '../../models';
 
 import { filterPlatforms, filterStartTimes } from '../../../../shared/utils/history-filter.utils';
 
-import { user } from '../../../../test-helpers';
+import { history, user } from '../../../../test-helpers';
 
 describe('AddPlayingComponent', () => {
   let store: Store<fromRoot.State>;
@@ -63,13 +63,13 @@ describe('AddPlayingComponent', () => {
   describe('Game Value Changes', () => {
     it('Should dispatch SetGame', async(() => {
       const gameEl = fixture.nativeElement.querySelector('.game ng-select');
-      component.game = testGame;
+      component.game = history.testGame;
       fixture.detectChanges();
 
       gameEl.dispatchEvent(new Event('change'));
       fixture.detectChanges();
 
-      const action = new actions.SetGame(testGame);
+      const action = new actions.SetGame(history.testGame);
 
       expect(store.dispatch).toHaveBeenCalledWith(action);
     }));
@@ -92,8 +92,8 @@ describe('AddPlayingComponent', () => {
 
   describe('Platform Option Changes', () => {
     it('Should dispatch SetPlatform', async(() => {
-      component.game = testGame;
-      component.platforms = filterPlatforms(testGroupings, testGame);
+      component.game = history.testGame;
+      component.platforms = filterPlatforms(history.testGroupings, history.testGame);
       fixture.detectChanges();
 
       const platformEl = fixture.nativeElement.querySelector('.platform select');
@@ -111,10 +111,10 @@ describe('AddPlayingComponent', () => {
 
   describe('StartTime Option Changes', () => {
     it('Should dispatch SetStartTime', async(() => {
-      component.game = testGame;
-      component.platforms = filterPlatforms(testGroupings, testGame);
+      component.game = history.testGame;
+      component.platforms = filterPlatforms(history.testGroupings, history.testGame);
       const platform = component.platforms[1];
-      component.dates = filterStartTimes(testGroupings, testGame, platform);
+      component.dates = filterStartTimes(history.testGroupings, history.testGame, platform);
       fixture.detectChanges();
 
       const startTimeEl = fixture.nativeElement.querySelector('.startTime select');
@@ -141,7 +141,7 @@ describe('AddPlayingComponent', () => {
     describe('With Match', () => {
       it('Should dispatch Save', async(() => {
         component.info = {
-          game: testGame,
+          game: history.testGame,
           platform: 'Platform 1',
           startTime: 3000
         };
@@ -185,8 +185,8 @@ describe('AddPlayingComponent', () => {
 `
 })
 class TestWrapperComponent implements OnInit {
-  gameGroupings: HistoryGrouping[] = testGroupings;
-  games: string[] = [testGame];
+  gameGroupings: HistoryGrouping[] = history.testGroupings;
+  games: string[] = [history.testGame];
   game: string | null;
   info: AddPlayingInfo = {
     game: '',
@@ -198,34 +198,3 @@ class TestWrapperComponent implements OnInit {
 
   ngOnInit() { }
 }
-
-const testGame = 'Game 1';
-const testGroupings: HistoryGrouping[] = [{
-  key: testGame,
-  historyItems: [{
-    id: '3',
-    game: testGame,
-    platform: 'Platform 1',
-    startTime: 5000,
-    endTime: 6000,
-    dateRange: [new Date(5000), new Date(6000)],
-    locked: false
-  }, {
-    id: '2',
-    game: testGame,
-    platform: 'Platform 1',
-    startTime: 3000,
-    endTime: 4000,
-    dateRange: [new Date(3000), new Date(4000)],
-    locked: false
-  }, {
-    id: '1',
-    game: testGame,
-    platform: 'Platform 2',
-    startTime: 1000,
-    endTime: 2000,
-    dateRange: [new Date(1000), new Date(2000)],
-    locked: false
-  }],
-  totalTime: 3
-}];
