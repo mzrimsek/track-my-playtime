@@ -3,9 +3,9 @@
 .playing-item {
   border-bottom: 1px solid darken($background-light, 10%);
   padding: 10px;
+  font-size: $small-font-size;
 
   .display-element {
-    font-size: $small-font-size;
     font-family: $base-font-family;
     width: 100%;
     padding: 5px;
