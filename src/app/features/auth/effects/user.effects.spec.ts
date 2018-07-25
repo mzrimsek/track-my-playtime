@@ -229,15 +229,33 @@ describe('User Effects', () => {
     });
 
     it('Should dispatch GetUser', () => {
-      fail();
+      actions = hot('-a', { a: new userActions.SignUp('email', 'password') });
+      const expected = cold('-(b)', {
+        b: new userActions.GetUser()
+      });
+      expect(effects.signUp$).toBeObservable(expected);
     });
 
     it('Should dispatch Error on error', () => {
-      fail();
+      const message = 'Something went terribly wrong';
+      actions = hot('-a', { a: new userActions.SignUp('email', 'password') });
+
+      const expected = cold('-(b)', {
+        b: new appActions.Error(userActions.SIGNUP, message)
+      });
+
+      spyOn(authService, 'signUpWithEmail').and.callFake(() => Observable.throw({ message }));
+      expect(effects.signUp$).toBeObservable(expected);
     });
 
     it('Should call AuthService signUpWithEmail', () => {
-      fail();
+      actions = new ReplaySubject(1);
+      actions.next(new userActions.SignUp('email', 'password'));
+
+      spyOn(authService, 'signUpWithEmail').and.callThrough();
+      effects.signUp$.subscribe(() => {
+        expect(authService.signUpWithEmail).toHaveBeenCalledWith('email', 'password');
+      });
     });
   });
 
@@ -247,15 +265,33 @@ describe('User Effects', () => {
     });
 
     it('Should dispatch GetUser', () => {
-      fail();
+      actions = hot('-a', { a: new userActions.EmailLogin('email', 'password') });
+      const expected = cold('-(b)', {
+        b: new userActions.GetUser()
+      });
+      expect(effects.emailLogin$).toBeObservable(expected);
     });
 
     it('Should dispatch Error on error', () => {
-      fail();
+      const message = 'Something went terribly wrong';
+      actions = hot('-a', { a: new userActions.EmailLogin('email', 'password') });
+
+      const expected = cold('-(b)', {
+        b: new appActions.Error(userActions.EMAIL_LOGIN, message)
+      });
+
+      spyOn(authService, 'signInWithEmail').and.callFake(() => Observable.throw({ message }));
+      expect(effects.emailLogin$).toBeObservable(expected);
     });
 
     it('Should call AuthService signInWithEmail', () => {
-      fail();
+      actions = new ReplaySubject(1);
+      actions.next(new userActions.EmailLogin('email', 'password'));
+
+      spyOn(authService, 'signInWithEmail').and.callThrough();
+      effects.emailLogin$.subscribe(() => {
+        expect(authService.signInWithEmail).toHaveBeenCalledWith('email', 'password');
+      });
     });
   });
 });

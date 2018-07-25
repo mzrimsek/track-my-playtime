@@ -58,5 +58,15 @@ export namespace auth {
       this.authState = Observable.of(null);
       return Observable.of('Logged out');
     }
+
+    signUpWithEmail(): Observable<any> {
+      this.authState = Observable.of(user.mockUser);
+      return Observable.of('Signed up with Email');
+    }
+
+    signInWithEmail(): Observable<any> {
+      this.authState = Observable.of(user.mockUser);
+      return Observable.of('Signed in with Email');
+    }
   }
 }
