@@ -21,7 +21,7 @@ export const getCompletedDisplayDataItems =
           displayData.push(displayDataItem);
         }
       });
-      return displayData;
+      return displayData.sort((a, b) => b.completedItem.endTime - a.completedItem.endTime);
     });
   };
 
@@ -40,6 +40,6 @@ export const getPlayingDisplayDataItems =
           displayData.push(displayDataItem);
         }
       });
-      return displayData;
+      return displayData.sort((a, b) => a.startEntryData.startTime - b.startEntryData.endTime);
     });
   };
