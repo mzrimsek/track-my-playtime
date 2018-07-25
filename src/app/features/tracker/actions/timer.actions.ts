@@ -52,9 +52,9 @@ export class LoadTimerInfo implements Action {
   constructor(public userId: string) { }
 }
 
-export const LOAD_TIMER_INFO_SUCCEEDED = '[Timer] Load Info Succeeded';
-export class LoadTimerInfoSucceeded implements Action {
-  readonly type = LOAD_TIMER_INFO_SUCCEEDED;
+export const SET_TIMER_INFO = '[Timer] Set Timer Info';
+export class SetTimerInfo implements Action {
+  readonly type = SET_TIMER_INFO;
   constructor(public info: TimerInfo) { }
 }
 
@@ -66,4 +66,4 @@ export type All = ResetTimer |
   SaveTimerInfoSucceeded |
   CancelTimer |
   LoadTimerInfo |
-  LoadTimerInfoSucceeded;
+  SetTimerInfo;

@@ -45,6 +45,18 @@
     width: 5%;
     color: lighten($neutral-action-color, 20%);
   }
+
+  .primary-action {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 5%;
+
+    .quickstart {
+      color: $good-action-color;
+      opacity: .5;
+    }
+  }
 }
 
 @media only screen and (max-width: $small-breakpoint) {
@@ -61,6 +73,14 @@
     .time {
       width: 45%;
       font-size: calc(#{$small-font-size} - 2px);
+    }
+
+    .primary-action {
+      width: 10%;
+    }
+
+    .lock {
+      width: 10%;
     }
   }
 }

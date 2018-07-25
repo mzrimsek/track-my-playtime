@@ -1,11 +1,13 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faPlay, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Store } from '@ngrx/store';
 
 import { UserService } from '../../../auth/services/user.service';
+import { TimerService } from '../../services/timer.service';
 
-import * as actions from '../../../../shared/actions/history.actions';
+import * as historyActions from '../../../../shared/actions/history.actions';
+import * as timerActions from '../../actions/timer.actions';
 
 import { State } from '../../reducers/root.reducer';
 
@@ -13,6 +15,7 @@ import {
     HistoryListItem, UpdateHistoryItemGamePayload, UpdateHistoryItemPlatformPayload,
     UpdateHistoryItemTimesPayload
 } from '../../../../shared/models';
+import { TimerInfo } from '../../models';
 
 @Component({
   selector: 'app-tracker-history-entry',
@@ -28,9 +31,10 @@ export class HistoryEntryComponent implements OnInit {
   @Input() game: string | null = null;
   userId = '';
   icons = {
-    remove: faTrash
+    remove: faTrash,
+    quickStart: faPlay
   };
-  constructor(private store: Store<State>, private userService: UserService) { }
+  constructor(private store: Store<State>, private userService: UserService, private timerService: TimerService) { }
 
   ngOnInit() {
     this.userId = this.userService.getUser().uid;
@@ -42,7 +46,7 @@ export class HistoryEntryComponent implements OnInit {
         itemId: this.item.id,
         game: this.game
       };
-      this.store.dispatch(new actions.UpdateGame(this.userId, payload));
+      this.store.dispatch(new historyActions.UpdateGame(this.userId, payload));
     }
   }
 
@@ -51,11 +55,21 @@ export class HistoryEntryComponent implements OnInit {
       itemId: this.item.id,
       platform: platformEl.value
     };
-    this.store.dispatch(new actions.UpdatePlatform(this.userId, payload));
+    this.store.dispatch(new historyActions.UpdatePlatform(this.userId, payload));
+  }
+
+  quickStart() {
+    const timerInfo: TimerInfo = {
+      game: this.item.game,
+      platform: this.item.platform,
+      startTime: this.timerService.getNowTime()
+    };
+    this.store.dispatch(new timerActions.SetTimerInfo(timerInfo));
+    this.timerService.setTimer(this.userId, timerInfo);
   }
 
   remove() {
-    this.store.dispatch(new actions.RemoveHistoryItem(this.userId, this.item.id));
+    this.store.dispatch(new historyActions.RemoveHistoryItem(this.userId, this.item.id));
   }
 
   updateElapsedTime(elapsedTimeEl: HTMLInputElement) {
@@ -69,7 +83,7 @@ export class HistoryEntryComponent implements OnInit {
         startTime,
         endTime
       };
-      this.store.dispatch(new actions.UpdateElapsedTime(this.userId, payload));
+      this.store.dispatch(new historyActions.UpdateElapsedTime(this.userId, payload));
     }
   }
 

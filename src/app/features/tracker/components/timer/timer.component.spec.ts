@@ -104,7 +104,7 @@ describe('TimerComponent', () => {
 
       beforeEach(async(() => {
         startButton = fixture.nativeElement.querySelector('.primary-action .start');
-        spyOn(component, 'getNowTime').and.returnValue(start.getTime());
+        tracker.timerServiceStub.getNowTime.and.returnValue(start.getTime());
       }));
 
       it('Should dispatch SetStartTime', async(() => {
@@ -252,7 +252,7 @@ describe('TimerComponent', () => {
 
       beforeEach(async(() => {
         stopButton = fixture.nativeElement.querySelector('.primary-action .stop');
-        spyOn(component, 'getNowTime').and.returnValue(end.getTime());
+        tracker.timerServiceStub.getNowTime.and.returnValue(end.getTime());
       }));
 
       it('Should dispatch SaveTimerInfo', async(() => {

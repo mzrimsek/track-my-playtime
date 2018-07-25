@@ -1,8 +1,17 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 
-import { faLock } from '@fortawesome/free-solid-svg-icons';
+import { faLock, faPlay } from '@fortawesome/free-solid-svg-icons';
+import { Store } from '@ngrx/store';
+
+import { UserService } from '../../../auth/services/user.service';
+import { TimerService } from '../../services/timer.service';
+
+import * as timerActions from '../../actions/timer.actions';
+
+import { State } from '../../reducers/root.reducer';
 
 import { HistoryListItem } from '../../../../shared/models';
+import { TimerInfo } from '../../models';
 
 @Component({
   selector: 'app-tracker-locked-history-entry',
@@ -13,10 +22,24 @@ import { HistoryListItem } from '../../../../shared/models';
 export class LockedHistoryEntryComponent implements OnInit {
 
   @Input() item: HistoryListItem;
+  userId = '';
   icons = {
-    lock: faLock
+    lock: faLock,
+    quickStart: faPlay
   };
-  constructor() { }
+  constructor(private store: Store<State>, private userService: UserService, private timerService: TimerService) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.userId = this.userService.getUser().uid;
+  }
+
+  quickStart() {
+    const timerInfo: TimerInfo = {
+      game: this.item.game,
+      platform: this.item.platform,
+      startTime: this.timerService.getNowTime()
+    };
+    this.store.dispatch(new timerActions.SetTimerInfo(timerInfo));
+    this.timerService.setTimer(this.userId, timerInfo);
+  }
 }

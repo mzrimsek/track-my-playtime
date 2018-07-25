@@ -127,14 +127,14 @@ describe('Timer Actions', () => {
     });
   });
 
-  describe('LoadTimerInfoSucceeded', () => {
+  describe('SetTimerInfo', () => {
     it('Should have correct type', () => {
-      const action = new actions.LoadTimerInfoSucceeded({
+      const action = new actions.SetTimerInfo({
         game: '',
         platform: '',
         startTime: 0
       });
-      expect(action.type).toBe(actions.LOAD_TIMER_INFO_SUCCEEDED);
+      expect(action.type).toBe(actions.SET_TIMER_INFO);
     });
 
     it('Should have correct info', () => {
@@ -143,7 +143,7 @@ describe('Timer Actions', () => {
         platform: 'some platform',
         startTime: 3000
       };
-      const action = new actions.LoadTimerInfoSucceeded(info);
+      const action = new actions.SetTimerInfo(info);
 
       expect(action.info).toEqual(info);
     });
