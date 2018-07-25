@@ -1,11 +1,13 @@
 import { addDays, eachDay, subDays } from 'date-fns';
 
-import { HistoryGrouping, HistoryListItem } from '../models';
+import { HistoryListItem } from '../models';
 
 import {
     filterGroupingsByDateRange, getElapsedTimeFrom, getFilteredGrouping, getHistoryGroupingList,
     getHistoryListItemMap, getHistoryListItemsMap, HistoryListItemMap
 } from './history.utils';
+
+import { history } from '../../test-helpers';
 
 describe('History Utils', () => {
   describe('getHistoryListItemsMap', () => {
@@ -18,9 +20,9 @@ describe('History Utils', () => {
     it('Can map a list of items with same key', () => {
       const game = 'Awesome Game';
       const items = [
-        getHistoryListItem(game, ''),
-        getHistoryListItem(game, ''),
-        getHistoryListItem(game, '')
+        history.getHistoryListItem(game, ''),
+        history.getHistoryListItem(game, ''),
+        history.getHistoryListItem(game, '')
       ];
 
       const result = getHistoryListItemsMap(items, item => item.game);
@@ -35,9 +37,9 @@ describe('History Utils', () => {
       const game1 = 'Awesome Game';
       const game2 = game1 + '2';
       const items = [
-        getHistoryListItem(game1, ''),
-        getHistoryListItem(game1, ''),
-        getHistoryListItem(game2, '')
+        history.getHistoryListItem(game1, ''),
+        history.getHistoryListItem(game1, ''),
+        history.getHistoryListItem(game2, '')
       ];
 
       const result = getHistoryListItemsMap(items, item => item.game);
@@ -65,8 +67,8 @@ describe('History Utils', () => {
     it('Should return a list with same length as the map size', () => {
       const game = 'Awesome Game';
       const items = [
-        getHistoryListItem(game, ''),
-        getHistoryListItem(game + '2', '')
+        history.getHistoryListItem(game, ''),
+        history.getHistoryListItem(game + '2', '')
       ];
       const map = getHistoryListItemsMap(items, item => item.game);
 
@@ -79,7 +81,7 @@ describe('History Utils', () => {
       it('Should set the key', () => {
         const game = 'Awesome Game';
         const items = [
-          getHistoryListItem(game, '')
+          history.getHistoryListItem(game, '')
         ];
         const map = getHistoryListItemsMap(items, item => item.game);
 
@@ -92,8 +94,8 @@ describe('History Utils', () => {
         const game = 'Awesome Game';
         const now = new Date().getTime();
         const items = [
-          getHistoryListItem(game, '', now, now + (30 * 1000)),
-          getHistoryListItem(game, '', now, now + (60 * 1000))
+          history.getHistoryListItem(game, '', now, now + (30 * 1000)),
+          history.getHistoryListItem(game, '', now, now + (60 * 1000))
         ];
         const map = getHistoryListItemsMap(items, item => item.game);
 
@@ -105,8 +107,8 @@ describe('History Utils', () => {
       it('Should set the history items', () => {
         const game = 'Awesome Game';
         const items = [
-          getHistoryListItem(game, ''),
-          getHistoryListItem(game, '')
+          history.getHistoryListItem(game, ''),
+          history.getHistoryListItem(game, '')
         ];
         const map = getHistoryListItemsMap(items, item => item.game);
 
@@ -127,18 +129,18 @@ describe('History Utils', () => {
     const game = 'some game';
 
     it('Should filter history items outside of date range', () => {
-      const grouping = getHistoryGrouping(game, 0);
+      const grouping = history.getHistoryGrouping(game, 0);
       grouping.historyItems = [{
-        ...getHistoryListItem(game, 'some platform', outOfRangeAhead.getTime(), outOfRangeAhead.getTime()),
+        ...history.getHistoryListItem(game, 'some platform', outOfRangeAhead.getTime(), outOfRangeAhead.getTime()),
         id: 'some id 4'
       }, {
-        ...getHistoryListItem(game, 'some platform', inRange.getTime(), inRange.getTime()),
+        ...history.getHistoryListItem(game, 'some platform', inRange.getTime(), inRange.getTime()),
         id: 'some id 3'
       }, {
-        ...getHistoryListItem(game, 'some platform', start.getTime(), start.getTime()),
+        ...history.getHistoryListItem(game, 'some platform', start.getTime(), start.getTime()),
         id: 'some id 2'
       }, {
-        ...getHistoryListItem(game, 'some platform', outOfRangeBehind.getTime(), outOfRangeBehind.getTime()),
+        ...history.getHistoryListItem(game, 'some platform', outOfRangeBehind.getTime(), outOfRangeBehind.getTime()),
         id: 'some id'
       }];
 
@@ -184,33 +186,33 @@ describe('History Utils', () => {
     const game = 'some game';
 
     it('Should filter history items outside of date range', () => {
-      const grouping1 = getHistoryGrouping(game, 0);
+      const grouping1 = history.getHistoryGrouping(game, 0);
       grouping1.historyItems = [{
-        ...getHistoryListItem(game, 'some platform', outOfRangeAhead.getTime(), outOfRangeAhead.getTime()),
+        ...history.getHistoryListItem(game, 'some platform', outOfRangeAhead.getTime(), outOfRangeAhead.getTime()),
         id: 'some id 4'
       }, {
-        ...getHistoryListItem(game, 'some platform', inRange.getTime(), inRange.getTime()),
+        ...history.getHistoryListItem(game, 'some platform', inRange.getTime(), inRange.getTime()),
         id: 'some id 3'
       }, {
-        ...getHistoryListItem(game, 'some platform', start.getTime(), start.getTime()),
+        ...history.getHistoryListItem(game, 'some platform', start.getTime(), start.getTime()),
         id: 'some id 2'
       }, {
-        ...getHistoryListItem(game, 'some platform', outOfRangeBehind.getTime(), outOfRangeBehind.getTime()),
+        ...history.getHistoryListItem(game, 'some platform', outOfRangeBehind.getTime(), outOfRangeBehind.getTime()),
         id: 'some id'
       }];
 
-      const grouping2 = getHistoryGrouping(game, 0);
+      const grouping2 = history.getHistoryGrouping(game, 0);
       grouping2.historyItems = [{
-        ...getHistoryListItem(game, 'some platform', inRange.getTime() + 1000, inRange.getTime() + 1000),
+        ...history.getHistoryListItem(game, 'some platform', inRange.getTime() + 1000, inRange.getTime() + 1000),
         id: 'some id 8'
       }, {
-        ...getHistoryListItem(game, 'some platform', inRange.getTime(), inRange.getTime()),
+        ...history.getHistoryListItem(game, 'some platform', inRange.getTime(), inRange.getTime()),
         id: 'some id 7'
       }, {
-        ...getHistoryListItem(game, 'some platform', start.getTime(), start.getTime()),
+        ...history.getHistoryListItem(game, 'some platform', start.getTime(), start.getTime()),
         id: 'some id 6'
       }, {
-        ...getHistoryListItem(game, 'some platform', outOfRangeBehind.getTime(), outOfRangeBehind.getTime()),
+        ...history.getHistoryListItem(game, 'some platform', outOfRangeBehind.getTime(), outOfRangeBehind.getTime()),
         id: 'some id 5'
       }];
 
@@ -283,18 +285,18 @@ describe('History Utils', () => {
     });
 
     it('Should update total time', () => {
-      const grouping = getHistoryGrouping(game, 7000);
+      const grouping = history.getHistoryGrouping(game, 7000);
       grouping.historyItems = [{
-        ...getHistoryListItem(game, 'some platform', outOfRangeAhead.getTime(), outOfRangeAhead.getTime() + 2000),
+        ...history.getHistoryListItem(game, 'some platform', outOfRangeAhead.getTime(), outOfRangeAhead.getTime() + 2000),
         id: 'some id 4'
       }, {
-        ...getHistoryListItem(game, 'some platform', inRange.getTime(), inRange.getTime() + 1000),
+        ...history.getHistoryListItem(game, 'some platform', inRange.getTime(), inRange.getTime() + 1000),
         id: 'some id 3'
       }, {
-        ...getHistoryListItem(game, 'some platform', start.getTime(), start.getTime() + 1000),
+        ...history.getHistoryListItem(game, 'some platform', start.getTime(), start.getTime() + 1000),
         id: 'some id 2'
       }, {
-        ...getHistoryListItem(game, 'some platform', outOfRangeBehind.getTime(), outOfRangeBehind.getTime() + 3000),
+        ...history.getHistoryListItem(game, 'some platform', outOfRangeBehind.getTime(), outOfRangeBehind.getTime() + 3000),
         id: 'some id'
       }];
 
@@ -367,9 +369,18 @@ describe('History Utils', () => {
 
     it('Should return correct map when there are groupings', () => {
       const expected: HistoryListItemMap = new Map<string, HistoryListItem>();
+      expected.set('4', {
+        id: '4',
+        game: history.testGame,
+        platform: 'Platform 1',
+        startTime: 8000,
+        endTime: 9000,
+        dateRange: [new Date(8000), new Date(9000)],
+        locked: false
+      });
       expected.set('3', {
         id: '3',
-        game: testGame,
+        game: history.testGame,
         platform: 'Platform 1',
         startTime: 5000,
         endTime: 6000,
@@ -378,7 +389,7 @@ describe('History Utils', () => {
       });
       expected.set('2', {
         id: '2',
-        game: testGame,
+        game: history.testGame,
         platform: 'Platform 1',
         startTime: 3000,
         endTime: 4000,
@@ -387,67 +398,15 @@ describe('History Utils', () => {
       });
       expected.set('1', {
         id: '1',
-        game: testGame,
+        game: history.testGame,
         platform: 'Platform 2',
         startTime: 1000,
         endTime: 2000,
         dateRange: [new Date(1000), new Date(2000)],
         locked: false
       });
-      const result = getHistoryListItemMap(testGroupings);
+      const result = getHistoryListItemMap(history.testGroupings);
       expect(result).toEqual(expected);
     });
   });
 });
-
-const getHistoryListItem = (game: string, platform: string, startTime = 0, endTime = 0): HistoryListItem => {
-  return <HistoryListItem>{
-    id: 'totally a unique id',
-    game,
-    platform,
-    startTime,
-    endTime,
-    dateRange: [new Date(startTime), new Date(endTime)],
-    locked: false
-  };
-};
-
-const getHistoryGrouping = (key: string, totalTime: number): HistoryGrouping => {
-  return {
-    key,
-    totalTime,
-    historyItems: []
-  };
-};
-
-const testGame = 'Game 1';
-
-const testGroupings: HistoryGrouping[] = [{
-  key: testGame,
-  historyItems: [{
-    id: '3',
-    game: testGame,
-    platform: 'Platform 1',
-    startTime: 5000,
-    endTime: 6000,
-    dateRange: [new Date(5000), new Date(6000)],
-    locked: false
-  }, {
-    id: '2',
-    game: testGame,
-    platform: 'Platform 1',
-    startTime: 3000,
-    endTime: 4000,
-    dateRange: [new Date(3000), new Date(4000)],
-    locked: false
-  }, {
-    id: '1',
-    game: testGame,
-    platform: 'Platform 2',
-    startTime: 1000,
-    endTime: 2000,
-    dateRange: [new Date(1000), new Date(2000)],
-    locked: false
-  }],
-  totalTime: 3
-}];

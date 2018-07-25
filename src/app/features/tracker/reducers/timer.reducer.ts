@@ -28,7 +28,7 @@ export function reducer(state: State = initialState, action: actions.All): State
     case actions.SET_START_TIME: {
       return tassign(state, { startTime: action.startTime });
     }
-    case actions.LOAD_TIMER_INFO_SUCCEEDED: {
+    case actions.SET_TIMER_INFO: {
       return tassign(state, action.info);
     }
     default: {

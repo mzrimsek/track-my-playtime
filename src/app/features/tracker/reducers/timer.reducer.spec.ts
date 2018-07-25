@@ -79,7 +79,7 @@ describe('Timer Reducer', () => {
       startTime: 30000
     };
 
-    const newState = reducer(initialState, new actions.LoadTimerInfoSucceeded(timerInfo));
+    const newState = reducer(initialState, new actions.SetTimerInfo(timerInfo));
 
     expect(newState).toEqual(timerInfo);
   });

@@ -14,6 +14,8 @@ import * as progressActions from '../../../../shared/actions/progress.actions';
 import * as fromRoot from '../../../../reducers/root.reducer';
 import * as fromCompletion from '../../reducers/root.reducer';
 
+import { user } from '../../../../test-helpers';
+
 describe('CompletedItemComponent', () => {
   let store: Store<fromRoot.State>;
   let component: CompletedItemComponent;
@@ -32,7 +34,7 @@ describe('CompletedItemComponent', () => {
           'completion': combineReducers(fromCompletion.reducers)
         })
       ],
-      providers: [{ provide: UserService, useValue: userServiceStub }],
+      providers: [{ provide: UserService, useValue: user.userServiceStub }],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
     userService = TestBed.get(UserService);
@@ -70,16 +72,6 @@ describe('CompletedItemComponent', () => {
   it('Should dispatch RemoveProgressItem when remove button is clicked', async(() => {
     const removeButton = fixture.nativeElement.querySelector('button');
     removeButton.click();
-    expect(store.dispatch).toHaveBeenCalledWith(new progressActions.RemoveProgressItem(testUserId, '1'));
+    expect(store.dispatch).toHaveBeenCalledWith(new progressActions.RemoveProgressItem(user.mockUser.uid, '1'));
   }));
 });
-
-const testUserId = 'some id';
-const userServiceStub = {
-  getUser: jasmine.createSpy('getUser').and.returnValue({
-    uid: testUserId,
-    displayName: 'Jim Bob',
-    email: 'jimbob@jimbob.com',
-    photoURL: 'jimbob.com/jimbob.png'
-  })
-};

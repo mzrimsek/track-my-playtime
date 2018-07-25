@@ -38,6 +38,6 @@ export class TimerEffects {
       .map(action => action as timerActions.LoadTimerInfo)
       .map(action => action.userId)
       .switchMap(userId => this.timerService.getTimerInfo(userId)
-        .map(data => new timerActions.LoadTimerInfoSucceeded(data))
+        .map(data => new timerActions.SetTimerInfo(data))
         .catch(err => Observable.of(new appActions.Error(timerActions.LOAD_TIMER_INFO, err.message))));
 }

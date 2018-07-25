@@ -1,8 +1,10 @@
 import * as actions from '../actions/progress.actions';
 
-import { ProgressEntity, reducer, State } from './progress.reducer';
+import { reducer, State } from './progress.reducer';
 
 import { MarkCompletePayload } from '../models';
+
+import { progress } from '../../test-helpers';
 
 describe('Progress Reducer', () => {
   it('Should add an item when AddNewProgressItem is dispatched', () => {
@@ -11,7 +13,7 @@ describe('Progress Reducer', () => {
       entities: {},
       loading: false
     };
-    const item = getProgressEntity('1');
+    const item = progress.getProgressEntity('1');
 
     const newState = reducer(initialState, new actions.AddNewProgressItem(item));
 
@@ -43,8 +45,8 @@ describe('Progress Reducer', () => {
       entities: {},
       loading: false
     };
-    const item1 = getProgressEntity('1');
-    const item2 = getProgressEntity('2', 'some end entry id');
+    const item1 = progress.getProgressEntity('1');
+    const item2 = progress.getProgressEntity('2', 'some end entry id');
 
     const newState = reducer(initialState, new actions.LoadProgressItemsSucceeded([item1, item2]));
 
@@ -59,8 +61,8 @@ describe('Progress Reducer', () => {
   });
 
   it('Should remove correct item when RemoveProgressItemSucceeded is dispatched', () => {
-    const item1 = getProgressEntity('1');
-    const item2 = getProgressEntity('2', 'some end entry id');
+    const item1 = progress.getProgressEntity('1');
+    const item2 = progress.getProgressEntity('2', 'some end entry id');
     const initialState: State = {
       ids: [item1.id, item2.id],
       entities: {
@@ -82,8 +84,8 @@ describe('Progress Reducer', () => {
   });
 
   it('Should remove all items when ClearProgressItems is dispatched', () => {
-    const item1 = getProgressEntity('1');
-    const item2 = getProgressEntity('2', 'some end entry id');
+    const item1 = progress.getProgressEntity('1');
+    const item2 = progress.getProgressEntity('2', 'some end entry id');
     const initialState: State = {
       ids: [item1.id, item2.id],
       entities: {
@@ -112,8 +114,8 @@ describe('Progress Reducer', () => {
   });
 
   it('Should update correct item endEntryId when MarkCompleteSuccessful is dispatched ', () => {
-    const item1 = getProgressEntity('1');
-    const item2 = getProgressEntity('2', 'some end entry id');
+    const item1 = progress.getProgressEntity('1');
+    const item2 = progress.getProgressEntity('2', 'some end entry id');
     const initialState: State = {
       ids: [item1.id, item2.id],
       entities: {
@@ -130,11 +132,3 @@ describe('Progress Reducer', () => {
     });
   });
 });
-
-const getProgressEntity = (id: string, endEntryId = ''): ProgressEntity => {
-  return {
-    id,
-    startEntryId: 'start entry id',
-    endEntryId
-  };
-};

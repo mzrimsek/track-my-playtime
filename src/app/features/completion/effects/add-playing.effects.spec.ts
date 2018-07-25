@@ -13,9 +13,7 @@ import { ProgressService } from '../services/progress.service';
 import * as appActions from '../../../actions/app.actions';
 import * as addPlayingActions from '../actions/add-playing.actions';
 
-import { ProgressEntity } from '../../../shared/reducers/progress.reducer';
-
-import { AddPlaying } from '../models';
+import { progress } from '../../../test-helpers';
 
 describe('Add Playing Effects', () => {
   let actions: any;
@@ -27,7 +25,7 @@ describe('Add Playing Effects', () => {
       providers: [
         AddPlayingEffects,
         provideMockActions(() => actions),
-        { provide: ProgressService, useClass: MockProgressService }
+        { provide: ProgressService, useClass: progress.MockProgressService }
       ]
     });
 
@@ -48,7 +46,7 @@ describe('Add Playing Effects', () => {
 
       actions = hot('-a', { a: action });
       const expected = cold('-(bc)', {
-        b: new addPlayingActions.SaveSucceeded(mockItem),
+        b: new addPlayingActions.SaveSucceeded(progress.mockItem),
         c: new addPlayingActions.Reset()
       });
 
@@ -87,15 +85,3 @@ describe('Add Playing Effects', () => {
     });
   });
 });
-
-const mockItem: ProgressEntity = {
-  id: 'some id',
-  startEntryId: 'some start id',
-  endEntryId: 'some end id'
-};
-
-class MockProgressService {
-  saveAddPlaying(_addPlaying: AddPlaying): Observable<ProgressEntity> {
-    return Observable.of(mockItem);
-  }
-}

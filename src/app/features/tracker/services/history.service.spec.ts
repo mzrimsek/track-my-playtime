@@ -1,7 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
 import { AngularFirestore } from 'angularfire2/firestore';
-import { Observable } from 'rxjs/Observable';
 
 import { FirestoreHistoryItem, HistoryService } from './history.service';
 
@@ -9,6 +8,8 @@ import {
     UpdateHistoryItemGamePayload, UpdateHistoryItemPlatformPayload, UpdateHistoryItemTimesPayload
 } from '../../../shared/models';
 import { AddTimerInfo } from '../models';
+
+import { history } from '../../../test-helpers';
 
 describe('History Service', () => {
   let service: HistoryService;
@@ -18,7 +19,7 @@ describe('History Service', () => {
     TestBed.configureTestingModule({
       providers: [
         HistoryService,
-        { provide: AngularFirestore, useValue: angularFirestoreStub }
+        { provide: AngularFirestore, useValue: history.firestore.angularFirestoreStub }
       ]
     });
 
@@ -36,20 +37,20 @@ describe('History Service', () => {
 
   describe('getHistoryList', () => {
     afterEach(() => {
-      while (testHistoryItems.length > 0) {
-        testHistoryItems.pop();
+      while (history.firestore.testHistoryItems.length > 0) {
+        history.firestore.testHistoryItems.pop();
       }
     });
 
     it('Should call history collection doc with user id', () => {
       const userId = 'user id';
       service.getHistoryList(userId);
-      expect(historyCollectionStub.doc).toHaveBeenCalledWith(userId);
+      expect(history.firestore.collectionStub.doc).toHaveBeenCalledWith(userId);
     });
 
     it('Should call history document collection with "items"', () => {
       service.getHistoryList('');
-      expect(historyDocumentStub.collection).toHaveBeenCalledWith('items');
+      expect(history.firestore.documentStub.collection).toHaveBeenCalledWith('items');
     });
 
     it('Should return empty list when no data', () => {
@@ -60,7 +61,7 @@ describe('History Service', () => {
     });
 
     it('Should return correct data', () => {
-      testHistoryItems.push({
+      history.firestore.testHistoryItems.push({
         id: '1',
         game: 'some game',
         platform: 'some platform',
@@ -115,24 +116,24 @@ describe('History Service', () => {
 
     it('Should call history collection doc with item user id', () => {
       service.saveTimerInfo(info);
-      expect(historyCollectionStub.doc).toHaveBeenCalledWith(info.userId);
+      expect(history.firestore.collectionStub.doc).toHaveBeenCalledWith(info.userId);
     });
 
     it('Should call history document collection with "items"', () => {
       service.saveTimerInfo(info);
-      expect(historyDocumentStub.collection).toHaveBeenCalledWith('items');
+      expect(history.firestore.documentStub.collection).toHaveBeenCalledWith('items');
     });
 
     it('Should call item collection doc with item id', () => {
       spyOn(service, 'getNewHistoryItem').and.callFake(() => newItem);
       service.saveTimerInfo(info);
-      expect(itemsCollectionStub.doc).toHaveBeenCalledWith(newItem.id);
+      expect(history.firestore.itemsCollectionStub.doc).toHaveBeenCalledWith(newItem.id);
     });
 
     it('Should call item collection doc set with correct info', () => {
       spyOn(service, 'getNewHistoryItem').and.callFake(() => newItem);
       service.saveTimerInfo(info);
-      expect(itemDocumentStub.set).toHaveBeenCalledWith(newItem);
+      expect(history.firestore.itemDocumentStub.set).toHaveBeenCalledWith(newItem);
     });
 
     it('Should return correct data', () => {
@@ -154,23 +155,23 @@ describe('History Service', () => {
     it('Should call history collection doc with user id', () => {
       const userId = 'user id';
       service.deleteHistoryItem(userId, '');
-      expect(historyCollectionStub.doc).toHaveBeenCalledWith(userId);
+      expect(history.firestore.collectionStub.doc).toHaveBeenCalledWith(userId);
     });
 
     it('Should call history document collection with "items"', () => {
       service.deleteHistoryItem('', '');
-      expect(historyDocumentStub.collection).toHaveBeenCalledWith('items');
+      expect(history.firestore.documentStub.collection).toHaveBeenCalledWith('items');
     });
 
     it('Should call item collection doc with item id', () => {
       const itemId = 'some item id';
       service.deleteHistoryItem('', itemId);
-      expect(itemsCollectionStub.doc).toHaveBeenCalledWith(itemId);
+      expect(history.firestore.itemsCollectionStub.doc).toHaveBeenCalledWith(itemId);
     });
 
     it('Should call item document delete', () => {
       service.deleteHistoryItem('', '');
-      expect(itemDocumentStub.delete).toHaveBeenCalled();
+      expect(history.firestore.itemDocumentStub.delete).toHaveBeenCalled();
     });
 
     it('Should return correct data', () => {
@@ -191,22 +192,22 @@ describe('History Service', () => {
     it('Should call history collection doc with user id', () => {
       const userId = 'user id';
       service.updateGame(userId, payload);
-      expect(historyCollectionStub.doc).toHaveBeenCalledWith(userId);
+      expect(history.firestore.collectionStub.doc).toHaveBeenCalledWith(userId);
     });
 
     it('Should call history document collection with "items"', () => {
       service.updateGame('', payload);
-      expect(historyDocumentStub.collection).toHaveBeenCalledWith('items');
+      expect(history.firestore.documentStub.collection).toHaveBeenCalledWith('items');
     });
 
     it('Should call item collection doc with payload item id', () => {
       service.updateGame('', payload);
-      expect(itemsCollectionStub.doc).toHaveBeenCalledWith(payload.itemId);
+      expect(history.firestore.itemsCollectionStub.doc).toHaveBeenCalledWith(payload.itemId);
     });
 
     it('Should call item document update with correct game', () => {
       service.updateGame('', payload);
-      expect(itemDocumentStub.update).toHaveBeenCalledWith({ game: payload.game });
+      expect(history.firestore.itemDocumentStub.update).toHaveBeenCalledWith({ game: payload.game });
     });
 
     it('Should return correct data', () => {
@@ -226,22 +227,22 @@ describe('History Service', () => {
     it('Should call history collection doc with user id', () => {
       const userId = 'user id';
       service.updatePlatform(userId, payload);
-      expect(historyCollectionStub.doc).toHaveBeenCalledWith(userId);
+      expect(history.firestore.collectionStub.doc).toHaveBeenCalledWith(userId);
     });
 
     it('Should call history document collection with "items"', () => {
       service.updatePlatform('', payload);
-      expect(historyDocumentStub.collection).toHaveBeenCalledWith('items');
+      expect(history.firestore.documentStub.collection).toHaveBeenCalledWith('items');
     });
 
     it('Should call item collection doc with payload item id', () => {
       service.updatePlatform('', payload);
-      expect(itemsCollectionStub.doc).toHaveBeenCalledWith(payload.itemId);
+      expect(history.firestore.itemsCollectionStub.doc).toHaveBeenCalledWith(payload.itemId);
     });
 
     it('Should call item document update with correct platform', () => {
       service.updatePlatform('', payload);
-      expect(itemDocumentStub.update).toHaveBeenCalledWith({ platform: payload.platform });
+      expect(history.firestore.itemDocumentStub.update).toHaveBeenCalledWith({ platform: payload.platform });
     });
 
     it('Should return correct data', () => {
@@ -262,22 +263,22 @@ describe('History Service', () => {
     it('Should call history collection doc with user id', () => {
       const userId = 'user id';
       service.updateElapsedTime(userId, payload);
-      expect(historyCollectionStub.doc).toHaveBeenCalledWith(userId);
+      expect(history.firestore.collectionStub.doc).toHaveBeenCalledWith(userId);
     });
 
     it('Should call history document collection with "items"', () => {
       service.updateElapsedTime('', payload);
-      expect(historyDocumentStub.collection).toHaveBeenCalledWith('items');
+      expect(history.firestore.documentStub.collection).toHaveBeenCalledWith('items');
     });
 
     it('Should call item collection doc with payload item id', () => {
       service.updateElapsedTime('', payload);
-      expect(itemsCollectionStub.doc).toHaveBeenCalledWith(payload.itemId);
+      expect(history.firestore.itemsCollectionStub.doc).toHaveBeenCalledWith(payload.itemId);
     });
 
     it('Should call item document update with correct startTime and endTime', () => {
       service.updateElapsedTime('', payload);
-      expect(itemDocumentStub.update).toHaveBeenCalledWith({
+      expect(history.firestore.itemDocumentStub.update).toHaveBeenCalledWith({
         startTime: payload.startTime,
         endTime: payload.endTime
       });
@@ -291,28 +292,3 @@ describe('History Service', () => {
     });
   });
 });
-
-const testHistoryItems: FirestoreHistoryItem[] = [];
-
-const itemDocumentStub = {
-  set: jasmine.createSpy('set'),
-  update: jasmine.createSpy('update'),
-  delete: jasmine.createSpy('delete')
-};
-
-const itemsCollectionStub = {
-  doc: jasmine.createSpy('doc').and.returnValue(itemDocumentStub),
-  valueChanges: jasmine.createSpy('valueChanges').and.returnValue(Observable.of(testHistoryItems))
-};
-
-const historyDocumentStub = {
-  collection: jasmine.createSpy('collection').and.returnValue(itemsCollectionStub)
-};
-
-const historyCollectionStub = {
-  doc: jasmine.createSpy('doc').and.returnValue(historyDocumentStub)
-};
-
-const angularFirestoreStub = {
-  collection: jasmine.createSpy('collection').and.returnValue(historyCollectionStub)
-};

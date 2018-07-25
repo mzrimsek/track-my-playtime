@@ -8,10 +8,12 @@ import { addMinutes } from 'date-fns';
 import { HistoryEntryComponent } from './history-entry.component';
 
 import { UserService } from '../../../auth/services/user.service';
+import { TimerService } from '../../services/timer.service';
 
 import { ElapsedTimePipe } from '../../../../shared/pipes/elapsed-time.pipe';
 
-import * as actions from '../../../../shared/actions/history.actions';
+import * as historyActions from '../../../../shared/actions/history.actions';
+import * as timerActions from '../../actions/timer.actions';
 
 import * as fromRoot from '../../../../reducers/root.reducer';
 import * as fromTracker from '../../reducers/root.reducer';
@@ -20,12 +22,16 @@ import {
     HistoryListItem, UpdateHistoryItemGamePayload, UpdateHistoryItemPlatformPayload,
     UpdateHistoryItemTimesPayload
 } from '../../../../shared/models';
+import { TimerInfo } from '../../models';
+
+import { platforms, tracker, user } from '../../../../test-helpers';
 
 describe('HistoryEntryComponent', () => {
   let store: Store<fromRoot.State>;
   let userService: UserService;
   let component: HistoryEntryComponent;
   let fixture: ComponentFixture<HistoryEntryComponent>;
+  let timerService: TimerService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -39,19 +45,23 @@ describe('HistoryEntryComponent', () => {
           'tracker': combineReducers(fromTracker.reducers)
         })
       ],
-      providers: [{ provide: UserService, useValue: userServiceStub }],
+      providers: [
+        { provide: UserService, useValue: user.userServiceStub },
+        { provide: TimerService, useValue: tracker.timerServiceStub }
+      ],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
 
     store = TestBed.get(Store);
     userService = TestBed.get(UserService);
+    timerService = TestBed.get(TimerService);
 
     spyOn(store, 'dispatch').and.callThrough();
 
     fixture = TestBed.createComponent(HistoryEntryComponent);
     component = fixture.componentInstance;
     component.item = testItem;
-    component.platformsOptions = testPlatforms;
+    component.platformsOptions = platforms.testPlatforms;
     fixture.detectChanges();
   }));
 
@@ -69,7 +79,7 @@ describe('HistoryEntryComponent', () => {
       itemId: testItem.id,
       game
     };
-    const action = new actions.UpdateGame(testUserId, payload);
+    const action = new historyActions.UpdateGame(user.mockUser.uid, payload);
     const gameEl = fixture.nativeElement.querySelector('.game ng-select');
 
     component.game = game;
@@ -82,9 +92,9 @@ describe('HistoryEntryComponent', () => {
   it('Should dispatch UpdatePlatform when platform option changes', async(() => {
     const payload: UpdateHistoryItemPlatformPayload = {
       itemId: testItem.id,
-      platform: testPlatforms[0]
+      platform: platforms.testPlatforms[0]
     };
-    const action = new actions.UpdatePlatform(testUserId, payload);
+    const action = new historyActions.UpdatePlatform(user.mockUser.uid, payload);
     const platformEl = fixture.nativeElement.querySelector('.platform select');
 
     platformEl.selectedIndex = 1;
@@ -100,7 +110,7 @@ describe('HistoryEntryComponent', () => {
       startTime: 3000,
       endTime: 6000
     };
-    const action = new actions.UpdateElapsedTime(testUserId, payload);
+    const action = new historyActions.UpdateElapsedTime(user.mockUser.uid, payload);
     const dateTimeEl = fixture.nativeElement.querySelector('.date-time-picker input');
 
     dateTimeEl.value = new Date(payload.startTime) + '~' + new Date(payload.endTime);
@@ -111,7 +121,7 @@ describe('HistoryEntryComponent', () => {
   }));
 
   it('Should dispatch RemoveHistoryItem when remove button is clicked', async(() => {
-    const action = new actions.RemoveHistoryItem(testUserId, testItem.id);
+    const action = new historyActions.RemoveHistoryItem(user.mockUser.uid, testItem.id);
     const removeButtonEl = fixture.nativeElement.querySelector('.remove');
 
     removeButtonEl.click();
@@ -127,17 +137,27 @@ describe('HistoryEntryComponent', () => {
 
     expect(component.openDateTimePicker).toHaveBeenCalled();
   }));
-});
 
-const testUserId = 'some id';
-const userServiceStub = {
-  getUser: jasmine.createSpy('getUser').and.returnValue({
-    uid: testUserId,
-    displayName: 'Jim Bob',
-    email: 'jimbob@jimbob.com',
-    photoURL: 'jimbob.com/jimbob.png'
-  })
-};
+  describe('Quickstart Button Clicked', () => {
+    let quickstartButton: any;
+
+    beforeEach(async(() => {
+      quickstartButton = fixture.nativeElement.querySelector('.primary-action .quickstart');
+      tracker.timerServiceStub.getNowTime.and.returnValue(start.getTime());
+    }));
+
+    it('Should dispatch SetTimerInfo with correct info', async(() => {
+      const action = new timerActions.SetTimerInfo(timerInfo);
+      quickstartButton.click();
+      expect(store.dispatch).toHaveBeenCalledWith(action);
+    }));
+
+    it('Should call TimerService setTimer', async(() => {
+      quickstartButton.click();
+      expect(timerService.setTimer).toHaveBeenCalledWith(user.mockUser.uid, timerInfo);
+    }));
+  });
+});
 
 const start = new Date();
 const end = addMinutes(start, 15);
@@ -150,8 +170,8 @@ const testItem: HistoryListItem = {
   dateRange: [start, end],
   locked: false
 };
-
-const testPlatforms = [
-  'PS4',
-  'Xbox One'
-];
+const timerInfo: TimerInfo = {
+  game: testItem.game,
+  platform: testItem.platform,
+  startTime: start.getTime()
+};

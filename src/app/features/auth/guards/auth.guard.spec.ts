@@ -12,6 +12,8 @@ import * as actions from '../actions/user.actions';
 import * as fromRoot from '../../../reducers/root.reducer';
 import * as fromAuth from '../reducers/root.reducer';
 
+import { routing } from '../../../test-helpers';
+
 describe('AuthGuard', () => {
   let guard: AuthGuard;
   let store: Store<fromAuth.State>;
@@ -31,7 +33,7 @@ describe('AuthGuard', () => {
       providers: [
         AuthGuard,
         { provide: Router, useValue: router },
-        { provide: RouterStateSnapshot, useClass: MockRouterStateSnapshot }
+        { provide: RouterStateSnapshot, useClass: routing.MockRouterStateSnapshot }
       ],
     }).compileComponents();
 
@@ -82,7 +84,3 @@ describe('AuthGuard', () => {
     expect(store.select).toHaveBeenCalledWith(fromAuth._selectUserLoggedIn);
   });
 });
-
-class MockRouterStateSnapshot {
-  url = 'app';
-}
