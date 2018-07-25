@@ -54,4 +54,38 @@ describe('User Actions', () => {
       expect(action.type).toBe(actions.LOGOUT);
     });
   });
+
+  describe('SignUp', () => {
+    it('Should have correct type', () => {
+      const action = new actions.SignUp('', '');
+      expect(action.type).toBe(actions.SIGNUP);
+    });
+
+    it('Should have correct email', () => {
+      const action = new actions.SignUp('email', '');
+      expect(action.email).toBe('email');
+    });
+
+    it('Should have correct password', () => {
+      const action = new actions.SignUp('', 'password');
+      expect(action.password).toBe('password');
+    });
+  });
+
+  describe('EmailLogin', () => {
+    it('Should have correct type', () => {
+      const action = new actions.EmailLogin('', '');
+      expect(action.type).toBe(actions.EMAIL_LOGIN);
+    });
+
+    it('Should have correct email', () => {
+      const action = new actions.EmailLogin('email', '');
+      expect(action.email).toBe('email');
+    });
+
+    it('Should have correct password', () => {
+      const action = new actions.EmailLogin('', 'password');
+      expect(action.password).toBe('password');
+    });
+  });
 });

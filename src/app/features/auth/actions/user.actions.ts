@@ -32,8 +32,22 @@ export class Logout implements Action {
   constructor() { }
 }
 
+export const SIGNUP = '[Auth] Signup';
+export class SignUp implements Action {
+  readonly type = SIGNUP;
+  constructor(public email: string, public password: string) { }
+}
+
+export const EMAIL_LOGIN = '[Auth] Email Login Attempt';
+export class EmailLogin implements Action {
+  readonly type = EMAIL_LOGIN;
+  constructor(public email: string, public password: string) { }
+}
+
 export type All = GetUser |
   Authenticated |
   NotAuthenticated |
   GoogleLogin |
-  Logout;
+  Logout |
+  SignUp |
+  EmailLogin;
