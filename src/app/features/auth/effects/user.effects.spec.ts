@@ -16,7 +16,6 @@ import * as userActions from '../actions/user.actions';
 
 import { auth, routing, user } from '../../../test-helpers';
 
-// FIXME: I still think these tests need some work
 describe('User Effects', () => {
   let actions: any;
   let effects: UserEffects;
@@ -131,7 +130,7 @@ describe('User Effects', () => {
       expect(effects.getUser$).toBeObservable(expected);
     });
 
-    it('Should call UserService getAuthState', () => {
+    it('Should call AuthService getAuthState', () => {
       actions = new ReplaySubject(1);
       actions.next(new userActions.GetUser());
 
@@ -167,7 +166,7 @@ describe('User Effects', () => {
       expect(effects.googleLogin$).toBeObservable(expected);
     });
 
-    it('Should call UserService signInWithGoogle', () => {
+    it('Should call AuthService signInWithGoogle', () => {
       actions = new ReplaySubject(1);
       actions.next(new userActions.GoogleLogin());
 
@@ -213,7 +212,7 @@ describe('User Effects', () => {
       expect(effects.logout$).toBeObservable(expected);
     });
 
-    it('Should call UserService signOut', () => {
+    it('Should call AuthService signOut', () => {
       actions = new ReplaySubject(1);
       actions.next(new userActions.Logout());
 
@@ -221,6 +220,42 @@ describe('User Effects', () => {
       effects.logout$.subscribe(() => {
         expect(authService.signOut).toHaveBeenCalled();
       });
+    });
+  });
+
+  describe('Sign Up', () => {
+    beforeEach(() => {
+      initTests();
+    });
+
+    it('Should dispatch GetUser', () => {
+      fail();
+    });
+
+    it('Should dispatch Error on error', () => {
+      fail();
+    });
+
+    it('Should call AuthService signUpWithEmail', () => {
+      fail();
+    });
+  });
+
+  describe('Email Login', () => {
+    beforeEach(() => {
+      initTests();
+    });
+
+    it('Should dispatch GetUser', () => {
+      fail();
+    });
+
+    it('Should dispatch Error on error', () => {
+      fail();
+    });
+
+    it('Should call AuthService signInWithEmail', () => {
+      fail();
     });
   });
 });
