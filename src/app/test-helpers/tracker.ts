@@ -14,7 +14,8 @@ export namespace tracker {
     setGame: jasmine.createSpy('setGame'),
     setPlatform: jasmine.createSpy('setPlatform'),
     setStartTime: jasmine.createSpy('setStartTime'),
-    resetTimer: jasmine.createSpy('resetTimer')
+    resetTimer: jasmine.createSpy('resetTimer'),
+    getNowTime: jasmine.createSpy('getNowTime')
   };
 
   export const testInfo: TimerInfo = {

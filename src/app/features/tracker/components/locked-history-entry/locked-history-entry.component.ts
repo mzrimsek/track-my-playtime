@@ -37,13 +37,9 @@ export class LockedHistoryEntryComponent implements OnInit {
     const timerInfo: TimerInfo = {
       game: this.item.game,
       platform: this.item.platform,
-      startTime: this.getNowTime()
+      startTime: this.timerService.getNowTime()
     };
     this.store.dispatch(new timerActions.SetTimerInfo(timerInfo));
     this.timerService.setTimer(this.userId, timerInfo);
-  }
-
-  getNowTime(): number {
-    return new Date().getTime();
   }
 }

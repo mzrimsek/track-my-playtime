@@ -38,7 +38,7 @@ export class TimerComponent implements OnInit {
   }
 
   startTimer() {
-    const now = this.getNowTime();
+    const now = this.timerService.getNowTime();
     this.store.dispatch(new actions.SetStartTime(now));
     this.timerService.setTimer(this.userId, {
       ...this.info,
@@ -52,7 +52,7 @@ export class TimerComponent implements OnInit {
       game: this.info.game,
       platform: this.info.platform,
       startTime: this.info.startTime,
-      endTime: this.getNowTime()
+      endTime: this.timerService.getNowTime()
     };
     this.store.dispatch(new actions.SaveTimerInfo(info));
     this.timerService.resetTimer(this.userId);
@@ -102,10 +102,6 @@ export class TimerComponent implements OnInit {
     if (this.info.startTime !== 0) {
       el.click();
     }
-  }
-
-  getNowTime(): number {
-    return new Date().getTime();
   }
 
   getCurrentTimeDate(): Date {

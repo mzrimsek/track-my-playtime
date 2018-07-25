@@ -47,6 +47,10 @@ export class TimerService {
       ...timer
     });
   }
+
+  getNowTime(): number {
+    return new Date().getTime();
+  }
 }
 
 export interface FirestoreTimerItem {

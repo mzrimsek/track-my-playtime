@@ -62,7 +62,7 @@ export class HistoryEntryComponent implements OnInit {
     const timerInfo: TimerInfo = {
       game: this.item.game,
       platform: this.item.platform,
-      startTime: this.getNowTime()
+      startTime: this.timerService.getNowTime()
     };
     this.store.dispatch(new timerActions.SetTimerInfo(timerInfo));
     this.timerService.setTimer(this.userId, timerInfo);
@@ -89,9 +89,5 @@ export class HistoryEntryComponent implements OnInit {
 
   openDateTimePicker(el: HTMLInputElement) {
     el.click();
-  }
-
-  getNowTime(): number {
-    return new Date().getTime();
   }
 }

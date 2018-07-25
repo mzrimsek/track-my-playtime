@@ -73,7 +73,7 @@ describe('LockedHistoryEntryComponent', () => {
 
     beforeEach(async(() => {
       quickstartButton = fixture.nativeElement.querySelector('.primary-action .quickstart');
-      spyOn(component, 'getNowTime').and.returnValue(start.getTime());
+      tracker.timerServiceStub.getNowTime.and.returnValue(start.getTime());
     }));
 
     it('Should dispatch SetTimerInfo with correct info', async(() => {
