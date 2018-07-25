@@ -38,10 +38,11 @@ export class TimerComponent implements OnInit {
   }
 
   startTimer() {
-    this.store.dispatch(new actions.SetStartTime(this.getNowTime()));
+    const now = this.getNowTime();
+    this.store.dispatch(new actions.SetStartTime(now));
     this.timerService.setTimer(this.userId, {
       ...this.info,
-      startTime: this.getNowTime()
+      startTime: now
     });
   }
 

@@ -12,7 +12,8 @@ import { TimerService } from '../../services/timer.service';
 
 import { ElapsedTimePipe } from '../../../../shared/pipes/elapsed-time.pipe';
 
-import * as actions from '../../../../shared/actions/history.actions';
+import * as historyActions from '../../../../shared/actions/history.actions';
+import * as timerActions from '../../actions/timer.actions';
 
 import * as fromRoot from '../../../../reducers/root.reducer';
 import * as fromTracker from '../../reducers/root.reducer';
@@ -21,6 +22,7 @@ import {
     HistoryListItem, UpdateHistoryItemGamePayload, UpdateHistoryItemPlatformPayload,
     UpdateHistoryItemTimesPayload
 } from '../../../../shared/models';
+import { TimerInfo } from '../../models';
 
 import { platforms, tracker, user } from '../../../../test-helpers';
 
@@ -29,6 +31,7 @@ describe('HistoryEntryComponent', () => {
   let userService: UserService;
   let component: HistoryEntryComponent;
   let fixture: ComponentFixture<HistoryEntryComponent>;
+  let timerService: TimerService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -51,6 +54,7 @@ describe('HistoryEntryComponent', () => {
 
     store = TestBed.get(Store);
     userService = TestBed.get(UserService);
+    timerService = TestBed.get(TimerService);
 
     spyOn(store, 'dispatch').and.callThrough();
 
@@ -75,7 +79,7 @@ describe('HistoryEntryComponent', () => {
       itemId: testItem.id,
       game
     };
-    const action = new actions.UpdateGame(user.mockUser.uid, payload);
+    const action = new historyActions.UpdateGame(user.mockUser.uid, payload);
     const gameEl = fixture.nativeElement.querySelector('.game ng-select');
 
     component.game = game;
@@ -90,7 +94,7 @@ describe('HistoryEntryComponent', () => {
       itemId: testItem.id,
       platform: platforms.testPlatforms[0]
     };
-    const action = new actions.UpdatePlatform(user.mockUser.uid, payload);
+    const action = new historyActions.UpdatePlatform(user.mockUser.uid, payload);
     const platformEl = fixture.nativeElement.querySelector('.platform select');
 
     platformEl.selectedIndex = 1;
@@ -106,7 +110,7 @@ describe('HistoryEntryComponent', () => {
       startTime: 3000,
       endTime: 6000
     };
-    const action = new actions.UpdateElapsedTime(user.mockUser.uid, payload);
+    const action = new historyActions.UpdateElapsedTime(user.mockUser.uid, payload);
     const dateTimeEl = fixture.nativeElement.querySelector('.date-time-picker input');
 
     dateTimeEl.value = new Date(payload.startTime) + '~' + new Date(payload.endTime);
@@ -117,7 +121,7 @@ describe('HistoryEntryComponent', () => {
   }));
 
   it('Should dispatch RemoveHistoryItem when remove button is clicked', async(() => {
-    const action = new actions.RemoveHistoryItem(user.mockUser.uid, testItem.id);
+    const action = new historyActions.RemoveHistoryItem(user.mockUser.uid, testItem.id);
     const removeButtonEl = fixture.nativeElement.querySelector('.remove');
 
     removeButtonEl.click();
@@ -133,6 +137,26 @@ describe('HistoryEntryComponent', () => {
 
     expect(component.openDateTimePicker).toHaveBeenCalled();
   }));
+
+  describe('Quickstart Button Clicked', () => {
+    let quickstartButton: any;
+
+    beforeEach(async(() => {
+      quickstartButton = fixture.nativeElement.querySelector('.primary-action .quickstart');
+      spyOn(component, 'getNowTime').and.returnValue(start.getTime());
+    }));
+
+    it('Should dispatch SetTimerInfo with correct info', async(() => {
+      const action = new timerActions.SetTimerInfo(timerInfo);
+      quickstartButton.click();
+      expect(store.dispatch).toHaveBeenCalledWith(action);
+    }));
+
+    it('Should call TimerService setTimer', async(() => {
+      quickstartButton.click();
+      expect(timerService.setTimer).toHaveBeenCalledWith(user.mockUser.uid, timerInfo);
+    }));
+  });
 });
 
 const start = new Date();
@@ -145,4 +169,9 @@ const testItem: HistoryListItem = {
   endTime: end.getTime(),
   dateRange: [start, end],
   locked: false
+};
+const timerInfo: TimerInfo = {
+  game: testItem.game,
+  platform: testItem.platform,
+  startTime: start.getTime()
 };
