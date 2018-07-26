@@ -13,6 +13,7 @@ import { UserEffects } from './effects/user.effects';
 import { AuthService } from './services/auth.service';
 
 import { reducers } from './reducers/root.reducer';
+import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
   imports: [
@@ -21,7 +22,7 @@ import { reducers } from './reducers/root.reducer';
     StoreModule.forFeature('auth', reducers),
     EffectsModule.forFeature([UserEffects, AuthEffects])
   ],
-  declarations: [LoginComponent],
+  declarations: [LoginComponent, RegisterComponent],
   providers: [AuthService]
 })
 export class AuthModule { }
