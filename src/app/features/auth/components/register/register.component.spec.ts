@@ -41,4 +41,13 @@ describe('RegisterComponent', () => {
   it('Should create the component', async(() => {
     expect(component).toBeTruthy();
   }));
+
+  it('Should dispatch Google Login on Google button click', () => {
+    const action = new actions.GoogleLogin();
+    const button = fixture.nativeElement.querySelector('#google-register');
+
+    button.click();
+
+    expect(store.dispatch).toHaveBeenCalledWith(action);
+  });
 });
