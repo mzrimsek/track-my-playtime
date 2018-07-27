@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { Store } from '@ngrx/store';
@@ -13,14 +14,26 @@ import { State } from '../../reducers/root.reducer';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+  email = new FormControl('', [
+    Validators.required,
+    Validators.minLength(6)
+  ]);
+  password = new FormControl('', [
+    Validators.required
+  ]);
+  loginForm: FormGroup;
 
   icons = {
     google: faGoogle
   };
-  constructor(private store: Store<State>) { }
+  constructor(private store: Store<State>, private builder: FormBuilder) { }
 
   ngOnInit() {
     this.store.dispatch(new userActions.GetUser());
+    this.loginForm = this.builder.group({
+      email: this.email,
+      password: this.password
+    });
   }
 
   googleLogin() {
@@ -28,8 +41,8 @@ export class LoginComponent implements OnInit {
   }
 
   emailLogin() {
-    const email = '';
-    const password = '';
-    this.store.dispatch(new userActions.EmailLogin(email, password));
+    if (this.loginForm.valid) {
+      this.store.dispatch(new userActions.EmailLogin(this.email.value, this.password.value));
+    }
   }
 }

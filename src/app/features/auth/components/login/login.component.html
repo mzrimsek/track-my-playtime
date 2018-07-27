@@ -1,6 +1,22 @@
 <div class="login">
   <div class="box drop-shadow">
 
+    <form [formGroup]="loginForm"
+          (ngSubmit)="emailLogin()">
+      <input type="email"
+             data-tracking-category="loginEmail"
+             [formControl]="email"
+             name="email" />
+      <input type="password"
+             data-tracking-category="loginPassword"
+             [formControl]="password"
+             name="password" />
+      <input type="submit"
+             data-tracking-category="loginSubmit"
+             value="Sign Up"
+             [disabled]="!loginForm.valid" />
+    </form>
+
     <button id="google-login"
             data-tracking-category="loginGoogle"
             class="login-button drop-shadow"

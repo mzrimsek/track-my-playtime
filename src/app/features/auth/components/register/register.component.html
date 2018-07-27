@@ -4,12 +4,15 @@
     <form [formGroup]="registerForm"
           (ngSubmit)="emailSignUp()">
       <input type="email"
+             data-tracking-category="registerEmail"
              [formControl]="email"
              name="email" />
       <input type="password"
+             data-tracking-category="registerPassword"
              [formControl]="password"
              name="password" />
       <input type="submit"
+             data-tracking-category="registerSubmit"
              value="Sign Up"
              [disabled]="!registerForm.valid" />
     </form>

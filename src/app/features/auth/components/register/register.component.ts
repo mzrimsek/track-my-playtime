@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { Store } from '@ngrx/store';
@@ -6,10 +7,6 @@ import { Store } from '@ngrx/store';
 import * as userActions from '../../actions/user.actions';
 
 import { State } from '../../reducers/root.reducer';
-
-import {
-    FormBuilder, FormControl, FormGroup, Validators
-} from '../../../../../../node_modules/@angular/forms';
 
 @Component({
   selector: 'app-auth-register',
