@@ -7,6 +7,10 @@ import * as userActions from '../../actions/user.actions';
 
 import { State } from '../../reducers/root.reducer';
 
+import {
+    FormBuilder, FormControl, FormGroup, Validators
+} from '../../../../../../node_modules/@angular/forms';
+
 @Component({
   selector: 'app-auth-register',
   templateUrl: './register.component.html',
@@ -14,20 +18,34 @@ import { State } from '../../reducers/root.reducer';
 })
 export class RegisterComponent implements OnInit {
 
+  email = new FormControl('', [
+    Validators.required,
+    Validators.minLength(6)
+  ]);
+  password = new FormControl('', [
+    Validators.required
+  ]);
+  registerForm: FormGroup;
+
   icons = {
     google: faGoogle
   };
-  constructor(private store: Store<State>) { }
+  constructor(private store: Store<State>, private builder: FormBuilder) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.registerForm = this.builder.group({
+      email: this.email,
+      password: this.password
+    });
+  }
 
   googleSignUp() {
     this.store.dispatch(new userActions.GoogleLogin());
   }
 
   emailSignUp() {
-    const email = '';
-    const password = '';
-    this.store.dispatch(new userActions.SignUp(email, password));
+    if (this.registerForm.valid) {
+      this.store.dispatch(new userActions.SignUp(this.email.value, this.password.value));
+    }
   }
 }

@@ -1,6 +1,19 @@
 <div class="register">
   <div class="box drop-shadow">
 
+    <form [formGroup]="registerForm"
+          (ngSubmit)="emailSignUp()">
+      <input type="email"
+             [formControl]="email"
+             name="email" />
+      <input type="password"
+             [formControl]="password"
+             name="password" />
+      <input type="submit"
+             value="Sign Up"
+             [disabled]="!registerForm.valid" />
+    </form>
+
     <button id="google-register"
             data-tracking-category="registerGoogle"
             class="register-button drop-shadow"
