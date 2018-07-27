@@ -16,6 +16,7 @@ import { AuthService } from './services/auth.service';
 import { reducers } from './reducers/root.reducer';
 
 import { FormsModule, ReactiveFormsModule } from '../../../../node_modules/@angular/forms';
+import { AuthFormComponent } from './components/auth-form/auth-form.component';
 
 @NgModule({
   imports: [
@@ -26,7 +27,7 @@ import { FormsModule, ReactiveFormsModule } from '../../../../node_modules/@angu
     StoreModule.forFeature('auth', reducers),
     EffectsModule.forFeature([UserEffects, AuthEffects])
   ],
-  declarations: [LoginComponent, RegisterComponent],
+  declarations: [LoginComponent, RegisterComponent, AuthFormComponent],
   providers: [AuthService]
 })
 export class AuthModule { }

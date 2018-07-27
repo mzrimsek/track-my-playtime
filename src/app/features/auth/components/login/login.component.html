@@ -1,33 +1,8 @@
 <div class="login">
-  <div class="header">
-    Login
-  </div>
-
-  <div class="box drop-shadow">
-    <form [formGroup]="loginForm"
-          (ngSubmit)="emailLogin()">
-      <input type="email"
-             data-tracking-category="loginEmail"
-             [formControl]="email"
-             name="email"
-             placeholder="Email" />
-      <input type="password"
-             data-tracking-category="loginPassword"
-             [formControl]="password"
-             name="password"
-             placeholder="Password" />
-      <button type="submit"
-              data-tracking-category="loginSubmit"
-              class="login-button drop-shadow"
-              [disabled]="!loginForm.valid">Login</button>
-    </form>
-
-    <button id="google-login"
-            data-tracking-category="loginGoogle"
-            class="login-button drop-shadow"
-            (click)="googleLogin()">
-      <fa-icon [icon]="icons.google"></fa-icon>
-      Login with Google
-    </button>
-  </div>
+  <app-auth-auth-form [authForm]="loginForm"
+                      [email]="email"
+                      [password]="password"
+                      [trackingCategory]="'Login'"
+                      (emailAuth)="emailLogin()"
+                      (googleAuth)="googleLogin()"></app-auth-auth-form>
 </div>

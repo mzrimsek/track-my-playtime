@@ -1,0 +1,33 @@
+<div class="auth-form">
+  <div class="header">
+    {{ trackingCategory }}
+  </div>
+
+  <div class="box drop-shadow">
+    <form [formGroup]="authForm"
+          (ngSubmit)="emailAuth.emit(null)">
+      <input type="email"
+             [attr.data-tracking-category]="trackingCategory + 'Email'"
+             [formControl]="email"
+             name="email"
+             placeholder="Email" />
+      <input type="password"
+             [attr.data-tracking-category]="trackingCategory + 'Password'"
+             [formControl]="password"
+             name="password"
+             placeholder="Password" />
+      <button type="submit"
+              [attr.data-tracking-category]="trackingCategory + 'Submit'"
+              class="auth-button drop-shadow"
+              [disabled]="!authForm.valid">Login</button>
+    </form>
+
+    <button id="google-login"
+            [attr.data-tracking-category]="trackingCategory + 'Google'"
+            class="auth-button drop-shadow"
+            (click)="googleAuth.emit(null)">
+      <fa-icon [icon]="icons.google"></fa-icon>
+      {{ trackingCategory }} with Google
+    </button>
+  </div>
+</div>
