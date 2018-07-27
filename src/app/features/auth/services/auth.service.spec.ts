@@ -67,18 +67,18 @@ describe('Auth Service', () => {
   });
 
   describe('signUpWithEmail', () => {
-    it('Should call AngularFireAuth createUserWithEmailAndPassword', () => {
+    it('Should call AngularFireAuth createUserAndRetrieveDataWithEmailAndPassword', () => {
       const password = 'password';
       service.signUpWithEmail(user.mockUser.email, password);
-      expect(afAuth.auth.createUserWithEmailAndPassword(user.mockUser.email, password));
+      expect(afAuth.auth.createUserAndRetrieveDataWithEmailAndPassword(user.mockUser.email, password));
     });
   });
 
   describe('signInWithEmail', () => {
-    it('Should call AngularFireAuth signInWithEmailAndPassword', () => {
+    it('Should call AngularFireAuth signInAndRetrieveDataWithEmailAndPassword', () => {
       const password = 'password';
       service.signInWithEmail(user.mockUser.email, password);
-      expect(afAuth.auth.signInWithEmailAndPassword(user.mockUser.email, password));
+      expect(afAuth.auth.signInAndRetrieveDataWithEmailAndPassword(user.mockUser.email, password));
     });
   });
 });
