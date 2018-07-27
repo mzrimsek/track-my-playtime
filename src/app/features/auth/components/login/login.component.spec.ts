@@ -45,12 +45,21 @@ describe('LoginComponent', () => {
     expect(store.dispatch).toHaveBeenCalledWith(action);
   }));
 
-  it('Should dispatch Google Login on Google button click', () => {
+  it('Should dispatch Google Login when GoogleAuth event emitted', async(() => {
     const action = new actions.GoogleLogin();
-    const button = fixture.nativeElement.querySelector('#google-login');
+    const form = fixture.nativeElement.querySelector('app-auth-auth-form');
 
-    button.click();
+    form.dispatchEvent(new Event('googleAuth'));
 
     expect(store.dispatch).toHaveBeenCalledWith(action);
-  });
+  }));
+
+  it('Should dispatch Email Login when EmailAuth event emitted', async(() => {
+    const action = new actions.EmailLogin('email', 'password');
+    const form = fixture.nativeElement.querySelector('app-auth-auth-form');
+
+    form.dispatchEvent(new Event('emailAuth'));
+
+    expect(store.dispatch).toHaveBeenCalledWith(action);
+  }));
 });

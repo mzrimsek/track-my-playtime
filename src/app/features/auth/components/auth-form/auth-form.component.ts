@@ -48,7 +48,7 @@ export class AuthFormComponent implements OnInit {
     }
   }
 
-  emailGoogleAuth() {
+  emitGoogleAuth() {
     this.googleAuth.emit(null);
   }
 }

@@ -22,10 +22,10 @@
               [disabled]="!authForm.valid">{{ trackingCategory }}</button>
     </form>
 
-    <button id="google-login"
+    <button id="google-auth"
             [attr.data-tracking-category]="trackingCategory + 'Google'"
             class="auth-button drop-shadow"
-            (click)="emailGoogleAuth()">
+            (click)="emitGoogleAuth()">
       <fa-icon [icon]="icons.google"></fa-icon>
       {{ trackingCategory }} with Google
     </button>
