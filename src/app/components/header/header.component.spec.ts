@@ -58,14 +58,14 @@ describe('HeaderComponent', () => {
   });
 
   describe('SignUp Link', () => {
-    let loginLink: any;
+    let signUpLink: any;
 
     beforeEach(async(() => {
-      loginLink = fixture.debugElement.query(By.css('#signUpLink'));
+      signUpLink = fixture.debugElement.query(By.css('#signUpLink'));
     }));
 
     it('Should have correct href', async(() => {
-      const href = loginLink.nativeElement.getAttribute('href');
+      const href = signUpLink.nativeElement.getAttribute('href');
       expect(href).toBe('/register');
     }));
   });
