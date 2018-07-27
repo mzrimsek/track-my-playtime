@@ -21,19 +21,23 @@
     }
   }
 
-  .login, .signUp {
-    margin-right: 30px;
+  .links {
+    display: flex;
 
-    a {
-      background: $background-light-accent;
-      padding: 15px 10px;
+    .login, .signUp {
+      margin-right: 30px;
 
-      &:hover {
-        background: darken($background-light-accent, 5%);
-      }
+      a {
+        background: $background-light-accent;
+        padding: 15px 10px;
 
-      &:active {
-        color: $text-light;
+        &:hover {
+          background: darken($background-light-accent, 5%);
+        }
+
+        &:active {
+          color: $text-light;
+        }
       }
     }
   }
@@ -45,8 +49,10 @@
       margin-left: 15px;
     }
 
-    .login {
-      margin-right: 15px;
+    .links {
+      .login, .signUp {
+        margin-right: 15px;
+      }
     }
   }
 }
