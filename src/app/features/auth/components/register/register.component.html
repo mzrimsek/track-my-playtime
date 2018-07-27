@@ -1,8 +1,5 @@
 <div class="register">
-  <app-auth-auth-form [authForm]="registerForm"
-                      [email]="email"
-                      [password]="password"
-                      [trackingCategory]="'SignUp'"
-                      (emailAuth)="emailSignUp()"
-                      (googleAuth)="googleSignUp()"></app-auth-auth-form>
+  <app-auth-auth-form [trackingCategory]="'SignUp'"
+                      (emailAuth)="emailSignUp($event)"
+                      (googleAuth)="googleSignUp($event)"></app-auth-auth-form>
 </div>

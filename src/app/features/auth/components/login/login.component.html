@@ -1,8 +1,5 @@
 <div class="login">
-  <app-auth-auth-form [authForm]="loginForm"
-                      [email]="email"
-                      [password]="password"
-                      [trackingCategory]="'Login'"
-                      (emailAuth)="emailLogin()"
-                      (googleAuth)="googleLogin()"></app-auth-auth-form>
+  <app-auth-auth-form [trackingCategory]="'Login'"
+                      (emailAuth)="emailLogin($event)"
+                      (googleAuth)="googleLogin($event)"></app-auth-auth-form>
 </div>

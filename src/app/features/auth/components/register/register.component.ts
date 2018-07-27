@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { Store } from '@ngrx/store';
 
 import * as userActions from '../../actions/user.actions';
 
 import { State } from '../../reducers/root.reducer';
+
+import { EmailAuthEvent } from '../../models';
 
 @Component({
   selector: 'app-auth-register',
@@ -15,34 +15,15 @@ import { State } from '../../reducers/root.reducer';
 })
 export class RegisterComponent implements OnInit {
 
-  email = new FormControl('', [
-    Validators.required,
-    Validators.minLength(6)
-  ]);
-  password = new FormControl('', [
-    Validators.required
-  ]);
-  registerForm: FormGroup;
+  constructor(private store: Store<State>) { }
 
-  icons = {
-    google: faGoogle
-  };
-  constructor(private store: Store<State>, private builder: FormBuilder) { }
-
-  ngOnInit() {
-    this.registerForm = this.builder.group({
-      email: this.email,
-      password: this.password
-    });
-  }
+  ngOnInit() { }
 
   googleSignUp() {
     this.store.dispatch(new userActions.GoogleLogin());
   }
 
-  emailSignUp() {
-    if (this.registerForm.valid) {
-      this.store.dispatch(new userActions.SignUp(this.email.value, this.password.value));
-    }
+  emailSignUp(event: EmailAuthEvent) {
+    this.store.dispatch(new userActions.SignUp(event.email, event.password));
   }
 }

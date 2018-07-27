@@ -5,7 +5,7 @@
 
   <div class="box drop-shadow">
     <form [formGroup]="authForm"
-          (ngSubmit)="emailAuth.emit(null)">
+          (ngSubmit)="emitEmailAuth()">
       <input type="email"
              [attr.data-tracking-category]="trackingCategory + 'Email'"
              [formControl]="email"
@@ -19,13 +19,13 @@
       <button type="submit"
               [attr.data-tracking-category]="trackingCategory + 'Submit'"
               class="auth-button drop-shadow"
-              [disabled]="!authForm.valid">Login</button>
+              [disabled]="!authForm.valid">{{ trackingCategory }}</button>
     </form>
 
     <button id="google-login"
             [attr.data-tracking-category]="trackingCategory + 'Google'"
             class="auth-button drop-shadow"
-            (click)="googleAuth.emit(null)">
+            (click)="emailGoogleAuth()">
       <fa-icon [icon]="icons.google"></fa-icon>
       {{ trackingCategory }} with Google
     </button>
