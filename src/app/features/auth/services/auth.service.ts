@@ -21,11 +21,11 @@ export class AuthService {
   }
 
   signUpWithEmail(email: string, password: string): Observable<any> {
-    return Observable.fromPromise(this.afAuth.auth.createUserWithEmailAndPassword(email, password));
+    return Observable.fromPromise(this.afAuth.auth.createUserAndRetrieveDataWithEmailAndPassword(email, password));
   }
 
   signInWithEmail(email: string, password: string): Observable<any> {
-    return Observable.fromPromise(this.afAuth.auth.signInWithEmailAndPassword(email, password));
+    return Observable.fromPromise(this.afAuth.auth.signInAndRetrieveDataWithEmailAndPassword(email, password));
   }
 
   private googleLogin(): Promise<any> {
