@@ -2,9 +2,29 @@
 
 .register {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: $main-height;
+
+  .register-button {
+    border: none;
+    color: $background-dark;
+    background: $background-light-accent;
+    width: 70%;
+    padding: 15px;
+    font-size: $base-font-size * .75;
+
+    &:hover {
+      background: darken($background-light-accent, 5%);
+      cursor: pointer;
+    }
+  }
+
+  .header {
+    color: $text-light;
+    font-size: 2.5em;
+  }
 
   .box {
     display: flex;
@@ -16,17 +36,20 @@
     padding: 20px;
     background: $background-light;
 
-    .register-button {
-      border: none;
-      color: $background-dark;
-      background: $background-light-accent;
+    form {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       width: 70%;
-      padding: 15px;
-      font-size: $base-font-size * .75;
+      margin-bottom: 20px;
 
-      &:hover {
-        background: darken($background-light-accent, 5%);
-        cursor: pointer;
+      input {
+        padding: 10px;
+        margin-bottom: 5px;
+      }
+
+      button {
+        width: 100%;
       }
     }
   }

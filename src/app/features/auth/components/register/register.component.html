@@ -1,20 +1,25 @@
 <div class="register">
-  <div class="box drop-shadow">
+  <div class="header">
+    Sign Up
+  </div>
 
+  <div class="box drop-shadow">
     <form [formGroup]="registerForm"
           (ngSubmit)="emailSignUp()">
       <input type="email"
              data-tracking-category="registerEmail"
              [formControl]="email"
-             name="email" />
+             name="email"
+             placeholder="Email" />
       <input type="password"
              data-tracking-category="registerPassword"
              [formControl]="password"
-             name="password" />
-      <input type="submit"
-             data-tracking-category="registerSubmit"
-             value="Sign Up"
-             [disabled]="!registerForm.valid" />
+             name="password"
+             placeholder="Password" />
+      <button type="submit"
+              data-tracking-category="registerSubmit"
+              class="register-button drop-shadow"
+              [disabled]="!registerForm.valid">Sign Up</button>
     </form>
 
     <button id="google-register"
@@ -22,8 +27,7 @@
             class="register-button drop-shadow"
             (click)="googleSignUp()">
       <fa-icon [icon]="icons.google"></fa-icon>
-      Login with Google
+      Sign Up with Google
     </button>
-
   </div>
 </div>
