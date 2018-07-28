@@ -24,8 +24,8 @@ export class AuthFormComponent implements OnInit {
   ]);
   authForm: FormGroup;
   @Input() trackingCategory: string;
-  @Output() emailAuth: EventEmitter<any> = new EventEmitter();
-  @Output() googleAuth: EventEmitter<any> = new EventEmitter();
+  @Output() emailAuth: EventEmitter<EmailAuthEvent> = new EventEmitter();
+  @Output() googleAuth: EventEmitter<null> = new EventEmitter();
 
   icons = {
     google: faGoogle
@@ -41,7 +41,7 @@ export class AuthFormComponent implements OnInit {
 
   emitEmailAuth() {
     if (this.authForm.valid) {
-      this.emailAuth.emit(<EmailAuthEvent>{
+      this.emailAuth.emit({
         email: this.email.value,
         password: this.password.value
       });

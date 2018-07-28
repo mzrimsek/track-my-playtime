@@ -24,24 +24,29 @@ describe('AuthFormComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('Should call emitGoogleAuth on Google button click', () => {
-    spyOn(component, 'emitGoogleAuth');
+  it('Should call emitGoogleAuth on Google button click', async(() => {
     const button = fixture.nativeElement.querySelector('#google-auth');
+
+    spyOn(component, 'emitGoogleAuth');
     button.click();
+
     expect(component.emitGoogleAuth).toHaveBeenCalled();
-  });
+  }));
 
-  it('Should not call emitEmailAuth on Email auth button click when form is invalid', () => {
-    spyOn(component, 'emitEmailAuth');
+  it('Should auth button when form is invalid', async(() => {
     const button = fixture.nativeElement.querySelector('form .auth-button');
-    button.click();
-    expect(component.emitEmailAuth).not.toHaveBeenCalled();
-  });
+    expect(button.disabled).toBe(true);
+  }));
 
-  it('Should call emitEmailAuth on Email auth button click when form is valid', () => {
-    spyOn(component, 'emitEmailAuth');
+  it('Should call emitEmailAuth on Email auth button click when form is valid', async(() => {
     const button = fixture.nativeElement.querySelector('form .auth-button');
+    component.email.setValue('email');
+    component.password.setValue('password');
+    fixture.detectChanges();
+
+    spyOn(component, 'emitEmailAuth');
     button.click();
+
     expect(component.emitEmailAuth).toHaveBeenCalled();
-  });
+  }));
 });
