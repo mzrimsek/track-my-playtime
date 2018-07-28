@@ -17,10 +17,11 @@ export class AuthFormComponent implements OnInit {
 
   email = new FormControl('', [
     Validators.required,
-    Validators.minLength(6)
+    Validators.email
   ]);
   password = new FormControl('', [
-    Validators.required
+    Validators.required,
+    Validators.minLength(6)
   ]);
   authForm: FormGroup;
   @Input() trackingCategory: string;

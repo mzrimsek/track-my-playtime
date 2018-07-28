@@ -17,6 +17,7 @@ describe('AuthFormComponent', () => {
 
     fixture = TestBed.createComponent(AuthFormComponent);
     component = fixture.componentInstance;
+    component.trackingCategory = 'test';
     fixture.detectChanges();
   }));
 
@@ -40,7 +41,7 @@ describe('AuthFormComponent', () => {
 
   it('Should call emitEmailAuth on Email auth button click when form is valid', async(() => {
     const button = fixture.nativeElement.querySelector('form .auth-button');
-    component.email.setValue('email');
+    component.email.setValue('email@email.com');
     component.password.setValue('password');
     fixture.detectChanges();
 
