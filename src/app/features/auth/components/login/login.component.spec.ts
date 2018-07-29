@@ -55,7 +55,7 @@ describe('LoginComponent', () => {
   }));
 
   it('Should dispatch Email Login when EmailAuth event emitted', async(() => {
-    const action = new actions.EmailLogin('email', 'password');
+    const action = new actions.EmailLogin('email@email.com', 'password');
     const form = fixture.nativeElement.querySelector('app-auth-auth-form');
 
     form.dispatchEvent(new Event('emailAuth'));

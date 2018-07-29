@@ -50,7 +50,7 @@ describe('RegisterComponent', () => {
   });
 
   it('Should dispatch SignUp when EmailAuth event emitted', async(() => {
-    const action = new actions.SignUp('email', 'password');
+    const action = new actions.SignUp('email@email.com', 'password');
     const form = fixture.nativeElement.querySelector('app-auth-auth-form');
 
     form.dispatchEvent(new Event('emailAuth'));
