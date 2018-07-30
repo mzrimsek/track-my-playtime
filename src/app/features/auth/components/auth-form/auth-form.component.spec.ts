@@ -21,9 +21,9 @@ describe('AuthFormComponent', () => {
     fixture.detectChanges();
   }));
 
-  it('Should create the component', () => {
+  it('Should create the component', async(() => {
     expect(component).toBeTruthy();
-  });
+  }));
 
   it('Should call emitGoogleAuth on Google button click', async(() => {
     const button = fixture.nativeElement.querySelector('#google-auth');

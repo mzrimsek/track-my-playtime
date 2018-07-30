@@ -40,14 +40,14 @@ describe('RegisterComponent', () => {
     expect(component).toBeTruthy();
   }));
 
-  it('Should dispatch Google Login when GoogleAuth event emitted', () => {
+  it('Should dispatch Google Login when GoogleAuth event emitted', async(() => {
     const action = new actions.GoogleLogin();
     const form = fixture.nativeElement.querySelector('app-auth-auth-form');
 
     form.dispatchEvent(new Event('googleAuth'));
 
     expect(store.dispatch).toHaveBeenCalledWith(action);
-  });
+  }));
 
   it('Should dispatch SignUp when EmailAuth event emitted', async(() => {
     const action = new actions.SignUp('email@email.com', 'password');
