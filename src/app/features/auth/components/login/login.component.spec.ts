@@ -1,5 +1,6 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 
 import { combineReducers, Store, StoreModule } from '@ngrx/store';
 
@@ -55,10 +56,15 @@ describe('LoginComponent', () => {
   }));
 
   it('Should dispatch Email Login when EmailAuth event emitted', async(() => {
-    const action = new actions.EmailLogin('email@email.com', 'password');
-    const form = fixture.nativeElement.querySelector('app-auth-auth-form');
+    const email = 'email@email.com';
+    const password = 'password';
+    const action = new actions.EmailLogin(email, password);
+    const form = fixture.debugElement.query(By.css('app-auth-auth-form'));
 
-    form.dispatchEvent(new Event('emailAuth'));
+    form.triggerEventHandler('emailAuth', {
+      email,
+      password
+    });
 
     expect(store.dispatch).toHaveBeenCalledWith(action);
   }));
