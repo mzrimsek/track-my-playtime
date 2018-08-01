@@ -34,9 +34,13 @@ describe('AuthFormComponent', () => {
     expect(component.emitGoogleAuth).toHaveBeenCalled();
   }));
 
-  it('Should auth button when form is invalid', async(() => {
+  it('Should not call emitEmailAuth on Email auth button click when form is invalid', async(() => {
     const button = fixture.nativeElement.querySelector('form .auth-button');
-    expect(button.disabled).toBe(true);
+
+    spyOn(component, 'emitEmailAuth');
+    button.click();
+
+    expect(component.emitEmailAuth).not.toHaveBeenCalled();
   }));
 
   it('Should call emitEmailAuth on Email auth button click when form is valid', async(() => {
