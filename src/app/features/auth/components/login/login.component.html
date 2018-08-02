@@ -1,5 +1,9 @@
 <div class="login">
   <app-auth-auth-form [trackingCategory]="'Login'"
                       (emailAuth)="emailLogin($event)"
-                      (googleAuth)="googleLogin()"></app-auth-auth-form>
+                      (googleAuth)="googleLogin()">
+    <a id="forgotPasswordLink"
+       data-tracking-category="loginForgotPassword"
+       [routerLink]="['../forgotPassword']">Forgot your password?</a>
+  </app-auth-auth-form>
 </div>

@@ -21,6 +21,8 @@
               class="auth-button drop-shadow">{{ trackingCategory }}</button>
     </form>
 
+    <ng-content></ng-content>
+
     <button id="google-auth"
             [attr.data-tracking-category]="trackingCategory + 'Google'"
             class="auth-button drop-shadow"

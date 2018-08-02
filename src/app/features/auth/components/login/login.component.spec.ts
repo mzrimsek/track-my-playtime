@@ -68,4 +68,17 @@ describe('LoginComponent', () => {
 
     expect(store.dispatch).toHaveBeenCalledWith(action);
   }));
+
+  describe('Forgot Password Link', () => {
+    let forgotPasswordLink: any;
+
+    beforeEach(async(() => {
+      forgotPasswordLink = fixture.debugElement.query(By.css('#forgotPasswordLink'));
+    }));
+
+    it('Should have correct href', async(() => {
+      const href = forgotPasswordLink.nativeElement.getAttribute('href');
+      expect(href).toBe('/forgotPassword');
+    }));
+  });
 });
