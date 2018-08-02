@@ -88,4 +88,16 @@ describe('User Actions', () => {
       expect(action.password).toBe('password');
     });
   });
+
+  describe('ResetPassword', () => {
+    it('Should have correct type', () => {
+      const action = new actions.ResetPassword('');
+      expect(action.type).toBe(actions.RESET_PASSWORD);
+    });
+
+    it('Should have correct email', () => {
+      const action = new actions.ResetPassword('email');
+      expect(action.email).toBe('email');
+    });
+  });
 });

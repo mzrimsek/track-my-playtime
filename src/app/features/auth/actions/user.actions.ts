@@ -44,10 +44,17 @@ export class EmailLogin implements Action {
   constructor(public email: string, public password: string) { }
 }
 
+export const RESET_PASSWORD = '[Auth] Reset Password';
+export class ResetPassword implements Action {
+  readonly type = RESET_PASSWORD;
+  constructor(public email: string) { }
+}
+
 export type All = GetUser |
   Authenticated |
   NotAuthenticated |
   GoogleLogin |
   Logout |
   SignUp |
-  EmailLogin;
+  EmailLogin |
+  ResetPassword;
