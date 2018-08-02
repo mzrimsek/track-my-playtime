@@ -44,25 +44,5 @@ describe('AuthFormComponent', () => {
       component.authForm.controls['password'].setValue('password');
       expect(component.authForm.valid).toBe(true);
     }));
-
-    it('Should not call emitEmailAuth on Email auth button click when form is invalid', async(() => {
-      const button = fixture.nativeElement.querySelector('form .auth-button');
-
-      spyOn(component, 'emitEmailAuth');
-      button.click();
-
-      expect(component.emitEmailAuth).not.toHaveBeenCalled();
-    }));
-
-    it('Should call emitEmailAuth on Email auth button click when form is valid', async(() => {
-      const button = fixture.nativeElement.querySelector('form .auth-button');
-      component.authForm.controls['email'].setValue('email@email.com');
-      component.authForm.controls['password'].setValue('password');
-
-      spyOn(component, 'emitEmailAuth');
-      button.click();
-
-      expect(component.emitEmailAuth).toHaveBeenCalled();
-    }));
   });
 });
