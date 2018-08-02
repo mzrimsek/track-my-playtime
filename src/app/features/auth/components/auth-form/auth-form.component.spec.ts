@@ -25,13 +25,8 @@ describe('AuthFormComponent', () => {
     expect(component).toBeTruthy();
   }));
 
-  it('Should call emitGoogleAuth on Google button click', async(() => {
-    const button = fixture.nativeElement.querySelector('#google-auth');
-
-    spyOn(component, 'emitGoogleAuth');
-    button.click();
-
-    expect(component.emitGoogleAuth).toHaveBeenCalled();
+  it('Should emith googleAuth when emitGoogleAuth is called', async(() => {
+    fail();
   }));
 
   describe('Email Form', () => {
@@ -44,6 +39,10 @@ describe('AuthFormComponent', () => {
         const button = fixture.nativeElement.querySelector('form button');
         expect(button.disabled).toBe(true);
       }));
+
+      it('Should not emit emailAuth event emitEmailAuth is called', () => {
+        fail();
+      });
     });
 
     describe('Valid form', () => {
@@ -59,6 +58,10 @@ describe('AuthFormComponent', () => {
         const button = fixture.nativeElement.querySelector('form button');
         expect(button.disabled).toBe(false);
       }));
+
+      it('Should emit emailAuth event emitEmailAuth is called', () => {
+        fail();
+      });
     });
   });
 });
