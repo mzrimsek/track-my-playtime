@@ -294,4 +294,22 @@ describe('User Effects', () => {
       });
     });
   });
+
+  describe('Reset Password', () => {
+    beforeEach(() => {
+      initTests();
+    });
+
+    it('Should dispatch Error on error', () => {
+      const message = 'Something went terribly wrong';
+      actions = hot('-a', { a: new userActions.ResetPassword('email') });
+
+      const expected = cold('-(b)', {
+        b: new appActions.Error(userActions.RESET_PASSWORD, message)
+      });
+
+      spyOn(authService, 'resetPassword').and.callFake(() => Observable.throw({ message }));
+      expect(effects.resetPassword$).toBeObservable(expected);
+    });
+  });
 });

@@ -72,5 +72,9 @@ export namespace auth {
       this.authState = Observable.of(user.mockUser);
       return Observable.of('Signed in with Email');
     }
+
+    resetPassword(): Observable<any> {
+      return Observable.of('Password reset email sent');
+    }
   }
 }

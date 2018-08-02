@@ -52,7 +52,6 @@ export class UserEffects {
         })
         .catch(err => Observable.of(new appActions.Error(userActions.LOGOUT, err.message))));
 
-
   @Effect() signUp$ =
     this.actions$
       .ofType(userActions.SIGNUP)
@@ -68,6 +67,13 @@ export class UserEffects {
       .switchMap(action => this.authService.signInWithEmail(action.email, action.password)
         .map(() => new userActions.GetUser())
         .catch(err => Observable.of(new appActions.Error(userActions.EMAIL_LOGIN, err.message))));
+
+  @Effect() resetPassword$ =
+    this.actions$
+      .ofType(userActions.RESET_PASSWORD)
+      .map(action => action as userActions.ResetPassword)
+      .switchMap(action => this.authService.resetPassword(action.email)
+        .catch(err => Observable.of(new appActions.Error(userActions.RESET_PASSWORD, err.message))));
 
   private getAuthenticatedAction(authData: AuthUser): userActions.Authenticated {
     const user = <User>{
