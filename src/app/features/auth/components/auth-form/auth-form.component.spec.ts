@@ -35,14 +35,30 @@ describe('AuthFormComponent', () => {
   }));
 
   describe('Email Form', () => {
-    it('Should be invalid when empty', async(() => {
-      expect(component.authForm.valid).toBe(false);
-    }));
+    describe('Invalid Form', () => {
+      it('Should be invalid when empty', async(() => {
+        expect(component.authForm.valid).toBe(false);
+      }));
 
-    it('Should be valid when filled out', async(() => {
-      component.authForm.controls['email'].setValue('email@email.com');
-      component.authForm.controls['password'].setValue('password');
-      expect(component.authForm.valid).toBe(true);
-    }));
+      it('Should disable email auth button when invalid', async(() => {
+        const button = fixture.nativeElement.querySelector('form button');
+        expect(button.disabled).toBe(true);
+      }));
+    });
+
+    describe('Valid form', () => {
+      it('Should be valid when filled out', async(() => {
+        component.authForm.controls['email'].setValue('email@email.com');
+        component.authForm.controls['password'].setValue('password');
+        expect(component.authForm.valid).toBe(true);
+      }));
+
+      it('Should enable email auth button when valid', async(() => {
+        component.authForm.controls['email'].setValue('email@email.com');
+        component.authForm.controls['password'].setValue('password');
+        const button = fixture.nativeElement.querySelector('form button');
+        expect(button.disabled).toBe(false);
+      }));
+    });
   });
 });
