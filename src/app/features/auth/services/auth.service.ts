@@ -28,6 +28,10 @@ export class AuthService {
     return Observable.fromPromise(this.afAuth.auth.signInAndRetrieveDataWithEmailAndPassword(email, password));
   }
 
+  resetPassword(email: string): Observable<any> {
+    return Observable.fromPromise(this.afAuth.auth.sendPasswordResetEmail(email));
+  }
+
   private googleLogin(): Promise<any> {
     const provider = new firebase.auth.GoogleAuthProvider();
     return this.afAuth.auth.signInWithPopup(provider);

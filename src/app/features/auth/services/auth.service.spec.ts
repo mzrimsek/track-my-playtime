@@ -70,7 +70,7 @@ describe('Auth Service', () => {
     it('Should call AngularFireAuth createUserAndRetrieveDataWithEmailAndPassword', () => {
       const password = 'password';
       service.signUpWithEmail(user.mockUser.email, password);
-      expect(afAuth.auth.createUserAndRetrieveDataWithEmailAndPassword(user.mockUser.email, password));
+      expect(afAuth.auth.createUserAndRetrieveDataWithEmailAndPassword).toHaveBeenCalledWith(user.mockUser.email, password);
     });
   });
 
@@ -78,7 +78,14 @@ describe('Auth Service', () => {
     it('Should call AngularFireAuth signInAndRetrieveDataWithEmailAndPassword', () => {
       const password = 'password';
       service.signInWithEmail(user.mockUser.email, password);
-      expect(afAuth.auth.signInAndRetrieveDataWithEmailAndPassword(user.mockUser.email, password));
+      expect(afAuth.auth.signInAndRetrieveDataWithEmailAndPassword).toHaveBeenCalledWith(user.mockUser.email, password);
+    });
+  });
+
+  describe('resetPassword', () => {
+    it('Should call AngularFireAuth sendPasswordResetEmail', () => {
+      service.resetPassword(user.mockUser.email);
+      expect(afAuth.auth.sendPasswordResetEmail).toHaveBeenCalledWith(user.mockUser.email);
     });
   });
 });

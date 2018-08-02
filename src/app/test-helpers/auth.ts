@@ -34,7 +34,11 @@ export namespace auth {
       signInAndRetrieveDataWithEmailAndPassword: jasmine
         .createSpy('signInAndRetrieveDataWithEmailAndPassword')
         .and
-        .callFake(fakeSignInHandler)
+        .callFake(fakeSignInHandler),
+      sendPasswordResetEmail: jasmine
+        .createSpy('sendPasswordResetEmail')
+        .and
+        .callFake(() => Promise.resolve())
     }
   };
 
