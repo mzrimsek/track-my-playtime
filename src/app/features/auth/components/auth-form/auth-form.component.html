@@ -18,6 +18,7 @@
              placeholder="Password" />
       <button type="submit"
               [attr.data-tracking-category]="trackingCategory + 'Submit'"
+              [disabled]="!authForm.valid"
               class="auth-button drop-shadow">{{ trackingCategory }}</button>
     </form>
 

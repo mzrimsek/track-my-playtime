@@ -15,9 +15,14 @@
     padding: 15px;
     font-size: $base-font-size * .75;
 
-    &:hover {
+    &:hover:not(:disabled) {
       background: darken($background-light-accent, 5%);
       cursor: pointer;
+    }
+
+    &:disabled {
+      background: lighten($background-light-accent, 5%);
+      color: lighten($background-dark, 5%);
     }
   }
 
@@ -36,12 +41,15 @@
     padding: 20px;
     background: $background-light;
 
+    .auth-button {
+      margin-top: 20px;
+    }
+
     form {
       display: flex;
       flex-direction: column;
       justify-content: center;
       width: 70%;
-      margin-bottom: 20px;
 
       input {
         padding: 10px;
@@ -50,6 +58,7 @@
 
       button {
         width: 100%;
+        margin-top: 0px;
       }
     }
   }
