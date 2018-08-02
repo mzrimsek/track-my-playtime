@@ -34,24 +34,35 @@ describe('AuthFormComponent', () => {
     expect(component.emitGoogleAuth).toHaveBeenCalled();
   }));
 
-  it('Should not call emitEmailAuth on Email auth button click when form is invalid', async(() => {
-    const button = fixture.nativeElement.querySelector('form .auth-button');
+  describe('Email Form', () => {
+    it('Should be invalid when empty', async(() => {
+      expect(component.authForm.valid).toBe(false);
+    }));
 
-    spyOn(component, 'emitEmailAuth');
-    button.click();
+    it('Should be valid when filled out', async(() => {
+      component.authForm.controls['email'].setValue('email@email.com');
+      component.authForm.controls['password'].setValue('password');
+      expect(component.authForm.valid).toBe(true);
+    }));
 
-    expect(component.emitEmailAuth).not.toHaveBeenCalled();
-  }));
+    it('Should not call emitEmailAuth on Email auth button click when form is invalid', async(() => {
+      const button = fixture.nativeElement.querySelector('form .auth-button');
 
-  it('Should call emitEmailAuth on Email auth button click when form is valid', async(() => {
-    const button = fixture.nativeElement.querySelector('form .auth-button');
-    component.email.setValue('email@email.com');
-    component.password.setValue('password');
-    fixture.detectChanges();
+      spyOn(component, 'emitEmailAuth');
+      button.click();
 
-    spyOn(component, 'emitEmailAuth');
-    button.click();
+      expect(component.emitEmailAuth).not.toHaveBeenCalled();
+    }));
 
-    expect(component.emitEmailAuth).toHaveBeenCalled();
-  }));
+    it('Should call emitEmailAuth on Email auth button click when form is valid', async(() => {
+      const button = fixture.nativeElement.querySelector('form .auth-button');
+      component.authForm.controls['email'].setValue('email@email.com');
+      component.authForm.controls['password'].setValue('password');
+
+      spyOn(component, 'emitEmailAuth');
+      button.click();
+
+      expect(component.emitEmailAuth).toHaveBeenCalled();
+    }));
+  });
 });

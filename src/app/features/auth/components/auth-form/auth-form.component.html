@@ -8,18 +8,17 @@
           (ngSubmit)="emitEmailAuth()">
       <input type="email"
              [attr.data-tracking-category]="trackingCategory + 'Email'"
-             [formControl]="email"
+             formControlName="email"
              name="email"
              placeholder="Email" />
       <input type="password"
              [attr.data-tracking-category]="trackingCategory + 'Password'"
-             [formControl]="password"
+             formControlName="password"
              name="password"
              placeholder="Password" />
       <button type="submit"
               [attr.data-tracking-category]="trackingCategory + 'Submit'"
-              class="auth-button drop-shadow"
-              [disabled]="!authForm.valid">{{ trackingCategory }}</button>
+              class="auth-button drop-shadow">{{ trackingCategory }}</button>
     </form>
 
     <button id="google-auth"
