@@ -26,7 +26,9 @@ describe('AuthFormComponent', () => {
   }));
 
   it('Should emith googleAuth when emitGoogleAuth is called', async(() => {
-    fail();
+    spyOn(component.googleAuth, 'emit');
+    component.emitGoogleAuth();
+    expect(component.googleAuth.emit).toHaveBeenCalled();
   }));
 
   describe('Email Form', () => {
@@ -41,26 +43,34 @@ describe('AuthFormComponent', () => {
       }));
 
       it('Should not emit emailAuth event emitEmailAuth is called', () => {
-        fail();
+        spyOn(component.emailAuth, 'emit');
+        component.emitEmailAuth();
+        expect(component.emailAuth.emit).not.toHaveBeenCalled();
       });
     });
 
     describe('Valid form', () => {
-      it('Should be valid when filled out', async(() => {
+      beforeEach(async(() => {
         component.authForm.controls['email'].setValue('email@email.com');
         component.authForm.controls['password'].setValue('password');
+      }));
+
+      it('Should be valid when filled out', async(() => {
         expect(component.authForm.valid).toBe(true);
       }));
 
       it('Should enable email auth button when valid', async(() => {
-        component.authForm.controls['email'].setValue('email@email.com');
-        component.authForm.controls['password'].setValue('password');
         const button = fixture.nativeElement.querySelector('form button');
         expect(button.disabled).toBe(false);
       }));
 
       it('Should emit emailAuth event emitEmailAuth is called', () => {
-        fail();
+        spyOn(component.emailAuth, 'emit');
+        component.emitEmailAuth();
+        expect(component.emailAuth.emit).toHaveBeenCalledWith({
+          email: 'email@email.com',
+          password: 'password'
+        });
       });
     });
   });
