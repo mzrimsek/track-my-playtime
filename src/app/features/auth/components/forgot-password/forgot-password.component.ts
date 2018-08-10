@@ -22,7 +22,7 @@ export class ForgotPasswordComponent implements OnInit {
     if (emailInputEl.value) {
       const email = emailInputEl.value;
       this.store.dispatch(new userActions.ResetPassword(email));
-      this.message = `An password reset email has been sent to ${email}`;
+      this.message = `A password reset email has been sent to ${email}`;
     }
   }
 }
