@@ -4,7 +4,11 @@ import {
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
+import { Store } from '@ngrx/store';
 
+import rootComponentSelectors, { State } from '../../../../reducers/root.reducer';
+
+import { Error } from '../../../../models';
 import { EmailAuthEvent } from '../../models';
 
 @Component({
@@ -16,6 +20,7 @@ import { EmailAuthEvent } from '../../models';
 export class AuthFormComponent implements OnInit {
 
   authForm: FormGroup;
+  error: Error;
   @Input() trackingCategory: string;
   @Output() emailAuth: EventEmitter<EmailAuthEvent> = new EventEmitter();
   @Output() googleAuth: EventEmitter<null> = new EventEmitter();
@@ -23,7 +28,7 @@ export class AuthFormComponent implements OnInit {
   icons = {
     google: faGoogle
   };
-  constructor(private builder: FormBuilder) { }
+  constructor(private store: Store<State>, private builder: FormBuilder) { }
 
   ngOnInit() {
     this.authForm = this.builder.group({
@@ -35,6 +40,12 @@ export class AuthFormComponent implements OnInit {
         Validators.required,
         Validators.minLength(6)
       ]]
+    });
+
+    this.store.select(rootComponentSelectors.error).subscribe(error => {
+      if (error.action.startsWith('[Auth]')) {
+        this.error = error;
+      }
     });
   }
 

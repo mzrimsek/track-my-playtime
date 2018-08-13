@@ -2,18 +2,34 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormBuilder } from '@angular/forms';
 
+import { combineReducers, Store, StoreModule } from '@ngrx/store';
+
 import { AuthFormComponent } from './auth-form.component';
+
+import * as fromRoot from '../../../../reducers/root.reducer';
+import * as fromAuth from '../../reducers/root.reducer';
 
 describe('AuthFormComponent', () => {
   let component: AuthFormComponent;
   let fixture: ComponentFixture<AuthFormComponent>;
+  let store: Store<fromAuth.State>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [AuthFormComponent],
       providers: [FormBuilder],
+      imports: [
+        StoreModule.forRoot({
+          ...fromRoot.reducers,
+          'auth': combineReducers(fromAuth.reducers)
+        })
+      ],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
+
+    store = TestBed.get(Store);
+
+    spyOn(store, 'dispatch').and.callThrough();
 
     fixture = TestBed.createComponent(AuthFormComponent);
     component = fixture.componentInstance;
