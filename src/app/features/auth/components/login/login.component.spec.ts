@@ -1,9 +1,11 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { combineReducers, Store, StoreModule } from '@ngrx/store';
 
+import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component';
 import { LoginComponent } from './login.component';
 
 import * as actions from '../../actions/user.actions';
@@ -18,12 +20,21 @@ describe('LoginComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [LoginComponent],
+      declarations: [
+        LoginComponent,
+        ForgotPasswordComponent
+      ],
       imports: [
         StoreModule.forRoot({
           ...fromRoot.reducers,
           'auth': combineReducers(fromAuth.reducers)
-        })
+        }),
+        RouterTestingModule.withRoutes([
+          {
+            path: 'forgotPassword',
+            component: ForgotPasswordComponent
+          }
+        ]),
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
