@@ -20,7 +20,7 @@ import { EmailAuthEvent } from '../../models';
 export class AuthFormComponent implements OnInit {
 
   authForm: FormGroup;
-  error: Error;
+  message = '';
   @Input() trackingCategory: string;
   @Output() emailAuth: EventEmitter<EmailAuthEvent> = new EventEmitter();
   @Output() googleAuth: EventEmitter<null> = new EventEmitter();
@@ -44,7 +44,7 @@ export class AuthFormComponent implements OnInit {
 
     this.store.select(rootComponentSelectors.error).subscribe(error => {
       if (error.action.startsWith('[Auth]')) {
-        this.error = error;
+        this.message = error.message;
       }
     });
   }
