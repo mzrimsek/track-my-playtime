@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { Store } from '@ngrx/store';
 
@@ -14,13 +15,21 @@ import { State } from '../../reducers/root.reducer';
 export class ForgotPasswordComponent implements OnInit {
 
   message = '';
-  constructor(private store: Store<State>) { }
+  passwordForm: FormGroup;
+  constructor(private store: Store<State>, private builder: FormBuilder) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.passwordForm = this.builder.group({
+      email: ['', [
+        Validators.required,
+        Validators.email
+      ]]
+    });
+  }
 
-  resetPassword(emailInputEl: HTMLInputElement) {
-    if (emailInputEl.value) {
-      const email = emailInputEl.value;
+  resetPassword() {
+    if (this.passwordForm.valid) {
+      const email = this.passwordForm.value.email;
       this.store.dispatch(new userActions.ResetPassword(email));
       this.message = `A password reset email has been sent to ${email}`;
     }
