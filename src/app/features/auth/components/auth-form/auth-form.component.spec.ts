@@ -37,11 +37,6 @@ describe('AuthFormComponent', () => {
         expect(component.authForm.valid).toBe(false);
       }));
 
-      it('Should disable email auth button when invalid', async(() => {
-        const button = fixture.nativeElement.querySelector('form button');
-        expect(button.disabled).toBe(true);
-      }));
-
       it('Should not emit emailAuth event emitEmailAuth is called', () => {
         spyOn(component.emailAuth, 'emit');
         component.emitEmailAuth();
@@ -57,11 +52,6 @@ describe('AuthFormComponent', () => {
 
       it('Should be valid when filled out', async(() => {
         expect(component.authForm.valid).toBe(true);
-      }));
-
-      it('Should enable email auth button when valid', async(() => {
-        const button = fixture.nativeElement.querySelector('form button');
-        expect(button.disabled).toBe(false);
       }));
 
       it('Should emit emailAuth event emitEmailAuth is called', () => {
