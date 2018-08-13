@@ -6,9 +6,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { Store } from '@ngrx/store';
 
+import * as userActions from '../../actions/user.actions';
+
 import rootComponentSelectors, { State } from '../../../../reducers/root.reducer';
 
-import { Error } from '../../../../models';
 import { EmailAuthEvent } from '../../models';
 
 @Component({
@@ -43,8 +44,18 @@ export class AuthFormComponent implements OnInit {
     });
 
     this.store.select(rootComponentSelectors.error).subscribe(error => {
-      if (error.action.startsWith('[Auth]')) {
-        this.message = error.message;
+      switch (error.action) {
+        case userActions.SIGNUP: {
+          this.message = 'Email address already in use.';
+          break;
+        }
+        case userActions.EMAIL_LOGIN: {
+          this.message = 'Email or password invalid.';
+          break;
+        }
+        default: {
+          this.message = error.message;
+        }
       }
     });
   }
