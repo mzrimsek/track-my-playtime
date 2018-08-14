@@ -16,6 +16,7 @@ import { EmailAuthEvent } from '../../models';
 export class AuthFormComponent implements OnInit {
 
   authForm: FormGroup;
+  showMessage = false;
   @Input() message = '';
   @Input() trackingCategory: string;
   @Output() emailAuth: EventEmitter<EmailAuthEvent> = new EventEmitter();
@@ -45,6 +46,7 @@ export class AuthFormComponent implements OnInit {
         email: this.authForm.value.email,
         password: this.authForm.value.password
       });
+      this.showMessage = true;
     }
   }
 
