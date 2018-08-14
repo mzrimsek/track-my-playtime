@@ -23,5 +23,4 @@ export class ProfileService {
 
 export interface FirestoreProfileItem {
   displayName: string;
-  email: string;
 }
