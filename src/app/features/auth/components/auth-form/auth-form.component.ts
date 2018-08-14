@@ -4,11 +4,6 @@ import {
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
-import { Store } from '@ngrx/store';
-
-import * as userActions from '../../actions/user.actions';
-
-import rootComponentSelectors, { State } from '../../../../reducers/root.reducer';
 
 import { EmailAuthEvent } from '../../models';
 
@@ -21,7 +16,7 @@ import { EmailAuthEvent } from '../../models';
 export class AuthFormComponent implements OnInit {
 
   authForm: FormGroup;
-  message = '';
+  @Input() message = '';
   @Input() trackingCategory: string;
   @Output() emailAuth: EventEmitter<EmailAuthEvent> = new EventEmitter();
   @Output() googleAuth: EventEmitter<null> = new EventEmitter();
@@ -29,7 +24,7 @@ export class AuthFormComponent implements OnInit {
   icons = {
     google: faGoogle
   };
-  constructor(private store: Store<State>, private builder: FormBuilder) { }
+  constructor(private builder: FormBuilder) { }
 
   ngOnInit() {
     this.authForm = this.builder.group({
@@ -41,22 +36,6 @@ export class AuthFormComponent implements OnInit {
         Validators.required,
         Validators.minLength(6)
       ]]
-    });
-
-    this.store.select(rootComponentSelectors.error).subscribe(error => {
-      switch (error.action) {
-        case userActions.SIGNUP: {
-          this.message = 'Email address already in use.';
-          break;
-        }
-        case userActions.EMAIL_LOGIN: {
-          this.message = 'Email or password invalid.';
-          break;
-        }
-        default: {
-          this.message = error.message;
-        }
-      }
     });
   }
 
