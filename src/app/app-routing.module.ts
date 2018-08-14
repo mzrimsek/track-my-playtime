@@ -8,6 +8,7 @@ import { DashboardComponent } from './features/dashboard/dashboard.component';
 import { HomeComponent } from './features/home/home.component';
 import { LibraryComponent } from './features/library/library.component';
 import { TrackerComponent } from './features/tracker/tracker.component';
+import { UserComponent } from './features/user/user.component';
 
 import { AuthGuard } from './features/auth/guards/auth.guard';
 
@@ -43,6 +44,10 @@ const routes: Routes = [
       {
         path: 'completion',
         component: CompletionComponent
+      },
+      {
+        path: 'me',
+        component: UserComponent
       },
       {
         path: '**',
