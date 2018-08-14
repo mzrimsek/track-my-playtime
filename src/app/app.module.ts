@@ -22,8 +22,8 @@ import { CompletionModule } from './features/completion/completion.module';
 import { DashboardModule } from './features/dashboard/dashboard.module';
 import { HomeModule } from './features/home/home.module';
 import { LibraryModule } from './features/library/library.module';
+import { ProfileModule } from './features/profile/profile.module';
 import { TrackerModule } from './features/tracker/tracker.module';
-import { UserModule } from './features/user/user.module';
 import { SharedModule } from './shared/shared.module';
 
 import { AppComponent } from './app.component';
@@ -70,7 +70,7 @@ import './rxjs-operators';
     DashboardModule,
     LibraryModule,
     CompletionModule,
-    UserModule
+    ProfileModule
   ],
   providers: [{
     provide: RouterStateSerializer, useClass: CustomRouterStateSerializer
