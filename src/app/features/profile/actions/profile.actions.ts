@@ -14,4 +14,12 @@ export class LoadProfileSucceeded implements Action {
   constructor(public profile: Profile) { }
 }
 
-export type All = LoadProfile | LoadProfileSucceeded;
+export const CLEAR_PROFILE = '[Profile] Clear Profile';
+export class ClearProfile implements Action {
+  readonly type = CLEAR_PROFILE;
+  constructor() { }
+}
+
+export type All = LoadProfile |
+  LoadProfileSucceeded |
+  ClearProfile;

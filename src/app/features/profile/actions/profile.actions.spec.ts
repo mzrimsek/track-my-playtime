@@ -33,4 +33,11 @@ describe('Profile Actions', () => {
       });
     });
   });
+
+  describe('ClearProfile', () => {
+    it('Should have correct type', () => {
+      const action = new actions.ClearProfile();
+      expect(action.type).toBe(actions.CLEAR_PROFILE);
+    });
+  });
 });
