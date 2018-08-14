@@ -70,14 +70,19 @@ describe('AuthFormComponent', () => {
         expect(component.authForm.valid).toBe(true);
       }));
 
-      it('Should emit emailAuth event emitEmailAuth is called', () => {
+      it('Should emit emailAuth event when emitEmailAuth is called', async(() => {
         spyOn(component.emailAuth, 'emit');
         component.emitEmailAuth();
         expect(component.emailAuth.emit).toHaveBeenCalledWith({
           email: 'email@email.com',
           password: 'password'
         });
-      });
+      }));
+
+      it('Should set showMessage to true when emitEmailAuth is called', async(() => {
+        component.emitEmailAuth();
+        expect(component.showMessage).toBe(true);
+      }));
     });
   });
 });
