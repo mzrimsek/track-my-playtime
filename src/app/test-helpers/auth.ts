@@ -27,8 +27,8 @@ export namespace auth {
         .createSpy('signOut')
         .and
         .callFake(fakeSignOutHandler),
-      createUserAndRetrieveDataWithEmailAndPassword: jasmine
-        .createSpy('createUserAndRetrieveDataWithEmailAndPassword')
+      createUserWithEmailAndPassword: jasmine
+        .createSpy('createUserWithEmailAndPassword')
         .and
         .callFake(fakeSignInHandler),
       signInAndRetrieveDataWithEmailAndPassword: jasmine
