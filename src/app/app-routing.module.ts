@@ -46,7 +46,7 @@ const routes: Routes = [
         component: CompletionComponent
       },
       {
-        path: 'me',
+        path: 'profile',
         component: ProfileComponent
       },
       {

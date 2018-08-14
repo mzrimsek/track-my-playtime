@@ -1,5 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Observable } from 'rxjs/Observable';
+
+import { UserService } from '../auth/services/user.service';
+
+import { User } from '../auth/models';
+import { Profile } from './models';
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -7,7 +14,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor() { }
+  user: User;
+  profile$: Observable<Profile>;
+  constructor(private userService: UserService) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.user = this.userService.getUser();
+  }
 }
