@@ -61,6 +61,12 @@ describe('NavComponent', () => {
     expect(href).toBe('/app');
   }));
 
+  it('Should have profile link with correct href', async(() => {
+    const profileLink = fixture.debugElement.query(By.css('.user .info a'));
+    const href = profileLink.nativeElement.getAttribute('href');
+    expect(href).toBe('/app/profile');
+  }));
+
   it('Should have nav tracker link with correct href', async(() => {
     const navTrackerLink = fixture.debugElement.query(By.css('#navTrackerLink'));
     const href = navTrackerLink.nativeElement.getAttribute('href');
