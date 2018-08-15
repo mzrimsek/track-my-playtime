@@ -43,7 +43,8 @@ describe('Auth Effects', () => {
         uid,
         displayName: '',
         email: '',
-        photoURL: ''
+        photoURL: '',
+        providerId: ''
       });
 
       actions = hot('-a', { a: action });

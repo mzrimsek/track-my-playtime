@@ -57,7 +57,8 @@ describe('User Service', () => {
           uid: '',
           displayName: '',
           email: '',
-          photoURL: ''
+          photoURL: '',
+          providerId: ''
         });
       });
     });
@@ -67,7 +68,8 @@ describe('User Service', () => {
         uid: 'some id',
         displayName: 'Jim Bob',
         email: 'jimbob@jimbob.com',
-        photoURL: 'jimbob.com/jimbob.png'
+        photoURL: 'jimbob.com/jimbob.png',
+        providerId: 'google.com'
       };
       store.dispatch(new actions.Authenticated(user));
 
@@ -84,7 +86,8 @@ describe('User Service', () => {
         uid: 'some id',
         displayName: 'Jim Bob',
         email: 'jimbob@jimbob.com',
-        photoURL: 'jimbob.com/jimbob.png'
+        photoURL: 'jimbob.com/jimbob.png',
+        providerId: 'google.com'
       };
       store.dispatch(new actions.Authenticated(user));
     });
@@ -100,7 +103,8 @@ describe('User Service', () => {
         expect(res).toEqual({
           displayName: 'Jimmy',
           imgSrc: 'jimbob.com/jimbob.png',
-          email: 'jimbob@jimbob.com'
+          email: 'jimbob@jimbob.com',
+          provider: 'google.com'
         });
       });
     });

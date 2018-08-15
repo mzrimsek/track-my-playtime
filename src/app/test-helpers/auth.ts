@@ -54,7 +54,12 @@ export namespace auth {
     }
 
     signInWithGoogle(): Observable<any> {
-      this.authState = Observable.of(user.mockUser);
+      this.authState = Observable.of({
+        ...user.mockUser,
+        providerData: [{
+          ...user.mockUser
+        }]
+      });
       return Observable.of('Logged in with Google');
     }
 

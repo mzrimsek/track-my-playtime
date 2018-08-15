@@ -7,13 +7,15 @@ export namespace user {
     uid: 'some id',
     displayName: 'Jim Bob',
     email: 'jimbob@jimbob.com',
-    photoURL: 'jimbob.com/jimbob.png'
+    photoURL: 'jimbob.com/jimbob.png',
+    providerId: 'google.com'
   };
 
   export const mockUserInfo: UserInfo = {
     displayName: 'Jimmy',
     email: mockUser.email,
-    imgSrc: mockUser.photoURL
+    imgSrc: mockUser.photoURL,
+    provider: mockUser.providerId
   };
 
   export const userServiceStub = {
