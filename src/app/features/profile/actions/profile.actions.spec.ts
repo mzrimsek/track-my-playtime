@@ -1,5 +1,7 @@
 import * as actions from './profile.actions';
 
+import { profile } from '../../../test-helpers/profile';
+
 describe('Profile Actions', () => {
   describe('LoadProfile', () => {
     it('Should have correct type', () => {
@@ -15,22 +17,13 @@ describe('Profile Actions', () => {
 
   describe('LoadProfileSucceeded', () => {
     it('Should have correct type', () => {
-      const action = new actions.LoadProfileSucceeded({
-        displayName: 'some name',
-        email: 'email@email.com'
-      });
+      const action = new actions.LoadProfileSucceeded(profile.profileWithDisplayName);
       expect(action.type).toBe(actions.LOAD_PROFILE_SUCCEEDED);
     });
 
     it('Should have correct profile', () => {
-      const action = new actions.LoadProfileSucceeded({
-        displayName: 'some name',
-        email: 'email@email.com'
-      });
-      expect(action.profile).toEqual({
-        displayName: 'some name',
-        email: 'email@email.com'
-      });
+      const action = new actions.LoadProfileSucceeded(profile.profileWithDisplayName);
+      expect(action.profile).toEqual(profile.profileWithDisplayName);
     });
   });
 

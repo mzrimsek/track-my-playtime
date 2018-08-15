@@ -16,4 +16,19 @@ export namespace profile {
       return Observable.of(profileWithDisplayName);
     }
   }
+
+  export namespace firestore {
+    export const documentStub = {
+      valueChanges: jasmine.createSpy('valueChanges').and.returnValue(Observable.of(profileWithDisplayName)),
+      set: jasmine.createSpy('set')
+    };
+
+    export const collectionStub = {
+      doc: jasmine.createSpy('doc').and.returnValue(documentStub)
+    };
+
+    export const angularFirestoreStub = {
+      collection: jasmine.createSpy('collection').and.returnValue(collectionStub)
+    };
+  }
 }
