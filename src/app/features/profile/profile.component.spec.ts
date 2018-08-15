@@ -6,8 +6,7 @@ import { ProfileComponent } from './profile.component';
 
 import { UserService } from '../auth/services/user.service';
 
-import * as profileActions from './actions/profile.actions';
-
+// import * as profileActions from './actions/profile.actions';
 import * as fromRoot from '../../reducers/root.reducer';
 import * as fromProfile from './reducers/root.reducer';
 
