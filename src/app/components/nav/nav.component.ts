@@ -7,7 +7,7 @@ import {
 
 import { UserService } from '../../features/auth/services/user.service';
 
-import { UserInfo } from '../../features/profile/models';
+import { UserInfo } from '../../features/auth/models';
 import { RouteEntry } from '../../models';
 
 @Component({

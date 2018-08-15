@@ -4,4 +4,9 @@
     <div class="name">{{ userInfo.displayName }}</div>
     <div class="email">{{ userInfo.email }}</div>
   </div>
+  <div *ngIf="userInfo.provider === 'password'"
+       class="security">
+    <div>Security</div>
+    <button>Reset Password</button>
+  </div>
 </div>

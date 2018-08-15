@@ -76,11 +76,13 @@ export class UserEffects {
         .catch(err => Observable.of(new appActions.Error(userActions.RESET_PASSWORD, err.message))));
 
   private getAuthenticatedAction(authData: AuthUser): userActions.Authenticated {
+    const providerData = authData.providerData[0];
     const user = <User>{
       uid: authData.uid,
       displayName: authData.displayName,
       email: authData.email,
-      photoURL: authData.photoURL
+      photoURL: authData.photoURL,
+      providerId: providerData ? providerData.providerId : ''
     };
     return new userActions.Authenticated(user);
   }

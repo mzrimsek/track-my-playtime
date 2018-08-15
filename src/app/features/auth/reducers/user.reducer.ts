@@ -7,13 +7,15 @@ export interface State {
   displayName: string;
   email: string;
   photoURL: string;
+  providerId: string;
 }
 
 const initialState: State = {
   uid: '',
   displayName: '',
   email: '',
-  photoURL: ''
+  photoURL: '',
+  providerId: ''
 };
 
 export function reducer(state: State = initialState, action: actions.All): State {

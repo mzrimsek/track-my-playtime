@@ -35,7 +35,8 @@ export class UserService {
       return {
         displayName: getDisplayName(user, profile),
         email: user.email,
-        imgSrc: getImgSrc(user)
+        imgSrc: getImgSrc(user),
+        provider: user.providerId
       };
     });
   }
