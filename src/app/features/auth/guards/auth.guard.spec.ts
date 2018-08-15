@@ -12,7 +12,7 @@ import * as actions from '../actions/user.actions';
 import * as fromRoot from '../../../reducers/root.reducer';
 import * as fromAuth from '../reducers/root.reducer';
 
-import { routing } from '../../../test-helpers';
+import { routing, user } from '../../../test-helpers';
 
 describe('AuthGuard', () => {
   let guard: AuthGuard;
@@ -66,12 +66,7 @@ describe('AuthGuard', () => {
   });
 
   it('Should return true when user is authenticated', () => {
-    store.dispatch(new actions.Authenticated({
-      uid: 'some id',
-      displayName: 'Jim Bob',
-      email: 'jimbob@jimbob.com',
-      photoURL: 'jimbob.com/jimbob.png'
-    }));
+    store.dispatch(new actions.Authenticated(user.mockUser));
     const expected = cold('(a|)', { a: true });
 
     const result = guard.canActivate(new ActivatedRouteSnapshot(), routerStateSnapshot);

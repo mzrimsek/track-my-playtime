@@ -12,7 +12,8 @@ describe('Auth Root Reducer', () => {
             uid: 'some uid',
             displayName: '',
             email: '',
-            photoURL: ''
+            photoURL: '',
+            providerId: ''
           }
         };
         const state: State = { auth: authState };
@@ -28,7 +29,8 @@ describe('Auth Root Reducer', () => {
             uid: '',
             displayName: '',
             email: '',
-            photoURL: ''
+            photoURL: '',
+            providerId: ''
           }
         };
         const state: State = { auth: authState };

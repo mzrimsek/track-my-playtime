@@ -1,6 +1,6 @@
 import * as actions from './user.actions';
 
-import { User } from '../models';
+import { user } from '../../../test-helpers';
 
 describe('User Actions', () => {
   describe('GetUser', () => {
@@ -16,21 +16,15 @@ describe('User Actions', () => {
         uid: '',
         displayName: '',
         email: '',
-        photoURL: ''
+        photoURL: '',
+        providerId: ''
       });
       expect(action.type).toBe(actions.AUTHENTICATED);
     });
 
     it('Should have correct user', () => {
-      const user: User = {
-        uid: 'some id',
-        displayName: 'Jim Bob',
-        email: 'jimbob@jimbob.com',
-        photoURL: 'jimbob.com/jimbob.png'
-      };
-      const action = new actions.Authenticated(user);
-
-      expect(action.user).toEqual(user);
+      const action = new actions.Authenticated(user.mockUser);
+      expect(action.user).toEqual(user.mockUser);
     });
   });
 
