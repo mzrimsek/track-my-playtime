@@ -41,11 +41,11 @@ describe('User Service', () => {
     expect(service).toBeTruthy();
   });
 
-  it('Should select user', () => {
+  xit('Should select user', () => {
     expect(store.select).toHaveBeenCalledWith(fromAuth._selectUserData);
   });
 
-  it('Should select profile info', () => {
+  xit('Should select profile info', () => {
     expect(store.select).toHaveBeenCalledWith(fromProfile._selectInfo);
   });
 
