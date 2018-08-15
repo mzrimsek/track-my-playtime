@@ -46,10 +46,6 @@ describe('ProfileComponent', () => {
     expect(component).toBeTruthy();
   }));
 
-  it('Should select profile info', async(() => {
-    expect(store.select).toHaveBeenCalledWith(fromProfile._selectInfo);
-  }));
-
   it('Should call UserService getUser', async(() => {
     expect(userService.getUser).toHaveBeenCalled();
   }));

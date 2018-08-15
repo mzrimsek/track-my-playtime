@@ -9,6 +9,7 @@ export namespace user {
   };
 
   export const userServiceStub = {
-    getUser: jasmine.createSpy('getUser').and.returnValue(mockUser)
+    getUser: jasmine.createSpy('getUser').and.returnValue(mockUser),
+    getUserInfo: jasmine.createSpy('getUserInfo').and.returnValue({ displayName: 'Jimmy' })
   };
 }
