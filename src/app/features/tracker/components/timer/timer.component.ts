@@ -34,7 +34,7 @@ export class TimerComponent implements OnInit {
   constructor(private store: Store<State>, private userService: UserService, private timerService: TimerService) { }
 
   ngOnInit() {
-    this.userId = this.userService.getUser().uid;
+    this.userService.getUser().subscribe(user => this.userId = user.uid);
   }
 
   startTimer() {

@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 
+import { Observable } from 'rxjs/Observable';
+
 import * as userActions from '../actions/user.actions';
 
 import profileComponentSelectors, {
@@ -9,32 +11,33 @@ import profileComponentSelectors, {
 } from '../../profile/reducers/root.reducer';
 import authComponentSelectors, { State } from '../reducers/root.reducer';
 
-import { UserInfo } from '../../profile/models';
-import { User } from '../models';
+import { Profile } from '../../profile/models';
+import { User, UserInfo } from '../models';
 
 import { getDisplayName, getImgSrc } from '../../profile/utils/userinfo.utils';
 
 @Injectable()
 export class UserService {
 
-  private user: User;
-  private userInfo: UserInfo;
-  constructor(private store: Store<State>, private profileStore: Store<ProfileState>) { }
-
-  getUser(): User {
-    this.store.select(authComponentSelectors.user).subscribe(user => this.user = user);
-    return this.user;
+  private user$: Observable<User>;
+  private profile$: Observable<Profile>;
+  constructor(private store: Store<State>, private profileStore: Store<ProfileState>) {
+    this.user$ = this.store.select(authComponentSelectors.user);
+    this.profile$ = this.profileStore.select(profileComponentSelectors.info);
   }
 
-  getUserInfo(): UserInfo {
-    this.profileStore.select(profileComponentSelectors.info).subscribe(profile => {
-      this.userInfo = {
-        displayName: getDisplayName(this.user, profile),
-        email: this.user.email,
-        imgSrc: getImgSrc(this.user)
+  getUser(): Observable<User> {
+    return this.user$;
+  }
+
+  getUserInfo(): Observable<UserInfo> {
+    return this.user$.combineLatest(this.profile$, (user: User, profile: Profile) => {
+      return {
+        displayName: getDisplayName(user, profile),
+        email: user.email,
+        imgSrc: getImgSrc(user)
       };
     });
-    return this.userInfo;
   }
 
   logout(): void {

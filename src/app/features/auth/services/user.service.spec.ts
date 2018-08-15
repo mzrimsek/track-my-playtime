@@ -41,19 +41,24 @@ describe('User Service', () => {
     expect(service).toBeTruthy();
   });
 
-  describe('getUser', () => {
-    it('Should select user', () => {
-      service.getUser();
-      expect(store.select).toHaveBeenCalledWith(fromAuth._selectUserData);
-    });
+  it('Should select user', () => {
+    expect(store.select).toHaveBeenCalledWith(fromAuth._selectUserData);
+  });
 
+  it('Should select profile info', () => {
+    expect(store.select).toHaveBeenCalledWith(fromProfile._selectInfo);
+  });
+
+  describe('getUser', () => {
     it('Should return default data when not authenticated', () => {
       const result = service.getUser();
-      expect(result).toEqual({
-        uid: '',
-        displayName: '',
-        email: '',
-        photoURL: ''
+      result.subscribe(res => {
+        expect(res).toEqual({
+          uid: '',
+          displayName: '',
+          email: '',
+          photoURL: ''
+        });
       });
     });
 
@@ -67,8 +72,9 @@ describe('User Service', () => {
       store.dispatch(new actions.Authenticated(user));
 
       const result = service.getUser();
-
-      expect(result).toEqual(user);
+      result.subscribe(res => {
+        expect(res).toEqual(user);
+      });
     });
   });
 
@@ -81,12 +87,6 @@ describe('User Service', () => {
         photoURL: 'jimbob.com/jimbob.png'
       };
       store.dispatch(new actions.Authenticated(user));
-      service.getUser();
-    });
-
-    it('Should select userInfo', () => {
-      service.getUserInfo();
-      expect(store.select).toHaveBeenCalledWith(fromProfile._selectInfo);
     });
 
     it('Should return user info', () => {
@@ -96,11 +96,12 @@ describe('User Service', () => {
       store.dispatch(new profileActions.LoadProfileSucceeded(profile));
 
       const result = service.getUserInfo();
-
-      expect(result).toEqual({
-        displayName: 'Jimmy',
-        imgSrc: 'jimbob.com/jimbob.png',
-        email: 'jimbob@jimbob.com'
+      result.subscribe(res => {
+        expect(res).toEqual({
+          displayName: 'Jimmy',
+          imgSrc: 'jimbob.com/jimbob.png',
+          email: 'jimbob@jimbob.com'
+        });
       });
     });
   });

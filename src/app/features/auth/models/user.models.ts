@@ -4,3 +4,9 @@ export interface User {
   email: string;
   photoURL: string;
 }
+
+export interface UserInfo {
+  displayName: string;
+  email: string;
+  imgSrc: string;
+}
