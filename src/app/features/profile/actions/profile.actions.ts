@@ -20,6 +20,20 @@ export class ClearProfile implements Action {
   constructor() { }
 }
 
+export const SET_PROFILE_DISPLAYNAME = '[Profile] Set DisplayName';
+export class SetProfileDisplayName implements Action {
+  readonly type = SET_PROFILE_DISPLAYNAME;
+  constructor(public userId: string, public displayName: string) { }
+}
+
+export const SET_PROFILE_DISPLAYNAME_SUCCEEDED = '[Profile] Set DisplayName Succeeded';
+export class SetProfileDisplayNameSucceeded implements Action {
+  readonly type = SET_PROFILE_DISPLAYNAME_SUCCEEDED;
+  constructor(public displayName: string) { }
+}
+
 export type All = LoadProfile |
   LoadProfileSucceeded |
-  ClearProfile;
+  ClearProfile |
+  SetProfileDisplayName |
+  SetProfileDisplayNameSucceeded;

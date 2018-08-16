@@ -33,4 +33,33 @@ describe('Profile Actions', () => {
       expect(action.type).toBe(actions.CLEAR_PROFILE);
     });
   });
+
+  describe('SetProfileDisplayName', () => {
+    it('Should have correct type', () => {
+      const action = new actions.SetProfileDisplayName('', '');
+      expect(action.type).toBe(actions.SET_PROFILE_DISPLAYNAME);
+    });
+
+    it('Should have correct userId', () => {
+      const action = new actions.SetProfileDisplayName('some id', '');
+      expect(action.userId).toBe('some id');
+    });
+
+    it('Should have correct displayName', () => {
+      const action = new actions.SetProfileDisplayName('', 'some name');
+      expect(action.displayName).toBe('some name');
+    });
+  });
+
+  describe('SetProfileDisplayNameSucceeded', () => {
+    it('Should have correct type', () => {
+      const action = new actions.SetProfileDisplayNameSucceeded('');
+      expect(action.type).toBe(actions.SET_PROFILE_DISPLAYNAME_SUCCEEDED);
+    });
+
+    it('Should have correct displayName', () => {
+      const action = new actions.SetProfileDisplayNameSucceeded('some name');
+      expect(action.displayName).toBe('some name');
+    });
+  });
 });
