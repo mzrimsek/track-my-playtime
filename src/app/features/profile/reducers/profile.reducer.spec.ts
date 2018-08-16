@@ -27,4 +27,14 @@ describe('Profile Reducer', () => {
 
     expect(newState).toEqual(profile);
   });
+
+  it('Should set displayName when SetProfileDisplayNameSucceeded is dispatched', () => {
+    const initialState: State = {
+      displayName: ''
+    };
+    const newState = reducer(initialState, new actions.SetProfileDisplayNameSucceeded('profile name'));
+    expect(newState).toEqual({
+      displayName: 'profile name'
+    });
+  });
 });

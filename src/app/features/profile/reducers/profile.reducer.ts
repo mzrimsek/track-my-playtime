@@ -15,6 +15,11 @@ export function reducer(state: State = initialState, action: actions.All): State
     case actions.LOAD_PROFILE_SUCCEEDED: {
       return tassign(state, action.profile);
     }
+    case actions.SET_PROFILE_DISPLAYNAME_SUCCEEDED: {
+      return tassign(state, {
+        displayName: action.displayName
+      });
+    }
     case actions.CLEAR_PROFILE: {
       return initialState;
     }
