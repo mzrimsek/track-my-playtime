@@ -49,4 +49,8 @@ describe('ProfileComponent', () => {
   it('Should call UserService getUser', async(() => {
     expect(userService.getUser).toHaveBeenCalled();
   }));
+
+  it('Should call UserService getUserInfo', async(() => {
+    expect(userService.getUserInfo).toHaveBeenCalled();
+  }));
 });
