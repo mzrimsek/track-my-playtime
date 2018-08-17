@@ -10,8 +10,8 @@
     </section>
 
     <section *ngIf="userInfo.provider === 'password'"
-             class="security drop-shadow">
-      <div class="header">Security</div>
+             class="account drop-shadow">
+      <div class="header">Account</div>
       <button data-tracking-category="profileResetPassword"
               (click)="sendResetPasswordLink()">Reset Password</button>
       <div *ngIf="message"
