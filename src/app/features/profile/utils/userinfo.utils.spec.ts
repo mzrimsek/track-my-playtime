@@ -7,7 +7,8 @@ import { user } from '../../../test-helpers';
 
 describe('User Info Utils', () => {
   describe('getDisplayName', () => {
-    it('Should return "New User" when no profile display name or user display name', () => {
+    it('Should return start of user email address when no profile display name or user display name', () => {
+      const defaultName = user.mockUser.email.split('@')[0];
       const currentUser: User = {
         ...user.mockUser,
         displayName: ''
@@ -18,7 +19,7 @@ describe('User Info Utils', () => {
 
       const result = getDisplayName(currentUser, profile);
 
-      expect(result).toBe('New User');
+      expect(result).toBe(defaultName);
     });
 
     it('Should return user display name when there is a user display name and no profile display name', () => {
