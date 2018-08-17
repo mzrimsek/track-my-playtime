@@ -1,0 +1,39 @@
+@import "../../../variables.scss";
+
+.content {
+  .profile{
+    padding: 20px;
+
+    .user-info {
+      display: flex;
+
+      img {
+        max-height: 200px;
+      }
+
+      .about {
+        margin-left: 10px;
+
+        .name, .email{
+          span {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+
+    section {
+      background: $background-light;
+      padding: 10px;
+
+      .header {
+        font-weight: bold;
+        font-size: $base-font-size + 2px;
+      }
+
+      &:not(:last-child) {
+        margin-bottom: 20px;
+      }
+    }
+  }
+}

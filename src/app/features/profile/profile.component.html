@@ -1,12 +1,21 @@
 <div class="content">
-  <div class="user-info">
-    <img src="{{ userInfo.imgSrc }}">
-    <div class="name">{{ userInfo.displayName }}</div>
-    <div class="email">{{ userInfo.email }}</div>
-  </div>
-  <div *ngIf="userInfo.provider === 'password'"
-       class="security">
-    <div>Security</div>
-    <button>Reset Password</button>
+  <div class="profile">
+    <section class="user-info drop-shadow">
+      <img src="{{ userInfo.imgSrc }}">
+      <div class="about">
+        <div class="header">About</div>
+        <div class="name"><span>Display Name</span>: {{ userInfo.displayName }}</div>
+        <div class="email"><span>Email</span>: {{ userInfo.email }}</div>
+      </div>
+    </section>
+
+    <section *ngIf="userInfo.provider === 'password'"
+             class="security drop-shadow">
+      <div class="header">Security</div>
+      <button data-tracking-category="profileResetPassword"
+              (click)="sendResetPasswordLink()">Reset Password</button>
+      <div *ngIf="message"
+           class="message">{{ message }}</div>
+    </section>
   </div>
 </div>
