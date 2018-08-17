@@ -15,6 +15,10 @@ export namespace profile {
     getProfile(_userId: string): Observable<Profile> {
       return Observable.of(profileWithDisplayName);
     }
+
+    setDisplayName(_userId: string, displayName: string): Observable<string> {
+      return Observable.of(displayName);
+    }
   }
 
   export namespace firestore {

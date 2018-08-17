@@ -42,4 +42,26 @@ describe('ProfileService', () => {
       });
     });
   });
+
+  describe('setDisplayName', () => {
+    const displayName = 'some name';
+
+    it('Should call profile collection doc with user id', () => {
+      const userId = 'user id';
+      service.setDisplayName(userId, displayName);
+      expect(profile.firestore.collectionStub.doc).toHaveBeenCalledWith(userId);
+    });
+
+    it('Should call document set with correct display name', () => {
+      service.setDisplayName('', displayName);
+      expect(profile.firestore.documentStub.set).toHaveBeenCalledWith({ displayName }, { merge: true });
+    });
+
+    it('Should return correct data', () => {
+      const result = service.setDisplayName('', displayName);
+      result.subscribe(res => {
+        expect(res).toBe(displayName);
+      });
+    });
+  });
 });

@@ -14,10 +14,15 @@ export class ProfileService {
   }
 
   getProfile(userId: string): Observable<Profile> {
-    const profileDoc = this.profileCollection.doc<FirestoreProfileItem>(userId).valueChanges();
+    const profileDoc = this.profileCollection.doc<FirestoreProfileItem>(userId).valueChanges().first();
     return profileDoc.map(profile => <Profile>{
       ...profile
     });
+  }
+
+  setDisplayName(userId: string, displayName: string): Observable<string> {
+    this.profileCollection.doc(userId).set({ displayName }, { merge: true });
+    return Observable.of(displayName);
   }
 }
 

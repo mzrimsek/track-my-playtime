@@ -74,4 +74,43 @@ describe('Profile Effects', () => {
       });
     });
   });
+
+  describe('Set Display Name', () => {
+    it('Should dispatch SetProfileDisplayNameSucceeded', () => {
+      const displayName = 'some name';
+      const action = new profileActions.SetProfileDisplayName('', displayName);
+
+      actions = hot('-a', { a: action });
+      const expected = cold('-(b)', {
+        b: new profileActions.SetProfileDisplayNameSucceeded(displayName)
+      });
+
+      expect(effects.setDisplayName$).toBeObservable(expected);
+    });
+
+    it('Should dispatch Error on error', () => {
+      const action = new profileActions.SetProfileDisplayName('', '');
+      const message = 'Something went terribly wrong';
+
+      actions = hot('-a', { a: action });
+      const expected = cold('-(b)', {
+        b: new appActions.Error(profileActions.SET_PROFILE_DISPLAYNAME, message)
+      });
+
+      spyOn(profileService, 'setDisplayName').and.callFake(() => Observable.throw({ message }));
+      expect(effects.setDisplayName$).toBeObservable(expected);
+    });
+
+    it('Should call ProfileService setDisplayName', () => {
+      const action = new profileActions.SetProfileDisplayName('', '');
+
+      actions = new ReplaySubject(1);
+      actions.next(action);
+
+      spyOn(profileService, 'setDisplayName').and.callThrough();
+      effects.loadProfile$.subscribe(() => {
+        expect(profileService.setDisplayName).toHaveBeenCalled();
+      });
+    });
+  });
 });
