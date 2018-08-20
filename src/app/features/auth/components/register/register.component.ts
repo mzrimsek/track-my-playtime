@@ -30,6 +30,10 @@ export class RegisterComponent implements OnInit {
     this.store.dispatch(new userActions.GoogleLogin());
   }
 
+  facebookSignUp() {
+    this.store.dispatch(new userActions.FacebookLogin());
+  }
+
   emailSignUp(event: EmailAuthEvent) {
     this.store.dispatch(new userActions.SignUp(event.email, event.password));
   }

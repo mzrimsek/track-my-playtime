@@ -50,6 +50,15 @@ describe('RegisterComponent', () => {
     expect(store.dispatch).toHaveBeenCalledWith(action);
   }));
 
+  it('Should dispatch Facebook Login when FacebookAuth event is emitted', async(() => {
+    const action = new actions.FacebookLogin();
+    const form = fixture.nativeElement.querySelector('app-auth-auth-form');
+
+    form.dispatchEvent(new Event('facebookAuth'));
+
+    expect(store.dispatch).toHaveBeenCalledWith(action);
+  }));
+
   it('Should dispatch SignUp when EmailAuth event emitted', async(() => {
     const email = 'email@email.com';
     const password = 'password';
