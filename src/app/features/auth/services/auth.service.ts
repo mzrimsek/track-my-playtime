@@ -16,6 +16,10 @@ export class AuthService {
     return Observable.fromPromise(this.googleLogin());
   }
 
+  signInWithFacebook(): Observable<any> {
+    return Observable.fromPromise(this.facebookLogin());
+  }
+
   signOut(): Observable<any> {
     return Observable.fromPromise(this.afAuth.auth.signOut());
   }
@@ -34,6 +38,11 @@ export class AuthService {
 
   private googleLogin(): Promise<any> {
     const provider = new firebase.auth.GoogleAuthProvider();
+    return this.afAuth.auth.signInWithPopup(provider);
+  }
+
+  private facebookLogin(): Promise<any> {
+    const provider = new firebase.auth.FacebookAuthProvider();
     return this.afAuth.auth.signInWithPopup(provider);
   }
 }
