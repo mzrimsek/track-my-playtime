@@ -177,6 +177,42 @@ describe('User Effects', () => {
     });
   });
 
+  describe('Facebook Login', () => {
+    beforeEach(() => {
+      initTests();
+    });
+
+    it('Should dispatch GetUser', () => {
+      actions = hot('-a', { a: new userActions.FacebookLogin() });
+      const expected = cold('-(b)', {
+        b: new userActions.GetUser()
+      });
+      expect(effects.facebookLogin$).toBeObservable(expected);
+    });
+
+    it('Should dispatch Error on error', () => {
+      const message = 'Something went terribly wrong';
+      actions = hot('-a', { a: new userActions.FacebookLogin() });
+
+      const expected = cold('-(b)', {
+        b: new appActions.Error(userActions.FACEBOOK_LOGIN, message)
+      });
+
+      spyOn(authService, 'signInWithFacebook').and.callFake(() => Observable.throw({ message }));
+      expect(effects.facebookLogin$).toBeObservable(expected);
+    });
+
+    it('Should call AuthService signInWithFacebook', () => {
+      actions = new ReplaySubject(1);
+      actions.next(new userActions.FacebookLogin());
+
+      spyOn(authService, 'signInWithFacebook').and.callThrough();
+      effects.facebookLogin$.subscribe(() => {
+        expect(authService.signInWithFacebook).toHaveBeenCalled();
+      });
+    });
+  });
+
   describe('Logout', () => {
     beforeEach(() => {
       initTests();

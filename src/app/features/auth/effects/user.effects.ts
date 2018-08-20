@@ -41,6 +41,14 @@ export class UserEffects {
         .map(() => new userActions.GetUser())
         .catch(err => Observable.of(new appActions.Error(userActions.GOOGLE_LOGIN, err.message))));
 
+  @Effect() facebookLogin$ =
+    this.actions$
+      .ofType(userActions.FACEBOOK_LOGIN)
+      .map(action => action as userActions.FacebookLogin)
+      .switchMap(() => this.authService.signInWithFacebook()
+        .map(() => new userActions.GetUser())
+        .catch(err => Observable.of(new appActions.Error(userActions.FACEBOOK_LOGIN, err.message))));
+
   @Effect() logout$ =
     this.actions$
       .ofType(userActions.LOGOUT)
