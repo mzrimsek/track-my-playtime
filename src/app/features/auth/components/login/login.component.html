@@ -2,7 +2,8 @@
   <app-auth-auth-form [trackingCategory]="'Login'"
                       [message]="validationMessage$ | async"
                       (emailAuth)="emailLogin($event)"
-                      (googleAuth)="googleLogin()">
+                      (googleAuth)="googleLogin()"
+                      (facebookAuth)="facebookLogin()">
     <a id="forgotPasswordLink"
        data-tracking-category="loginForgotPassword"
        [routerLink]="['../forgotPassword']">Forgot your password?</a>

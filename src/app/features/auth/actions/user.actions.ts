@@ -26,6 +26,12 @@ export class GoogleLogin implements Action {
   constructor() { }
 }
 
+export const FACEBOOK_LOGIN = '[Auth] Facebook Login Attempt';
+export class FacebookLogin implements Action {
+  readonly type = FACEBOOK_LOGIN;
+  constructor() { }
+}
+
 export const LOGOUT = '[Auth] Logout';
 export class Logout implements Action {
   readonly type = LOGOUT;
@@ -54,6 +60,7 @@ export type All = GetUser |
   Authenticated |
   NotAuthenticated |
   GoogleLogin |
+  FacebookLogin |
   Logout |
   SignUp |
   EmailLogin |

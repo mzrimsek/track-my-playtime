@@ -2,5 +2,6 @@
   <app-auth-auth-form [trackingCategory]="'Register'"
                       [message]="validationMessage$ | async"
                       (emailAuth)="emailSignUp($event)"
-                      (googleAuth)="googleSignUp()"></app-auth-auth-form>
+                      (googleAuth)="googleSignUp()"
+                      (facebookAuth)="facebookSignUp()"></app-auth-auth-form>
 </div>

@@ -34,6 +34,10 @@ export class LoginComponent implements OnInit {
     this.store.dispatch(new userActions.GoogleLogin());
   }
 
+  facebookLogin() {
+    this.store.dispatch(new userActions.FacebookLogin());
+  }
+
   emailLogin(event: EmailAuthEvent) {
     this.store.dispatch(new userActions.EmailLogin(event.email, event.password));
   }
