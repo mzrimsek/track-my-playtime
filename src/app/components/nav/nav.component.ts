@@ -7,7 +7,7 @@ import {
 
 import { UserService } from '../../features/auth/services/user.service';
 
-import { User } from '../../features/auth/models';
+import { UserInfo } from '../../features/auth/models';
 import { RouteEntry } from '../../models';
 
 @Component({
@@ -21,6 +21,11 @@ export class NavComponent implements OnInit {
     caption: 'Track My Playtime',
     router: ['app'],
     trackingCategory: 'navBanner'
+  };
+  profileRoute: RouteEntry = {
+    caption: '',
+    router: ['app/profile'],
+    trackingCategory: 'navProfile'
   };
   routes: RouteEntry[] = [
     {
@@ -53,7 +58,7 @@ export class NavComponent implements OnInit {
     }
   ];
   hideNavContents = true;
-  user: User;
+  userInfo: UserInfo;
   icons = {
     logout: faSignOutAlt,
     menu: faBars,
@@ -62,7 +67,7 @@ export class NavComponent implements OnInit {
   constructor(private userService: UserService) { }
 
   ngOnInit() {
-    this.user = this.userService.getUser();
+    this.userService.getUserInfo().subscribe(userInfo => this.userInfo = userInfo);
   }
 
   logout() {

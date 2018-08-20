@@ -10,7 +10,8 @@ describe('User Reducer', () => {
       uid: '',
       displayName: '',
       email: '',
-      photoURL: ''
+      photoURL: '',
+      providerId: ''
     };
 
     const newState = reducer(initialState, new actions.Authenticated(user.mockUser));
@@ -30,7 +31,8 @@ describe('User Reducer', () => {
       uid: '',
       displayName: '',
       email: '',
-      photoURL: ''
+      photoURL: '',
+      providerId: ''
     });
   });
 });

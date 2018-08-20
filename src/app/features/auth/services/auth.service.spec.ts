@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs/Subscription';
 
 import { AuthService } from './auth.service';
 
-import { auth } from '../../../test-helpers';
+import { auth, user } from '../../../test-helpers';
 
 describe('Auth Service', () => {
   let service: AuthService;
@@ -63,6 +63,29 @@ describe('Auth Service', () => {
     it('Should call AngularFireAuth signOut', () => {
       service.signOut();
       expect(afAuth.auth.signOut).toHaveBeenCalled();
+    });
+  });
+
+  describe('signUpWithEmail', () => {
+    it('Should call AngularFireAuth createUserWithEmailAndPassword', () => {
+      const password = 'password';
+      service.signUpWithEmail(user.mockUser.email, password);
+      expect(afAuth.auth.createUserWithEmailAndPassword).toHaveBeenCalledWith(user.mockUser.email, password);
+    });
+  });
+
+  describe('signInWithEmail', () => {
+    it('Should call AngularFireAuth signInAndRetrieveDataWithEmailAndPassword', () => {
+      const password = 'password';
+      service.signInWithEmail(user.mockUser.email, password);
+      expect(afAuth.auth.signInAndRetrieveDataWithEmailAndPassword).toHaveBeenCalledWith(user.mockUser.email, password);
+    });
+  });
+
+  describe('resetPassword', () => {
+    it('Should call AngularFireAuth sendPasswordResetEmail', () => {
+      service.resetPassword(user.mockUser.email);
+      expect(afAuth.auth.sendPasswordResetEmail).toHaveBeenCalledWith(user.mockUser.email);
     });
   });
 });

@@ -48,9 +48,12 @@
 
   <div class="user">
     <div class="info">
-      <img class="drop-shadow"
-           src="{{ user.photoURL }}">
-      <div class="name">{{ user.displayName }}</div>
+      <a [attr.data-tracking-category]="profileRoute.trackingCategory"
+         [routerLink]="profileRoute.router">
+        <img class="drop-shadow"
+             src="{{ userInfo.imgSrc }}">
+        <div class="name">{{ userInfo.displayName }}</div>
+      </a>
     </div>
 
     <button id="logoutButton"

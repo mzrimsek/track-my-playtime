@@ -16,7 +16,6 @@ import * as userActions from '../actions/user.actions';
 
 import { auth, routing, user } from '../../../test-helpers';
 
-// FIXME: I still think these tests need some work
 describe('User Effects', () => {
   let actions: any;
   let effects: UserEffects;
@@ -131,7 +130,7 @@ describe('User Effects', () => {
       expect(effects.getUser$).toBeObservable(expected);
     });
 
-    it('Should call UserService getAuthState', () => {
+    it('Should call AuthService getAuthState', () => {
       actions = new ReplaySubject(1);
       actions.next(new userActions.GetUser());
 
@@ -167,7 +166,7 @@ describe('User Effects', () => {
       expect(effects.googleLogin$).toBeObservable(expected);
     });
 
-    it('Should call UserService signInWithGoogle', () => {
+    it('Should call AuthService signInWithGoogle', () => {
       actions = new ReplaySubject(1);
       actions.next(new userActions.GoogleLogin());
 
@@ -213,7 +212,7 @@ describe('User Effects', () => {
       expect(effects.logout$).toBeObservable(expected);
     });
 
-    it('Should call UserService signOut', () => {
+    it('Should call AuthService signOut', () => {
       actions = new ReplaySubject(1);
       actions.next(new userActions.Logout());
 
@@ -221,6 +220,96 @@ describe('User Effects', () => {
       effects.logout$.subscribe(() => {
         expect(authService.signOut).toHaveBeenCalled();
       });
+    });
+  });
+
+  describe('Sign Up', () => {
+    beforeEach(() => {
+      initTests();
+    });
+
+    it('Should dispatch GetUser', () => {
+      actions = hot('-a', { a: new userActions.SignUp('email', 'password') });
+      const expected = cold('-(b)', {
+        b: new userActions.GetUser()
+      });
+      expect(effects.signUp$).toBeObservable(expected);
+    });
+
+    it('Should dispatch Error on error', () => {
+      const message = 'Something went terribly wrong';
+      actions = hot('-a', { a: new userActions.SignUp('email', 'password') });
+
+      const expected = cold('-(b)', {
+        b: new appActions.Error(userActions.SIGNUP, message)
+      });
+
+      spyOn(authService, 'signUpWithEmail').and.callFake(() => Observable.throw({ message }));
+      expect(effects.signUp$).toBeObservable(expected);
+    });
+
+    it('Should call AuthService signUpWithEmail', () => {
+      actions = new ReplaySubject(1);
+      actions.next(new userActions.SignUp('email', 'password'));
+
+      spyOn(authService, 'signUpWithEmail').and.callThrough();
+      effects.signUp$.subscribe(() => {
+        expect(authService.signUpWithEmail).toHaveBeenCalledWith('email', 'password');
+      });
+    });
+  });
+
+  describe('Email Login', () => {
+    beforeEach(() => {
+      initTests();
+    });
+
+    it('Should dispatch GetUser', () => {
+      actions = hot('-a', { a: new userActions.EmailLogin('email', 'password') });
+      const expected = cold('-(b)', {
+        b: new userActions.GetUser()
+      });
+      expect(effects.emailLogin$).toBeObservable(expected);
+    });
+
+    it('Should dispatch Error on error', () => {
+      const message = 'Something went terribly wrong';
+      actions = hot('-a', { a: new userActions.EmailLogin('email', 'password') });
+
+      const expected = cold('-(b)', {
+        b: new appActions.Error(userActions.EMAIL_LOGIN, message)
+      });
+
+      spyOn(authService, 'signInWithEmail').and.callFake(() => Observable.throw({ message }));
+      expect(effects.emailLogin$).toBeObservable(expected);
+    });
+
+    it('Should call AuthService signInWithEmail', () => {
+      actions = new ReplaySubject(1);
+      actions.next(new userActions.EmailLogin('email', 'password'));
+
+      spyOn(authService, 'signInWithEmail').and.callThrough();
+      effects.emailLogin$.subscribe(() => {
+        expect(authService.signInWithEmail).toHaveBeenCalledWith('email', 'password');
+      });
+    });
+  });
+
+  describe('Reset Password', () => {
+    beforeEach(() => {
+      initTests();
+    });
+
+    it('Should dispatch Error on error', () => {
+      const message = 'Something went terribly wrong';
+      actions = hot('-a', { a: new userActions.ResetPassword('email') });
+
+      const expected = cold('-(b)', {
+        b: new appActions.Error(userActions.RESET_PASSWORD, message)
+      });
+
+      spyOn(authService, 'resetPassword').and.callFake(() => Observable.throw({ message }));
+      expect(effects.resetPassword$).toBeObservable(expected);
     });
   });
 });

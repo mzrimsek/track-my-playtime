@@ -9,6 +9,7 @@ import * as progressActions from '../../../shared/actions/progress.actions';
 import * as userActions from '../../auth/actions/user.actions';
 import * as addPlayingActions from '../../completion/actions/add-playing.actions';
 import * as markCompleteActions from '../../completion/actions/mark-complete.actions';
+import * as profileActions from '../../profile/actions/profile.actions';
 
 @Injectable()
 export class AuthEffects {
@@ -23,7 +24,8 @@ export class AuthEffects {
         new platformsActions.LoadOptions(),
         new historyActions.LoadHistoryItems(action.user.uid),
         new timerActions.LoadTimerInfo(action.user.uid),
-        new progressActions.LoadProgressItems(action.user.uid)
+        new progressActions.LoadProgressItems(action.user.uid),
+        new profileActions.LoadProfile(action.user.uid)
       ]);
 
   @Effect() logout$ =
@@ -34,6 +36,7 @@ export class AuthEffects {
         new timerActions.ResetTimer(),
         new progressActions.ClearProgressItems(),
         new addPlayingActions.Reset(),
-        new markCompleteActions.ClearItems()
+        new markCompleteActions.ClearItems(),
+        new profileActions.ClearProfile()
       ]);
 }

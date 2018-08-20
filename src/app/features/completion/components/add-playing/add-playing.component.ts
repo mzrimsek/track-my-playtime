@@ -36,7 +36,7 @@ export class AddPlayingComponent implements OnInit {
   constructor(private store: Store<State>, private userService: UserService) { }
 
   ngOnInit() {
-    this.userId = this.userService.getUser().uid;
+    this.userService.getUser().subscribe(user => this.userId = user.uid);
   }
 
   setGame() {

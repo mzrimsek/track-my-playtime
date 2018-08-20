@@ -1,0 +1,81 @@
+@import "../../../variables.scss";
+
+.content {
+  .profile{
+    padding: 20px;
+
+    .user-info {
+      display: flex;
+
+      img {
+        max-width: 200px;
+        height: auto;
+      }
+
+      .about {
+        margin-left: 10px;
+
+        .name, .email{
+          height: $profile-field-height;
+
+          span {
+            text-decoration: underline;
+          }
+
+          .no-edit {
+            display: flex;
+          }
+        }
+      }
+    }
+
+    .account {
+      button {
+        border: none;
+        color: $background-dark;
+        background: $background-light-accent;
+        padding: 15px;
+
+        &:hover:not(:disabled) {
+          background: darken($background-light-accent, 5%);
+          cursor: pointer;
+        }
+      }
+    }
+
+    section {
+      background: $background-light;
+      padding: 10px;
+
+      .header {
+        font-weight: bold;
+        font-size: $base-font-size + 2px;
+      }
+
+      &:not(:last-child) {
+        margin-bottom: 20px;
+      }
+    }
+  }
+}
+
+@media only screen  and (max-width : $small-breakpoint) {
+  .content {
+    .profile {
+      margin-top: $small-nav-banner-height;
+
+      .user-info {
+        flex-direction: column;
+
+        img {
+          align-self: center;
+          margin-bottom: 5px;
+        }
+
+        .about {
+          margin-left: 0px;
+        }
+      }
+    }
+  }
+}

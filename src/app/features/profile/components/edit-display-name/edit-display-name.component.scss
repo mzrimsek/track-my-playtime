@@ -1,0 +1,19 @@
+@import "../../../../../variables.scss";
+
+.edit-display-name {
+  display: flex;
+
+  input {
+    padding: 10px;
+  }
+
+  .actions {
+    .confirm {
+      color: $good-action-color;
+    }
+
+    .cancel {
+      color: $bad-action-color;
+    }
+  }
+}

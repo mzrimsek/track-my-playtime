@@ -5,6 +5,8 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { combineReducers, Store, StoreModule } from '@ngrx/store';
 
+import { Observable } from 'rxjs';
+
 import { DashboardComponent } from '../../features/dashboard/dashboard.component';
 import { TrackerComponent } from '../../features/tracker/tracker.component';
 import { NavComponent } from './nav.component';
@@ -18,10 +20,13 @@ import * as userActions from '../../features/auth/actions/user.actions';
 import * as fromAuth from '../../features/auth/reducers/root.reducer';
 import * as fromRoot from '../../reducers/root.reducer';
 
+import { user } from '../../test-helpers';
+
 describe('NavComponent', () => {
   let component: NavComponent;
   let fixture: ComponentFixture<NavComponent>;
   let store: Store<fromAuth.State>;
+  let userService: UserService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -43,8 +48,10 @@ describe('NavComponent', () => {
     }).compileComponents();
 
     store = TestBed.get(Store);
+    userService = TestBed.get(UserService);
 
     spyOn(store, 'dispatch').and.callThrough();
+    spyOn(userService, 'getUserInfo').and.callFake(() => Observable.of(user.mockUserInfo));
 
     fixture = TestBed.createComponent(NavComponent);
     component = fixture.componentInstance;
@@ -59,6 +66,12 @@ describe('NavComponent', () => {
     const navBannerLink = fixture.debugElement.query(By.css('#navBannerLink'));
     const href = navBannerLink.nativeElement.getAttribute('href');
     expect(href).toBe('/app');
+  }));
+
+  it('Should have profile link with correct href', async(() => {
+    const profileLink = fixture.debugElement.query(By.css('.user .info a'));
+    const href = profileLink.nativeElement.getAttribute('href');
+    expect(href).toBe('/app/profile');
   }));
 
   it('Should have nav tracker link with correct href', async(() => {

@@ -52,12 +52,37 @@ export class UserEffects {
         })
         .catch(err => Observable.of(new appActions.Error(userActions.LOGOUT, err.message))));
 
+  @Effect() signUp$ =
+    this.actions$
+      .ofType(userActions.SIGNUP)
+      .map(action => action as userActions.SignUp)
+      .switchMap(action => this.authService.signUpWithEmail(action.email, action.password)
+        .map(() => new userActions.GetUser())
+        .catch(err => Observable.of(new appActions.Error(userActions.SIGNUP, err.message))));
+
+  @Effect() emailLogin$ =
+    this.actions$
+      .ofType(userActions.EMAIL_LOGIN)
+      .map(action => action as userActions.EmailLogin)
+      .switchMap(action => this.authService.signInWithEmail(action.email, action.password)
+        .map(() => new userActions.GetUser())
+        .catch(err => Observable.of(new appActions.Error(userActions.EMAIL_LOGIN, err.message))));
+
+  @Effect() resetPassword$ =
+    this.actions$
+      .ofType(userActions.RESET_PASSWORD)
+      .map(action => action as userActions.ResetPassword)
+      .switchMap(action => this.authService.resetPassword(action.email)
+        .catch(err => Observable.of(new appActions.Error(userActions.RESET_PASSWORD, err.message))));
+
   private getAuthenticatedAction(authData: AuthUser): userActions.Authenticated {
+    const providerData = authData.providerData[0];
     const user = <User>{
       uid: authData.uid,
       displayName: authData.displayName,
       email: authData.email,
-      photoURL: authData.photoURL
+      photoURL: authData.photoURL,
+      providerId: providerData ? providerData.providerId : ''
     };
     return new userActions.Authenticated(user);
   }

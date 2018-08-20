@@ -26,7 +26,19 @@ export namespace auth {
       signOut: jasmine
         .createSpy('signOut')
         .and
-        .callFake(fakeSignOutHandler)
+        .callFake(fakeSignOutHandler),
+      createUserWithEmailAndPassword: jasmine
+        .createSpy('createUserWithEmailAndPassword')
+        .and
+        .callFake(fakeSignInHandler),
+      signInAndRetrieveDataWithEmailAndPassword: jasmine
+        .createSpy('signInAndRetrieveDataWithEmailAndPassword')
+        .and
+        .callFake(fakeSignInHandler),
+      sendPasswordResetEmail: jasmine
+        .createSpy('sendPasswordResetEmail')
+        .and
+        .callFake(() => Promise.resolve())
     }
   };
 
@@ -42,13 +54,32 @@ export namespace auth {
     }
 
     signInWithGoogle(): Observable<any> {
-      this.authState = Observable.of(user.mockUser);
+      this.authState = Observable.of({
+        ...user.mockUser,
+        providerData: [{
+          ...user.mockUser
+        }]
+      });
       return Observable.of('Logged in with Google');
     }
 
     signOut(): Observable<any> {
       this.authState = Observable.of(null);
       return Observable.of('Logged out');
+    }
+
+    signUpWithEmail(): Observable<any> {
+      this.authState = Observable.of(user.mockUser);
+      return Observable.of('Signed up with Email');
+    }
+
+    signInWithEmail(): Observable<any> {
+      this.authState = Observable.of(user.mockUser);
+      return Observable.of('Signed in with Email');
+    }
+
+    resetPassword(): Observable<any> {
+      return Observable.of('Password reset email sent');
     }
   }
 }

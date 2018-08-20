@@ -94,7 +94,9 @@
     font-size: .7em;
     background: darken($background-dark, 10%);
 
-    .info {
+    .info a {
+      text-decoration: none;
+      color: $text-light;
       display: flex;
       align-items: center;
 
@@ -157,7 +159,7 @@
     }
 
     .user {
-      .info {
+      .info a {
         .name {
           display: none;
         }
@@ -234,8 +236,10 @@
     .user {
       padding: 5px;
 
-      .info {
-        display: none;
+      .info a {
+        .name {
+          display: block;
+        }
       }
 
       .logout {

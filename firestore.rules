@@ -13,5 +13,8 @@ service cloud.firestore {
     match /progress/{userId}/items/{item} {
     	allow read, write: if request.auth.uid == userId;
     }
+    match /profile/{userId} {
+      allow read, write: if request.auth.uid == userId;
+    }
   }
 }

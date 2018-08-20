@@ -4,11 +4,14 @@ import { combineReducers, Store, StoreModule } from '@ngrx/store';
 
 import { UserService } from './user.service';
 
+import * as profileActions from '../../profile/actions/profile.actions';
 import * as actions from '../actions/user.actions';
 
+import * as fromProfile from '../../../features/profile/reducers/root.reducer';
 import * as fromRoot from '../../../reducers/root.reducer';
 import * as fromAuth from '../reducers/root.reducer';
 
+import { Profile } from '../../profile/models';
 import { User } from '../models';
 
 describe('User Service', () => {
@@ -20,7 +23,8 @@ describe('User Service', () => {
       imports: [
         StoreModule.forRoot({
           ...fromRoot.reducers,
-          'auth': combineReducers(fromAuth.reducers)
+          'auth': combineReducers(fromAuth.reducers),
+          'profile': combineReducers(fromProfile.reducers)
         })
       ],
       providers: [UserService]
@@ -37,19 +41,25 @@ describe('User Service', () => {
     expect(service).toBeTruthy();
   });
 
-  describe('getUser', () => {
-    it('Should select user', () => {
-      service.getUser();
-      expect(store.select).toHaveBeenCalledWith(fromAuth._selectUserData);
-    });
+  xit('Should select user', () => {
+    expect(store.select).toHaveBeenCalledWith(fromAuth._selectUserData);
+  });
 
+  xit('Should select profile info', () => {
+    expect(store.select).toHaveBeenCalledWith(fromProfile._selectInfo);
+  });
+
+  describe('getUser', () => {
     it('Should return default data when not authenticated', () => {
       const result = service.getUser();
-      expect(result).toEqual({
-        uid: '',
-        displayName: '',
-        email: '',
-        photoURL: ''
+      result.subscribe(res => {
+        expect(res).toEqual({
+          uid: '',
+          displayName: '',
+          email: '',
+          photoURL: '',
+          providerId: ''
+        });
       });
     });
 
@@ -58,13 +68,45 @@ describe('User Service', () => {
         uid: 'some id',
         displayName: 'Jim Bob',
         email: 'jimbob@jimbob.com',
-        photoURL: 'jimbob.com/jimbob.png'
+        photoURL: 'jimbob.com/jimbob.png',
+        providerId: 'google.com'
       };
       store.dispatch(new actions.Authenticated(user));
 
       const result = service.getUser();
+      result.subscribe(res => {
+        expect(res).toEqual(user);
+      });
+    });
+  });
 
-      expect(result).toEqual(user);
+  describe('getUserInfo', () => {
+    beforeEach(() => {
+      const user: User = {
+        uid: 'some id',
+        displayName: 'Jim Bob',
+        email: 'jimbob@jimbob.com',
+        photoURL: 'jimbob.com/jimbob.png',
+        providerId: 'google.com'
+      };
+      store.dispatch(new actions.Authenticated(user));
+    });
+
+    it('Should return user info', () => {
+      const profile: Profile = {
+        displayName: 'Jimmy'
+      };
+      store.dispatch(new profileActions.LoadProfileSucceeded(profile));
+
+      const result = service.getUserInfo();
+      result.subscribe(res => {
+        expect(res).toEqual({
+          displayName: 'Jimmy',
+          imgSrc: 'jimbob.com/jimbob.png',
+          email: 'jimbob@jimbob.com',
+          provider: 'google.com'
+        });
+      });
     });
   });
 

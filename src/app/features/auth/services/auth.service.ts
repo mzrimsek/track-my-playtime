@@ -17,7 +17,19 @@ export class AuthService {
   }
 
   signOut(): Observable<any> {
-    return Observable.of(this.afAuth.auth.signOut());
+    return Observable.fromPromise(this.afAuth.auth.signOut());
+  }
+
+  signUpWithEmail(email: string, password: string): Observable<any> {
+    return Observable.fromPromise(this.afAuth.auth.createUserWithEmailAndPassword(email, password));
+  }
+
+  signInWithEmail(email: string, password: string): Observable<any> {
+    return Observable.fromPromise(this.afAuth.auth.signInAndRetrieveDataWithEmailAndPassword(email, password));
+  }
+
+  resetPassword(email: string): Observable<any> {
+    return Observable.fromPromise(this.afAuth.auth.sendPasswordResetEmail(email));
   }
 
   private googleLogin(): Promise<any> {

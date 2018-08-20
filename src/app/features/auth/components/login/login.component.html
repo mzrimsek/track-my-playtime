@@ -1,13 +1,10 @@
 <div class="login">
-  <div class="box drop-shadow">
-
-    <button id="google-login"
-            data-tracking-category="loginGoogle"
-            class="login-button drop-shadow"
-            (click)="googleLogin()">
-      <fa-icon [icon]="icons.google"></fa-icon>
-      Login with Google
-    </button>
-
-  </div>
+  <app-auth-auth-form [trackingCategory]="'Login'"
+                      [message]="validationMessage$ | async"
+                      (emailAuth)="emailLogin($event)"
+                      (googleAuth)="googleLogin()">
+    <a id="forgotPasswordLink"
+       data-tracking-category="loginForgotPassword"
+       [routerLink]="['../forgotPassword']">Forgot your password?</a>
+  </app-auth-auth-form>
 </div>

@@ -10,6 +10,10 @@
 
   &:hover {
     background: darken($background-light, 5%);
+
+    .primary-action .quickstart {
+      display: initial;
+    }
   }
 
   .display-element {
@@ -76,6 +80,7 @@
     .quickstart {
       color: $good-action-color;
       opacity: .5;
+      display: none;
     }
   }
 
@@ -121,6 +126,10 @@
 
     .primary-action {
       width: 10%;
+
+      .quickstart {
+        display: initial;
+      }
     }
 
     .secondary-action {

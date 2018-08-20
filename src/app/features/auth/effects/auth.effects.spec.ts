@@ -13,6 +13,7 @@ import * as progressActions from '../../../shared/actions/progress.actions';
 import * as userActions from '../../auth/actions/user.actions';
 import * as addPlayingActions from '../../completion/actions/add-playing.actions';
 import * as markCompleteActions from '../../completion/actions/mark-complete.actions';
+import * as profileActions from '../../profile/actions/profile.actions';
 
 import '../../../rxjs-operators';
 
@@ -42,15 +43,17 @@ describe('Auth Effects', () => {
         uid,
         displayName: '',
         email: '',
-        photoURL: ''
+        photoURL: '',
+        providerId: ''
       });
 
       actions = hot('-a', { a: action });
-      const expected = cold('-(bcde)', {
+      const expected = cold('-(bcdef)', {
         b: new platformsActions.LoadOptions(),
         c: new historyActions.LoadHistoryItems(uid),
         d: new timerActions.LoadTimerInfo(uid),
-        e: new progressActions.LoadProgressItems(uid)
+        e: new progressActions.LoadProgressItems(uid),
+        f: new profileActions.LoadProfile(uid)
       });
 
       expect(effects.authenticated$).toBeObservable(expected);
@@ -60,12 +63,13 @@ describe('Auth Effects', () => {
   describe('Logout', () => {
     it('Should dispatch actions to clear user data', () => {
       actions = hot('-a', { a: new userActions.Logout() });
-      const expected = cold('-(bcdef)', {
+      const expected = cold('-(bcdefg)', {
         b: new historyActions.ClearHistoryItems(),
         c: new timerActions.ResetTimer(),
         d: new progressActions.ClearProgressItems(),
         e: new addPlayingActions.Reset(),
-        f: new markCompleteActions.ClearItems()
+        f: new markCompleteActions.ClearItems(),
+        g: new profileActions.ClearProfile()
       });
 
       expect(effects.logout$).toBeObservable(expected);
