@@ -1,3 +1,16 @@
-<p>
-  edit-display-name works!
-</p>
+<div class="edit-display-name">
+  <input type="text"
+         placeholder="New Display Name"
+         #displayName>
+  <div class="actions">
+    <button class="confirm"
+            (click)="setDisplayName(displayName)">
+      <fa-icon [icon]="icons.confirm"></fa-icon>
+    </button>
+
+    <button class="cancel"
+            (click)="emitFinishEdit()">
+      <fa-icon [icon]="icons.cancel"></fa-icon>
+    </button>
+  </div>
+</div>

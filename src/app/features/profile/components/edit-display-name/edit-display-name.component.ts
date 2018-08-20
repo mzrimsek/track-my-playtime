@@ -19,7 +19,6 @@ export class EditDisplayNameComponent implements OnInit {
 
   @Output() finishEdit: EventEmitter<null> = new EventEmitter();
   userId: string;
-  displayName = '';
   icons = {
     confirm: faCheck,
     cancel: faTimes
@@ -34,7 +33,11 @@ export class EditDisplayNameComponent implements OnInit {
     this.finishEdit.emit(null);
   }
 
-  setDisplayName() {
-    this.store.dispatch(new profileActions.SetProfileDisplayName(this.userId, this.displayName));
+  setDisplayName(displayNameEl: HTMLInputElement) {
+    const displayName = displayNameEl.value;
+    displayNameEl.value = '';
+
+    this.store.dispatch(new profileActions.SetProfileDisplayName(this.userId, displayName));
+    this.emitFinishEdit();
   }
 }
