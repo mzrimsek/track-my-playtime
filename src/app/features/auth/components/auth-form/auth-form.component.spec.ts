@@ -47,6 +47,12 @@ describe('AuthFormComponent', () => {
     expect(component.googleAuth.emit).toHaveBeenCalled();
   }));
 
+  it('Should emit facebookAuth when emitFacebookAuth is called', async(() => {
+    spyOn(component.facebookAuth, 'emit');
+    component.emitFacebookAuth();
+    expect(component.facebookAuth.emit).toHaveBeenCalled();
+  }));
+
   describe('Email Form', () => {
     describe('Invalid Form', () => {
       it('Should be invalid when empty', async(() => {

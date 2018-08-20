@@ -26,12 +26,22 @@
 
     <ng-content></ng-content>
 
-    <button id="google-auth"
-            [attr.data-tracking-category]="trackingCategory + 'Google'"
-            class="auth-button drop-shadow"
-            (click)="emitGoogleAuth()">
-      <fa-icon [icon]="icons.google"></fa-icon>
-      {{ trackingCategory }} with Google
-    </button>
+    <div class="providers">
+      <button id="google-auth"
+              [attr.data-tracking-category]="trackingCategory + 'Google'"
+              class="auth-button drop-shadow"
+              (click)="emitGoogleAuth()">
+        <fa-icon [icon]="icons.google"></fa-icon>
+        {{ trackingCategory }} with Google
+      </button>
+
+      <button id="facebook-auth"
+              [attr.data-tracking-category]="trackingCategory + 'Facebook'"
+              class="auth-button drop-shadow"
+              (click)="emitFacebookAuth()">
+        <fa-icon [icon]="icons.facebook"></fa-icon>
+        {{ trackingCategory }} with Facebook
+      </button>
+    </div>
   </div>
 </div>
