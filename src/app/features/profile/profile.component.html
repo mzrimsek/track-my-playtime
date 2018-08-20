@@ -4,7 +4,16 @@
       <img src="{{ userInfo.imgSrc }}">
       <div class="about">
         <div class="header">About</div>
-        <div class="name"><span>Display Name</span>: {{ userInfo.displayName }}</div>
+        <div class="name">
+          <div *ngIf="!editName"
+               class="no-edit">
+            <div class="detail"><span>Display Name</span>: {{ userInfo.displayName }}</div>
+            <button class="icon-button"
+                    (click)="setEditName(true)"><fa-icon [icon]="icons.edit"></fa-icon></button>
+          </div>
+          <app-profile-edit-display-name *ngIf="editName"
+                                         (finishEdit)="setEditName(false)"></app-profile-edit-display-name>
+        </div>
         <div class="email"><span>Email</span>: {{ userInfo.email }}</div>
       </div>
     </section>

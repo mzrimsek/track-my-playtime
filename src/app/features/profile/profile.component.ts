@@ -18,21 +18,24 @@ import { UserInfo } from '../auth/models';
 })
 export class ProfileComponent implements OnInit {
 
-  userId: string;
   userInfo: UserInfo;
   message = '';
+  editName = false;
   icons = {
     edit: faEdit
   };
   constructor(private store: Store<AuthState>, private userService: UserService) { }
 
   ngOnInit() {
-    this.userService.getUser().subscribe(user => this.userId = user.uid);
     this.userService.getUserInfo().subscribe(userInfo => this.userInfo = userInfo);
   }
 
   sendResetPasswordLink() {
     this.store.dispatch(new userActions.ResetPassword(this.userInfo.email));
     this.message = `A password reset email has been sent to ${this.userInfo.email}`;
+  }
+
+  setEditName(editName: boolean) {
+    this.editName = editName;
   }
 }

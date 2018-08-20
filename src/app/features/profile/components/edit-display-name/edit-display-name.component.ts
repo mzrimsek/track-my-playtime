@@ -1,6 +1,13 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { Store } from '@ngrx/store';
+
+import { UserService } from '../../../auth/services/user.service';
+
+import * as profileActions from '../../actions/profile.actions';
+
+import { State } from '../../reducers/root.reducer';
 
 @Component({
   selector: 'app-profile-edit-display-name',
@@ -10,11 +17,24 @@ import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 })
 export class EditDisplayNameComponent implements OnInit {
 
+  @Output() finishEdit: EventEmitter<null> = new EventEmitter();
+  userId: string;
+  displayName = '';
   icons = {
     confirm: faCheck,
     cancel: faTimes
   };
-  constructor() { }
+  constructor(private store: Store<State>, private userService: UserService) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.userService.getUser().subscribe(user => this.userId = user.uid);
+  }
+
+  emitFinishEdit() {
+    this.finishEdit.emit(null);
+  }
+
+  setDisplayName() {
+    this.store.dispatch(new profileActions.SetProfileDisplayName(this.userId, this.displayName));
+  }
 }
