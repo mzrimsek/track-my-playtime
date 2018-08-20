@@ -1,3 +1,4 @@
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { combineReducers, Store, StoreModule } from '@ngrx/store';
@@ -29,7 +30,8 @@ describe('ProfileComponent', () => {
           'profile': combineReducers(fromProfile.reducers),
         })
       ],
-      providers: [{ provide: UserService, useValue: user.userServiceStub }]
+      providers: [{ provide: UserService, useValue: user.userServiceStub }],
+      schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
 
     store = TestBed.get(Store);
