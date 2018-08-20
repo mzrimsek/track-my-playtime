@@ -8,7 +8,7 @@ import * as userActions from '../../actions/user.actions';
 import { State } from '../../reducers/root.reducer';
 
 @Component({
-  selector: 'app-forgot-password',
+  selector: 'app-auth-forgot-password',
   templateUrl: './forgot-password.component.html',
   styleUrls: ['./forgot-password.component.scss']
 })

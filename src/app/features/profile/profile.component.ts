@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { Store } from '@ngrx/store';
 
 import { UserService } from '../auth/services/user.service';
@@ -20,6 +21,9 @@ export class ProfileComponent implements OnInit {
   userId: string;
   userInfo: UserInfo;
   message = '';
+  icons = {
+    edit: faEdit
+  };
   constructor(private store: Store<AuthState>, private userService: UserService) { }
 
   ngOnInit() {
