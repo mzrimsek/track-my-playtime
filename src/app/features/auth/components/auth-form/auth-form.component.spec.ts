@@ -41,7 +41,7 @@ describe('AuthFormComponent', () => {
     expect(component).toBeTruthy();
   }));
 
-  it('Should emith googleAuth when emitGoogleAuth is called', async(() => {
+  it('Should emit googleAuth when emitGoogleAuth is called', async(() => {
     spyOn(component.googleAuth, 'emit');
     component.emitGoogleAuth();
     expect(component.googleAuth.emit).toHaveBeenCalled();
