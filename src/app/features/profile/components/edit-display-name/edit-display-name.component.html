@@ -1,14 +1,17 @@
 <div class="edit-display-name">
-  <input type="text"
+  <input data-tracking-category="editDisplayNameInput"
+         type="text"
          placeholder="New Display Name"
          #displayName>
   <div class="actions">
-    <button class="confirm icon-button"
+    <button data-tracking-category="editDisplayNameConfirm"
+            class="confirm icon-button"
             (click)="setDisplayName(displayName)">
       <fa-icon [icon]="icons.confirm"></fa-icon>
     </button>
 
-    <button class="cancel icon-button"
+    <button data-tracking-category="editDisplayNameCancel"
+            class="cancel icon-button"
             (click)="emitFinishEdit()">
       <fa-icon [icon]="icons.cancel"></fa-icon>
     </button>

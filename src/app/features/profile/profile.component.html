@@ -9,8 +9,11 @@
           <div *ngIf="!editName"
                class="no-edit">
             <div class="detail"><span>Display Name</span>: {{ userInfo.displayName }}</div>
-            <button class="icon-button"
-                    (click)="setEditName(true)"><fa-icon [icon]="icons.edit"></fa-icon></button>
+            <button data-tracking-category="profileEditDisplayName"
+                    class="icon-button"
+                    (click)="setEditName(true)">
+              <fa-icon [icon]="icons.edit"></fa-icon>
+            </button>
           </div>
 
           <app-profile-edit-display-name *ngIf="editName"
@@ -24,7 +27,9 @@
     <section *ngIf="userInfo.provider === 'password'"
              class="account drop-shadow">
       <div class="header">Account</div>
+
       <button data-tracking-category="profileResetPassword"
+              class="drop-shadow"
               (click)="sendResetPasswordLink()">Reset Password</button>
       <div *ngIf="message"
            class="message">{{ message }}</div>
