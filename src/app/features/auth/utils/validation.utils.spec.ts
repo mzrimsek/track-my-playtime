@@ -24,13 +24,13 @@ describe('Validation Utils', () => {
       expect(result).toBe('Email or password invalid.');
     });
 
-    it('Should return error message if not handled action', () => {
+    it('Should return nothing if not handled action', () => {
       const error: Error = {
         action: userActions.GOOGLE_LOGIN,
         message: 'something bad happened'
       };
       const result = getValidationMessage(error);
-      expect(result).toBe(error.message);
+      expect(result).toBe('');
     });
   });
 });

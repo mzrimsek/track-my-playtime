@@ -11,7 +11,7 @@ export const getValidationMessage = (error: Error): string => {
       return 'Email or password invalid.';
     }
     default: {
-      return error.message;
+      return '';
     }
   }
 };
