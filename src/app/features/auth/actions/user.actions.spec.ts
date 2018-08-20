@@ -42,6 +42,13 @@ describe('User Actions', () => {
     });
   });
 
+  describe('FacebookLogin', () => {
+    it('Should have correct type', () => {
+      const action = new actions.FacebookLogin();
+      expect(action.type).toBe(actions.FACEBOOK_LOGIN);
+    });
+  });
+
   describe('GetUser', () => {
     it('Should have correct type', () => {
       const action = new actions.Logout();
