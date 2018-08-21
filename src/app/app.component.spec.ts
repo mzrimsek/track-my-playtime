@@ -24,6 +24,7 @@ import { TimePipe } from './shared/pipes/time.pipe';
 
 import * as actions from './actions/app.actions';
 
+import * as fromAuth from './features/auth/reducers/root.reducer';
 import * as fromCompletion from './features/completion/reducers/root.reducer';
 import * as fromDashboard from './features/dashboard/reducers/root.reducer';
 import * as fromProfile from './features/profile/reducers/root.reducer';
@@ -95,6 +96,7 @@ describe('AppComponent', () => {
         ]),
         StoreModule.forRoot({
           ...fromRoot.reducers,
+          'auth': combineReducers(fromAuth.reducers),
           'shared': combineReducers(fromShared.reducers),
           'tracker': combineReducers(fromTracker.reducers),
           'dashboard': combineReducers(fromDashboard.reducers),
