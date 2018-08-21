@@ -13,9 +13,7 @@ describe('User Reducer', () => {
       photoURL: '',
       providerId: ''
     };
-
     const newState = reducer(initialState, new actions.Authenticated(user.mockUser));
-
     expect(newState).toEqual(user.mockUser);
   });
 
