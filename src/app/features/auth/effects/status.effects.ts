@@ -32,7 +32,7 @@ export class StatusEffects {
     this.actions$
       .ofType(fromRouter.ROUTER_NAVIGATION)
       .mergeMap(() => [
-        new statusActions.SetAttemptingLogin(false)
+        new statusActions.SetValidationMessage('')
       ]);
 
   @Effect() emailLogin$ =
