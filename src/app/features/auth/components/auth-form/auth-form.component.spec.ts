@@ -47,10 +47,20 @@ describe('AuthFormComponent', () => {
     expect(component.googleAuth.emit).toHaveBeenCalled();
   }));
 
+  it('Should set showMessage to true when emitGoogleAuth is called', async(() => {
+    component.emitGoogleAuth();
+    expect(component.showMessage).toBe(true);
+  }));
+
   it('Should emit facebookAuth when emitFacebookAuth is called', async(() => {
     spyOn(component.facebookAuth, 'emit');
     component.emitFacebookAuth();
     expect(component.facebookAuth.emit).toHaveBeenCalled();
+  }));
+
+  it('Should set showMessage to true when emitFacebookAuth is called', async(() => {
+    component.emitFacebookAuth();
+    expect(component.showMessage).toBe(true);
   }));
 
   describe('Email Form', () => {

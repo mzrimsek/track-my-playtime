@@ -4,8 +4,13 @@ import {
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { faFacebook, faGoogle } from '@fortawesome/free-brands-svg-icons';
+import { Store } from '@ngrx/store';
+
+import rootComponentSelectors, { State } from '../../../../reducers/root.reducer';
 
 import { EmailAuthEvent } from '../../models';
+
+import { getValidationMessage } from '../../utils/validation.utils';
 
 @Component({
   selector: 'app-auth-auth-form',
@@ -15,18 +20,18 @@ import { EmailAuthEvent } from '../../models';
 })
 export class AuthFormComponent implements OnInit {
 
-  @Input() message = '';
   @Input() trackingCategory: string;
   @Output() emailAuth: EventEmitter<EmailAuthEvent> = new EventEmitter();
   @Output() googleAuth: EventEmitter<null> = new EventEmitter();
   @Output() facebookAuth: EventEmitter<null> = new EventEmitter();
   authForm: FormGroup;
+  message = '';
   showMessage = false;
   icons = {
     google: faGoogle,
     facebook: faFacebook
   };
-  constructor(private builder: FormBuilder) { }
+  constructor(private store: Store<State>, private builder: FormBuilder) { }
 
   ngOnInit() {
     this.authForm = this.builder.group({
@@ -47,15 +52,23 @@ export class AuthFormComponent implements OnInit {
         email: this.authForm.value.email,
         password: this.authForm.value.password
       });
-      this.showMessage = true;
     }
+    this.setMessage();
   }
 
   emitGoogleAuth() {
     this.googleAuth.emit(null);
+    this.setMessage();
   }
 
   emitFacebookAuth() {
     this.facebookAuth.emit(null);
+    this.setMessage();
+  }
+
+  private setMessage() {
+    const message$ = this.store.select(rootComponentSelectors.error).map(error => getValidationMessage(error));
+    message$.subscribe(message => this.message = message);
+    this.showMessage = true;
   }
 }
