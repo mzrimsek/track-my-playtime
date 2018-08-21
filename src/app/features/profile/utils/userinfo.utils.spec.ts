@@ -1,7 +1,7 @@
 import { User } from '../../auth/models';
 import { Profile } from '../models';
 
-import { DEFAULT_USER_IMGSRC, getDisplayName, getImgSrc } from './userinfo.utils';
+import { DEFAULT_USER_IMGSRC, getDisplayName, getImgSrc, getProviderFrom } from './userinfo.utils';
 
 import { user } from '../../../test-helpers';
 
@@ -70,6 +70,47 @@ describe('User Info Utils', () => {
       };
       const result = getImgSrc(currentUser);
       expect(result).toBe('img.png');
+    });
+
+    it('Should return modified photo url when provider is Facebook', () => {
+      const currentUser: User = {
+        ...user.mockUser,
+        providerId: 'facebook.com'
+      };
+      const result = getImgSrc(currentUser);
+      expect(result).toBe(`${user.mockUser.photoURL}?type=large`);
+    });
+  });
+
+  describe('getProviderFrom', () => {
+    it('Should return empty string when given empty string', () => {
+      const providerId = '';
+      const result = getProviderFrom(providerId);
+      expect(result).toBe('');
+    });
+
+    it('Should return empty string when given an invalid provider', () => {
+      const providerId = 'reddit.com';
+      const result = getProviderFrom(providerId);
+      expect(result).toBe('');
+    });
+
+    it('Should return PASSWORD when given password', () => {
+      const providerId = 'password';
+      const result = getProviderFrom(providerId);
+      expect(result).toBe('PASSWORD');
+    });
+
+    it('Should return GOOGLE when given google.com', () => {
+      const providerId = 'google.com';
+      const result = getProviderFrom(providerId);
+      expect(result).toBe('GOOGLE');
+    });
+
+    it('Should return FACEBOOK when given facebook.com', () => {
+      const providerId = 'facebook.com';
+      const result = getProviderFrom(providerId);
+      expect(result).toBe('FACEBOOK');
     });
   });
 });
