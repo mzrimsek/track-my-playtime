@@ -1,5 +1,7 @@
 <div class="login">
-  <app-auth-auth-form [trackingCategory]="'Login'"
+  <app-auth-auth-form [message]="message$ | async"
+                      [loggingIn]="loggingIn$ | async"
+                      [trackingCategory]="'Login'"
                       (emailAuth)="emailLogin($event)"
                       (googleAuth)="googleLogin()"
                       (facebookAuth)="facebookLogin()">

@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 
+import { Observable } from 'rxjs/Observable';
+
 import * as userActions from '../../actions/user.actions';
 
-import { State } from '../../../../reducers/root.reducer';
+import authComponentSelectors, { State } from '../../reducers/root.reducer';
 
 import { EmailAuthEvent } from '../../models';
 
@@ -15,9 +17,14 @@ import { EmailAuthEvent } from '../../models';
 })
 export class RegisterComponent implements OnInit {
 
+  loggingIn$: Observable<boolean>;
+  message$: Observable<string>;
   constructor(private store: Store<State>) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.loggingIn$ = this.store.select(authComponentSelectors.loggingIn);
+    this.message$ = this.store.select(authComponentSelectors.validationMessage);
+  }
 
   googleSignUp() {
     this.store.dispatch(new userActions.GoogleLogin());

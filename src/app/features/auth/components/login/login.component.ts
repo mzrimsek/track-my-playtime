@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 
+import { Observable } from 'rxjs/Observable';
+
 import * as userActions from '../../actions/user.actions';
 
-import { State } from '../../../../reducers/root.reducer';
+import authComponentSelectors, { State } from '../../reducers/root.reducer';
 
 import { EmailAuthEvent } from '../../models';
 
@@ -14,10 +16,15 @@ import { EmailAuthEvent } from '../../models';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+
+  loggingIn$: Observable<boolean>;
+  message$: Observable<string>;
   constructor(private store: Store<State>) { }
 
   ngOnInit() {
     this.store.dispatch(new userActions.GetUser());
+    this.loggingIn$ = this.store.select(authComponentSelectors.loggingIn);
+    this.message$ = this.store.select(authComponentSelectors.validationMessage);
   }
 
   googleLogin() {

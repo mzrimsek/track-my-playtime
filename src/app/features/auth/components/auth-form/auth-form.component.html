@@ -20,7 +20,7 @@
               [attr.data-tracking-category]="trackingCategory + 'Submit'"
               [disabled]="!authForm.valid"
               class="auth-button drop-shadow">{{ trackingCategory }}</button>
-      <div *ngIf="message && showMessage"
+      <div *ngIf="message && !loggingIn"
            class="message">{{ message }}</div>
     </form>
 
