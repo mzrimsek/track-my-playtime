@@ -16,7 +16,6 @@ export class StatusEffects {
 
   constructor(private actions$: Actions) { }
 
-
   @Effect() error$ =
     this.actions$
       .ofType(appActions.APP_ERROR)
