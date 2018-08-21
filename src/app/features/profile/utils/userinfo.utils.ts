@@ -10,7 +10,7 @@ export const getDisplayName = (user: User, profile: Profile): string => {
 export const getImgSrc = (user: User): string => {
   const provider = getProviderFrom(user.providerId);
   if (provider === 'FACEBOOK') {
-    user.photoURL = `${user.photoURL}?type=large`;
+    return `${user.photoURL}?type=large`;
   }
   return user.photoURL ? user.photoURL : DEFAULT_USER_IMGSRC;
 };
