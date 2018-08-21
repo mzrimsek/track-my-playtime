@@ -16,7 +16,6 @@ export const getImgSrc = (user: User): string => {
 };
 
 const providerMap = new Map<string, Provider>([
-  ['', ''],
   ['password', 'PASSWORD'],
   ['google.com', 'GOOGLE'],
   ['facebook.com', 'FACEBOOK']
