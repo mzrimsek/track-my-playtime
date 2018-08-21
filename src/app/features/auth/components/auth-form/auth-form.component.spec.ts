@@ -2,34 +2,18 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormBuilder } from '@angular/forms';
 
-import { combineReducers, Store, StoreModule } from '@ngrx/store';
-
 import { AuthFormComponent } from './auth-form.component';
-
-import * as fromRoot from '../../../../reducers/root.reducer';
-import * as fromAuth from '../../reducers/root.reducer';
 
 describe('AuthFormComponent', () => {
   let component: AuthFormComponent;
   let fixture: ComponentFixture<AuthFormComponent>;
-  let store: Store<fromAuth.State>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [AuthFormComponent],
       providers: [FormBuilder],
-      imports: [
-        StoreModule.forRoot({
-          ...fromRoot.reducers,
-          'auth': combineReducers(fromAuth.reducers)
-        })
-      ],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
-
-    store = TestBed.get(Store);
-
-    spyOn(store, 'dispatch').and.callThrough();
 
     fixture = TestBed.createComponent(AuthFormComponent);
     component = fixture.componentInstance;
@@ -47,20 +31,10 @@ describe('AuthFormComponent', () => {
     expect(component.googleAuth.emit).toHaveBeenCalled();
   }));
 
-  it('Should set showMessage to true when emitGoogleAuth is called', async(() => {
-    component.emitGoogleAuth();
-    expect(component.showMessage).toBe(true);
-  }));
-
   it('Should emit facebookAuth when emitFacebookAuth is called', async(() => {
     spyOn(component.facebookAuth, 'emit');
     component.emitFacebookAuth();
     expect(component.facebookAuth.emit).toHaveBeenCalled();
-  }));
-
-  it('Should set showMessage to true when emitFacebookAuth is called', async(() => {
-    component.emitFacebookAuth();
-    expect(component.showMessage).toBe(true);
   }));
 
   describe('Email Form', () => {
@@ -93,11 +67,6 @@ describe('AuthFormComponent', () => {
           email: 'email@email.com',
           password: 'password'
         });
-      }));
-
-      it('Should set showMessage to true when emitEmailAuth is called', async(() => {
-        component.emitEmailAuth();
-        expect(component.showMessage).toBe(true);
       }));
     });
   });

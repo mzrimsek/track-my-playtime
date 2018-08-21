@@ -1,11 +1,6 @@
 import { tassign } from 'tassign';
 
-import * as appActions from '../../../actions/app.actions';
-import * as actions from '../actions/user.actions';
-
-import { Error } from '../../../models';
-
-import { getValidationMessage } from '../utils/validation.utils';
+import * as actions from '../actions/status.actions';
 
 export interface State {
   attemptingLogin: boolean;
@@ -17,44 +12,16 @@ const initialState: State = {
   validationMessage: ''
 };
 
-export function reducer(state: State = initialState, action: actions.All | appActions.All): State {
+export function reducer(state: State = initialState, action: actions.All): State {
   switch (action.type) {
-    case actions.EMAIL_LOGIN: {
+    case actions.SET_ATTEMPTING_LOGIN: {
       return tassign(state, {
-        attemptingLogin: true
+        attemptingLogin: action.attemptingLogin
       });
     }
-    case actions.SIGNUP: {
+    case actions.SET_VALIDATION_MESSAGE: {
       return tassign(state, {
-        attemptingLogin: true
-      });
-    }
-    case actions.GOOGLE_LOGIN: {
-      return tassign(state, {
-        attemptingLogin: true
-      });
-    }
-    case actions.FACEBOOK_LOGIN: {
-      return tassign(state, {
-        attemptingLogin: true
-      });
-    }
-    case actions.AUTHENTICATED: {
-      return tassign(state, {
-        attemptingLogin: false
-      });
-    }
-    case actions.NOT_AUTHENTICATED: {
-      return tassign(state, {
-        attemptingLogin: false
-      });
-    }
-    case appActions.APP_ERROR: {
-      const error = action as Error;
-      const validationMessage = getValidationMessage(error);
-      return tassign(state, {
-        attemptingLogin: false,
-        validationMessage
+        validationMessage: action.validationMessage
       });
     }
     default: {

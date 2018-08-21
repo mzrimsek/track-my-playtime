@@ -13,6 +13,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 
 import { AuthEffects } from './effects/auth.effects';
+import { StatusEffects } from './effects/status.effects';
 import { UserEffects } from './effects/user.effects';
 
 import { AuthService } from './services/auth.service';
@@ -29,7 +30,7 @@ import { FormsModule, ReactiveFormsModule } from '../../../../node_modules/@angu
     ReactiveFormsModule,
     AuthRoutingModule,
     StoreModule.forFeature('auth', reducers),
-    EffectsModule.forFeature([UserEffects, AuthEffects])
+    EffectsModule.forFeature([UserEffects, AuthEffects, StatusEffects])
   ],
   declarations: [LoginComponent, RegisterComponent, AuthFormComponent, ForgotPasswordComponent],
   providers: [AuthService]
