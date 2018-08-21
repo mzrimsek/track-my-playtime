@@ -8,6 +8,10 @@
   }
 
   .actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     .confirm {
       color: $good-action-color;
     }
