@@ -2,7 +2,9 @@ import * as userActions from '../actions/user.actions';
 
 import { Error } from '../../../models';
 
-import { EMAIL_IN_USE, getValidationMessage, INVALID_CREDENTIALS } from './validation.utils';
+import {
+    EMAIL_IN_USE, getValidationMessage, INVALID_CREDENTIALS, POPUP_CLOSED
+} from './validation.utils';
 
 describe('Validation Utils', () => {
   describe('getValidationMessage', () => {
@@ -40,6 +42,24 @@ describe('Validation Utils', () => {
       };
       const result = getValidationMessage(error);
       expect(result).toBe(EMAIL_IN_USE);
+    });
+
+    it('Should return nothing for GOOGLE_LOGIN when error is about popup', () => {
+      const error: Error = {
+        action: userActions.GOOGLE_LOGIN,
+        message: POPUP_CLOSED
+      };
+      const result = getValidationMessage(error);
+      expect(result).toBe('');
+    });
+
+    it('Should return nothing for FACEBOOK_LOGIN when error is about popup', () => {
+      const error: Error = {
+        action: userActions.FACEBOOK_LOGIN,
+        message: POPUP_CLOSED
+      };
+      const result = getValidationMessage(error);
+      expect(result).toBe('');
     });
 
     it('Should return nothing if not handled action', () => {
