@@ -14,7 +14,7 @@ import authComponentSelectors, { State } from '../reducers/root.reducer';
 import { Profile } from '../../profile/models';
 import { User, UserInfo } from '../models';
 
-import { getDisplayName, getImgSrc } from '../../profile/utils/userinfo.utils';
+import { getDisplayName, getImgSrc, getProviderFrom } from '../../profile/utils/userinfo.utils';
 
 @Injectable()
 export class UserService {
@@ -36,7 +36,7 @@ export class UserService {
         displayName: getDisplayName(user, profile),
         email: user.email,
         imgSrc: getImgSrc(user),
-        provider: user.providerId
+        provider: getProviderFrom(user.providerId)
       };
     });
   }
