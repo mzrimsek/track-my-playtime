@@ -21,7 +21,7 @@ import { AddTimerInfo, TimerInfo } from '../../models';
 export class TimerComponent implements OnInit {
 
   @Input() info: TimerInfo;
-  @Input() currentTime = 0;
+  @Input() elapsedTime = '00:00:00';
   @Input() platformsOptions: string[] = [];
   @Input() trackedGames: string[] = [];
   @Input() game: string | null = null;
@@ -105,6 +105,7 @@ export class TimerComponent implements OnInit {
   }
 
   getCurrentTimeDate(): Date {
-    return new Date(this.currentTime);
+    const now = this.timerService.getNowTime();
+    return new Date(now);
   }
 }
