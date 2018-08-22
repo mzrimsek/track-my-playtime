@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
 import { Store } from '@ngrx/store';
 
 import { insertAnalyticsElements } from 'insert-analytics-elements/googleTagManager';
 import { Observable } from 'rxjs/Observable';
+
+import { ElapsedTimeService } from './features/tracker/services/elapsed-time.service';
 
 import sharedSelectors, { State as SharedState } from './shared/reducers/root.reducer';
 
@@ -18,12 +21,15 @@ import { environment } from '../environments/environment';
 export class AppComponent implements OnInit {
 
   userDataLoaded$: Observable<boolean>;
-  constructor(private sharedStore: Store<SharedState>, private router: Router) { }
+  constructor(private sharedStore: Store<SharedState>,
+    private router: Router,
+    private titleService: Title,
+    private elapsedTimeService: ElapsedTimeService) { }
 
   ngOnInit() {
     insertAnalyticsElements(environment.googleTagManager);
-
     this.userDataLoaded$ = this.sharedStore.select(sharedSelectors.userDataLoaded);
+    this.elapsedTimeService.getElapsedTime('Track My Playtime').subscribe(title => this.titleService.setTitle(title));
   }
 
   shouldShowHeader(): boolean {
