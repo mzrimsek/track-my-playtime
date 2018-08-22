@@ -34,6 +34,7 @@ describe('LibraryComponent', () => {
     component = fixture.componentInstance;
 
     spyOn(component, 'setNumEntriesToShow');
+    spyOn(component, 'onResize');
 
     fixture.detectChanges();
   }));
@@ -46,7 +47,17 @@ describe('LibraryComponent', () => {
     expect(store.select).toHaveBeenCalledWith(fromShared._selectHistoryGroupingsByGame);
   });
 
-  it('Should call getNumEntriesToShow', () => {
+  it('Should call setNumEntriesToShow', () => {
+    expect(component.setNumEntriesToShow).toHaveBeenCalled();
+  });
+
+  it('Should call onResize on resize', () => {
+    window.dispatchEvent(new Event('resize'));
+    expect(component.onResize).toHaveBeenCalled();
+  });
+
+  it('Should call setNumEntriesToShow when onResize is called ', () => {
+    component.onResize();
     expect(component.setNumEntriesToShow).toHaveBeenCalled();
   });
 });

@@ -54,7 +54,7 @@ describe('HeaderComponent', () => {
       expect(store.dispatch).toHaveBeenCalledWith(new actions.SetThisWeek());
     }));
 
-    it('Should dispatch SetThisWeek when "LAST_WEEK" is selected', async(() => {
+    it('Should dispatch SetLastWeek when "LAST_WEEK" is selected', async(() => {
       const dateRangeEl = fixture.nativeElement.querySelector('.range-options select');
 
       dateRangeEl.selectedIndex = 1;
@@ -63,7 +63,7 @@ describe('HeaderComponent', () => {
       expect(store.dispatch).toHaveBeenCalledWith(new actions.SetLastWeek());
     }));
 
-    it('Should dispatch SetThisWeek when "THIS_MONTH" is selected', async(() => {
+    it('Should dispatch SetThisMonth when "THIS_MONTH" is selected', async(() => {
       const dateRangeEl = fixture.nativeElement.querySelector('.range-options select');
 
       dateRangeEl.selectedIndex = 2;
@@ -72,13 +72,22 @@ describe('HeaderComponent', () => {
       expect(store.dispatch).toHaveBeenCalledWith(new actions.SetThisMonth());
     }));
 
-    it('Should dispatch SetThisWeek when "LAST_MONTH" is selected', async(() => {
+    it('Should dispatch SetLastMonth when "LAST_MONTH" is selected', async(() => {
       const dateRangeEl = fixture.nativeElement.querySelector('.range-options select');
 
       dateRangeEl.selectedIndex = 3;
       dateRangeEl.dispatchEvent(new Event('change'));
 
       expect(store.dispatch).toHaveBeenCalledWith(new actions.SetLastMonth());
+    }));
+
+    it('Should dispatch SetThisWeek when "" is selected', async(() => {
+      const dateRangeEl = fixture.nativeElement.querySelector('.range-options select');
+
+      dateRangeEl.selectedIndex = 4;
+      dateRangeEl.dispatchEvent(new Event('change'));
+
+      expect(store.dispatch).toHaveBeenCalledWith(new actions.SetThisWeek());
     }));
   });
 
