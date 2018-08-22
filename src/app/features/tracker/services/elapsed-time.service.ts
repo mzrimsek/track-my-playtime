@@ -10,7 +10,7 @@ import trackerSelectors, { State as TrackerState } from '../reducers/root.reduce
 
 import { TimerInfo } from '../models';
 
-import { formatTime, getElapsedTimeInSeconds } from '../../../shared/utils/date.utils';
+import { formatElapsedTime } from '../../../shared/utils/date.utils';
 
 @Injectable()
 export class ElapsedTimeService {
@@ -24,14 +24,7 @@ export class ElapsedTimeService {
 
   getElapsedTime(inactiveValue: string): Observable<string> {
     return this.currentTime$.combineLatest(this.timerInfo$, (currentTime: number, timerInfo: TimerInfo) => {
-      const elapsedTime = getElapsedTimeInSeconds(timerInfo.startTime, currentTime);
-      return elapsedTime >= 0 && this.canCalculate(timerInfo.startTime, currentTime) ? formatTime(elapsedTime) : inactiveValue;
+      return formatElapsedTime(timerInfo.startTime, currentTime, inactiveValue);
     });
-  }
-
-  private canCalculate(startTime: number, endTime: number): boolean {
-    const areValid = startTime !== 0 && endTime !== 0;
-    const areInOrder = startTime <= endTime;
-    return areValid && areInOrder;
   }
 }

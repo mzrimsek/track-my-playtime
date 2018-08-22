@@ -1,6 +1,8 @@
 import { addDays, eachDay, subDays } from 'date-fns';
 
-import { formatDate, formatTime, getElapsedTimeInSeconds, isInDateRange } from './date.utils';
+import {
+    formatDate, formatElapsedTime, formatTime, getElapsedTimeInSeconds, isInDateRange
+} from './date.utils';
 
 const MINUTE = 60;
 const HOUR = MINUTE * 60;
@@ -93,6 +95,35 @@ describe('Date Utils', () => {
       const date = addDays(end, 3);
       const result = isInDateRange(date, range);
       expect(result).toBe(false);
+    });
+  });
+
+  describe('formatElapsedTime', () => {
+    const inactiveValue = 'not active';
+
+    it('Return inactiveValue when start is 0', () => {
+      const result = formatElapsedTime(0, 5, inactiveValue);
+      expect(result).toBe(inactiveValue);
+    });
+
+    it('Return inactiveValue when end is 0', () => {
+      const result = formatElapsedTime(5, 0, inactiveValue);
+      expect(result).toBe(inactiveValue);
+    });
+
+    it('Returns inactiveValue when given 0 for both', () => {
+      const result = formatElapsedTime(0, 0, inactiveValue);
+      expect(result).toBe(inactiveValue);
+    });
+
+    it('Returns inactiveValue when end is before start', () => {
+      const result = formatElapsedTime(30, 10, inactiveValue);
+      expect(result).toBe(inactiveValue);
+    });
+
+    it('Returns 00:01:00 when given times one minute apart', () => {
+      const result = formatElapsedTime(500, 60500);
+      expect(result).toBe('00:01:00');
     });
   });
 });
