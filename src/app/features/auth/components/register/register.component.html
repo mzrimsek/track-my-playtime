@@ -1,6 +1,7 @@
 <div class="register">
-  <app-auth-auth-form [trackingCategory]="'Register'"
-                      [message]="validationMessage$ | async"
+  <app-auth-auth-form [message]="message$ | async"
+                      [loggingIn]="loggingIn$ | async"
+                      [trackingCategory]="'Register'"
                       (emailAuth)="emailSignUp($event)"
                       (googleAuth)="googleSignUp()"
                       (facebookAuth)="facebookSignUp()"></app-auth-auth-form>

@@ -16,12 +16,12 @@ import { EmailAuthEvent } from '../../models';
 export class AuthFormComponent implements OnInit {
 
   @Input() message = '';
+  @Input() loggingIn = false;
   @Input() trackingCategory: string;
   @Output() emailAuth: EventEmitter<EmailAuthEvent> = new EventEmitter();
   @Output() googleAuth: EventEmitter<null> = new EventEmitter();
   @Output() facebookAuth: EventEmitter<null> = new EventEmitter();
   authForm: FormGroup;
-  showMessage = false;
   icons = {
     google: faGoogle,
     facebook: faFacebook
@@ -47,7 +47,6 @@ export class AuthFormComponent implements OnInit {
         email: this.authForm.value.email,
         password: this.authForm.value.password
       });
-      this.showMessage = true;
     }
   }
 

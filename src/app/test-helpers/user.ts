@@ -15,7 +15,7 @@ export namespace user {
     displayName: 'Jimmy',
     email: mockUser.email,
     imgSrc: mockUser.photoURL,
-    provider: mockUser.providerId
+    provider: 'GOOGLE'
   };
 
   export const userServiceStub = {

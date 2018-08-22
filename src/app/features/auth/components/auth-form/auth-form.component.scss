@@ -75,7 +75,7 @@
 @media only screen  and (max-width : $small-breakpoint) {
   .auth-form {
     .box {
-      height: $box-height * .75;
+      height: $box-height * 1.25;
       width: $box-width * .75;
     }
   }

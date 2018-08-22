@@ -15,6 +15,7 @@ import { CompletionComponent } from './features/completion/completion.component'
 import { DashboardComponent } from './features/dashboard/dashboard.component';
 import { HomeComponent } from './features/home/home.component';
 import { LibraryComponent } from './features/library/library.component';
+import { ProfileComponent } from './features/profile/profile.component';
 import { TrackerComponent } from './features/tracker/tracker.component';
 
 import { ClockService } from './features/tracker/services/clock.service';
@@ -23,8 +24,10 @@ import { TimePipe } from './shared/pipes/time.pipe';
 
 import * as actions from './actions/app.actions';
 
+import * as fromAuth from './features/auth/reducers/root.reducer';
 import * as fromCompletion from './features/completion/reducers/root.reducer';
 import * as fromDashboard from './features/dashboard/reducers/root.reducer';
+import * as fromProfile from './features/profile/reducers/root.reducer';
 import * as fromTracker from './features/tracker/reducers/root.reducer';
 import * as fromRoot from './reducers/root.reducer';
 import * as fromShared from './shared/reducers/root.reducer';
@@ -47,6 +50,7 @@ describe('AppComponent', () => {
         DashboardComponent,
         LibraryComponent,
         CompletionComponent,
+        ProfileComponent,
         TimePipe
       ],
       imports: [
@@ -79,6 +83,10 @@ describe('AppComponent', () => {
                 component: CompletionComponent
               },
               {
+                path: 'profile',
+                component: ProfileComponent
+              },
+              {
                 path: '**',
                 redirectTo: '/app/tracker',
                 pathMatch: 'full'
@@ -88,10 +96,12 @@ describe('AppComponent', () => {
         ]),
         StoreModule.forRoot({
           ...fromRoot.reducers,
+          'auth': combineReducers(fromAuth.reducers),
           'shared': combineReducers(fromShared.reducers),
           'tracker': combineReducers(fromTracker.reducers),
           'dashboard': combineReducers(fromDashboard.reducers),
-          'completion': combineReducers(fromCompletion.reducers)
+          'completion': combineReducers(fromCompletion.reducers),
+          'profile': combineReducers(fromProfile.reducers)
         })
       ],
       providers: [

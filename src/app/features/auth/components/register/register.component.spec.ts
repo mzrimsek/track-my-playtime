@@ -31,6 +31,7 @@ describe('RegisterComponent', () => {
     store = TestBed.get(Store);
 
     spyOn(store, 'dispatch').and.callThrough();
+    spyOn(store, 'select').and.callThrough();
 
     fixture = TestBed.createComponent(RegisterComponent);
     component = fixture.componentInstance;
@@ -39,6 +40,14 @@ describe('RegisterComponent', () => {
 
   it('Should create the component', async(() => {
     expect(component).toBeTruthy();
+  }));
+
+  it('Should select logging in', async(() => {
+    expect(store.select).toHaveBeenCalledWith(fromAuth._selectStatusLoggingIn);
+  }));
+
+  it('Should select validation message', async(() => {
+    expect(store.select).toHaveBeenCalledWith(fromAuth._selectStatusValidationMessage);
   }));
 
   it('Should dispatch Google Login when GoogleAuth event emitted', async(() => {

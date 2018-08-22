@@ -42,6 +42,7 @@ describe('LoginComponent', () => {
     store = TestBed.get(Store);
 
     spyOn(store, 'dispatch').and.callThrough();
+    spyOn(store, 'select').and.callThrough();
 
     fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;
@@ -55,6 +56,14 @@ describe('LoginComponent', () => {
   it('Should dispatch Get User', async(() => {
     const action = new actions.GetUser();
     expect(store.dispatch).toHaveBeenCalledWith(action);
+  }));
+
+  it('Should select logging in', async(() => {
+    expect(store.select).toHaveBeenCalledWith(fromAuth._selectStatusLoggingIn);
+  }));
+
+  it('Should select validation message', async(() => {
+    expect(store.select).toHaveBeenCalledWith(fromAuth._selectStatusValidationMessage);
   }));
 
   it('Should dispatch Google Login when GoogleAuth event emitted', async(() => {

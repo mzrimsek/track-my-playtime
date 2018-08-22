@@ -30,6 +30,7 @@
       a {
         background: $background-light-accent;
         padding: 15px 10px;
+        color: $background-dark;
 
         &:hover {
           background: darken($background-light-accent, 5%);

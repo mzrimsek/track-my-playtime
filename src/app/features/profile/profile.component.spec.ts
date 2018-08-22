@@ -57,7 +57,7 @@ describe('ProfileComponent', () => {
     beforeEach(async(() => {
       component.userInfo = {
         ...user.mockUserInfo,
-        provider: 'password'
+        provider: 'PASSWORD'
       };
       fixture.detectChanges();
     }));

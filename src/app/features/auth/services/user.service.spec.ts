@@ -104,7 +104,7 @@ describe('User Service', () => {
           displayName: 'Jimmy',
           imgSrc: 'jimbob.com/jimbob.png',
           email: 'jimbob@jimbob.com',
-          provider: 'google.com'
+          provider: 'GOOGLE'
         });
       });
     });

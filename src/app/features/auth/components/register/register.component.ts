@@ -6,11 +6,9 @@ import { Observable } from 'rxjs/Observable';
 
 import * as userActions from '../../actions/user.actions';
 
-import rootComponentSelectors, { State } from '../../../../reducers/root.reducer';
+import authComponentSelectors, { State } from '../../reducers/root.reducer';
 
 import { EmailAuthEvent } from '../../models';
-
-import { getValidationMessage } from '../../utils/validation.utils';
 
 @Component({
   selector: 'app-auth-register',
@@ -19,11 +17,13 @@ import { getValidationMessage } from '../../utils/validation.utils';
 })
 export class RegisterComponent implements OnInit {
 
-  validationMessage$: Observable<string>;
+  loggingIn$: Observable<boolean>;
+  message$: Observable<string>;
   constructor(private store: Store<State>) { }
 
   ngOnInit() {
-    this.validationMessage$ = this.store.select(rootComponentSelectors.error).map(error => getValidationMessage(error));
+    this.loggingIn$ = this.store.select(authComponentSelectors.loggingIn);
+    this.message$ = this.store.select(authComponentSelectors.validationMessage);
   }
 
   googleSignUp() {

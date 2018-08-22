@@ -10,5 +10,7 @@ export interface UserInfo {
   displayName: string;
   email: string;
   imgSrc: string;
-  provider: string;
+  provider: Provider;
 }
+
+export type Provider = '' | 'PASSWORD' | 'GOOGLE' | 'FACEBOOK';
