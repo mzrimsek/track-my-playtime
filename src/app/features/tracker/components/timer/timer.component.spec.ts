@@ -55,6 +55,7 @@ describe('TimerComponent', () => {
     component = fixture.componentInstance;
     component.info = tracker.testInfo;
     component.platformsOptions = platforms.testPlatforms;
+    component.elapsedTime = testElapsedTime;
     fixture.detectChanges();
   };
 
@@ -222,6 +223,7 @@ describe('TimerComponent', () => {
 
     beforeEach(async(() => {
       tracker.testInfo.startTime = subHours(end, 1).getTime();
+      testElapsedTime = '01:00:00';
       initTests();
     }));
 
@@ -338,3 +340,5 @@ describe('TimerComponent', () => {
     });
   });
 });
+
+let testElapsedTime = '00:00:00';
