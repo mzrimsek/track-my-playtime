@@ -10,7 +10,11 @@ import { combineReducers, Store, StoreModule } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
 import { AppComponent } from './app.component';
+import {
+    ForgotPasswordComponent
+} from './features/auth/components/forgot-password/forgot-password.component';
 import { LoginComponent } from './features/auth/components/login/login.component';
+import { RegisterComponent } from './features/auth/components/register/register.component';
 import { CompletionComponent } from './features/completion/completion.component';
 import { DashboardComponent } from './features/dashboard/dashboard.component';
 import { HomeComponent } from './features/home/home.component';
@@ -18,12 +22,11 @@ import { LibraryComponent } from './features/library/library.component';
 import { ProfileComponent } from './features/profile/profile.component';
 import { TrackerComponent } from './features/tracker/tracker.component';
 
+import { UserService } from './features/auth/services/user.service';
 import { ClockService } from './features/tracker/services/clock.service';
 import { ElapsedTimeService } from './features/tracker/services/elapsed-time.service';
 
 import { TimePipe } from './shared/pipes/time.pipe';
-
-import * as actions from './actions/app.actions';
 
 import * as fromAuth from './features/auth/reducers/root.reducer';
 import * as fromCompletion from './features/completion/reducers/root.reducer';
@@ -47,6 +50,8 @@ describe('AppComponent', () => {
         AppComponent,
         HomeComponent,
         LoginComponent,
+        RegisterComponent,
+        ForgotPasswordComponent,
         TrackerComponent,
         DashboardComponent,
         LibraryComponent,
@@ -63,6 +68,14 @@ describe('AppComponent', () => {
           {
             path: 'login',
             component: LoginComponent
+          },
+          {
+            path: 'register',
+            component: RegisterComponent
+          },
+          {
+            path: 'forgotPassword',
+            component: ForgotPasswordComponent
           },
           {
             path: 'app',
@@ -109,6 +122,7 @@ describe('AppComponent', () => {
         { provide: APP_BASE_HREF, useValue: '/' },
         FormBuilder,
         ClockService,
+        UserService,
         ElapsedTimeService
       ],
       schemas: [NO_ERRORS_SCHEMA]
@@ -127,11 +141,6 @@ describe('AppComponent', () => {
 
   it('Should create the app', async(() => {
     expect(component).toBeTruthy();
-  }));
-
-  it('Should dispatch Initialize Application', async(() => {
-    const action = new actions.InitializeApplication();
-    expect(store.dispatch).toHaveBeenCalledWith(action);
   }));
 
   it('Should select userDataLoaded', () => {
@@ -164,6 +173,52 @@ describe('AppComponent', () => {
   describe('On Login Route', () => {
     beforeEach(async(() => {
       router.navigate(['login']);
+    }));
+
+    it('shouldShowHeader returns true', async(() => {
+      const shouldShowHeader = component.shouldShowHeader();
+      expect(shouldShowHeader).toBe(true);
+    }));
+
+    it('Should show header', async(() => {
+      fixture.detectChanges();
+      const header = fixture.nativeElement.querySelector('app-header');
+      expect(header).toBeTruthy();
+    }));
+
+    it('Should not show nav', async(() => {
+      fixture.detectChanges();
+      const nav = fixture.nativeElement.querySelector('app-nav');
+      expect(nav).toBeNull();
+    }));
+  });
+
+  describe('On Register Route', () => {
+    beforeEach(async(() => {
+      router.navigate(['register']);
+    }));
+
+    it('shouldShowHeader returns true', async(() => {
+      const shouldShowHeader = component.shouldShowHeader();
+      expect(shouldShowHeader).toBe(true);
+    }));
+
+    it('Should show header', async(() => {
+      fixture.detectChanges();
+      const header = fixture.nativeElement.querySelector('app-header');
+      expect(header).toBeTruthy();
+    }));
+
+    it('Should not show nav', async(() => {
+      fixture.detectChanges();
+      const nav = fixture.nativeElement.querySelector('app-nav');
+      expect(nav).toBeNull();
+    }));
+  });
+
+  describe('On ForgotPassword Route', () => {
+    beforeEach(async(() => {
+      router.navigate(['forgotPassword']);
     }));
 
     it('shouldShowHeader returns true', async(() => {
@@ -265,6 +320,18 @@ describe('AppComponent', () => {
         expect(completion).toBeTruthy();
       }));
     });
+
+    describe('On Profile Route', () => {
+      beforeEach(async(() => {
+        router.navigate(['app/profile']);
+      }));
+
+      it('Should show profile component', async(() => {
+        fixture.detectChanges();
+        const profile = fixture.nativeElement.querySelector('app-profile');
+        expect(profile).toBeTruthy();
+      }));
+    });
   });
 
   describe('User data not loaded', () => {
@@ -340,6 +407,18 @@ describe('AppComponent', () => {
     describe('On Completion Route', () => {
       beforeEach(async(() => {
         router.navigate(['app/completion']);
+      }));
+
+      it('Should show loading screen', () => {
+        fixture.detectChanges();
+        const loading = fixture.nativeElement.querySelector('.main .loading');
+        expect(loading).toBeTruthy();
+      });
+    });
+
+    describe('On Profile Route', () => {
+      beforeEach(async(() => {
+        router.navigate(['app/profile']);
       }));
 
       it('Should show loading screen', () => {
