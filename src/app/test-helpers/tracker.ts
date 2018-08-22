@@ -18,6 +18,10 @@ export namespace tracker {
     getNowTime: jasmine.createSpy('getNowTime')
   };
 
+  export const elapsedTimeServiceStub = {
+    getElapsedTime: jasmine.createSpy('getElapsedTime')
+  };
+
   export const testInfo: TimerInfo = {
     game: 'some game',
     platform: 'some platform',
