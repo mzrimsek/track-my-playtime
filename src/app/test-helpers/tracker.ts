@@ -34,6 +34,12 @@ export namespace tracker {
     }
   }
 
+  export class MockClockService {
+    getCurrentTime(): Observable<number> {
+      return Observable.of(0);
+    }
+  }
+
   export namespace firestore {
     export const testTimerItem: FirestoreTimerItem = {
       game: 'some game',

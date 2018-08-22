@@ -15,15 +15,13 @@ import { formatElapsedTime } from '../../../shared/utils/date.utils';
 @Injectable()
 export class ElapsedTimeService {
 
-  timerInfo$: Observable<TimerInfo>;
-  currentTime$: Observable<number>;
-  constructor(private trackerStore: Store<TrackerState>, private clockService: ClockService) {
-    this.timerInfo$ = this.trackerStore.select(trackerSelectors.timerInfo);
-    this.currentTime$ = this.clockService.getCurrentTime();
-  }
+  constructor(private trackerStore: Store<TrackerState>, private clockService: ClockService) { }
 
   getElapsedTime(inactiveValue: string): Observable<string> {
-    return this.currentTime$.combineLatest(this.timerInfo$, (currentTime: number, timerInfo: TimerInfo) => {
+    const timerInfo$ = this.trackerStore.select(trackerSelectors.timerInfo);
+    const currentTime$ = this.clockService.getCurrentTime();
+
+    return currentTime$.combineLatest(timerInfo$, (currentTime: number, timerInfo: TimerInfo) => {
       return formatElapsedTime(timerInfo.startTime, currentTime, inactiveValue);
     });
   }
