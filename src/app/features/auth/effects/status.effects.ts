@@ -35,44 +35,19 @@ export class StatusEffects {
         new statusActions.SetValidationMessage('')
       ]);
 
-  @Effect() emailLogin$ =
+  @Effect() login$ =
     this.actions$
-      .ofType(userActions.EMAIL_LOGIN)
+      .ofType(userActions.EMAIL_LOGIN,
+        userActions.SIGNUP,
+        userActions.GOOGLE_LOGIN,
+        userActions.FACEBOOK_LOGIN)
       .mergeMap(() => [
         new statusActions.SetAttemptingLogin(true)
       ]);
 
-  @Effect() signUp$ =
+  @Effect() postLogin$ =
     this.actions$
-      .ofType(userActions.SIGNUP)
-      .mergeMap(() => [
-        new statusActions.SetAttemptingLogin(true)
-      ]);
-
-  @Effect() googleLogin$ =
-    this.actions$
-      .ofType(userActions.GOOGLE_LOGIN)
-      .mergeMap(() => [
-        new statusActions.SetAttemptingLogin(true)
-      ]);
-
-  @Effect() facebookLogin$ =
-    this.actions$
-      .ofType(userActions.FACEBOOK_LOGIN)
-      .mergeMap(() => [
-        new statusActions.SetAttemptingLogin(true)
-      ]);
-
-  @Effect() authenticated$ =
-    this.actions$
-      .ofType(userActions.AUTHENTICATED)
-      .mergeMap(() => [
-        new statusActions.SetAttemptingLogin(false)
-      ]);
-
-  @Effect() notAuthenticated$ =
-    this.actions$
-      .ofType(userActions.NOT_AUTHENTICATED)
+      .ofType(userActions.AUTHENTICATED, userActions.NOT_AUTHENTICATED)
       .mergeMap(() => [
         new statusActions.SetAttemptingLogin(false)
       ]);
