@@ -68,9 +68,7 @@ export class TimerComponent implements OnInit {
 
   setGame() {
     if (this.game) {
-      console.log(this.game);
       const game = getValueFromNgSelect(this.game);
-      console.log(game);
       this.store.dispatch(new actions.SetGame(game));
       if (this.info.startTime !== 0) {
         this.timerService.setGame(this.userId, game);
