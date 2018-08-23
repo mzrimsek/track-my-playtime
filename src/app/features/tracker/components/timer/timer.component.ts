@@ -10,7 +10,10 @@ import * as actions from '../../actions/timer.actions';
 
 import { State } from '../../reducers/root.reducer';
 
+import { NgSelectValue } from '../../../../shared/models';
 import { AddTimerInfo, TimerInfo } from '../../models';
+
+import { getValueFromNgSelect } from '../../../../shared/utils/ng-select.utils';
 
 @Component({
   selector: 'app-tracker-timer',
@@ -24,7 +27,7 @@ export class TimerComponent implements OnInit {
   @Input() elapsedTime = '00:00:00';
   @Input() platformsOptions: string[] = [];
   @Input() trackedGames: string[] = [];
-  @Input() game: string | null = null;
+  @Input() game: string | NgSelectValue | null = null;
   userId = '';
   icons = {
     start: faPlayCircle,
@@ -65,7 +68,9 @@ export class TimerComponent implements OnInit {
 
   setGame() {
     if (this.game) {
-      const game = this.game;
+      console.log(this.game);
+      const game = getValueFromNgSelect(this.game);
+      console.log(game);
       this.store.dispatch(new actions.SetGame(game));
       if (this.info.startTime !== 0) {
         this.timerService.setGame(this.userId, game);

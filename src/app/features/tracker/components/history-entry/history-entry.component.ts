@@ -12,10 +12,12 @@ import * as timerActions from '../../actions/timer.actions';
 import { State } from '../../reducers/root.reducer';
 
 import {
-    HistoryListItem, UpdateHistoryItemGamePayload, UpdateHistoryItemPlatformPayload,
+    HistoryListItem, NgSelectValue, UpdateHistoryItemGamePayload, UpdateHistoryItemPlatformPayload,
     UpdateHistoryItemTimesPayload
 } from '../../../../shared/models';
 import { TimerInfo } from '../../models';
+
+import { getValueFromNgSelect } from '../../../../shared/utils/ng-select.utils';
 
 @Component({
   selector: 'app-tracker-history-entry',
@@ -28,7 +30,7 @@ export class HistoryEntryComponent implements OnInit {
   @Input() item: HistoryListItem;
   @Input() platformsOptions: string[] = [];
   @Input() trackedGames: string[] = [];
-  @Input() game: string | null = null;
+  @Input() game: string | NgSelectValue | null = null;
   userId = '';
   icons = {
     remove: faTrash,
@@ -44,7 +46,7 @@ export class HistoryEntryComponent implements OnInit {
     if (this.game) {
       const payload = <UpdateHistoryItemGamePayload>{
         itemId: this.item.id,
-        game: this.game
+        game: getValueFromNgSelect(this.game)
       };
       this.store.dispatch(new historyActions.UpdateGame(this.userId, payload));
     }
