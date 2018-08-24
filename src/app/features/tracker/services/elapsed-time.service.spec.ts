@@ -2,6 +2,8 @@ import { TestBed } from '@angular/core/testing';
 
 import { combineReducers, Store, StoreModule } from '@ngrx/store';
 
+import { Observable } from 'rxjs';
+
 import { ElapsedTimeService } from './elapsed-time.service';
 
 import * as actions from '../actions/timer.actions';
@@ -30,6 +32,7 @@ describe('ElapsedTimeService', () => {
     store = TestBed.get(Store);
 
     spyOn(store, 'select').and.callThrough();
+    spyOn(service, 'getCurrentTime').and.callFake(() => Observable.of(70000));
   });
 
   it('Should be created', () => {
