@@ -2,9 +2,6 @@ import { TestBed } from '@angular/core/testing';
 
 import { combineReducers, Store, StoreModule } from '@ngrx/store';
 
-import { Observable } from 'rxjs/Observable';
-
-import { ClockService } from './clock.service';
 import { ElapsedTimeService } from './elapsed-time.service';
 
 import * as actions from '../actions/timer.actions';
@@ -16,15 +13,11 @@ import { tracker } from '../../../test-helpers';
 
 describe('ElapsedTimeService', () => {
   let service: ElapsedTimeService;
-  let clockService: ClockService;
   let store: Store<fromRoot.State>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [
-        ElapsedTimeService,
-        { provide: ClockService, useClass: tracker.MockClockService }
-      ],
+      providers: [ElapsedTimeService],
       imports: [
         StoreModule.forRoot({
           ...fromRoot.reducers,
@@ -34,10 +27,8 @@ describe('ElapsedTimeService', () => {
     });
 
     service = TestBed.get(ElapsedTimeService);
-    clockService = TestBed.get(ClockService);
     store = TestBed.get(Store);
 
-    spyOn(clockService, 'getCurrentTime').and.callFake(() => Observable.of(70000));
     spyOn(store, 'select').and.callThrough();
   });
 
@@ -51,11 +42,6 @@ describe('ElapsedTimeService', () => {
     it('Should select timerInfo', () => {
       service.getElapsedTime(inactiveValue);
       expect(store.select).toHaveBeenCalledWith(fromTracker._selectTimerInfo);
-    });
-
-    it('Should call clockService getCurrentTime', () => {
-      service.getElapsedTime(inactiveValue);
-      expect(clockService.getCurrentTime).toHaveBeenCalled();
     });
 
     it('Should return inactiveValue when timer is not active', () => {

@@ -5,10 +5,6 @@ import { FirestoreTimerItem } from '../features/tracker/services/timer.service';
 import { TimerInfo } from '../features/tracker/models';
 
 export namespace tracker {
-  export const clockServiceStub = {
-    getCurrentTime: jasmine.createSpy('getCurrentTime')
-  };
-
   export const timerServiceStub = {
     setTimer: jasmine.createSpy('setTimer'),
     setGame: jasmine.createSpy('setGame'),
@@ -31,12 +27,6 @@ export namespace tracker {
   export class MockTimerService {
     getTimerInfo(_userId: string): Observable<TimerInfo> {
       return Observable.of(testInfo);
-    }
-  }
-
-  export class MockClockService {
-    getCurrentTime(): Observable<number> {
-      return Observable.of(0);
     }
   }
 

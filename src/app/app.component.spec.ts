@@ -23,7 +23,6 @@ import { ProfileComponent } from './features/profile/profile.component';
 import { TrackerComponent } from './features/tracker/tracker.component';
 
 import { UserService } from './features/auth/services/user.service';
-import { ClockService } from './features/tracker/services/clock.service';
 import { ElapsedTimeService } from './features/tracker/services/elapsed-time.service';
 
 import { TimePipe } from './shared/pipes/time.pipe';
@@ -121,7 +120,6 @@ describe('AppComponent', () => {
       providers: [
         { provide: APP_BASE_HREF, useValue: '/' },
         FormBuilder,
-        ClockService,
         UserService,
         ElapsedTimeService
       ],
