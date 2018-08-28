@@ -36,6 +36,7 @@ import * as fromRoot from './reducers/root.reducer';
 import * as fromShared from './shared/reducers/root.reducer';
 
 import './rxjs-operators';
+import { tracker } from './test-helpers';
 
 describe('AppComponent', () => {
   let component: AppComponent;
@@ -121,7 +122,7 @@ describe('AppComponent', () => {
         { provide: APP_BASE_HREF, useValue: '/' },
         FormBuilder,
         UserService,
-        ElapsedTimeService
+        { provide: ElapsedTimeService, useClass: tracker.MockElapsedTimeService }
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();

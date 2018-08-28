@@ -30,6 +30,12 @@ export namespace tracker {
     }
   }
 
+  export class MockElapsedTimeService {
+    getElapsedTime(invalidValue: string): Observable<string> {
+      return Observable.of(invalidValue);
+    }
+  }
+
   export namespace firestore {
     export const testTimerItem: FirestoreTimerItem = {
       game: 'some game',
