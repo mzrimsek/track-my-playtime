@@ -21,6 +21,7 @@ import { environment } from '../environments/environment';
 export class AppComponent implements OnInit {
 
   userDataLoaded$: Observable<boolean>;
+  trackerNavCaption$: Observable<string>;
   constructor(private sharedStore: Store<SharedState>,
     private router: Router,
     private titleService: Title,
@@ -30,6 +31,7 @@ export class AppComponent implements OnInit {
     insertAnalyticsElements(environment.googleTagManager);
     this.userDataLoaded$ = this.sharedStore.select(sharedSelectors.userDataLoaded);
     this.elapsedTimeService.getElapsedTime('Track My Playtime').subscribe(title => this.titleService.setTitle(title));
+    this.trackerNavCaption$ = this.elapsedTimeService.getElapsedTime('Tracker');
   }
 
   shouldShowHeader(): boolean {

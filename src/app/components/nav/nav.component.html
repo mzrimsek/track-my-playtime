@@ -25,6 +25,22 @@
 
     <nav>
       <ul>
+        <li [routerLinkActive]="['active']"
+            [routerLinkActiveOptions]="{ exact: trackerRoute.exact }">
+
+          <a [id]="trackerRoute.trackingCategory + 'Link'"
+             [attr.data-tracking-category]="trackerRoute.trackingCategory"
+             [routerLink]="trackerRoute.router">
+            <span class="icon">
+              <fa-icon [icon]="trackerRoute.icon"></fa-icon>
+            </span>
+            <span [attr.data-tracking-category]="trackerRoute.trackingCategory"
+                  class="text static">{{ trackerRoute.caption }}</span>
+            <span [attr.data-tracking-category]="trackerRoute.trackingCategory"
+                  class="text dynamic">{{ trackerCaption }}</span>
+          </a>
+
+        </li>
         <li *ngFor="let route of routes"
             [routerLinkActive]="['active']"
             [routerLinkActiveOptions]="{ exact: route.exact }">
