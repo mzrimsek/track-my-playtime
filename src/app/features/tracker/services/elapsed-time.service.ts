@@ -13,10 +13,14 @@ import { formatElapsedTime } from '../../../shared/utils/date.utils';
 @Injectable()
 export class ElapsedTimeService {
 
+  private currentTime$: Observable<number>;
   constructor(private trackerStore: Store<TrackerState>) { }
 
   getCurrentTime(): Observable<number> {
-    return Observable.interval(1000).map(() => new Date().getTime());
+    if (!this.currentTime$) {
+      this.currentTime$ = Observable.interval(1000).map(() => new Date().getTime());
+    }
+    return this.currentTime$;
   }
 
   getElapsedTime(inactiveValue: string): Observable<string> {
