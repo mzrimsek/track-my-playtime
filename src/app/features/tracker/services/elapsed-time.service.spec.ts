@@ -13,7 +13,7 @@ import * as fromTracker from '../reducers/root.reducer';
 
 import { tracker } from '../../../test-helpers';
 
-describe('ElapsedTimeService', () => {
+fdescribe('ElapsedTimeService', () => {
   let service: ElapsedTimeService;
   let store: Store<fromRoot.State>;
 
@@ -32,15 +32,22 @@ describe('ElapsedTimeService', () => {
     store = TestBed.get(Store);
 
     spyOn(store, 'select').and.callThrough();
-    spyOn(service, 'getCurrentTime').and.callFake(() => Observable.of(70000));
   });
 
   it('Should be created', () => {
     expect(service).toBeTruthy();
   });
 
+  it('Should have currentTime$ be undefined at start', () => {
+    expect(service.currentTime$).toBeUndefined();
+  });
+
   describe('getElapsedTime', () => {
     const inactiveValue = 'inactive';
+
+    beforeEach(() => {
+      spyOn(service, 'getCurrentTime').and.callFake(() => Observable.of(70000));
+    });
 
     it('Should select timerInfo', () => {
       service.getElapsedTime(inactiveValue);
@@ -63,6 +70,19 @@ describe('ElapsedTimeService', () => {
       result.subscribe(res => {
         expect(res).toBe('00:01:00');
       });
+    });
+  });
+
+  describe('getCurrentTime', () => {
+    it('Should set currentTime$ when it is undefined', () => {
+      service.getCurrentTime();
+      expect(service.currentTime$).not.toBeUndefined();
+    });
+
+    it('Should return currentTime$ when it is set', () => {
+      service.getCurrentTime(); // set currentTime$
+      const result = service.getCurrentTime();
+      expect(service.currentTime$).toEqual(result);
     });
   });
 });

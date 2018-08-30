@@ -13,7 +13,7 @@ import { formatElapsedTime } from '../../../shared/utils/date.utils';
 @Injectable()
 export class ElapsedTimeService {
 
-  private currentTime$: Observable<number>;
+  currentTime$: Observable<number>;
   constructor(private trackerStore: Store<TrackerState>) { }
 
   getCurrentTime(): Observable<number> {
