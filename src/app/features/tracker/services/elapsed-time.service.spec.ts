@@ -13,7 +13,7 @@ import * as fromTracker from '../reducers/root.reducer';
 
 import { tracker } from '../../../test-helpers';
 
-fdescribe('ElapsedTimeService', () => {
+describe('ElapsedTimeService', () => {
   let service: ElapsedTimeService;
   let store: Store<fromRoot.State>;
 
