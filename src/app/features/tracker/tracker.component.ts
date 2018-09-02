@@ -4,12 +4,12 @@ import { Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs/Observable';
 
-import { ClockService } from './services/clock.service';
+import { ElapsedTimeService } from './services/elapsed-time.service';
 
 import sharedSelectors, { State as SharedState } from '../../shared/reducers/root.reducer';
 import trackerSelectors, { State as TrackerState } from './reducers/root.reducer';
 
-import { HistoryGrouping } from '../../shared/models';
+import { HistoryGrouping, NgSelectValue } from '../../shared/models';
 import { TimerInfo } from './models';
 
 import { hasMoreToDisplay, takeFrom } from './utils/display.utils';
@@ -22,20 +22,22 @@ import { hasMoreToDisplay, takeFrom } from './utils/display.utils';
 export class TrackerComponent implements OnInit {
 
   timerInfo$: Observable<TimerInfo>;
-  currentTime$: Observable<number>;
   platformsOptions$: Observable<string[]>;
-  game$: Observable<string | null>;
+  game$: Observable<string | NgSelectValue | null>;
+  elapsedTime$: Observable<string>;
 
   historyGroupings$: Observable<HistoryGrouping[]>;
   showLoadMoreButton$: Observable<boolean>;
 
   trackedGames$: Observable<string[]>;
-  constructor(private trackerStore: Store<TrackerState>, private sharedStore: Store<SharedState>, private clockService: ClockService) { }
+  constructor(private trackerStore: Store<TrackerState>,
+    private sharedStore: Store<SharedState>,
+    private elapsedTimeService: ElapsedTimeService) { }
 
   ngOnInit() {
     this.timerInfo$ = this.trackerStore.select(trackerSelectors.timerInfo);
-    this.currentTime$ = this.clockService.getCurrentTime();
     this.game$ = this.timerInfo$.map(info => info.game ? info.game : null);
+    this.elapsedTime$ = this.elapsedTimeService.getElapsedTime('00:00:00');
 
     const historyGroupings = this.sharedStore.select(sharedSelectors.historyGroupingsByDate);
     const entriesToShow = this.trackerStore.select(trackerSelectors.entriesToShow);

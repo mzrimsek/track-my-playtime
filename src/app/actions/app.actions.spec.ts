@@ -1,13 +1,6 @@
 import * as actions from './app.actions';
 
 describe('App Actions', () => {
-  describe('InitializeApplication', () => {
-    it('Should have correct type', () => {
-      const action = new actions.InitializeApplication();
-      expect(action.type).toBe(actions.APP_INIT);
-    });
-  });
-
   describe('Error', () => {
     it('Should have correct type', () => {
       const action = new actions.Error('', '');

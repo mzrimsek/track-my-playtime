@@ -2,7 +2,8 @@
   <app-header *ngIf="shouldShowHeader()"></app-header>
 
   <div class="main">
-    <app-nav *ngIf="!shouldShowHeader()"></app-nav>
+    <app-nav *ngIf="!shouldShowHeader()"
+             [trackerCaption]="trackerNavCaption$ | async"></app-nav>
 
     <div *ngIf="!shouldShowHeader() && !(userDataLoaded$ | async)"
          class="content loading">

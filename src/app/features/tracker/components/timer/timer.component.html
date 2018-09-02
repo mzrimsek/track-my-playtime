@@ -24,7 +24,7 @@
   <div class="time"
        [class.active]="info.startTime !== 0">
     <div data-tracking-category="timerTime"
-         (click)="openDateTimePicker(startTimeEl)">{{ info.startTime | elapsedTime:currentTime }}</div>
+         (click)="openDateTimePicker(startTimeEl)">{{ elapsedTime }}</div>
 
     <div class="date-time-picker">
       <input #startTimeEl

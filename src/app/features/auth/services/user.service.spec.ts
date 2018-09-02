@@ -41,14 +41,6 @@ describe('User Service', () => {
     expect(service).toBeTruthy();
   });
 
-  xit('Should select user', () => {
-    expect(store.select).toHaveBeenCalledWith(fromAuth._selectUserData);
-  });
-
-  xit('Should select profile info', () => {
-    expect(store.select).toHaveBeenCalledWith(fromProfile._selectInfo);
-  });
-
   describe('getUser', () => {
     it('Should return default data when not authenticated', () => {
       const result = service.getUser();
@@ -77,6 +69,11 @@ describe('User Service', () => {
       result.subscribe(res => {
         expect(res).toEqual(user);
       });
+    });
+
+    it('Should select user', () => {
+      service.getUser();
+      expect(store.select).toHaveBeenCalledWith(fromAuth._selectUserData);
     });
   });
 
@@ -107,6 +104,16 @@ describe('User Service', () => {
           provider: 'GOOGLE'
         });
       });
+    });
+
+    it('Should select user', () => {
+      service.getUserInfo();
+      expect(store.select).toHaveBeenCalledWith(fromAuth._selectUserData);
+    });
+
+    it('Should select profile info', () => {
+      service.getUserInfo();
+      expect(store.select).toHaveBeenCalledWith(fromProfile._selectInfo);
     });
   });
 
