@@ -19,19 +19,17 @@ import { getDisplayName, getImgSrc, getProviderFrom } from '../../profile/utils/
 @Injectable()
 export class UserService {
 
-  private user$: Observable<User>;
-  private profile$: Observable<Profile>;
-  constructor(private store: Store<State>, private profileStore: Store<ProfileState>) {
-    this.user$ = this.store.select(authComponentSelectors.user);
-    this.profile$ = this.profileStore.select(profileComponentSelectors.info);
-  }
+  constructor(private store: Store<State>, private profileStore: Store<ProfileState>) { }
 
   getUser(): Observable<User> {
-    return this.user$;
+    return this.store.select(authComponentSelectors.user);
   }
 
   getUserInfo(): Observable<UserInfo> {
-    return this.user$.combineLatest(this.profile$, (user: User, profile: Profile) => {
+    const user$ = this.getUser();
+    const profile$ = this.profileStore.select(profileComponentSelectors.info);
+
+    return user$.combineLatest(profile$, (user: User, profile: Profile) => {
       return {
         displayName: getDisplayName(user, profile),
         email: user.email,

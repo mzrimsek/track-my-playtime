@@ -7,7 +7,7 @@ import { addDays } from 'date-fns';
 
 import { TrackerComponent } from './tracker.component';
 
-import { ClockService } from './services/clock.service';
+import { ElapsedTimeService } from './services/elapsed-time.service';
 
 import * as historyActions from '../../shared/actions/history.actions';
 
@@ -19,7 +19,7 @@ import { tracker } from '../../test-helpers';
 
 describe('Tracker Component', () => {
   let store: Store<fromRoot.State>;
-  let clockService: ClockService;
+  let elapsedTimeService: ElapsedTimeService;
   let component: TrackerComponent;
   let fixture: ComponentFixture<TrackerComponent>;
 
@@ -35,12 +35,12 @@ describe('Tracker Component', () => {
           'tracker': combineReducers(fromTracker.reducers)
         })
       ],
-      providers: [{ provide: ClockService, useValue: tracker.clockServiceStub }],
+      providers: [{ provide: ElapsedTimeService, useValue: tracker.elapsedTimeServiceStub }],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
 
     store = TestBed.get(Store);
-    clockService = TestBed.get(ClockService);
+    elapsedTimeService = TestBed.get(ElapsedTimeService);
 
     spyOn(store, 'select').and.callThrough();
 
@@ -57,8 +57,8 @@ describe('Tracker Component', () => {
     expect(store.select).toHaveBeenCalledWith(fromTracker._selectTimerInfo);
   });
 
-  it('Should call ClockService getCurrentTime', () => {
-    expect(clockService.getCurrentTime).toHaveBeenCalled();
+  it('Should call ElaspedTimeService getElapsedTime', () => {
+    expect(elapsedTimeService.getElapsedTime).toHaveBeenCalledWith('00:00:00');
   });
 
   it('Should select platforms options', () => {

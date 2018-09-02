@@ -22,3 +22,14 @@ export const formatDate = (date: Date): string => {
 export const isInDateRange = (dateToCheck: Date, dateRange: Date[]): boolean => {
   return dateRange.some(date => isSameDay(date, dateToCheck));
 };
+
+export const formatElapsedTime = (startTimeMS: number, endTimeMS: number, inactiveValue = '00:00:00'): string => {
+  const elapsedTime = getElapsedTimeInSeconds(startTimeMS, endTimeMS);
+  return elapsedTime >= 0 && canCalculateElapsedTime(startTimeMS, endTimeMS) ? formatTime(elapsedTime) : inactiveValue;
+};
+
+const canCalculateElapsedTime = (startTime: number, endTime: number): boolean => {
+  const areValid = startTime !== 0 && endTime !== 0;
+  const areInOrder = startTime <= endTime;
+  return areValid && areInOrder;
+};

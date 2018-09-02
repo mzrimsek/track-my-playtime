@@ -14,6 +14,9 @@ import { SharedModule } from '../../shared/shared.module';
 import { HistoryEntryComponent } from './components/history-entry/history-entry.component';
 import { HistoryComponent } from './components/history/history.component';
 import { LoadMoreComponent } from './components/load-more/load-more.component';
+import {
+    LockedHistoryEntryComponent
+} from './components/locked-history-entry/locked-history-entry.component';
 import { TimerComponent } from './components/timer/timer.component';
 import { TrackerComponent } from './tracker.component';
 
@@ -22,13 +25,12 @@ import { PlatformsEffects } from './effects/platforms.effects';
 import { TimerEffects } from './effects/timer.effects';
 
 import { UserService } from '../auth/services/user.service';
-import { ClockService } from './services/clock.service';
+import { ElapsedTimeService } from './services/elapsed-time.service';
 import { HistoryService } from './services/history.service';
 import { PlatformsService } from './services/platforms.service';
 import { TimerService } from './services/timer.service';
 
 import { reducers } from './reducers/root.reducer';
-import { LockedHistoryEntryComponent } from './components/locked-history-entry/locked-history-entry.component';
 
 @NgModule({
   imports: [
@@ -43,6 +45,6 @@ import { LockedHistoryEntryComponent } from './components/locked-history-entry/l
     SharedModule
   ],
   declarations: [TrackerComponent, TimerComponent, HistoryComponent, HistoryEntryComponent, LoadMoreComponent, LockedHistoryEntryComponent],
-  providers: [ClockService, HistoryService, PlatformsService, UserService, TimerService]
+  providers: [HistoryService, PlatformsService, UserService, TimerService, ElapsedTimeService]
 })
 export class TrackerModule { }

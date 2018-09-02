@@ -53,8 +53,22 @@
           border-radius: 8px;
           margin-bottom: 5px;
 
+          .static {
+            display: none;
+          }
+
           &.active {
             background: $background-dark-accent;
+
+            a {
+              .dynamic {
+                display: none;
+              }
+
+              .static {
+                display: block;
+              }
+            }
           }
 
           &:hover {

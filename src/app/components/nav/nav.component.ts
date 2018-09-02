@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 
 import { faClock } from '@fortawesome/free-regular-svg-icons';
 import {
@@ -14,9 +14,18 @@ import { RouteEntry } from '../../models';
   selector: 'app-nav',
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NavComponent implements OnInit {
 
+  @Input() trackerCaption = 'Tracker';
+  trackerRoute: RouteEntry = {
+    caption: 'Tracker',
+    router: ['app/tracker'],
+    exact: true,
+    icon: faClock,
+    trackingCategory: 'navTracker'
+  };
   bannerRoute: RouteEntry = {
     caption: 'Track My Playtime',
     router: ['app'],
@@ -27,35 +36,27 @@ export class NavComponent implements OnInit {
     router: ['app/profile'],
     trackingCategory: 'navProfile'
   };
-  routes: RouteEntry[] = [
-    {
-      caption: 'Tracker',
-      router: ['app/tracker'],
-      exact: true,
-      icon: faClock,
-      trackingCategory: 'navTracker'
-    },
-    {
-      caption: 'Dashboard',
-      router: ['app/dashboard'],
-      exact: true,
-      icon: faChartBar,
-      trackingCategory: 'navDashboard'
-    },
-    {
-      caption: 'Library',
-      router: ['app/library'],
-      exact: true,
-      icon: faList,
-      trackingCategory: 'navLibrary'
-    },
-    {
-      caption: 'Completion',
-      router: ['app/completion'],
-      exact: true,
-      icon: faClipboardList,
-      trackingCategory: 'navCompletion'
-    }
+  routes: RouteEntry[] = [{
+    caption: 'Dashboard',
+    router: ['app/dashboard'],
+    exact: true,
+    icon: faChartBar,
+    trackingCategory: 'navDashboard'
+  },
+  {
+    caption: 'Library',
+    router: ['app/library'],
+    exact: true,
+    icon: faList,
+    trackingCategory: 'navLibrary'
+  },
+  {
+    caption: 'Completion',
+    router: ['app/completion'],
+    exact: true,
+    icon: faClipboardList,
+    trackingCategory: 'navCompletion'
+  }
   ];
   hideNavContents = true;
   userInfo: UserInfo;
