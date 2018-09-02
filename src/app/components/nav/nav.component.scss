@@ -166,6 +166,10 @@
               .text {
                 display: none;
               }
+
+              .text.static {
+                display: none;
+              }
             }
           }
         }
@@ -239,6 +243,10 @@
               }
 
               .text {
+                display: block;
+              }
+
+              .text.static {
                 display: block;
               }
 
