@@ -113,7 +113,7 @@ describe('NavComponent', () => {
     expect(store.dispatch).toHaveBeenCalledWith(action);
   }));
 
-  describe('Mobile', () => {
+  xdescribe('Mobile', () => {
     describe('Nav Hidden', () => {
       it('Should change hideNavContents to false when menu icon clicked', async(() => {
         const navtoggleMenuIcon = fixture.debugElement.query(By.css('.nav .main .banner .menu'));
