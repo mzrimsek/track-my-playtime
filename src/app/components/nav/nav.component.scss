@@ -241,6 +241,10 @@
               .text {
                 display: block;
               }
+
+              .text.dynamic {
+                display: none;
+              }
             }
           }
         }
