@@ -1,20 +1,27 @@
 @import "../../../variables";
 
 .home {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: $main-height;
+  color: $text-light;
 
   .tagline {
-    width: 50%;
-    color: $text-light;
-    text-transform: uppercase;
-    font-weight: bold;
-    font-size: 3.5em;
-    text-align: center;
-    text-shadow: -1px -1px 1px #fff, 1px 1px 1px #000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: $main-height;
+
+    .text {
+      width: 50%;
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: 3.5em;
+      text-align: center;
+      text-shadow: -1px -1px 1px #fff, 1px 1px 1px #000;
+    }
+  }
+
+  .about {
+    background: $background-dark;
   }
 }
 
