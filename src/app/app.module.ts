@@ -19,7 +19,6 @@ import { AdsenseModule } from 'ng2-adsense';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthModule } from './features/auth/auth.module';
 import { DashboardModule } from './features/dashboard/dashboard.module';
-import { LibraryModule } from './features/library/library.module';
 import { ProfileModule } from './features/profile/profile.module';
 import { TrackerModule } from './features/tracker/tracker.module';
 import { SharedModule } from './shared/shared.module';
@@ -65,7 +64,6 @@ import './rxjs-operators';
     EffectsModule.forRoot([]),
     TrackerModule,
     DashboardModule,
-    LibraryModule,
     ProfileModule
   ],
   providers: [{
