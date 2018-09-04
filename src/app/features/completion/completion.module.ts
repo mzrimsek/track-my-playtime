@@ -8,7 +8,6 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
 import { SharedModule } from '../../shared/shared.module';
-import { CompletionRoutingModule } from './completion-routing.module';
 
 import { CompletionComponent } from './completion.component';
 import { AddPlayingComponent } from './components/add-playing/add-playing.component';
@@ -32,10 +31,9 @@ import { reducers } from './reducers/root.reducer';
     FontAwesomeModule,
     NgSelectModule,
     FormsModule,
-    CompletionRoutingModule,
+    SharedModule,
     StoreModule.forFeature('completion', reducers),
-    EffectsModule.forFeature([AddPlayingEffects, ProgressEffects]),
-    SharedModule
+    EffectsModule.forFeature([AddPlayingEffects, ProgressEffects])
   ],
   declarations: [
     CompletionComponent,
