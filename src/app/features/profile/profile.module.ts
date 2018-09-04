@@ -5,6 +5,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
+import { ProfileRoutingModule } from './profile-routing.module';
+
 import {
     EditDisplayNameComponent
 } from './components/edit-display-name/edit-display-name.component';
@@ -20,6 +22,7 @@ import { reducers } from './reducers/root.reducer';
   imports: [
     CommonModule,
     FontAwesomeModule,
+    ProfileRoutingModule,
     StoreModule.forFeature('profile', reducers),
     EffectsModule.forFeature([ProfileEffects]),
   ],
