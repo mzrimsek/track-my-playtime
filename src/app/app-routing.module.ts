@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { LoginComponent } from './features/auth/components/login/login.component';
 import { RegisterComponent } from './features/auth/components/register/register.component';
-import { ProfileComponent } from './features/profile/profile.component';
 import { TrackerComponent } from './features/tracker/tracker.component';
 
 import { AuthGuard } from './features/auth/guards/auth.guard';
@@ -43,7 +42,7 @@ const routes: Routes = [
       },
       {
         path: 'profile',
-        component: ProfileComponent
+        loadChildren: 'app/features/profile/profile.module#ProfileModule'
       },
       {
         path: '**',
