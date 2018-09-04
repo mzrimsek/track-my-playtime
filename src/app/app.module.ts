@@ -18,9 +18,7 @@ import { AdsenseModule } from 'ng2-adsense';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AuthModule } from './features/auth/auth.module';
-import { CompletionModule } from './features/completion/completion.module';
 import { DashboardModule } from './features/dashboard/dashboard.module';
-import { HomeModule } from './features/home/home.module';
 import { LibraryModule } from './features/library/library.module';
 import { ProfileModule } from './features/profile/profile.module';
 import { TrackerModule } from './features/tracker/tracker.module';
@@ -48,6 +46,7 @@ import './rxjs-operators';
     BrowserAnimationsModule,
     FontAwesomeModule,
     AppRoutingModule,
+    AuthModule,
     SharedModule,
     HttpClientModule,
     Angulartics2Module.forRoot([Angulartics2GoogleTagManager]),
@@ -64,12 +63,9 @@ import './rxjs-operators';
     }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     EffectsModule.forRoot([]),
-    HomeModule,
-    AuthModule,
     TrackerModule,
     DashboardModule,
     LibraryModule,
-    CompletionModule,
     ProfileModule
   ],
   providers: [{
