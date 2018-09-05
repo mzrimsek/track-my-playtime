@@ -213,6 +213,42 @@ describe('User Effects', () => {
     });
   });
 
+  describe('Twitter Login', () => {
+    beforeEach(() => {
+      initTests();
+    });
+
+    it('Should dispatch GetUser', () => {
+      actions = hot('-a', { a: new userActions.TwitterLogin() });
+      const expected = cold('-(b)', {
+        b: new userActions.GetUser()
+      });
+      expect(effects.twitterLogin$).toBeObservable(expected);
+    });
+
+    it('Should dispatch Error on error', () => {
+      const message = 'Something went terribly wrong';
+      actions = hot('-a', { a: new userActions.TwitterLogin() });
+
+      const expected = cold('-(b)', {
+        b: new appActions.Error(userActions.TWITTER_LOGIN, message)
+      });
+
+      spyOn(authService, 'signInWithTwitter').and.callFake(() => Observable.throw({ message }));
+      expect(effects.twitterLogin$).toBeObservable(expected);
+    });
+
+    it('Should call AuthService signInWithTwitter', () => {
+      actions = new ReplaySubject(1);
+      actions.next(new userActions.TwitterLogin());
+
+      spyOn(authService, 'signInWithTwitter').and.callThrough();
+      effects.twitterLogin$.subscribe(() => {
+        expect(authService.signInWithTwitter).toHaveBeenCalled();
+      });
+    });
+  });
+
   describe('Logout', () => {
     beforeEach(() => {
       initTests();
