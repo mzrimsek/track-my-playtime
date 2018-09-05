@@ -34,6 +34,10 @@ export class RegisterComponent implements OnInit {
     this.store.dispatch(new userActions.FacebookLogin());
   }
 
+  twitterSignUp() {
+    this.store.dispatch(new userActions.TwitterLogin());
+  }
+
   emailSignUp(event: EmailAuthEvent) {
     this.store.dispatch(new userActions.SignUp(event.email, event.password));
   }

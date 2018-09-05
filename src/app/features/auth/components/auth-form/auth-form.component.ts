@@ -3,7 +3,7 @@ import {
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { faFacebook, faGoogle } from '@fortawesome/free-brands-svg-icons';
+import { faFacebook, faGoogle, faTwitter } from '@fortawesome/free-brands-svg-icons';
 
 import { EmailAuthEvent } from '../../models';
 
@@ -21,10 +21,12 @@ export class AuthFormComponent implements OnInit {
   @Output() emailAuth: EventEmitter<EmailAuthEvent> = new EventEmitter();
   @Output() googleAuth: EventEmitter<null> = new EventEmitter();
   @Output() facebookAuth: EventEmitter<null> = new EventEmitter();
+  @Output() twitterAuth: EventEmitter<null> = new EventEmitter();
   authForm: FormGroup;
   icons = {
     google: faGoogle,
-    facebook: faFacebook
+    facebook: faFacebook,
+    twitter: faTwitter
   };
   constructor(private builder: FormBuilder) { }
 
@@ -56,5 +58,9 @@ export class AuthFormComponent implements OnInit {
 
   emitFacebookAuth() {
     this.facebookAuth.emit(null);
+  }
+
+  emitTwitterAuth() {
+    this.twitterAuth.emit(null);
   }
 }

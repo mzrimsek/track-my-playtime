@@ -49,6 +49,13 @@ describe('User Actions', () => {
     });
   });
 
+  describe('TwitterLogin', () => {
+    it('Should have correct type', () => {
+      const action = new actions.TwitterLogin();
+      expect(action.type).toBe(actions.TWITTER_LOGIN);
+    });
+  });
+
   describe('GetUser', () => {
     it('Should have correct type', () => {
       const action = new actions.Logout();

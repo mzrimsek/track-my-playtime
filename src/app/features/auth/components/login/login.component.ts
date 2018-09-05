@@ -35,6 +35,10 @@ export class LoginComponent implements OnInit {
     this.store.dispatch(new userActions.FacebookLogin());
   }
 
+  twitterLogin() {
+    this.store.dispatch(new userActions.TwitterLogin());
+  }
+
   emailLogin(event: EmailAuthEvent) {
     this.store.dispatch(new userActions.EmailLogin(event.email, event.password));
   }

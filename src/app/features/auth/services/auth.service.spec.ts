@@ -66,6 +66,13 @@ describe('Auth Service', () => {
     });
   });
 
+  describe('signInWithTwitter', () => {
+    it('Should call AngularFireAuth signInWithPopup', () => {
+      service.signInWithTwitter();
+      expect(afAuth.auth.signInWithPopup).toHaveBeenCalled();
+    });
+  });
+
   describe('signOut', () => {
     it('Should call AngularFireAuth signOut', () => {
       service.signOut();
