@@ -4,7 +4,8 @@
                       [trackingCategory]="'Login'"
                       (emailAuth)="emailLogin($event)"
                       (googleAuth)="googleLogin()"
-                      (facebookAuth)="facebookLogin()">
+                      (facebookAuth)="facebookLogin()"
+                      (twitterAuth)="twitterLogin()">
     <a id="forgotPasswordLink"
        data-tracking-category="loginForgotPassword"
        [routerLink]="['../forgotPassword']">Forgot your password?</a>

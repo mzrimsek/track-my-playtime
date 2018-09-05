@@ -1,7 +1,9 @@
 import { User } from '../../auth/models';
 import { Profile } from '../models';
 
-import { DEFAULT_USER_IMGSRC, getDisplayName, getImgSrc, getProviderFrom } from './userinfo.utils';
+import {
+    DEFAULT_DISPLAYNAME, DEFAULT_USER_IMGSRC, getDisplayName, getEmail, getImgSrc, getProviderFrom
+} from './userinfo.utils';
 
 import { user } from '../../../test-helpers';
 
@@ -20,6 +22,21 @@ describe('User Info Utils', () => {
       const result = getDisplayName(currentUser, profile);
 
       expect(result).toBe(defaultName);
+    });
+
+    it('Should return "New User" when no profile display name, user display name, or email', () => {
+      const currentUser: User = {
+        ...user.mockUser,
+        displayName: '',
+        email: ''
+      };
+      const profile: Profile = {
+        displayName: ''
+      };
+
+      const result = getDisplayName(currentUser, profile);
+
+      expect(result).toBe(DEFAULT_DISPLAYNAME);
     });
 
     it('Should return user display name when there is a user display name and no profile display name', () => {
@@ -80,6 +97,32 @@ describe('User Info Utils', () => {
       const result = getImgSrc(currentUser);
       expect(result).toBe(`${user.mockUser.photoURL}?type=large`);
     });
+
+    it('Should return modified photo url when provider is Twitter', () => {
+      const currentUser: User = {
+        ...user.mockUser,
+        providerId: 'twitter.com',
+        photoURL: 'something_normal.png'
+      };
+      const result = getImgSrc(currentUser);
+      expect(result).toBe('something.png');
+    });
+  });
+
+  describe('getEmail', () => {
+    it('Should return user email when email is present', () => {
+      const result = getEmail(user.mockUser);
+      expect(result).toBe(user.mockUser.email);
+    });
+
+    it('Should return "N/A" when no user email present', () => {
+      const currentUser: User = {
+        ...user.mockUser,
+        email: ''
+      };
+      const result = getEmail(currentUser);
+      expect(result).toBe('N/A');
+    });
   });
 
   describe('getProviderFrom', () => {
@@ -111,6 +154,12 @@ describe('User Info Utils', () => {
       const providerId = 'facebook.com';
       const result = getProviderFrom(providerId);
       expect(result).toBe('FACEBOOK');
+    });
+
+    it('Should return TWITTER when given twitter.com', () => {
+      const providerId = 'twitter.com';
+      const result = getProviderFrom(providerId);
+      expect(result).toBe('TWITTER');
     });
   });
 });

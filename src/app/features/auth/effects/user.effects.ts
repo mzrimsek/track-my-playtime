@@ -49,6 +49,14 @@ export class UserEffects {
         .map(() => new userActions.GetUser())
         .catch(err => Observable.of(new appActions.Error(userActions.FACEBOOK_LOGIN, err.message))));
 
+  @Effect() twitterLogin$ =
+    this.actions$
+      .ofType(userActions.TWITTER_LOGIN)
+      .map(action => action as userActions.TwitterLogin)
+      .switchMap(() => this.authService.signInWithTwitter()
+        .map(() => new userActions.GetUser())
+        .catch(err => Observable.of(new appActions.Error(userActions.TWITTER_LOGIN, err.message))));
+
   @Effect() logout$ =
     this.actions$
       .ofType(userActions.LOGOUT)
