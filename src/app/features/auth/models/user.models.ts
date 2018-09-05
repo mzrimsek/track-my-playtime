@@ -13,4 +13,4 @@ export interface UserInfo {
   provider: Provider;
 }
 
-export type Provider = '' | 'PASSWORD' | 'GOOGLE' | 'FACEBOOK';
+export type Provider = '' | 'PASSWORD' | 'GOOGLE' | 'FACEBOOK' | 'TWITTER';

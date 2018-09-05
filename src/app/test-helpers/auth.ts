@@ -73,6 +73,16 @@ export namespace auth {
       return Observable.of('Logged in with Facebook');
     }
 
+    signInWithTwitter(): Observable<any> {
+      this.authState = Observable.of({
+        ...user.mockUser,
+        providerData: [{
+          ...user.mockUser
+        }]
+      });
+      return Observable.of('Logged in with Twitter');
+    }
+
     signOut(): Observable<any> {
       this.authState = Observable.of(null);
       return Observable.of('Logged out');

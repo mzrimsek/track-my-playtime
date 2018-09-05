@@ -20,6 +20,10 @@ export class AuthService {
     return Observable.fromPromise(this.facebookLogin());
   }
 
+  signInWithTwitter(): Observable<any> {
+    return Observable.fromPromise(this.twitterLogin());
+  }
+
   signOut(): Observable<any> {
     return Observable.fromPromise(this.afAuth.auth.signOut());
   }
@@ -43,6 +47,11 @@ export class AuthService {
 
   private facebookLogin(): Promise<any> {
     const provider = new firebase.auth.FacebookAuthProvider();
+    return this.afAuth.auth.signInWithPopup(provider);
+  }
+
+  private twitterLogin(): Promise<any> {
+    const provider = new firebase.auth.TwitterAuthProvider();
     return this.afAuth.auth.signInWithPopup(provider);
   }
 }

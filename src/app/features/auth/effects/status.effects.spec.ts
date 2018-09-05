@@ -111,6 +111,17 @@ describe('Status Effects', () => {
 
       expect(effects.login$).toBeObservable(expected);
     });
+
+    it('Should dispatch SetAttemptingLogin with TwitterLogin', () => {
+      const action = new userActions.TwitterLogin();
+
+      actions = hot('-a', { a: action });
+      const expected = cold('-(b)', {
+        b: new statusActions.SetAttemptingLogin(true)
+      });
+
+      expect(effects.login$).toBeObservable(expected);
+    });
   });
 
   describe('Post Login', () => {
