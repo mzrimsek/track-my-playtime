@@ -14,7 +14,9 @@ import authComponentSelectors, { State } from '../reducers/root.reducer';
 import { Profile } from '../../profile/models';
 import { User, UserInfo } from '../models';
 
-import { getDisplayName, getImgSrc, getProviderFrom } from '../../profile/utils/userinfo.utils';
+import {
+    getDisplayName, getEmail, getImgSrc, getProviderFrom
+} from '../../profile/utils/userinfo.utils';
 
 @Injectable()
 export class UserService {
@@ -32,7 +34,7 @@ export class UserService {
     return user$.combineLatest(profile$, (user: User, profile: Profile) => {
       return {
         displayName: getDisplayName(user, profile),
-        email: user.email,
+        email: getEmail(user),
         imgSrc: getImgSrc(user),
         provider: getProviderFrom(user.providerId)
       };
