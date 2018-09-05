@@ -40,7 +40,8 @@ export class StatusEffects {
       .ofType(userActions.EMAIL_LOGIN,
         userActions.SIGNUP,
         userActions.GOOGLE_LOGIN,
-        userActions.FACEBOOK_LOGIN)
+        userActions.FACEBOOK_LOGIN,
+        userActions.TWITTER_LOGIN)
       .mergeMap(() => [
         new statusActions.SetAttemptingLogin(true)
       ]);
