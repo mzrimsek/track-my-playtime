@@ -35,7 +35,6 @@ import { AuthGuard } from './features/auth/guards/auth.guard';
 import { CustomRouterStateSerializer, reducers } from './reducers/root.reducer';
 
 import { environment } from '../environments/environment';
-import './rxjs-operators';
 
 @NgModule({
   declarations: [

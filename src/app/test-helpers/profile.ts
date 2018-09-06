@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs/Observable';
+import { Observable, of } from 'rxjs';
 
 import { Profile } from '../features/profile/models';
 
@@ -13,17 +13,17 @@ export namespace profile {
 
   export class MockProfileService {
     getProfile(_userId: string): Observable<Profile> {
-      return Observable.of(profileWithDisplayName);
+      return of(profileWithDisplayName);
     }
 
     setDisplayName(_userId: string, displayName: string): Observable<string> {
-      return Observable.of(displayName);
+      return of(displayName);
     }
   }
 
   export namespace firestore {
     export const documentStub = {
-      valueChanges: jasmine.createSpy('valueChanges').and.returnValue(Observable.of(profileWithDisplayName)),
+      valueChanges: jasmine.createSpy('valueChanges').and.returnValue(of(profileWithDisplayName)),
       set: jasmine.createSpy('set')
     };
 

@@ -1,5 +1,5 @@
 import { addDays } from 'date-fns';
-import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs';
 
 import { HistoryGrouping } from '../../../shared/models';
 
@@ -8,7 +8,7 @@ import { mapGroupings } from './library-data.utils';
 describe('Library Data Utils', () => {
   describe('mapGroupings', () => {
     it('Should return correct data', () => {
-      const data = Observable.of(testGroupings);
+      const data = of(testGroupings);
       const result = mapGroupings(data);
       result.subscribe(res => {
         expect(res).toEqual([{

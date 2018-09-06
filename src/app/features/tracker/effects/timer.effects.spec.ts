@@ -3,8 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 
 import { cold, hot } from 'jasmine-marbles';
-import { Observable } from 'rxjs/Observable';
-import { ReplaySubject } from 'rxjs/ReplaySubject';
+import { ReplaySubject, throwError } from 'rxjs';
 
 import { TimerEffects } from './timer.effects';
 
@@ -14,7 +13,6 @@ import { TimerService } from '../services/timer.service';
 import * as appActions from '../../../actions/app.actions';
 import * as timerActions from '../actions/timer.actions';
 
-import '../../../rxjs-operators';
 import { history, tracker } from '../../../test-helpers';
 
 describe('Timer Effects', () => {
@@ -76,7 +74,7 @@ describe('Timer Effects', () => {
         b: new appActions.Error(timerActions.SAVE_TIMER_INFO, message)
       });
 
-      spyOn(historyService, 'saveTimerInfo').and.callFake(() => Observable.throw({ message }));
+      spyOn(historyService, 'saveTimerInfo').and.callFake(() => throwError({ message }));
       expect(effects.saveTimerInfo$).toBeObservable(expected);
     });
 
@@ -128,7 +126,7 @@ describe('Timer Effects', () => {
         b: new appActions.Error(timerActions.LOAD_TIMER_INFO, message)
       });
 
-      spyOn(timerService, 'getTimerInfo').and.callFake(() => Observable.throw({ message }));
+      spyOn(timerService, 'getTimerInfo').and.callFake(() => throwError({ message }));
       expect(effects.loadTimerInfo$).toBeObservable(expected);
     });
 

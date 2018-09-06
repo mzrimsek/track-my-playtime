@@ -7,7 +7,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { combineReducers, Store, StoreModule } from '@ngrx/store';
 
-import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs';
 
 import { AppComponent } from './app.component';
 import {
@@ -35,7 +35,6 @@ import * as fromTracker from './features/tracker/reducers/root.reducer';
 import * as fromRoot from './reducers/root.reducer';
 import * as fromShared from './shared/reducers/root.reducer';
 
-import './rxjs-operators';
 import { tracker } from './test-helpers';
 
 describe('AppComponent', () => {
@@ -240,7 +239,7 @@ describe('AppComponent', () => {
 
   describe('User data loaded', () => {
     beforeEach(async(() => {
-      component.userDataLoaded$ = Observable.of(true);
+      component.userDataLoaded$ = of(true);
     }));
 
     describe('On App Route', () => {
@@ -267,8 +266,8 @@ describe('AppComponent', () => {
 
       it('Should show tracker component', () => {
         fixture.detectChanges();
-        const tracker = fixture.nativeElement.querySelector('app-tracker');
-        expect(tracker).toBeTruthy();
+        const trackerComponent = fixture.nativeElement.querySelector('app-tracker');
+        expect(trackerComponent).toBeTruthy();
       });
     });
 
@@ -279,8 +278,8 @@ describe('AppComponent', () => {
 
       it('Should show tracker component', () => {
         fixture.detectChanges();
-        const tracker = fixture.nativeElement.querySelector('app-tracker');
-        expect(tracker).toBeTruthy();
+        const trackerComponent = fixture.nativeElement.querySelector('app-tracker');
+        expect(trackerComponent).toBeTruthy();
       });
     });
 
@@ -335,7 +334,7 @@ describe('AppComponent', () => {
 
   describe('User data not loaded', () => {
     beforeEach(async(() => {
-      component.userDataLoaded$ = Observable.of(false);
+      component.userDataLoaded$ = of(false);
     }));
 
     describe('On App Route', () => {

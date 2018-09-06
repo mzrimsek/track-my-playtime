@@ -5,7 +5,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { combineReducers, Store, StoreModule } from '@ngrx/store';
 
-import { Observable } from 'rxjs';
+import { of } from 'rxjs';
 
 import { DashboardComponent } from '../../features/dashboard/dashboard.component';
 import { TrackerComponent } from '../../features/tracker/tracker.component';
@@ -51,7 +51,7 @@ describe('NavComponent', () => {
     userService = TestBed.get(UserService);
 
     spyOn(store, 'dispatch').and.callThrough();
-    spyOn(userService, 'getUserInfo').and.callFake(() => Observable.of(user.mockUserInfo));
+    spyOn(userService, 'getUserInfo').and.callFake(() => of(user.mockUserInfo));
 
     fixture = TestBed.createComponent(NavComponent);
     component = fixture.componentInstance;
