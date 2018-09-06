@@ -3,8 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 
 import { cold, hot } from 'jasmine-marbles';
-import { Observable } from 'rxjs/Observable';
-import { ReplaySubject } from 'rxjs/ReplaySubject';
+import { ReplaySubject, throwError } from 'rxjs';
 
 import { ProgressEffects } from './progress.effects';
 
@@ -63,7 +62,7 @@ describe('Progress Effects', () => {
         b: new appActions.Error(progressActions.LOAD_PROGRESS_ITEMS, message)
       });
 
-      spyOn(progressService, 'getProgressList').and.callFake(() => Observable.throw({ message }));
+      spyOn(progressService, 'getProgressList').and.callFake(() => throwError({ message }));
       expect(effects.loadProgressItems$).toBeObservable(expected);
     });
 
@@ -117,7 +116,7 @@ describe('Progress Effects', () => {
         b: new appActions.Error(progressActions.REMOVE_PROGRESS_ITEM, message)
       });
 
-      spyOn(progressService, 'remove').and.callFake(() => Observable.throw({ message }));
+      spyOn(progressService, 'remove').and.callFake(() => throwError({ message }));
       expect(effects.removeProgressItem$).toBeObservable(expected);
     });
 
@@ -163,7 +162,7 @@ describe('Progress Effects', () => {
         b: new appActions.Error(progressActions.MARK_COMPLETE, message)
       });
 
-      spyOn(progressService, 'markCompleted').and.callFake(() => Observable.throw({ message }));
+      spyOn(progressService, 'markCompleted').and.callFake(() => throwError({ message }));
       expect(effects.markCompleted$).toBeObservable(expected);
     });
 

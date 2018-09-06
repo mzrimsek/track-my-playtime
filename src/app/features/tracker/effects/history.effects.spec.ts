@@ -3,7 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 
 import { cold, hot } from 'jasmine-marbles';
-import { Observable, ReplaySubject } from 'rxjs';
+import { ReplaySubject, throwError } from 'rxjs';
 
 import { HistoryEffects } from './history.effects';
 
@@ -62,7 +62,7 @@ describe('History Effects', () => {
         b: new appActions.Error(historyActions.LOAD_HISTORY_ITEMS, message)
       });
 
-      spyOn(historyService, 'getHistoryList').and.callFake(() => Observable.throw({ message }));
+      spyOn(historyService, 'getHistoryList').and.callFake(() => throwError({ message }));
       expect(effects.loadHistoryItems$).toBeObservable(expected);
     });
 
@@ -114,7 +114,7 @@ describe('History Effects', () => {
         b: new appActions.Error(historyActions.REMOVE_HISTORY_ITEM, message)
       });
 
-      spyOn(historyService, 'deleteHistoryItem').and.callFake(() => Observable.throw({ message }));
+      spyOn(historyService, 'deleteHistoryItem').and.callFake(() => throwError({ message }));
       expect(effects.removeHistoryItem$).toBeObservable(expected);
     });
 
@@ -159,7 +159,7 @@ describe('History Effects', () => {
         b: new appActions.Error(historyActions.UPDATE_GAME, message)
       });
 
-      spyOn(historyService, 'updateGame').and.callFake(() => Observable.throw({ message }));
+      spyOn(historyService, 'updateGame').and.callFake(() => throwError({ message }));
       expect(effects.updateGame$).toBeObservable(expected);
     });
 
@@ -207,7 +207,7 @@ describe('History Effects', () => {
         b: new appActions.Error(historyActions.UPDATE_PLATFORM, message)
       });
 
-      spyOn(historyService, 'updatePlatform').and.callFake(() => Observable.throw({ message }));
+      spyOn(historyService, 'updatePlatform').and.callFake(() => throwError({ message }));
       expect(effects.updatePlatform$).toBeObservable(expected);
     });
 
@@ -257,7 +257,7 @@ describe('History Effects', () => {
         b: new appActions.Error(historyActions.UPDATE_ELAPSED_TIME, message)
       });
 
-      spyOn(historyService, 'updateElapsedTime').and.callFake(() => Observable.throw({ message }));
+      spyOn(historyService, 'updateElapsedTime').and.callFake(() => throwError({ message }));
       expect(effects.updateElapsedTime$).toBeObservable(expected);
     });
 

@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { provideMockActions } from '@ngrx/effects/testing';
 
 import { cold, hot } from 'jasmine-marbles';
-import { Observable, ReplaySubject } from 'rxjs';
+import { ReplaySubject, throwError } from 'rxjs';
 
 import { UserEffects } from './user.effects';
 
@@ -125,7 +125,7 @@ describe('User Effects', () => {
         b: new appActions.Error(userActions.GET_USER, message)
       });
 
-      spyOn(authService, 'getAuthState').and.callFake(() => Observable.throw({ message }));
+      spyOn(authService, 'getAuthState').and.callFake(() => throwError({ message }));
       expect(effects.getUser$).toBeObservable(expected);
     });
 
@@ -161,7 +161,7 @@ describe('User Effects', () => {
         b: new appActions.Error(userActions.GOOGLE_LOGIN, message)
       });
 
-      spyOn(authService, 'signInWithGoogle').and.callFake(() => Observable.throw({ message }));
+      spyOn(authService, 'signInWithGoogle').and.callFake(() => throwError({ message }));
       expect(effects.googleLogin$).toBeObservable(expected);
     });
 
@@ -197,7 +197,7 @@ describe('User Effects', () => {
         b: new appActions.Error(userActions.FACEBOOK_LOGIN, message)
       });
 
-      spyOn(authService, 'signInWithFacebook').and.callFake(() => Observable.throw({ message }));
+      spyOn(authService, 'signInWithFacebook').and.callFake(() => throwError({ message }));
       expect(effects.facebookLogin$).toBeObservable(expected);
     });
 
@@ -233,7 +233,7 @@ describe('User Effects', () => {
         b: new appActions.Error(userActions.TWITTER_LOGIN, message)
       });
 
-      spyOn(authService, 'signInWithTwitter').and.callFake(() => Observable.throw({ message }));
+      spyOn(authService, 'signInWithTwitter').and.callFake(() => throwError({ message }));
       expect(effects.twitterLogin$).toBeObservable(expected);
     });
 
@@ -279,7 +279,7 @@ describe('User Effects', () => {
         b: new appActions.Error(userActions.LOGOUT, message)
       });
 
-      spyOn(authService, 'signOut').and.callFake(() => Observable.throw({ message }));
+      spyOn(authService, 'signOut').and.callFake(() => throwError({ message }));
       expect(effects.logout$).toBeObservable(expected);
     });
 
@@ -315,7 +315,7 @@ describe('User Effects', () => {
         b: new appActions.Error(userActions.SIGNUP, message)
       });
 
-      spyOn(authService, 'signUpWithEmail').and.callFake(() => Observable.throw({ message }));
+      spyOn(authService, 'signUpWithEmail').and.callFake(() => throwError({ message }));
       expect(effects.signUp$).toBeObservable(expected);
     });
 
@@ -351,7 +351,7 @@ describe('User Effects', () => {
         b: new appActions.Error(userActions.EMAIL_LOGIN, message)
       });
 
-      spyOn(authService, 'signInWithEmail').and.callFake(() => Observable.throw({ message }));
+      spyOn(authService, 'signInWithEmail').and.callFake(() => throwError({ message }));
       expect(effects.emailLogin$).toBeObservable(expected);
     });
 
@@ -379,7 +379,7 @@ describe('User Effects', () => {
         b: new appActions.Error(userActions.RESET_PASSWORD, message)
       });
 
-      spyOn(authService, 'resetPassword').and.callFake(() => Observable.throw({ message }));
+      spyOn(authService, 'resetPassword').and.callFake(() => throwError({ message }));
       expect(effects.resetPassword$).toBeObservable(expected);
     });
   });
