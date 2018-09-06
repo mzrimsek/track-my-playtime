@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs/Observable';
+import { combineLatest, Observable } from 'rxjs';
 
 import { Dictionary, HistoryGrouping, ProgressItem } from '../../../shared/models';
 import { CompletedDisplayData, MarkCompleteItem, PlayingDisplayData } from '../models';
@@ -9,7 +9,7 @@ import { getPlayingDisplayData } from './playing.utils';
 
 export const getCompletedDisplayDataItems =
   (progressItems: Observable<ProgressItem[]>, gameGroupings: Observable<HistoryGrouping[]>): Observable<CompletedDisplayData[]> => {
-    return progressItems.combineLatest(gameGroupings, (items, groupings) => {
+    return combineLatest(progressItems, gameGroupings, (items, groupings) => {
       const historyListItemMap = getHistoryListItemMap(groupings);
 
       const displayData: CompletedDisplayData[] = [];
@@ -29,7 +29,7 @@ export const getPlayingDisplayDataItems =
   (progressItems: Observable<ProgressItem[]>,
     gameGroupings: Observable<HistoryGrouping[]>,
     markCompleteEntities: Observable<Dictionary<MarkCompleteItem>>): Observable<PlayingDisplayData[]> => {
-    return progressItems.combineLatest(gameGroupings, markCompleteEntities, (items, groupings, entities) => {
+    return combineLatest(progressItems, gameGroupings, markCompleteEntities, (items, groupings, entities) => {
       const historyListItemMap = getHistoryListItemMap(groupings);
 
       const displayData: PlayingDisplayData[] = [];

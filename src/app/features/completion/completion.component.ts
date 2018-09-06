@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 
-import { Observable } from 'rxjs/Observable';
+import { combineLatest, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import sharedSelectors, { State as SharedState } from '../../shared/reducers/root.reducer';
 import completionSelectors, { State as CompletionState } from './reducers/root.reducer';
@@ -37,13 +38,13 @@ export class CompletionComponent implements OnInit {
 
   ngOnInit() {
     this.historyGroupings$ = this.sharedStore.select(sharedSelectors.historyGroupingsByGame);
-    this.games$ = this.historyGroupings$.map(groupings => groupings.map(item => item.key));
+    this.games$ = this.historyGroupings$.pipe(map(groupings => groupings.map(item => item.key)));
     this.addPlayingInfo$ = this.completionStore.select(completionSelectors.addPlayingInfo);
-    this.game$ = this.addPlayingInfo$.map(info => info.game ? info.game : null);
-    this.potentialPlatforms$ = this.historyGroupings$.combineLatest(this.addPlayingInfo$, (groupings, info) => {
+    this.game$ = this.addPlayingInfo$.pipe(map(info => info.game ? info.game : null));
+    this.potentialPlatforms$ = combineLatest(this.historyGroupings$, this.addPlayingInfo$, (groupings, info) => {
       return filterPlatforms(groupings, info.game);
     });
-    this.potentialDates$ = this.historyGroupings$.combineLatest(this.addPlayingInfo$, (groupings, info) => {
+    this.potentialDates$ = combineLatest(this.historyGroupings$, this.addPlayingInfo$, (groupings, info) => {
       return filterStartTimes(groupings, info.game, info.platform);
     });
 
