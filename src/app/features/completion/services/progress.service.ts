@@ -21,8 +21,7 @@ export class ProgressService {
 
   getProgressList(userId: string): Observable<ProgressEntity[]> {
     const progressList = this.getUserItemCollection(userId).valueChanges().pipe(first());
-    return progressList.pipe(map(progressListItems => progressListItems
-      .map(progress => progress as ProgressEntity)));
+    return progressList.pipe(map(progressListItems => progressListItems.map(progress => progress as ProgressEntity)));
   }
 
   saveAddPlaying(addPlaying: AddPlaying): Observable<ProgressEntity> {
