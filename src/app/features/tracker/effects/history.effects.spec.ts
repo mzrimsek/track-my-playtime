@@ -3,8 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 
 import { cold, hot } from 'jasmine-marbles';
-import { Observable } from 'rxjs/Observable';
-import { ReplaySubject } from 'rxjs/ReplaySubject';
+import { Observable, ReplaySubject } from 'rxjs';
 
 import { HistoryEffects } from './history.effects';
 
@@ -18,7 +17,6 @@ import {
     UpdateHistoryItemGamePayload, UpdateHistoryItemPlatformPayload, UpdateHistoryItemTimesPayload
 } from '../../../shared/models';
 
-import '../../../rxjs-operators';
 import { history } from '../../../test-helpers';
 
 describe('History Effects', () => {

@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
+import { first, map } from 'rxjs/operators';
 
 import { TimerInfo } from '../models';
 
@@ -42,10 +43,10 @@ export class TimerService {
   }
 
   getTimerInfo(userId: string): Observable<TimerInfo> {
-    const timerDoc = this.timerCollection.doc<FirestoreTimerItem>(userId).valueChanges().first();
-    return timerDoc.map(timer => <TimerInfo>{
+    const timerDoc = this.timerCollection.doc<FirestoreTimerItem>(userId).valueChanges().pipe(first());
+    return timerDoc.pipe(map(timer => <TimerInfo>{
       ...timer
-    });
+    }));
   }
 
   getNowTime(): number {

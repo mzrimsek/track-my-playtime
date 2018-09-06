@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs';
 
 import { HistoryGrouping } from '../../../shared/models';
 
@@ -24,21 +24,21 @@ describe('Display Utils', () => {
 
   describe('takeFrom', () => {
     it('Should return part of the data when amount less than data length', () => {
-      const result = takeFrom(Observable.of([grouping1, grouping2]), Observable.of(1));
+      const result = takeFrom(of([grouping1, grouping2]), of(1));
       result.subscribe(res => {
         expect(res).toEqual([grouping1]);
       });
     });
 
     it('Should return all data when amount is data length', () => {
-      const result = takeFrom(Observable.of([grouping1, grouping2]), Observable.of(2));
+      const result = takeFrom(of([grouping1, grouping2]), of(2));
       result.subscribe(res => {
         expect(res).toEqual([grouping1, grouping2]);
       });
     });
 
     it('Should return all data when amount is greater than data length', () => {
-      const result = takeFrom(Observable.of([grouping1, grouping2]), Observable.of(3));
+      const result = takeFrom(of([grouping1, grouping2]), of(3));
       result.subscribe(res => {
         expect(res).toEqual([grouping1, grouping2]);
       });
@@ -47,14 +47,14 @@ describe('Display Utils', () => {
 
   describe('hasMoreToDisplay', () => {
     it('Should return false when lists are the same', () => {
-      const result = hasMoreToDisplay(Observable.of([grouping1, grouping2]), Observable.of([grouping1, grouping2]));
+      const result = hasMoreToDisplay(of([grouping1, grouping2]), of([grouping1, grouping2]));
       result.subscribe(res => {
         expect(res).toBe(false);
       });
     });
 
     it('Should return true when the list are different', () => {
-      const result = hasMoreToDisplay(Observable.of([grouping1, grouping2]), Observable.of([grouping1]));
+      const result = hasMoreToDisplay(of([grouping1, grouping2]), of([grouping1]));
       result.subscribe(res => {
         expect(res).toBe(true);
       });

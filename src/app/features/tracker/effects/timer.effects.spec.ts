@@ -3,8 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 
 import { cold, hot } from 'jasmine-marbles';
-import { Observable } from 'rxjs/Observable';
-import { ReplaySubject } from 'rxjs/ReplaySubject';
+import { Observable, ReplaySubject } from 'rxjs';
 
 import { TimerEffects } from './timer.effects';
 
@@ -14,7 +13,6 @@ import { TimerService } from '../services/timer.service';
 import * as appActions from '../../../actions/app.actions';
 import * as timerActions from '../actions/timer.actions';
 
-import '../../../rxjs-operators';
 import { history, tracker } from '../../../test-helpers';
 
 describe('Timer Effects', () => {

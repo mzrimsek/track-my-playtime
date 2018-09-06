@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
-import { Observable } from 'rxjs/Observable';
+import { Observable, of } from 'rxjs';
+import { first, map } from 'rxjs/operators';
 
 import { HistoryEntity } from '../../../shared/reducers/history.reducer';
 
@@ -21,38 +22,37 @@ export class HistoryService {
   }
 
   getHistoryList(userId: string): Observable<HistoryEntity[]> {
-    const historyList = this.getUserItemCollection(userId).valueChanges().first();
-    return historyList.map(histories => histories
-      .map(history => this.getHistoryEntity(history)));
+    const historyList = this.getUserItemCollection(userId).valueChanges().pipe(first());
+    return historyList.pipe(map(histories => histories.map(history => this.getHistoryEntity(history))));
   }
 
   saveTimerInfo(info: AddTimerInfo): Observable<HistoryEntity> {
     const newItem = this.getNewHistoryItem(info);
     this.getUserItemCollection(info.userId).doc(newItem.id).set(newItem);
-    return Observable.of(this.getHistoryEntity(newItem));
+    return of(this.getHistoryEntity(newItem));
   }
 
   deleteHistoryItem(userId: string, itemId: string): Observable<string> {
     this.getUserItemCollection(userId).doc(itemId).delete();
-    return Observable.of(itemId);
+    return of(itemId);
   }
 
   updateGame(userId: string, payload: UpdateHistoryItemGamePayload): Observable<UpdateHistoryItemGamePayload> {
     const { itemId, game } = payload;
     this.getUserItemCollection(userId).doc(itemId).update({ game });
-    return Observable.of(payload);
+    return of(payload);
   }
 
   updatePlatform(userId: string, payload: UpdateHistoryItemPlatformPayload): Observable<UpdateHistoryItemPlatformPayload> {
     const { itemId, platform } = payload;
     this.getUserItemCollection(userId).doc(itemId).update({ platform });
-    return Observable.of(payload);
+    return of(payload);
   }
 
   updateElapsedTime(userId: string, payload: UpdateHistoryItemTimesPayload): Observable<UpdateHistoryItemTimesPayload> {
     const { itemId, startTime, endTime } = payload;
     this.getUserItemCollection(userId).doc(itemId).update({ startTime, endTime });
-    return Observable.of(payload);
+    return of(payload);
   }
 
   getNewHistoryItem(info: AddTimerInfo): FirestoreHistoryItem {

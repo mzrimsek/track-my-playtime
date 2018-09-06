@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 
 import { Actions, Effect } from '@ngrx/effects';
 
-import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs';
+import { catchError, map, switchMap } from 'rxjs/operators';
 
 import { PlatformsService } from '../services/platforms.service';
 
@@ -17,7 +18,9 @@ export class PlatformsEffects {
   @Effect() loadOptions$ =
     this.actions$
       .ofType(platformsActions.LOAD_OPTIONS)
-      .switchMap(() => this.platformsService.getPlatformsOptions()
-        .map(data => new platformsActions.LoadOptionsSucceeded(data))
-        .catch(err => Observable.of(new appActions.Error(platformsActions.LOAD_OPTIONS, err.message))));
+      .pipe(
+        switchMap(() => this.platformsService.getPlatformsOptions()
+          .pipe(
+            map(data => new platformsActions.LoadOptionsSucceeded(data)),
+            catchError(err => of(new appActions.Error(platformsActions.LOAD_OPTIONS, err.message))))));
 }
