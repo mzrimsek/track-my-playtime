@@ -16,7 +16,8 @@ export const getValidationMessage = (error: Error): string => {
       return INVALID_CREDENTIALS;
     }
     case userActions.GOOGLE_LOGIN:
-    case userActions.FACEBOOK_LOGIN: {
+    case userActions.FACEBOOK_LOGIN:
+    case userActions.TWITTER_LOGIN: {
       return error.message === POPUP_CLOSED ? '' : EMAIL_IN_USE;
     }
     default: {

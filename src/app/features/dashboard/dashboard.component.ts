@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import sharedSelectors, { State as SharedState } from '../../shared/reducers/root.reducer';
 import dashboardSelectors, { State as DashboardState } from './reducers/root.reducer';
@@ -79,7 +80,7 @@ export class DashboardComponent implements OnInit {
     this.timeVsPlatformGraphData$ = getGraphData(groupingsByPlatform, dateList);
     this.timeVsGameGraphData$ = getSortedGraphData(groupingsByGame, dateList);
 
-    this.totalTime$ = this.timeVsDateGraphData$.map(x => x.reduce((a, b) => a + b.value, 0));
+    this.totalTime$ = this.timeVsDateGraphData$.pipe(map(x => x.reduce((a, b) => a + b.value, 0)));
     this.dateRangeType$ = this.dashboardStore.select(dashboardSelectors.rangeType);
   }
 }

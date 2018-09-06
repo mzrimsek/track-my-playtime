@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 
 import { Actions, Effect } from '@ngrx/effects';
 
-import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs';
+import { catchError, map, switchMap } from 'rxjs/operators';
 
 import { ProfileService } from '../services/profile.service';
 
@@ -17,16 +18,20 @@ export class ProfileEffects {
   @Effect() loadProfile$ =
     this.actions$
       .ofType(profileActions.LOAD_PROFILE)
-      .map(action => action as profileActions.LoadProfile)
-      .switchMap(action => this.profileService.getProfile(action.userId)
-        .map(data => new profileActions.LoadProfileSucceeded(data))
-        .catch(err => Observable.of(new appActions.Error(profileActions.LOAD_PROFILE, err.message))));
+      .pipe(
+        map(action => action as profileActions.LoadProfile),
+        switchMap(action => this.profileService.getProfile(action.userId)
+          .pipe(
+            map(data => new profileActions.LoadProfileSucceeded(data)),
+            catchError(err => of(new appActions.Error(profileActions.LOAD_PROFILE, err.message))))));
 
   @Effect() setDisplayName$ =
     this.actions$
       .ofType(profileActions.SET_PROFILE_DISPLAYNAME)
-      .map(action => action as profileActions.SetProfileDisplayName)
-      .switchMap(action => this.profileService.setDisplayName(action.userId, action.displayName)
-        .map(data => new profileActions.SetProfileDisplayNameSucceeded(data))
-        .catch(err => Observable.of(new appActions.Error(profileActions.SET_PROFILE_DISPLAYNAME, err.message))));
+      .pipe(
+        map(action => action as profileActions.SetProfileDisplayName),
+        switchMap(action => this.profileService.setDisplayName(action.userId, action.displayName)
+          .pipe(
+            map(data => new profileActions.SetProfileDisplayNameSucceeded(data)),
+            catchError(err => of(new appActions.Error(profileActions.SET_PROFILE_DISPLAYNAME, err.message))))));
 }

@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
-import { Observable } from 'rxjs/Observable';
+import { Observable, of } from 'rxjs';
+import { first, map } from 'rxjs/operators';
 
 import { ProgressEntity } from '../../../shared/reducers/progress.reducer';
 
@@ -19,26 +20,25 @@ export class ProgressService {
   }
 
   getProgressList(userId: string): Observable<ProgressEntity[]> {
-    const progressList = this.getUserItemCollection(userId).valueChanges().first();
-    return progressList.map(progressListItems => progressListItems
-      .map(progress => progress as ProgressEntity));
+    const progressList = this.getUserItemCollection(userId).valueChanges().pipe(first());
+    return progressList.pipe(map(progressListItems => progressListItems.map(progress => progress as ProgressEntity)));
   }
 
   saveAddPlaying(addPlaying: AddPlaying): Observable<ProgressEntity> {
     const newItem = this.getNewProgressItem(addPlaying);
     this.getUserItemCollection(addPlaying.userId).doc(newItem.id).set(newItem);
-    return Observable.of(newItem as ProgressEntity);
+    return of(newItem as ProgressEntity);
   }
 
   markCompleted(userId: string, payload: MarkCompletePayload): Observable<MarkCompletePayload> {
     const { itemId, endEntryId } = payload;
     this.getUserItemCollection(userId).doc(itemId).update({ endEntryId });
-    return Observable.of(payload);
+    return of(payload);
   }
 
   remove(userId: string, itemId: string): Observable<string> {
     this.getUserItemCollection(userId).doc(itemId).delete();
-    return Observable.of(itemId);
+    return of(itemId);
   }
 
   getNewProgressItem(addPlaying: AddPlaying): FirestoreProgressItem {

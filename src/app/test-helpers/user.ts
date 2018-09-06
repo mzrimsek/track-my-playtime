@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs';
 
 import { User, UserInfo } from '../features/auth/models';
 
@@ -19,7 +19,7 @@ export namespace user {
   };
 
   export const userServiceStub = {
-    getUser: jasmine.createSpy('getUser').and.returnValue(Observable.of(mockUser)),
-    getUserInfo: jasmine.createSpy('getUserInfo').and.returnValue(Observable.of(mockUserInfo))
+    getUser: jasmine.createSpy('getUser').and.returnValue(of(mockUser)),
+    getUserInfo: jasmine.createSpy('getUserInfo').and.returnValue(of(mockUserInfo))
   };
 }

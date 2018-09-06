@@ -3,8 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 
 import { cold, hot } from 'jasmine-marbles';
-import { Observable } from 'rxjs/Observable';
-import { ReplaySubject } from 'rxjs/ReplaySubject';
+import { ReplaySubject, throwError } from 'rxjs';
 
 import { PlatformsEffects } from './platforms.effects';
 
@@ -13,7 +12,6 @@ import { PlatformsService } from '../services/platforms.service';
 import * as appActions from '../../../actions/app.actions';
 import * as platformsActions from '../../../shared/actions/platforms.actions';
 
-import '../../../rxjs-operators';
 import { platforms } from '../../../test-helpers';
 
 describe('Platforms Effects', () => {
@@ -59,7 +57,7 @@ describe('Platforms Effects', () => {
         b: new appActions.Error(platformsActions.LOAD_OPTIONS, message)
       });
 
-      spyOn(platformsService, 'getPlatformsOptions').and.callFake(() => Observable.throw({ message }));
+      spyOn(platformsService, 'getPlatformsOptions').and.callFake(() => throwError({ message }));
       expect(effects.loadOptions$).toBeObservable(expected);
     });
 

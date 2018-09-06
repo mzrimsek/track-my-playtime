@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import { insertAnalyticsElements } from 'insert-analytics-elements/googleTagManager';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 import { ElapsedTimeService } from './features/tracker/services/elapsed-time.service';
 
