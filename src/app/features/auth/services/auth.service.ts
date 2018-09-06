@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
-import { Observable } from 'rxjs/Observable';
+import { from, Observable } from 'rxjs';
 
 @Injectable()
 export class AuthService {
@@ -13,31 +13,31 @@ export class AuthService {
   }
 
   signInWithGoogle(): Observable<any> {
-    return Observable.fromPromise(this.googleLogin());
+    return from(this.googleLogin());
   }
 
   signInWithFacebook(): Observable<any> {
-    return Observable.fromPromise(this.facebookLogin());
+    return from(this.facebookLogin());
   }
 
   signInWithTwitter(): Observable<any> {
-    return Observable.fromPromise(this.twitterLogin());
+    return from(this.twitterLogin());
   }
 
   signOut(): Observable<any> {
-    return Observable.fromPromise(this.afAuth.auth.signOut());
+    return from(this.afAuth.auth.signOut());
   }
 
   signUpWithEmail(email: string, password: string): Observable<any> {
-    return Observable.fromPromise(this.afAuth.auth.createUserWithEmailAndPassword(email, password));
+    return from(this.afAuth.auth.createUserWithEmailAndPassword(email, password));
   }
 
   signInWithEmail(email: string, password: string): Observable<any> {
-    return Observable.fromPromise(this.afAuth.auth.signInAndRetrieveDataWithEmailAndPassword(email, password));
+    return from(this.afAuth.auth.signInAndRetrieveDataWithEmailAndPassword(email, password));
   }
 
   resetPassword(email: string): Observable<any> {
-    return Observable.fromPromise(this.afAuth.auth.sendPasswordResetEmail(email));
+    return from(this.afAuth.auth.sendPasswordResetEmail(email));
   }
 
   private googleLogin(): Promise<any> {

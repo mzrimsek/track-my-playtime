@@ -15,8 +15,6 @@ import * as addPlayingActions from '../../completion/actions/add-playing.actions
 import * as markCompleteActions from '../../completion/actions/mark-complete.actions';
 import * as profileActions from '../../profile/actions/profile.actions';
 
-import '../../../rxjs-operators';
-
 describe('Auth Effects', () => {
   let actions: any;
   let effects: AuthEffects;
