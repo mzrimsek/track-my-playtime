@@ -46,7 +46,6 @@
     "ng-pick-datetime": "^6.0.16",
     "ng2-adsense": "^5.3.2",
     "rxjs": "^6.3.2",
-    "rxjs-compat": "^6.3.2",
     "tassign": "^1.0.0",
     "uuid": "^3.3.2",
     "zone.js": "^0.8.26"
