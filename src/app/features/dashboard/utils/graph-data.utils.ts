@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs/Observable';
+import { combineLatest, Observable } from 'rxjs';
 
 import { HistoryGrouping } from '../../../shared/models';
 import { GraphDataItem } from '../models';
@@ -12,7 +12,7 @@ export const getGraphData =
   (groupings: Observable<HistoryGrouping[]>,
     dateRange: Observable<Date[]>,
     modifier: GraphDataModifier = x => x): Observable<GraphDataItem[]> => {
-    return groupings.combineLatest(dateRange, (groups, dates) => {
+    return combineLatest(groupings, dateRange, (groups, dates) => {
       const groupingsToGraph = filterGroupingsByDateRange(groups, dates);
       const graphItems = mapToGraphData(groupingsToGraph);
       return modifier(graphItems, dates);

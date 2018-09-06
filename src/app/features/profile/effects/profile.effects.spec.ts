@@ -3,8 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 
 import { cold, hot } from 'jasmine-marbles';
-import { Observable } from 'rxjs/Observable';
-import { ReplaySubject } from 'rxjs/ReplaySubject';
+import { ReplaySubject, throwError } from 'rxjs';
 
 import { ProfileEffects } from './profile.effects';
 
@@ -58,7 +57,7 @@ describe('Profile Effects', () => {
         b: new appActions.Error(profileActions.LOAD_PROFILE, message)
       });
 
-      spyOn(profileService, 'getProfile').and.callFake(() => Observable.throw({ message }));
+      spyOn(profileService, 'getProfile').and.callFake(() => throwError({ message }));
       expect(effects.loadProfile$).toBeObservable(expected);
     });
 
@@ -97,7 +96,7 @@ describe('Profile Effects', () => {
         b: new appActions.Error(profileActions.SET_PROFILE_DISPLAYNAME, message)
       });
 
-      spyOn(profileService, 'setDisplayName').and.callFake(() => Observable.throw({ message }));
+      spyOn(profileService, 'setDisplayName').and.callFake(() => throwError({ message }));
       expect(effects.setDisplayName$).toBeObservable(expected);
     });
 

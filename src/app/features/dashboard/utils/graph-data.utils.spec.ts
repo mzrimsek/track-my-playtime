@@ -1,5 +1,5 @@
 import { addDays, eachDay, subDays } from 'date-fns';
-import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs';
 
 import { HistoryGrouping } from '../../../shared/models';
 
@@ -10,14 +10,14 @@ describe('Graph Data Utils', () => {
   describe('getPaddedGraphData', () => {
     describe('No data in range', () => {
       it('Should return length of data equal to date range', () => {
-        const result = getPaddedGraphData(Observable.of([]), Observable.of(dateRange));
+        const result = getPaddedGraphData(of([]), of(dateRange));
         result.subscribe(res => {
           expect(res.length).toBe(dateRange.length);
         });
       });
 
       it('Should return data points with 0 in value', () => {
-        const result = getPaddedGraphData(Observable.of([]), Observable.of(dateRange));
+        const result = getPaddedGraphData(of([]), of(dateRange));
         result.subscribe(res => {
           const allZero = res.every(x => x.value === 0);
           expect(allZero).toBe(true);
@@ -27,7 +27,7 @@ describe('Graph Data Utils', () => {
 
     describe('When data in range', () => {
       it('Should return the correct data', () => {
-        const result = getPaddedGraphData(Observable.of(testGroupings), Observable.of(dateRange));
+        const result = getPaddedGraphData(of(testGroupings), of(dateRange));
         result.subscribe(res => {
           expect(res).toEqual([{
             name: formatDate(start),
@@ -76,14 +76,14 @@ describe('Graph Data Utils', () => {
 
   describe('getGraphData', () => {
     it('Should return nothing when no data in range', () => {
-      const result = getGraphData(Observable.of([]), Observable.of(dateRange));
+      const result = getGraphData(of([]), of(dateRange));
       result.subscribe(res => {
         expect(res.length).toBe(0);
       });
     });
 
     it('Should return correct data when in range', () => {
-      const result = getGraphData(Observable.of(testGroupings), Observable.of(dateRange));
+      const result = getGraphData(of(testGroupings), of(dateRange));
       result.subscribe(res => {
         expect(res).toEqual([{
           name: formatDate(start),
@@ -98,14 +98,14 @@ describe('Graph Data Utils', () => {
 
   describe('getSortedGraphData', () => {
     it('Should return nothing when no data in range', () => {
-      const result = getSortedGraphData(Observable.of([]), Observable.of(dateRange));
+      const result = getSortedGraphData(of([]), of(dateRange));
       result.subscribe(res => {
         expect(res.length).toBe(0);
       });
     });
 
     it('Should return correct data when in range', () => {
-      const result = getSortedGraphData(Observable.of(testGroupings), Observable.of(dateRange));
+      const result = getSortedGraphData(of(testGroupings), of(dateRange));
       result.subscribe(res => {
         expect(res).toEqual([{
           name: formatDate(addDays(start, 4)),

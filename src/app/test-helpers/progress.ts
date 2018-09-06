@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs/Observable';
+import { Observable, of } from 'rxjs';
 
 import { FirestoreProgressItem } from '../features/completion/services/progress.service';
 
@@ -22,16 +22,16 @@ export namespace progress {
 
   export class MockProgressService {
     saveAddPlaying(_addPlaying: AddPlaying): Observable<ProgressEntity> {
-      return Observable.of(mockItem);
+      return of(mockItem);
     }
     getProgressList(_userId: string): Observable<ProgressEntity[]> {
-      return Observable.of([mockItem, mockItemNoEnd]);
+      return of([mockItem, mockItemNoEnd]);
     }
     remove(_userId: string, itemId: string): Observable<string> {
-      return Observable.of(itemId);
+      return of(itemId);
     }
     markCompleted(_userId: string, payload: MarkCompletePayload): Observable<MarkCompletePayload> {
-      return Observable.of(payload);
+      return of(payload);
     }
   }
 
@@ -54,7 +54,7 @@ export namespace progress {
 
     export const itemsCollectionStub = {
       doc: jasmine.createSpy('doc').and.returnValue(itemDocumentStub),
-      valueChanges: jasmine.createSpy('valueChanges').and.returnValue(Observable.of(testProgressItems))
+      valueChanges: jasmine.createSpy('valueChanges').and.returnValue(of(testProgressItems))
     };
 
     export const documentStub = {

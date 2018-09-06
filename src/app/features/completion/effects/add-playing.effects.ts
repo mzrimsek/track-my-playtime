@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 
 import { Actions, Effect } from '@ngrx/effects';
 
-import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs';
+import { catchError, map, mergeMap, switchMap } from 'rxjs/operators';
 
 import { ProgressService } from '../services/progress.service';
 
@@ -17,12 +18,14 @@ export class AddPlayingEffects {
   @Effect() save$ =
     this.actions$
       .ofType(addPlayingActions.SAVE)
-      .map(action => action as addPlayingActions.Save)
-      .map(action => action.addPlaying)
-      .switchMap(addPlaying => this.progressService.saveAddPlaying(addPlaying)
-        .mergeMap(newItem => [
-          new addPlayingActions.SaveSucceeded(newItem),
-          new addPlayingActions.Reset()
-        ])
-        .catch(err => Observable.of(new appActions.Error(addPlayingActions.SAVE, err.message))));
+      .pipe(
+        map(action => action as addPlayingActions.Save),
+        map(action => action.addPlaying),
+        switchMap(addPlaying => this.progressService.saveAddPlaying(addPlaying)
+          .pipe(
+            mergeMap(newItem => [
+              new addPlayingActions.SaveSucceeded(newItem),
+              new addPlayingActions.Reset()
+            ]),
+            catchError(err => of(new appActions.Error(addPlayingActions.SAVE, err.message))))));
 }

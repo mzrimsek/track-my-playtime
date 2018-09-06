@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 
-import { Observable } from 'rxjs/Observable';
+import { combineLatest, interval, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import trackerSelectors, { State as TrackerState } from '../reducers/root.reducer';
 
@@ -18,7 +19,7 @@ export class ElapsedTimeService {
 
   getCurrentTime(): Observable<number> {
     if (!this.currentTime$) {
-      this.currentTime$ = Observable.interval(1000).map(() => new Date().getTime());
+      this.currentTime$ = interval(1000).pipe(map(() => new Date().getTime()));
     }
     return this.currentTime$;
   }
@@ -27,7 +28,7 @@ export class ElapsedTimeService {
     const timerInfo$ = this.trackerStore.select(trackerSelectors.timerInfo);
     const currentTime$ = this.getCurrentTime();
 
-    return currentTime$.combineLatest(timerInfo$, (currentTime: number, timerInfo: TimerInfo) => {
+    return combineLatest(currentTime$, timerInfo$, (currentTime: number, timerInfo: TimerInfo) => {
       return formatElapsedTime(timerInfo.startTime, currentTime, inactiveValue);
     });
   }

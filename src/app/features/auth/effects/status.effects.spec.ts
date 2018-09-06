@@ -15,7 +15,6 @@ import { Error } from '../../../models';
 
 import { getValidationMessage } from '../utils/validation.utils';
 
-import '../../../rxjs-operators';
 import { user } from '../../../test-helpers';
 
 describe('Status Effects', () => {
