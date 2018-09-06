@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
-import { Observable } from 'rxjs/Observable';
+import { Observable, of } from 'rxjs';
+import { first, map } from 'rxjs/operators';
 
 import { Profile } from '../models';
 
@@ -14,15 +15,15 @@ export class ProfileService {
   }
 
   getProfile(userId: string): Observable<Profile> {
-    const profileDoc = this.profileCollection.doc<FirestoreProfileItem>(userId).valueChanges().first();
-    return profileDoc.map(profile => <Profile>{
+    const profileDoc = this.profileCollection.doc<FirestoreProfileItem>(userId).valueChanges().pipe(first());
+    return profileDoc.pipe(map(profile => <Profile>{
       ...profile
-    });
+    }));
   }
 
   setDisplayName(userId: string, displayName: string): Observable<string> {
     this.profileCollection.doc(userId).set({ displayName }, { merge: true });
-    return Observable.of(displayName);
+    return of(displayName);
   }
 }
 

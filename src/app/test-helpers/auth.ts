@@ -1,7 +1,6 @@
 import { User as AuthUser } from '@firebase/auth-types';
 
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Observable } from 'rxjs/Observable';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 
 import { user } from './user';
 
@@ -46,7 +45,7 @@ export namespace auth {
     private authState: Observable<any>;
 
     constructor() {
-      this.authState = Observable.of(null);
+      this.authState = of(null);
     }
 
     getAuthState(): Observable<AuthUser | null> {
@@ -54,42 +53,52 @@ export namespace auth {
     }
 
     signInWithGoogle(): Observable<any> {
-      this.authState = Observable.of({
+      this.authState = of({
         ...user.mockUser,
         providerData: [{
           ...user.mockUser
         }]
       });
-      return Observable.of('Logged in with Google');
+      return of('Logged in with Google');
     }
 
     signInWithFacebook(): Observable<any> {
-      this.authState = Observable.of({
+      this.authState = of({
         ...user.mockUser,
         providerData: [{
           ...user.mockUser
         }]
       });
-      return Observable.of('Logged in with Facebook');
+      return of('Logged in with Facebook');
+    }
+
+    signInWithTwitter(): Observable<any> {
+      this.authState = of({
+        ...user.mockUser,
+        providerData: [{
+          ...user.mockUser
+        }]
+      });
+      return of('Logged in with Twitter');
     }
 
     signOut(): Observable<any> {
-      this.authState = Observable.of(null);
-      return Observable.of('Logged out');
+      this.authState = of(null);
+      return of('Logged out');
     }
 
     signUpWithEmail(): Observable<any> {
-      this.authState = Observable.of(user.mockUser);
-      return Observable.of('Signed up with Email');
+      this.authState = of(user.mockUser);
+      return of('Signed up with Email');
     }
 
     signInWithEmail(): Observable<any> {
-      this.authState = Observable.of(user.mockUser);
-      return Observable.of('Signed in with Email');
+      this.authState = of(user.mockUser);
+      return of('Signed in with Email');
     }
 
     resetPassword(): Observable<any> {
-      return Observable.of('Password reset email sent');
+      return of('Password reset email sent');
     }
   }
 }

@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { combineReducers, Store, StoreModule } from '@ngrx/store';
 
-import { Observable } from 'rxjs';
+import { of } from 'rxjs';
 
 import { ElapsedTimeService } from './elapsed-time.service';
 
@@ -46,7 +46,7 @@ describe('ElapsedTimeService', () => {
     const inactiveValue = 'inactive';
 
     beforeEach(() => {
-      spyOn(service, 'getCurrentTime').and.callFake(() => Observable.of(70000));
+      spyOn(service, 'getCurrentTime').and.callFake(() => of(70000));
     });
 
     it('Should select timerInfo', () => {

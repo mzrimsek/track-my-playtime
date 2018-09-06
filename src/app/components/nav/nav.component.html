@@ -63,7 +63,8 @@
   </div>
 
   <div class="user">
-    <div class="info">
+    <div class="info"
+         *ngIf="userInfo">
       <a [attr.data-tracking-category]="profileRoute.trackingCategory"
          [routerLink]="profileRoute.router">
         <img class="drop-shadow"

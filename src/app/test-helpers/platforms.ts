@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs/Observable';
+import { Observable, of } from 'rxjs';
 
 import { FirestorePlatformsItem } from '../features/tracker/services/platforms.service';
 
@@ -10,7 +10,7 @@ export namespace platforms {
 
   export class MockPlatformsService {
     getPlatformsOptions(): Observable<string[]> {
-      return Observable.of(testPlatforms);
+      return of(testPlatforms);
     }
   }
 
@@ -18,7 +18,7 @@ export namespace platforms {
     export const testPlatformsItems: FirestorePlatformsItem[] = [];
 
     export const collectionStub = {
-      valueChanges: jasmine.createSpy('valueChanges').and.returnValue(Observable.of(testPlatformsItems))
+      valueChanges: jasmine.createSpy('valueChanges').and.returnValue(of(testPlatformsItems))
     };
 
     export const angularFirestoreStub = {

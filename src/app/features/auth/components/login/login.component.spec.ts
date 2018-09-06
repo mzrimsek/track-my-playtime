@@ -84,6 +84,15 @@ describe('LoginComponent', () => {
     expect(store.dispatch).toHaveBeenCalledWith(action);
   }));
 
+  it('Should dispatch Twitter Login when TwitterAuth event is emitted', async(() => {
+    const action = new actions.TwitterLogin();
+    const form = fixture.nativeElement.querySelector('app-auth-auth-form');
+
+    form.dispatchEvent(new Event('twitterAuth'));
+
+    expect(store.dispatch).toHaveBeenCalledWith(action);
+  }));
+
   it('Should dispatch Email Login when EmailAuth event emitted', async(() => {
     const email = 'email@email.com';
     const password = 'password';

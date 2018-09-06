@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 import * as userActions from '../../actions/user.actions';
 
@@ -33,6 +33,10 @@ export class LoginComponent implements OnInit {
 
   facebookLogin() {
     this.store.dispatch(new userActions.FacebookLogin());
+  }
+
+  twitterLogin() {
+    this.store.dispatch(new userActions.TwitterLogin());
   }
 
   emailLogin(event: EmailAuthEvent) {

@@ -3,8 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 
 import { cold, hot } from 'jasmine-marbles';
-import { Observable } from 'rxjs/Observable';
-import { ReplaySubject } from 'rxjs/ReplaySubject';
+import { ReplaySubject, throwError } from 'rxjs';
 
 import { AddPlayingEffects } from './add-playing.effects';
 
@@ -65,7 +64,7 @@ describe('Add Playing Effects', () => {
         b: new appActions.Error(addPlayingActions.SAVE, message)
       });
 
-      spyOn(progressService, 'saveAddPlaying').and.callFake(() => Observable.throw({ message }));
+      spyOn(progressService, 'saveAddPlaying').and.callFake(() => throwError({ message }));
       expect(effects.save$).toBeObservable(expected);
     });
 

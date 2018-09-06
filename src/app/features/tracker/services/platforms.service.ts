@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
+import { first, map } from 'rxjs/operators';
 
 @Injectable()
 export class PlatformsService {
@@ -12,10 +13,10 @@ export class PlatformsService {
   }
 
   getPlatformsOptions(): Observable<string[]> {
-    const platformsItems = this.platformsCollection.valueChanges().first();
-    return platformsItems.map(items =>
+    const platformsItems = this.platformsCollection.valueChanges().pipe(first());
+    return platformsItems.pipe(map(items =>
       items.sort((a, b) => a.index - b.index)
-        .map(item => item.option));
+        .map(item => item.option)));
   }
 }
 

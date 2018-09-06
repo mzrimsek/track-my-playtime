@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 
-import { Observable } from 'rxjs/Observable';
+import { combineLatest, Observable } from 'rxjs';
 
 import * as userActions from '../actions/user.actions';
 
@@ -14,7 +14,9 @@ import authComponentSelectors, { State } from '../reducers/root.reducer';
 import { Profile } from '../../profile/models';
 import { User, UserInfo } from '../models';
 
-import { getDisplayName, getImgSrc, getProviderFrom } from '../../profile/utils/userinfo.utils';
+import {
+    getDisplayName, getEmail, getImgSrc, getProviderFrom
+} from '../../profile/utils/userinfo.utils';
 
 @Injectable()
 export class UserService {
@@ -29,10 +31,10 @@ export class UserService {
     const user$ = this.getUser();
     const profile$ = this.profileStore.select(profileComponentSelectors.info);
 
-    return user$.combineLatest(profile$, (user: User, profile: Profile) => {
+    return combineLatest(user$, profile$, (user: User, profile: Profile) => {
       return {
         displayName: getDisplayName(user, profile),
-        email: user.email,
+        email: getEmail(user),
         imgSrc: getImgSrc(user),
         provider: getProviderFrom(user.providerId)
       };

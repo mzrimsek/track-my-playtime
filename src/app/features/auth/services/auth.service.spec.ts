@@ -1,7 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 
 import { AngularFireAuth } from 'angularfire2/auth';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { AuthService } from './auth.service';
 
@@ -33,7 +34,7 @@ describe('Auth Service', () => {
 
     beforeEach(() => {
       isAuth$ = service.getAuthState()
-        .map(firebaseUser => firebaseUser !== null)
+        .pipe(map(firebaseUser => firebaseUser !== null))
         .subscribe(isAuth => isAuthRef = isAuth);
     });
 
@@ -62,6 +63,13 @@ describe('Auth Service', () => {
   describe('signInWithFacebook', () => {
     it('Should call AngularFireAuth signInWithPopup', () => {
       service.signInWithFacebook();
+      expect(afAuth.auth.signInWithPopup).toHaveBeenCalled();
+    });
+  });
+
+  describe('signInWithTwitter', () => {
+    it('Should call AngularFireAuth signInWithPopup', () => {
+      service.signInWithTwitter();
       expect(afAuth.auth.signInWithPopup).toHaveBeenCalled();
     });
   });

@@ -2,7 +2,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 import sharedSelectors, { State as SharedState } from '../../shared/reducers/root.reducer';
 

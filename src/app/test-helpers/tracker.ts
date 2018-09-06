@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs/Observable';
+import { Observable, of } from 'rxjs';
 
 import { FirestoreTimerItem } from '../features/tracker/services/timer.service';
 
@@ -26,13 +26,13 @@ export namespace tracker {
 
   export class MockTimerService {
     getTimerInfo(_userId: string): Observable<TimerInfo> {
-      return Observable.of(testInfo);
+      return of(testInfo);
     }
   }
 
   export class MockElapsedTimeService {
     getElapsedTime(invalidValue: string): Observable<string> {
-      return Observable.of(invalidValue);
+      return of(invalidValue);
     }
   }
 
@@ -44,7 +44,7 @@ export namespace tracker {
     };
 
     export const documentStub = {
-      valueChanges: jasmine.createSpy('valueChanges').and.returnValue(Observable.of(testTimerItem)),
+      valueChanges: jasmine.createSpy('valueChanges').and.returnValue(of(testTimerItem)),
       set: jasmine.createSpy('set')
     };
 

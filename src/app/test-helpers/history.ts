@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs/Observable';
+import { Observable, of } from 'rxjs';
 
 import { FirestoreHistoryItem } from '../features/tracker/services/history.service';
 
@@ -91,27 +91,27 @@ export namespace history {
 
   export class MockHistoryService {
     saveTimerInfo(_info: AddTimerInfo): Observable<HistoryEntity> {
-      return Observable.of(mockEntity);
+      return of(mockEntity);
     }
 
     getHistoryList(_userId: string): Observable<HistoryEntity[]> {
-      return Observable.of([mockEntity]);
+      return of([mockEntity]);
     }
 
     deleteHistoryItem(_userId: string, itemId: string): Observable<string> {
-      return Observable.of(itemId);
+      return of(itemId);
     }
 
     updateGame(_userId: string, payload: UpdateHistoryItemGamePayload): Observable<UpdateHistoryItemGamePayload> {
-      return Observable.of(payload);
+      return of(payload);
     }
 
     updatePlatform(_userId: string, payload: UpdateHistoryItemPlatformPayload): Observable<UpdateHistoryItemPlatformPayload> {
-      return Observable.of(payload);
+      return of(payload);
     }
 
     updateElapsedTime(_userId: string, payload: UpdateHistoryItemTimesPayload): Observable<UpdateHistoryItemTimesPayload> {
-      return Observable.of(payload);
+      return of(payload);
     }
   }
 
@@ -126,7 +126,7 @@ export namespace history {
 
     export const itemsCollectionStub = {
       doc: jasmine.createSpy('doc').and.returnValue(itemDocumentStub),
-      valueChanges: jasmine.createSpy('valueChanges').and.returnValue(Observable.of(testHistoryItems))
+      valueChanges: jasmine.createSpy('valueChanges').and.returnValue(of(testHistoryItems))
     };
 
     export const documentStub = {

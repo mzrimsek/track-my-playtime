@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { ElapsedTimeService } from './services/elapsed-time.service';
 
@@ -36,7 +37,7 @@ export class TrackerComponent implements OnInit {
 
   ngOnInit() {
     this.timerInfo$ = this.trackerStore.select(trackerSelectors.timerInfo);
-    this.game$ = this.timerInfo$.map(info => info.game ? info.game : null);
+    this.game$ = this.timerInfo$.pipe(map(info => info.game ? info.game : null));
     this.elapsedTime$ = this.elapsedTimeService.getElapsedTime('00:00:00');
 
     const historyGroupings = this.sharedStore.select(sharedSelectors.historyGroupingsByDate);

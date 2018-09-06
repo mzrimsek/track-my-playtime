@@ -42,6 +42,14 @@
         <fa-icon [icon]="icons.facebook"></fa-icon>
         {{ trackingCategory }} with Facebook
       </button>
+
+      <button id="twitter-auth"
+              [attr.data-tracking-category]="trackingCategory + 'Twitter'"
+              class="auth-button drop-shadow"
+              (click)="emitTwitterAuth()">
+        <fa-icon [icon]="icons.twitter"></fa-icon>
+        {{ trackingCategory }} with Twitter
+      </button>
     </div>
   </div>
 </div>

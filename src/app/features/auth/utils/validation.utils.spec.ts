@@ -62,6 +62,15 @@ describe('Validation Utils', () => {
       expect(result).toBe('');
     });
 
+    it('Should return nothing for TWITTER_LOGIN when error is about popup', () => {
+      const error: Error = {
+        action: userActions.TWITTER_LOGIN,
+        message: POPUP_CLOSED
+      };
+      const result = getValidationMessage(error);
+      expect(result).toBe('');
+    });
+
     it('Should return nothing if not handled action', () => {
       const error: Error = {
         action: userActions.NOT_AUTHENTICATED,

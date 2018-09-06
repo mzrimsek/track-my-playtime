@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs/Observable';
+import { Observable, of } from 'rxjs';
 
 import { Dictionary, HistoryGrouping, ProgressItem } from '../../../shared/models';
 import { MarkCompleteItem } from '../models';
@@ -8,14 +8,14 @@ import { getCompletedDisplayDataItems, getPlayingDisplayDataItems } from './disp
 describe('Display Data Utils', () => {
   describe('getCompletedDisplayDataItems', () => {
     it('Should return empty when no items', () => {
-      const result = getCompletedDisplayDataItems(Observable.of([]), Observable.of([]));
+      const result = getCompletedDisplayDataItems(of([]), of([]));
       result.subscribe(res => {
         expect(res.length).toBe(0);
       });
     });
 
     it('Should return empty when no item start entry match', () => {
-      const progressItems: Observable<ProgressItem[]> = Observable.of([{
+      const progressItems: Observable<ProgressItem[]> = of([{
         id: '1',
         startEntryId: 'some start id',
         endEntryId: 'some end id'
@@ -33,7 +33,7 @@ describe('Display Data Utils', () => {
         }],
         totalTime: 3
       };
-      const gameGroupings: Observable<HistoryGrouping[]> = Observable.of([grouping]);
+      const gameGroupings: Observable<HistoryGrouping[]> = of([grouping]);
 
       const result = getCompletedDisplayDataItems(progressItems, gameGroupings);
 
@@ -43,7 +43,7 @@ describe('Display Data Utils', () => {
     });
 
     it('Should return correct data when item start entry matches', () => {
-      const progressItems: Observable<ProgressItem[]> = Observable.of([{
+      const progressItems: Observable<ProgressItem[]> = of([{
         id: '1',
         startEntryId: 'some start id',
         endEntryId: 'some end id'
@@ -69,7 +69,7 @@ describe('Display Data Utils', () => {
         }],
         totalTime: 4
       };
-      const gameGroupings: Observable<HistoryGrouping[]> = Observable.of([grouping]);
+      const gameGroupings: Observable<HistoryGrouping[]> = of([grouping]);
 
       const result = getCompletedDisplayDataItems(progressItems, gameGroupings);
 
@@ -94,14 +94,14 @@ describe('Display Data Utils', () => {
 
   describe('getPlayingDisplayDataItems', () => {
     it('Should return empty when no items', () => {
-      const result = getPlayingDisplayDataItems(Observable.of([]), Observable.of([]), Observable.of({}));
+      const result = getPlayingDisplayDataItems(of([]), of([]), of({}));
       result.subscribe(res => {
         expect(res.length).toBe(0);
       });
     });
 
     it('Should return empty when no item start entry match', () => {
-      const progressItems: Observable<ProgressItem[]> = Observable.of([{
+      const progressItems: Observable<ProgressItem[]> = of([{
         id: '1',
         startEntryId: 'some start id',
         endEntryId: ''
@@ -119,16 +119,16 @@ describe('Display Data Utils', () => {
         }],
         totalTime: 3
       };
-      const gameGroupings: Observable<HistoryGrouping[]> = Observable.of([grouping]);
+      const gameGroupings: Observable<HistoryGrouping[]> = of([grouping]);
 
-      const result = getPlayingDisplayDataItems(progressItems, gameGroupings, Observable.of({}));
+      const result = getPlayingDisplayDataItems(progressItems, gameGroupings, of({}));
       result.subscribe(res => {
         expect(res.length).toBe(0);
       });
     });
 
     it('Should return correct data when item start entry matches', () => {
-      const progressItems: Observable<ProgressItem[]> = Observable.of([{
+      const progressItems: Observable<ProgressItem[]> = of([{
         id: '1',
         startEntryId: 'some start id',
         endEntryId: ''
@@ -146,8 +146,8 @@ describe('Display Data Utils', () => {
         }],
         totalTime: 3
       };
-      const gameGroupings: Observable<HistoryGrouping[]> = Observable.of([grouping]);
-      const markCompleteEntities: Observable<Dictionary<MarkCompleteItem>> = Observable.of({
+      const gameGroupings: Observable<HistoryGrouping[]> = of([grouping]);
+      const markCompleteEntities: Observable<Dictionary<MarkCompleteItem>> = of({
         '1': {
           id: '1',
           showExtra: false,
