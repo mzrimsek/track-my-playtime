@@ -1,4 +1,3 @@
-import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -18,7 +17,6 @@ import { AdsenseModule } from 'ng2-adsense';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AuthModule } from './features/auth/auth.module';
-import { CompletionModule } from './features/completion/completion.module';
 import { ProfileModule } from './features/profile/profile.module';
 import { SharedModule } from './shared/shared.module';
 
@@ -50,7 +48,6 @@ const metaReducers: MetaReducer<any>[] = [clearState];
     AppRoutingModule,
     AuthModule,
     SharedModule,
-    HttpClientModule,
     Angulartics2Module.forRoot([Angulartics2GoogleTagManager]),
     AngularFireModule.initializeApp(environment.firebase),
     AdsenseModule.forRoot({
@@ -65,7 +62,6 @@ const metaReducers: MetaReducer<any>[] = [clearState];
     }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     EffectsModule.forRoot([]),
-    CompletionModule,
     ProfileModule
   ],
   providers: [
