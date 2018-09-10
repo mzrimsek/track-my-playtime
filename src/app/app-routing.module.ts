@@ -48,7 +48,7 @@ const routes: Routes = [
       },
       {
         path: '**',
-        redirectTo: `/app/tracker`,
+        redirectTo: '/app/tracker',
         pathMatch: 'full'
       }
     ]
