@@ -33,7 +33,7 @@ export namespace auth {
         .and
         .callFake(fakeSignInHandler),
       signInAndRetrieveDataWithEmailAndPassword: jasmine
-        .createSpy('signInAndRetrieveDataWithEmailAndPassword')
+        .createSpy('signInWithEmailAndPassword')
         .and
         .callFake(fakeSignInHandler),
       sendPasswordResetEmail: jasmine

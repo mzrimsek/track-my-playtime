@@ -3,14 +3,16 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { LoginComponent } from './features/auth/components/login/login.component';
 import { RegisterComponent } from './features/auth/components/register/register.component';
+import { HomeComponent } from './features/home/home.component';
 import { ProfileComponent } from './features/profile/profile.component';
+import { TrackerComponent } from './features/tracker/tracker.component';
 
 import { AuthGuard } from './features/auth/guards/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
-    loadChildren: 'app/features/home/home.module#HomeModule'
+    component: HomeComponent
   },
   {
     path: 'login',
@@ -26,7 +28,7 @@ const routes: Routes = [
     children: [
       {
         path: 'tracker',
-        loadChildren: 'app/features/tracker/tracker.module#TrackerModule'
+        component: TrackerComponent
       },
       {
         path: 'dashboard',

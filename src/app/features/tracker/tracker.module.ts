@@ -10,7 +10,6 @@ import { StoreModule } from '@ngrx/store';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 
 import { SharedModule } from '../../shared/shared.module';
-import { TrackerRoutingModule } from './tracker-routing.module';
 
 import { HistoryEntryComponent } from './components/history-entry/history-entry.component';
 import { HistoryComponent } from './components/history/history.component';
@@ -42,7 +41,6 @@ import { reducers } from './reducers/root.reducer';
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
     SharedModule,
-    TrackerRoutingModule,
     StoreModule.forFeature('tracker', reducers),
     EffectsModule.forFeature([
       TimerEffects,
