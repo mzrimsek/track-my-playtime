@@ -16,6 +16,9 @@ import { LibraryComponent } from './library.component';
     SharedModule,
     LibraryRoutingModule
   ],
-  declarations: [LibraryComponent, HeaderComponent]
+  declarations: [
+    LibraryComponent,
+    HeaderComponent
+  ]
 })
 export class LibraryModule { }

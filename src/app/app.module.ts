@@ -20,12 +20,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AuthModule } from './features/auth/auth.module';
 import { CompletionModule } from './features/completion/completion.module';
 import { ProfileModule } from './features/profile/profile.module';
-import { TrackerModule } from './features/tracker/tracker.module';
 import { SharedModule } from './shared/shared.module';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { NavComponent } from './components/nav/nav.component';
+
+import { ElapsedTimeService } from './shared/services/elapsed-time.service';
 
 import { AuthGuard } from './features/auth/guards/auth.guard';
 
@@ -61,13 +62,14 @@ import { environment } from '../environments/environment';
     }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     EffectsModule.forRoot([]),
-    TrackerModule,
     CompletionModule,
     ProfileModule
   ],
-  providers: [{
-    provide: RouterStateSerializer, useClass: CustomRouterStateSerializer
-  }, AuthGuard],
+  providers: [
+    { provide: RouterStateSerializer, useClass: CustomRouterStateSerializer },
+    AuthGuard,
+    ElapsedTimeService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

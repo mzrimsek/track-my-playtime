@@ -41,6 +41,10 @@ import { reducers } from './reducers/root.reducer';
     PlayingItemComponent,
     CompletedItemComponent,
     TabsComponent],
-  providers: [UserService, ProgressService, TimePipe]
+  providers: [
+    UserService,
+    ProgressService,
+    TimePipe
+  ]
 })
 export class CompletionModule { }

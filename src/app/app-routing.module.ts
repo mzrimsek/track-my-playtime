@@ -5,7 +5,6 @@ import { LoginComponent } from './features/auth/components/login/login.component
 import { RegisterComponent } from './features/auth/components/register/register.component';
 import { CompletionComponent } from './features/completion/completion.component';
 import { ProfileComponent } from './features/profile/profile.component';
-import { TrackerComponent } from './features/tracker/tracker.component';
 
 import { AuthGuard } from './features/auth/guards/auth.guard';
 
@@ -28,7 +27,7 @@ const routes: Routes = [
     children: [
       {
         path: 'tracker',
-        component: TrackerComponent
+        loadChildren: 'app/features/tracker/tracker.module#TrackerModule'
       },
       {
         path: 'dashboard',
