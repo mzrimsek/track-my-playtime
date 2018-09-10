@@ -33,7 +33,10 @@ import { reducers } from './reducers/root.reducer';
     FormsModule,
     SharedModule,
     StoreModule.forFeature('completion', reducers),
-    EffectsModule.forFeature([AddPlayingEffects, ProgressEffects])
+    EffectsModule.forFeature([
+      AddPlayingEffects,
+      ProgressEffects
+    ])
   ],
   declarations: [
     CompletionComponent,

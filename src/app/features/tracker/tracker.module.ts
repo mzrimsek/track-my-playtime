@@ -44,7 +44,11 @@ import { reducers } from './reducers/root.reducer';
     SharedModule,
     TrackerRoutingModule,
     StoreModule.forFeature('tracker', reducers),
-    EffectsModule.forFeature([TimerEffects, HistoryEffects, PlatformsEffects]),
+    EffectsModule.forFeature([
+      TimerEffects,
+      HistoryEffects,
+      PlatformsEffects
+    ]),
   ],
   declarations: [
     TrackerComponent,
