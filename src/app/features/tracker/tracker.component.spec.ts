@@ -7,7 +7,7 @@ import { addDays } from 'date-fns';
 
 import { TrackerComponent } from './tracker.component';
 
-import { ElapsedTimeService } from './services/elapsed-time.service';
+import { ElapsedTimeService } from '../../shared/services/elapsed-time.service';
 
 import * as historyActions from '../../shared/actions/history.actions';
 

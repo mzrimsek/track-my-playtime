@@ -24,8 +24,8 @@ import { HistoryEffects } from './effects/history.effects';
 import { PlatformsEffects } from './effects/platforms.effects';
 import { TimerEffects } from './effects/timer.effects';
 
+import { ElapsedTimeService } from '../../shared/services/elapsed-time.service';
 import { UserService } from '../auth/services/user.service';
-import { ElapsedTimeService } from './services/elapsed-time.service';
 import { HistoryService } from './services/history.service';
 import { PlatformsService } from './services/platforms.service';
 import { TimerService } from './services/timer.service';

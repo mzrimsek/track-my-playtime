@@ -7,7 +7,7 @@ import { Store } from '@ngrx/store';
 import { insertAnalyticsElements } from 'insert-analytics-elements/googleTagManager';
 import { Observable } from 'rxjs';
 
-import { ElapsedTimeService } from './features/tracker/services/elapsed-time.service';
+import { ElapsedTimeService } from './shared/services/elapsed-time.service';
 
 import sharedSelectors, { State as SharedState } from './shared/reducers/root.reducer';
 

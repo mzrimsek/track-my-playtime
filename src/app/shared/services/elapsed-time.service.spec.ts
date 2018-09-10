@@ -6,12 +6,12 @@ import { of } from 'rxjs';
 
 import { ElapsedTimeService } from './elapsed-time.service';
 
-import * as actions from '../../../shared/actions/timer.actions';
+import * as actions from '../actions/timer.actions';
 
-import * as fromRoot from '../../../reducers/root.reducer';
-import * as fromShared from '../../../shared/reducers/root.reducer';
+import * as fromRoot from '../../reducers/root.reducer';
+import * as fromShared from '../reducers/root.reducer';
 
-import { tracker } from '../../../test-helpers';
+import { tracker } from '../../test-helpers';
 
 describe('ElapsedTimeService', () => {
   let service: ElapsedTimeService;

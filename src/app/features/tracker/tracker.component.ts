@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { ElapsedTimeService } from './services/elapsed-time.service';
+import { ElapsedTimeService } from '../../shared/services/elapsed-time.service';
 
 import sharedSelectors, { State as SharedState } from '../../shared/reducers/root.reducer';
 import trackerSelectors, { State as TrackerState } from './reducers/root.reducer';
