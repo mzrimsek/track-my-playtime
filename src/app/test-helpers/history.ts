@@ -2,7 +2,7 @@ import { Observable, of } from 'rxjs';
 
 import { FirestoreHistoryItem } from '../features/tracker/services/history.service';
 
-import { HistoryEntity } from '../shared/reducers/history.reducer';
+import { HistoryEntity, State as HistoryState } from '../shared/reducers/history.reducer';
 
 import {
     AddTimerInfo, HistoryGrouping, HistoryListItem, UpdateHistoryItemGamePayload,
@@ -86,6 +86,12 @@ export namespace history {
     platform: 'some platform',
     startTime: 3000,
     endTime: 6000
+  };
+
+  export const initialHistoryState: HistoryState = {
+    ids: [],
+    entities: {},
+    loading: false
   };
 
   export class MockHistoryService {

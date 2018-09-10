@@ -2,10 +2,9 @@ import {
     _selectStatusLoggingIn, _selectStatusValidationMessage, _selectUserData, _selectUserLoggedIn,
     AuthState, State
 } from './root.reducer';
-import { State as StatusState } from './status.reducer';
 import { State as UserState } from './user.reducer';
 
-import { user } from '../../../test-helpers';
+import { auth, user } from '../../../test-helpers';
 
 describe('Auth Root Reducer', () => {
   describe('User State Selectors', () => {
@@ -13,10 +12,10 @@ describe('Auth Root Reducer', () => {
       it('Should return true if uid is set', () => {
         const authState: AuthState = {
           user: {
-            ...initialUserState,
+            ...user.initialUserState,
             uid: 'some uid'
           },
-          status: initialStatusState
+          status: auth.initialStatusState
         };
         const state: State = { auth: authState };
 
@@ -27,8 +26,8 @@ describe('Auth Root Reducer', () => {
 
       it('Should return false if uid is not set', () => {
         const authState: AuthState = {
-          user: initialUserState,
-          status: initialStatusState
+          user: user.initialUserState,
+          status: auth.initialStatusState
         };
         const state: State = { auth: authState };
 
@@ -45,7 +44,7 @@ describe('Auth Root Reducer', () => {
         };
         const authState: AuthState = {
           user: userState,
-          status: initialStatusState
+          status: auth.initialStatusState
         };
         const state: State = { auth: authState };
 
@@ -60,7 +59,7 @@ describe('Auth Root Reducer', () => {
     describe('_selectStatusLoggingIn', () => {
       it('Should return attemptingLogin', () => {
         const authState: AuthState = {
-          user: initialUserState,
+          user: user.initialUserState,
           status: {
             attemptingLogin: true,
             validationMessage: ''
@@ -77,7 +76,7 @@ describe('Auth Root Reducer', () => {
     describe('_selectStatusValidationMessage', () => {
       it('Should return validationMessage', () => {
         const authState: AuthState = {
-          user: initialUserState,
+          user: user.initialUserState,
           status: {
             attemptingLogin: false,
             validationMessage: 'some message'
@@ -93,15 +92,4 @@ describe('Auth Root Reducer', () => {
   });
 });
 
-export const initialUserState: UserState = {
-  uid: '',
-  displayName: '',
-  email: '',
-  photoURL: '',
-  providerId: ''
-};
 
-export const initialStatusState: StatusState = {
-  attemptingLogin: false,
-  validationMessage: ''
-};

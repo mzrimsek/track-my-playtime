@@ -2,6 +2,8 @@ import { Observable, of } from 'rxjs';
 
 import { FirestorePlatformsItem } from '../features/tracker/services/platforms.service';
 
+import { State as PlatformsState } from '../shared/reducers/platforms.reducer';
+
 export namespace platforms {
   export const testPlatforms = [
     'PS4',
@@ -13,6 +15,10 @@ export namespace platforms {
       return of(testPlatforms);
     }
   }
+
+  export const initialPlatformsState: PlatformsState = {
+    options: []
+  };
 
   export namespace firestore {
     export const testPlatformsItems: FirestorePlatformsItem[] = [];

@@ -2,6 +2,8 @@ import { Observable, of } from 'rxjs';
 
 import { FirestoreTimerItem } from '../features/tracker/services/timer.service';
 
+import { State as TimerState } from '../shared/reducers/timer.reducer';
+
 import { TimerInfo } from '../shared/models';
 
 export namespace tracker {
@@ -21,6 +23,12 @@ export namespace tracker {
   export const testInfo: TimerInfo = {
     game: 'some game',
     platform: 'some platform',
+    startTime: 0
+  };
+
+  export const initialTimerState: TimerState = {
+    game: '',
+    platform: '',
     startTime: 0
   };
 

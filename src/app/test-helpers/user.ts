@@ -1,5 +1,7 @@
 import { of } from 'rxjs';
 
+import { State as UserState } from '../features/auth/reducers/user.reducer';
+
 import { User, UserInfo } from '../features/auth/models';
 
 export namespace user {
@@ -21,5 +23,13 @@ export namespace user {
   export const userServiceStub = {
     getUser: jasmine.createSpy('getUser').and.returnValue(of(mockUser)),
     getUserInfo: jasmine.createSpy('getUserInfo').and.returnValue(of(mockUserInfo))
+  };
+
+  export const initialUserState: UserState = {
+    uid: '',
+    displayName: '',
+    email: '',
+    photoURL: '',
+    providerId: ''
   };
 }

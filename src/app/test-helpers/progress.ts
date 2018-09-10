@@ -2,7 +2,7 @@ import { Observable, of } from 'rxjs';
 
 import { FirestoreProgressItem } from '../features/completion/services/progress.service';
 
-import { ProgressEntity } from '../shared/reducers/progress.reducer';
+import { ProgressEntity, State as ProgressState } from '../shared/reducers/progress.reducer';
 
 import { AddPlaying } from '../features/completion/models';
 import { MarkCompletePayload } from '../shared/models';
@@ -18,6 +18,12 @@ export namespace progress {
     id: 'some id 2',
     startEntryId: 'some start id 2',
     endEntryId: ''
+  };
+
+  export const initialProgressState: ProgressState = {
+    ids: [],
+    entities: {},
+    loading: false
   };
 
   export class MockProgressService {
