@@ -5,9 +5,9 @@ import { Store } from '@ngrx/store';
 import { combineLatest, interval, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import trackerSelectors, { State as TrackerState } from '../reducers/root.reducer';
+import sharedSelectors, { SharedState } from '../../../shared/reducers/root.reducer';
 
-import { TimerInfo } from '../models';
+import { TimerInfo } from '../../../shared/models';
 
 import { formatElapsedTime } from '../../../shared/utils/date.utils';
 
@@ -15,7 +15,7 @@ import { formatElapsedTime } from '../../../shared/utils/date.utils';
 export class ElapsedTimeService {
 
   currentTime$: Observable<number>;
-  constructor(private trackerStore: Store<TrackerState>) { }
+  constructor(private sharedStore: Store<SharedState>) { }
 
   getCurrentTime(): Observable<number> {
     if (!this.currentTime$) {
@@ -25,7 +25,7 @@ export class ElapsedTimeService {
   }
 
   getElapsedTime(inactiveValue: string): Observable<string> {
-    const timerInfo$ = this.trackerStore.select(trackerSelectors.timerInfo);
+    const timerInfo$ = this.sharedStore.select(sharedSelectors.timerInfo);
     const currentTime$ = this.getCurrentTime();
 
     return combineLatest(currentTime$, timerInfo$, (currentTime: number, timerInfo: TimerInfo) => {

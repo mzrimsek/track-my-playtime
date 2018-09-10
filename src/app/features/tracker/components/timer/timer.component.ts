@@ -6,12 +6,11 @@ import { Store } from '@ngrx/store';
 import { UserService } from '../../../auth/services/user.service';
 import { TimerService } from '../../services/timer.service';
 
-import * as actions from '../../actions/timer.actions';
+import * as actions from '../../../../shared/actions/timer.actions';
 
 import { State } from '../../reducers/root.reducer';
 
-import { NgSelectValue } from '../../../../shared/models';
-import { AddTimerInfo, TimerInfo } from '../../models';
+import { AddTimerInfo, NgSelectValue, TimerInfo } from '../../../../shared/models';
 
 import { getValueFromNgSelect } from '../../../../shared/utils/ng-select.utils';
 

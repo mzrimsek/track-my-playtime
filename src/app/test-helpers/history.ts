@@ -4,9 +4,8 @@ import { FirestoreHistoryItem } from '../features/tracker/services/history.servi
 
 import { HistoryEntity } from '../shared/reducers/history.reducer';
 
-import { AddTimerInfo } from '../features/tracker/models';
 import {
-    HistoryGrouping, HistoryListItem, UpdateHistoryItemGamePayload,
+    AddTimerInfo, HistoryGrouping, HistoryListItem, UpdateHistoryItemGamePayload,
     UpdateHistoryItemPlatformPayload, UpdateHistoryItemTimesPayload
 } from '../shared/models';
 

@@ -2,7 +2,7 @@ import { Observable, of } from 'rxjs';
 
 import { FirestoreTimerItem } from '../features/tracker/services/timer.service';
 
-import { TimerInfo } from '../features/tracker/models';
+import { TimerInfo } from '../shared/models';
 
 export namespace tracker {
   export const timerServiceStub = {

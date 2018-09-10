@@ -6,7 +6,7 @@ import { cold, hot } from 'jasmine-marbles';
 
 import { AuthEffects } from './auth.effects';
 
-import * as timerActions from '../../../features/tracker/actions/timer.actions';
+import * as timerActions from '../../../shared/actions/timer.actions';
 import * as historyActions from '../../../shared/actions/history.actions';
 import * as platformsActions from '../../../shared/actions/platforms.actions';
 import * as progressActions from '../../../shared/actions/progress.actions';

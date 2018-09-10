@@ -3,8 +3,9 @@ import { ActionReducerMap, createFeatureSelector, createSelector } from '@ngrx/s
 import * as fromHistory from './history.reducer';
 import * as fromPlatforms from './platforms.reducer';
 import * as fromProgress from './progress.reducer';
+import * as fromTimer from './timer.reducer';
 
-import { HistoryListItem, ProgressItem } from '../models';
+import { HistoryListItem, ProgressItem, TimerInfo } from '../models';
 
 import { formatDate } from '../utils/date.utils';
 import { getUniqueFrom } from '../utils/history-filter.utils';
@@ -14,6 +15,7 @@ export interface SharedState {
   history: fromHistory.State;
   platforms: fromPlatforms.State;
   progress: fromProgress.State;
+  timer: fromTimer.State;
 }
 
 export interface State {
@@ -23,13 +25,15 @@ export interface State {
 export const reducers: ActionReducerMap<SharedState, any> = {
   history: fromHistory.reducer,
   platforms: fromPlatforms.reducer,
-  progress: fromProgress.reducer
+  progress: fromProgress.reducer,
+  timer: fromTimer.reducer
 };
 
 export const _selectSharedState = createFeatureSelector<SharedState>('shared');
 export const _selectHistory = createSelector(_selectSharedState, state => state.history);
 export const _selectPlatforms = createSelector(_selectSharedState, state => state.platforms);
 export const _selectProgress = createSelector(_selectSharedState, state => state.progress);
+export const _selectTimer = createSelector(_selectSharedState, state => state.timer);
 
 export const { selectAll: _selectAllProgress } = fromProgress.adapter.getSelectors(_selectProgress);
 export const _selectPlayingProgress = createSelector(_selectAllProgress,
@@ -69,6 +73,8 @@ export const _selectTrackedGames = createSelector(_selectSortedHistoryItems, ite
 export const _selectPlatformsOptions = createSelector(_selectPlatforms, platforms => platforms.options);
 export const _selectPlatformsLoaded = createSelector(_selectPlatformsOptions, platformOptions => platformOptions.length !== 0);
 
+export const _selectTimerInfo = createSelector(_selectTimer, timer => timer as TimerInfo);
+
 export const _selectUserDataLoaded = createSelector(_selectHistory, _selectProgress, _selectPlatformsLoaded,
   (history, progress, platformsLoaded) => !history.loading && !progress.loading && platformsLoaded);
 
@@ -81,6 +87,7 @@ const sharedSelectors = {
   platformsOptions: _selectPlatformsOptions,
   progressPlaying: _selectPlayingProgress,
   progressCompleted: _selectCompletedProgress,
+  timerInfo: _selectTimerInfo,
   userDataLoaded: _selectUserDataLoaded
 };
 

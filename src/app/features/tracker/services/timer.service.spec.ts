@@ -4,7 +4,7 @@ import { AngularFirestore } from 'angularfire2/firestore';
 
 import { TimerService } from './timer.service';
 
-import { TimerInfo } from '../models';
+import { TimerInfo } from '../../../shared/models';
 
 import { tracker } from '../../../test-helpers';
 

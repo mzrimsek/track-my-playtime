@@ -9,7 +9,7 @@ import { HistoryService } from '../services/history.service';
 import { TimerService } from '../services/timer.service';
 
 import * as appActions from '../../../actions/app.actions';
-import * as timerActions from '../actions/timer.actions';
+import * as timerActions from '../../../shared/actions/timer.actions';
 
 @Injectable()
 export class TimerEffects {

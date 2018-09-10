@@ -54,7 +54,7 @@ describe('Tracker Component', () => {
   });
 
   it('Should select timer info', () => {
-    expect(store.select).toHaveBeenCalledWith(fromTracker._selectTimerInfo);
+    expect(store.select).toHaveBeenCalledWith(fromShared._selectTimerInfo);
   });
 
   it('Should call ElaspedTimeService getElapsedTime', () => {

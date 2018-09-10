@@ -4,7 +4,7 @@ import { Actions, Effect } from '@ngrx/effects';
 
 import { map, mergeMap } from 'rxjs/operators';
 
-import * as timerActions from '../../../features/tracker/actions/timer.actions';
+import * as timerActions from '../../../shared/actions/timer.actions';
 import * as historyActions from '../../../shared/actions/history.actions';
 import * as platformsActions from '../../../shared/actions/platforms.actions';
 import * as progressActions from '../../../shared/actions/progress.actions';

@@ -10,8 +10,7 @@ import { ElapsedTimeService } from './services/elapsed-time.service';
 import sharedSelectors, { State as SharedState } from '../../shared/reducers/root.reducer';
 import trackerSelectors, { State as TrackerState } from './reducers/root.reducer';
 
-import { HistoryGrouping, NgSelectValue } from '../../shared/models';
-import { TimerInfo } from './models';
+import { HistoryGrouping, NgSelectValue, TimerInfo } from '../../shared/models';
 
 import { hasMoreToDisplay, takeFrom } from './utils/display.utils';
 
@@ -36,7 +35,7 @@ export class TrackerComponent implements OnInit {
     private elapsedTimeService: ElapsedTimeService) { }
 
   ngOnInit() {
-    this.timerInfo$ = this.trackerStore.select(trackerSelectors.timerInfo);
+    this.timerInfo$ = this.sharedStore.select(sharedSelectors.timerInfo);
     this.game$ = this.timerInfo$.pipe(map(info => info.game ? info.game : null));
     this.elapsedTime$ = this.elapsedTimeService.getElapsedTime('00:00:00');
 

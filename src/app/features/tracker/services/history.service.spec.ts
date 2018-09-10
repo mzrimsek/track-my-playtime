@@ -5,9 +5,9 @@ import { AngularFirestore } from 'angularfire2/firestore';
 import { FirestoreHistoryItem, HistoryService } from './history.service';
 
 import {
-    UpdateHistoryItemGamePayload, UpdateHistoryItemPlatformPayload, UpdateHistoryItemTimesPayload
+    AddTimerInfo, UpdateHistoryItemGamePayload, UpdateHistoryItemPlatformPayload,
+    UpdateHistoryItemTimesPayload
 } from '../../../shared/models';
-import { AddTimerInfo } from '../models';
 
 import { history } from '../../../test-helpers';
 
