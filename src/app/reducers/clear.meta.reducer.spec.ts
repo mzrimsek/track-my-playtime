@@ -13,9 +13,7 @@ import * as fromRoot from '../reducers/root.reducer';
 import * as fromShared from '../shared/reducers/root.reducer';
 import { clearState } from './clear.meta.reducer';
 
-import {
-    auth, completion, history, platforms, progress, routing, tracker, user
-} from '../test-helpers';
+import { auth, completion, history, platforms, progress, tracker, user } from '../test-helpers';
 
 describe('Clear Meta Reducer', () => {
   const action = new userActions.Logout();
@@ -161,7 +159,7 @@ describe('Clear Meta Reducer', () => {
         action: '',
         message: ''
       },
-      router: routing.initialRouterState
+      router: undefined
     });
   });
 
