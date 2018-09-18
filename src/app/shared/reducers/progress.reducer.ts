@@ -38,9 +38,6 @@ export function reducer(state: State = initialState, action: actions.All): State
     case actions.REMOVE_PROGRESS_ITEM_SUCCEEDED: {
       return adapter.removeOne(action.itemId, state);
     }
-    case actions.CLEAR_PROGRESS_ITEMS: {
-      return adapter.removeAll(state);
-    }
     case actions.MARK_COMPLETE_SUCCEEDED: {
       const { itemId: id, ...changes } = action.payload;
       return adapter.updateOne({

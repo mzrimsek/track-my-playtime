@@ -176,25 +176,4 @@ describe('History Reducer', () => {
       }
     });
   });
-
-  it('Should remove all items when ClearHistoryItems is dispatched', () => {
-    const item1 = history.getHistoryEntity('1');
-    const item2 = history.getHistoryEntity('2');
-    const initialState: State = {
-      ids: [item1.id, item2.id],
-      entities: {
-        [item1.id]: item1,
-        [item2.id]: item2
-      },
-      loading: false
-    };
-
-    const newState = reducer(initialState, new actions.ClearHistoryItems());
-
-    expect(newState).toEqual({
-      ids: [],
-      entities: {},
-      loading: false
-    });
-  });
 });

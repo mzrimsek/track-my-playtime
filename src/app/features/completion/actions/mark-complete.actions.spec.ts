@@ -70,11 +70,4 @@ describe('Mark Complete Actions', () => {
       expect(action.itemId).toBe('some new item id');
     });
   });
-
-  describe('ClearItems', () => {
-    it('Should have correct type', () => {
-      const action = new actions.ClearItems();
-      expect(action.type).toBe(actions.CLEAR_ITEMS);
-    });
-  });
 });

@@ -51,9 +51,6 @@ export function reducer(state: State = initialState, action: actions.All): State
     case actions.UPDATE_ELAPSED_TIME_SUCCEEDED: {
       return getUpdatedState(action.payload, state);
     }
-    case actions.CLEAR_HISTORY_ITEMS: {
-      return adapter.removeAll(state);
-    }
     default: {
       return state;
     }

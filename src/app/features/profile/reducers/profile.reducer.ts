@@ -22,9 +22,6 @@ export function reducer(state: State = initialState, action: actions.All): State
         displayName: action.displayName
       };
     }
-    case actions.CLEAR_PROFILE: {
-      return initialState;
-    }
     default: {
       return state;
     }

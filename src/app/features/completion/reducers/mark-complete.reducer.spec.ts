@@ -44,29 +44,6 @@ describe('Mark Complete Reducer', () => {
     });
   });
 
-  it('Should remove all items when ClearItems is dispatched', () => {
-    const initialState: State = {
-      ids: ['some item id', 'some item id 2'],
-      entities: {
-        ['some item id']: {
-          id: 'some item id',
-          showExtra: false,
-          endTime: 0
-        },
-        ['some item id 2']: {
-          id: 'some item id 2',
-          showExtra: true,
-          endTime: 10
-        }
-      }
-    };
-    const newState = reducer(initialState, new actions.ClearItems());
-    expect(newState).toEqual({
-      ids: [],
-      entities: {}
-    });
-  });
-
   it('Should remove item when Remove is dispatched', () => {
     const initialState: State = {
       ids: ['some item id', 'some item id 2'],
