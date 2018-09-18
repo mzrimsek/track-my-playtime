@@ -1,5 +1,3 @@
-import { tassign } from 'tassign';
-
 import * as actions from '../actions/timer.actions';
 
 export interface State {
@@ -20,16 +18,28 @@ export function reducer(state: State = initialState, action: actions.All): State
       return initialState;
     }
     case actions.SET_GAME: {
-      return tassign(state, { game: action.game });
+      return {
+        ...state,
+        game: action.game
+      };
     }
     case actions.SET_PLATFORM: {
-      return tassign(state, { platform: action.platform });
+      return {
+        ...state,
+        platform: action.platform
+      };
     }
     case actions.SET_START_TIME: {
-      return tassign(state, { startTime: action.startTime });
+      return {
+        ...state,
+        startTime: action.startTime
+      };
     }
     case actions.SET_TIMER_INFO: {
-      return tassign(state, action.info);
+      return {
+        ...state,
+        ...action.info
+      };
     }
     default: {
       return state;
