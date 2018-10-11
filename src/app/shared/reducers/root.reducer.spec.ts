@@ -93,10 +93,21 @@ describe('Shared Root Reducer', () => {
           },
           loading: false
         };
+        const progressState: ProgressState = {
+          ids: ['some id'],
+          entities: {
+            'some id': {
+              id: 'some id',
+              startEntryId: item1.id,
+              endEntryId: ''
+            }
+          },
+          loading: false
+        };
         const sharedState: SharedState = {
           history: historyState,
           platforms: platforms.initialPlatformsState,
-          progress: progress.initialProgressState,
+          progress: progressState,
           timer: tracker.initialTimerState
         };
         const state: State = { shared: sharedState };
@@ -109,7 +120,7 @@ describe('Shared Root Reducer', () => {
             item1Start,
             item1End
           ],
-          locked: false,
+          locked: true,
         }, {
           ...item2,
           dateRange: [
