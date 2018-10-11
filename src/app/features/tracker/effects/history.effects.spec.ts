@@ -11,7 +11,7 @@ import { HistoryService } from '../services/history.service';
 
 import * as appActions from '../../../actions/app.actions';
 import * as historyActions from '../../../shared/actions/history.actions';
-import * as timerActions from '../actions/timer.actions';
+import * as timerActions from '../../../shared/actions/timer.actions';
 
 import {
     UpdateHistoryItemGamePayload, UpdateHistoryItemPlatformPayload, UpdateHistoryItemTimesPayload

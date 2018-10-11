@@ -5,16 +5,6 @@ import { reducer, State } from './profile.reducer';
 import { Profile } from '../models';
 
 describe('Profile Reducer', () => {
-  it('Should clear profile info when ClearProfile is dispatched', () => {
-    const initialState: State = {
-      displayName: 'profile name'
-    };
-    const newState = reducer(initialState, new actions.ClearProfile());
-    expect(newState).toEqual({
-      displayName: ''
-    });
-  });
-
   it('Should set profile info when LoadProfileSucceeded is dispatched', () => {
     const initialState: State = {
       displayName: ''

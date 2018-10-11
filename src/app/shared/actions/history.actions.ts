@@ -72,12 +72,6 @@ export class UpdateElapsedTimeSucceeded implements Action {
   constructor(public payload: UpdateHistoryItemTimesPayload) { }
 }
 
-export const CLEAR_HISTORY_ITEMS = '[History] Clear Items';
-export class ClearHistoryItems implements Action {
-  readonly type = CLEAR_HISTORY_ITEMS;
-  constructor() { }
-}
-
 export type All = AddNewHistoryItem |
   LoadHistoryItems |
   LoadHistoryItemsSucceeded |
@@ -88,5 +82,4 @@ export type All = AddNewHistoryItem |
   UpdatePlatform |
   UpdatePlatformSucceeded |
   UpdateElapsedTime |
-  UpdateElapsedTimeSucceeded |
-  ClearHistoryItems;
+  UpdateElapsedTimeSucceeded;

@@ -23,7 +23,7 @@ import { ProfileComponent } from './features/profile/profile.component';
 import { TrackerComponent } from './features/tracker/tracker.component';
 
 import { UserService } from './features/auth/services/user.service';
-import { ElapsedTimeService } from './features/tracker/services/elapsed-time.service';
+import { ElapsedTimeService } from './shared/services/elapsed-time.service';
 
 import { TimePipe } from './shared/pipes/time.pipe';
 

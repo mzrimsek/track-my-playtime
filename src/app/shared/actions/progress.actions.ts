@@ -46,17 +46,10 @@ export class MarkCompleteSucceeded implements Action {
   constructor(public payload: MarkCompletePayload) { }
 }
 
-export const CLEAR_PROGRESS_ITEMS = '[Progress] Clear Items';
-export class ClearProgressItems implements Action {
-  readonly type = CLEAR_PROGRESS_ITEMS;
-  constructor() { }
-}
-
 export type All = AddNewProgressItem |
   LoadProgressItems |
   LoadProgressItemsSucceeded |
   RemoveProgressItem |
   RemoveProgressItemSucceeded |
   MarkComplete |
-  MarkCompleteSucceeded |
-  ClearProgressItems;
+  MarkCompleteSucceeded;

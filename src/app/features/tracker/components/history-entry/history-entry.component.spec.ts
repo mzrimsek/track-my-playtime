@@ -13,16 +13,15 @@ import { TimerService } from '../../services/timer.service';
 import { ElapsedTimePipe } from '../../../../shared/pipes/elapsed-time.pipe';
 
 import * as historyActions from '../../../../shared/actions/history.actions';
-import * as timerActions from '../../actions/timer.actions';
+import * as timerActions from '../../../../shared/actions/timer.actions';
 
 import * as fromRoot from '../../../../reducers/root.reducer';
 import * as fromTracker from '../../reducers/root.reducer';
 
 import {
-    HistoryListItem, UpdateHistoryItemGamePayload, UpdateHistoryItemPlatformPayload,
+    HistoryListItem, TimerInfo, UpdateHistoryItemGamePayload, UpdateHistoryItemPlatformPayload,
     UpdateHistoryItemTimesPayload
 } from '../../../../shared/models';
-import { TimerInfo } from '../../models';
 
 import { platforms, tracker, user } from '../../../../test-helpers';
 

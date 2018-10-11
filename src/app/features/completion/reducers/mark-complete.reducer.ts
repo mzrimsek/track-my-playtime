@@ -41,9 +41,6 @@ export function reducer(state: State = initialState, action: actions.All): State
       const items = action.itemIds.map(itemId => getMarkCompleteEntity(itemId));
       return adapter.addAll(items, state);
     }
-    case actions.CLEAR_ITEMS: {
-      return adapter.removeAll(state);
-    }
     default: {
       return state;
     }

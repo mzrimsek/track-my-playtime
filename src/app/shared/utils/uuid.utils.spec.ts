@@ -12,6 +12,6 @@ describe('UUID Utils', () => {
 });
 
 const generateUUIDs = (userId: string, amountToGenerate: number): string[] => {
-  const ids: number[] = [amountToGenerate];
+  const ids: number[] = new Array(amountToGenerate);
   return ids.map(i => getUUID(userId, i));
 };

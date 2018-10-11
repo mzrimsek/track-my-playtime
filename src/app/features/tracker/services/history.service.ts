@@ -7,9 +7,9 @@ import { first, map } from 'rxjs/operators';
 import { HistoryEntity } from '../../../shared/reducers/history.reducer';
 
 import {
-    UpdateHistoryItemGamePayload, UpdateHistoryItemPlatformPayload, UpdateHistoryItemTimesPayload
+    AddTimerInfo, UpdateHistoryItemGamePayload, UpdateHistoryItemPlatformPayload,
+    UpdateHistoryItemTimesPayload
 } from '../../../shared/models';
-import { AddTimerInfo } from '../models';
 
 import { getUUID } from '../../../shared/utils/uuid.utils';
 

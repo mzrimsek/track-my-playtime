@@ -6,12 +6,11 @@ import { Store } from '@ngrx/store';
 import { UserService } from '../../../auth/services/user.service';
 import { TimerService } from '../../services/timer.service';
 
-import * as timerActions from '../../actions/timer.actions';
+import * as timerActions from '../../../../shared/actions/timer.actions';
 
 import { State } from '../../reducers/root.reducer';
 
-import { HistoryListItem } from '../../../../shared/models';
-import { TimerInfo } from '../../models';
+import { HistoryListItem, TimerInfo } from '../../../../shared/models';
 
 @Component({
   selector: 'app-tracker-locked-history-entry',

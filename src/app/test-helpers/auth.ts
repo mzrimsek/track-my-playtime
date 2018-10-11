@@ -2,6 +2,8 @@ import { User as AuthUser } from '@firebase/auth-types';
 
 import { BehaviorSubject, Observable, of } from 'rxjs';
 
+import { State as StatusState } from '../features/auth/reducers/status.reducer';
+
 import { user } from './user';
 
 export namespace auth {
@@ -30,8 +32,8 @@ export namespace auth {
         .createSpy('createUserWithEmailAndPassword')
         .and
         .callFake(fakeSignInHandler),
-      signInAndRetrieveDataWithEmailAndPassword: jasmine
-        .createSpy('signInAndRetrieveDataWithEmailAndPassword')
+      signInWithEmailAndPassword: jasmine
+        .createSpy('signInWithEmailAndPassword')
         .and
         .callFake(fakeSignInHandler),
       sendPasswordResetEmail: jasmine
@@ -39,6 +41,11 @@ export namespace auth {
         .and
         .callFake(() => Promise.resolve())
     }
+  };
+
+  export const initialStatusState: StatusState = {
+    attemptingLogin: false,
+    validationMessage: ''
   };
 
   export class MockAuthService {
