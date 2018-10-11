@@ -8,7 +8,7 @@ import { TimerInfo } from '../../../shared/models';
 
 import { tracker } from '../../../test-helpers';
 
-fdescribe('Timer Service', () => {
+describe('Timer Service', () => {
   let service: TimerService;
   let afs: AngularFirestore;
 
