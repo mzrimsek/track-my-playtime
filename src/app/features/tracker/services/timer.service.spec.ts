@@ -8,7 +8,7 @@ import { TimerInfo } from '../../../shared/models';
 
 import { tracker } from '../../../test-helpers';
 
-describe('Timer Service', () => {
+fdescribe('Timer Service', () => {
   let service: TimerService;
   let afs: AngularFirestore;
 
@@ -125,6 +125,14 @@ describe('Timer Service', () => {
       result.subscribe(res => {
         expect(res).toEqual(tracker.firestore.testTimerItem);
       });
+    });
+  });
+
+  describe('getNowTime', () => {
+    it('Should return the current time', () => {
+      const nowTime = Math.floor(service.getNowTime() / 1000);
+      const now = Math.floor(new Date().getTime() / 1000);
+      expect(nowTime).toBe(now); // testing seconds
     });
   });
 });
