@@ -17,7 +17,10 @@ import { AdsenseModule } from 'ng2-adsense';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AuthModule } from './features/auth/auth.module';
+import { CompletionModule } from './features/completion/completion.module';
+import { DashboardModule } from './features/dashboard/dashboard.module';
 import { HomeModule } from './features/home/home.module';
+import { LibraryModule } from './features/library/library.module';
 import { ProfileModule } from './features/profile/profile.module';
 import { TrackerModule } from './features/tracker/tracker.module';
 import { SharedModule } from './shared/shared.module';
@@ -66,6 +69,9 @@ const metaReducers: MetaReducer<any>[] = [clearState];
     EffectsModule.forRoot([]),
     HomeModule,
     TrackerModule,
+    DashboardModule,
+    LibraryModule,
+    CompletionModule,
     ProfileModule
   ],
   providers: [
