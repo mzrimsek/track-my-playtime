@@ -1,7 +1,5 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 
-import { tassign } from 'tassign';
-
 import * as actions from '../actions/progress.actions';
 
 export interface ProgressEntity {
@@ -25,17 +23,20 @@ export function reducer(state: State = initialState, action: actions.All): State
       return adapter.addOne(action.item, state);
     }
     case actions.LOAD_PROGRESS_ITEMS: {
-      return tassign(state, { loading: true });
+      return {
+        ...state,
+        loading: true
+      };
     }
     case actions.LOAD_PROGRESS_ITEMS_SUCCEEDED: {
       const newState = adapter.addAll(action.items, state);
-      return tassign(newState, { loading: false });
+      return {
+        ...newState,
+        loading: false
+      };
     }
     case actions.REMOVE_PROGRESS_ITEM_SUCCEEDED: {
       return adapter.removeOne(action.itemId, state);
-    }
-    case actions.CLEAR_PROGRESS_ITEMS: {
-      return adapter.removeAll(state);
     }
     case actions.MARK_COMPLETE_SUCCEEDED: {
       const { itemId: id, ...changes } = action.payload;

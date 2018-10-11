@@ -24,8 +24,8 @@ import { HistoryEffects } from './effects/history.effects';
 import { PlatformsEffects } from './effects/platforms.effects';
 import { TimerEffects } from './effects/timer.effects';
 
+import { ElapsedTimeService } from '../../shared/services/elapsed-time.service';
 import { UserService } from '../auth/services/user.service';
-import { ElapsedTimeService } from './services/elapsed-time.service';
 import { HistoryService } from './services/history.service';
 import { PlatformsService } from './services/platforms.service';
 import { TimerService } from './services/timer.service';
@@ -40,11 +40,28 @@ import { reducers } from './reducers/root.reducer';
     FormsModule,
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
+    SharedModule,
     StoreModule.forFeature('tracker', reducers),
-    EffectsModule.forFeature([TimerEffects, HistoryEffects, PlatformsEffects]),
-    SharedModule
+    EffectsModule.forFeature([
+      TimerEffects,
+      HistoryEffects,
+      PlatformsEffects
+    ]),
   ],
-  declarations: [TrackerComponent, TimerComponent, HistoryComponent, HistoryEntryComponent, LoadMoreComponent, LockedHistoryEntryComponent],
-  providers: [HistoryService, PlatformsService, UserService, TimerService, ElapsedTimeService]
+  declarations: [
+    TrackerComponent,
+    TimerComponent,
+    HistoryComponent,
+    HistoryEntryComponent,
+    LoadMoreComponent,
+    LockedHistoryEntryComponent
+  ],
+  providers: [
+    HistoryService,
+    PlatformsService,
+    UserService,
+    TimerService,
+    ElapsedTimeService
+  ]
 })
 export class TrackerModule { }

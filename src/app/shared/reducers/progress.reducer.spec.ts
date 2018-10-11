@@ -112,23 +112,4 @@ describe('Progress Reducer', () => {
       }
     });
   });
-
-  it('Should update correct item endEntryId when MarkCompleteSuccessful is dispatched ', () => {
-    const item1 = progress.getProgressEntity('1');
-    const item2 = progress.getProgressEntity('2', 'some end entry id');
-    const initialState: State = {
-      ids: [item1.id, item2.id],
-      entities: {
-        [item1.id]: item1,
-        [item2.id]: item2
-      },
-      loading: false
-    };
-    const newState = reducer(initialState, new actions.ClearProgressItems());
-    expect(newState).toEqual({
-      ids: [],
-      entities: {},
-      loading: false
-    });
-  });
 });

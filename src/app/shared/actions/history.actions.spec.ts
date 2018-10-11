@@ -263,11 +263,4 @@ describe('History Actions', () => {
       expect(action.payload).toEqual(payload);
     });
   });
-
-  describe('ClearHistoryItems', () => {
-    it('Should have correct type', () => {
-      const action = new actions.ClearHistoryItems();
-      expect(action.type).toBe(actions.CLEAR_HISTORY_ITEMS);
-    });
-  });
 });

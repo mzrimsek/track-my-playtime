@@ -14,12 +14,6 @@ export class LoadProfileSucceeded implements Action {
   constructor(public profile: Profile) { }
 }
 
-export const CLEAR_PROFILE = '[Profile] Clear Profile';
-export class ClearProfile implements Action {
-  readonly type = CLEAR_PROFILE;
-  constructor() { }
-}
-
 export const SET_PROFILE_DISPLAYNAME = '[Profile] Set DisplayName';
 export class SetProfileDisplayName implements Action {
   readonly type = SET_PROFILE_DISPLAYNAME;
@@ -34,6 +28,5 @@ export class SetProfileDisplayNameSucceeded implements Action {
 
 export type All = LoadProfile |
   LoadProfileSucceeded |
-  ClearProfile |
   SetProfileDisplayName |
   SetProfileDisplayNameSucceeded;

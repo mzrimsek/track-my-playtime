@@ -30,15 +30,8 @@ export class AddNewItem implements Action {
   constructor(public itemId: string) { }
 }
 
-export const CLEAR_ITEMS = '[Mark Complete] Clear Items';
-export class ClearItems implements Action {
-  readonly type = CLEAR_ITEMS;
-  constructor() { }
-}
-
 export type All = SetShowExtra |
   SetEndTime |
   Remove |
   LoadItems |
-  AddNewItem |
-  ClearItems;
+  AddNewItem;

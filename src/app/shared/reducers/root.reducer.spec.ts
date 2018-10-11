@@ -1,25 +1,29 @@
 import { addDays, addHours } from 'date-fns';
 
-import { State as PlatformsState } from '../reducers/platforms.reducer';
 import { HistoryEntity, State as HistoryState } from './history.reducer';
 import { State as ProgressState } from './progress.reducer';
 import {
     _selectCompletedProgress, _selectHistoryGroupingsByDate, _selectHistoryGroupingsByGame,
     _selectHistoryGroupingsByPlatform, _selectHistoryItems, _selectHistoryLoading,
     _selectPlatformsLoaded, _selectPlatformsOptions, _selectPlayingProgress,
-    _selectSortedHistoryItems, _selectTrackedGames, _selectUserDataLoaded, SharedState, State
+    _selectSortedHistoryItems, _selectTimerInfo, _selectTrackedGames, _selectUserDataLoaded,
+    SharedState, State
 } from './root.reducer';
+import { State as TimerState } from './timer.reducer';
 
 import { formatDate } from '../utils/date.utils';
+
+import { history, platforms, progress, tracker } from '../../test-helpers';
 
 describe('Shared Root Reducer', () => {
   describe('History State Selectors', () => {
     describe('_selectHistoryItems', () => {
       it('Should return an empty list when there are no items', () => {
         const sharedState: SharedState = {
-          history: initialHistoryState,
-          platforms: initialPlatformsState,
-          progress: initialProgressState
+          history: history.initialHistoryState,
+          platforms: platforms.initialPlatformsState,
+          progress: progress.initialProgressState,
+          timer: tracker.initialTimerState
         };
         const state: State = { shared: sharedState };
 
@@ -29,7 +33,7 @@ describe('Shared Root Reducer', () => {
       });
 
       it('Should return a list with the same length as the items', () => {
-        const history: HistoryState = {
+        const historyState: HistoryState = {
           ids: ['1', '2'],
           entities: {
             '1': {
@@ -50,15 +54,16 @@ describe('Shared Root Reducer', () => {
           loading: false
         };
         const sharedState: SharedState = {
-          history,
-          platforms: initialPlatformsState,
-          progress: initialProgressState
+          history: historyState,
+          platforms: platforms.initialPlatformsState,
+          progress: progress.initialProgressState,
+          timer: tracker.initialTimerState
         };
         const state: State = { shared: sharedState };
 
         const result = _selectHistoryItems(state);
 
-        expect(result.length).toBe(history.ids.length);
+        expect(result.length).toBe(historyState.ids.length);
       });
 
       it('Should return a correctly mapped list', () => {
@@ -80,7 +85,7 @@ describe('Shared Root Reducer', () => {
           startTime: item2Start.getTime(),
           endTime: item2End.getTime()
         };
-        const history: HistoryState = {
+        const historyState: HistoryState = {
           ids: [item1.id, item2.id],
           entities: {
             [item1.id]: item1,
@@ -88,10 +93,22 @@ describe('Shared Root Reducer', () => {
           },
           loading: false
         };
+        const progressState: ProgressState = {
+          ids: ['some id'],
+          entities: {
+            'some id': {
+              id: 'some id',
+              startEntryId: item1.id,
+              endEntryId: ''
+            }
+          },
+          loading: false
+        };
         const sharedState: SharedState = {
-          history,
-          platforms: initialPlatformsState,
-          progress: initialProgressState
+          history: historyState,
+          platforms: platforms.initialPlatformsState,
+          progress: progressState,
+          timer: tracker.initialTimerState
         };
         const state: State = { shared: sharedState };
 
@@ -103,7 +120,7 @@ describe('Shared Root Reducer', () => {
             item1Start,
             item1End
           ],
-          locked: false,
+          locked: true,
         }, {
           ...item2,
           dateRange: [
@@ -132,7 +149,7 @@ describe('Shared Root Reducer', () => {
           startTime: startTime + 2000,
           endTime: startTime + 2500
         };
-        const history: HistoryState = {
+        const historyState: HistoryState = {
           ids: [item1.id, item2.id],
           entities: {
             [item1.id]: item1,
@@ -141,9 +158,10 @@ describe('Shared Root Reducer', () => {
           loading: false
         };
         const sharedState: SharedState = {
-          history,
-          platforms: initialPlatformsState,
-          progress: initialProgressState
+          history: historyState,
+          platforms: platforms.initialPlatformsState,
+          progress: progress.initialProgressState,
+          timer: tracker.initialTimerState
         };
         const state: State = { shared: sharedState };
 
@@ -191,7 +209,7 @@ describe('Shared Root Reducer', () => {
           startTime: addDays(startDate, 1).getTime(),
           endTime: addDays(startDate, 1).getTime()
         };
-        const history: HistoryState = {
+        const historyState: HistoryState = {
           ids: [item1.id, item2.id, item3.id],
           entities: {
             [item1.id]: item1,
@@ -201,9 +219,10 @@ describe('Shared Root Reducer', () => {
           loading: false
         };
         const sharedState: SharedState = {
-          history,
-          platforms: initialPlatformsState,
-          progress: initialProgressState
+          history: historyState,
+          platforms: platforms.initialPlatformsState,
+          progress: progress.initialProgressState,
+          timer: tracker.initialTimerState
         };
         const state: State = { shared: sharedState };
 
@@ -266,7 +285,7 @@ describe('Shared Root Reducer', () => {
           startTime: 2000,
           endTime: 2000
         };
-        const history: HistoryState = {
+        const historyState: HistoryState = {
           ids: [item1.id, item2.id, item3.id],
           entities: {
             [item1.id]: item1,
@@ -276,9 +295,10 @@ describe('Shared Root Reducer', () => {
           loading: false
         };
         const sharedState: SharedState = {
-          history,
-          platforms: initialPlatformsState,
-          progress: initialProgressState
+          history: historyState,
+          platforms: platforms.initialPlatformsState,
+          progress: progress.initialProgressState,
+          timer: tracker.initialTimerState
         };
         const state: State = { shared: sharedState };
 
@@ -341,7 +361,7 @@ describe('Shared Root Reducer', () => {
           startTime: 2000,
           endTime: 2000
         };
-        const history: HistoryState = {
+        const historyState: HistoryState = {
           ids: [item1.id, item2.id, item3.id],
           entities: {
             [item1.id]: item1,
@@ -351,9 +371,10 @@ describe('Shared Root Reducer', () => {
           loading: false
         };
         const sharedState: SharedState = {
-          history,
-          platforms: initialPlatformsState,
-          progress: initialProgressState
+          history: historyState,
+          platforms: platforms.initialPlatformsState,
+          progress: progress.initialProgressState,
+          timer: tracker.initialTimerState
         };
         const state: State = { shared: sharedState };
 
@@ -396,11 +417,12 @@ describe('Shared Root Reducer', () => {
       it('Should return true if loading is true', () => {
         const sharedState: SharedState = {
           history: {
-            ...initialHistoryState,
+            ...history.initialHistoryState,
             loading: true
           },
-          platforms: initialPlatformsState,
-          progress: initialProgressState
+          platforms: platforms.initialPlatformsState,
+          progress: progress.initialProgressState,
+          timer: tracker.initialTimerState
         };
         const state: State = { shared: sharedState };
 
@@ -411,9 +433,10 @@ describe('Shared Root Reducer', () => {
 
       it('Should return false if loading is false', () => {
         const sharedState: SharedState = {
-          history: initialHistoryState,
-          platforms: initialPlatformsState,
-          progress: initialProgressState
+          history: history.initialHistoryState,
+          platforms: platforms.initialPlatformsState,
+          progress: progress.initialProgressState,
+          timer: tracker.initialTimerState
         };
         const state: State = { shared: sharedState };
 
@@ -446,7 +469,7 @@ describe('Shared Root Reducer', () => {
           startTime: 4000,
           endTime: 4500
         };
-        const history: HistoryState = {
+        const historyState: HistoryState = {
           ids: [item1.id, item2.id, item3.id],
           entities: {
             [item1.id]: item1,
@@ -456,9 +479,10 @@ describe('Shared Root Reducer', () => {
           loading: false
         };
         const sharedState: SharedState = {
-          history,
-          platforms: initialPlatformsState,
-          progress: initialProgressState
+          history: historyState,
+          platforms: platforms.initialPlatformsState,
+          progress: progress.initialProgressState,
+          timer: tracker.initialTimerState
         };
         const state: State = { shared: sharedState };
 
@@ -474,11 +498,12 @@ describe('Shared Root Reducer', () => {
       it('Should return the platforms options', () => {
         const options = ['Game Box 720', 'Nipkendo Scratch', 'Dudestation 69'];
         const sharedState: SharedState = {
-          history: initialHistoryState,
+          history: history.initialHistoryState,
           platforms: {
             options
           },
-          progress: initialProgressState
+          progress: progress.initialProgressState,
+          timer: tracker.initialTimerState
         };
         const state: State = { shared: sharedState };
 
@@ -491,11 +516,12 @@ describe('Shared Root Reducer', () => {
     describe('_selectPlatformsLoaded', () => {
       it('Should return false when no platforms options', () => {
         const sharedState: SharedState = {
-          history: initialHistoryState,
+          history: history.initialHistoryState,
           platforms: {
             options: []
           },
-          progress: initialProgressState
+          progress: progress.initialProgressState,
+          timer: tracker.initialTimerState
         };
         const state: State = { shared: sharedState };
 
@@ -506,11 +532,12 @@ describe('Shared Root Reducer', () => {
 
       it('Should return true when there are platforms options', () => {
         const sharedState: SharedState = {
-          history: initialHistoryState,
+          history: history.initialHistoryState,
           platforms: {
             options: ['Game Box 720', 'Nipkendo Scratch', 'Dudestation 69']
           },
-          progress: initialProgressState
+          progress: progress.initialProgressState,
+          timer: tracker.initialTimerState
         };
         const state: State = { shared: sharedState };
 
@@ -525,9 +552,10 @@ describe('Shared Root Reducer', () => {
     describe('_selectPlayingProgress', () => {
       it('Should return an empty list when there are no items', () => {
         const sharedState: SharedState = {
-          history: initialHistoryState,
-          platforms: initialPlatformsState,
-          progress: initialProgressState
+          history: history.initialHistoryState,
+          platforms: platforms.initialPlatformsState,
+          progress: progress.initialProgressState,
+          timer: tracker.initialTimerState
         };
         const state: State = { shared: sharedState };
 
@@ -537,7 +565,7 @@ describe('Shared Root Reducer', () => {
       });
 
       it('Should return an empty list when all have end entry ids', () => {
-        const progress: ProgressState = {
+        const progressState: ProgressState = {
           ids: ['1', '2'],
           entities: {
             '1': {
@@ -554,9 +582,10 @@ describe('Shared Root Reducer', () => {
           loading: false
         };
         const sharedState: SharedState = {
-          history: initialHistoryState,
-          platforms: initialPlatformsState,
-          progress
+          history: history.initialHistoryState,
+          platforms: platforms.initialPlatformsState,
+          progress: progressState,
+          timer: tracker.initialTimerState
         };
         const state: State = { shared: sharedState };
 
@@ -566,7 +595,7 @@ describe('Shared Root Reducer', () => {
       });
 
       it('Should return correct items', () => {
-        const progress: ProgressState = {
+        const progressState: ProgressState = {
           ids: ['1', '2'],
           entities: {
             '1': {
@@ -583,9 +612,10 @@ describe('Shared Root Reducer', () => {
           loading: false
         };
         const sharedState: SharedState = {
-          history: initialHistoryState,
-          platforms: initialPlatformsState,
-          progress
+          history: history.initialHistoryState,
+          platforms: platforms.initialPlatformsState,
+          progress: progressState,
+          timer: tracker.initialTimerState
         };
         const state: State = { shared: sharedState };
 
@@ -602,9 +632,10 @@ describe('Shared Root Reducer', () => {
     describe('_selectCompletedProgress', () => {
       it('Should return an empty list when there are no items', () => {
         const sharedState: SharedState = {
-          history: initialHistoryState,
-          platforms: initialPlatformsState,
-          progress: initialProgressState
+          history: history.initialHistoryState,
+          platforms: platforms.initialPlatformsState,
+          progress: progress.initialProgressState,
+          timer: tracker.initialTimerState
         };
         const state: State = { shared: sharedState };
 
@@ -614,7 +645,7 @@ describe('Shared Root Reducer', () => {
       });
 
       it('Should return an empty list when none have end entry ids', () => {
-        const progress: ProgressState = {
+        const progressState: ProgressState = {
           ids: ['1', '2'],
           entities: {
             '1': {
@@ -631,9 +662,10 @@ describe('Shared Root Reducer', () => {
           loading: false
         };
         const sharedState: SharedState = {
-          history: initialHistoryState,
-          platforms: initialPlatformsState,
-          progress
+          history: history.initialHistoryState,
+          platforms: platforms.initialPlatformsState,
+          progress: progressState,
+          timer: tracker.initialTimerState
         };
         const state: State = { shared: sharedState };
 
@@ -643,7 +675,7 @@ describe('Shared Root Reducer', () => {
       });
 
       it('Should return correct items', () => {
-        const progress: ProgressState = {
+        const progressState: ProgressState = {
           ids: ['1', '2'],
           entities: {
             '1': {
@@ -660,9 +692,10 @@ describe('Shared Root Reducer', () => {
           loading: false
         };
         const sharedState: SharedState = {
-          history: initialHistoryState,
-          platforms: initialPlatformsState,
-          progress
+          history: history.initialHistoryState,
+          platforms: platforms.initialPlatformsState,
+          progress: progressState,
+          timer: tracker.initialTimerState
         };
         const state: State = { shared: sharedState };
 
@@ -677,21 +710,45 @@ describe('Shared Root Reducer', () => {
     });
   });
 
+  describe('Timer State Selectors', () => {
+    describe('_selectTimerInfo', () => {
+      it('Should return the timer info', () => {
+        const timer: TimerState = {
+          game: 'some cool game',
+          platform: 'some awesome platform',
+          startTime: 1523563
+        };
+        const sharedState: SharedState = {
+          timer,
+          history: history.initialHistoryState,
+          platforms: platforms.initialPlatformsState,
+          progress: progress.initialProgressState
+        };
+        const state: State = { shared: sharedState };
+
+        const result = _selectTimerInfo(state);
+
+        expect(result).toEqual(timer);
+      });
+    });
+  });
+
   describe('Combined State Selectors', () => {
     describe('_selectUserDataLoaded', () => {
       it('Should return false when history is not loaded', () => {
         const sharedState: SharedState = {
           history: {
-            ...initialHistoryState,
+            ...history.initialHistoryState,
             loading: true
           },
           platforms: {
             options: ['platform 1', 'platform 2']
           },
           progress: {
-            ...initialProgressState,
+            ...progress.initialProgressState,
             loading: false
-          }
+          },
+          timer: tracker.initialTimerState
         };
         const state: State = { shared: sharedState };
 
@@ -703,16 +760,17 @@ describe('Shared Root Reducer', () => {
       it('Should return false when progress is not loaded', () => {
         const sharedState: SharedState = {
           history: {
-            ...initialHistoryState,
+            ...history.initialHistoryState,
             loading: false
           },
           platforms: {
             options: ['platform 1', 'platform 2']
           },
           progress: {
-            ...initialProgressState,
+            ...progress.initialProgressState,
             loading: true
-          }
+          },
+          timer: tracker.initialTimerState
         };
         const state: State = { shared: sharedState };
 
@@ -724,16 +782,17 @@ describe('Shared Root Reducer', () => {
       it('Should return false when platforms are not loaded', () => {
         const sharedState: SharedState = {
           history: {
-            ...initialHistoryState,
+            ...history.initialHistoryState,
             loading: false
           },
           platforms: {
             options: []
           },
           progress: {
-            ...initialProgressState,
+            ...progress.initialProgressState,
             loading: false
-          }
+          },
+          timer: tracker.initialTimerState
         };
         const state: State = { shared: sharedState };
 
@@ -745,16 +804,17 @@ describe('Shared Root Reducer', () => {
       it('Should return true when all data is loaded', () => {
         const sharedState: SharedState = {
           history: {
-            ...initialHistoryState,
+            ...history.initialHistoryState,
             loading: false
           },
           platforms: {
             options: ['platform 1', 'platform 2']
           },
           progress: {
-            ...initialProgressState,
+            ...progress.initialProgressState,
             loading: false
-          }
+          },
+          timer: tracker.initialTimerState
         };
         const state: State = { shared: sharedState };
 
@@ -766,18 +826,4 @@ describe('Shared Root Reducer', () => {
   });
 });
 
-const initialHistoryState: HistoryState = {
-  ids: [],
-  entities: {},
-  loading: false
-};
 
-const initialPlatformsState: PlatformsState = {
-  options: []
-};
-
-const initialProgressState: ProgressState = {
-  ids: [],
-  entities: {},
-  loading: false
-};

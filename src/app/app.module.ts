@@ -1,4 +1,3 @@
-import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -6,7 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { EffectsModule } from '@ngrx/effects';
 import { RouterStateSerializer, StoreRouterConnectingModule } from '@ngrx/router-store';
-import { StoreModule } from '@ngrx/store';
+import { MetaReducer, StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { AngularFireModule } from 'angularfire2';
@@ -30,11 +29,16 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { NavComponent } from './components/nav/nav.component';
 
+import { ElapsedTimeService } from './shared/services/elapsed-time.service';
+
 import { AuthGuard } from './features/auth/guards/auth.guard';
 
+import { clearState } from './reducers/clear.meta.reducer';
 import { CustomRouterStateSerializer, reducers } from './reducers/root.reducer';
 
 import { environment } from '../environments/environment';
+
+const metaReducers: MetaReducer<any>[] = [clearState];
 
 @NgModule({
   declarations: [
@@ -47,8 +51,8 @@ import { environment } from '../environments/environment';
     BrowserAnimationsModule,
     FontAwesomeModule,
     AppRoutingModule,
+    AuthModule,
     SharedModule,
-    HttpClientModule,
     Angulartics2Module.forRoot([Angulartics2GoogleTagManager]),
     AngularFireModule.initializeApp(environment.firebase),
     AdsenseModule.forRoot({
@@ -57,23 +61,24 @@ import { environment } from '../environments/environment';
     }),
     AngularFireAuthModule,
     AngularFirestoreModule,
-    StoreModule.forRoot(reducers),
+    StoreModule.forRoot(reducers, { metaReducers }),
     StoreRouterConnectingModule.forRoot({
       stateKey: 'router'
     }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     EffectsModule.forRoot([]),
     HomeModule,
-    AuthModule,
     TrackerModule,
     DashboardModule,
     LibraryModule,
     CompletionModule,
     ProfileModule
   ],
-  providers: [{
-    provide: RouterStateSerializer, useClass: CustomRouterStateSerializer
-  }, AuthGuard],
+  providers: [
+    { provide: RouterStateSerializer, useClass: CustomRouterStateSerializer },
+    AuthGuard,
+    ElapsedTimeService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

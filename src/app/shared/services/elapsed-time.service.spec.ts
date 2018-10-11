@@ -8,10 +8,10 @@ import { ElapsedTimeService } from './elapsed-time.service';
 
 import * as actions from '../actions/timer.actions';
 
-import * as fromRoot from '../../../reducers/root.reducer';
-import * as fromTracker from '../reducers/root.reducer';
+import * as fromRoot from '../../reducers/root.reducer';
+import * as fromShared from '../reducers/root.reducer';
 
-import { tracker } from '../../../test-helpers';
+import { tracker } from '../../test-helpers';
 
 describe('ElapsedTimeService', () => {
   let service: ElapsedTimeService;
@@ -23,7 +23,7 @@ describe('ElapsedTimeService', () => {
       imports: [
         StoreModule.forRoot({
           ...fromRoot.reducers,
-          'tracker': combineReducers(fromTracker.reducers)
+          'shared': combineReducers(fromShared.reducers)
         })
       ]
     });
@@ -51,7 +51,7 @@ describe('ElapsedTimeService', () => {
 
     it('Should select timerInfo', () => {
       service.getElapsedTime(inactiveValue);
-      expect(store.select).toHaveBeenCalledWith(fromTracker._selectTimerInfo);
+      expect(store.select).toHaveBeenCalledWith(fromShared._selectTimerInfo);
     });
 
     it('Should return inactiveValue when timer is not active', () => {
