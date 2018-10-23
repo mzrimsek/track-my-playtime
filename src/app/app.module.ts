@@ -13,7 +13,6 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { Angulartics2Module } from 'angulartics2';
 import { Angulartics2GoogleTagManager } from 'angulartics2/gtm';
-import { AdsenseModule } from 'ng2-adsense';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AuthModule } from './features/auth/auth.module';
@@ -55,10 +54,6 @@ const metaReducers: MetaReducer<any>[] = [clearState];
     SharedModule,
     Angulartics2Module.forRoot([Angulartics2GoogleTagManager]),
     AngularFireModule.initializeApp(environment.firebase),
-    AdsenseModule.forRoot({
-      adClient: environment.adsense.client,
-      adSlot: environment.adsense.navAdSlot
-    }),
     AngularFireAuthModule,
     AngularFirestoreModule,
     StoreModule.forRoot(reducers, { metaReducers }),
