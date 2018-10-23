@@ -5,7 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { EffectsModule } from '@ngrx/effects';
 import { RouterStateSerializer, StoreRouterConnectingModule } from '@ngrx/router-store';
-import { MetaReducer, StoreModule } from '@ngrx/store';
+import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { AngularFireModule } from 'angularfire2';
@@ -32,12 +32,10 @@ import { ElapsedTimeService } from './shared/services/elapsed-time.service';
 
 import { AuthGuard } from './features/auth/guards/auth.guard';
 
-import { clearState } from './reducers/clear.meta.reducer';
+import { metaReducers } from './meta.reducers';
 import { CustomRouterStateSerializer, reducers } from './reducers/root.reducer';
 
 import { environment } from '../environments/environment';
-
-const metaReducers: MetaReducer<any>[] = [clearState];
 
 @NgModule({
   declarations: [
