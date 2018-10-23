@@ -18,12 +18,29 @@
       text-align: center;
       text-shadow: -1px -1px 1px #fff, 1px 1px 1px #000;
     }
+
+    .about {
+      display: flex;
+      justify-content: space-evenly;
+      margin-top: 50px;
+
+      .column {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 30%;
+        padding: 10px;
+
+        h1 {
+          text-transform: uppercase;
+          width: 80%;
+          text-align: center;
+        }
+      }
+    }
   }
 
-  .about {
-    background: $background-dark-accent;
-    display: flex;
-  }
+
 }
 
 @media only screen  and (max-width : $small-breakpoint) {
@@ -31,6 +48,10 @@
     .tagline {
       width: 100%;
       font-size: 2em;
+    }
+
+    .about {
+      flex-direction: column;
     }
   }
 }
