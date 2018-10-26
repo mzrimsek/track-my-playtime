@@ -12,7 +12,8 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "update": "ng update -all",
-    "compodoc": "./node_modules/.bin/compodoc -p src/tsconfig.app.json"
+    "compodoc-generate": "./node_modules/.bin/compodoc -p src/tsconfig.app.json -d docs",
+    "compodoc-serve": "./node_modules/.bin/compodoc -s"
   },
   "private": true,
   "dependencies": {
