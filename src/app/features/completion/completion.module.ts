@@ -8,7 +8,6 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
 import { SharedModule } from '../../shared/shared.module';
-import { CompletionRoutingModule } from './completion-routing.module';
 
 import { CompletionComponent } from './completion.component';
 import { AddPlayingComponent } from './components/add-playing/add-playing.component';
@@ -33,7 +32,6 @@ import { reducers } from './reducers/root.reducer';
     NgSelectModule,
     FormsModule,
     SharedModule,
-    CompletionRoutingModule,
     StoreModule.forFeature('completion', reducers),
     EffectsModule.forFeature([
       AddPlayingEffects,

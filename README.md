@@ -3,9 +3,11 @@
 [![Build Status](https://travis-ci.org/mzrimsek/track-my-playtime.svg?branch=master)](https://travis-ci.org/mzrimsek/track-my-playtime)
 [![Coverage Status](https://coveralls.io/repos/github/mzrimsek/track-my-playtime/badge.svg?branch=master)](https://coveralls.io/github/mzrimsek/track-my-playtime?branch=master)
 
-![TrackMyPlaytime Logo](./src/assets/blk_512x_v2.png)
+![TrackMyPlaytime Logo](https://trackmyplaytime.com/assets/blk_512x_v2.png)
 
 A time tracker app specific to video games.
+
+Detailed information on the application structure can be found here: https://mzrimsek.github.io/track-my-playtime/
 
 ## Technologies
 
