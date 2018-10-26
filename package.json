@@ -13,7 +13,7 @@
     "e2e": "ng e2e",
     "update": "ng update -all",
     "compodoc-generate": "./node_modules/.bin/compodoc -p src/tsconfig.app.json -d docs",
-    "compodoc-serve": "./node_modules/.bin/compodoc -s"
+    "compodoc-serve": "./node_modules/.bin/compodoc -s -d docs"
   },
   "private": true,
   "dependencies": {
