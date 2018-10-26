@@ -5,7 +5,6 @@ import { StoreModule } from '@ngrx/store';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 import { SharedModule } from '../../shared/shared.module';
-import { DashboardRoutingModule } from './dashboard-routing.module';
 
 import { GraphTooltipComponent } from './components/graph-tooltip/graph-tooltip.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -23,7 +22,6 @@ import { reducers } from './reducers/root.reducer';
     CommonModule,
     NgxChartsModule,
     SharedModule,
-    DashboardRoutingModule,
     StoreModule.forFeature('dashboard', reducers),
   ],
   declarations: [
