@@ -1,3 +1,7 @@
+import { State as AddPlayingState } from '../features/completion/reducers/add-playing.reducer';
+import { State as MarkCompleteState } from '../features/completion/reducers/mark-complete.reducer';
+import { State as TabState } from '../features/completion/reducers/tab.reducer';
+
 import { PlayingDisplayData } from '../features/completion/models';
 
 export namespace completion {
@@ -23,5 +27,20 @@ export namespace completion {
       showExtra: false,
       endTime: 0
     }
+  };
+
+  export const initialAddPlayingState: AddPlayingState = {
+    game: '',
+    platform: '',
+    startTime: 0
+  };
+
+  export const initialMarkCompleteState: MarkCompleteState = {
+    ids: [],
+    entities: {}
+  };
+
+  export const initialTabState: TabState = {
+    tab: 'PLAYING'
   };
 }

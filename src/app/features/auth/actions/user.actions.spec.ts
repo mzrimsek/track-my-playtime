@@ -108,4 +108,11 @@ describe('User Actions', () => {
       expect(action.email).toBe('email');
     });
   });
+
+  describe('Logout', () => {
+    it('Should have correct type', () => {
+      const action = new actions.Logout();
+      expect(action.type).toBe(actions.LOGOUT);
+    });
+  });
 });

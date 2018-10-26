@@ -13,6 +13,7 @@ import { CompletionComponent } from './completion.component';
 import { AddPlayingComponent } from './components/add-playing/add-playing.component';
 import { CompletedItemComponent } from './components/completed-item/completed-item.component';
 import { PlayingItemComponent } from './components/playing-item/playing-item.component';
+import { TabsComponent } from './components/tabs/tabs.component';
 
 import { AddPlayingEffects } from './effects/add-playing.effects';
 import { ProgressEffects } from './effects/progress.effects';
@@ -23,7 +24,6 @@ import { ProgressService } from './services/progress.service';
 import { TimePipe } from '../../shared/pipes/time.pipe';
 
 import { reducers } from './reducers/root.reducer';
-import { TabsComponent } from './components/tabs/tabs.component';
 
 @NgModule({
   imports: [
@@ -31,9 +31,12 @@ import { TabsComponent } from './components/tabs/tabs.component';
     FontAwesomeModule,
     NgSelectModule,
     FormsModule,
+    SharedModule,
     StoreModule.forFeature('completion', reducers),
-    EffectsModule.forFeature([AddPlayingEffects, ProgressEffects]),
-    SharedModule
+    EffectsModule.forFeature([
+      AddPlayingEffects,
+      ProgressEffects
+    ])
   ],
   declarations: [
     CompletionComponent,
@@ -41,6 +44,10 @@ import { TabsComponent } from './components/tabs/tabs.component';
     PlayingItemComponent,
     CompletedItemComponent,
     TabsComponent],
-  providers: [UserService, ProgressService, TimePipe]
+  providers: [
+    UserService,
+    ProgressService,
+    TimePipe
+  ]
 })
 export class CompletionModule { }

@@ -30,9 +30,18 @@ import { FormsModule, ReactiveFormsModule } from '../../../../node_modules/@angu
     ReactiveFormsModule,
     AuthRoutingModule,
     StoreModule.forFeature('auth', reducers),
-    EffectsModule.forFeature([UserEffects, AuthEffects, StatusEffects])
+    EffectsModule.forFeature([
+      UserEffects,
+      AuthEffects,
+      StatusEffects
+    ])
   ],
-  declarations: [LoginComponent, RegisterComponent, AuthFormComponent, ForgotPasswordComponent],
+  declarations: [
+    LoginComponent,
+    RegisterComponent,
+    AuthFormComponent,
+    ForgotPasswordComponent
+  ],
   providers: [AuthService]
 })
 export class AuthModule { }

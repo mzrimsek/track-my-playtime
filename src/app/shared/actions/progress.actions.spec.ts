@@ -135,11 +135,4 @@ describe('Progress Actions', () => {
       });
     });
   });
-
-  describe('ClearProgressItems', () => {
-    it('Should have correct type', () => {
-      const action = new actions.ClearProgressItems();
-      expect(action.type).toBe(actions.CLEAR_PROGRESS_ITEMS);
-    });
-  });
 });

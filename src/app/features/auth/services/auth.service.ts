@@ -33,7 +33,7 @@ export class AuthService {
   }
 
   signInWithEmail(email: string, password: string): Observable<any> {
-    return from(this.afAuth.auth.signInAndRetrieveDataWithEmailAndPassword(email, password));
+    return from(this.afAuth.auth.signInWithEmailAndPassword(email, password));
   }
 
   resetPassword(email: string): Observable<any> {

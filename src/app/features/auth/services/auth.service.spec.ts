@@ -90,10 +90,10 @@ describe('Auth Service', () => {
   });
 
   describe('signInWithEmail', () => {
-    it('Should call AngularFireAuth signInAndRetrieveDataWithEmailAndPassword', () => {
+    it('Should call AngularFireAuth signInWithEmailAndPassword', () => {
       const password = 'password';
       service.signInWithEmail(user.mockUser.email, password);
-      expect(afAuth.auth.signInAndRetrieveDataWithEmailAndPassword).toHaveBeenCalledWith(user.mockUser.email, password);
+      expect(afAuth.auth.signInWithEmailAndPassword).toHaveBeenCalledWith(user.mockUser.email, password);
     });
   });
 

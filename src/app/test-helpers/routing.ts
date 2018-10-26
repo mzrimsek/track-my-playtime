@@ -10,4 +10,13 @@ export namespace routing {
       }
     }
   };
+
+  export const initialRouterState = {
+    state: {
+      url: '',
+      params: {},
+      queryParams: {}
+    },
+    navigationId: 1
+  };
 }

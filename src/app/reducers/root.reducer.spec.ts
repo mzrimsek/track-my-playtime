@@ -1,6 +1,8 @@
 import { State as ErrorState } from './error.reducer';
 import { _selectError, State } from './root.reducer';
 
+import { routing } from '../test-helpers';
+
 describe('Root Reducer', () => {
   describe('Error State Selectors', () => {
     describe('_selectError', () => {
@@ -10,7 +12,7 @@ describe('Root Reducer', () => {
           message: 'some error message'
         };
         const state: State = {
-          router: initialRouterState,
+          router: routing.initialRouterState,
           error: errorState
         };
 
@@ -25,11 +27,4 @@ describe('Root Reducer', () => {
   });
 });
 
-const initialRouterState = {
-  state: {
-    url: '',
-    params: {},
-    queryParams: {}
-  },
-  navigationId: 1
-};
+

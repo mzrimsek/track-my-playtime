@@ -7,15 +7,14 @@ import { UserService } from '../../../auth/services/user.service';
 import { TimerService } from '../../services/timer.service';
 
 import * as historyActions from '../../../../shared/actions/history.actions';
-import * as timerActions from '../../actions/timer.actions';
+import * as timerActions from '../../../../shared/actions/timer.actions';
 
 import { State } from '../../reducers/root.reducer';
 
 import {
-    HistoryListItem, NgSelectValue, UpdateHistoryItemGamePayload, UpdateHistoryItemPlatformPayload,
-    UpdateHistoryItemTimesPayload
+    HistoryListItem, NgSelectValue, TimerInfo, UpdateHistoryItemGamePayload,
+    UpdateHistoryItemPlatformPayload, UpdateHistoryItemTimesPayload
 } from '../../../../shared/models';
-import { TimerInfo } from '../../models';
 
 import { getValueFromNgSelect } from '../../../../shared/utils/ng-select.utils';
 

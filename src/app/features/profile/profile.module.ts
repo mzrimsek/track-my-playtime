@@ -23,7 +23,10 @@ import { reducers } from './reducers/root.reducer';
     StoreModule.forFeature('profile', reducers),
     EffectsModule.forFeature([ProfileEffects]),
   ],
-  declarations: [ProfileComponent, EditDisplayNameComponent],
+  declarations: [
+    ProfileComponent,
+    EditDisplayNameComponent
+  ],
   providers: [ProfileService]
 })
 export class ProfileModule { }

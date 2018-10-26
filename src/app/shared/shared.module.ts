@@ -16,7 +16,17 @@ import { reducers } from './reducers/root.reducer';
     CommonModule,
     StoreModule.forFeature('shared', reducers),
   ],
-  declarations: [ElapsedTimePipe, TimePipe, SpinnerComponent, PluralizePipe],
-  exports: [ElapsedTimePipe, TimePipe, SpinnerComponent, PluralizePipe]
+  declarations: [
+    ElapsedTimePipe,
+    TimePipe,
+    SpinnerComponent,
+    PluralizePipe
+  ],
+  exports: [
+    ElapsedTimePipe,
+    TimePipe,
+    SpinnerComponent,
+    PluralizePipe
+  ]
 })
 export class SharedModule { }
