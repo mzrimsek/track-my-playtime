@@ -64,103 +64,80 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app/features/dashboard/reducers/root.reducer.ts</code>
+            <code>src/app/features/completion/reducers/mark-complete.reducer.ts</code>
         </p>
 
 
-
-        <section>
-            <h3 id="index">Index</h3>
-            <table class="table table-sm table-bordered index-table">
-                <tbody>
-                    <tr>
-                        <td class="col-md-4">
-                            <h6><b>Properties</b></h6>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <ul class="index-list">
-                                <li>
-                                        <a href="#dashboard">dashboard</a>
-                                </li>
-                            </ul>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-
-
-
-            <section>
-                <h3 id="inputs">Properties</h3>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <a name="dashboard"></a>
-                                        <span class="name"><b>dashboard</b><a href="#dashboard"><span class="icon ion-ios-link"></span></a></span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>dashboard:     <code><a href="../interfaces/State.html" target="_self" >DashboardState</a></code>
-</code>
-                                    </td>
-                                </tr>
-
-
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Type : </i>    <code><a href="../interfaces/State.html" target="_self" >DashboardState</a></code>
-
-                                        </td>
-                                    </tr>
+            <p class="comment">
+                <h3>Extends</h3>
+            </p>
+            <p class="comment">
+                    <code><a href="../interfaces/State.html" target="_self" >EntityState</a></code>
+            </p>
 
 
 
 
-
-                        </tbody>
-                    </table>
-            </section>
     </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { ActionReducerMap, createFeatureSelector, createSelector } from &#x27;@ngrx/store&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { createEntityAdapter, EntityAdapter, EntityState } from &#x27;@ngrx/entity&#x27;;
 
-import { eachDay } from &#x27;date-fns&#x27;;
+import * as actions from &#x27;../actions/mark-complete.actions&#x27;;
 
-import * as fromDateRange from &#x27;./date-range.reducer&#x27;;
-
-export interface DashboardState {
-  dateRange: fromDateRange.State;
+export interface MarkCompleteEntity {
+  id: string;
+  showExtra: boolean;
+  endTime: number;
 }
 
-export interface State {
-  dashboard: DashboardState;
+export interface State extends EntityState&lt;MarkCompleteEntity&gt; { }
+
+export const adapter: EntityAdapter&lt;MarkCompleteEntity&gt; &#x3D; createEntityAdapter&lt;MarkCompleteEntity&gt;();
+const initialState: State &#x3D; adapter.getInitialState();
+
+export function reducer(state: State &#x3D; initialState, action: actions.All): State {
+  switch (action.type) {
+    case actions.SET_SHOW_EXTRA: {
+      return adapter.updateOne({
+        id: action.itemId,
+        changes: {
+          showExtra: action.showExtra
+        }
+      }, state);
+    }
+    case actions.SET_ENDTIME: {
+      return adapter.updateOne({
+        id: action.itemId,
+        changes: {
+          endTime: action.endTime
+        }
+      }, state);
+    }
+    case actions.REMOVE: {
+      return adapter.removeOne(action.itemId, state);
+    }
+    case actions.ADD_NEW_ITEM: {
+      return adapter.addOne(getMarkCompleteEntity(action.itemId), state);
+    }
+    case actions.LOAD_ITEMS: {
+      const items &#x3D; action.itemIds.map(itemId &#x3D;&gt; getMarkCompleteEntity(itemId));
+      return adapter.addAll(items, state);
+    }
+    default: {
+      return state;
+    }
+  }
 }
 
-export const reducers: ActionReducerMap&lt;DashboardState, any&gt; &#x3D; {
-  dateRange: fromDateRange.reducer
+const getMarkCompleteEntity &#x3D; (itemId: string): MarkCompleteEntity &#x3D;&gt; {
+  return {
+    id: itemId,
+    showExtra: false,
+    endTime: 0
+  };
 };
-
-export const _selectDashboardFeature &#x3D; createFeatureSelector&lt;DashboardState&gt;(&#x27;dashboard&#x27;);
-export const _selectDateRange &#x3D; createSelector(_selectDashboardFeature, state &#x3D;&gt; state.dateRange);
-
-export const _selectDateList &#x3D; createSelector(_selectDateRange, dateRange &#x3D;&gt; {
-  return eachDay(dateRange.startDay, dateRange.endDay);
-});
-export const _selectRangeType &#x3D; createSelector(_selectDateRange, dateRange &#x3D;&gt; dateRange.type);
-
-const dashboardSelectors &#x3D; {
-  dateList: _selectDateList,
-  rangeType: _selectRangeType
-};
-
-export default dashboardSelectors;
 </code></pre>
     </div>
 </div>
