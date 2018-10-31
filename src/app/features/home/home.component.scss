@@ -1,41 +1,39 @@
 @import "../../../variables";
 
 .home {
-  color: $text-light;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 
   .tagline {
+    width: 50%;
+    color: $text-light;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 3.5em;
+    text-align: center;
+    text-shadow: -1px -1px 1px #fff, 1px 1px 1px #000;
+  }
+
+  .about {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: $main-height;
+    justify-content: space-evenly;
+    margin: 80px 30px 30px 30px;
 
-    .text {
-      width: 50%;
-      text-transform: uppercase;
-      font-weight: bold;
-      font-size: 3.5em;
-      text-align: center;
-      text-shadow: -1px -1px 1px #fff, 1px 1px 1px #000;
-    }
-
-    .about {
+    .column {
       display: flex;
-      justify-content: space-evenly;
-      margin-top: 50px;
+      background: $background-light;
+      flex-direction: column;
+      align-items: center;
+      width: 30%;
+      padding: 25px;
 
-      .column {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 30%;
-        padding: 10px;
-
-        h1 {
-          text-transform: uppercase;
-          width: 80%;
-          text-align: center;
-        }
+      h1 {
+        text-transform: uppercase;
+        width: 80%;
+        text-align: center;
       }
     }
   }
@@ -46,9 +44,14 @@
     .tagline {
       width: 100%;
       font-size: 2em;
+    }
 
-      .about {
-        flex-direction: column;
+    .about {
+      flex-direction: column;
+      margin-top: 30px;
+
+      .column {
+        width: 100%;
       }
     }
   }
