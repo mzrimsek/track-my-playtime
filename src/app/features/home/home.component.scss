@@ -39,8 +39,6 @@
       }
     }
   }
-
-
 }
 
 @media only screen  and (max-width : $small-breakpoint) {
@@ -48,10 +46,10 @@
     .tagline {
       width: 100%;
       font-size: 2em;
-    }
 
-    .about {
-      flex-direction: column;
+      .about {
+        flex-direction: column;
+      }
     }
   }
 }
