@@ -18,10 +18,7 @@
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
-                <div id="book-search-input" role="search">
-    <input type="text" placeholder="Type to search">
-</div>
-            <compodoc-menu></compodoc-menu>
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
         </div>
 
         <div class="container-fluid main">
@@ -50,6 +47,9 @@
         </li>
         <li >
             <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
         </li>
         <li >
             <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
@@ -100,7 +100,7 @@
 
             <tr>
                 <td class="col-md-3">styleUrls</td>
-                <td class="col-md-9"><code>nav.component.scss</code></td>
+                <td class="col-md-9"><code>./nav.component.scss</code></td>
             </tr>
 
 
@@ -109,6 +109,12 @@
                 <td class="col-md-3">templateUrl</td>
                 <td class="col-md-9"><code>./nav.component.html</code></td>
             </tr>
+
+
+
+
+
+
 
 
         </tbody>
@@ -875,6 +881,297 @@ export class NavComponent implements OnInit {
 </code></pre>
     </div>
 
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./nav.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">@import &quot;../../../variables.scss&quot;;
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+  background: $background-dark;
+  color: $text-light;
+  width: $sidebar-width;
+  position: fixed;
+
+  .main {
+    padding: 0px 15px;
+
+    .banner {
+      display: flex;
+      justify-content: center;
+      text-align: center;
+      margin: 30px 0px;
+
+      .menu {
+        display:none;
+      }
+
+      a{
+        text-decoration: none;
+
+        .text {
+          color: $text-light;
+          font-size: 1.1em;
+          display: none;
+          font-weight: bold;
+          text-transform: uppercase;
+        }
+
+        .no-text-logo {
+          display: none;
+        }
+
+        img {
+          width: 100%;
+        }
+      }
+    }
+
+    nav {
+      ul {
+        padding: 0;
+        list-style: none;
+
+        li{
+          border-radius: 8px;
+          margin-bottom: 5px;
+
+          .static {
+            display: none;
+          }
+
+          &amp;.active {
+            background: $background-dark-accent;
+
+            a {
+              .dynamic {
+                display: none;
+              }
+
+              .static {
+                display: block;
+              }
+            }
+          }
+
+          &amp;:hover {
+            background: $background-dark-accent;
+            cursor: pointer;
+          }
+
+          a{
+            color: $text-light;
+            text-decoration: none;
+
+            display: flex;
+            align-items: center;
+            height: 45px;
+            padding: 0px 10px;
+
+            .icon {
+              margin-right: 5px;
+              pointer-events: none;
+            }
+
+            .text {
+              pointer-events: none;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .user {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    padding: 30px 15px;
+    font-size: .7em;
+    background: darken($background-dark, 10%);
+
+    .info a {
+      text-decoration: none;
+      color: $text-light;
+      display: flex;
+      align-items: center;
+
+      img {
+        width: 50px;
+        border-radius: 50%;
+      }
+
+      .name {
+        padding: 5px;
+      }
+    }
+
+    .logout {
+      font-size: $base-font-size;
+      color: $text-light;
+
+      .text {
+        display: none;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width : $medium-breakpoint) {
+  .nav {
+    width: $small-sidebar-width;
+
+    .main {
+      .banner {
+        a {
+          .no-text-logo {
+            display: block;
+          }
+
+          .text-logo {
+            display: none;
+          }
+        }
+      }
+
+      nav {
+        ul {
+          li {
+            a {
+              justify-content: center;
+              height: 60px;
+
+              .icon {
+                font-size: 2em;
+              }
+
+              .text {
+                display: none;
+              }
+
+              .text.static {
+                display: none;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .user {
+      .info a {
+        .name {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width : $small-breakpoint) {
+  .nav {
+    width: 100%;
+    z-index: 70;
+
+    &amp;.hide {
+      height: $small-nav-banner-height;
+
+      .main {
+        nav, ng-adsense {
+          display: none;
+        }
+      }
+      .user {
+        display: none;
+      }
+    }
+
+    .main {
+      .banner {
+        margin: 6px 0px;
+
+        .menu {
+          display: flex;
+          justify-self: flex-start;
+          font-size: 1.25em;
+
+          &amp;:hover {
+            cursor: pointer;
+          }
+        }
+
+        a{
+          width: 100%;
+
+          .text {
+            display: block;
+          }
+
+          .text-logo, .no-text-logo {
+            display: none;
+          }
+        }
+      }
+
+      nav {
+        ul {
+          li {
+            a {
+              height: 20px;
+              padding: 0px 5px;
+
+              .icon {
+                display: none;
+              }
+
+              .text {
+                display: block;
+              }
+
+              .text.static {
+                display: block;
+              }
+
+              .text.dynamic {
+                display: none;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .user {
+      padding: 5px;
+
+      .info a {
+        .name {
+          display: block;
+        }
+      }
+
+      .logout {
+        font-size: $small-font-size;
+
+        .icon {
+          display: none;
+        }
+
+        .text {
+          display: block;
+        }
+      }
+    }
+  }
+}
+</code></pre>
+    </div>
+
     <div class="tab-pane fade " id="c-tree">
         <div id="tree-container"></div>
         <div class="tree-legend">
@@ -942,7 +1239,9 @@ export class NavComponent implements OnInit {
 
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>
-       <script src="../js/menu-wc.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
 
        <script src="../js/libs/bootstrap-native.js"></script>
 

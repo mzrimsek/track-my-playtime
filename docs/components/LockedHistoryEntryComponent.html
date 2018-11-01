@@ -18,10 +18,7 @@
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
-                <div id="book-search-input" role="search">
-    <input type="text" placeholder="Type to search">
-</div>
-            <compodoc-menu></compodoc-menu>
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
         </div>
 
         <div class="container-fluid main">
@@ -50,6 +47,9 @@
         </li>
         <li >
             <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
         </li>
         <li >
             <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
@@ -100,7 +100,7 @@
 
             <tr>
                 <td class="col-md-3">styleUrls</td>
-                <td class="col-md-9"><code>locked-history-entry.component.scss</code></td>
+                <td class="col-md-9"><code>./locked-history-entry.component.scss</code></td>
             </tr>
 
 
@@ -109,6 +109,12 @@
                 <td class="col-md-3">templateUrl</td>
                 <td class="col-md-9"><code>./locked-history-entry.component.html</code></td>
             </tr>
+
+
+
+
+
+
 
 
         </tbody>
@@ -521,6 +527,108 @@ export class LockedHistoryEntryComponent implements OnInit {
 </code></pre>
     </div>
 
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./locked-history-entry.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">@import &quot;../../../../../variables.scss&quot;;
+
+.locked-history-entry {
+  display: flex;
+  align-items: center;
+  background: $background-light;
+  height: $history-entry-height;
+  padding: 0px 10px;
+  border-bottom: 1px solid darken($background-light, 10%);
+
+  &amp;:hover {
+    background: darken($background-light, 5%);
+
+    .primary-action .quickstart {
+      display: initial;
+    }
+  }
+
+  .display-element {
+    font-size: $small-font-size;
+    font-family: $base-font-family;
+    width: 100%;
+    padding: 5px;
+    background: none;
+  }
+
+  .game {
+    width: 55%;
+    font-size: $small-font-size;
+  }
+
+  .platform {
+    width: 20%;
+    font-size: $small-font-size;
+  }
+
+  .time {
+    @extend .display-element;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    width: 20%;
+  }
+
+  .lock {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 5%;
+    color: lighten($neutral-action-color, 20%);
+  }
+
+  .primary-action {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 5%;
+
+    .quickstart {
+      color: $good-action-color;
+      opacity: .5;
+      display: none;
+    }
+  }
+}
+
+@media only screen and (max-width: $small-breakpoint) {
+  .locked-history-entry {
+    .display-element {
+      font-size: calc(#{$small-font-size} - 2px);
+    }
+
+    .game {
+      width: 30%;
+      font-size: calc(#{$small-font-size} - 2px);
+  }
+
+    .time {
+      width: 45%;
+      font-size: calc(#{$small-font-size} - 2px);
+    }
+
+    .primary-action {
+      width: 10%;
+
+      .quickstart {
+        display: initial;
+      }
+    }
+
+    .lock {
+      width: 10%;
+    }
+  }
+}
+</code></pre>
+    </div>
+
     <div class="tab-pane fade " id="c-tree">
         <div id="tree-container"></div>
         <div class="tree-legend">
@@ -588,7 +696,9 @@ export class LockedHistoryEntryComponent implements OnInit {
 
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>
-       <script src="../js/menu-wc.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
 
        <script src="../js/libs/bootstrap-native.js"></script>
 

@@ -1,4 +1,7 @@
 import { NgModule } from '@angular/core';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -7,12 +10,6 @@ import { EffectsModule } from '@ngrx/effects';
 import { RouterStateSerializer, StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireAuthModule } from 'angularfire2/auth';
-import { AngularFirestoreModule } from 'angularfire2/firestore';
-import { Angulartics2Module } from 'angulartics2';
-import { Angulartics2GoogleTagManager } from 'angulartics2/gtm';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AuthModule } from './features/auth/auth.module';
@@ -50,7 +47,6 @@ import { environment } from '../environments/environment';
     AppRoutingModule,
     AuthModule,
     SharedModule,
-    Angulartics2Module.forRoot([Angulartics2GoogleTagManager]),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,

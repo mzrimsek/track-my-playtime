@@ -14,10 +14,9 @@ Detailed information on the application structure can be found here: https://mzr
 * [Angular](https://angular.io/) (via [angular-cli](https://github.com/angular/angular-cli))
 * [RxJS](https://github.com/ReactiveX/rxjs)
 * [Redux](https://redux.js.org/) (via [NGRX](https://github.com/ngrx/platform))
-* [Firebase](https://firebase.google.com/) (via [AngularFire2](https://github.com/angular/angularfire2))
+* [Firebase](https://firebase.google.com/) (via [@angular/fire](https://github.com/angular/angularfire2))
 * [TravisCI](https://travis-ci.org/)
 * [FontAwesome](https://fontawesome.com/) (via [angular-fontawesome](https://github.com/FortAwesome/angular-fontawesome))
-* [Google Analytics](https://www.google.com/analytics) (via [Angulartics2](https://github.com/angulartics/angulartics2))
 * [D3](https://d3js.org/) (via [ngx-charts](https://github.com/swimlane/ngx-charts))
 * [CompoDoc](https://compodoc.app/)
 

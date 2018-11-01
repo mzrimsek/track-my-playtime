@@ -1,6 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-
-import { AngularFirestore } from 'angularfire2/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 import { FirestoreHistoryItem, HistoryService } from './history.service';
 

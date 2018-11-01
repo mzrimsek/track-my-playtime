@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
+import { AngularFireAuth } from '@angular/fire/auth';
 
-import { AngularFireAuth } from 'angularfire2/auth';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 
