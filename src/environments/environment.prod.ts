@@ -2,7 +2,6 @@ import { Environment } from './';
 
 export const environment: Environment = {
   production: true,
-  urls: {},
   firebase: {
     apiKey: 'AIzaSyDIwtutkMaINN8gaGZmoEjt_fR9_XhDZdY',
     authDomain: 'track-my-playtime.firebaseapp.com',
@@ -15,9 +14,5 @@ export const environment: Environment = {
     domain: 'https://trackmyplaytime.com',
     namespace: 'e3f55957-93ab-507a-9c01-86eb4e4bc347'
   },
-  googleTagManager: 'GTM-MTTF78T',
-  adsense: {
-    client: 'ca-pub-5689921718615200',
-    navAdSlot: '5589551149'
-  }
+  googleTagManager: 'GTM-MTTF78T'
 };

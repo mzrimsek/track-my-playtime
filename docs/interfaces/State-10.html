@@ -64,7 +64,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app/features/dashboard/reducers/date-range.reducer.ts</code>
+            <code>src/app/features/completion/reducers/add-playing.reducer.ts</code>
         </p>
 
 
@@ -82,13 +82,13 @@
                         <td class="col-md-4">
                             <ul class="index-list">
                                 <li>
-                                        <a href="#endDay">endDay</a>
+                                        <a href="#game">game</a>
                                 </li>
                                 <li>
-                                        <a href="#startDay">startDay</a>
+                                        <a href="#platform">platform</a>
                                 </li>
                                 <li>
-                                        <a href="#type">type</a>
+                                        <a href="#startTime">startTime</a>
                                 </li>
                             </ul>
                         </td>
@@ -105,13 +105,13 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="endDay"></a>
-                                        <span class="name"><b>endDay</b><a href="#endDay"><span class="icon ion-ios-link"></span></a></span>
+                                        <a name="game"></a>
+                                        <span class="name"><b>game</b><a href="#game"><span class="icon ion-ios-link"></span></a></span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>endDay:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
+                                        <code>game:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -119,7 +119,7 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
+                                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
                                         </td>
                                     </tr>
@@ -134,13 +134,13 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="startDay"></a>
-                                        <span class="name"><b>startDay</b><a href="#startDay"><span class="icon ion-ios-link"></span></a></span>
+                                        <a name="platform"></a>
+                                        <span class="name"><b>platform</b><a href="#platform"><span class="icon ion-ios-link"></span></a></span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>startDay:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
+                                        <code>platform:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -148,7 +148,7 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
+                                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
                                         </td>
                                     </tr>
@@ -163,13 +163,13 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="type"></a>
-                                        <span class="name"><b>type</b><a href="#type"><span class="icon ion-ios-link"></span></a></span>
+                                        <a name="startTime"></a>
+                                        <span class="name"><b>startTime</b><a href="#startTime"><span class="icon ion-ios-link"></span></a></span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>type:     <code><a href="../miscellaneous/typealiases.html#DateRangeType" target="_self" >DateRangeType</a></code>
+                                        <code>startTime:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -177,7 +177,7 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <i>Type : </i>    <code><a href="../miscellaneous/typealiases.html#DateRangeType" target="_self" >DateRangeType</a></code>
+                                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
 
                                         </td>
                                     </tr>
@@ -193,52 +193,45 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { endOfMonth, endOfWeek, startOfMonth, startOfWeek, subDays } from &#x27;date-fns&#x27;;
-
-import * as actions from &#x27;../actions/date-range.actions&#x27;;
-
-import { DateRangeType } from &#x27;../models&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import * as actions from &#x27;../actions/add-playing.actions&#x27;;
 
 export interface State {
-  startDay: Date;
-  endDay: Date;
-  type: DateRangeType;
+  game: string;
+  platform: string;
+  startTime: number;
 }
 
-const getState &#x3D; (startDay: Date, endDay: Date, type: DateRangeType): State &#x3D;&gt; {
-  return {
-    startDay,
-    endDay,
-    type
-  };
+const initialState: State &#x3D; {
+  game: &#x27;&#x27;,
+  platform: &#x27;&#x27;,
+  startTime: 0
 };
-
-const now &#x3D; new Date();
-const startWeek &#x3D; startOfWeek(now);
-const endWeek &#x3D; endOfWeek(now);
-const initialState: State &#x3D; getState(startWeek, endWeek, &#x27;THIS_WEEK&#x27;);
 
 export function reducer(state: State &#x3D; initialState, action: actions.All): State {
   switch (action.type) {
-    case actions.SET_THIS_WEEK: {
+    case actions.SET_GAME: {
+      return {
+        ...state,
+        game: action.game,
+        platform: &#x27;&#x27;,
+        startTime: 0
+      };
+    }
+    case actions.SET_PLATFORM: {
+      return {
+        ...state,
+        platform: action.platform,
+        startTime: 0
+      };
+    }
+    case actions.SET_STARTTIME: {
+      return {
+        ...state,
+        startTime: action.startTime
+      };
+    }
+    case actions.RESET: {
       return initialState;
-    }
-    case actions.SET_LAST_WEEK: {
-      const startThisWeek &#x3D; startOfWeek(now);
-      const endLastWeek &#x3D; subDays(startThisWeek, 1);
-      const startLastWeek &#x3D; startOfWeek(endLastWeek);
-      return getState(startLastWeek, endLastWeek, &#x27;LAST_WEEK&#x27;);
-    }
-    case actions.SET_THIS_MONTH: {
-      const startMonth &#x3D; startOfMonth(now);
-      const endMonth &#x3D; endOfMonth(now);
-      return getState(startMonth, endMonth, &#x27;THIS_MONTH&#x27;);
-    }
-    case actions.SET_LAST_MONTH: {
-      const startThisMonth &#x3D; startOfMonth(now);
-      const endLastMonth &#x3D; subDays(startThisMonth, 1);
-      const startLastMonth &#x3D; startOfMonth(endLastMonth);
-      return getState(startLastMonth, endLastMonth, &#x27;LAST_MONTH&#x27;);
     }
     default: {
       return state;

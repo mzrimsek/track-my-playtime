@@ -1,6 +1,6 @@
 {
   "name": "track-my-playtime",
-  "version": "0.5.8",
+  "version": "0.6.0",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
@@ -12,8 +12,9 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "update": "ng update -all",
-    "compodoc-generate": "./node_modules/.bin/compodoc -p src/tsconfig.app.json -d docs",
-    "compodoc-serve": "./node_modules/.bin/compodoc -s -d docs"
+    "compodoc:gen": "./node_modules/.bin/compodoc -p src/tsconfig.app.json -d docs",
+    "compodoc:serve": "./node_modules/.bin/compodoc -s -d docs",
+    "preversion": "npm run compodoc:gen && git add -A docs"
   },
   "private": true,
   "dependencies": {
@@ -47,7 +48,6 @@
     "firebase": "^5.4.2",
     "insert-analytics-elements": "^0.0.4",
     "ng-pick-datetime": "^6.0.16",
-    "ng2-adsense": "^5.3.2",
     "rxjs": "^6.3.2",
     "uuid": "^3.3.2",
     "zone.js": "^0.8.26"

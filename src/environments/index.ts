@@ -1,16 +1,8 @@
 export interface Environment {
   production: boolean;
-  urls: {};
   firebase: FirebaseConfig;
-  uuid: {
-    domain: string;
-    namespace: string;
-  };
+  uuid: UUIDConfig;
   googleTagManager: string;
-  adsense: {
-    client: string;
-    navAdSlot: string;
-  };
 }
 
 interface FirebaseConfig {
@@ -20,4 +12,9 @@ interface FirebaseConfig {
   projectId: string;
   storageBucket: string;
   messagingSenderId: string;
+}
+
+interface UUIDConfig {
+  domain: string;
+  namespace: string;
 }

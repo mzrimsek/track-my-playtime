@@ -63,13 +63,13 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                         <a href="modules/AppModule.html" data-type="entity-link">AppModule</a>
                             <li class="chapter inner">
                                 <div class="simple menu-toggler" data-toggle="collapse"
-                                    ${ isNormalMode ? 'data-target="#components-links-module-AppModule-c22add3374082a0186017d8950989db6"' : 'data-target="#xs-components-links-module-AppModule-c22add3374082a0186017d8950989db6"' }>
+                                    ${ isNormalMode ? 'data-target="#components-links-module-AppModule-2ac7e5d484dbae734b9c84efa6353d7d"' : 'data-target="#xs-components-links-module-AppModule-2ac7e5d484dbae734b9c84efa6353d7d"' }>
                                     <span class="icon ion-md-cog"></span>
                                     <span>Components</span>
                                     <span class="icon ion-ios-arrow-down"></span>
                                 </div>
                                 <ul class="links collapse"
-                                    ${ isNormalMode ? 'id="components-links-module-AppModule-c22add3374082a0186017d8950989db6"' : 'id="xs-components-links-module-AppModule-c22add3374082a0186017d8950989db6"' }>
+                                    ${ isNormalMode ? 'id="components-links-module-AppModule-2ac7e5d484dbae734b9c84efa6353d7d"' : 'id="xs-components-links-module-AppModule-2ac7e5d484dbae734b9c84efa6353d7d"' }>
                                         <li class="link">
                                             <a href="components/AppComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules">AppComponent</a>
                                         </li>
@@ -83,13 +83,13 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </li>
                             <li class="chapter inner">
                                 <div class="simple menu-toggler" data-toggle="collapse"
-                                    ${ isNormalMode ? 'data-target="#injectables-links-module-AppModule-c22add3374082a0186017d8950989db6"' : 'data-target="#xs-injectables-links-module-AppModule-c22add3374082a0186017d8950989db6"' }>
+                                    ${ isNormalMode ? 'data-target="#injectables-links-module-AppModule-2ac7e5d484dbae734b9c84efa6353d7d"' : 'data-target="#xs-injectables-links-module-AppModule-2ac7e5d484dbae734b9c84efa6353d7d"' }>
                                     <span class="icon ion-md-arrow-round-down"></span>
                                     <span>Injectables</span>
                                     <span class="icon ion-ios-arrow-down"></span>
                                 </div>
                                 <ul class="links collapse"
-                                    ${ isNormalMode ? 'id="injectables-links-module-AppModule-c22add3374082a0186017d8950989db6"' : 'id="xs-injectables-links-module-AppModule-c22add3374082a0186017d8950989db6"' }>
+                                    ${ isNormalMode ? 'id="injectables-links-module-AppModule-2ac7e5d484dbae734b9c84efa6353d7d"' : 'id="xs-injectables-links-module-AppModule-2ac7e5d484dbae734b9c84efa6353d7d"' }>
                                         <li class="link">
                                             <a href="injectables/ElapsedTimeService.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules"}>ElapsedTimeService</a>
                                         </li>
@@ -206,6 +206,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                             <a href="components/GraphTooltipComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules">GraphTooltipComponent</a>
                                         </li>
                                         <li class="link">
+                                            <a href="components/HeaderComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules">HeaderComponent</a>
+                                        </li>
+                                        <li class="link">
                                             <a href="components/TimeDateGraphComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules">TimeDateGraphComponent</a>
                                         </li>
                                         <li class="link">
@@ -245,6 +248,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 </div>
                                 <ul class="links collapse"
                                     ${ isNormalMode ? 'id="components-links-module-LibraryModule-46583c5c52539e6d70babc632fc25385"' : 'id="xs-components-links-module-LibraryModule-46583c5c52539e6d70babc632fc25385"' }>
+                                        <li class="link">
+                                            <a href="components/HeaderComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules">HeaderComponent</a>
+                                        </li>
                                         <li class="link">
                                             <a href="components/LibraryComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules">LibraryComponent</a>
                                         </li>
@@ -875,6 +881,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                     </li>
                     <li class="link">
                         <a href="interfaces/TrackerState.html" data-type="entity-link">TrackerState</a>
+                    </li>
+                    <li class="link">
+                        <a href="interfaces/UUIDConfig.html" data-type="entity-link">UUIDConfig</a>
                     </li>
                     <li class="link">
                         <a href="interfaces/UpdateHistoryItemGamePayload.html" data-type="entity-link">UpdateHistoryItemGamePayload</a>

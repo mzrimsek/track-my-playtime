@@ -5,7 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { EffectsModule } from '@ngrx/effects';
 import { RouterStateSerializer, StoreRouterConnectingModule } from '@ngrx/router-store';
-import { MetaReducer, StoreModule } from '@ngrx/store';
+import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { AngularFireModule } from 'angularfire2';
@@ -13,7 +13,6 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { Angulartics2Module } from 'angulartics2';
 import { Angulartics2GoogleTagManager } from 'angulartics2/gtm';
-import { AdsenseModule } from 'ng2-adsense';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AuthModule } from './features/auth/auth.module';
@@ -33,12 +32,10 @@ import { ElapsedTimeService } from './shared/services/elapsed-time.service';
 
 import { AuthGuard } from './features/auth/guards/auth.guard';
 
-import { clearState } from './reducers/clear.meta.reducer';
+import { metaReducers } from './meta.reducers';
 import { CustomRouterStateSerializer, reducers } from './reducers/root.reducer';
 
 import { environment } from '../environments/environment';
-
-const metaReducers: MetaReducer<any>[] = [clearState];
 
 @NgModule({
   declarations: [
@@ -55,10 +52,6 @@ const metaReducers: MetaReducer<any>[] = [clearState];
     SharedModule,
     Angulartics2Module.forRoot([Angulartics2GoogleTagManager]),
     AngularFireModule.initializeApp(environment.firebase),
-    AdsenseModule.forRoot({
-      adClient: environment.adsense.client,
-      adSlot: environment.adsense.navAdSlot
-    }),
     AngularFireAuthModule,
     AngularFirestoreModule,
     StoreModule.forRoot(reducers, { metaReducers }),
