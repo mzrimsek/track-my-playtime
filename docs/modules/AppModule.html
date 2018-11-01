@@ -18,10 +18,7 @@
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
-                <div id="book-search-input" role="search">
-    <input type="text" placeholder="Type to search">
-</div>
-            <compodoc-menu></compodoc-menu>
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
         </div>
 
         <div class="container-fluid main">
@@ -380,6 +377,9 @@
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { NgModule } from &#x27;@angular/core&#x27;;
+import { AngularFireModule } from &#x27;@angular/fire&#x27;;
+import { AngularFireAuthModule } from &#x27;@angular/fire/auth&#x27;;
+import { AngularFirestoreModule } from &#x27;@angular/fire/firestore&#x27;;
 import { BrowserModule } from &#x27;@angular/platform-browser&#x27;;
 import { BrowserAnimationsModule } from &#x27;@angular/platform-browser/animations&#x27;;
 
@@ -388,12 +388,6 @@ import { EffectsModule } from &#x27;@ngrx/effects&#x27;;
 import { RouterStateSerializer, StoreRouterConnectingModule } from &#x27;@ngrx/router-store&#x27;;
 import { StoreModule } from &#x27;@ngrx/store&#x27;;
 import { StoreDevtoolsModule } from &#x27;@ngrx/store-devtools&#x27;;
-
-import { AngularFireModule } from &#x27;angularfire2&#x27;;
-import { AngularFireAuthModule } from &#x27;angularfire2/auth&#x27;;
-import { AngularFirestoreModule } from &#x27;angularfire2/firestore&#x27;;
-import { Angulartics2Module } from &#x27;angulartics2&#x27;;
-import { Angulartics2GoogleTagManager } from &#x27;angulartics2/gtm&#x27;;
 
 import { AppRoutingModule } from &#x27;./app-routing.module&#x27;;
 import { AuthModule } from &#x27;./features/auth/auth.module&#x27;;
@@ -431,7 +425,6 @@ import { environment } from &#x27;../environments/environment&#x27;;
     AppRoutingModule,
     AuthModule,
     SharedModule,
-    Angulartics2Module.forRoot([Angulartics2GoogleTagManager]),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
@@ -496,7 +489,9 @@ export class AppModule { }
 
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>
-       <script src="../js/menu-wc.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
 
        <script src="../js/libs/bootstrap-native.js"></script>
 

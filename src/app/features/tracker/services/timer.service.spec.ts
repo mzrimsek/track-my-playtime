@@ -1,6 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-
-import { AngularFirestore } from 'angularfire2/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 import { TimerService } from './timer.service';
 

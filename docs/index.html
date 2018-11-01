@@ -18,10 +18,7 @@
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
-                <div id="book-search-input" role="search">
-    <input type="text" placeholder="Type to search">
-</div>
-            <compodoc-menu></compodoc-menu>
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
         </div>
 
         <div class="container-fluid main">
@@ -44,10 +41,9 @@
 <li><a href="https://angular.io/">Angular</a> (via <a href="https://github.com/angular/angular-cli">angular-cli</a>)</li>
 <li><a href="https://github.com/ReactiveX/rxjs">RxJS</a></li>
 <li><a href="https://redux.js.org/">Redux</a> (via <a href="https://github.com/ngrx/platform">NGRX</a>)</li>
-<li><a href="https://firebase.google.com/">Firebase</a> (via <a href="https://github.com/angular/angularfire2">AngularFire2</a>)</li>
+<li><a href="https://firebase.google.com/">Firebase</a> (via <a href="https://github.com/angular/angularfire2">@angular/fire</a>)</li>
 <li><a href="https://travis-ci.org/">TravisCI</a></li>
 <li><a href="https://fontawesome.com/">FontAwesome</a> (via <a href="https://github.com/FortAwesome/angular-fontawesome">angular-fontawesome</a>)</li>
-<li><a href="https://www.google.com/analytics">Google Analytics</a> (via <a href="https://github.com/angulartics/angulartics2">Angulartics2</a>)</li>
 <li><a href="https://d3js.org/">D3</a> (via <a href="https://github.com/swimlane/ngx-charts">ngx-charts</a>)</li>
 <li><a href="https://compodoc.app/">CompoDoc</a></li>
 </ul>
@@ -102,7 +98,9 @@
 
        <script src="./js/libs/custom-elements.min.js"></script>
        <script src="./js/libs/lit-html.js"></script>
-       <script src="./js/menu-wc.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="./js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="./js/menu-wc.js" defer></script>
 
        <script src="./js/libs/bootstrap-native.js"></script>
 
