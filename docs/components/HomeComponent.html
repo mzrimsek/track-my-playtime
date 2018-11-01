@@ -290,7 +290,26 @@ export class HomeComponent implements OnInit {
 
     <div class="tab-pane fade " id="c-templateData">
         <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;home&quot;&gt;
-  &lt;div class&#x3D;&quot;tagline&quot;&gt;{{ tagline }}&lt;/div&gt;
+  &lt;section class&#x3D;&quot;tagline&quot;&gt;
+    &lt;div class&#x3D;&quot;text&quot;&gt;{{ tagline }}&lt;/div&gt;
+  &lt;/section&gt;
+
+  &lt;section class&#x3D;&quot;about&quot;&gt;
+    &lt;div class&#x3D;&quot;column drop-shadow&quot;&gt;
+      &lt;h1&gt;Track playtime on any platform&lt;/h1&gt;
+      &lt;p&gt;We support over 15 different platforms&lt;/p&gt;
+    &lt;/div&gt;
+
+    &lt;div class&#x3D;&quot;column drop-shadow&quot;&gt;
+      &lt;h1&gt;Get detailed graphs on playtime&lt;/h1&gt;
+      &lt;p&gt;Learn how you spend your time when you game&lt;/p&gt;
+    &lt;/div&gt;
+
+    &lt;div class&#x3D;&quot;column drop-shadow&quot;&gt;
+      &lt;h1&gt;Mark games as complete as you finish them&lt;/h1&gt;
+      &lt;p&gt;Hold yourself accountable to that backlog you&#x27;ve accrued&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
 &lt;/div&gt;
 </code></pre>
     </div>
@@ -320,7 +339,7 @@ export class HomeComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="home">  <div class="tagline">{{ tagline }}</div></div></div>'
+        var COMPONENT_TEMPLATE = '<div><div class="home">  <section class="tagline">    <div class="text">{{ tagline }}</div>  </section>  <section class="about">    <div class="column drop-shadow">      <h1>Track playtime on any platform</h1>      <p>We support over 15 different platforms</p>    </div>    <div class="column drop-shadow">      <h1>Get detailed graphs on playtime</h1>      <p>Learn how you spend your time when you game</p>    </div>    <div class="column drop-shadow">      <h1>Mark games as complete as you finish them</h1>      <p>Hold yourself accountable to that backlog you\'ve accrued</p>    </div>  </section></div></div>'
     var COMPONENTS = [{'name': 'AddPlayingComponent', 'selector': 'app-completion-add-playing'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AuthFormComponent', 'selector': 'app-auth-auth-form'},{'name': 'CompletedItemComponent', 'selector': 'app-completion-completed-item'},{'name': 'CompletionComponent', 'selector': 'app-completion'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'EditDisplayNameComponent', 'selector': 'app-profile-edit-display-name'},{'name': 'ForgotPasswordComponent', 'selector': 'app-auth-forgot-password'},{'name': 'GraphTooltipComponent', 'selector': 'app-dashboard-graph-tooltip'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HeaderComponent', 'selector': 'app-dashboard-header'},{'name': 'HeaderComponent', 'selector': 'app-library-header'},{'name': 'HistoryComponent', 'selector': 'app-tracker-history'},{'name': 'HistoryEntryComponent', 'selector': 'app-tracker-history-entry'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'LibraryComponent', 'selector': 'app-library'},{'name': 'LoadMoreComponent', 'selector': 'app-tracker-load-more'},{'name': 'LockedHistoryEntryComponent', 'selector': 'app-tracker-locked-history-entry'},{'name': 'LoginComponent', 'selector': 'app-auth-login'},{'name': 'NavComponent', 'selector': 'app-nav'},{'name': 'PlayingItemComponent', 'selector': 'app-completion-playing-item'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'RegisterComponent', 'selector': 'app-auth-register'},{'name': 'SpinnerComponent', 'selector': 'app-shared-spinner'},{'name': 'TabsComponent', 'selector': 'app-completion-tabs'},{'name': 'TimeDateGraphComponent', 'selector': 'app-dashboard-time-date-graph'},{'name': 'TimeGameGraphComponent', 'selector': 'app-dashboard-time-game-graph'},{'name': 'TimePlatformGraphComponent', 'selector': 'app-dashboard-time-platform-graph'},{'name': 'TimerComponent', 'selector': 'app-tracker-timer'},{'name': 'TrackerComponent', 'selector': 'app-tracker'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'HomeComponent'};

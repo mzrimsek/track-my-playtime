@@ -386,7 +386,7 @@ import { BrowserAnimationsModule } from &#x27;@angular/platform-browser/animatio
 import { FontAwesomeModule } from &#x27;@fortawesome/angular-fontawesome&#x27;;
 import { EffectsModule } from &#x27;@ngrx/effects&#x27;;
 import { RouterStateSerializer, StoreRouterConnectingModule } from &#x27;@ngrx/router-store&#x27;;
-import { MetaReducer, StoreModule } from &#x27;@ngrx/store&#x27;;
+import { StoreModule } from &#x27;@ngrx/store&#x27;;
 import { StoreDevtoolsModule } from &#x27;@ngrx/store-devtools&#x27;;
 
 import { AngularFireModule } from &#x27;angularfire2&#x27;;
@@ -394,7 +394,6 @@ import { AngularFireAuthModule } from &#x27;angularfire2/auth&#x27;;
 import { AngularFirestoreModule } from &#x27;angularfire2/firestore&#x27;;
 import { Angulartics2Module } from &#x27;angulartics2&#x27;;
 import { Angulartics2GoogleTagManager } from &#x27;angulartics2/gtm&#x27;;
-import { AdsenseModule } from &#x27;ng2-adsense&#x27;;
 
 import { AppRoutingModule } from &#x27;./app-routing.module&#x27;;
 import { AuthModule } from &#x27;./features/auth/auth.module&#x27;;
@@ -414,12 +413,10 @@ import { ElapsedTimeService } from &#x27;./shared/services/elapsed-time.service&
 
 import { AuthGuard } from &#x27;./features/auth/guards/auth.guard&#x27;;
 
-import { clearState } from &#x27;./reducers/clear.meta.reducer&#x27;;
+import { metaReducers } from &#x27;./meta.reducers&#x27;;
 import { CustomRouterStateSerializer, reducers } from &#x27;./reducers/root.reducer&#x27;;
 
 import { environment } from &#x27;../environments/environment&#x27;;
-
-const metaReducers: MetaReducer&lt;any&gt;[] &#x3D; [clearState];
 
 @NgModule({
   declarations: [
@@ -436,10 +433,6 @@ const metaReducers: MetaReducer&lt;any&gt;[] &#x3D; [clearState];
     SharedModule,
     Angulartics2Module.forRoot([Angulartics2GoogleTagManager]),
     AngularFireModule.initializeApp(environment.firebase),
-    AdsenseModule.forRoot({
-      adClient: environment.adsense.client,
-      adSlot: environment.adsense.navAdSlot
-    }),
     AngularFireAuthModule,
     AngularFirestoreModule,
     StoreModule.forRoot(reducers, { metaReducers }),
