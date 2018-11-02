@@ -61,7 +61,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app/features/profile/reducers/profile.reducer.ts</code>
+            <code>src/app/features/auth/reducers/status.reducer.ts</code>
         </p>
 
 
@@ -79,7 +79,10 @@
                         <td class="col-md-4">
                             <ul class="index-list">
                                 <li>
-                                        <a href="#displayName">displayName</a>
+                                        <a href="#attemptingLogin">attemptingLogin</a>
+                                </li>
+                                <li>
+                                        <a href="#validationMessage">validationMessage</a>
                                 </li>
                             </ul>
                         </td>
@@ -96,13 +99,42 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="displayName"></a>
-                                        <span class="name"><b>displayName</b><a href="#displayName"><span class="icon ion-ios-link"></span></a></span>
+                                        <a name="attemptingLogin"></a>
+                                        <span class="name"><b>attemptingLogin</b><a href="#attemptingLogin"><span class="icon ion-ios-link"></span></a></span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>displayName:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                        <code>attemptingLogin:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="validationMessage"></a>
+                                        <span class="name"><b>validationMessage</b><a href="#validationMessage"><span class="icon ion-ios-link"></span></a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>validationMessage:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -126,28 +158,30 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import * as actions from &#x27;../actions/profile.actions&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import * as actions from &#x27;../actions/status.actions&#x27;;
 
 export interface State {
-  displayName: string;
+  attemptingLogin: boolean;
+  validationMessage: string;
 }
 
 const initialState: State &#x3D; {
-  displayName: &#x27;&#x27;
+  attemptingLogin: false,
+  validationMessage: &#x27;&#x27;
 };
 
 export function reducer(state: State &#x3D; initialState, action: actions.All): State {
   switch (action.type) {
-    case actions.LOAD_PROFILE_SUCCEEDED: {
+    case actions.SET_ATTEMPTING_LOGIN: {
       return {
         ...state,
-        ...action.profile
+        attemptingLogin: action.attemptingLogin
       };
     }
-    case actions.SET_PROFILE_DISPLAYNAME_SUCCEEDED: {
+    case actions.SET_VALIDATION_MESSAGE: {
       return {
         ...state,
-        displayName: action.displayName
+        validationMessage: action.validationMessage
       };
     }
     default: {
