@@ -42,13 +42,11 @@ export class HistoryEntryComponent implements OnInit {
   }
 
   updateGame() {
-    if (this.game) {
-      const payload = <UpdateHistoryItemGamePayload>{
-        itemId: this.item.id,
-        game: getValueFromNgSelect(this.game)
-      };
-      this.store.dispatch(new historyActions.UpdateGame(this.userId, payload));
-    }
+    const payload = <UpdateHistoryItemGamePayload>{
+      itemId: this.item.id,
+      game: getValueFromNgSelect(this.game)
+    };
+    this.store.dispatch(new historyActions.UpdateGame(this.userId, payload));
   }
 
   updatePlatform(platformEl: HTMLSelectElement) {

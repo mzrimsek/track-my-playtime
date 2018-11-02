@@ -444,7 +444,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="91" class="link-to-prism">src/app/features/tracker/components/history-entry/history-entry.component.ts:91</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="89" class="link-to-prism">src/app/features/tracker/components/history-entry/history-entry.component.ts:89</a></div>
                             </td>
                         </tr>
 
@@ -513,7 +513,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/app/features/tracker/components/history-entry/history-entry.component.ts:62</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/features/tracker/components/history-entry/history-entry.component.ts:60</a></div>
                             </td>
                         </tr>
 
@@ -551,7 +551,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="72" class="link-to-prism">src/app/features/tracker/components/history-entry/history-entry.component.ts:72</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="70" class="link-to-prism">src/app/features/tracker/components/history-entry/history-entry.component.ts:70</a></div>
                             </td>
                         </tr>
 
@@ -589,7 +589,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="76" class="link-to-prism">src/app/features/tracker/components/history-entry/history-entry.component.ts:76</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="74" class="link-to-prism">src/app/features/tracker/components/history-entry/history-entry.component.ts:74</a></div>
                             </td>
                         </tr>
 
@@ -696,7 +696,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/features/tracker/components/history-entry/history-entry.component.ts:54</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/features/tracker/components/history-entry/history-entry.component.ts:52</a></div>
                             </td>
                         </tr>
 
@@ -881,13 +881,11 @@ export class HistoryEntryComponent implements OnInit {
   }
 
   updateGame() {
-    if (this.game) {
-      const payload &#x3D; &lt;UpdateHistoryItemGamePayload&gt;{
-        itemId: this.item.id,
-        game: getValueFromNgSelect(this.game)
-      };
-      this.store.dispatch(new historyActions.UpdateGame(this.userId, payload));
-    }
+    const payload &#x3D; &lt;UpdateHistoryItemGamePayload&gt;{
+      itemId: this.item.id,
+      game: getValueFromNgSelect(this.game)
+    };
+    this.store.dispatch(new historyActions.UpdateGame(this.userId, payload));
   }
 
   updatePlatform(platformEl: HTMLSelectElement) {

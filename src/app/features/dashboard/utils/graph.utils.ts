@@ -1,11 +1,9 @@
 import { isSameDay } from 'date-fns';
 
-import { HistoryGrouping } from '../../../shared/models';
+import { DEFAULT_KEY, HistoryGrouping } from '../../../shared/models';
 import { GraphDataItem } from '../models';
 
 import { formatDate } from '../../../shared/utils/date.utils';
-
-export const DEFAULT_KEY = 'Uncategorized';
 
 export const mapToGraphData = (groupings: HistoryGrouping[]): GraphDataItem[] => {
   return groupings.map(grouping => <GraphDataItem>{

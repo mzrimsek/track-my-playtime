@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { HistoryGrouping } from '../../../shared/models';
+import { DEFAULT_KEY, HistoryGrouping } from '../../../shared/models';
 import { LibraryEntry } from '../models';
 
 import { formatTime } from '../../../shared/utils/date.utils';
@@ -11,7 +11,7 @@ export const mapGroupings = (groupings: Observable<HistoryGrouping[]>): Observab
     const firstPlayed = group.historyItems[group.historyItems.length - 1].startTime;
     const lastPlayed = group.historyItems[0].endTime;
     return <LibraryEntry>{
-      game: group.key,
+      game: group.key === '' ? DEFAULT_KEY : group.key,
       totalTime: formatTime(group.totalTime),
       firstPlayed,
       lastPlayed
