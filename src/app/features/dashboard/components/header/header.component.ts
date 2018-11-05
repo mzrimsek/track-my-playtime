@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 
@@ -14,13 +14,11 @@ import { DateRangeType } from '../../models';
   styleUrls: ['./header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
 
   @Input() rangeType: DateRangeType = 'THIS_WEEK';
   @Input() totalTime = 0;
   constructor(private store: Store<State>) { }
-
-  ngOnInit() { }
 
   updateDateRange(dateRangeEl: HTMLSelectElement) {
     switch (dateRangeEl.value) {

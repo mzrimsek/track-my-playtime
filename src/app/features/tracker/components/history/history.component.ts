@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 import { HistoryGrouping } from '../../../../shared/models';
 
@@ -8,12 +8,9 @@ import { HistoryGrouping } from '../../../../shared/models';
   styleUrls: ['./history.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HistoryComponent implements OnInit {
+export class HistoryComponent {
 
   @Input() groups: HistoryGrouping[] = [];
   @Input() platformsOptions: string[] = [];
   @Input() trackedGames: string[] = [];
-  constructor() { }
-
-  ngOnInit() { }
 }
