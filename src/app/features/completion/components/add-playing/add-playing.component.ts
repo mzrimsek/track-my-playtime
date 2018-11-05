@@ -52,7 +52,7 @@ export class AddPlayingComponent implements OnInit {
   }
 
   setStartTime(startTimeEl: HTMLSelectElement) {
-    const startTime = Number.parseInt(startTimeEl.value);
+    const startTime = Number.parseInt(startTimeEl.value, 10);
     this.store.dispatch(new actions.SetStartTime(startTime));
   }
 

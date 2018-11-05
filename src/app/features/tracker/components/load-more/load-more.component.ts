@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 
@@ -11,7 +11,7 @@ import { State } from '../../reducers/root.reducer';
   templateUrl: './load-more.component.html',
   styleUrls: ['./load-more.component.scss']
 })
-export class LoadMoreComponent implements OnInit {
+export class LoadMoreComponent {
 
   AMOUNT_TO_LOAD = 4;
   constructor(private store: Store<State>) { }
@@ -19,6 +19,4 @@ export class LoadMoreComponent implements OnInit {
   loadMoreEntries() {
     this.store.dispatch(new actions.IncrementDaysToShow(this.AMOUNT_TO_LOAD));
   }
-
-  ngOnInit() { }
 }

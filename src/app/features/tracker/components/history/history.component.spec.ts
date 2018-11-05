@@ -1,4 +1,4 @@
-import { Component, NO_ERRORS_SCHEMA, OnInit } from '@angular/core';
+import { Component, NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HistoryComponent } from './history.component';
@@ -114,9 +114,7 @@ describe('HistoryComponent', () => {
                          [groups]="groups"></app-tracker-history>
   `
 })
-class TestWrapperComponent implements OnInit {
+class TestWrapperComponent {
   loading = false;
   groups: HistoryGrouping[] = [];
-
-  ngOnInit() { }
 }

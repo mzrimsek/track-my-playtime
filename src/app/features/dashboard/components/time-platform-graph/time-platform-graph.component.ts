@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 import { GraphDataItem, PieChartConfig } from '../../models';
 
@@ -8,11 +8,8 @@ import { GraphDataItem, PieChartConfig } from '../../models';
   styleUrls: ['./time-platform-graph.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TimePlatformGraphComponent implements OnInit {
+export class TimePlatformGraphComponent {
 
   @Input() data: GraphDataItem[];
   @Input() config: PieChartConfig;
-  constructor() { }
-
-  ngOnInit() { }
 }
