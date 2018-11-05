@@ -61,7 +61,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app/features/dashboard/reducers/root.reducer.ts</code>
+            <code>src/app/features/auth/reducers/status.reducer.ts</code>
         </p>
 
 
@@ -79,7 +79,10 @@
                         <td class="col-md-4">
                             <ul class="index-list">
                                 <li>
-                                        <a href="#dashboard">dashboard</a>
+                                        <a href="#attemptingLogin">attemptingLogin</a>
+                                </li>
+                                <li>
+                                        <a href="#validationMessage">validationMessage</a>
                                 </li>
                             </ul>
                         </td>
@@ -96,13 +99,13 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="dashboard"></a>
-                                        <span class="name"><b>dashboard</b><a href="#dashboard"><span class="icon ion-ios-link"></span></a></span>
+                                        <a name="attemptingLogin"></a>
+                                        <span class="name"><b>attemptingLogin</b><a href="#attemptingLogin"><span class="icon ion-ios-link"></span></a></span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>dashboard:     <code><a href="../interfaces/State.html" target="_self" >DashboardState</a></code>
+                                        <code>attemptingLogin:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -110,7 +113,36 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <i>Type : </i>    <code><a href="../interfaces/State.html" target="_self" >DashboardState</a></code>
+                                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="validationMessage"></a>
+                                        <span class="name"><b>validationMessage</b><a href="#validationMessage"><span class="icon ion-ios-link"></span></a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>validationMessage:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
                                         </td>
                                     </tr>
@@ -126,38 +158,37 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { ActionReducerMap, createFeatureSelector, createSelector } from &#x27;@ngrx/store&#x27;;
-
-import { eachDay } from &#x27;date-fns&#x27;;
-
-import * as fromDateRange from &#x27;./date-range.reducer&#x27;;
-
-export interface DashboardState {
-  dateRange: fromDateRange.State;
-}
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import * as actions from &#x27;../actions/status.actions&#x27;;
 
 export interface State {
-  dashboard: DashboardState;
+  attemptingLogin: boolean;
+  validationMessage: string;
 }
 
-export const reducers: ActionReducerMap&lt;DashboardState, any&gt; &#x3D; {
-  dateRange: fromDateRange.reducer
+const initialState: State &#x3D; {
+  attemptingLogin: false,
+  validationMessage: &#x27;&#x27;
 };
 
-export const _selectDashboardFeature &#x3D; createFeatureSelector&lt;DashboardState&gt;(&#x27;dashboard&#x27;);
-export const _selectDateRange &#x3D; createSelector(_selectDashboardFeature, state &#x3D;&gt; state.dateRange);
-
-export const _selectDateList &#x3D; createSelector(_selectDateRange, dateRange &#x3D;&gt; {
-  return eachDay(dateRange.startDay, dateRange.endDay);
-});
-export const _selectRangeType &#x3D; createSelector(_selectDateRange, dateRange &#x3D;&gt; dateRange.type);
-
-const dashboardSelectors &#x3D; {
-  dateList: _selectDateList,
-  rangeType: _selectRangeType
-};
-
-export default dashboardSelectors;
+export function reducer(state: State &#x3D; initialState, action: actions.All): State {
+  switch (action.type) {
+    case actions.SET_ATTEMPTING_LOGIN: {
+      return {
+        ...state,
+        attemptingLogin: action.attemptingLogin
+      };
+    }
+    case actions.SET_VALIDATION_MESSAGE: {
+      return {
+        ...state,
+        validationMessage: action.validationMessage
+      };
+    }
+    default: {
+      return state;
+    }
+  }
+}
 </code></pre>
     </div>
 </div>

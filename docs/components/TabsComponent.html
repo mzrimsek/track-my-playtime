@@ -66,12 +66,6 @@
 
 
 
-    <p class="comment">
-        <h3>Implements</h3>
-    </p>
-    <p class="comment">
-                <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
-    </p>
 
 
 <section>
@@ -134,9 +128,6 @@
                 <tr>
                     <td class="col-md-4">
                         <ul class="index-list">
-                            <li>
-                                <a href="#ngOnInit">ngOnInit</a>
-                            </li>
                             <li>
                                 <a href="#setVisibleTab">setVisibleTab</a>
                             </li>
@@ -300,44 +291,6 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="ngOnInit"></a>
-                        <span class="name">
-                            <b>
-                            ngOnInit
-                            </b>
-                            <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-<code>ngOnInit()</code>
-                    </td>
-                </tr>
-
-
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/features/completion/components/tabs/tabs.component.ts:24</a></div>
-                            </td>
-                        </tr>
-
-
-                <tr>
-                    <td class="col-md-4">
-
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                            </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
                         <a name="setVisibleTab"></a>
                         <span class="name">
                             <b>
@@ -356,7 +309,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/features/completion/components/tabs/tabs.component.ts:26</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/features/completion/components/tabs/tabs.component.ts:24</a></div>
                             </td>
                         </tr>
 
@@ -410,7 +363,7 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { ChangeDetectionStrategy, Component, Input, OnInit } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { ChangeDetectionStrategy, Component, Input } from &#x27;@angular/core&#x27;;
 
 import { Store } from &#x27;@ngrx/store&#x27;;
 
@@ -426,14 +379,12 @@ import { TabType } from &#x27;../../models&#x27;;
   styleUrls: [&#x27;./tabs.component.scss&#x27;],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TabsComponent implements OnInit {
+export class TabsComponent {
 
   @Input() visibleTab: TabType &#x3D; &#x27;PLAYING&#x27;;
   @Input() playingCount &#x3D; 0;
   @Input() completedCount &#x3D; 0;
   constructor(private store: Store&lt;State&gt;) { }
-
-  ngOnInit() { }
 
   setVisibleTab(tab: TabType) {
     this.store.dispatch(new actions.SetVisibleTab(tab));

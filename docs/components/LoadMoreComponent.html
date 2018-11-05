@@ -66,12 +66,6 @@
 
 
 
-    <p class="comment">
-        <h3>Implements</h3>
-    </p>
-    <p class="comment">
-                <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
-    </p>
 
 
 <section>
@@ -130,6 +124,8 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
                                 <a href="#AMOUNT_TO_LOAD">AMOUNT_TO_LOAD</a>
                             </li>
                         </ul>
@@ -146,9 +142,6 @@
                         <ul class="index-list">
                             <li>
                                 <a href="#loadMoreEntries">loadMoreEntries</a>
-                            </li>
-                            <li>
-                                <a href="#ngOnInit">ngOnInit</a>
                             </li>
                         </ul>
                     </td>
@@ -258,44 +251,6 @@
                 </tr>
             </tbody>
         </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="ngOnInit"></a>
-                        <span class="name">
-                            <b>
-                            ngOnInit
-                            </b>
-                            <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-<code>ngOnInit()</code>
-                    </td>
-                </tr>
-
-
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/features/tracker/components/load-more/load-more.component.ts:23</a></div>
-                            </td>
-                        </tr>
-
-
-                <tr>
-                    <td class="col-md-4">
-
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                            </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
 </section>
 
     <section>
@@ -310,6 +265,8 @@
                         <a name="AMOUNT_TO_LOAD"></a>
                         <span class="name">
                             <b>
+                                <span class="modifier">Private</span>
+                                <span class="modifier">Readonly</span>
                             AMOUNT_TO_LOAD
                             </b>
                             <a href="#AMOUNT_TO_LOAD"><span class="icon ion-ios-link"></span></a>
@@ -318,7 +275,7 @@
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <code>AMOUNT_TO_LOAD:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                        <span class="modifier-icon icon ion-ios-reset"></span><code>AMOUNT_TO_LOAD:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
 </code>
                     </td>
                 </tr>
@@ -348,7 +305,7 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component } from &#x27;@angular/core&#x27;;
 
 import { Store } from &#x27;@ngrx/store&#x27;;
 
@@ -361,16 +318,14 @@ import { State } from &#x27;../../reducers/root.reducer&#x27;;
   templateUrl: &#x27;./load-more.component.html&#x27;,
   styleUrls: [&#x27;./load-more.component.scss&#x27;]
 })
-export class LoadMoreComponent implements OnInit {
+export class LoadMoreComponent {
 
-  AMOUNT_TO_LOAD &#x3D; 4;
+  private readonly AMOUNT_TO_LOAD &#x3D; 4;
   constructor(private store: Store&lt;State&gt;) { }
 
   loadMoreEntries() {
     this.store.dispatch(new actions.IncrementDaysToShow(this.AMOUNT_TO_LOAD));
   }
-
-  ngOnInit() { }
 }
 </code></pre>
     </div>
