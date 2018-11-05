@@ -1,7 +1,7 @@
 import { addDays } from 'date-fns';
 import { of } from 'rxjs';
 
-import { HistoryGrouping } from '../../../shared/models';
+import { DEFAULT_KEY, HistoryGrouping } from '../../../shared/models';
 
 import { mapGroupings } from './library-data.utils';
 
@@ -22,6 +22,20 @@ describe('Library Data Utils', () => {
           firstPlayed: addDays(start, 3).getTime(),
           lastPlayed: addDays(start, 4).getTime() + 3000
         }]);
+      });
+    });
+
+    it('Should set the key to the default value when the key is empty', () => {
+      const grouping: HistoryGrouping = {
+        ...testGroupings[0],
+        key: ''
+      };
+      const groupings$ = of([grouping]);
+
+      const result = mapGroupings(groupings$);
+
+      result.subscribe(res => {
+        expect(res[0].game).toBe(DEFAULT_KEY);
       });
     });
   });

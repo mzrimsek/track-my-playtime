@@ -1,9 +1,9 @@
 import { addDays, eachDay } from 'date-fns';
 
-import { HistoryGrouping } from '../../../shared/models';
+import { DEFAULT_KEY, HistoryGrouping } from '../../../shared/models';
 import { GraphDataItem } from '../models';
 
-import { DEFAULT_KEY, mapToGraphData, padDateGraphData, sortGraphDataByValue } from './graph.utils';
+import { mapToGraphData, padDateGraphData, sortGraphDataByValue } from './graph.utils';
 
 import { history } from '../../../test-helpers';
 
