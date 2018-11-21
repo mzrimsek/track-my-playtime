@@ -48,7 +48,8 @@ describe('CompletedItemComponent', () => {
       item: {
         id: '1',
         startEntryId: 'start 1',
-        endEntryId: 'end 1'
+        endEntryId: 'end 1',
+        notes: ''
       },
       completedItem: {
         game: 'some game',

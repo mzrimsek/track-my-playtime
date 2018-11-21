@@ -11,13 +11,15 @@ export namespace progress {
   export const mockItem: ProgressEntity = {
     id: 'some id',
     startEntryId: 'some start id',
-    endEntryId: 'some end id'
+    endEntryId: 'some end id',
+    notes: 'some notes'
   };
 
   export const mockItemNoEnd: ProgressEntity = {
     id: 'some id 2',
     startEntryId: 'some start id 2',
-    endEntryId: ''
+    endEntryId: '',
+    notes: ''
   };
 
   export const initialProgressState: ProgressState = {
@@ -45,7 +47,8 @@ export namespace progress {
     return {
       id,
       startEntryId: 'start entry id',
-      endEntryId
+      endEntryId,
+      notes: 'some notes'
     };
   };
 
