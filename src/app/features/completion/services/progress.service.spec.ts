@@ -72,11 +72,13 @@ describe('ProgressService', () => {
         expect(res).toEqual([{
           id: '1',
           startEntryId: 'start id 1',
-          endEntryId: ''
+          endEntryId: '',
+          notes: ''
         }, {
           id: '2',
           startEntryId: 'start id 2',
-          endEntryId: 'end id 1'
+          endEntryId: 'end id 1',
+          notes: ''
         }]);
       });
     });

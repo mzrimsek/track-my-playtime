@@ -21,7 +21,7 @@ export class ProgressService {
 
   getProgressList(userId: string): Observable<ProgressEntity[]> {
     const progressList = this.getUserItemCollection(userId).valueChanges().pipe(first());
-    return progressList.pipe(map(progressListItems => progressListItems.map(progress => progress as ProgressEntity)));
+    return progressList.pipe(map(progressListItems => progressListItems.map(progress => this.getProgressEntity(progress))));
   }
 
   saveAddPlaying(addPlaying: AddPlaying): Observable<ProgressEntity> {
@@ -53,12 +53,22 @@ export class ProgressService {
   private getUserItemCollection(userId: string): AngularFirestoreCollection<FirestoreProgressItem> {
     return this.progressCollection.doc(userId).collection('items');
   }
+
+  private getProgressEntity(progress: FirestoreProgressItem): ProgressEntity {
+    return {
+      id: progress.id,
+      startEntryId: progress.startEntryId,
+      endEntryId: progress.endEntryId,
+      notes: progress.notes ? progress.notes : ''
+    };
+  }
 }
 
 export interface FirestoreProgressItem {
   id: string;
   startEntryId: string;
   endEntryId: string;
+  notes?: string;
 }
 
 interface ProgressCollection {
