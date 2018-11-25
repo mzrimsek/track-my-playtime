@@ -6,7 +6,7 @@ import { first, map } from 'rxjs/operators';
 
 import { ProgressEntity } from '../../../shared/reducers/progress.reducer';
 
-import { MarkCompletePayload } from '../../../shared/models';
+import { MarkCompletePayload, SetNotesPayload } from '../../../shared/models';
 import { AddPlaying } from '../models';
 
 import { getUUID } from '../../../shared/utils/uuid.utils';
@@ -39,6 +39,12 @@ export class ProgressService {
   remove(userId: string, itemId: string): Observable<string> {
     this.getUserItemCollection(userId).doc(itemId).delete();
     return of(itemId);
+  }
+
+  setNotes(userId: string, payload: SetNotesPayload): Observable<SetNotesPayload> {
+    const { itemId, notes } = payload;
+    this.getUserItemCollection(userId).doc(itemId).update({ notes });
+    return of(payload);
   }
 
   getNewProgressItem(addPlaying: AddPlaying): FirestoreProgressItem {

@@ -66,4 +66,16 @@ export class ProgressEffects {
               new markCompleteActions.Remove(itemId)
             ]),
             catchError(err => of(new appActions.Error(progressActions.REMOVE_PROGRESS_ITEM, err.message))))));
+
+  @Effect() setNotes$ =
+    this.actions$
+      .ofType(progressActions.SET_NOTES)
+      .pipe(
+        map(action => action as progressActions.SetNotes),
+        switchMap(action => this.progressService.setNotes(action.userId, action.payload)
+          .pipe(
+            mergeMap(data => [
+              new progressActions.SetNotesSucceeded(data)
+            ]),
+            catchError(err => of(new appActions.Error(progressActions.SET_NOTES, err.message))))));
 }

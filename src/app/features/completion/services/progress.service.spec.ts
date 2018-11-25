@@ -3,7 +3,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 
 import { FirestoreProgressItem, ProgressService } from './progress.service';
 
-import { MarkCompletePayload } from '../../../shared/models';
+import { MarkCompletePayload, SetNotesPayload } from '../../../shared/models';
 import { AddPlaying } from '../models';
 
 import { progress } from '../../../test-helpers';
@@ -166,7 +166,7 @@ describe('ProgressService', () => {
     });
   });
 
-  describe('Remove', () => {
+  describe('remove', () => {
     it('Should call progress collection doc with user id', () => {
       const userId = 'user id';
       service.remove(userId, '');
@@ -194,6 +194,41 @@ describe('ProgressService', () => {
       const result = service.remove('', itemId);
       result.subscribe(res => {
         expect(res).toBe(itemId);
+      });
+    });
+  });
+
+  describe('setNotes', () => {
+    const payload: SetNotesPayload = {
+      itemId: 'some item id',
+      notes: 'some notes'
+    };
+
+    it('Should call progress collection doc with user id', () => {
+      const userId = 'user id';
+      service.setNotes(userId, payload);
+      expect(progress.firestore.collectionStub.doc).toHaveBeenCalledWith(userId);
+    });
+
+    it('Should call progress document collection with "items"', () => {
+      service.setNotes('', payload);
+      expect(progress.firestore.documentStub.collection).toHaveBeenCalledWith('items');
+    });
+
+    it('Should call item collection doc with payload item id', () => {
+      service.setNotes('', payload);
+      expect(progress.firestore.itemsCollectionStub.doc).toHaveBeenCalledWith(payload.itemId);
+    });
+
+    it('Should call item document update with correct end entry id', () => {
+      service.setNotes('', payload);
+      expect(progress.firestore.itemDocumentStub.update).toHaveBeenCalledWith({ notes: payload.notes });
+    });
+
+    it('Should return correct data', () => {
+      const result = service.setNotes('', payload);
+      result.subscribe(res => {
+        expect(res).toEqual(payload);
       });
     });
   });
