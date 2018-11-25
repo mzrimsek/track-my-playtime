@@ -86,7 +86,8 @@ describe('Add Playing Actions', () => {
       expect(action.item).toEqual({
         id: 'some id',
         startEntryId: 'some entry id',
-        endEntryId: ''
+        endEntryId: '',
+        notes: ''
       });
     });
   });

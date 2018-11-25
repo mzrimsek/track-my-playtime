@@ -52,7 +52,8 @@ export class ProgressService {
     return {
       id,
       startEntryId: addPlaying.startEntryId,
-      endEntryId: ''
+      endEntryId: '',
+      notes: ''
     };
   }
 

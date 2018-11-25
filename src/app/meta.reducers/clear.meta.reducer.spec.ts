@@ -195,12 +195,14 @@ describe('Clear Meta Reducer', () => {
           '1': {
             id: '1',
             startEntryId: 'start 1',
-            endEntryId: 'end 1'
+            endEntryId: 'end 1',
+            notes: ''
           },
           '2': {
             id: '2',
             startEntryId: 'start 2',
-            endEntryId: 'end 2'
+            endEntryId: 'end 2',
+            notes: ''
           }
         },
         loading: true

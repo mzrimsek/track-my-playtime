@@ -93,7 +93,8 @@ describe('ProgressService', () => {
     const newItem: FirestoreProgressItem = {
       id: 'some id',
       startEntryId: addPlaying.startEntryId,
-      endEntryId: ''
+      endEntryId: '',
+      notes: ''
     };
 
     it('Should call history collection doc with item user id', () => {
@@ -125,7 +126,8 @@ describe('ProgressService', () => {
         expect(res).toEqual({
           id: newItem.id,
           startEntryId: newItem.startEntryId,
-          endEntryId: ''
+          endEntryId: '',
+          notes: ''
         });
       });
     });
