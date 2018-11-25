@@ -24,6 +24,7 @@ import { ProgressService } from './services/progress.service';
 import { TimePipe } from '../../shared/pipes/time.pipe';
 
 import { reducers } from './reducers/root.reducer';
+import { SetNotesComponent } from './components/set-notes/set-notes.component';
 
 @NgModule({
   imports: [
@@ -43,7 +44,8 @@ import { reducers } from './reducers/root.reducer';
     AddPlayingComponent,
     PlayingItemComponent,
     CompletedItemComponent,
-    TabsComponent],
+    TabsComponent,
+    SetNotesComponent],
   providers: [
     UserService,
     ProgressService,

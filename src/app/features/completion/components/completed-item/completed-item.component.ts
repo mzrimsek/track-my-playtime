@@ -21,6 +21,7 @@ export class CompletedItemComponent implements OnInit {
 
   @Input() displayData: CompletedDisplayData;
   userId = '';
+  editNotes = false;
   icons = {
     remove: faTrash
   };
@@ -32,5 +33,9 @@ export class CompletedItemComponent implements OnInit {
 
   remove() {
     this.store.dispatch(new progressActions.RemoveProgressItem(this.userId, this.displayData.item.id));
+  }
+
+  setEditNotes(editNotes: boolean) {
+    this.editNotes = editNotes;
   }
 }

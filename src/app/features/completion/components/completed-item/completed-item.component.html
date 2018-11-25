@@ -4,10 +4,27 @@
       <div class="game">{{ displayData.completedItem.game }}</div>
       <div class="platform">({{ displayData.completedItem.platform }})</div>
     </div>
+
     <div class="time">
       <div class="played">Playtime: {{ displayData.completedItem.timePlayed | time }}</div>
       <div class="start">Start: {{ displayData.completedItem.startTime | date:'M/d/y - hh:mm a' }}</div>
       <div class="end">End: {{ displayData.completedItem.endTime | date:'M/d/y - hh:mm a' }}</div>
+    </div>
+
+    <div class="notes">
+      <div *ngIf="!editName"
+           class="no-edit">
+        <div class="detail"><span>Notes</span>: {{ displayData.progressItem.notes }}</div>
+        <button data-tracking-category="completedEditNotes"
+                class="icon-button fa-lg"
+                (click)="setEditName(true)">
+          <fa-icon [icon]="icons.edit"></fa-icon>
+        </button>
+      </div>
+
+      <app-completion-set-notes *ngIf="editNotes"
+                                [itemId]="displayData.progressItem.id"
+                                (finishEdit)="setEditNotes(false)"></app-completion-set-notes>
     </div>
   </div>
 
