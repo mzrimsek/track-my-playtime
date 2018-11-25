@@ -5,7 +5,7 @@ import { FirestoreProgressItem } from '../features/completion/services/progress.
 import { ProgressEntity, State as ProgressState } from '../shared/reducers/progress.reducer';
 
 import { AddPlaying } from '../features/completion/models';
-import { MarkCompletePayload } from '../shared/models';
+import { MarkCompletePayload, SetNotesPayload } from '../shared/models';
 
 export namespace progress {
   export const mockItem: ProgressEntity = {
@@ -39,6 +39,9 @@ export namespace progress {
       return of(itemId);
     }
     markCompleted(_userId: string, payload: MarkCompletePayload): Observable<MarkCompletePayload> {
+      return of(payload);
+    }
+    setNotes(_userId: string, payload: SetNotesPayload): Observable<SetNotesPayload> {
       return of(payload);
     }
   }
