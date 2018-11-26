@@ -59,6 +59,7 @@ describe('CompletedItemComponent', () => {
         timePlayed: 3
       }
     };
+    component.editNotes = false;
     fixture.detectChanges();
   }));
 
@@ -75,4 +76,47 @@ describe('CompletedItemComponent', () => {
     removeButton.click();
     expect(store.dispatch).toHaveBeenCalledWith(new progressActions.RemoveProgressItem(user.mockUser.uid, '1'));
   }));
+
+  describe('Edit notes', () => {
+    describe('When editNotes is true', () => {
+      beforeEach(async(() => {
+        component.editNotes = true;
+        fixture.detectChanges();
+      }));
+
+      it('Should not display no edit', async(() => {
+        const noEdit = fixture.nativeElement.querySelector('.completed-item .info .notes .no-edit');
+        expect(noEdit).toBeFalsy();
+      }));
+
+      it('Should display edit display name component', async(() => {
+        const editNotes = fixture.nativeElement.querySelector('.completed-item .info .notes app-completion-set-notes');
+        expect(editNotes).toBeTruthy();
+      }));
+
+      it('Should set editNotes to false on finishEdit', () => {
+        const editNotes = fixture.nativeElement.querySelector('.completed-item .info .notes app-completion-set-notes');
+        editNotes.dispatchEvent(new Event('finishEdit'));
+        expect(component.editNotes).toBe(false);
+      });
+    });
+
+    describe('When editNotes is false', () => {
+      it('Should display no edit', async(() => {
+        const noEdit = fixture.nativeElement.querySelector('.completed-item .info .notes .no-edit');
+        expect(noEdit).toBeTruthy();
+      }));
+
+      it('Should not display set notes component', async(() => {
+        const editDisplayName = fixture.nativeElement.querySelector('.completed-item .info .notes app-completion-set-notes');
+        expect(editDisplayName).toBeFalsy();
+      }));
+
+      it('Should set editNotes to true when edit button is clicked', async(() => {
+        const editButton = fixture.nativeElement.querySelector('.completed-item .info .notes .no-edit button');
+        editButton.click();
+        expect(component.editNotes).toBe(true);
+      }));
+    });
+  });
 });
