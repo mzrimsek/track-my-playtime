@@ -26,7 +26,7 @@ describe('EditDisplayNameComponent', () => {
       imports: [
         StoreModule.forRoot({
           ...fromRoot.reducers,
-          'profile': combineReducers(fromProfile.reducers),
+          'profile': combineReducers(fromProfile.reducers)
         })
       ],
       providers: [{ provide: UserService, useValue: user.userServiceStub }],
