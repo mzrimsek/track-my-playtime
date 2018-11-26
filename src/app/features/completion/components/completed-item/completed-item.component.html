@@ -12,18 +12,18 @@
     </div>
 
     <div class="notes">
-      <div *ngIf="!editName"
+      <div *ngIf="!editNotes"
            class="no-edit">
-        <div class="detail"><span>Notes</span>: {{ displayData.progressItem.notes }}</div>
+        <div class="detail"><span>Notes</span>: {{ displayData.item.notes }}</div>
         <button data-tracking-category="completedEditNotes"
                 class="icon-button fa-lg"
-                (click)="setEditName(true)">
+                (click)="setEditNotes(true)">
           <fa-icon [icon]="icons.edit"></fa-icon>
         </button>
       </div>
 
       <app-completion-set-notes *ngIf="editNotes"
-                                [itemId]="displayData.progressItem.id"
+                                [itemId]="displayData.item.id"
                                 (finishEdit)="setEditNotes(false)"></app-completion-set-notes>
     </div>
   </div>
