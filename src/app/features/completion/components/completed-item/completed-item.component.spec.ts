@@ -59,7 +59,6 @@ describe('CompletedItemComponent', () => {
         timePlayed: 3
       }
     };
-    component.editNotes = false;
     fixture.detectChanges();
   }));
 
@@ -72,7 +71,7 @@ describe('CompletedItemComponent', () => {
   }));
 
   it('Should dispatch RemoveProgressItem when remove button is clicked', async(() => {
-    const removeButton = fixture.nativeElement.querySelector('button');
+    const removeButton = fixture.nativeElement.querySelector('.actions .remove');
     removeButton.click();
     expect(store.dispatch).toHaveBeenCalledWith(new progressActions.RemoveProgressItem(user.mockUser.uid, '1'));
   }));
