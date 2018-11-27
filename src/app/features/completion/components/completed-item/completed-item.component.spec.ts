@@ -93,11 +93,11 @@ describe('CompletedItemComponent', () => {
         expect(editNotes).toBeTruthy();
       }));
 
-      it('Should set editNotes to false on finishEdit', () => {
+      it('Should set editNotes to false on finishEdit', async(() => {
         const editNotes = fixture.nativeElement.querySelector('.completed-item .info .notes app-completion-set-notes');
         editNotes.dispatchEvent(new Event('finishEdit'));
         expect(component.editNotes).toBe(false);
-      });
+      }));
     });
 
     describe('When editNotes is false', () => {
