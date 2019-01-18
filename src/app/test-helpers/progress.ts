@@ -5,19 +5,21 @@ import { FirestoreProgressItem } from '../features/completion/services/progress.
 import { ProgressEntity, State as ProgressState } from '../shared/reducers/progress.reducer';
 
 import { AddPlaying } from '../features/completion/models';
-import { MarkCompletePayload } from '../shared/models';
+import { MarkCompletePayload, SetNotesPayload } from '../shared/models';
 
 export namespace progress {
   export const mockItem: ProgressEntity = {
     id: 'some id',
     startEntryId: 'some start id',
-    endEntryId: 'some end id'
+    endEntryId: 'some end id',
+    notes: 'some notes'
   };
 
   export const mockItemNoEnd: ProgressEntity = {
     id: 'some id 2',
     startEntryId: 'some start id 2',
-    endEntryId: ''
+    endEntryId: '',
+    notes: ''
   };
 
   export const initialProgressState: ProgressState = {
@@ -39,13 +41,17 @@ export namespace progress {
     markCompleted(_userId: string, payload: MarkCompletePayload): Observable<MarkCompletePayload> {
       return of(payload);
     }
+    setNotes(_userId: string, payload: SetNotesPayload): Observable<SetNotesPayload> {
+      return of(payload);
+    }
   }
 
   export const getProgressEntity = (id: string, endEntryId = ''): ProgressEntity => {
     return {
       id,
       startEntryId: 'start entry id',
-      endEntryId
+      endEntryId,
+      notes: 'some notes'
     };
   };
 

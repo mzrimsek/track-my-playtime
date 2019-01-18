@@ -2,7 +2,7 @@ import * as actions from '../actions/progress.actions';
 
 import { reducer, State } from './progress.reducer';
 
-import { MarkCompletePayload } from '../models';
+import { MarkCompletePayload, SetNotesPayload } from '../models';
 
 import { progress } from '../../test-helpers';
 
@@ -83,7 +83,7 @@ describe('Progress Reducer', () => {
     });
   });
 
-  it('Should remove all items when ClearProgressItems is dispatched', () => {
+  it('Should update endEntryId when MarkCompleteSucceeded is dispatched', () => {
     const item1 = progress.getProgressEntity('1');
     const item2 = progress.getProgressEntity('2', 'some end entry id');
     const initialState: State = {
@@ -109,6 +109,33 @@ describe('Progress Reducer', () => {
           endEntryId: markCompletePayload.endEntryId
         },
         [item2.id]: item2
+      }
+    });
+  });
+
+  it('Should set notes when SetNotesSucceeded is dispatched', () => {
+    const item1 = progress.getProgressEntity('1');
+    const initialState: State = {
+      ids: [item1.id],
+      entities: {
+        [item1.id]: item1
+      },
+      loading: false
+    };
+    const setNotesPlayload: SetNotesPayload = {
+      itemId: item1.id,
+      notes: 'some notes'
+    };
+
+    const newState = reducer(initialState, new actions.SetNotesSucceeded(setNotesPlayload));
+
+    expect(newState).toEqual({
+      ...initialState,
+      entities: {
+        [item1.id]: {
+          ...item1,
+          notes: setNotesPlayload.notes
+        }
       }
     });
   });

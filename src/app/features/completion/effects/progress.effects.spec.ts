@@ -14,7 +14,7 @@ import * as progressActions from '../../../shared/actions/progress.actions';
 import * as addPlayingActions from '../actions/add-playing.actions';
 import * as markCompleteActions from '../actions/mark-complete.actions';
 
-import { MarkCompletePayload } from '../../../shared/models';
+import { MarkCompletePayload, SetNotesPayload } from '../../../shared/models';
 
 import { progress } from '../../../test-helpers';
 
@@ -178,6 +178,54 @@ describe('Progress Effects', () => {
       spyOn(progressService, 'markCompleted').and.callThrough();
       effects.markCompleted$.subscribe(() => {
         expect(progressService.markCompleted).toHaveBeenCalled();
+      });
+    });
+  });
+
+  describe('Set Notes', () => {
+    it('Should dispatch SetNotesSucceeded', () => {
+      const payload: SetNotesPayload = {
+        itemId: 'item id',
+        notes: ''
+      };
+      const action = new progressActions.SetNotes('some user id', payload);
+
+      actions = hot('-a', { a: action });
+      const expected = cold('-(b)', {
+        b: new progressActions.SetNotesSucceeded(payload)
+      });
+
+      expect(effects.setNotes$).toBeObservable(expected);
+    });
+
+    it('Should dispatch Error on error', () => {
+      const action = new progressActions.SetNotes('some user id', {
+        itemId: 'item id',
+        notes: ''
+      });
+      const message = 'Something went terribly wrong';
+
+      actions = hot('-a', { a: action });
+      const expected = cold('-(b)', {
+        b: new appActions.Error(progressActions.SET_NOTES, message)
+      });
+
+      spyOn(progressService, 'setNotes').and.callFake(() => throwError({ message }));
+      expect(effects.setNotes$).toBeObservable(expected);
+    });
+
+    it('Should call ProgressService setNotes', () => {
+      const action = new progressActions.SetNotes('some user id', {
+        itemId: 'item id',
+        notes: ''
+      });
+
+      actions = new ReplaySubject(1);
+      actions.next(action);
+
+      spyOn(progressService, 'setNotes').and.callThrough();
+      effects.setNotes$.subscribe(() => {
+        expect(progressService.setNotes).toHaveBeenCalled();
       });
     });
   });

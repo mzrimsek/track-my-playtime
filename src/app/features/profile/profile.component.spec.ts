@@ -107,11 +107,11 @@ describe('ProfileComponent', () => {
         expect(editDisplayName).toBeTruthy();
       }));
 
-      it('Should set editName to false on finishEdit', () => {
+      it('Should set editName to false on finishEdit', async(() => {
         const editDisplayName = fixture.nativeElement.querySelector('.profile .name app-profile-edit-display-name');
         editDisplayName.dispatchEvent(new Event('finishEdit'));
         expect(component.editName).toBe(false);
-      });
+      }));
     });
 
     describe('When editName is false', () => {

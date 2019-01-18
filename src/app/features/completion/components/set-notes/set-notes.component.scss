@@ -1,0 +1,23 @@
+@import "../../../../../variables.scss";
+
+.edit-notes {
+  display: flex;
+
+  input {
+    padding: 10px;
+  }
+
+  .actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .confirm {
+      color: $good-action-color;
+    }
+
+    .cancel {
+      color: $bad-action-color;
+    }
+  }
+}

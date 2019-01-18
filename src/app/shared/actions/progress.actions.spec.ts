@@ -6,7 +6,8 @@ describe('Progress Actions', () => {
       const action = new actions.AddNewProgressItem({
         id: '',
         startEntryId: '',
-        endEntryId: ''
+        endEntryId: '',
+        notes: ''
       });
       expect(action.type).toBe(actions.ADD_NEW_PROGRESS_ITEM);
     });
@@ -15,12 +16,14 @@ describe('Progress Actions', () => {
       const action = new actions.AddNewProgressItem({
         id: 'some id',
         startEntryId: 'some entry id',
-        endEntryId: ''
+        endEntryId: '',
+        notes: ''
       });
       expect(action.item).toEqual({
         id: 'some id',
         startEntryId: 'some entry id',
-        endEntryId: ''
+        endEntryId: '',
+        notes: ''
       });
     });
   });
@@ -47,12 +50,14 @@ describe('Progress Actions', () => {
       const action = new actions.LoadProgressItemsSucceeded([{
         id: '1',
         startEntryId: 'a',
-        endEntryId: 'b'
+        endEntryId: 'b',
+        notes: 'new game plus'
       }]);
       expect(action.items).toEqual([{
         id: '1',
         startEntryId: 'a',
-        endEntryId: 'b'
+        endEntryId: 'b',
+        notes: 'new game plus'
       }]);
     });
   });
@@ -132,6 +137,56 @@ describe('Progress Actions', () => {
       expect(action.payload).toEqual({
         itemId: 'some item id',
         endEntryId: 'some end id'
+      });
+    });
+  });
+
+  describe('SetNotes', () => {
+    it('Should have correct type', () => {
+      const action = new actions.SetNotes('some user id', {
+        itemId: 'some item id',
+        notes: 'some notes'
+      });
+      expect(action.type).toBe(actions.SET_NOTES);
+    });
+
+    it('Should have correct userId', () => {
+      const action = new actions.SetNotes('some user id', {
+        itemId: 'some item id',
+        notes: 'set notes'
+      });
+      expect(action.userId).toBe('some user id');
+    });
+
+    it('Should have correct payload', () => {
+      const action = new actions.SetNotes('some user id', {
+        itemId: 'some item id',
+        notes: 'some notes'
+      });
+      expect(action.payload).toEqual({
+        itemId: 'some item id',
+        notes: 'some notes'
+      });
+    });
+  });
+
+  describe('SetNotesSucceeded', () => {
+    it('Should have correct type', () => {
+      const action = new actions.SetNotesSucceeded({
+        itemId: 'some item id',
+        notes: 'some notes'
+      });
+      expect(action.type).toBe(actions.SET_NOTES_SUCCEEDED);
+    });
+
+    it('Should have correct payload', () => {
+      const action = new actions.SetNotesSucceeded({
+        itemId: 'some item id',
+        notes: 'some notes'
+      });
+      expect(action.payload).toEqual({
+        itemId: 'some item id',
+        notes: 'some notes'
       });
     });
   });
