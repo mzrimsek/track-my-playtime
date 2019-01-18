@@ -99,7 +99,8 @@ describe('Shared Root Reducer', () => {
             'some id': {
               id: 'some id',
               startEntryId: item1.id,
-              endEntryId: ''
+              endEntryId: '',
+              notes: ''
             }
           },
           loading: false
@@ -571,12 +572,14 @@ describe('Shared Root Reducer', () => {
             '1': {
               id: '1',
               startEntryId: 'start 1',
-              endEntryId: 'end 1'
+              endEntryId: 'end 1',
+              notes: ''
             },
             '2': {
               id: '2',
               startEntryId: 'start 2',
-              endEntryId: 'end 2'
+              endEntryId: 'end 2',
+              notes: ''
             }
           },
           loading: false
@@ -601,12 +604,14 @@ describe('Shared Root Reducer', () => {
             '1': {
               id: '1',
               startEntryId: 'start 1',
-              endEntryId: 'end 1'
+              endEntryId: 'end 1',
+              notes: ''
             },
             '2': {
               id: '2',
               startEntryId: 'start 2',
-              endEntryId: ''
+              endEntryId: '',
+              notes: ''
             }
           },
           loading: false
@@ -624,7 +629,8 @@ describe('Shared Root Reducer', () => {
         expect(result).toEqual([{
           id: '2',
           startEntryId: 'start 2',
-          endEntryId: ''
+          endEntryId: '',
+          notes: ''
         }]);
       });
     });
@@ -651,12 +657,14 @@ describe('Shared Root Reducer', () => {
             '1': {
               id: '1',
               startEntryId: 'start 1',
-              endEntryId: ''
+              endEntryId: '',
+              notes: ''
             },
             '2': {
               id: '2',
               startEntryId: 'start 2',
-              endEntryId: ''
+              endEntryId: '',
+              notes: ''
             }
           },
           loading: false
@@ -681,12 +689,14 @@ describe('Shared Root Reducer', () => {
             '1': {
               id: '1',
               startEntryId: 'start 1',
-              endEntryId: 'end 1'
+              endEntryId: 'end 1',
+              notes: ''
             },
             '2': {
               id: '2',
               startEntryId: 'start 2',
-              endEntryId: ''
+              endEntryId: '',
+              notes: ''
             }
           },
           loading: false
@@ -704,7 +714,8 @@ describe('Shared Root Reducer', () => {
         expect(result).toEqual([{
           id: '1',
           startEntryId: 'start 1',
-          endEntryId: 'end 1'
+          endEntryId: 'end 1',
+          notes: ''
         }]);
       });
     });

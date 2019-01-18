@@ -18,7 +18,8 @@ describe('Display Data Utils', () => {
       const progressItems: Observable<ProgressItem[]> = of([{
         id: '1',
         startEntryId: 'some start id',
-        endEntryId: 'some end id'
+        endEntryId: 'some end id',
+        notes: ''
       }]);
       const grouping: HistoryGrouping = {
         key: 'some game',
@@ -46,7 +47,8 @@ describe('Display Data Utils', () => {
       const progressItems: Observable<ProgressItem[]> = of([{
         id: '1',
         startEntryId: 'some start id',
-        endEntryId: 'some end id'
+        endEntryId: 'some end id',
+        notes: ''
       }]);
       const grouping: HistoryGrouping = {
         key: 'some game',
@@ -78,7 +80,8 @@ describe('Display Data Utils', () => {
           item: {
             id: '1',
             startEntryId: 'some start id',
-            endEntryId: 'some end id'
+            endEntryId: 'some end id',
+            notes: ''
           },
           completedItem: {
             game: 'some game',
@@ -104,7 +107,8 @@ describe('Display Data Utils', () => {
       const progressItems: Observable<ProgressItem[]> = of([{
         id: '1',
         startEntryId: 'some start id',
-        endEntryId: ''
+        endEntryId: '',
+        notes: ''
       }]);
       const grouping: HistoryGrouping = {
         key: 'some game',
@@ -131,7 +135,8 @@ describe('Display Data Utils', () => {
       const progressItems: Observable<ProgressItem[]> = of([{
         id: '1',
         startEntryId: 'some start id',
-        endEntryId: ''
+        endEntryId: '',
+        notes: ''
       }]);
       const grouping: HistoryGrouping = {
         key: 'some game',
@@ -161,7 +166,8 @@ describe('Display Data Utils', () => {
           item: {
             id: '1',
             startEntryId: 'some start id',
-            endEntryId: ''
+            endEntryId: '',
+            notes: ''
           },
           startEntryData: {
             id: 'some start id',

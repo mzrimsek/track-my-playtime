@@ -3,30 +3,32 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { combineReducers, Store, StoreModule } from '@ngrx/store';
 
-import { EditDisplayNameComponent } from './edit-display-name.component';
+import { SetNotesComponent } from './set-notes.component';
 
 import { UserService } from '../../../auth/services/user.service';
 
-import * as profileActions from '../../actions/profile.actions';
+import * as progressActions from '../../../../shared/actions/progress.actions';
 
 import * as fromRoot from '../../../../reducers/root.reducer';
-import * as fromProfile from '../../reducers/root.reducer';
+import * as fromShared from '../../../../shared/reducers/root.reducer';
+import * as fromCompletion from '../../reducers/root.reducer';
 
 import { user } from '../../../../test-helpers';
 
-describe('EditDisplayNameComponent', () => {
+describe('SetNotesComponent', () => {
   let store: Store<fromRoot.State>;
   let userService: UserService;
-  let component: EditDisplayNameComponent;
-  let fixture: ComponentFixture<EditDisplayNameComponent>;
+  let component: SetNotesComponent;
+  let fixture: ComponentFixture<SetNotesComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [EditDisplayNameComponent],
+      declarations: [SetNotesComponent],
       imports: [
         StoreModule.forRoot({
           ...fromRoot.reducers,
-          'profile': combineReducers(fromProfile.reducers)
+          'completion': combineReducers(fromCompletion.reducers),
+          'shared': combineReducers(fromShared.reducers)
         })
       ],
       providers: [{ provide: UserService, useValue: user.userServiceStub }],
@@ -38,14 +40,15 @@ describe('EditDisplayNameComponent', () => {
 
     spyOn(store, 'dispatch').and.callThrough();
 
-    fixture = TestBed.createComponent(EditDisplayNameComponent);
+    fixture = TestBed.createComponent(SetNotesComponent);
     component = fixture.componentInstance;
+    component.itemId = 'someItemId';
     fixture.detectChanges();
   }));
 
-  it('Should create the component', async(() => {
+  it('Should create the component', () => {
     expect(component).toBeTruthy();
-  }));
+  });
 
   it('Should call userService getUser', async(() => {
     expect(userService.getUser).toHaveBeenCalled();
@@ -66,12 +69,15 @@ describe('EditDisplayNameComponent', () => {
     expect(component.emitFinishEdit).toHaveBeenCalled();
   }));
 
-  it('Should dispatch SetProfileDisplayName when confirm button is clicked', async(() => {
-    const displayName = 'some name';
+  it('Should dispatch SetNotes when confirm button is clicked', async(() => {
+    const notes = 'some notes';
     const confirmButton = fixture.nativeElement.querySelector('.actions .confirm');
-    const displayNameInput = fixture.nativeElement.querySelector('input');
-    displayNameInput.value = displayName;
-    const action = new profileActions.SetProfileDisplayName(user.mockUser.uid, displayName);
+    const setNotesInput = fixture.nativeElement.querySelector('input');
+    setNotesInput.value = notes;
+    const action = new progressActions.SetNotes(user.mockUser.uid, {
+      itemId: component.itemId,
+      notes
+    });
 
     confirmButton.click();
 

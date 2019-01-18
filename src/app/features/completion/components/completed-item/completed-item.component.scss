@@ -32,6 +32,24 @@
       display: flex;
       flex-direction: column;
     }
+
+    .notes {
+      height: $profile-field-height;
+
+      span {
+        text-decoration: underline;
+      }
+
+      .no-edit {
+        display: flex;
+
+        button {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      }
+    }
   }
 
   .actions {

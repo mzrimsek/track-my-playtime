@@ -70,7 +70,8 @@ describe('Add Playing Actions', () => {
       const action = new actions.SaveSucceeded({
         id: '',
         startEntryId: '',
-        endEntryId: ''
+        endEntryId: '',
+        notes: ''
       });
       expect(action.type).toBe(actions.SAVE_SUCCEEDED);
     });
@@ -79,12 +80,14 @@ describe('Add Playing Actions', () => {
       const action = new actions.SaveSucceeded({
         id: 'some id',
         startEntryId: 'some entry id',
-        endEntryId: ''
+        endEntryId: '',
+        notes: ''
       });
       expect(action.item).toEqual({
         id: 'some id',
         startEntryId: 'some entry id',
-        endEntryId: ''
+        endEntryId: '',
+        notes: ''
       });
     });
   });

@@ -48,7 +48,8 @@ describe('CompletedItemComponent', () => {
       item: {
         id: '1',
         startEntryId: 'start 1',
-        endEntryId: 'end 1'
+        endEntryId: 'end 1',
+        notes: ''
       },
       completedItem: {
         game: 'some game',
@@ -70,8 +71,51 @@ describe('CompletedItemComponent', () => {
   }));
 
   it('Should dispatch RemoveProgressItem when remove button is clicked', async(() => {
-    const removeButton = fixture.nativeElement.querySelector('button');
+    const removeButton = fixture.nativeElement.querySelector('.actions .remove');
     removeButton.click();
     expect(store.dispatch).toHaveBeenCalledWith(new progressActions.RemoveProgressItem(user.mockUser.uid, '1'));
   }));
+
+  describe('Edit notes', () => {
+    xdescribe('When editNotes is true', () => {
+      beforeEach(async(() => {
+        component.editNotes = true;
+        fixture.detectChanges();
+      }));
+
+      it('Should not display no edit', async(() => {
+        const noEdit = fixture.nativeElement.querySelector('.completed-item .info .notes .no-edit');
+        expect(noEdit).toBeFalsy();
+      }));
+
+      it('Should display edit display name component', async(() => {
+        const editNotes = fixture.nativeElement.querySelector('.completed-item .info .notes app-completion-set-notes');
+        expect(editNotes).toBeTruthy();
+      }));
+
+      it('Should set editNotes to false on finishEdit', async(() => {
+        const editNotes = fixture.nativeElement.querySelector('.completed-item .info .notes app-completion-set-notes');
+        editNotes.dispatchEvent(new Event('finishEdit'));
+        expect(component.editNotes).toBe(false);
+      }));
+    });
+
+    describe('When editNotes is false', () => {
+      it('Should display no edit', async(() => {
+        const noEdit = fixture.nativeElement.querySelector('.completed-item .info .notes .no-edit');
+        expect(noEdit).toBeTruthy();
+      }));
+
+      it('Should not display set notes component', async(() => {
+        const editDisplayName = fixture.nativeElement.querySelector('.completed-item .info .notes app-completion-set-notes');
+        expect(editDisplayName).toBeFalsy();
+      }));
+
+      it('Should set editNotes to true when edit button is clicked', async(() => {
+        const editButton = fixture.nativeElement.querySelector('.completed-item .info .notes .no-edit button');
+        editButton.click();
+        expect(component.editNotes).toBe(true);
+      }));
+    });
+  });
 });

@@ -6,6 +6,7 @@ export interface ProgressEntity {
   id: string;
   startEntryId: string;
   endEntryId: string;
+  notes: string;
 }
 
 export interface State extends EntityState<ProgressEntity> {
@@ -39,6 +40,13 @@ export function reducer(state: State = initialState, action: actions.All): State
       return adapter.removeOne(action.itemId, state);
     }
     case actions.MARK_COMPLETE_SUCCEEDED: {
+      const { itemId: id, ...changes } = action.payload;
+      return adapter.updateOne({
+        id,
+        changes
+      }, state);
+    }
+    case actions.SET_NOTES_SUCCEEDED: {
       const { itemId: id, ...changes } = action.payload;
       return adapter.updateOne({
         id,

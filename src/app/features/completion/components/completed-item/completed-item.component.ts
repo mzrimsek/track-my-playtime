@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Store } from '@ngrx/store';
 
 import { UserService } from '../../../auth/services/user.service';
@@ -21,7 +21,9 @@ export class CompletedItemComponent implements OnInit {
 
   @Input() displayData: CompletedDisplayData;
   userId = '';
+  editNotes = false;
   icons = {
+    edit: faEdit,
     remove: faTrash
   };
   constructor(private store: Store<State>, private userService: UserService) { }
@@ -32,5 +34,9 @@ export class CompletedItemComponent implements OnInit {
 
   remove() {
     this.store.dispatch(new progressActions.RemoveProgressItem(this.userId, this.displayData.item.id));
+  }
+
+  setEditNotes(editNotes: boolean) {
+    this.editNotes = editNotes;
   }
 }

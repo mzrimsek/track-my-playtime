@@ -9,7 +9,8 @@ export namespace completion {
     item: {
       id: '1',
       startEntryId: 'start 1',
-      endEntryId: ''
+      endEntryId: '',
+      notes: ''
     },
     startEntryData: {
       id: 'start 1',

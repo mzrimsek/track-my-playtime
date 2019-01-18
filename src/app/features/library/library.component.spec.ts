@@ -34,7 +34,6 @@ describe('LibraryComponent', () => {
     component = fixture.componentInstance;
 
     spyOn(component, 'setNumEntriesToShow');
-    spyOn(component, 'onResize');
 
     fixture.detectChanges();
   }));
@@ -51,13 +50,8 @@ describe('LibraryComponent', () => {
     expect(component.setNumEntriesToShow).toHaveBeenCalled();
   });
 
-  it('Should call onResize on resize', () => {
-    window.dispatchEvent(new Event('resize'));
-    expect(component.onResize).toHaveBeenCalled();
-  });
-
   it('Should call setNumEntriesToShow when onResize is called ', () => {
-    component.onResize();
+    window.dispatchEvent(new Event('resize'));
     expect(component.setNumEntriesToShow).toHaveBeenCalled();
   });
 });

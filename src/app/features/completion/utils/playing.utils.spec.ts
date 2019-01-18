@@ -11,7 +11,8 @@ describe('Playing Utils', () => {
       const progressItem: ProgressItem = {
         id: 'some id',
         startEntryId: '1',
-        endEntryId: ''
+        endEntryId: '',
+        notes: ''
       };
       const startEntry: HistoryListItem = {
         id: '1',

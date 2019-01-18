@@ -6,7 +6,7 @@ import { first, map } from 'rxjs/operators';
 
 import { ProgressEntity } from '../../../shared/reducers/progress.reducer';
 
-import { MarkCompletePayload } from '../../../shared/models';
+import { MarkCompletePayload, SetNotesPayload } from '../../../shared/models';
 import { AddPlaying } from '../models';
 
 import { getUUID } from '../../../shared/utils/uuid.utils';
@@ -21,7 +21,7 @@ export class ProgressService {
 
   getProgressList(userId: string): Observable<ProgressEntity[]> {
     const progressList = this.getUserItemCollection(userId).valueChanges().pipe(first());
-    return progressList.pipe(map(progressListItems => progressListItems.map(progress => progress as ProgressEntity)));
+    return progressList.pipe(map(progressListItems => progressListItems.map(progress => this.getProgressEntity(progress))));
   }
 
   saveAddPlaying(addPlaying: AddPlaying): Observable<ProgressEntity> {
@@ -41,17 +41,33 @@ export class ProgressService {
     return of(itemId);
   }
 
+  setNotes(userId: string, payload: SetNotesPayload): Observable<SetNotesPayload> {
+    const { itemId, notes } = payload;
+    this.getUserItemCollection(userId).doc(itemId).update({ notes });
+    return of(payload);
+  }
+
   getNewProgressItem(addPlaying: AddPlaying): FirestoreProgressItem {
     const id = getUUID(addPlaying.userId);
     return {
       id,
       startEntryId: addPlaying.startEntryId,
-      endEntryId: ''
+      endEntryId: '',
+      notes: ''
     };
   }
 
   private getUserItemCollection(userId: string): AngularFirestoreCollection<FirestoreProgressItem> {
     return this.progressCollection.doc(userId).collection('items');
+  }
+
+  private getProgressEntity(progress: FirestoreProgressItem): ProgressEntity {
+    return {
+      id: progress.id,
+      startEntryId: progress.startEntryId,
+      endEntryId: progress.endEntryId,
+      notes: progress.notes ? progress.notes : ''
+    };
   }
 }
 
@@ -59,6 +75,7 @@ export interface FirestoreProgressItem {
   id: string;
   startEntryId: string;
   endEntryId: string;
+  notes?: string;
 }
 
 interface ProgressCollection {

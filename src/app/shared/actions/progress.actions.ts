@@ -2,7 +2,7 @@ import { Action } from '@ngrx/store';
 
 import { ProgressEntity } from '../reducers/progress.reducer';
 
-import { MarkCompletePayload } from '../models';
+import { MarkCompletePayload, SetNotesPayload } from '../models';
 
 export const ADD_NEW_PROGRESS_ITEM = '[Progress] Add New Progress Item';
 export class AddNewProgressItem implements Action {
@@ -46,10 +46,24 @@ export class MarkCompleteSucceeded implements Action {
   constructor(public payload: MarkCompletePayload) { }
 }
 
+export const SET_NOTES = '[Progress] Set Notes';
+export class SetNotes implements Action {
+  readonly type = SET_NOTES;
+  constructor(public userId: string, public payload: SetNotesPayload) { }
+}
+
+export const SET_NOTES_SUCCEEDED = '[Progress] Set Notes Succeeded';
+export class SetNotesSucceeded implements Action {
+  readonly type = SET_NOTES_SUCCEEDED;
+  constructor(public payload: SetNotesPayload) { }
+}
+
 export type All = AddNewProgressItem |
   LoadProgressItems |
   LoadProgressItemsSucceeded |
   RemoveProgressItem |
   RemoveProgressItemSucceeded |
   MarkComplete |
-  MarkCompleteSucceeded;
+  MarkCompleteSucceeded |
+  SetNotes |
+  SetNotesSucceeded;

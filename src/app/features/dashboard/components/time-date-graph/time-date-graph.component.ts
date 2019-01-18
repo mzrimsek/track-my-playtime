@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 import { BarGraphConfig, GraphDataItem } from '../../models';
 
@@ -8,11 +8,8 @@ import { BarGraphConfig, GraphDataItem } from '../../models';
   styleUrls: ['./time-date-graph.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TimeDateGraphComponent implements OnInit {
+export class TimeDateGraphComponent {
 
   @Input() data: GraphDataItem[];
   @Input() config: BarGraphConfig;
-  constructor() { }
-
-  ngOnInit() { }
 }

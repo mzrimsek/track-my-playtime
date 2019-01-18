@@ -677,7 +677,7 @@ export class PlayingItemComponent implements OnInit {
   }
 
   setEndTime(endTimeEl: HTMLSelectElement) {
-    const endTime &#x3D; Number.parseInt(endTimeEl.value);
+    const endTime &#x3D; Number.parseInt(endTimeEl.value, 10);
     this.store.dispatch(new markCompleteActions.SetEndTime(this.displayData.item.id, endTime));
   }
 
