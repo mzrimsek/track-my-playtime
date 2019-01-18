@@ -34,7 +34,6 @@ describe('LibraryComponent', () => {
     component = fixture.componentInstance;
 
     spyOn(component, 'setNumEntriesToShow');
-    spyOn(component, 'onResize');
 
     fixture.detectChanges();
   }));
