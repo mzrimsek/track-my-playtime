@@ -13,7 +13,10 @@
         <ngx-datatable-column name="Game"
                               [flexGrow]="1"></ngx-datatable-column>
         <ngx-datatable-column name="Total Time"
-                              [flexGrow]="1"></ngx-datatable-column>
+                              [flexGrow]="1">
+          <ng-template let-value="value"
+                       ngx-datatable-cell-template>{{ value | time }}</ng-template>
+        </ngx-datatable-column>
         <ngx-datatable-column name="First Played"
                               [flexGrow]="1">
           <ng-template let-value="value"
