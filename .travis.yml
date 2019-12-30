@@ -19,7 +19,6 @@ before_script:
 
 script:
   - ng test --watch=false --code-coverage
-  - ng e2e
   - if [ "$TRAVIS_BRANCH" == "master" ]; then ng build --prod --aot; fi
   - if [ "$TRAVIS_BRANCH" != "master" ]; then ng build; fi
 
