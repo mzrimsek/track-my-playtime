@@ -1,6 +1,6 @@
 export interface LibraryEntry {
   game: string;
-  totalTime: string;
+  totalTime: number;
   firstPlayed: number;
   lastPlayed: number;
 }
