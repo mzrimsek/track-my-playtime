@@ -13,12 +13,12 @@ describe('Library Data Utils', () => {
       result.subscribe(res => {
         expect(res).toEqual([{
           game: 'game 1',
-          totalTime: '00:00:02',
+          totalTime: 2,
           firstPlayed: start.getTime(),
           lastPlayed: addDays(start, 1).getTime() + 2000
         }, {
           game: 'game 2',
-          totalTime: '00:00:04',
+          totalTime: 4,
           firstPlayed: addDays(start, 3).getTime(),
           lastPlayed: addDays(start, 4).getTime() + 3000
         }]);
