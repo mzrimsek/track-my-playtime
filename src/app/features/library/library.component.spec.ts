@@ -5,6 +5,8 @@ import { combineReducers, Store, StoreModule } from '@ngrx/store';
 
 import { LibraryComponent } from './library.component';
 
+import { TimePipe } from '../../shared/pipes/time.pipe';
+
 import * as fromRoot from '../../reducers/root.reducer';
 import * as fromShared from '../../shared/reducers/root.reducer';
 
@@ -16,7 +18,8 @@ describe('LibraryComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        LibraryComponent
+        LibraryComponent,
+        TimePipe
       ],
       imports: [
         StoreModule.forRoot({

@@ -36,6 +36,12 @@ describe('Date Utils', () => {
       const result = formatTime(timeInSeconds);
       expect(result).toBe('51:35:36');
     });
+
+    it('Can format time over 100 hours', () => {
+      const timeInSeconds = HOUR * 150;
+      const result = formatTime(timeInSeconds);
+      expect(result).toBe('150:00:00');
+    });
   });
 
   describe('getElapsedTimeInSeconds', () => {
