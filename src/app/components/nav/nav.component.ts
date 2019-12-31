@@ -78,4 +78,8 @@ export class NavComponent implements OnInit {
   toggleNav() {
     this.hideNavContents = !this.hideNavContents;
   }
+
+  hideNav() {
+    this.hideNavContents = true;
+  }
 }

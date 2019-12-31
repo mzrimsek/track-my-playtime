@@ -211,7 +211,7 @@
         .menu {
           display: flex;
           justify-self: flex-start;
-          font-size: 1.25em;
+          font-size: 1.5em;
 
           &:hover {
             cursor: pointer;
@@ -235,7 +235,7 @@
         ul {
           li {
             a {
-              height: 20px;
+              height: 50px;
               padding: 0px 5px;
 
               .icon {
@@ -244,6 +244,7 @@
 
               .text {
                 display: block;
+                font-size: 1.25em;
               }
 
               .text.static {
