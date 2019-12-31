@@ -120,6 +120,11 @@ describe('NavComponent', () => {
       expect(component.hideNavContents).toBe(!hideNav);
     }));
 
+    it('Should set hideNavContents to true when hideNav is called', async(() => {
+      component.hideNav();
+      expect(component.hideNavContents).toBe(true);
+    }));
+
     describe('Nav Hidden', () => {
       it('Should change hideNavContents to false when menu icon clicked', async(() => {
         const navtoggleMenuIcon = fixture.debugElement.query(By.css('.nav .main .banner .menu'));

@@ -14,7 +14,8 @@
       </div>
       <a id="navBannerLink"
          [attr.data-tracking-category]="bannerRoute.trackingCategory"
-         [routerLink]="bannerRoute.router">
+         [routerLink]="bannerRoute.router"
+         (click)="hideNav()">
         <span class="text">{{ bannerRoute.caption }}</span>
         <img class="text-logo"
              src="../../../assets/wht_512x.png">
@@ -30,7 +31,8 @@
 
           <a [id]="trackerRoute.trackingCategory + 'Link'"
              [attr.data-tracking-category]="trackerRoute.trackingCategory"
-             [routerLink]="trackerRoute.router">
+             [routerLink]="trackerRoute.router"
+             (click)="hideNav()">
             <span class="icon">
               <fa-icon [icon]="trackerRoute.icon"></fa-icon>
             </span>
@@ -47,7 +49,8 @@
 
           <a [id]="route.trackingCategory + 'Link'"
              [attr.data-tracking-category]="route.trackingCategory"
-             [routerLink]="route.router">
+             [routerLink]="route.router"
+             (click)="hideNav()">
             <span class="icon">
               <fa-icon [icon]="route.icon"></fa-icon>
             </span>
