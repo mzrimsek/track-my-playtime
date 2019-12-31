@@ -72,13 +72,13 @@ describe('Graph Utils', () => {
   describe('padDateGraphData', () => {
     it('Should add empty data items where none exist in the date range', () => {
       const items: GraphDataItem[] = [{
-        name: '4/3/2018',
+        name: 'Tues, 4/3/2018',
         value: 1000
       }, {
-        name: '4/5/2018',
+        name: 'Thur, 4/5/2018',
         value: 2000
       }, {
-        name: '4/6/2018',
+        name: 'Fri, 4/6/2018',
         value: 500
       }];
       const start = new Date(2018, 3, 1);
@@ -88,25 +88,25 @@ describe('Graph Utils', () => {
       const result = padDateGraphData(items, range);
 
       expect(result).toEqual([{
-        name: '4/1/2018',
+        name: 'Sun, 4/1/2018',
         value: 0
       }, {
-        name: '4/2/2018',
+        name: 'Mon, 4/2/2018',
         value: 0
       }, {
-        name: '4/3/2018',
+        name: 'Tues, 4/3/2018',
         value: 1000
       }, {
-        name: '4/4/2018',
+        name: 'Wed, 4/4/2018',
         value: 0
       }, {
-        name: '4/5/2018',
+        name: 'Thur, 4/5/2018',
         value: 2000
       }, {
-        name: '4/6/2018',
+        name: 'Fri, 4/6/2018',
         value: 500
       }, {
-        name: '4/7/2018',
+        name: 'Sat, 4/7/2018',
         value: 0
       }]);
     });
