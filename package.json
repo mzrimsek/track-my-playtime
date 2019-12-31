@@ -7,6 +7,7 @@
     "start": "ng serve",
     "build": "ng build --prod",
     "test": "ng test",
+    "test:single": "ng test --watch=false",
     "test:mocha": "ng test --karma-config ./config/karma/karma.mocha.conf.js",
     "test:nyan": "ng test --karma-config ./config/karma/karma.nyan.conf.js",
     "lint": "ng lint",

@@ -16,7 +16,7 @@ const getZeroPaddingTime = (time: number): string => {
 };
 
 export const formatDate = (date: Date): string => {
-  return format(date, 'M/D/YYYY');
+  return format(date, 'ddd, M/D/YYYY');
 };
 
 export const isInDateRange = (dateToCheck: Date, dateRange: Date[]): boolean => {
