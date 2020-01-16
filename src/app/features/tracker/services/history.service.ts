@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 
 import { Observable, of } from 'rxjs';
-import { first, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 import { HistoryEntity } from '../../../shared/reducers/history.reducer';
 
@@ -22,7 +22,7 @@ export class HistoryService {
   }
 
   getHistoryList(userId: string): Observable<HistoryEntity[]> {
-    const historyList = this.getUserItemCollection(userId).valueChanges().pipe(first());
+    const historyList = this.getUserItemCollection(userId).valueChanges();
     return historyList.pipe(map(histories => histories.map(history => this.getHistoryEntity(history))));
   }
 

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 
 import { Observable, of } from 'rxjs';
-import { first, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 import { ProgressEntity } from '../../../shared/reducers/progress.reducer';
 
@@ -20,7 +20,7 @@ export class ProgressService {
   }
 
   getProgressList(userId: string): Observable<ProgressEntity[]> {
-    const progressList = this.getUserItemCollection(userId).valueChanges().pipe(first());
+    const progressList = this.getUserItemCollection(userId).valueChanges();
     return progressList.pipe(map(progressListItems => progressListItems.map(progress => this.getProgressEntity(progress))));
   }
 
