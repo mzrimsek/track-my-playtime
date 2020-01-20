@@ -1,10 +1,10 @@
 import { ActionReducerMap, createFeatureSelector, createSelector } from '@ngrx/store';
 
+import { AddPlayingInfo } from 'features/completion/models';
+
 import * as fromPlaying from './add-playing.reducer';
 import * as fromMarkComplete from './mark-complete.reducer';
 import * as fromTab from './tab.reducer';
-
-import { AddPlayingInfo } from '../models';
 
 export interface CompletionState {
   addPlaying: fromPlaying.State;

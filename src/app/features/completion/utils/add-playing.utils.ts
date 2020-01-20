@@ -1,5 +1,5 @@
-import { HistoryGrouping, HistoryListItem } from '../../../shared/models';
-import { AddPlayingInfo } from '../models';
+import { AddPlayingInfo } from 'features/completion/models';
+import { HistoryGrouping, HistoryListItem } from 'shared/models';
 
 export const findMatchingHistoryEntry = (groupings: HistoryGrouping[], info: AddPlayingInfo): HistoryListItem | undefined => {
   const selectedGameGrouping = groupings.find(grouping => grouping.key === info.game);

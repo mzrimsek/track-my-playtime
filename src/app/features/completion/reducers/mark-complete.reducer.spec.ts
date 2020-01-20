@@ -1,4 +1,4 @@
-import * as actions from '../actions/mark-complete.actions';
+import * as actions from 'features/completion/actions/mark-complete.actions';
 
 import { reducer, State } from './mark-complete.reducer';
 

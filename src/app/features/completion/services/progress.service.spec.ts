@@ -3,10 +3,10 @@ import { AngularFirestore } from '@angular/fire/firestore';
 
 import { FirestoreProgressItem, ProgressService } from './progress.service';
 
-import { MarkCompletePayload, SetNotesPayload } from '../../../shared/models';
-import { AddPlaying } from '../models';
+import { MarkCompletePayload, SetNotesPayload } from 'shared/models';
+import { AddPlaying } from 'features/completion/models';
 
-import { progress } from '../../../test-helpers';
+import { progress } from 'app/test-helpers';
 
 describe('ProgressService', () => {
   let service: ProgressService;

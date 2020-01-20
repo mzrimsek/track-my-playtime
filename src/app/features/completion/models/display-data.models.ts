@@ -1,4 +1,4 @@
-import { CompletedItem, HistoryListItem, ProgressItem } from '../../../shared/models';
+import { CompletedItem, HistoryListItem, ProgressItem } from 'shared/models';
 
 import { MarkCompleteItem } from './';
 
