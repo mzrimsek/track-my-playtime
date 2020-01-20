@@ -1,4 +1,4 @@
-import { HistoryGrouping, HistoryListItem } from '../models';
+import { HistoryGrouping, HistoryListItem } from 'shared/models';
 
 import { getElapsedTimeInSeconds, isInDateRange } from './date.utils';
 
@@ -20,6 +20,10 @@ export const getHistoryListItemsMap = (items: HistoryListItem[], keyFunction: Hi
   return map;
 };
 
+export const getElapsedTimeFrom = (items: HistoryListItem[]): number => {
+  return items.map(item => getElapsedTimeInSeconds(item.startTime, item.endTime)).reduce((a, b) => a + b, 0);
+};
+
 export const getHistoryGroupingList = (map: HistoryListItemsMap): HistoryGrouping[] => {
   let groupings: HistoryGrouping[] = [];
   map.forEach((value: HistoryListItem[], key: string) => {
@@ -33,18 +37,6 @@ export const getHistoryGroupingList = (map: HistoryListItemsMap): HistoryGroupin
   return groupings;
 };
 
-export const filterGroupingsByDateRange = (groupings: HistoryGrouping[], dateRange: Date[]): HistoryGrouping[] => {
-  const groupingsToGraph: HistoryGrouping[] = [];
-  groupings.forEach(grouping => {
-    const groupingHasHistoryItemInRange = grouping.historyItems.some(item => isInDateRange(item.dateRange[0], dateRange));
-    if (groupingHasHistoryItemInRange) {
-      const filtedGrouping = getFilteredGrouping(grouping, dateRange);
-      groupingsToGraph.push(filtedGrouping);
-    }
-  });
-  return groupingsToGraph;
-};
-
 export const getFilteredGrouping = (grouping: HistoryGrouping, dateRange: Date[]): HistoryGrouping => {
   const historyItems = grouping.historyItems.filter(item => isInDateRange(item.dateRange[0], dateRange));
   const totalTime = historyItems.map(item => getElapsedTimeInSeconds(item.startTime, item.endTime)).reduce((a, b) => a + b, 0);
@@ -55,8 +47,16 @@ export const getFilteredGrouping = (grouping: HistoryGrouping, dateRange: Date[]
   };
 };
 
-export const getElapsedTimeFrom = (items: HistoryListItem[]): number => {
-  return items.map(item => getElapsedTimeInSeconds(item.startTime, item.endTime)).reduce((a, b) => a + b, 0);
+export const filterGroupingsByDateRange = (groupings: HistoryGrouping[], dateRange: Date[]): HistoryGrouping[] => {
+  const groupingsToGraph: HistoryGrouping[] = [];
+  groupings.forEach(grouping => {
+    const groupingHasHistoryItemInRange = grouping.historyItems.some(item => isInDateRange(item.dateRange[0], dateRange));
+    if (groupingHasHistoryItemInRange) {
+      const filtedGrouping = getFilteredGrouping(grouping, dateRange);
+      groupingsToGraph.push(filtedGrouping);
+    }
+  });
+  return groupingsToGraph;
 };
 
 export const getHistoryListItemMap = (gameGroupings: HistoryGrouping[]): HistoryListItemMap => {

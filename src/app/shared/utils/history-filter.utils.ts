@@ -1,4 +1,4 @@
-import { HistoryGrouping, HistoryListItem } from '../models';
+import { HistoryGrouping, HistoryListItem } from 'shared/models';
 
 import { HistoryListItemKeyFunction } from './history.utils';
 

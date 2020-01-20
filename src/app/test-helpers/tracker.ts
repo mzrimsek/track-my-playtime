@@ -1,10 +1,9 @@
 import { Observable, of } from 'rxjs';
+import { State as TimerState } from 'shared/reducers/timer.reducer';
 
-import { FirestoreTimerItem } from '../features/tracker/services/timer.service';
+import { FirestoreTimerItem } from 'features/tracker/services/timer.service';
 
-import { State as TimerState } from '../shared/reducers/timer.reducer';
-
-import { TimerInfo } from '../shared/models';
+import { TimerInfo } from 'shared/models';
 
 export namespace tracker {
   export const timerServiceStub = {

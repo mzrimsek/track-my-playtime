@@ -1,8 +1,7 @@
 import { Observable, of } from 'rxjs';
+import { State as PlatformsState } from 'shared/reducers/platforms.reducer';
 
-import { FirestorePlatformsItem } from '../features/tracker/services/platforms.service';
-
-import { State as PlatformsState } from '../shared/reducers/platforms.reducer';
+import { FirestorePlatformsItem } from 'features/tracker/services/platforms.service';
 
 export namespace platforms {
   export const testPlatforms = [

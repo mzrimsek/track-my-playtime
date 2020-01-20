@@ -1,10 +1,9 @@
-import * as actions from '../actions/progress.actions';
+import * as actions from 'shared/actions/progress.actions';
 
-import { reducer, State } from './progress.reducer';
-
-import { MarkCompletePayload, SetNotesPayload } from '../models';
+import { MarkCompletePayload, SetNotesPayload } from 'shared/models';
 
 import { progress } from '../../test-helpers';
+import { reducer, State } from './progress.reducer';
 
 describe('Progress Reducer', () => {
   it('Should add an item when AddNewProgressItem is dispatched', () => {

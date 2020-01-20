@@ -4,14 +4,12 @@ import { Router } from '@angular/router';
 
 import { Store } from '@ngrx/store';
 
+import { environment } from 'environments/environment';
 import { insertAnalyticsElements } from 'insert-analytics-elements/googleTagManager';
 import { Observable } from 'rxjs';
+import sharedSelectors, { State as SharedState } from 'shared/reducers/root.reducer';
 
-import { ElapsedTimeService } from './shared/services/elapsed-time.service';
-
-import sharedSelectors, { State as SharedState } from './shared/reducers/root.reducer';
-
-import { environment } from '../environments/environment';
+import { ElapsedTimeService } from 'shared/services/elapsed-time.service';
 
 @Component({
   selector: 'app-root',

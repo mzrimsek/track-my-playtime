@@ -1,4 +1,4 @@
-import * as actions from '../actions/timer.actions';
+import * as actions from 'shared/actions/timer.actions';
 
 export interface State {
   game: string;

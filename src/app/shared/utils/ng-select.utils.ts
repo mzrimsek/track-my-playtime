@@ -1,4 +1,4 @@
-import { NgSelectValue } from '../models';
+import { NgSelectValue } from 'shared/models';
 
 export const getValueFromNgSelect = (value: string | NgSelectValue | null | undefined): string => {
   if (value) {

@@ -1,6 +1,5 @@
-import * as actions from '../actions/platforms.actions';
-
-import { reducer, State } from '../reducers/platforms.reducer';
+import * as actions from 'shared/actions/platforms.actions';
+import { reducer, State } from 'shared/reducers/platforms.reducer';
 
 import { platforms } from '../../test-helpers';
 

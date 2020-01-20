@@ -1,6 +1,6 @@
 import { addDays, eachDay, subDays } from 'date-fns';
 
-import { HistoryListItem } from '../models';
+import { HistoryListItem } from 'shared/models';
 
 import {
     filterGroupingsByDateRange, getElapsedTimeFrom, getFilteredGrouping, getHistoryGroupingList,

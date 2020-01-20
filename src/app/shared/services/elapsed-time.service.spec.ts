@@ -3,14 +3,12 @@ import { TestBed } from '@angular/core/testing';
 import { combineReducers, Store, StoreModule } from '@ngrx/store';
 
 import { of } from 'rxjs';
+import * as actions from 'shared/actions/timer.actions';
+import * as fromShared from 'shared/reducers/root.reducer';
 
 import { ElapsedTimeService } from './elapsed-time.service';
 
-import * as actions from '../actions/timer.actions';
-
 import * as fromRoot from '../../reducers/root.reducer';
-import * as fromShared from '../reducers/root.reducer';
-
 import { tracker } from '../../test-helpers';
 
 describe('ElapsedTimeService', () => {

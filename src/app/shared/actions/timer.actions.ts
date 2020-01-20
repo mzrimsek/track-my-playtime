@@ -1,8 +1,8 @@
 import { Action } from '@ngrx/store';
 
-import { HistoryEntity } from '../reducers/history.reducer';
+import { HistoryEntity } from 'shared/reducers/history.reducer';
 
-import { AddTimerInfo, TimerInfo } from '../models';
+import { AddTimerInfo, TimerInfo } from 'shared/models';
 
 export const RESET_TIMER = '[Timer] Reset Timer';
 export class ResetTimer implements Action {

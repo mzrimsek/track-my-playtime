@@ -1,11 +1,10 @@
 import { Observable, of } from 'rxjs';
+import { ProgressEntity, State as ProgressState } from 'shared/reducers/progress.reducer';
 
-import { FirestoreProgressItem } from '../features/completion/services/progress.service';
+import { FirestoreProgressItem } from 'features/completion/services/progress.service';
 
-import { ProgressEntity, State as ProgressState } from '../shared/reducers/progress.reducer';
-
-import { AddPlaying } from '../features/completion/models';
-import { MarkCompletePayload, SetNotesPayload } from '../shared/models';
+import { AddPlaying } from 'features/completion/models';
+import { MarkCompletePayload, SetNotesPayload } from 'shared/models';
 
 export namespace progress {
   export const mockItem: ProgressEntity = {

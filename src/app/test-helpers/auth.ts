@@ -1,8 +1,7 @@
 import { User as AuthUser } from '@firebase/auth-types';
 
+import { State as StatusState } from 'features/auth/reducers/status.reducer';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-
-import { State as StatusState } from '../features/auth/reducers/status.reducer';
 
 import { user } from './user';
 

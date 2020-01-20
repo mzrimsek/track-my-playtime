@@ -1,8 +1,7 @@
+import { State as UserState } from 'features/auth/reducers/user.reducer';
 import { of } from 'rxjs';
 
-import { State as UserState } from '../features/auth/reducers/user.reducer';
-
-import { User, UserInfo } from '../features/auth/models';
+import { User, UserInfo } from 'features/auth/models';
 
 export namespace user {
   export const mockUser: User = {

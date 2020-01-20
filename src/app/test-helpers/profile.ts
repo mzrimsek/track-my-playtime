@@ -1,6 +1,6 @@
 import { Observable, of } from 'rxjs';
 
-import { Profile } from '../features/profile/models';
+import { Profile } from 'features/profile/models';
 
 export namespace profile {
   export const profileWithDisplayName: Profile = {

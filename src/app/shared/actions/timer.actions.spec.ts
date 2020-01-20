@@ -1,8 +1,8 @@
+import { HistoryEntity } from 'shared/reducers/history.reducer';
+
+import { AddTimerInfo, TimerInfo } from 'shared/models';
+
 import * as actions from './timer.actions';
-
-import { HistoryEntity } from '../reducers/history.reducer';
-
-import { AddTimerInfo, TimerInfo } from '../models';
 
 describe('Timer Actions', () => {
   describe('ResetTimer', () => {

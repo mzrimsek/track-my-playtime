@@ -4,12 +4,11 @@ import { Store } from '@ngrx/store';
 
 import { combineLatest, interval, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import sharedSelectors, { SharedState } from 'shared/reducers/root.reducer';
 
-import { TimerInfo } from '../models';
+import { TimerInfo } from 'shared/models';
 
-import { formatElapsedTime } from '../utils/date.utils';
-
-import sharedSelectors, { SharedState } from '../reducers/root.reducer';
+import { formatElapsedTime } from 'shared/utils/date.utils';
 
 @Injectable({
   providedIn: 'root'

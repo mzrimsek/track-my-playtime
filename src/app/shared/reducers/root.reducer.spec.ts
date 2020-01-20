@@ -1,5 +1,8 @@
 import { addDays, addHours } from 'date-fns';
 
+import { formatDate } from 'shared/utils/date.utils';
+
+import { history, platforms, progress, tracker } from '../../test-helpers';
 import { HistoryEntity, State as HistoryState } from './history.reducer';
 import { State as ProgressState } from './progress.reducer';
 import {
@@ -10,10 +13,6 @@ import {
     SharedState, State
 } from './root.reducer';
 import { State as TimerState } from './timer.reducer';
-
-import { formatDate } from '../utils/date.utils';
-
-import { history, platforms, progress, tracker } from '../../test-helpers';
 
 describe('Shared Root Reducer', () => {
   describe('History State Selectors', () => {

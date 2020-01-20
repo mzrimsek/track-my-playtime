@@ -1,8 +1,8 @@
-import { State as AddPlayingState } from '../features/completion/reducers/add-playing.reducer';
-import { State as MarkCompleteState } from '../features/completion/reducers/mark-complete.reducer';
-import { State as TabState } from '../features/completion/reducers/tab.reducer';
+import { State as AddPlayingState } from 'features/completion/reducers/add-playing.reducer';
+import { State as MarkCompleteState } from 'features/completion/reducers/mark-complete.reducer';
+import { State as TabState } from 'features/completion/reducers/tab.reducer';
 
-import { PlayingDisplayData } from '../features/completion/models';
+import { PlayingDisplayData } from 'features/completion/models';
 
 export namespace completion {
   export const testPlayingDisplayData: PlayingDisplayData = {

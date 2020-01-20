@@ -1,10 +1,10 @@
-import * as actions from './history.actions';
-
-import { HistoryEntity } from '../reducers/history.reducer';
+import { HistoryEntity } from 'shared/reducers/history.reducer';
 
 import {
     UpdateHistoryItemGamePayload, UpdateHistoryItemPlatformPayload, UpdateHistoryItemTimesPayload
-} from '../models';
+} from 'shared/models';
+
+import * as actions from './history.actions';
 
 describe('History Actions', () => {
   describe('AddNewHistoryItem', () => {
