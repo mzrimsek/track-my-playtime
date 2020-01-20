@@ -1,8 +1,8 @@
 import { Action } from '@ngrx/store';
 
-import { ProgressEntity } from '../../../shared/reducers/progress.reducer';
+import { ProgressEntity } from 'shared/reducers/progress.reducer';
 
-import { AddPlaying } from '../models';
+import { AddPlaying } from 'features/completion/models';
 
 export const SET_GAME = '[Add Playing] Set Game';
 export class SetGame implements Action {

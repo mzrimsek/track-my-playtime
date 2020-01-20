@@ -3,22 +3,20 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { combineReducers, Store, StoreModule } from '@ngrx/store';
 
+import * as appActions from 'app/actions/app.actions';
+import * as fromRoot from 'app/reducers/root.reducer';
+import { history, user } from 'app/test-helpers';
+import * as actions from 'features/completion/actions/add-playing.actions';
+import * as fromCompletion from 'features/completion/reducers/root.reducer';
+
 import { AddPlayingComponent } from './add-playing.component';
 
-import { UserService } from '../../../auth/services/user.service';
+import { UserService } from 'features/auth/services/user.service';
 
-import * as appActions from '../../../../actions/app.actions';
-import * as actions from '../../actions/add-playing.actions';
+import { AddPlayingInfo } from 'features/completion/models';
+import { HistoryGrouping } from 'shared/models';
 
-import * as fromRoot from '../../../../reducers/root.reducer';
-import * as fromCompletion from '../../reducers/root.reducer';
-
-import { HistoryGrouping } from '../../../../shared/models';
-import { AddPlayingInfo } from '../../models';
-
-import { filterPlatforms, filterStartTimes } from '../../../../shared/utils/history-filter.utils';
-
-import { history, user } from '../../../../test-helpers';
+import { filterPlatforms, filterStartTimes } from 'shared/utils/history-filter.utils';
 
 describe('AddPlayingComponent', () => {
   let store: Store<fromRoot.State>;

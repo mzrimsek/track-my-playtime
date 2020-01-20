@@ -3,13 +3,12 @@ import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Store } from '@ngrx/store';
 
-import { UserService } from '../../../auth/services/user.service';
+import { State } from 'features/completion/reducers/root.reducer';
+import * as progressActions from 'shared/actions/progress.actions';
 
-import * as progressActions from '../../../../shared/actions/progress.actions';
+import { UserService } from 'features/auth/services/user.service';
 
-import { State } from '../../reducers/root.reducer';
-
-import { CompletedDisplayData } from '../../models';
+import { CompletedDisplayData } from 'features/completion/models';
 
 @Component({
   selector: 'app-completion-completed-item',

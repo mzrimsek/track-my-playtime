@@ -2,12 +2,11 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { combineReducers, Store, StoreModule } from '@ngrx/store';
 
+import * as fromRoot from 'app/reducers/root.reducer';
+import * as tabActions from 'features/completion/actions/tab.actions';
+import * as fromCompletion from 'features/completion/reducers/root.reducer';
+
 import { TabsComponent } from './tabs.component';
-
-import * as tabActions from '../../actions/tab.actions';
-
-import * as fromRoot from '../../../../reducers/root.reducer';
-import * as fromCompletion from '../../reducers/root.reducer';
 
 describe('TabsComponent', () => {
   let store: Store<fromRoot.State>;

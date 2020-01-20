@@ -4,17 +4,17 @@ import { Store } from '@ngrx/store';
 
 import { combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import sharedSelectors, { State as SharedState } from 'shared/reducers/root.reducer';
 
-import sharedSelectors, { State as SharedState } from '../../shared/reducers/root.reducer';
-import completionSelectors, { State as CompletionState } from './reducers/root.reducer';
-
-import { HistoryGrouping } from '../../shared/models';
+import { HistoryGrouping } from 'shared/models';
 import { AddPlayingInfo, CompletedDisplayData, PlayingDisplayData, TabType } from './models';
 
-import { filterPlatforms, filterStartTimes } from '../../shared/utils/history-filter.utils';
+import { filterPlatforms, filterStartTimes } from 'shared/utils/history-filter.utils';
 import {
     getCompletedDisplayDataItems, getPlayingDisplayDataItems
 } from './utils/display-data.utils';
+
+import completionSelectors, { State as CompletionState } from './reducers/root.reducer';
 
 @Component({
   selector: 'app-completion',

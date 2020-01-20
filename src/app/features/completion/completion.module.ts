@@ -7,7 +7,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
-import { SharedModule } from '../../shared/shared.module';
+import { SharedModule } from 'shared/shared.module';
 
 import { CompletionComponent } from './completion.component';
 import { AddPlayingComponent } from './components/add-playing/add-playing.component';
@@ -16,7 +16,7 @@ import { PlayingItemComponent } from './components/playing-item/playing-item.com
 import { SetNotesComponent } from './components/set-notes/set-notes.component';
 import { TabsComponent } from './components/tabs/tabs.component';
 
-import { TimePipe } from '../../shared/pipes/time.pipe';
+import { TimePipe } from 'shared/pipes/time.pipe';
 
 import { AddPlayingEffects } from './effects/add-playing.effects';
 import { ProgressEffects } from './effects/progress.effects';

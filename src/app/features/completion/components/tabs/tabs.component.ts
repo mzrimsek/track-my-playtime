@@ -2,11 +2,10 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 
-import * as actions from '../../actions/tab.actions';
+import * as actions from 'features/completion/actions/tab.actions';
+import { State } from 'features/completion/reducers/root.reducer';
 
-import { State } from '../../reducers/root.reducer';
-
-import { TabType } from '../../models';
+import { TabType } from 'features/completion/models';
 
 @Component({
   selector: 'app-completion-tabs',
