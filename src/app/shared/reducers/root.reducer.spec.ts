@@ -1,8 +1,8 @@
+import { history, platforms, progress, tracker } from 'app/test-helpers';
 import { addDays, addHours } from 'date-fns';
 
 import { formatDate } from 'shared/utils/date.utils';
 
-import { history, platforms, progress, tracker } from '../../test-helpers';
 import { HistoryEntity, State as HistoryState } from './history.reducer';
 import { State as ProgressState } from './progress.reducer';
 import {

@@ -1,7 +1,6 @@
+import { platforms } from 'app/test-helpers';
 import * as actions from 'shared/actions/platforms.actions';
 import { reducer, State } from 'shared/reducers/platforms.reducer';
-
-import { platforms } from '../../test-helpers';
 
 describe('Platforms Reducer', () => {
   it('Should set options when LoadOptionsSucceeded is dispatched', () => {

@@ -1,10 +1,10 @@
+import { history } from 'app/test-helpers';
 import * as actions from 'shared/actions/history.actions';
 
 import {
     UpdateHistoryItemGamePayload, UpdateHistoryItemPlatformPayload, UpdateHistoryItemTimesPayload
 } from 'shared/models';
 
-import { history } from '../../test-helpers';
 import { reducer, State } from './history.reducer';
 
 describe('History Reducer', () => {

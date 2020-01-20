@@ -3,9 +3,9 @@ import { Params, RouterStateSnapshot } from '@angular/router';
 import * as fromRouter from '@ngrx/router-store';
 import { ActionReducerMap, createFeatureSelector, createSelector } from '@ngrx/store';
 
-import * as fromError from './error.reducer';
+import { Error } from 'app/models';
 
-import { Error } from '../models';
+import * as fromError from './error.reducer';
 
 export interface State {
   router: fromRouter.RouterReducerState<RouterStateUrl>;

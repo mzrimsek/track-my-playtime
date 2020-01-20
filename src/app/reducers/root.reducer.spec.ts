@@ -1,7 +1,7 @@
+import { routing } from 'app/test-helpers';
+
 import { State as ErrorState } from './error.reducer';
 import { _selectError, State } from './root.reducer';
-
-import { routing } from '../test-helpers';
 
 describe('Root Reducer', () => {
   describe('Error State Selectors', () => {

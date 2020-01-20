@@ -1,8 +1,8 @@
+import { progress } from 'app/test-helpers';
 import * as actions from 'shared/actions/progress.actions';
 
 import { MarkCompletePayload, SetNotesPayload } from 'shared/models';
 
-import { progress } from '../../test-helpers';
 import { reducer, State } from './progress.reducer';
 
 describe('Progress Reducer', () => {
