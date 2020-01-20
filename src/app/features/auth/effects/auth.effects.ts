@@ -2,14 +2,13 @@ import { Injectable } from '@angular/core';
 
 import { Actions, Effect } from '@ngrx/effects';
 
+import * as userActions from 'features/auth/actions/user.actions';
+import * as profileActions from 'features/profile/actions/profile.actions';
 import { map, mergeMap } from 'rxjs/operators';
-
-import * as historyActions from '../../../shared/actions/history.actions';
-import * as platformsActions from '../../../shared/actions/platforms.actions';
-import * as progressActions from '../../../shared/actions/progress.actions';
-import * as timerActions from '../../../shared/actions/timer.actions';
-import * as userActions from '../../auth/actions/user.actions';
-import * as profileActions from '../../profile/actions/profile.actions';
+import * as historyActions from 'shared/actions/history.actions';
+import * as platformsActions from 'shared/actions/platforms.actions';
+import * as progressActions from 'shared/actions/progress.actions';
+import * as timerActions from 'shared/actions/timer.actions';
 
 @Injectable()
 export class AuthEffects {

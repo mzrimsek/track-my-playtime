@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { EffectsModule } from '@ngrx/effects';
@@ -12,7 +13,6 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 
-import { FormsModule, ReactiveFormsModule } from '../../../../node_modules/@angular/forms';
 import { AuthEffects } from './effects/auth.effects';
 import { StatusEffects } from './effects/status.effects';
 import { UserEffects } from './effects/user.effects';

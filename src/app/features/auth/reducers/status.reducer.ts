@@ -1,4 +1,4 @@
-import * as actions from '../actions/status.actions';
+import * as actions from 'features/auth/actions/status.actions';
 
 export interface State {
   attemptingLogin: boolean;

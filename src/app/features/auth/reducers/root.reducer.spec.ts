@@ -1,10 +1,10 @@
+import { auth, user } from 'app/test-helpers';
+
 import {
     _selectStatusLoggingIn, _selectStatusValidationMessage, _selectUserData, _selectUserLoggedIn,
     AuthState, State
 } from './root.reducer';
 import { State as UserState } from './user.reducer';
-
-import { auth, user } from '../../../test-helpers';
 
 describe('Auth Root Reducer', () => {
   describe('User State Selectors', () => {

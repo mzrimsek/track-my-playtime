@@ -4,12 +4,11 @@ import { FormBuilder } from '@angular/forms';
 
 import { combineReducers, Store, StoreModule } from '@ngrx/store';
 
+import * as fromRoot from 'app/reducers/root.reducer';
+import * as actions from 'features/auth/actions/user.actions';
+import * as fromAuth from 'features/auth/reducers/root.reducer';
+
 import { ForgotPasswordComponent } from './forgot-password.component';
-
-import * as actions from '../../actions/user.actions';
-
-import * as fromRoot from '../../../../reducers/root.reducer';
-import * as fromAuth from '../../reducers/root.reducer';
 
 describe('ForgotPasswordComponent', () => {
   let component: ForgotPasswordComponent;

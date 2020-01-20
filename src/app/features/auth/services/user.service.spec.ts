@@ -2,17 +2,16 @@ import { TestBed } from '@angular/core/testing';
 
 import { combineReducers, Store, StoreModule } from '@ngrx/store';
 
+import * as fromRoot from 'app/reducers/root.reducer';
+import * as actions from 'features/auth/actions/user.actions';
+import * as fromAuth from 'features/auth/reducers/root.reducer';
+import * as profileActions from 'features/profile/actions/profile.actions';
+import * as fromProfile from 'features/profile/reducers/root.reducer';
+
 import { UserService } from './user.service';
 
-import * as profileActions from '../../profile/actions/profile.actions';
-import * as actions from '../actions/user.actions';
-
-import * as fromProfile from '../../../features/profile/reducers/root.reducer';
-import * as fromRoot from '../../../reducers/root.reducer';
-import * as fromAuth from '../reducers/root.reducer';
-
-import { Profile } from '../../profile/models';
-import { User } from '../models';
+import { User } from 'features/auth/models';
+import { Profile } from 'features/profile/models';
 
 describe('User Service', () => {
   let service: UserService;

@@ -1,6 +1,6 @@
-import * as userActions from '../actions/user.actions';
+import { Error } from 'app/models';
 
-import { Error } from '../../../models';
+import * as userActions from '../actions/user.actions';
 
 export const EMAIL_IN_USE = 'Email address already in use.';
 export const INVALID_CREDENTIALS = 'Email or password invalid.';

@@ -5,7 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { faFacebook, faGoogle, faTwitter } from '@fortawesome/free-brands-svg-icons';
 
-import { EmailAuthEvent } from '../../models';
+import { EmailAuthEvent } from 'features/auth/models';
 
 @Component({
   selector: 'app-auth-auth-form',

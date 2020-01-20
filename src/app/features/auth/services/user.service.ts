@@ -2,20 +2,19 @@ import { Injectable } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 
+import * as userActions from 'features/auth/actions/user.actions';
+import authComponentSelectors, { State } from 'features/auth/reducers/root.reducer';
+import profileComponentSelectors, {
+    State as ProfileState
+} from 'features/profile/reducers/root.reducer';
 import { combineLatest, Observable } from 'rxjs';
 
-import { Profile } from '../../profile/models';
-import { User, UserInfo } from '../models';
+import { User, UserInfo } from 'features/auth/models';
+import { Profile } from 'features/profile/models';
 
 import {
     getDisplayName, getEmail, getImgSrc, getProviderFrom
-} from '../../profile/utils/userinfo.utils';
-
-import profileComponentSelectors, {
-    State as ProfileState
-} from '../../profile/reducers/root.reducer';
-import * as userActions from '../actions/user.actions';
-import authComponentSelectors, { State } from '../reducers/root.reducer';
+} from 'features/profile/utils/userinfo.utils';
 
 @Injectable({
   providedIn: 'root'

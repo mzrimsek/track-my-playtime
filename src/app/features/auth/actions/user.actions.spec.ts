@@ -1,6 +1,6 @@
-import * as actions from './user.actions';
+import { user } from 'app/test-helpers';
 
-import { user } from '../../../test-helpers';
+import * as actions from './user.actions';
 
 describe('User Actions', () => {
   describe('GetUser', () => {
