@@ -3,13 +3,12 @@ import { Component, OnInit } from '@angular/core';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { Store } from '@ngrx/store';
 
-import { UserService } from '../auth/services/user.service';
+import * as userActions from 'features/auth/actions/user.actions';
+import { State as AuthState } from 'features/auth/reducers/root.reducer';
 
-import * as userActions from '../auth/actions/user.actions';
+import { UserService } from 'features/auth/services/user.service';
 
-import { State as AuthState } from '../auth/reducers/root.reducer';
-
-import { UserInfo } from '../auth/models';
+import { UserInfo } from 'features/auth/models';
 
 @Component({
   selector: 'app-profile',

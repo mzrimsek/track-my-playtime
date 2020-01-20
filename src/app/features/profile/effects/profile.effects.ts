@@ -2,13 +2,12 @@ import { Injectable } from '@angular/core';
 
 import { Actions, Effect } from '@ngrx/effects';
 
+import * as appActions from 'app/actions/app.actions';
+import * as profileActions from 'features/profile/actions/profile.actions';
 import { of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 
-import { ProfileService } from '../services/profile.service';
-
-import * as appActions from '../../../actions/app.actions';
-import * as profileActions from '../actions/profile.actions';
+import { ProfileService } from 'features/profile/services/profile.service';
 
 @Injectable()
 export class ProfileEffects {

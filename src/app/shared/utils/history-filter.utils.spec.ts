@@ -1,11 +1,11 @@
+import { history } from 'app/test-helpers';
+
 import { HistoryGrouping, HistoryListItem } from 'shared/models';
 
 import {
     filterHistoryItemsAfter, filterHistoryItemsBetween, filterPlatforms, filterStartTimes,
     getUniqueFrom
 } from './history-filter.utils';
-
-import { history } from '../../test-helpers';
 
 describe('History Filter Utils', () => {
   describe('getUniqueFrom', () => {

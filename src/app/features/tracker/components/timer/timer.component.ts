@@ -3,16 +3,15 @@ import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core
 import { faBan, faPlayCircle, faStopCircle } from '@fortawesome/free-solid-svg-icons';
 import { Store } from '@ngrx/store';
 
-import { UserService } from '../../../auth/services/user.service';
-import { TimerService } from '../../services/timer.service';
+import { State } from 'features/tracker/reducers/root.reducer';
+import * as actions from 'shared/actions/timer.actions';
 
-import * as actions from '../../../../shared/actions/timer.actions';
+import { UserService } from 'features/auth/services/user.service';
+import { TimerService } from 'features/tracker/services/timer.service';
 
-import { State } from '../../reducers/root.reducer';
+import { AddTimerInfo, NgSelectValue, TimerInfo } from 'shared/models';
 
-import { AddTimerInfo, NgSelectValue, TimerInfo } from '../../../../shared/models';
-
-import { getValueFromNgSelect } from '../../../../shared/utils/ng-select.utils';
+import { getValueFromNgSelect } from 'shared/utils/ng-select.utils';
 
 @Component({
   selector: 'app-tracker-timer',

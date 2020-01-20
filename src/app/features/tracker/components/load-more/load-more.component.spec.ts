@@ -2,12 +2,11 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { combineReducers, Store, StoreModule } from '@ngrx/store';
 
+import * as fromRoot from 'app/reducers/root.reducer';
+import * as actions from 'features/tracker/actions/display.actions';
+import * as fromTracker from 'features/tracker/reducers/root.reducer';
+
 import { LoadMoreComponent } from './load-more.component';
-
-import * as actions from '../../actions/display.actions';
-
-import * as fromRoot from '../../../../reducers/root.reducer';
-import * as fromTracker from '../../reducers/root.reducer';
 
 describe('LoadMoreComponent', () => {
   let component: LoadMoreComponent;

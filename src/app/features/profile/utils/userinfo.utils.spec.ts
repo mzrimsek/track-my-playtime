@@ -1,11 +1,11 @@
-import { User } from '../../auth/models';
-import { Profile } from '../models';
+import { user } from 'app/test-helpers';
+
+import { User } from 'features/auth/models';
+import { Profile } from 'features/profile/models';
 
 import {
     DEFAULT_DISPLAYNAME, DEFAULT_USER_IMGSRC, getDisplayName, getEmail, getImgSrc, getProviderFrom
 } from './userinfo.utils';
-
-import { user } from '../../../test-helpers';
 
 describe('User Info Utils', () => {
   describe('getDisplayName', () => {

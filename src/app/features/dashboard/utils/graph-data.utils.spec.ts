@@ -1,10 +1,60 @@
 import { addDays, eachDay, subDays } from 'date-fns';
 import { of } from 'rxjs';
 
-import { HistoryGrouping } from '../../../shared/models';
+import { HistoryGrouping } from 'shared/models';
 
-import { formatDate } from '../../../shared/utils/date.utils';
+import { formatDate } from 'shared/utils/date.utils';
 import { getGraphData, getPaddedGraphData, getSortedGraphData } from './graph-data.utils';
+
+const start = new Date();
+const end = addDays(start, 12);
+const dateRange = eachDay(start, end);
+
+const testGroupings: HistoryGrouping[] = [{
+  key: formatDate(subDays(start, 1)),
+  historyItems: [{
+    id: '3',
+    game: 'game 1',
+    platform: 'platform 2',
+    startTime: subDays(start, 1).getTime(),
+    endTime: subDays(start, 1).getTime() + 2000,
+    dateRange: [subDays(start, 1), subDays(start, 1)],
+    locked: false
+  }],
+  totalTime: 2
+}, {
+  key: formatDate(start),
+  historyItems: [{
+    id: '1',
+    game: 'game 1',
+    platform: 'platform 1',
+    startTime: start.getTime(),
+    endTime: start.getTime() + 1000,
+    dateRange: [start, start],
+    locked: false
+  }],
+  totalTime: 1
+}, {
+  key: formatDate(addDays(start, 4)),
+  historyItems: [{
+    id: '2',
+    game: 'game 2',
+    platform: 'platform 1',
+    startTime: addDays(start, 4).getTime(),
+    endTime: addDays(start, 4).getTime() + 3000,
+    dateRange: [addDays(start, 4), addDays(start, 4)],
+    locked: false
+  }, {
+    id: '4',
+    game: 'game 2',
+    platform: 'platform 2',
+    startTime: addDays(start, 4).getTime(),
+    endTime: addDays(start, 4).getTime() + 1000,
+    dateRange: [addDays(start, 4), addDays(start, 4)],
+    locked: false
+  }],
+  totalTime: 4
+}];
 
 describe('Graph Data Utils', () => {
   describe('getPaddedGraphData', () => {
@@ -118,53 +168,3 @@ describe('Graph Data Utils', () => {
     });
   });
 });
-
-const start = new Date();
-const end = addDays(start, 12);
-const dateRange = eachDay(start, end);
-
-const testGroupings: HistoryGrouping[] = [{
-  key: formatDate(subDays(start, 1)),
-  historyItems: [{
-    id: '3',
-    game: 'game 1',
-    platform: 'platform 2',
-    startTime: subDays(start, 1).getTime(),
-    endTime: subDays(start, 1).getTime() + 2000,
-    dateRange: [subDays(start, 1), subDays(start, 1)],
-    locked: false
-  }],
-  totalTime: 2
-}, {
-  key: formatDate(start),
-  historyItems: [{
-    id: '1',
-    game: 'game 1',
-    platform: 'platform 1',
-    startTime: start.getTime(),
-    endTime: start.getTime() + 1000,
-    dateRange: [start, start],
-    locked: false
-  }],
-  totalTime: 1
-}, {
-  key: formatDate(addDays(start, 4)),
-  historyItems: [{
-    id: '2',
-    game: 'game 2',
-    platform: 'platform 1',
-    startTime: addDays(start, 4).getTime(),
-    endTime: addDays(start, 4).getTime() + 3000,
-    dateRange: [addDays(start, 4), addDays(start, 4)],
-    locked: false
-  }, {
-    id: '4',
-    game: 'game 2',
-    platform: 'platform 2',
-    startTime: addDays(start, 4).getTime(),
-    endTime: addDays(start, 4).getTime() + 1000,
-    dateRange: [addDays(start, 4), addDays(start, 4)],
-    locked: false
-  }],
-  totalTime: 4
-}];

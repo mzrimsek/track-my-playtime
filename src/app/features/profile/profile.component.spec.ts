@@ -3,16 +3,15 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { combineReducers, Store, StoreModule } from '@ngrx/store';
 
+import * as fromRoot from 'app/reducers/root.reducer';
+import { user } from 'app/test-helpers';
+import * as userActions from 'features/auth/actions/user.actions';
+
 import { ProfileComponent } from './profile.component';
 
-import { UserService } from '../auth/services/user.service';
+import { UserService } from 'features/auth/services/user.service';
 
-import * as userActions from '../auth/actions/user.actions';
-
-import * as fromRoot from '../../reducers/root.reducer';
 import * as fromProfile from './reducers/root.reducer';
-
-import { user } from '../../test-helpers';
 
 describe('ProfileComponent', () => {
   let store: Store<fromRoot.State>;

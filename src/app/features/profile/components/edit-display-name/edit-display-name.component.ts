@@ -3,11 +3,10 @@ import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output } from
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { Store } from '@ngrx/store';
 
-import { UserService } from '../../../auth/services/user.service';
+import * as profileActions from 'features/profile/actions/profile.actions';
+import { State } from 'features/profile/reducers/root.reducer';
 
-import * as profileActions from '../../actions/profile.actions';
-
-import { State } from '../../reducers/root.reducer';
+import { UserService } from 'features/auth/services/user.service';
 
 @Component({
   selector: 'app-profile-edit-display-name',

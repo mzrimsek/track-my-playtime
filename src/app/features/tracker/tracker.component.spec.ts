@@ -3,19 +3,17 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { combineReducers, Store, StoreModule } from '@ngrx/store';
 
+import * as fromRoot from 'app/reducers/root.reducer';
+import { tracker } from 'app/test-helpers';
 import { addDays } from 'date-fns';
+import * as historyActions from 'shared/actions/history.actions';
+import * as fromShared from 'shared/reducers/root.reducer';
 
 import { TrackerComponent } from './tracker.component';
 
-import { ElapsedTimeService } from '../../shared/services/elapsed-time.service';
+import { ElapsedTimeService } from 'shared/services/elapsed-time.service';
 
-import * as historyActions from '../../shared/actions/history.actions';
-
-import * as fromRoot from '../../reducers/root.reducer';
-import * as fromShared from '../../shared/reducers/root.reducer';
 import * as fromTracker from './reducers/root.reducer';
-
-import { tracker } from '../../test-helpers';
 
 describe('Tracker Component', () => {
   let store: Store<fromRoot.State>;

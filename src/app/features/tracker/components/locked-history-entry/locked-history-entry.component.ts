@@ -3,14 +3,13 @@ import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core
 import { faLock, faPlay } from '@fortawesome/free-solid-svg-icons';
 import { Store } from '@ngrx/store';
 
-import { UserService } from '../../../auth/services/user.service';
-import { TimerService } from '../../services/timer.service';
+import { State } from 'features/tracker/reducers/root.reducer';
+import * as timerActions from 'shared/actions/timer.actions';
 
-import * as timerActions from '../../../../shared/actions/timer.actions';
+import { UserService } from 'features/auth/services/user.service';
+import { TimerService } from 'features/tracker/services/timer.service';
 
-import { State } from '../../reducers/root.reducer';
-
-import { HistoryListItem, TimerInfo } from '../../../../shared/models';
+import { HistoryListItem, TimerInfo } from 'shared/models';
 
 @Component({
   selector: 'app-tracker-locked-history-entry',

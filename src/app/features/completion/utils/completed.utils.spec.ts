@@ -1,8 +1,8 @@
-import { HistoryListItem, ProgressItem } from '../../../shared/models';
+import { history } from 'app/test-helpers';
+
+import { HistoryListItem, ProgressItem } from 'shared/models';
 
 import { getCompletedDisplayData } from './completed.utils';
-
-import { history } from '../../../test-helpers';
 
 describe('Completed Utils', () => {
   describe('getCompletedDisplayData', () => {

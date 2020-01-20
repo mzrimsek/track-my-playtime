@@ -1,10 +1,9 @@
+import { history } from 'app/test-helpers';
 import { of } from 'rxjs';
 
-import { HistoryGrouping } from '../../../shared/models';
+import { HistoryGrouping } from 'shared/models';
 
 import { hasMoreToDisplay, takeFrom } from './display.utils';
-
-import { history } from '../../../test-helpers';
 
 describe('Display Utils', () => {
   let grouping1: HistoryGrouping;

@@ -1,8 +1,8 @@
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { DEFAULT_KEY, HistoryGrouping } from '../../../shared/models';
-import { LibraryEntry } from '../models';
+import { LibraryEntry } from 'features/library/models';
+import { DEFAULT_KEY, HistoryGrouping } from 'shared/models';
 
 export const mapGroupings = (groupings: Observable<HistoryGrouping[]>): Observable<LibraryEntry[]> => {
   return groupings.pipe(map(groups => groups.map(group => {

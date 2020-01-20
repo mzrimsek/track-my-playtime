@@ -1,11 +1,11 @@
 import { TestBed } from '@angular/core/testing';
 import { AngularFirestore } from '@angular/fire/firestore';
 
+import { tracker } from 'app/test-helpers';
+
 import { TimerService } from './timer.service';
 
-import { TimerInfo } from '../../../shared/models';
-
-import { tracker } from '../../../test-helpers';
+import { TimerInfo } from 'shared/models';
 
 describe('Timer Service', () => {
   let service: TimerService;

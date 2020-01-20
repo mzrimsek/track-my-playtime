@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
-import { GraphDataItem } from '../../models';
+import { GraphDataItem } from 'features/dashboard/models';
 
 @Component({
   selector: 'app-dashboard-graph-tooltip',

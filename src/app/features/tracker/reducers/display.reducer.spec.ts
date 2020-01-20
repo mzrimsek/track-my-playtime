@@ -1,4 +1,4 @@
-import * as actions from '../actions/display.actions';
+import * as actions from 'features/tracker/actions/display.actions';
 
 import { reducer, State } from './display.reducer';
 

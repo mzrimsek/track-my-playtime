@@ -1,4 +1,4 @@
-import * as actions from '../actions/profile.actions';
+import * as actions from 'features/profile/actions/profile.actions';
 
 export interface State {
   displayName: string;

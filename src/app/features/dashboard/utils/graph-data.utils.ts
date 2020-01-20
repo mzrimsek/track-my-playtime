@@ -1,9 +1,9 @@
 import { combineLatest, Observable } from 'rxjs';
 
-import { HistoryGrouping } from '../../../shared/models';
-import { GraphDataItem } from '../models';
+import { GraphDataItem } from 'features/dashboard/models';
+import { HistoryGrouping } from 'shared/models';
 
-import { filterGroupingsByDateRange } from '../../../shared/utils/history.utils';
+import { filterGroupingsByDateRange } from 'shared/utils/history.utils';
 import { mapToGraphData, padDateGraphData, sortGraphDataByValue } from './graph.utils';
 
 type GraphDataModifier = (items: GraphDataItem[], dates: Date[]) => GraphDataItem[];

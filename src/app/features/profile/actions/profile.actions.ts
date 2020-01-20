@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 
-import { Profile } from '../models';
+import { Profile } from 'features/profile/models';
 
 export const LOAD_PROFILE = '[Profile] Load Profile';
 export class LoadProfile implements Action {

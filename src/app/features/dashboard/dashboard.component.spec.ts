@@ -3,12 +3,13 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { combineReducers, Store, StoreModule } from '@ngrx/store';
 
+import * as fromRoot from 'app/reducers/root.reducer';
+import * as fromShared from 'shared/reducers/root.reducer';
+
 import { DashboardComponent } from './dashboard.component';
 
-import { TimePipe } from '../../shared/pipes/time.pipe';
+import { TimePipe } from 'shared/pipes/time.pipe';
 
-import * as fromRoot from '../../reducers/root.reducer';
-import * as fromShared from '../../shared/reducers/root.reducer';
 import * as fromDashboard from './reducers/root.reducer';
 
 describe('DashboardComponent', () => {

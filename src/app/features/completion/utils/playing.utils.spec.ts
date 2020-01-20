@@ -1,9 +1,9 @@
-import { Dictionary, HistoryListItem, ProgressItem } from '../../../shared/models';
-import { MarkCompleteItem } from '../models';
+import { history } from 'app/test-helpers';
+
+import { MarkCompleteItem } from 'features/completion/models';
+import { Dictionary, HistoryListItem, ProgressItem } from 'shared/models';
 
 import { getEndItem, getPlayingDisplayData } from './playing.utils';
-
-import { history } from '../../../test-helpers';
 
 describe('Playing Utils', () => {
   describe('getPlayingDisplayData', () => {

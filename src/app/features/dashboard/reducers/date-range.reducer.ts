@@ -1,8 +1,7 @@
 import { endOfMonth, endOfWeek, startOfMonth, startOfWeek, subDays } from 'date-fns';
+import * as actions from 'features/dashboard/actions/date-range.actions';
 
-import * as actions from '../actions/date-range.actions';
-
-import { DateRangeType } from '../models';
+import { DateRangeType } from 'features/dashboard/models';
 
 export interface State {
   startDay: Date;

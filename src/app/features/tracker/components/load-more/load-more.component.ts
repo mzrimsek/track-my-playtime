@@ -2,9 +2,8 @@ import { Component } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 
-import * as actions from '../../actions/display.actions';
-
-import { State } from '../../reducers/root.reducer';
+import * as actions from 'features/tracker/actions/display.actions';
+import { State } from 'features/tracker/reducers/root.reducer';
 
 @Component({
   selector: 'app-tracker-load-more',

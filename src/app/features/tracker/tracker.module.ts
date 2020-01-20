@@ -9,7 +9,7 @@ import { StoreModule } from '@ngrx/store';
 
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 
-import { SharedModule } from '../../shared/shared.module';
+import { SharedModule } from 'shared/shared.module';
 
 import { HistoryEntryComponent } from './components/history-entry/history-entry.component';
 import { HistoryComponent } from './components/history/history.component';

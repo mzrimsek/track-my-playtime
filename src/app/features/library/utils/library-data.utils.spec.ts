@@ -1,7 +1,7 @@
 import { addDays } from 'date-fns';
 import { of } from 'rxjs';
 
-import { DEFAULT_KEY, HistoryGrouping } from '../../../shared/models';
+import { DEFAULT_KEY, HistoryGrouping } from 'shared/models';
 
 import { mapGroupings } from './library-data.utils';
 
