@@ -25,14 +25,9 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { NavComponent } from './components/nav/nav.component';
 
-import { ElapsedTimeService } from './shared/services/elapsed-time.service';
-
-import { AuthGuard } from './features/auth/guards/auth.guard';
-
+import { environment } from '../environments/environment';
 import { metaReducers } from './meta.reducers';
 import { CustomRouterStateSerializer, reducers } from './reducers/root.reducer';
-
-import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -64,9 +59,7 @@ import { environment } from '../environments/environment';
     ProfileModule
   ],
   providers: [
-    { provide: RouterStateSerializer, useClass: CustomRouterStateSerializer },
-    AuthGuard,
-    ElapsedTimeService
+    { provide: RouterStateSerializer, useClass: CustomRouterStateSerializer }
   ],
   bootstrap: [AppComponent]
 })

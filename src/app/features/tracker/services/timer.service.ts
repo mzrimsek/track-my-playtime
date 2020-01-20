@@ -6,7 +6,9 @@ import { map } from 'rxjs/operators';
 
 import { TimerInfo } from '../../../shared/models';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class TimerService {
 
   private timerCollection: AngularFirestoreCollection<FirestoreTimerItem>;

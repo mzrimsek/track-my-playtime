@@ -4,13 +4,6 @@ import { Store } from '@ngrx/store';
 
 import { combineLatest, Observable } from 'rxjs';
 
-import * as userActions from '../actions/user.actions';
-
-import profileComponentSelectors, {
-    State as ProfileState
-} from '../../profile/reducers/root.reducer';
-import authComponentSelectors, { State } from '../reducers/root.reducer';
-
 import { Profile } from '../../profile/models';
 import { User, UserInfo } from '../models';
 
@@ -18,7 +11,15 @@ import {
     getDisplayName, getEmail, getImgSrc, getProviderFrom
 } from '../../profile/utils/userinfo.utils';
 
-@Injectable()
+import profileComponentSelectors, {
+    State as ProfileState
+} from '../../profile/reducers/root.reducer';
+import * as userActions from '../actions/user.actions';
+import authComponentSelectors, { State } from '../reducers/root.reducer';
+
+@Injectable({
+  providedIn: 'root'
+})
 export class UserService {
 
   constructor(private store: Store<State>, private profileStore: Store<ProfileState>) { }

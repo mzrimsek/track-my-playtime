@@ -8,7 +8,9 @@ import { map, take } from 'rxjs/operators';
 
 import authComponentSelectors, { State } from '../reducers/root.reducer';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthGuard implements CanActivate {
   constructor(private store: Store<State>, private router: Router) { }
 

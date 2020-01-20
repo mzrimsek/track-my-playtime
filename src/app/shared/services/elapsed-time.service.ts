@@ -5,13 +5,15 @@ import { Store } from '@ngrx/store';
 import { combineLatest, interval, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import sharedSelectors, { SharedState } from '../reducers/root.reducer';
-
 import { TimerInfo } from '../models';
 
 import { formatElapsedTime } from '../utils/date.utils';
 
-@Injectable()
+import sharedSelectors, { SharedState } from '../reducers/root.reducer';
+
+@Injectable({
+  providedIn: 'root'
+})
 export class ElapsedTimeService {
 
   currentTime$: Observable<number>;

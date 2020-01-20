@@ -6,7 +6,9 @@ import { map } from 'rxjs/operators';
 
 import { Profile } from '../models';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class ProfileService {
 
   private profileCollection: AngularFirestoreCollection<FirestoreProfileItem>;

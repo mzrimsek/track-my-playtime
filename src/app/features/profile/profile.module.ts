@@ -11,9 +11,6 @@ import {
 import { ProfileComponent } from './profile.component';
 
 import { ProfileEffects } from './effects/profile.effects';
-
-import { ProfileService } from './services/profile.service';
-
 import { reducers } from './reducers/root.reducer';
 
 @NgModule({
@@ -26,7 +23,6 @@ import { reducers } from './reducers/root.reducer';
   declarations: [
     ProfileComponent,
     EditDisplayNameComponent
-  ],
-  providers: [ProfileService]
+  ]
 })
 export class ProfileModule { }

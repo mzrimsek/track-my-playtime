@@ -4,8 +4,6 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { HistoryEntity } from '../../../shared/reducers/history.reducer';
-
 import {
     AddTimerInfo, UpdateHistoryItemGamePayload, UpdateHistoryItemPlatformPayload,
     UpdateHistoryItemTimesPayload
@@ -13,7 +11,11 @@ import {
 
 import { getUUID } from '../../../shared/utils/uuid.utils';
 
-@Injectable()
+import { HistoryEntity } from '../../../shared/reducers/history.reducer';
+
+@Injectable({
+  providedIn: 'root'
+})
 export class HistoryService {
 
   private historyCollection: AngularFirestoreCollection<HistoryCollection>;

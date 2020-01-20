@@ -4,14 +4,16 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { ProgressEntity } from '../../../shared/reducers/progress.reducer';
-
 import { MarkCompletePayload, SetNotesPayload } from '../../../shared/models';
 import { AddPlaying } from '../models';
 
 import { getUUID } from '../../../shared/utils/uuid.utils';
 
-@Injectable()
+import { ProgressEntity } from '../../../shared/reducers/progress.reducer';
+
+@Injectable({
+  providedIn: 'root'
+})
 export class ProgressService {
 
   private progressCollection: AngularFirestoreCollection<ProgressCollection>;

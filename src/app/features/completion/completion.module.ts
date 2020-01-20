@@ -13,18 +13,14 @@ import { CompletionComponent } from './completion.component';
 import { AddPlayingComponent } from './components/add-playing/add-playing.component';
 import { CompletedItemComponent } from './components/completed-item/completed-item.component';
 import { PlayingItemComponent } from './components/playing-item/playing-item.component';
+import { SetNotesComponent } from './components/set-notes/set-notes.component';
 import { TabsComponent } from './components/tabs/tabs.component';
-
-import { AddPlayingEffects } from './effects/add-playing.effects';
-import { ProgressEffects } from './effects/progress.effects';
-
-import { UserService } from '../auth/services/user.service';
-import { ProgressService } from './services/progress.service';
 
 import { TimePipe } from '../../shared/pipes/time.pipe';
 
+import { AddPlayingEffects } from './effects/add-playing.effects';
+import { ProgressEffects } from './effects/progress.effects';
 import { reducers } from './reducers/root.reducer';
-import { SetNotesComponent } from './components/set-notes/set-notes.component';
 
 @NgModule({
   imports: [
@@ -46,10 +42,6 @@ import { SetNotesComponent } from './components/set-notes/set-notes.component';
     CompletedItemComponent,
     TabsComponent,
     SetNotesComponent],
-  providers: [
-    UserService,
-    ProgressService,
-    TimePipe
-  ]
+  providers: [TimePipe]
 })
 export class CompletionModule { }
