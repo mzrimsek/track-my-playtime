@@ -7,34 +7,33 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { combineReducers, Store, StoreModule } from '@ngrx/store';
 
+import * as fromAuth from 'features/auth/reducers/root.reducer';
+import * as fromCompletion from 'features/completion/reducers/root.reducer';
+import * as fromDashboard from 'features/dashboard/reducers/root.reducer';
+import * as fromProfile from 'features/profile/reducers/root.reducer';
+import * as fromTracker from 'features/tracker/reducers/root.reducer';
 import { of } from 'rxjs';
+import * as fromShared from 'shared/reducers/root.reducer';
 
-import { AppComponent } from './app.component';
 import {
     ForgotPasswordComponent
-} from './features/auth/components/forgot-password/forgot-password.component';
-import { LoginComponent } from './features/auth/components/login/login.component';
-import { RegisterComponent } from './features/auth/components/register/register.component';
-import { CompletionComponent } from './features/completion/completion.component';
-import { DashboardComponent } from './features/dashboard/dashboard.component';
-import { HomeComponent } from './features/home/home.component';
-import { LibraryComponent } from './features/library/library.component';
-import { ProfileComponent } from './features/profile/profile.component';
-import { TrackerComponent } from './features/tracker/tracker.component';
+} from 'features/auth/components/forgot-password/forgot-password.component';
+import { LoginComponent } from 'features/auth/components/login/login.component';
+import { RegisterComponent } from 'features/auth/components/register/register.component';
+import { CompletionComponent } from 'features/completion/completion.component';
+import { DashboardComponent } from 'features/dashboard/dashboard.component';
+import { HomeComponent } from 'features/home/home.component';
+import { LibraryComponent } from 'features/library/library.component';
+import { ProfileComponent } from 'features/profile/profile.component';
+import { TrackerComponent } from 'features/tracker/tracker.component';
+import { AppComponent } from './app.component';
 
-import { UserService } from './features/auth/services/user.service';
-import { ElapsedTimeService } from './shared/services/elapsed-time.service';
+import { UserService } from 'features/auth/services/user.service';
+import { ElapsedTimeService } from 'shared/services/elapsed-time.service';
 
-import { TimePipe } from './shared/pipes/time.pipe';
+import { TimePipe } from 'shared/pipes/time.pipe';
 
-import * as fromAuth from './features/auth/reducers/root.reducer';
-import * as fromCompletion from './features/completion/reducers/root.reducer';
-import * as fromDashboard from './features/dashboard/reducers/root.reducer';
-import * as fromProfile from './features/profile/reducers/root.reducer';
-import * as fromTracker from './features/tracker/reducers/root.reducer';
 import * as fromRoot from './reducers/root.reducer';
-import * as fromShared from './shared/reducers/root.reducer';
-
 import { tracker } from './test-helpers';
 
 describe('AppComponent', () => {

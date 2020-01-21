@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { StoreModule } from '@ngrx/store';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 
-import { SharedModule } from '../../shared/shared.module';
+import { SharedModule } from 'shared/shared.module';
 
 import { GraphTooltipComponent } from './components/graph-tooltip/graph-tooltip.component';
 import { HeaderComponent } from './components/header/header.component';

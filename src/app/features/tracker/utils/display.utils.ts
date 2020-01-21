@@ -1,6 +1,6 @@
 import { combineLatest, Observable } from 'rxjs';
 
-import { HistoryGrouping } from '../../../shared/models';
+import { HistoryGrouping } from 'shared/models';
 
 export const takeFrom =
   (groupings: Observable<HistoryGrouping[]>, amount: Observable<number>): Observable<HistoryGrouping[]> => {

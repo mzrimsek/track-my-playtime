@@ -2,17 +2,15 @@ import { TestBed } from '@angular/core/testing';
 
 import { provideMockActions } from '@ngrx/effects/testing';
 
+import * as appActions from 'app/actions/app.actions';
+import { progress } from 'app/test-helpers';
+import * as addPlayingActions from 'features/completion/actions/add-playing.actions';
 import { cold, hot } from 'jasmine-marbles';
 import { ReplaySubject, throwError } from 'rxjs';
 
+import { ProgressService } from 'features/completion/services/progress.service';
+
 import { AddPlayingEffects } from './add-playing.effects';
-
-import { ProgressService } from '../services/progress.service';
-
-import * as appActions from '../../../actions/app.actions';
-import * as addPlayingActions from '../actions/add-playing.actions';
-
-import { progress } from '../../../test-helpers';
 
 describe('Add Playing Effects', () => {
   let actions: any;

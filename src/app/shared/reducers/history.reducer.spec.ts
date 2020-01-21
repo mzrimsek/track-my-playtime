@@ -1,12 +1,11 @@
-import * as actions from '../actions/history.actions';
-
-import { reducer, State } from './history.reducer';
+import { history } from 'app/test-helpers';
+import * as actions from 'shared/actions/history.actions';
 
 import {
     UpdateHistoryItemGamePayload, UpdateHistoryItemPlatformPayload, UpdateHistoryItemTimesPayload
-} from '../models';
+} from 'shared/models';
 
-import { history } from '../../test-helpers';
+import { reducer, State } from './history.reducer';
 
 describe('History Reducer', () => {
   it('Should add an item when AddNewHistoryItem is dispatched', () => {

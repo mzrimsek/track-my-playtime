@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
-import { GraphDataItem, PieChartConfig } from '../../models';
+import { GraphDataItem, PieChartConfig } from 'features/dashboard/models';
 
 @Component({
   selector: 'app-dashboard-time-platform-graph',

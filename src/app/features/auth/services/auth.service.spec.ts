@@ -1,12 +1,11 @@
 import { TestBed } from '@angular/core/testing';
 import { AngularFireAuth } from '@angular/fire/auth';
 
+import { auth, user } from 'app/test-helpers';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { AuthService } from './auth.service';
-
-import { auth, user } from '../../../test-helpers';
 
 describe('Auth Service', () => {
   let service: AuthService;

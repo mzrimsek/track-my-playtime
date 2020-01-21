@@ -1,8 +1,8 @@
-import { AddPlayingInfo } from '../models';
+import { history } from 'app/test-helpers';
+
+import { AddPlayingInfo } from 'features/completion/models';
 
 import { findMatchingHistoryEntry } from './add-playing.utils';
-
-import { history } from '../../../test-helpers';
 
 describe('Add Playing Utils', () => {
   describe('findMatchingHistoryEntry', () => {

@@ -3,17 +3,15 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { combineReducers, Store, StoreModule } from '@ngrx/store';
 
+import * as fromRoot from 'app/reducers/root.reducer';
+import { user } from 'app/test-helpers';
+import * as fromCompletion from 'features/completion/reducers/root.reducer';
+import * as progressActions from 'shared/actions/progress.actions';
+import * as fromShared from 'shared/reducers/root.reducer';
+
 import { SetNotesComponent } from './set-notes.component';
 
-import { UserService } from '../../../auth/services/user.service';
-
-import * as progressActions from '../../../../shared/actions/progress.actions';
-
-import * as fromRoot from '../../../../reducers/root.reducer';
-import * as fromShared from '../../../../shared/reducers/root.reducer';
-import * as fromCompletion from '../../reducers/root.reducer';
-
-import { user } from '../../../../test-helpers';
+import { UserService } from 'features/auth/services/user.service';
 
 describe('SetNotesComponent', () => {
   let store: Store<fromRoot.State>;

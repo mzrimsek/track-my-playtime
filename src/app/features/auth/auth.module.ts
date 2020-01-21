@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { EffectsModule } from '@ngrx/effects';
@@ -15,12 +16,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { AuthEffects } from './effects/auth.effects';
 import { StatusEffects } from './effects/status.effects';
 import { UserEffects } from './effects/user.effects';
-
-import { AuthService } from './services/auth.service';
-
 import { reducers } from './reducers/root.reducer';
-
-import { FormsModule, ReactiveFormsModule } from '../../../../node_modules/@angular/forms';
 
 @NgModule({
   imports: [
@@ -41,7 +37,6 @@ import { FormsModule, ReactiveFormsModule } from '../../../../node_modules/@angu
     RegisterComponent,
     AuthFormComponent,
     ForgotPasswordComponent
-  ],
-  providers: [AuthService]
+  ]
 })
 export class AuthModule { }

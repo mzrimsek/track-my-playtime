@@ -2,16 +2,15 @@ import { TestBed } from '@angular/core/testing';
 
 import { provideMockActions } from '@ngrx/effects/testing';
 
+import * as userActions from 'features/auth/actions/user.actions';
+import * as profileActions from 'features/profile/actions/profile.actions';
 import { cold, hot } from 'jasmine-marbles';
+import * as historyActions from 'shared/actions/history.actions';
+import * as platformsActions from 'shared/actions/platforms.actions';
+import * as progressActions from 'shared/actions/progress.actions';
+import * as timerActions from 'shared/actions/timer.actions';
 
 import { AuthEffects } from './auth.effects';
-
-import * as historyActions from '../../../shared/actions/history.actions';
-import * as platformsActions from '../../../shared/actions/platforms.actions';
-import * as progressActions from '../../../shared/actions/progress.actions';
-import * as timerActions from '../../../shared/actions/timer.actions';
-import * as userActions from '../../auth/actions/user.actions';
-import * as profileActions from '../../profile/actions/profile.actions';
 
 describe('Auth Effects', () => {
   let actions: any;

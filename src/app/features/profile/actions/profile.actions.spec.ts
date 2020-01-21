@@ -1,6 +1,6 @@
-import * as actions from './profile.actions';
+import { profile } from 'app/test-helpers/profile';
 
-import { profile } from '../../../test-helpers/profile';
+import * as actions from './profile.actions';
 
 describe('Profile Actions', () => {
   describe('LoadProfile', () => {

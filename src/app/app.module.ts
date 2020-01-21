@@ -11,28 +11,24 @@ import { RouterStateSerializer, StoreRouterConnectingModule } from '@ngrx/router
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
+import { environment } from 'environments/environment';
+
+import { AuthModule } from 'features/auth/auth.module';
+import { CompletionModule } from 'features/completion/completion.module';
+import { DashboardModule } from 'features/dashboard/dashboard.module';
+import { HomeModule } from 'features/home/home.module';
+import { LibraryModule } from 'features/library/library.module';
+import { ProfileModule } from 'features/profile/profile.module';
+import { TrackerModule } from 'features/tracker/tracker.module';
+import { SharedModule } from 'shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
-import { AuthModule } from './features/auth/auth.module';
-import { CompletionModule } from './features/completion/completion.module';
-import { DashboardModule } from './features/dashboard/dashboard.module';
-import { HomeModule } from './features/home/home.module';
-import { LibraryModule } from './features/library/library.module';
-import { ProfileModule } from './features/profile/profile.module';
-import { TrackerModule } from './features/tracker/tracker.module';
-import { SharedModule } from './shared/shared.module';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { NavComponent } from './components/nav/nav.component';
 
-import { ElapsedTimeService } from './shared/services/elapsed-time.service';
-
-import { AuthGuard } from './features/auth/guards/auth.guard';
-
 import { metaReducers } from './meta.reducers';
 import { CustomRouterStateSerializer, reducers } from './reducers/root.reducer';
-
-import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -64,9 +60,7 @@ import { environment } from '../environments/environment';
     ProfileModule
   ],
   providers: [
-    { provide: RouterStateSerializer, useClass: CustomRouterStateSerializer },
-    AuthGuard,
-    ElapsedTimeService
+    { provide: RouterStateSerializer, useClass: CustomRouterStateSerializer }
   ],
   bootstrap: [AppComponent]
 })

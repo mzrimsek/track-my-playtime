@@ -3,17 +3,16 @@ import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core
 import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 import { Store } from '@ngrx/store';
 
-import { UserService } from '../../../auth/services/user.service';
+import * as appActions from 'app/actions/app.actions';
+import * as actions from 'features/completion/actions/add-playing.actions';
+import { State } from 'features/completion/reducers/root.reducer';
 
-import * as appActions from '../../../../actions/app.actions';
-import * as actions from '../../actions/add-playing.actions';
+import { UserService } from 'features/auth/services/user.service';
 
-import { State } from '../../reducers/root.reducer';
+import { AddPlaying, AddPlayingInfo } from 'features/completion/models';
+import { HistoryGrouping } from 'shared/models';
 
-import { HistoryGrouping } from '../../../../shared/models';
-import { AddPlaying, AddPlayingInfo } from '../../models';
-
-import { findMatchingHistoryEntry } from '../../utils/add-playing.utils';
+import { findMatchingHistoryEntry } from 'features/completion/utils/add-playing.utils';
 
 @Component({
   selector: 'app-completion-add-playing',

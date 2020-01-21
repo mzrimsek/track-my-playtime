@@ -3,13 +3,12 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { Store } from '@ngrx/store';
 
-import { UserService } from '../../../auth/services/user.service';
+import { State } from 'features/completion/reducers/root.reducer';
+import * as progressActions from 'shared/actions/progress.actions';
 
-import * as progressActions from '../../../../shared/actions/progress.actions';
+import { UserService } from 'features/auth/services/user.service';
 
-import { State } from '../../reducers/root.reducer';
-
-import { SetNotesPayload } from '../../../../shared/models';
+import { SetNotesPayload } from 'shared/models';
 
 @Component({
   selector: 'app-completion-set-notes',

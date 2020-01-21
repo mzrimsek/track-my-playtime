@@ -1,10 +1,16 @@
 import { endOfMonth, endOfWeek, startOfMonth, startOfWeek, subDays } from 'date-fns';
+import * as actions from 'features/dashboard/actions/date-range.actions';
 
-import * as actions from '../actions/date-range.actions';
+import { formatDate } from 'shared/utils/date.utils';
 
 import { reducer, State } from './date-range.reducer';
 
-import { formatDate } from '../../../shared/utils/date.utils';
+const now = new Date();
+const initialState: State = {
+  startDay: startOfWeek(now),
+  endDay: endOfWeek(now),
+  type: 'THIS_WEEK'
+};
 
 describe('Date Range Reducer', () => {
   it('Should have initial state when SetThisWeek is dispatched', () => {
@@ -71,10 +77,3 @@ describe('Date Range Reducer', () => {
     });
   });
 });
-
-const now = new Date();
-const initialState: State = {
-  startDay: startOfWeek(now),
-  endDay: endOfWeek(now),
-  type: 'THIS_WEEK'
-};

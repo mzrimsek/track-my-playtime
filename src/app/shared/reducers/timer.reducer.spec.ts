@@ -1,8 +1,8 @@
-import * as actions from '../actions/timer.actions';
+import * as actions from 'shared/actions/timer.actions';
+
+import { TimerInfo } from 'shared/models';
 
 import { reducer, State } from './timer.reducer';
-
-import { TimerInfo } from '../models';
 
 describe('Timer Reducer', () => {
   it('Should clear timer info when ResetTimer is dispatched', () => {

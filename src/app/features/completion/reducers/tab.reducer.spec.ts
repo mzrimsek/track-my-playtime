@@ -1,4 +1,4 @@
-import * as actions from '../actions/tab.actions';
+import * as actions from 'features/completion/actions/tab.actions';
 
 import { reducer, State } from './tab.reducer';
 

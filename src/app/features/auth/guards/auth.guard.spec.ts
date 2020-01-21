@@ -3,16 +3,13 @@ import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/ro
 
 import { combineReducers, Store, StoreModule } from '@ngrx/store';
 
+import * as fromRoot from 'app/reducers/root.reducer';
+import { routing, user } from 'app/test-helpers';
+import * as actions from 'features/auth/actions/user.actions';
+import * as fromAuth from 'features/auth/reducers/root.reducer';
 import { cold } from 'jasmine-marbles';
 
 import { AuthGuard } from './auth.guard';
-
-import * as actions from '../actions/user.actions';
-
-import * as fromRoot from '../../../reducers/root.reducer';
-import * as fromAuth from '../reducers/root.reducer';
-
-import { routing, user } from '../../../test-helpers';
 
 describe('AuthGuard', () => {
   let guard: AuthGuard;

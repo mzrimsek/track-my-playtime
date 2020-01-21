@@ -1,4 +1,4 @@
-import * as actions from '../actions/user.actions';
+import * as actions from 'features/auth/actions/user.actions';
 
 export interface State {
   uid: string;

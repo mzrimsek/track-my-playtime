@@ -1,8 +1,6 @@
-import * as actions from '../actions/platforms.actions';
-
-import { reducer, State } from '../reducers/platforms.reducer';
-
-import { platforms } from '../../test-helpers';
+import { platforms } from 'app/test-helpers';
+import * as actions from 'shared/actions/platforms.actions';
+import { reducer, State } from 'shared/reducers/platforms.reducer';
 
 describe('Platforms Reducer', () => {
   it('Should set options when LoadOptionsSucceeded is dispatched', () => {

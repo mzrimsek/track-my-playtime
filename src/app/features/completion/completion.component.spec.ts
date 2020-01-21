@@ -3,10 +3,11 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { combineReducers, Store, StoreModule } from '@ngrx/store';
 
+import * as fromRoot from 'app/reducers/root.reducer';
+import * as fromShared from 'shared/reducers/root.reducer';
+
 import { CompletionComponent } from './completion.component';
 
-import * as fromRoot from '../../reducers/root.reducer';
-import * as fromShared from '../../shared/reducers/root.reducer';
 import * as fromCompletion from './reducers/root.reducer';
 
 describe('CompletionComponent', () => {

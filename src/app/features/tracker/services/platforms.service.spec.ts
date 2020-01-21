@@ -1,9 +1,9 @@
 import { TestBed } from '@angular/core/testing';
 import { AngularFirestore } from '@angular/fire/firestore';
 
-import { PlatformsService } from './platforms.service';
+import { platforms } from 'app/test-helpers';
 
-import { platforms } from '../../../test-helpers';
+import { PlatformsService } from './platforms.service';
 
 describe('Platforms Service', () => {
   let service: PlatformsService;
@@ -48,9 +48,9 @@ describe('Platforms Service', () => {
         index: 3,
         option: 'Platform 1'
       }, {
-          index: 1,
-          option: 'Platform 2'
-        });
+        index: 1,
+        option: 'Platform 2'
+      });
 
       const result = service.getPlatformsOptions();
 

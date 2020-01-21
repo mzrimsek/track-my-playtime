@@ -2,11 +2,10 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 
-import * as actions from '../../actions/date-range.actions';
+import * as actions from 'features/dashboard/actions/date-range.actions';
+import { State } from 'features/dashboard/reducers/root.reducer';
 
-import { State } from '../../reducers/root.reducer';
-
-import { DateRangeType } from '../../models';
+import { DateRangeType } from 'features/dashboard/models';
 
 @Component({
   selector: 'app-dashboard-header',

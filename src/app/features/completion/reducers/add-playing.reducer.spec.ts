@@ -1,4 +1,4 @@
-import * as actions from '../actions/add-playing.actions';
+import * as actions from 'features/completion/actions/add-playing.actions';
 
 import { reducer, State } from './add-playing.reducer';
 

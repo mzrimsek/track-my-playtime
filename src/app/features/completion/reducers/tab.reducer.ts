@@ -1,6 +1,6 @@
-import * as actions from '../actions/tab.actions';
+import * as actions from 'features/completion/actions/tab.actions';
 
-import { TabType } from '../models';
+import { TabType } from 'features/completion/models';
 
 export interface State {
   tab: TabType;

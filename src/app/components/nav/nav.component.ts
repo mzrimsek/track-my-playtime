@@ -5,10 +5,10 @@ import {
     faBars, faChartBar, faClipboardList, faList, faSignOutAlt, faTimes
 } from '@fortawesome/free-solid-svg-icons';
 
-import { UserService } from '../../features/auth/services/user.service';
+import { UserService } from 'features/auth/services/user.service';
 
-import { UserInfo } from '../../features/auth/models';
-import { RouteEntry } from '../../models';
+import { RouteEntry } from 'app/models';
+import { UserInfo } from 'features/auth/models';
 
 @Component({
   selector: 'app-nav',

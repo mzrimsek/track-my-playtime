@@ -1,4 +1,4 @@
-import * as actions from '../actions/app.actions';
+import * as actions from 'app/actions/app.actions';
 
 import { reducer, State } from './error.reducer';
 

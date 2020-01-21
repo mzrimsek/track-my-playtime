@@ -1,10 +1,10 @@
 import { Action } from '@ngrx/store';
 
-import { HistoryEntity } from '../reducers/history.reducer';
+import { HistoryEntity } from 'shared/reducers/history.reducer';
 
 import {
     UpdateHistoryItemGamePayload, UpdateHistoryItemPlatformPayload, UpdateHistoryItemTimesPayload
-} from '../models';
+} from 'shared/models';
 
 export const ADD_NEW_HISTORY_ITEM = '[History] Add New History Item';
 export class AddNewHistoryItem implements Action {

@@ -1,8 +1,8 @@
 import { ActionReducerMap, createFeatureSelector, createSelector } from '@ngrx/store';
 
-import * as fromProfile from './profile.reducer';
+import { Profile } from 'features/profile/models';
 
-import { Profile } from '../models';
+import * as fromProfile from './profile.reducer';
 
 export interface ProfileState {
   info: fromProfile.State;

@@ -3,19 +3,17 @@ import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import * as fromRouter from '@ngrx/router-store';
 
+import * as appActions from 'app/actions/app.actions';
+import { user } from 'app/test-helpers';
+import * as statusActions from 'features/auth/actions/status.actions';
+import * as userActions from 'features/auth/actions/user.actions';
 import { cold, hot } from 'jasmine-marbles';
 
+import { Error } from 'app/models';
+
+import { getValidationMessage } from 'features/auth/utils/validation.utils';
+
 import { StatusEffects } from './status.effects';
-
-import * as appActions from '../../../actions/app.actions';
-import * as statusActions from '../actions/status.actions';
-import * as userActions from '../actions/user.actions';
-
-import { Error } from '../../../models';
-
-import { getValidationMessage } from '../utils/validation.utils';
-
-import { user } from '../../../test-helpers';
 
 describe('Status Effects', () => {
   let actions: any;

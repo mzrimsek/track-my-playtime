@@ -1,6 +1,6 @@
-import * as userActions from '../actions/user.actions';
+import * as userActions from 'features/auth/actions/user.actions';
 
-import { Error } from '../../../models';
+import { Error } from 'app/models';
 
 import {
     EMAIL_IN_USE, getValidationMessage, INVALID_CREDENTIALS, POPUP_CLOSED

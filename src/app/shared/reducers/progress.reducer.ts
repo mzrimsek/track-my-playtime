@@ -1,6 +1,6 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 
-import * as actions from '../actions/progress.actions';
+import * as actions from 'shared/actions/progress.actions';
 
 export interface ProgressEntity {
   id: string;

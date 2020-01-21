@@ -4,9 +4,11 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { Profile } from '../models';
+import { Profile } from 'features/profile/models';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class ProfileService {
 
   private profileCollection: AngularFirestoreCollection<FirestoreProfileItem>;

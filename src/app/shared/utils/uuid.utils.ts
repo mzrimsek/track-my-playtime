@@ -1,5 +1,4 @@
-import { environment } from '../../../environments/environment';
-
+import { environment } from 'environments/environment';
 import * as uuidv5 from 'uuid/v5';
 
 export const getUUID = (userId: string, modifier = 0): string => {

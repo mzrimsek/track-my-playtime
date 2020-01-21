@@ -3,17 +3,15 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { provideMockActions } from '@ngrx/effects/testing';
 
+import * as appActions from 'app/actions/app.actions';
+import { auth, routing, user } from 'app/test-helpers';
+import * as userActions from 'features/auth/actions/user.actions';
 import { cold, hot } from 'jasmine-marbles';
 import { ReplaySubject, throwError } from 'rxjs';
 
+import { AuthService } from 'features/auth/services/auth.service';
+
 import { UserEffects } from './user.effects';
-
-import { AuthService } from '../services/auth.service';
-
-import * as appActions from '../../../actions/app.actions';
-import * as userActions from '../actions/user.actions';
-
-import { auth, routing, user } from '../../../test-helpers';
 
 describe('User Effects', () => {
   let actions: any;

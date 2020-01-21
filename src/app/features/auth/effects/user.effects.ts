@@ -4,15 +4,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { User as AuthUser } from '@firebase/auth-types';
 import { Actions, Effect } from '@ngrx/effects';
 
+import * as appActions from 'app/actions/app.actions';
+import * as userActions from 'features/auth/actions/user.actions';
 import { of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 
-import { AuthService } from '../services/auth.service';
+import { AuthService } from 'features/auth/services/auth.service';
 
-import * as appActions from '../../../actions/app.actions';
-import * as userActions from '../actions/user.actions';
-
-import { User } from '../models';
+import { User } from 'features/auth/models';
 
 @Injectable()
 export class UserEffects {

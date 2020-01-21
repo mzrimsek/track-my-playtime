@@ -2,14 +2,13 @@ import { Injectable } from '@angular/core';
 
 import { Actions, Effect } from '@ngrx/effects';
 
+import * as appActions from 'app/actions/app.actions';
 import { of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
+import * as historyActions from 'shared/actions/history.actions';
+import * as timerActions from 'shared/actions/timer.actions';
 
-import { HistoryService } from '../services/history.service';
-
-import * as appActions from '../../../actions/app.actions';
-import * as historyActions from '../../../shared/actions/history.actions';
-import * as timerActions from '../../../shared/actions/timer.actions';
+import { HistoryService } from 'features/tracker/services/history.service';
 
 @Injectable()
 export class HistoryEffects {

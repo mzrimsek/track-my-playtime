@@ -4,15 +4,15 @@ import { Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import sharedSelectors, { State as SharedState } from 'shared/reducers/root.reducer';
 
-import { ElapsedTimeService } from '../../shared/services/elapsed-time.service';
+import { ElapsedTimeService } from 'shared/services/elapsed-time.service';
 
-import sharedSelectors, { State as SharedState } from '../../shared/reducers/root.reducer';
-import trackerSelectors, { State as TrackerState } from './reducers/root.reducer';
-
-import { HistoryGrouping, NgSelectValue, TimerInfo } from '../../shared/models';
+import { HistoryGrouping, NgSelectValue, TimerInfo } from 'shared/models';
 
 import { hasMoreToDisplay, takeFrom } from './utils/display.utils';
+
+import trackerSelectors, { State as TrackerState } from './reducers/root.reducer';
 
 @Component({
   selector: 'app-tracker',

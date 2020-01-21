@@ -3,17 +3,18 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
-
-import { HistoryEntity } from '../../../shared/reducers/history.reducer';
+import { HistoryEntity } from 'shared/reducers/history.reducer';
 
 import {
     AddTimerInfo, UpdateHistoryItemGamePayload, UpdateHistoryItemPlatformPayload,
     UpdateHistoryItemTimesPayload
-} from '../../../shared/models';
+} from 'shared/models';
 
-import { getUUID } from '../../../shared/utils/uuid.utils';
+import { getUUID } from 'shared/utils/uuid.utils';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class HistoryService {
 
   private historyCollection: AngularFirestoreCollection<HistoryCollection>;

@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HeaderComponent } from './header.component';
 
-import { PluralizePipe } from '../../../../shared/pipes/pluralize.pipe';
+import { PluralizePipe } from 'shared/pipes/pluralize.pipe';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;

@@ -1,8 +1,8 @@
-import { Dictionary, HistoryGrouping, HistoryListItem, ProgressItem } from '../../../shared/models';
-import { MarkCompleteItem, PlayingDisplayData } from '../models';
+import { MarkCompleteItem, PlayingDisplayData } from 'features/completion/models';
+import { Dictionary, HistoryGrouping, HistoryListItem, ProgressItem } from 'shared/models';
 
-import { filterHistoryItemsAfter } from '../../../shared/utils/history-filter.utils';
-import { getElapsedTimeFrom } from '../../../shared/utils/history.utils';
+import { filterHistoryItemsAfter } from 'shared/utils/history-filter.utils';
+import { getElapsedTimeFrom } from 'shared/utils/history.utils';
 
 export const getPlayingDisplayData = (item: ProgressItem,
   gameGroupings: HistoryGrouping[],

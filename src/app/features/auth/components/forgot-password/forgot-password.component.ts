@@ -3,9 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { Store } from '@ngrx/store';
 
-import * as userActions from '../../actions/user.actions';
-
-import { State } from '../../reducers/root.reducer';
+import * as userActions from 'features/auth/actions/user.actions';
+import { State } from 'features/auth/reducers/root.reducer';
 
 @Component({
   selector: 'app-auth-forgot-password',

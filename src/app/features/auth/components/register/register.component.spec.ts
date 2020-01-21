@@ -4,12 +4,11 @@ import { By } from '@angular/platform-browser';
 
 import { combineReducers, Store, StoreModule } from '@ngrx/store';
 
+import * as fromRoot from 'app/reducers/root.reducer';
+import * as actions from 'features/auth/actions/user.actions';
+import * as fromAuth from 'features/auth/reducers/root.reducer';
+
 import { RegisterComponent } from './register.component';
-
-import * as actions from '../../actions/user.actions';
-
-import * as fromRoot from '../../../../reducers/root.reducer';
-import * as fromAuth from '../../reducers/root.reducer';
 
 describe('RegisterComponent', () => {
   let component: RegisterComponent;

@@ -3,15 +3,14 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
 import * as fromRouter from '@ngrx/router-store';
 
+import * as appActions from 'app/actions/app.actions';
+import * as statusActions from 'features/auth/actions/status.actions';
+import * as userActions from 'features/auth/actions/user.actions';
 import { map, mergeMap } from 'rxjs/operators';
 
-import * as appActions from '../../../actions/app.actions';
-import * as statusActions from '../actions/status.actions';
-import * as userActions from '../actions/user.actions';
+import { Error } from 'app/models';
 
-import { Error } from '../../../models';
-
-import { getValidationMessage } from '../utils/validation.utils';
+import { getValidationMessage } from 'features/auth/utils/validation.utils';
 
 @Injectable()
 export class StatusEffects {

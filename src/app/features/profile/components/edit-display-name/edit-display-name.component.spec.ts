@@ -3,16 +3,14 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { combineReducers, Store, StoreModule } from '@ngrx/store';
 
+import * as fromRoot from 'app/reducers/root.reducer';
+import { user } from 'app/test-helpers';
+import * as profileActions from 'features/profile/actions/profile.actions';
+import * as fromProfile from 'features/profile/reducers/root.reducer';
+
 import { EditDisplayNameComponent } from './edit-display-name.component';
 
-import { UserService } from '../../../auth/services/user.service';
-
-import * as profileActions from '../../actions/profile.actions';
-
-import * as fromRoot from '../../../../reducers/root.reducer';
-import * as fromProfile from '../../reducers/root.reducer';
-
-import { user } from '../../../../test-helpers';
+import { UserService } from 'features/auth/services/user.service';
 
 describe('EditDisplayNameComponent', () => {
   let store: Store<fromRoot.State>;

@@ -5,22 +5,19 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { combineReducers, Store, StoreModule } from '@ngrx/store';
 
+import * as fromRoot from 'app/reducers/root.reducer';
+import { user } from 'app/test-helpers';
+import * as userActions from 'features/auth/actions/user.actions';
+import * as fromAuth from 'features/auth/reducers/root.reducer';
 import { of } from 'rxjs';
 
-import { DashboardComponent } from '../../features/dashboard/dashboard.component';
-import { TrackerComponent } from '../../features/tracker/tracker.component';
+import { DashboardComponent } from 'features/dashboard/dashboard.component';
+import { TrackerComponent } from 'features/tracker/tracker.component';
 import { NavComponent } from './nav.component';
 
-import { UserService } from '../../features/auth/services/user.service';
+import { UserService } from 'features/auth/services/user.service';
 
-import { TimePipe } from '../../shared/pipes/time.pipe';
-
-import * as userActions from '../../features/auth/actions/user.actions';
-
-import * as fromAuth from '../../features/auth/reducers/root.reducer';
-import * as fromRoot from '../../reducers/root.reducer';
-
-import { user } from '../../test-helpers';
+import { TimePipe } from 'shared/pipes/time.pipe';
 
 describe('NavComponent', () => {
   let component: NavComponent;

@@ -2,17 +2,15 @@ import { TestBed } from '@angular/core/testing';
 
 import { provideMockActions } from '@ngrx/effects/testing';
 
+import * as appActions from 'app/actions/app.actions';
+import { profile } from 'app/test-helpers/profile';
+import * as profileActions from 'features/profile/actions/profile.actions';
 import { cold, hot } from 'jasmine-marbles';
 import { ReplaySubject, throwError } from 'rxjs';
 
+import { ProfileService } from 'features/profile/services/profile.service';
+
 import { ProfileEffects } from './profile.effects';
-
-import { ProfileService } from '../services/profile.service';
-
-import * as appActions from '../../../actions/app.actions';
-import * as profileActions from '../actions/profile.actions';
-
-import { profile } from '../../../test-helpers/profile';
 
 describe('Profile Effects', () => {
   let actions: any;

@@ -1,8 +1,8 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 
-import * as actions from '../actions/history.actions';
+import * as actions from 'shared/actions/history.actions';
 
-import { UpdatePayload } from '../models';
+import { UpdatePayload } from 'shared/models';
 
 export interface HistoryEntity {
   id: string;
@@ -20,6 +20,14 @@ export const adapter: EntityAdapter<HistoryEntity> = createEntityAdapter<History
 const initialState: State = adapter.getInitialState({
   loading: false
 });
+
+const getUpdatedState = (payload: UpdatePayload, currentState: State): State => {
+  const { itemId: id, ...changes } = payload;
+  return adapter.updateOne({
+    id,
+    changes
+  }, currentState);
+};
 
 export function reducer(state: State = initialState, action: actions.All): State {
   switch (action.type) {
@@ -56,11 +64,3 @@ export function reducer(state: State = initialState, action: actions.All): State
     }
   }
 }
-
-const getUpdatedState = (payload: UpdatePayload, currentState: State): State => {
-  const { itemId: id, ...changes } = payload;
-  return adapter.updateOne({
-    id,
-    changes
-  }, currentState);
-};

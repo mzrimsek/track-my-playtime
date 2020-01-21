@@ -1,7 +1,7 @@
 import { Observable, of } from 'rxjs';
 
-import { Dictionary, HistoryGrouping, ProgressItem } from '../../../shared/models';
-import { MarkCompleteItem } from '../models';
+import { MarkCompleteItem } from 'features/completion/models';
+import { Dictionary, HistoryGrouping, ProgressItem } from 'shared/models';
 
 import { getCompletedDisplayDataItems, getPlayingDisplayDataItems } from './display-data.utils';
 

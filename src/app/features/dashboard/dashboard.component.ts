@@ -4,17 +4,17 @@ import { Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-
-import sharedSelectors, { State as SharedState } from '../../shared/reducers/root.reducer';
-import dashboardSelectors, { State as DashboardState } from './reducers/root.reducer';
+import sharedSelectors, { State as SharedState } from 'shared/reducers/root.reducer';
 
 import {
     BarGraphConfig, DateRangeType, GraphConfig, GraphDataItem, PieChartConfig
 } from './models';
 
-import { formatTime } from '../../shared/utils/date.utils';
+import { formatTime } from 'shared/utils/date.utils';
 import { selectColorScheme } from './utils/colorScheme.utils';
 import { getGraphData, getPaddedGraphData, getSortedGraphData } from './utils/graph-data.utils';
+
+import dashboardSelectors, { State as DashboardState } from './reducers/root.reducer';
 
 @Component({
   selector: 'app-dashboard',

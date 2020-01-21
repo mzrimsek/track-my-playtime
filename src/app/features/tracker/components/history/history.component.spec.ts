@@ -3,9 +3,9 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HistoryComponent } from './history.component';
 
-import { TimePipe } from '../../../../shared/pipes/time.pipe';
+import { TimePipe } from 'shared/pipes/time.pipe';
 
-import { HistoryGrouping } from '../../../../shared/models';
+import { HistoryGrouping } from 'shared/models';
 
 describe('HistoryComponent', () => {
   let component: TestWrapperComponent;

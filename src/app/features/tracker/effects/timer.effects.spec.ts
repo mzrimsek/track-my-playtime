@@ -2,18 +2,16 @@ import { TestBed } from '@angular/core/testing';
 
 import { provideMockActions } from '@ngrx/effects/testing';
 
+import * as appActions from 'app/actions/app.actions';
+import { history, tracker } from 'app/test-helpers';
 import { cold, hot } from 'jasmine-marbles';
 import { ReplaySubject, throwError } from 'rxjs';
+import * as timerActions from 'shared/actions/timer.actions';
+
+import { HistoryService } from 'features/tracker/services/history.service';
+import { TimerService } from 'features/tracker/services/timer.service';
 
 import { TimerEffects } from './timer.effects';
-
-import { HistoryService } from '../services/history.service';
-import { TimerService } from '../services/timer.service';
-
-import * as appActions from '../../../actions/app.actions';
-import * as timerActions from '../../../shared/actions/timer.actions';
-
-import { history, tracker } from '../../../test-helpers';
 
 describe('Timer Effects', () => {
   let actions: any;

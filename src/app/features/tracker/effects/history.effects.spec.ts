@@ -2,22 +2,20 @@ import { TestBed } from '@angular/core/testing';
 
 import { provideMockActions } from '@ngrx/effects/testing';
 
+import * as appActions from 'app/actions/app.actions';
+import { history } from 'app/test-helpers';
 import { cold, hot } from 'jasmine-marbles';
 import { ReplaySubject, throwError } from 'rxjs';
+import * as historyActions from 'shared/actions/history.actions';
+import * as timerActions from 'shared/actions/timer.actions';
 
-import { HistoryEffects } from './history.effects';
-
-import { HistoryService } from '../services/history.service';
-
-import * as appActions from '../../../actions/app.actions';
-import * as historyActions from '../../../shared/actions/history.actions';
-import * as timerActions from '../../../shared/actions/timer.actions';
+import { HistoryService } from 'features/tracker/services/history.service';
 
 import {
     UpdateHistoryItemGamePayload, UpdateHistoryItemPlatformPayload, UpdateHistoryItemTimesPayload
-} from '../../../shared/models';
+} from 'shared/models';
 
-import { history } from '../../../test-helpers';
+import { HistoryEffects } from './history.effects';
 
 describe('History Effects', () => {
   let actions: any;

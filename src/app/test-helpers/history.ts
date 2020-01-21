@@ -1,13 +1,12 @@
 import { Observable, of } from 'rxjs';
+import { HistoryEntity, State as HistoryState } from 'shared/reducers/history.reducer';
 
-import { FirestoreHistoryItem } from '../features/tracker/services/history.service';
-
-import { HistoryEntity, State as HistoryState } from '../shared/reducers/history.reducer';
+import { FirestoreHistoryItem } from 'features/tracker/services/history.service';
 
 import {
     AddTimerInfo, HistoryGrouping, HistoryListItem, UpdateHistoryItemGamePayload,
     UpdateHistoryItemPlatformPayload, UpdateHistoryItemTimesPayload
-} from '../shared/models';
+} from 'shared/models';
 
 export namespace history {
   export const getHistoryListItem = (game: string, platform = 'some platform', startTime = 0, endTime = 0): HistoryListItem => {

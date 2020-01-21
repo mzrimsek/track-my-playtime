@@ -3,14 +3,13 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { combineReducers, Store, StoreModule } from '@ngrx/store';
 
+import * as fromRoot from 'app/reducers/root.reducer';
+import * as actions from 'features/dashboard/actions/date-range.actions';
+import * as fromDashboard from 'features/dashboard/reducers/root.reducer';
+
 import { HeaderComponent } from './header.component';
 
-import { TimePipe } from '../../../../shared/pipes/time.pipe';
-
-import * as actions from '../../actions/date-range.actions';
-
-import * as fromRoot from '../../../../reducers/root.reducer';
-import * as fromDashboard from '../../reducers/root.reducer';
+import { TimePipe } from 'shared/pipes/time.pipe';
 
 describe('HeaderComponent', () => {
   let component: TestWrapperComponent;

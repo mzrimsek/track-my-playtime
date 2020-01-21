@@ -3,18 +3,17 @@ import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core
 import { faCheck, faTimes, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Store } from '@ngrx/store';
 
-import { UserService } from '../../../auth/services/user.service';
+import * as appActions from 'app/actions/app.actions';
+import * as markCompleteActions from 'features/completion/actions/mark-complete.actions';
+import { State } from 'features/completion/reducers/root.reducer';
+import * as progressActions from 'shared/actions/progress.actions';
 
-import * as appActions from '../../../../actions/app.actions';
-import * as progressActions from '../../../../shared/actions/progress.actions';
-import * as markCompleteActions from '../../actions/mark-complete.actions';
+import { UserService } from 'features/auth/services/user.service';
 
-import { State } from '../../reducers/root.reducer';
+import { PlayingDisplayData } from 'features/completion/models';
+import { HistoryGrouping } from 'shared/models';
 
-import { HistoryGrouping } from '../../../../shared/models';
-import { PlayingDisplayData } from '../../models';
-
-import { getEndItem } from '../../utils/playing.utils';
+import { getEndItem } from 'features/completion/utils/playing.utils';
 
 @Component({
   selector: 'app-completion-playing-item',

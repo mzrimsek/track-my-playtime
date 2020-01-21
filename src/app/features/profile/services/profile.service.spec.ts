@@ -1,9 +1,9 @@
 import { TestBed } from '@angular/core/testing';
 import { AngularFirestore } from '@angular/fire/firestore';
 
-import { ProfileService } from './profile.service';
+import { profile } from 'app/test-helpers/profile';
 
-import { profile } from '../../../test-helpers/profile';
+import { ProfileService } from './profile.service';
 
 describe('ProfileService', () => {
   let service: ProfileService;

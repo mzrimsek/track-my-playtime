@@ -3,23 +3,20 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { combineReducers, Store, StoreModule } from '@ngrx/store';
 
+import * as fromRoot from 'app/reducers/root.reducer';
+import { tracker, user } from 'app/test-helpers';
 import { addMinutes } from 'date-fns';
+import * as fromTracker from 'features/tracker/reducers/root.reducer';
+import * as timerActions from 'shared/actions/timer.actions';
 
 import { LockedHistoryEntryComponent } from './locked-history-entry.component';
 
-import { UserService } from '../../../auth/services/user.service';
-import { TimerService } from '../../services/timer.service';
+import { UserService } from 'features/auth/services/user.service';
+import { TimerService } from 'features/tracker/services/timer.service';
 
-import { ElapsedTimePipe } from '../../../../shared/pipes/elapsed-time.pipe';
+import { ElapsedTimePipe } from 'shared/pipes/elapsed-time.pipe';
 
-import * as timerActions from '../../../../shared/actions/timer.actions';
-
-import * as fromRoot from '../../../../reducers/root.reducer';
-import * as fromTracker from '../../reducers/root.reducer';
-
-import { HistoryListItem, TimerInfo } from '../../../../shared/models';
-
-import { tracker, user } from '../../../../test-helpers';
+import { HistoryListItem, TimerInfo } from 'shared/models';
 
 describe('LockedHistoryEntryComponent', () => {
   let store: Store<fromRoot.State>;

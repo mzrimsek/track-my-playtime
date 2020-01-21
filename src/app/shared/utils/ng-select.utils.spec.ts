@@ -1,4 +1,4 @@
-import { NgSelectValue } from '../models';
+import { NgSelectValue } from 'shared/models';
 
 import { getValueFromNgSelect } from './ng-select.utils';
 

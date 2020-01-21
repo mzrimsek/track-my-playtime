@@ -2,13 +2,11 @@ import { Component, OnInit } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 
+import * as userActions from 'features/auth/actions/user.actions';
+import authComponentSelectors, { State } from 'features/auth/reducers/root.reducer';
 import { Observable } from 'rxjs';
 
-import * as userActions from '../../actions/user.actions';
-
-import authComponentSelectors, { State } from '../../reducers/root.reducer';
-
-import { EmailAuthEvent } from '../../models';
+import { EmailAuthEvent } from 'features/auth/models';
 
 @Component({
   selector: 'app-auth-register',

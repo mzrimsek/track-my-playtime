@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
-import { BarGraphConfig, GraphDataItem } from '../../models';
+import { BarGraphConfig, GraphDataItem } from 'features/dashboard/models';
 
 @Component({
   selector: 'app-dashboard-time-date-graph',

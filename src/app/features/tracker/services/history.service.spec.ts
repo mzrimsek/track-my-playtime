@@ -1,14 +1,14 @@
 import { TestBed } from '@angular/core/testing';
 import { AngularFirestore } from '@angular/fire/firestore';
 
+import { history } from 'app/test-helpers';
+
 import { FirestoreHistoryItem, HistoryService } from './history.service';
 
 import {
     AddTimerInfo, UpdateHistoryItemGamePayload, UpdateHistoryItemPlatformPayload,
     UpdateHistoryItemTimesPayload
-} from '../../../shared/models';
-
-import { history } from '../../../test-helpers';
+} from 'shared/models';
 
 describe('History Service', () => {
   let service: HistoryService;
@@ -68,13 +68,13 @@ describe('History Service', () => {
         endTime: 6000,
         source: 'web'
       }, {
-          id: '2',
-          game: 'some other game',
-          platform: 'some platform',
-          startTime: 30000,
-          endTime: 60000,
-          source: 'web'
-        });
+        id: '2',
+        game: 'some other game',
+        platform: 'some platform',
+        startTime: 30000,
+        endTime: 60000,
+        source: 'web'
+      });
 
       const result = service.getHistoryList('');
       result.subscribe(res => {

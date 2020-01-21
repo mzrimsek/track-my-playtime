@@ -1,10 +1,8 @@
-import {
-    CompletedItem, HistoryGrouping, HistoryListItem, ProgressItem
-} from '../../../shared/models';
-import { CompletedDisplayData } from '../models';
+import { CompletedDisplayData } from 'features/completion/models';
+import { CompletedItem, HistoryGrouping, HistoryListItem, ProgressItem } from 'shared/models';
 
-import { filterHistoryItemsBetween } from '../../../shared/utils/history-filter.utils';
-import { getElapsedTimeFrom } from '../../../shared/utils/history.utils';
+import { filterHistoryItemsBetween } from 'shared/utils/history-filter.utils';
+import { getElapsedTimeFrom } from 'shared/utils/history.utils';
 
 const getCompletedItem = (historyItems: HistoryListItem[], startEntry: HistoryListItem, endEntry: HistoryListItem): CompletedItem => {
   const timePlayed = getElapsedTimeFrom(historyItems);

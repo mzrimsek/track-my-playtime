@@ -2,17 +2,15 @@ import { TestBed } from '@angular/core/testing';
 
 import { provideMockActions } from '@ngrx/effects/testing';
 
+import * as appActions from 'app/actions/app.actions';
+import { platforms } from 'app/test-helpers';
 import { cold, hot } from 'jasmine-marbles';
 import { ReplaySubject, throwError } from 'rxjs';
+import * as platformsActions from 'shared/actions/platforms.actions';
+
+import { PlatformsService } from 'features/tracker/services/platforms.service';
 
 import { PlatformsEffects } from './platforms.effects';
-
-import { PlatformsService } from '../services/platforms.service';
-
-import * as appActions from '../../../actions/app.actions';
-import * as platformsActions from '../../../shared/actions/platforms.actions';
-
-import { platforms } from '../../../test-helpers';
 
 describe('Platforms Effects', () => {
   let actions: any;

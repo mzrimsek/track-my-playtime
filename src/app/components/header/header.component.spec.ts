@@ -3,8 +3,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { LoginComponent } from '../../features/auth/components/login/login.component';
-import { HomeComponent } from '../../features/home/home.component';
+import { LoginComponent } from 'features/auth/components/login/login.component';
+import { HomeComponent } from 'features/home/home.component';
 import { HeaderComponent } from './header.component';
 
 describe('HeaderComponent', () => {

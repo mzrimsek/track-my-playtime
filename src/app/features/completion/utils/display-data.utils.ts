@@ -1,9 +1,11 @@
 import { combineLatest, Observable } from 'rxjs';
 
-import { Dictionary, HistoryGrouping, ProgressItem } from '../../../shared/models';
-import { CompletedDisplayData, MarkCompleteItem, PlayingDisplayData } from '../models';
+import {
+    CompletedDisplayData, MarkCompleteItem, PlayingDisplayData
+} from 'features/completion/models';
+import { Dictionary, HistoryGrouping, ProgressItem } from 'shared/models';
 
-import { getHistoryListItemMap } from '../../../shared/utils/history.utils';
+import { getHistoryListItemMap } from 'shared/utils/history.utils';
 import { getCompletedDisplayData } from './completed.utils';
 import { getPlayingDisplayData } from './playing.utils';
 

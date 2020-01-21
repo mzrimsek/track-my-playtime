@@ -1,19 +1,17 @@
 import { combineReducers } from '@ngrx/store';
 
+import * as fromRoot from 'app/reducers/root.reducer';
+import { auth, completion, history, platforms, progress, tracker, user } from 'app/test-helpers';
 import { endOfWeek, startOfWeek, subDays } from 'date-fns';
+import * as userActions from 'features/auth/actions/user.actions';
+import * as fromAuth from 'features/auth/reducers/root.reducer';
+import * as fromCompletion from 'features/completion/reducers/root.reducer';
+import * as fromDashboard from 'features/dashboard/reducers/root.reducer';
+import * as fromProfile from 'features/profile/reducers/root.reducer';
+import * as fromTracker from 'features/tracker/reducers/root.reducer';
+import * as fromShared from 'shared/reducers/root.reducer';
 
-import * as userActions from '../features/auth/actions/user.actions';
-
-import * as fromAuth from '../features/auth/reducers/root.reducer';
-import * as fromCompletion from '../features/completion/reducers/root.reducer';
-import * as fromDashboard from '../features/dashboard/reducers/root.reducer';
-import * as fromProfile from '../features/profile/reducers/root.reducer';
-import * as fromTracker from '../features/tracker/reducers/root.reducer';
-import * as fromRoot from '../reducers/root.reducer';
-import * as fromShared from '../shared/reducers/root.reducer';
 import { clearState } from './clear.meta.reducer';
-
-import { auth, completion, history, platforms, progress, tracker, user } from '../test-helpers';
 
 describe('Clear Meta Reducer', () => {
   const action = new userActions.Logout();

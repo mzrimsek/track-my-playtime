@@ -3,21 +3,18 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { combineReducers, Store, StoreModule } from '@ngrx/store';
 
+import * as fromRoot from 'app/reducers/root.reducer';
+import { platforms, tracker, user } from 'app/test-helpers';
 import { subHours } from 'date-fns';
+import * as fromTracker from 'features/tracker/reducers/root.reducer';
+import * as actions from 'shared/actions/timer.actions';
 
 import { TimerComponent } from './timer.component';
 
-import { UserService } from '../../../auth/services/user.service';
-import { TimerService } from '../../services/timer.service';
+import { UserService } from 'features/auth/services/user.service';
+import { TimerService } from 'features/tracker/services/timer.service';
 
-import { ElapsedTimePipe } from '../../../../shared/pipes/elapsed-time.pipe';
-
-import * as actions from '../../../../shared/actions/timer.actions';
-
-import * as fromRoot from '../../../../reducers/root.reducer';
-import * as fromTracker from '../../reducers/root.reducer';
-
-import { platforms, tracker, user } from '../../../../test-helpers';
+import { ElapsedTimePipe } from 'shared/pipes/elapsed-time.pipe';
 
 describe('TimerComponent', () => {
   let store: Store<fromRoot.State>;

@@ -4,9 +4,11 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { TimerInfo } from '../../../shared/models';
+import { TimerInfo } from 'shared/models';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class TimerService {
 
   private timerCollection: AngularFirestoreCollection<FirestoreTimerItem>;

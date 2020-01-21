@@ -1,15 +1,15 @@
 import { ActionReducerMap, createFeatureSelector, createSelector } from '@ngrx/store';
 
+import { HistoryListItem, ProgressItem, TimerInfo } from 'shared/models';
+
+import { formatDate } from 'shared/utils/date.utils';
+import { getUniqueFrom } from 'shared/utils/history-filter.utils';
+import { getHistoryGroupingList, getHistoryListItemsMap } from 'shared/utils/history.utils';
+
 import * as fromHistory from './history.reducer';
 import * as fromPlatforms from './platforms.reducer';
 import * as fromProgress from './progress.reducer';
 import * as fromTimer from './timer.reducer';
-
-import { HistoryListItem, ProgressItem, TimerInfo } from '../models';
-
-import { formatDate } from '../utils/date.utils';
-import { getUniqueFrom } from '../utils/history-filter.utils';
-import { getHistoryGroupingList, getHistoryListItemsMap } from '../utils/history.utils';
 
 export interface SharedState {
   history: fromHistory.State;

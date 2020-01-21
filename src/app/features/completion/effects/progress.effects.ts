@@ -2,15 +2,14 @@ import { Injectable } from '@angular/core';
 
 import { Actions, Effect } from '@ngrx/effects';
 
+import * as appActions from 'app/actions/app.actions';
+import * as addPlayingActions from 'features/completion/actions/add-playing.actions';
+import * as markCompleteActions from 'features/completion/actions/mark-complete.actions';
 import { of } from 'rxjs';
 import { catchError, map, mergeMap, switchMap } from 'rxjs/operators';
+import * as progressActions from 'shared/actions/progress.actions';
 
-import { ProgressService } from '../services/progress.service';
-
-import * as appActions from '../../../actions/app.actions';
-import * as progressActions from '../../../shared/actions/progress.actions';
-import * as addPlayingActions from '../actions/add-playing.actions';
-import * as markCompleteActions from '../actions/mark-complete.actions';
+import { ProgressService } from 'features/completion/services/progress.service';
 
 @Injectable()
 export class ProgressEffects {

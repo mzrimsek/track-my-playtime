@@ -1,8 +1,8 @@
+import { completion } from 'app/test-helpers';
+
 import { State as AddPlayingState } from './add-playing.reducer';
 import { _selectAddPlayingInfo, _selectVisibleTab, CompletionState, State } from './root.reducer';
 import { State as TabState } from './tab.reducer';
-
-import { completion } from '../../../test-helpers';
 
 describe('Completion Root Reducer', () => {
   describe('AddPlaying State Selectors', () => {

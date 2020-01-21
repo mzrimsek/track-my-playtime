@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 
-import { User } from '../models';
+import { User } from 'features/auth/models';
 
 export const GET_USER = '[Auth] Get User';
 export class GetUser implements Action {

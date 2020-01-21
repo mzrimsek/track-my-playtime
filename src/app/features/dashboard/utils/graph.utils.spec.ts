@@ -1,11 +1,10 @@
+import { history } from 'app/test-helpers';
 import { addDays, eachDay } from 'date-fns';
 
-import { DEFAULT_KEY, HistoryGrouping } from '../../../shared/models';
-import { GraphDataItem } from '../models';
+import { GraphDataItem } from 'features/dashboard/models';
+import { DEFAULT_KEY, HistoryGrouping } from 'shared/models';
 
 import { mapToGraphData, padDateGraphData, sortGraphDataByValue } from './graph.utils';
-
-import { history } from '../../../test-helpers';
 
 describe('Graph Utils', () => {
   describe('mapToGraphData', () => {

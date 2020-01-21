@@ -1,6 +1,6 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 
-import * as actions from '../actions/mark-complete.actions';
+import * as actions from 'features/completion/actions/mark-complete.actions';
 
 export interface MarkCompleteEntity {
   id: string;

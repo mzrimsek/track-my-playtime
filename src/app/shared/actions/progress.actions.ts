@@ -1,8 +1,8 @@
 import { Action } from '@ngrx/store';
 
-import { ProgressEntity } from '../reducers/progress.reducer';
+import { ProgressEntity } from 'shared/reducers/progress.reducer';
 
-import { MarkCompletePayload, SetNotesPayload } from '../models';
+import { MarkCompletePayload, SetNotesPayload } from 'shared/models';
 
 export const ADD_NEW_PROGRESS_ITEM = '[Progress] Add New Progress Item';
 export class AddNewProgressItem implements Action {

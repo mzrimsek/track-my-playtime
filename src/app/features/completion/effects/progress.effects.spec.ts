@@ -2,21 +2,19 @@ import { TestBed } from '@angular/core/testing';
 
 import { provideMockActions } from '@ngrx/effects/testing';
 
+import * as appActions from 'app/actions/app.actions';
+import { progress } from 'app/test-helpers';
+import * as addPlayingActions from 'features/completion/actions/add-playing.actions';
+import * as markCompleteActions from 'features/completion/actions/mark-complete.actions';
 import { cold, hot } from 'jasmine-marbles';
 import { ReplaySubject, throwError } from 'rxjs';
+import * as progressActions from 'shared/actions/progress.actions';
+
+import { ProgressService } from 'features/completion/services/progress.service';
+
+import { MarkCompletePayload, SetNotesPayload } from 'shared/models';
 
 import { ProgressEffects } from './progress.effects';
-
-import { ProgressService } from '../services/progress.service';
-
-import * as appActions from '../../../actions/app.actions';
-import * as progressActions from '../../../shared/actions/progress.actions';
-import * as addPlayingActions from '../actions/add-playing.actions';
-import * as markCompleteActions from '../actions/mark-complete.actions';
-
-import { MarkCompletePayload, SetNotesPayload } from '../../../shared/models';
-
-import { progress } from '../../../test-helpers';
 
 describe('Progress Effects', () => {
   let actions: any;

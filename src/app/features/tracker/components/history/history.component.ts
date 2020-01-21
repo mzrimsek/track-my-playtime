@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
-import { HistoryGrouping } from '../../../../shared/models';
+import { HistoryGrouping } from 'shared/models';
 
 @Component({
   selector: 'app-tracker-history',

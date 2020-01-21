@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { GraphTooltipComponent } from './graph-tooltip.component';
 
-import { TimePipe } from '../../../../shared/pipes/time.pipe';
+import { TimePipe } from 'shared/pipes/time.pipe';
 
 describe('GraphTooltipComponent', () => {
   let component: GraphTooltipComponent;

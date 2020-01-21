@@ -1,8 +1,8 @@
-import * as actions from '../actions/profile.actions';
+import * as actions from 'features/profile/actions/profile.actions';
+
+import { Profile } from 'features/profile/models';
 
 import { reducer, State } from './profile.reducer';
-
-import { Profile } from '../models';
 
 describe('Profile Reducer', () => {
   it('Should set profile info when LoadProfileSucceeded is dispatched', () => {

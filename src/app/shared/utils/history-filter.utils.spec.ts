@@ -1,11 +1,11 @@
-import { HistoryGrouping, HistoryListItem } from '../models';
+import { history } from 'app/test-helpers';
+
+import { HistoryGrouping, HistoryListItem } from 'shared/models';
 
 import {
     filterHistoryItemsAfter, filterHistoryItemsBetween, filterPlatforms, filterStartTimes,
     getUniqueFrom
 } from './history-filter.utils';
-
-import { history } from '../../test-helpers';
 
 describe('History Filter Utils', () => {
   describe('getUniqueFrom', () => {
@@ -154,14 +154,14 @@ describe('History Filter Utils', () => {
         historyItems: [],
         totalTime: 0
       }, {
-          id: 'some id',
-          game: history.testGame,
-          platform: 'Platform 1',
-          startTime: 6000,
-          endTime: 9000,
-          dateRange: [new Date(6000), new Date(9000)],
-          locked: false
-        });
+        id: 'some id',
+        game: history.testGame,
+        platform: 'Platform 1',
+        startTime: 6000,
+        endTime: 9000,
+        dateRange: [new Date(6000), new Date(9000)],
+        locked: false
+      });
       expect(result.length).toBe(0);
     });
 
@@ -227,14 +227,14 @@ describe('History Filter Utils', () => {
         dateRange: [new Date(6000), new Date(9000)],
         locked: false
       }, {
-          id: 'some id 2',
-          game: history.testGame,
-          platform: 'Platform 1',
-          startTime: 10000,
-          endTime: 12000,
-          dateRange: [new Date(10000), new Date(12000)],
-          locked: false
-        });
+        id: 'some id 2',
+        game: history.testGame,
+        platform: 'Platform 1',
+        startTime: 10000,
+        endTime: 12000,
+        dateRange: [new Date(10000), new Date(12000)],
+        locked: false
+      });
       expect(result.length).toBe(0);
     });
 
@@ -244,22 +244,22 @@ describe('History Filter Utils', () => {
         historyItems: [],
         totalTime: 0
       }, {
-          id: 'some id',
-          game: history.testGame,
-          platform: 'Platform 1',
-          startTime: 6000,
-          endTime: 9000,
-          dateRange: [new Date(6000), new Date(9000)],
-          locked: false
-        }, {
-          id: 'some id 2',
-          game: history.testGame,
-          platform: 'Platform 1',
-          startTime: 10000,
-          endTime: 12000,
-          dateRange: [new Date(10000), new Date(12000)],
-          locked: false
-        });
+        id: 'some id',
+        game: history.testGame,
+        platform: 'Platform 1',
+        startTime: 6000,
+        endTime: 9000,
+        dateRange: [new Date(6000), new Date(9000)],
+        locked: false
+      }, {
+        id: 'some id 2',
+        game: history.testGame,
+        platform: 'Platform 1',
+        startTime: 10000,
+        endTime: 12000,
+        dateRange: [new Date(10000), new Date(12000)],
+        locked: false
+      });
       expect(result.length).toBe(0);
     });
 
@@ -273,14 +273,14 @@ describe('History Filter Utils', () => {
         dateRange: [new Date(9000), new Date(10000)],
         locked: false
       }, {
-          id: 'some id 2',
-          game: history.testGame,
-          platform: 'Platform 1',
-          startTime: 10000,
-          endTime: 12000,
-          dateRange: [new Date(10000), new Date(12000)],
-          locked: false
-        });
+        id: 'some id 2',
+        game: history.testGame,
+        platform: 'Platform 1',
+        startTime: 10000,
+        endTime: 12000,
+        dateRange: [new Date(10000), new Date(12000)],
+        locked: false
+      });
       expect(result.length).toBe(0);
     });
 
@@ -294,14 +294,14 @@ describe('History Filter Utils', () => {
         dateRange: [new Date(3000), new Date(4000)],
         locked: false
       }, {
-          id: 'some id 2',
-          game: history.testGame,
-          platform: 'Platform 1',
-          startTime: 4000,
-          endTime: 6000,
-          dateRange: [new Date(4000), new Date(6000)],
-          locked: false
-        });
+        id: 'some id 2',
+        game: history.testGame,
+        platform: 'Platform 1',
+        startTime: 4000,
+        endTime: 6000,
+        dateRange: [new Date(4000), new Date(6000)],
+        locked: false
+      });
       expect(result).toEqual([{
         id: '3',
         game: history.testGame,

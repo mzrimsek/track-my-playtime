@@ -1,13 +1,12 @@
+import { history } from 'app/test-helpers';
 import { addDays, eachDay, subDays } from 'date-fns';
 
-import { HistoryListItem } from '../models';
+import { HistoryListItem } from 'shared/models';
 
 import {
     filterGroupingsByDateRange, getElapsedTimeFrom, getFilteredGrouping, getHistoryGroupingList,
     getHistoryListItemMap, getHistoryListItemsMap, HistoryListItemMap
 } from './history.utils';
-
-import { history } from '../../test-helpers';
 
 describe('History Utils', () => {
   describe('getHistoryListItemsMap', () => {
