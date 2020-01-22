@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Actions, Effect } from '@ngrx/effects';
+import { Actions, Effect, ofType } from '@ngrx/effects';
 
 import * as appActions from 'app/actions/app.actions';
 import { of } from 'rxjs';
@@ -17,8 +17,8 @@ export class HistoryEffects {
 
   @Effect() loadHistoryItems$ =
     this.actions$
-      .ofType(historyActions.LOAD_HISTORY_ITEMS)
       .pipe(
+        ofType(historyActions.LOAD_HISTORY_ITEMS),
         map(action => action as historyActions.LoadHistoryItems),
         switchMap(action => this.historyService.getHistoryList(action.userId)
           .pipe(
@@ -27,15 +27,15 @@ export class HistoryEffects {
 
   @Effect() saveTimerInfoSucceeded$ =
     this.actions$
-      .ofType(timerActions.SAVE_TIMER_INFO_SUCCEEDED)
       .pipe(
+        ofType(timerActions.SAVE_TIMER_INFO_SUCCEEDED),
         map(action => action as timerActions.SaveTimerInfoSucceeded),
         map(action => new historyActions.AddNewHistoryItem(action.item)));
 
   @Effect() removeHistoryItem$ =
     this.actions$
-      .ofType(historyActions.REMOVE_HISTORY_ITEM)
       .pipe(
+        ofType(historyActions.REMOVE_HISTORY_ITEM),
         map(action => action as historyActions.RemoveHistoryItem),
         switchMap(action => this.historyService.deleteHistoryItem(action.userId, action.itemId)
           .pipe(
@@ -44,8 +44,8 @@ export class HistoryEffects {
 
   @Effect() updateGame$ =
     this.actions$
-      .ofType(historyActions.UPDATE_GAME)
       .pipe(
+        ofType(historyActions.UPDATE_GAME),
         map(action => action as historyActions.UpdateGame),
         switchMap(action => this.historyService.updateGame(action.userId, action.payload)
           .pipe(
@@ -54,8 +54,8 @@ export class HistoryEffects {
 
   @Effect() updatePlatform$ =
     this.actions$
-      .ofType(historyActions.UPDATE_PLATFORM)
       .pipe(
+        ofType(historyActions.UPDATE_PLATFORM),
         map(action => action as historyActions.UpdatePlatform),
         switchMap(action => this.historyService.updatePlatform(action.userId, action.payload)
           .pipe(
@@ -64,8 +64,8 @@ export class HistoryEffects {
 
   @Effect() updateElapsedTime$ =
     this.actions$
-      .ofType(historyActions.UPDATE_ELAPSED_TIME)
       .pipe(
+        ofType(historyActions.UPDATE_ELAPSED_TIME),
         map(action => action as historyActions.UpdateElapsedTime),
         switchMap(action => this.historyService.updateElapsedTime(action.userId, action.payload)
           .pipe(

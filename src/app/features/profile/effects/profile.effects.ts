@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Actions, Effect } from '@ngrx/effects';
+import { Actions, Effect, ofType } from '@ngrx/effects';
 
 import * as appActions from 'app/actions/app.actions';
 import * as profileActions from 'features/profile/actions/profile.actions';
@@ -16,8 +16,8 @@ export class ProfileEffects {
 
   @Effect() loadProfile$ =
     this.actions$
-      .ofType(profileActions.LOAD_PROFILE)
       .pipe(
+        ofType(profileActions.LOAD_PROFILE),
         map(action => action as profileActions.LoadProfile),
         switchMap(action => this.profileService.getProfile(action.userId)
           .pipe(
@@ -26,8 +26,8 @@ export class ProfileEffects {
 
   @Effect() setDisplayName$ =
     this.actions$
-      .ofType(profileActions.SET_PROFILE_DISPLAYNAME)
       .pipe(
+        ofType(profileActions.SET_PROFILE_DISPLAYNAME),
         map(action => action as profileActions.SetProfileDisplayName),
         switchMap(action => this.profileService.setDisplayName(action.userId, action.displayName)
           .pipe(

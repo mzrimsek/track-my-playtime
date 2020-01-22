@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { User as AuthUser } from '@firebase/auth-types';
-import { Actions, Effect } from '@ngrx/effects';
+import { Actions, Effect, ofType } from '@ngrx/effects';
 
 import * as appActions from 'app/actions/app.actions';
 import * as userActions from 'features/auth/actions/user.actions';
@@ -20,8 +20,8 @@ export class UserEffects {
 
   @Effect() getUser$ =
     this.actions$
-      .ofType(userActions.GET_USER)
       .pipe(
+        ofType(userActions.GET_USER),
         map(action => action as userActions.GetUser),
         switchMap(() => this.authService.getAuthState()
           .pipe(
@@ -37,8 +37,8 @@ export class UserEffects {
 
   @Effect() googleLogin$ =
     this.actions$
-      .ofType(userActions.GOOGLE_LOGIN)
       .pipe(
+        ofType(userActions.GOOGLE_LOGIN),
         map(action => action as userActions.GoogleLogin),
         switchMap(() => this.authService.signInWithGoogle()
           .pipe(
@@ -47,8 +47,8 @@ export class UserEffects {
 
   @Effect() facebookLogin$ =
     this.actions$
-      .ofType(userActions.FACEBOOK_LOGIN)
       .pipe(
+        ofType(userActions.FACEBOOK_LOGIN),
         map(action => action as userActions.FacebookLogin),
         switchMap(() => this.authService.signInWithFacebook()
           .pipe(
@@ -57,8 +57,8 @@ export class UserEffects {
 
   @Effect() twitterLogin$ =
     this.actions$
-      .ofType(userActions.TWITTER_LOGIN)
       .pipe(
+        ofType(userActions.TWITTER_LOGIN),
         map(action => action as userActions.TwitterLogin),
         switchMap(() => this.authService.signInWithTwitter()
           .pipe(
@@ -67,8 +67,8 @@ export class UserEffects {
 
   @Effect() logout$ =
     this.actions$
-      .ofType(userActions.LOGOUT)
       .pipe(
+        ofType(userActions.LOGOUT),
         map(action => action as userActions.Logout),
         switchMap(() => this.authService.signOut()
           .pipe(
@@ -80,8 +80,8 @@ export class UserEffects {
 
   @Effect() signUp$ =
     this.actions$
-      .ofType(userActions.SIGNUP)
       .pipe(
+        ofType(userActions.SIGNUP),
         map(action => action as userActions.SignUp),
         switchMap(action => this.authService.signUpWithEmail(action.email, action.password)
           .pipe(
@@ -90,8 +90,8 @@ export class UserEffects {
 
   @Effect() emailLogin$ =
     this.actions$
-      .ofType(userActions.EMAIL_LOGIN)
       .pipe(
+        ofType(userActions.EMAIL_LOGIN),
         map(action => action as userActions.EmailLogin),
         switchMap(action => this.authService.signInWithEmail(action.email, action.password)
           .pipe(
@@ -100,8 +100,8 @@ export class UserEffects {
 
   @Effect() resetPassword$ =
     this.actions$
-      .ofType(userActions.RESET_PASSWORD)
       .pipe(
+        ofType(userActions.RESET_PASSWORD),
         map(action => action as userActions.ResetPassword),
         switchMap(action => this.authService.resetPassword(action.email)
           .pipe(catchError(err => of(new appActions.Error(userActions.RESET_PASSWORD, err.message))))));

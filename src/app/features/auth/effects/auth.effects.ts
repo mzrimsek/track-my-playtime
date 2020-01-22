@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Actions, Effect } from '@ngrx/effects';
+import { Actions, Effect, ofType } from '@ngrx/effects';
 
 import * as userActions from 'features/auth/actions/user.actions';
 import * as profileActions from 'features/profile/actions/profile.actions';
@@ -17,8 +17,8 @@ export class AuthEffects {
 
   @Effect() authenticated$ =
     this.actions$
-      .ofType(userActions.AUTHENTICATED)
       .pipe(
+        ofType(userActions.AUTHENTICATED),
         map(action => action as userActions.Authenticated),
         mergeMap(action => [
           new platformsActions.LoadOptions(),
@@ -26,6 +26,5 @@ export class AuthEffects {
           new timerActions.LoadTimerInfo(action.user.uid),
           new progressActions.LoadProgressItems(action.user.uid),
           new profileActions.LoadProfile(action.user.uid)
-        ])
-      );
+        ]));
 }

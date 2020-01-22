@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Actions, Effect } from '@ngrx/effects';
+import { Actions, Effect, ofType } from '@ngrx/effects';
 
 import * as appActions from 'app/actions/app.actions';
 import * as addPlayingActions from 'features/completion/actions/add-playing.actions';
@@ -16,8 +16,8 @@ export class AddPlayingEffects {
 
   @Effect() save$ =
     this.actions$
-      .ofType(addPlayingActions.SAVE)
       .pipe(
+        ofType(addPlayingActions.SAVE),
         map(action => action as addPlayingActions.Save),
         map(action => action.addPlaying),
         switchMap(addPlaying => this.progressService.saveAddPlaying(addPlaying)

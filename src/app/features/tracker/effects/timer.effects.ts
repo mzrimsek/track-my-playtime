@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Actions, Effect } from '@ngrx/effects';
+import { Actions, Effect, ofType } from '@ngrx/effects';
 
 import * as appActions from 'app/actions/app.actions';
 import { of } from 'rxjs';
@@ -17,8 +17,8 @@ export class TimerEffects {
 
   @Effect() saveTimerInfo$ =
     this.actions$
-      .ofType(timerActions.SAVE_TIMER_INFO)
       .pipe(
+        ofType(timerActions.SAVE_TIMER_INFO),
         map(action => action as timerActions.SaveTimerInfo),
         map(action => action.info),
         switchMap(addTimerInfo => this.historyService.saveTimerInfo(addTimerInfo)
@@ -31,13 +31,14 @@ export class TimerEffects {
 
   @Effect() cancelTimer$ =
     this.actions$
-      .ofType(timerActions.CANCEL_TIMER)
-      .pipe(map(() => new timerActions.ResetTimer()));
+      .pipe(
+        ofType(timerActions.CANCEL_TIMER),
+        map(() => new timerActions.ResetTimer()));
 
   @Effect() loadTimerInfo$ =
     this.actions$
-      .ofType(timerActions.LOAD_TIMER_INFO)
       .pipe(
+        ofType(timerActions.LOAD_TIMER_INFO),
         map(action => action as timerActions.LoadTimerInfo),
         map(action => action.userId),
         switchMap(userId => this.timerService.getTimerInfo(userId)

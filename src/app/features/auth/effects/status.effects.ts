@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Actions, Effect } from '@ngrx/effects';
+import { Actions, Effect, ofType } from '@ngrx/effects';
 import * as fromRouter from '@ngrx/router-store';
 
 import * as appActions from 'app/actions/app.actions';
@@ -19,8 +19,8 @@ export class StatusEffects {
 
   @Effect() error$ =
     this.actions$
-      .ofType(appActions.APP_ERROR)
       .pipe(
+        ofType(appActions.APP_ERROR),
         map(action => action as appActions.Error),
         mergeMap(action => {
           const validationMessage = getValidationMessage(action as Error);
@@ -28,31 +28,33 @@ export class StatusEffects {
             new statusActions.SetAttemptingLogin(false),
             new statusActions.SetValidationMessage(validationMessage)
           ];
-        })
-      );
+        }));
 
   @Effect() routeNavigate$ =
     this.actions$
-      .ofType(fromRouter.ROUTER_NAVIGATION)
-      .pipe(mergeMap(() => [
-        new statusActions.SetValidationMessage('')
-      ]));
+      .pipe(
+        ofType(fromRouter.ROUTER_NAVIGATION),
+        mergeMap(() => [
+          new statusActions.SetValidationMessage('')
+        ]));
 
   @Effect() login$ =
     this.actions$
-      .ofType(userActions.EMAIL_LOGIN,
-        userActions.SIGNUP,
-        userActions.GOOGLE_LOGIN,
-        userActions.FACEBOOK_LOGIN,
-        userActions.TWITTER_LOGIN)
-      .pipe(mergeMap(() => [
-        new statusActions.SetAttemptingLogin(true)
-      ]));
+      .pipe(
+        ofType(userActions.EMAIL_LOGIN,
+          userActions.SIGNUP,
+          userActions.GOOGLE_LOGIN,
+          userActions.FACEBOOK_LOGIN,
+          userActions.TWITTER_LOGIN),
+        mergeMap(() => [
+          new statusActions.SetAttemptingLogin(true)
+        ]));
 
   @Effect() postLogin$ =
     this.actions$
-      .ofType(userActions.AUTHENTICATED, userActions.NOT_AUTHENTICATED)
-      .pipe(mergeMap(() => [
-        new statusActions.SetAttemptingLogin(false)
-      ]));
+      .pipe(
+        ofType(userActions.AUTHENTICATED, userActions.NOT_AUTHENTICATED),
+        mergeMap(() => [
+          new statusActions.SetAttemptingLogin(false)
+        ]));
 }

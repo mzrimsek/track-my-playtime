@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Actions, Effect } from '@ngrx/effects';
+import { Actions, Effect, ofType } from '@ngrx/effects';
 
 import * as appActions from 'app/actions/app.actions';
 import { of } from 'rxjs';
@@ -16,8 +16,8 @@ export class PlatformsEffects {
 
   @Effect() loadOptions$ =
     this.actions$
-      .ofType(platformsActions.LOAD_OPTIONS)
       .pipe(
+        ofType(platformsActions.LOAD_OPTIONS),
         switchMap(() => this.platformsService.getPlatformsOptions()
           .pipe(
             map(data => new platformsActions.LoadOptionsSucceeded(data)),

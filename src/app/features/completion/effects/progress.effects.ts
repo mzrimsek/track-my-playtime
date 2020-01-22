@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Actions, Effect } from '@ngrx/effects';
+import { Actions, Effect, ofType } from '@ngrx/effects';
 
 import * as appActions from 'app/actions/app.actions';
 import * as addPlayingActions from 'features/completion/actions/add-playing.actions';
@@ -18,8 +18,8 @@ export class ProgressEffects {
 
   @Effect() loadProgressItems$ =
     this.actions$
-      .ofType(progressActions.LOAD_PROGRESS_ITEMS)
       .pipe(
+        ofType(progressActions.LOAD_PROGRESS_ITEMS),
         map(action => action as progressActions.LoadProgressItems),
         switchMap(action => this.progressService.getProgressList(action.userId)
           .pipe(
@@ -31,8 +31,8 @@ export class ProgressEffects {
 
   @Effect() saveAddPlayingSucceeded$ =
     this.actions$
-      .ofType(addPlayingActions.SAVE_SUCCEEDED)
       .pipe(
+        ofType(addPlayingActions.SAVE_SUCCEEDED),
         map(action => action as addPlayingActions.SaveSucceeded),
         map(action => action.item),
         mergeMap(item => [
@@ -42,8 +42,8 @@ export class ProgressEffects {
 
   @Effect() markCompleted$ =
     this.actions$
-      .ofType(progressActions.MARK_COMPLETE)
       .pipe(
+        ofType(progressActions.MARK_COMPLETE),
         map(action => action as progressActions.MarkComplete),
         switchMap(action => this.progressService.markCompleted(action.userId, action.payload)
           .pipe(
@@ -55,8 +55,8 @@ export class ProgressEffects {
 
   @Effect() removeProgressItem$ =
     this.actions$
-      .ofType(progressActions.REMOVE_PROGRESS_ITEM)
       .pipe(
+        ofType(progressActions.REMOVE_PROGRESS_ITEM),
         map(action => action as progressActions.RemoveProgressItem),
         switchMap(action => this.progressService.remove(action.userId, action.itemId)
           .pipe(
@@ -68,8 +68,8 @@ export class ProgressEffects {
 
   @Effect() setNotes$ =
     this.actions$
-      .ofType(progressActions.SET_NOTES)
       .pipe(
+        ofType(progressActions.SET_NOTES),
         map(action => action as progressActions.SetNotes),
         switchMap(action => this.progressService.setNotes(action.userId, action.payload)
           .pipe(
