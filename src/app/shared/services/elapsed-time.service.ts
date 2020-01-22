@@ -6,8 +6,6 @@ import { combineLatest, interval, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import sharedSelectors, { SharedState } from 'shared/reducers/root.reducer';
 
-import { TimerInfo } from 'shared/models';
-
 import { formatElapsedTime } from 'shared/utils/date.utils';
 
 @Injectable({
@@ -29,8 +27,8 @@ export class ElapsedTimeService {
     const timerInfo$ = this.sharedStore.select(sharedSelectors.timerInfo);
     const currentTime$ = this.getCurrentTime();
 
-    return combineLatest(currentTime$, timerInfo$, (currentTime: number, timerInfo: TimerInfo) => {
+    return combineLatest([currentTime$, timerInfo$]).pipe(map(([currentTime, timerInfo]) => {
       return formatElapsedTime(timerInfo.startTime, currentTime, inactiveValue);
-    });
+    }));
   }
 }

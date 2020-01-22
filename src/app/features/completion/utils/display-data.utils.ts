@@ -1,4 +1,5 @@
 import { combineLatest, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import {
     CompletedDisplayData, MarkCompleteItem, PlayingDisplayData
@@ -11,7 +12,7 @@ import { getPlayingDisplayData } from './playing.utils';
 
 export const getCompletedDisplayDataItems =
   (progressItems: Observable<ProgressItem[]>, gameGroupings: Observable<HistoryGrouping[]>): Observable<CompletedDisplayData[]> => {
-    return combineLatest(progressItems, gameGroupings, (items, groupings) => {
+    return combineLatest([progressItems, gameGroupings]).pipe(map(([items, groupings]) => {
       const historyListItemMap = getHistoryListItemMap(groupings);
 
       const displayData: CompletedDisplayData[] = [];
@@ -24,14 +25,14 @@ export const getCompletedDisplayDataItems =
         }
       });
       return displayData.sort((a, b) => b.completedItem.endTime - a.completedItem.endTime);
-    });
+    }));
   };
 
 export const getPlayingDisplayDataItems =
   (progressItems: Observable<ProgressItem[]>,
     gameGroupings: Observable<HistoryGrouping[]>,
     markCompleteEntities: Observable<Dictionary<MarkCompleteItem>>): Observable<PlayingDisplayData[]> => {
-    return combineLatest(progressItems, gameGroupings, markCompleteEntities, (items, groupings, entities) => {
+    return combineLatest([progressItems, gameGroupings, markCompleteEntities]).pipe(map(([items, groupings, entities]) => {
       const historyListItemMap = getHistoryListItemMap(groupings);
 
       const displayData: PlayingDisplayData[] = [];
@@ -43,5 +44,5 @@ export const getPlayingDisplayDataItems =
         }
       });
       return displayData.sort((a, b) => a.startEntryData.startTime - b.startEntryData.endTime);
-    });
+    }));
   };

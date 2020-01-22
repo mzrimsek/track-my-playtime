@@ -41,18 +41,18 @@ export class CompletionComponent implements OnInit {
     this.games$ = this.historyGroupings$.pipe(map(groupings => groupings.map(item => item.key)));
     this.addPlayingInfo$ = this.completionStore.select(completionSelectors.addPlayingInfo);
     this.game$ = this.addPlayingInfo$.pipe(map(info => info.game ? info.game : null));
-    this.potentialPlatforms$ = combineLatest(this.historyGroupings$, this.addPlayingInfo$, (groupings, info) => {
+    this.potentialPlatforms$ = combineLatest([this.historyGroupings$, this.addPlayingInfo$]).pipe(map(([groupings, info]) => {
       return filterPlatforms(groupings, info.game);
-    });
-    this.potentialDates$ = combineLatest(this.historyGroupings$, this.addPlayingInfo$, (groupings, info) => {
+    }));
+    this.potentialDates$ = combineLatest([this.historyGroupings$, this.addPlayingInfo$]).pipe(map(([groupings, info]) => {
       return filterStartTimes(groupings, info.game, info.platform);
-    });
+    }));
 
     const playingProgressItems = this.sharedStore.select(sharedSelectors.progressPlaying);
-    const completedProgerssItems = this.sharedStore.select(sharedSelectors.progressCompleted);
+    const completedProgressItems = this.sharedStore.select(sharedSelectors.progressCompleted);
     const markCompleteEntities = this.completionStore.select(completionSelectors.markCompleteEntities);
     this.playingDisplayData$ = getPlayingDisplayDataItems(playingProgressItems, this.historyGroupings$, markCompleteEntities);
-    this.completedDisplayData$ = getCompletedDisplayDataItems(completedProgerssItems, this.historyGroupings$);
+    this.completedDisplayData$ = getCompletedDisplayDataItems(completedProgressItems, this.historyGroupings$);
 
     this.visibleTab$ = this.completionStore.select(completionSelectors.visibleTab);
   }

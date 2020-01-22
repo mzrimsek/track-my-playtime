@@ -8,9 +8,9 @@ import profileComponentSelectors, {
     State as ProfileState
 } from 'features/profile/reducers/root.reducer';
 import { combineLatest, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { User, UserInfo } from 'features/auth/models';
-import { Profile } from 'features/profile/models';
 
 import {
     getDisplayName, getEmail, getImgSrc, getProviderFrom
@@ -31,14 +31,14 @@ export class UserService {
     const user$ = this.getUser();
     const profile$ = this.profileStore.select(profileComponentSelectors.info);
 
-    return combineLatest(user$, profile$, (user: User, profile: Profile) => {
+    return combineLatest([user$, profile$]).pipe(map(([user, profile]) => {
       return {
         displayName: getDisplayName(user, profile),
         email: getEmail(user),
         imgSrc: getImgSrc(user),
         provider: getProviderFrom(user.providerId)
       };
-    });
+    }));
   }
 
   logout(): void {

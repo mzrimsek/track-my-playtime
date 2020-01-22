@@ -1,4 +1,5 @@
 import { combineLatest, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { GraphDataItem } from 'features/dashboard/models';
 import { HistoryGrouping } from 'shared/models';
@@ -12,11 +13,11 @@ export const getGraphData =
   (groupings: Observable<HistoryGrouping[]>,
     dateRange: Observable<Date[]>,
     modifier: GraphDataModifier = x => x): Observable<GraphDataItem[]> => {
-    return combineLatest(groupings, dateRange, (groups, dates) => {
+    return combineLatest([groupings, dateRange]).pipe(map(([groups, dates]) => {
       const groupingsToGraph = filterGroupingsByDateRange(groups, dates);
       const graphItems = mapToGraphData(groupingsToGraph);
       return modifier(graphItems, dates);
-    });
+    }));
   };
 
 export const getPaddedGraphData =
