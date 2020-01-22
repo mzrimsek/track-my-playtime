@@ -1,6 +1,6 @@
 import { ActionReducerMap, createFeatureSelector, createSelector } from '@ngrx/store';
 
-import { eachDay } from 'date-fns';
+import { eachDayOfInterval } from 'date-fns';
 
 import * as fromDateRange from './date-range.reducer';
 
@@ -20,7 +20,7 @@ export const _selectDashboardFeature = createFeatureSelector<DashboardState>('da
 export const _selectDateRange = createSelector(_selectDashboardFeature, state => state.dateRange);
 
 export const _selectDateList = createSelector(_selectDateRange, dateRange => {
-  return eachDay(dateRange.startDay, dateRange.endDay);
+  return eachDayOfInterval({ start: dateRange.startDay, end: dateRange.endDay });
 });
 export const _selectRangeType = createSelector(_selectDateRange, dateRange => dateRange.type);
 

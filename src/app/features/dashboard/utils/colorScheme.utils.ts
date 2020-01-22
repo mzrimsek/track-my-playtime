@@ -1,4 +1,4 @@
-import { colorSets } from '@swimlane/ngx-charts/release/utils/color-sets';
+import { colorSets } from '@swimlane/ngx-charts';
 
 type ColorSetName = 'vivid' | 'natural' | 'cool' | 'fire' |
   'solar' | 'air' | 'aqua' | 'flame' |
