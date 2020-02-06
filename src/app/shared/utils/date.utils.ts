@@ -16,7 +16,7 @@ export const formatTime = (timeInSeconds: number): string => {
 export const getElapsedTimeInSeconds = (startTime: number, endTime: number) => Math.floor((endTime - startTime) / 1000);
 
 export const formatDate = (date: Date): string => {
-  return format(date, 'ddd, M/D/YYYY');
+  return format(date, 'E, M/d/yyyy');
 };
 
 export const isInDateRange = (dateToCheck: Date, dateRange: Date[]): boolean => {
