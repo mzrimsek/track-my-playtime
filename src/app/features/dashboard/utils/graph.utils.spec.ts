@@ -1,5 +1,5 @@
 import { history } from 'app/test-helpers';
-import { addDays, eachDay } from 'date-fns';
+import { addDays, eachDayOfInterval } from 'date-fns';
 
 import { GraphDataItem } from 'features/dashboard/models';
 import { DEFAULT_KEY, HistoryGrouping } from 'shared/models';
@@ -82,7 +82,7 @@ describe('Graph Utils', () => {
       }];
       const start = new Date(2018, 3, 1);
       const end = addDays(start, 6);
-      const range = eachDay(start, end);
+      const range = eachDayOfInterval({ start, end });
 
       const result = padDateGraphData(items, range);
 

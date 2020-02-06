@@ -1,4 +1,4 @@
-import { addDays, eachDay, subDays } from 'date-fns';
+import { addDays, eachDayOfInterval, subDays } from 'date-fns';
 
 import {
     formatDate, formatElapsedTime, formatTime, getElapsedTimeInSeconds, isInDateRange
@@ -73,7 +73,7 @@ describe('Date Utils', () => {
   describe('isInDateRange', () => {
     const start = new Date(2018, 3, 1);
     const end = new Date(2018, 3, 6);
-    const range = eachDay(start, end);
+    const range = eachDayOfInterval({ start, end });
 
     it('Should return true for the first day of the range', () => {
       const result = isInDateRange(start, range);

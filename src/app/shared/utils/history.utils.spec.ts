@@ -1,5 +1,5 @@
 import { history } from 'app/test-helpers';
-import { addDays, eachDay, subDays } from 'date-fns';
+import { addDays, eachDayOfInterval, subDays } from 'date-fns';
 
 import { HistoryListItem } from 'shared/models';
 
@@ -124,7 +124,7 @@ describe('History Utils', () => {
     const inRange = addDays(start, 3);
     const outOfRangeAhead = addDays(start, 15);
     const outOfRangeBehind = subDays(start, 3);
-    const range = eachDay(start, end);
+    const range = eachDayOfInterval({ start, end });
     const game = 'some game';
 
     it('Should filter history items outside of date range', () => {
@@ -181,7 +181,7 @@ describe('History Utils', () => {
     const inRange = addDays(start, 3);
     const outOfRangeAhead = addDays(start, 15);
     const outOfRangeBehind = subDays(start, 3);
-    const range = eachDay(start, end);
+    const range = eachDayOfInterval({ start, end });
     const game = 'some game';
 
     it('Should filter history items outside of date range', () => {

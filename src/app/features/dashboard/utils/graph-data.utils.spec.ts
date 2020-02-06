@@ -1,4 +1,4 @@
-import { addDays, eachDay, subDays } from 'date-fns';
+import { addDays, eachDayOfInterval, subDays } from 'date-fns';
 import { of } from 'rxjs';
 
 import { HistoryGrouping } from 'shared/models';
@@ -8,7 +8,7 @@ import { getGraphData, getPaddedGraphData, getSortedGraphData } from './graph-da
 
 const start = new Date();
 const end = addDays(start, 12);
-const dateRange = eachDay(start, end);
+const dateRange = eachDayOfInterval({ start, end });
 
 const testGroupings: HistoryGrouping[] = [{
   key: formatDate(subDays(start, 1)),
