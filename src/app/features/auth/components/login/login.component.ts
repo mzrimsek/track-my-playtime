@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
+
+import { Observable } from 'rxjs';
 
 import * as userActions from 'features/auth/actions/user.actions';
+
 import authComponentSelectors, { State } from 'features/auth/reducers/root.reducer';
-import { Observable } from 'rxjs';
 
 import { EmailAuthEvent } from 'features/auth/models';
 
@@ -21,8 +23,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.store.dispatch(new userActions.GetUser());
-    this.loggingIn$ = this.store.select(authComponentSelectors.loggingIn);
-    this.message$ = this.store.select(authComponentSelectors.validationMessage);
+    this.loggingIn$ = this.store.pipe(select(authComponentSelectors.loggingIn));
+    this.message$ = this.store.pipe(select(authComponentSelectors.validationMessage));
   }
 
   googleLogin() {

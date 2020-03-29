@@ -1,8 +1,9 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
+
 import sharedSelectors, { State as SharedState } from 'shared/reducers/root.reducer';
 
 import { LibraryEntry } from './models';
@@ -23,7 +24,7 @@ export class LibraryComponent implements OnInit {
   constructor(private sharedStore: Store<SharedState>) { }
 
   ngOnInit() {
-    const gameGroupings = this.sharedStore.select(sharedSelectors.historyGroupingsByGame);
+    const gameGroupings = this.sharedStore.pipe(select(sharedSelectors.historyGroupingsByGame));
     this.libraryEntries$ = mapGroupings(gameGroupings);
     this.setNumEntriesToShow();
   }

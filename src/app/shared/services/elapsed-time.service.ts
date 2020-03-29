@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 
 import { combineLatest, interval, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+
 import sharedSelectors, { SharedState } from 'shared/reducers/root.reducer';
 
 import { formatElapsedTime } from 'shared/utils/date.utils';
@@ -24,7 +25,7 @@ export class ElapsedTimeService {
   }
 
   getElapsedTime(inactiveValue: string): Observable<string> {
-    const timerInfo$ = this.sharedStore.select(sharedSelectors.timerInfo);
+    const timerInfo$ = this.sharedStore.pipe(select(sharedSelectors.timerInfo));
     const currentTime$ = this.getCurrentTime();
 
     return combineLatest([currentTime$, timerInfo$]).pipe(map(([currentTime, timerInfo]) => {

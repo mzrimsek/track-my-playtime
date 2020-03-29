@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 
 import { combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -37,9 +37,9 @@ export class CompletionComponent implements OnInit {
   constructor(private sharedStore: Store<SharedState>, private completionStore: Store<CompletionState>) { }
 
   ngOnInit() {
-    this.historyGroupings$ = this.sharedStore.select(sharedSelectors.historyGroupingsByGame);
+    this.historyGroupings$ = this.sharedStore.pipe(select(sharedSelectors.historyGroupingsByGame));
     this.games$ = this.historyGroupings$.pipe(map(groupings => groupings.map(item => item.key)));
-    this.addPlayingInfo$ = this.completionStore.select(completionSelectors.addPlayingInfo);
+    this.addPlayingInfo$ = this.completionStore.pipe(select(completionSelectors.addPlayingInfo));
     this.game$ = this.addPlayingInfo$.pipe(map(info => info.game ? info.game : null));
     this.potentialPlatforms$ = combineLatest([this.historyGroupings$, this.addPlayingInfo$]).pipe(map(([groupings, info]) => {
       return filterPlatforms(groupings, info.game);
@@ -48,12 +48,12 @@ export class CompletionComponent implements OnInit {
       return filterStartTimes(groupings, info.game, info.platform);
     }));
 
-    const playingProgressItems = this.sharedStore.select(sharedSelectors.progressPlaying);
-    const completedProgressItems = this.sharedStore.select(sharedSelectors.progressCompleted);
-    const markCompleteEntities = this.completionStore.select(completionSelectors.markCompleteEntities);
+    const playingProgressItems = this.sharedStore.pipe(select(sharedSelectors.progressPlaying));
+    const completedProgressItems = this.sharedStore.pipe(select(sharedSelectors.progressCompleted));
+    const markCompleteEntities = this.completionStore.pipe(select(completionSelectors.markCompleteEntities));
     this.playingDisplayData$ = getPlayingDisplayDataItems(playingProgressItems, this.historyGroupings$, markCompleteEntities);
     this.completedDisplayData$ = getCompletedDisplayDataItems(completedProgressItems, this.historyGroupings$);
 
-    this.visibleTab$ = this.completionStore.select(completionSelectors.visibleTab);
+    this.visibleTab$ = this.completionStore.pipe(select(completionSelectors.visibleTab));
   }
 }

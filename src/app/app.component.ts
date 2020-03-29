@@ -2,14 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 
 import { environment } from 'environments/environment';
 import { insertAnalyticsElements } from 'insert-analytics-elements/googleTagManager';
 import { Observable } from 'rxjs';
-import sharedSelectors, { State as SharedState } from 'shared/reducers/root.reducer';
 
 import { ElapsedTimeService } from 'shared/services/elapsed-time.service';
+
+import sharedSelectors, { State as SharedState } from 'shared/reducers/root.reducer';
 
 @Component({
   selector: 'app-root',
@@ -27,7 +28,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     insertAnalyticsElements(environment.googleTagManager);
-    this.userDataLoaded$ = this.sharedStore.select(sharedSelectors.userDataLoaded);
+    this.userDataLoaded$ = this.sharedStore.pipe(select(sharedSelectors.userDataLoaded));
     this.elapsedTimeService.getElapsedTime('Track My Playtime').subscribe(title => this.titleService.setTitle(title));
     this.trackerNavCaption$ = this.elapsedTimeService.getElapsedTime('Tracker');
   }

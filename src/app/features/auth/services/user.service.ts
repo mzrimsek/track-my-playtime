@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
 
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
+
+import { combineLatest, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import * as userActions from 'features/auth/actions/user.actions';
+
 import authComponentSelectors, { State } from 'features/auth/reducers/root.reducer';
 import profileComponentSelectors, {
     State as ProfileState
 } from 'features/profile/reducers/root.reducer';
-import { combineLatest, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 import { User, UserInfo } from 'features/auth/models';
 
@@ -24,12 +26,12 @@ export class UserService {
   constructor(private store: Store<State>, private profileStore: Store<ProfileState>) { }
 
   getUser(): Observable<User> {
-    return this.store.select(authComponentSelectors.user);
+    return this.store.pipe(select(authComponentSelectors.user));
   }
 
   getUserInfo(): Observable<UserInfo> {
     const user$ = this.getUser();
-    const profile$ = this.profileStore.select(profileComponentSelectors.info);
+    const profile$ = this.profileStore.pipe(select(profileComponentSelectors.info));
 
     return combineLatest([user$, profile$]).pipe(map(([user, profile]) => {
       return {
