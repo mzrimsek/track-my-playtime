@@ -2,13 +2,15 @@ import { TestBed } from '@angular/core/testing';
 
 import { combineReducers, Store, StoreModule } from '@ngrx/store';
 
-import * as fromRoot from 'app/reducers/root.reducer';
 import { tracker } from 'app/test-helpers';
 import { of } from 'rxjs';
-import * as actions from 'shared/actions/timer.actions';
-import * as fromShared from 'shared/reducers/root.reducer';
 
 import { ElapsedTimeService } from './elapsed-time.service';
+
+import * as actions from 'shared/actions/timer.actions';
+
+import * as fromRoot from 'app/reducers/root.reducer';
+import * as fromShared from 'shared/reducers/root.reducer';
 
 describe('ElapsedTimeService', () => {
   let service: ElapsedTimeService;
@@ -44,11 +46,6 @@ describe('ElapsedTimeService', () => {
 
     beforeEach(() => {
       spyOn(service, 'getCurrentTime').and.callFake(() => of(70000));
-    });
-
-    it('Should select timerInfo', () => {
-      service.getElapsedTime(inactiveValue);
-      expect(store.select).toHaveBeenCalledWith(fromShared._selectTimerInfo);
     });
 
     it('Should return inactiveValue when timer is not active', () => {

@@ -4,11 +4,12 @@ import { By } from '@angular/platform-browser';
 
 import { combineReducers, Store, StoreModule } from '@ngrx/store';
 
-import * as fromRoot from 'app/reducers/root.reducer';
-import * as actions from 'features/auth/actions/user.actions';
-import * as fromAuth from 'features/auth/reducers/root.reducer';
-
 import { RegisterComponent } from './register.component';
+
+import * as actions from 'features/auth/actions/user.actions';
+
+import * as fromRoot from 'app/reducers/root.reducer';
+import * as fromAuth from 'features/auth/reducers/root.reducer';
 
 describe('RegisterComponent', () => {
   let component: RegisterComponent;
@@ -30,7 +31,6 @@ describe('RegisterComponent', () => {
     store = TestBed.get(Store);
 
     spyOn(store, 'dispatch').and.callThrough();
-    spyOn(store, 'select').and.callThrough();
 
     fixture = TestBed.createComponent(RegisterComponent);
     component = fixture.componentInstance;
@@ -39,14 +39,6 @@ describe('RegisterComponent', () => {
 
   it('Should create the component', async(() => {
     expect(component).toBeTruthy();
-  }));
-
-  it('Should select logging in', async(() => {
-    expect(store.select).toHaveBeenCalledWith(fromAuth._selectStatusLoggingIn);
-  }));
-
-  it('Should select validation message', async(() => {
-    expect(store.select).toHaveBeenCalledWith(fromAuth._selectStatusValidationMessage);
   }));
 
   it('Should dispatch Google Login when GoogleAuth event emitted', async(() => {

@@ -5,14 +5,15 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { combineReducers, Store, StoreModule } from '@ngrx/store';
 
-import * as fromRoot from 'app/reducers/root.reducer';
-import * as actions from 'features/auth/actions/user.actions';
-import * as fromAuth from 'features/auth/reducers/root.reducer';
-
 import {
     ForgotPasswordComponent
 } from 'features/auth/components/forgot-password/forgot-password.component';
 import { LoginComponent } from './login.component';
+
+import * as actions from 'features/auth/actions/user.actions';
+
+import * as fromRoot from 'app/reducers/root.reducer';
+import * as fromAuth from 'features/auth/reducers/root.reducer';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -43,7 +44,6 @@ describe('LoginComponent', () => {
     store = TestBed.get(Store);
 
     spyOn(store, 'dispatch').and.callThrough();
-    spyOn(store, 'select').and.callThrough();
 
     fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;
@@ -57,14 +57,6 @@ describe('LoginComponent', () => {
   it('Should dispatch Get User', async(() => {
     const action = new actions.GetUser();
     expect(store.dispatch).toHaveBeenCalledWith(action);
-  }));
-
-  it('Should select logging in', async(() => {
-    expect(store.select).toHaveBeenCalledWith(fromAuth._selectStatusLoggingIn);
-  }));
-
-  it('Should select validation message', async(() => {
-    expect(store.select).toHaveBeenCalledWith(fromAuth._selectStatusValidationMessage);
   }));
 
   it('Should dispatch Google Login when GoogleAuth event emitted', async(() => {

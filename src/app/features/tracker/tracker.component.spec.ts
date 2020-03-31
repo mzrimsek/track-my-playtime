@@ -3,16 +3,17 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { combineReducers, Store, StoreModule } from '@ngrx/store';
 
-import * as fromRoot from 'app/reducers/root.reducer';
 import { tracker } from 'app/test-helpers';
 import { addDays } from 'date-fns';
-import * as historyActions from 'shared/actions/history.actions';
-import * as fromShared from 'shared/reducers/root.reducer';
 
 import { TrackerComponent } from './tracker.component';
 
 import { ElapsedTimeService } from 'shared/services/elapsed-time.service';
 
+import * as historyActions from 'shared/actions/history.actions';
+
+import * as fromRoot from 'app/reducers/root.reducer';
+import * as fromShared from 'shared/reducers/root.reducer';
 import * as fromTracker from './reducers/root.reducer';
 
 describe('Tracker Component', () => {
@@ -40,8 +41,6 @@ describe('Tracker Component', () => {
     store = TestBed.get(Store);
     elapsedTimeService = TestBed.get(ElapsedTimeService);
 
-    spyOn(store, 'select').and.callThrough();
-
     fixture = TestBed.createComponent(TrackerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -51,24 +50,8 @@ describe('Tracker Component', () => {
     expect(component).toBeTruthy();
   });
 
-  it('Should select timer info', () => {
-    expect(store.select).toHaveBeenCalledWith(fromShared._selectTimerInfo);
-  });
-
   it('Should call ElaspedTimeService getElapsedTime', () => {
     expect(elapsedTimeService.getElapsedTime).toHaveBeenCalledWith('00:00:00');
-  });
-
-  it('Should select platforms options', () => {
-    expect(store.select).toHaveBeenCalledWith(fromShared._selectPlatformsOptions);
-  });
-
-  it('Should select history groupings by date', () => {
-    expect(store.select).toHaveBeenCalledWith(fromShared._selectHistoryGroupingsByDate);
-  });
-
-  it('Should select entries to show', () => {
-    expect(store.select).toHaveBeenCalledWith(fromTracker._selectEntriesToShow);
   });
 
   describe('Load More Button', () => {

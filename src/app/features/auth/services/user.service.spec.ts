@@ -2,13 +2,14 @@ import { TestBed } from '@angular/core/testing';
 
 import { combineReducers, Store, StoreModule } from '@ngrx/store';
 
-import * as fromRoot from 'app/reducers/root.reducer';
-import * as actions from 'features/auth/actions/user.actions';
-import * as fromAuth from 'features/auth/reducers/root.reducer';
-import * as profileActions from 'features/profile/actions/profile.actions';
-import * as fromProfile from 'features/profile/reducers/root.reducer';
-
 import { UserService } from './user.service';
+
+import * as actions from 'features/auth/actions/user.actions';
+import * as profileActions from 'features/profile/actions/profile.actions';
+
+import * as fromRoot from 'app/reducers/root.reducer';
+import * as fromAuth from 'features/auth/reducers/root.reducer';
+import * as fromProfile from 'features/profile/reducers/root.reducer';
 
 import { User } from 'features/auth/models';
 import { Profile } from 'features/profile/models';
@@ -33,7 +34,6 @@ describe('User Service', () => {
     store = TestBed.get(Store);
 
     spyOn(store, 'dispatch').and.callThrough();
-    spyOn(store, 'select').and.callThrough();
   });
 
   it('Should be created', () => {
@@ -69,11 +69,6 @@ describe('User Service', () => {
         expect(res).toEqual(user);
       });
     });
-
-    it('Should select user', () => {
-      service.getUser();
-      expect(store.select).toHaveBeenCalledWith(fromAuth._selectUserData);
-    });
   });
 
   describe('getUserInfo', () => {
@@ -103,16 +98,6 @@ describe('User Service', () => {
           provider: 'GOOGLE'
         });
       });
-    });
-
-    it('Should select user', () => {
-      service.getUserInfo();
-      expect(store.select).toHaveBeenCalledWith(fromAuth._selectUserData);
-    });
-
-    it('Should select profile info', () => {
-      service.getUserInfo();
-      expect(store.select).toHaveBeenCalledWith(fromProfile._selectInfo);
     });
   });
 

@@ -3,13 +3,15 @@ import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/ro
 
 import { combineReducers, Store, StoreModule } from '@ngrx/store';
 
-import * as fromRoot from 'app/reducers/root.reducer';
 import { routing, user } from 'app/test-helpers';
-import * as actions from 'features/auth/actions/user.actions';
-import * as fromAuth from 'features/auth/reducers/root.reducer';
 import { cold } from 'jasmine-marbles';
 
 import { AuthGuard } from './auth.guard';
+
+import * as actions from 'features/auth/actions/user.actions';
+
+import * as fromRoot from 'app/reducers/root.reducer';
+import * as fromAuth from 'features/auth/reducers/root.reducer';
 
 describe('AuthGuard', () => {
   let guard: AuthGuard;
@@ -36,8 +38,6 @@ describe('AuthGuard', () => {
 
     guard = TestBed.get(AuthGuard);
     store = TestBed.get(Store);
-
-    spyOn(store, 'select').and.callThrough();
 
     routerStateSnapshot = TestBed.get(RouterStateSnapshot);
     router = TestBed.get(Router);
@@ -69,10 +69,5 @@ describe('AuthGuard', () => {
     const result = guard.canActivate(new ActivatedRouteSnapshot(), routerStateSnapshot);
 
     expect(result).toBeObservable(expected);
-  });
-
-  it('Should select user logged in', () => {
-    guard.canActivate(new ActivatedRouteSnapshot(), routerStateSnapshot);
-    expect(store.select).toHaveBeenCalledWith(fromAuth._selectUserLoggedIn);
   });
 });

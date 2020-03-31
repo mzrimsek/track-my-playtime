@@ -5,15 +5,9 @@ import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { combineReducers, Store, StoreModule } from '@ngrx/store';
+import { combineReducers, StoreModule } from '@ngrx/store';
 
-import * as fromAuth from 'features/auth/reducers/root.reducer';
-import * as fromCompletion from 'features/completion/reducers/root.reducer';
-import * as fromDashboard from 'features/dashboard/reducers/root.reducer';
-import * as fromProfile from 'features/profile/reducers/root.reducer';
-import * as fromTracker from 'features/tracker/reducers/root.reducer';
 import { of } from 'rxjs';
-import * as fromShared from 'shared/reducers/root.reducer';
 
 import {
     ForgotPasswordComponent
@@ -33,13 +27,19 @@ import { ElapsedTimeService } from 'shared/services/elapsed-time.service';
 
 import { TimePipe } from 'shared/pipes/time.pipe';
 
+import * as fromAuth from 'features/auth/reducers/root.reducer';
+import * as fromCompletion from 'features/completion/reducers/root.reducer';
+import * as fromDashboard from 'features/dashboard/reducers/root.reducer';
+import * as fromProfile from 'features/profile/reducers/root.reducer';
+import * as fromTracker from 'features/tracker/reducers/root.reducer';
+import * as fromShared from 'shared/reducers/root.reducer';
 import * as fromRoot from './reducers/root.reducer';
+
 import { tracker } from './test-helpers';
 
 describe('AppComponent', () => {
   let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
-  let store: Store<fromRoot.State>;
   let router: Router;
 
   beforeEach(async(() => {
@@ -126,10 +126,6 @@ describe('AppComponent', () => {
     }).compileComponents();
 
     router = TestBed.get(Router);
-    store = TestBed.get(Store);
-
-    spyOn(store, 'dispatch').and.callThrough();
-    spyOn(store, 'select').and.callThrough();
 
     fixture = TestBed.createComponent(AppComponent);
     component = fixture.componentInstance;
@@ -139,11 +135,6 @@ describe('AppComponent', () => {
   it('Should create the app', async(() => {
     expect(component).toBeTruthy();
   }));
-
-  it('Should select userDataLoaded', () => {
-    expect(store.select).toHaveBeenCalledWith(fromShared._selectUserDataLoaded);
-  });
-
   describe('On Base Route', () => {
     beforeEach(async(() => {
       router.navigate(['']);
