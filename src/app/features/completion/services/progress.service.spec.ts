@@ -1,16 +1,15 @@
 import { TestBed } from '@angular/core/testing';
 import { AngularFirestore } from '@angular/fire/firestore';
 
+import { progress } from 'app/test-helpers';
+
 import { FirestoreProgressItem, ProgressService } from './progress.service';
 
-import { MarkCompletePayload, SetNotesPayload } from 'shared/models';
 import { AddPlaying } from 'features/completion/models';
-
-import { progress } from 'app/test-helpers';
+import { MarkCompletePayload, SetNotesPayload } from 'shared/models';
 
 describe('ProgressService', () => {
   let service: ProgressService;
-  let afs: AngularFirestore;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -20,15 +19,10 @@ describe('ProgressService', () => {
     });
 
     service = TestBed.get(ProgressService);
-    afs = TestBed.get(AngularFirestore);
   });
 
   it('Should be created', () => {
     expect(service).toBeTruthy();
-  });
-
-  it('Should call AngularFirestore collection with "progress"', () => {
-    expect(afs.collection).toHaveBeenCalledWith('progress');
   });
 
   describe('getProgressList', () => {
@@ -62,10 +56,10 @@ describe('ProgressService', () => {
         startEntryId: 'start id 1',
         endEntryId: ''
       }, {
-          id: '2',
-          startEntryId: 'start id 2',
-          endEntryId: 'end id 1'
-        });
+        id: '2',
+        startEntryId: 'start id 2',
+        endEntryId: 'end id 1'
+      });
 
       const result = service.getProgressList('');
       result.subscribe(res => {

@@ -7,7 +7,6 @@ import { ProfileService } from './profile.service';
 
 describe('ProfileService', () => {
   let service: ProfileService;
-  let afs: AngularFirestore;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -16,15 +15,10 @@ describe('ProfileService', () => {
     });
 
     service = TestBed.get(ProfileService);
-    afs = TestBed.get(AngularFirestore);
   });
 
   it('Should be created', () => {
     expect(service).toBeTruthy();
-  });
-
-  it('Should call AngularFirestore collection with "profile"', () => {
-    expect(afs.collection).toHaveBeenCalledWith('profile');
   });
 
   describe('getProfile', () => {

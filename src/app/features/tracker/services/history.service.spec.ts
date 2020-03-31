@@ -12,7 +12,6 @@ import {
 
 describe('History Service', () => {
   let service: HistoryService;
-  let afs: AngularFirestore;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -23,15 +22,10 @@ describe('History Service', () => {
     });
 
     service = TestBed.get(HistoryService);
-    afs = TestBed.get(AngularFirestore);
   });
 
   it('Should be created', () => {
     expect(service).toBeTruthy();
-  });
-
-  it('Should call AngularFirestore collection with "history"', () => {
-    expect(afs.collection).toHaveBeenCalledWith('history');
   });
 
   describe('getHistoryList', () => {

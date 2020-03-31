@@ -7,7 +7,6 @@ import { PlatformsService } from './platforms.service';
 
 describe('Platforms Service', () => {
   let service: PlatformsService;
-  let afs: AngularFirestore;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -18,15 +17,10 @@ describe('Platforms Service', () => {
     });
 
     service = TestBed.get(PlatformsService);
-    afs = TestBed.get(AngularFirestore);
   });
 
   it('Should be created', () => {
     expect(service).toBeTruthy();
-  });
-
-  it('Should call AngularFirestore collection with "platforms"', () => {
-    expect(afs.collection).toHaveBeenCalledWith('platforms');
   });
 
   describe('getPlatformsOptions', () => {

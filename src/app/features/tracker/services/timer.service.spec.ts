@@ -9,7 +9,6 @@ import { TimerInfo } from 'shared/models';
 
 describe('Timer Service', () => {
   let service: TimerService;
-  let afs: AngularFirestore;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -20,15 +19,10 @@ describe('Timer Service', () => {
     });
 
     service = TestBed.get(TimerService);
-    afs = TestBed.get(AngularFirestore);
   });
 
   it('Should be created', () => {
     expect(service).toBeTruthy();
-  });
-
-  it('Should call AngularFirestore collection with "timer"', () => {
-    expect(afs.collection).toHaveBeenCalledWith('timer');
   });
 
   describe('setTimer', () => {
