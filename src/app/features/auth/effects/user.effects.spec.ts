@@ -3,15 +3,16 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { provideMockActions } from '@ngrx/effects/testing';
 
-import * as appActions from 'app/actions/app.actions';
 import { auth, routing, user } from 'app/test-helpers';
-import * as userActions from 'features/auth/actions/user.actions';
 import { cold, hot } from 'jasmine-marbles';
 import { ReplaySubject, throwError } from 'rxjs';
 
+import { UserEffects } from './user.effects';
+
 import { AuthService } from 'features/auth/services/auth.service';
 
-import { UserEffects } from './user.effects';
+import * as appActions from 'app/actions/app.actions';
+import * as userActions from 'features/auth/actions/user.actions';
 
 describe('User Effects', () => {
   let actions: any;
@@ -73,7 +74,7 @@ describe('User Effects', () => {
       });
 
       describe('With return url', () => {
-        const returnUrl = 'some/route';
+        const returnUrl = 'app';
 
         beforeEach(() => {
           routing.mockActivatedRoute.snapshot.queryParams.returnUrl = returnUrl;
