@@ -3,11 +3,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { combineReducers, Store, StoreModule } from '@ngrx/store';
 
-import * as fromRoot from 'app/reducers/root.reducer';
 import { platforms, tracker, user } from 'app/test-helpers';
 import { subHours } from 'date-fns';
-import * as fromTracker from 'features/tracker/reducers/root.reducer';
-import * as actions from 'shared/actions/timer.actions';
 
 import { TimerComponent } from './timer.component';
 
@@ -15,6 +12,11 @@ import { UserService } from 'features/auth/services/user.service';
 import { TimerService } from 'features/tracker/services/timer.service';
 
 import { ElapsedTimePipe } from 'shared/pipes/elapsed-time.pipe';
+
+import * as actions from 'shared/actions/timer.actions';
+
+import * as fromRoot from 'app/reducers/root.reducer';
+import * as fromTracker from 'features/tracker/reducers/root.reducer';
 
 describe('TimerComponent', () => {
   let store: Store<fromRoot.State>;
@@ -72,6 +74,7 @@ describe('TimerComponent', () => {
 
   describe('Timer Inactive', () => {
     beforeEach(async(() => {
+      testElapsedTime = '00:00:00';
       initTests();
     }));
 

@@ -3,18 +3,20 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { combineReducers, Store, StoreModule } from '@ngrx/store';
 
-import * as appActions from 'app/actions/app.actions';
-import * as fromRoot from 'app/reducers/root.reducer';
 import { completion, user } from 'app/test-helpers';
-import * as markCompleteActions from 'features/completion/actions/mark-complete.actions';
-import * as fromCompletion from 'features/completion/reducers/root.reducer';
-import * as progressActions from 'shared/actions/progress.actions';
 
 import { PlayingItemComponent } from './playing-item.component';
 
 import { UserService } from 'features/auth/services/user.service';
 
 import { TimePipe } from 'shared/pipes/time.pipe';
+
+import * as appActions from 'app/actions/app.actions';
+import * as markCompleteActions from 'features/completion/actions/mark-complete.actions';
+import * as progressActions from 'shared/actions/progress.actions';
+
+import * as fromRoot from 'app/reducers/root.reducer';
+import * as fromCompletion from 'features/completion/reducers/root.reducer';
 
 describe('PlayingItemComponent', () => {
   let store: Store<fromRoot.State>;
@@ -66,6 +68,13 @@ describe('PlayingItemComponent', () => {
   describe('When show extra is false', () => {
     beforeEach(async(() => {
       initTests();
+      component.displayData = {
+        ...completion.testPlayingDisplayData,
+        markComplete: {
+          ...completion.testPlayingDisplayData.markComplete,
+          showExtra: false
+        }
+      };
     }));
 
     it('Should display extra section open button', async(() => {
