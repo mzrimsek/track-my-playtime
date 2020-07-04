@@ -24,6 +24,7 @@
 
       <app-completion-set-notes *ngIf="editNotes"
                                 [itemId]="displayData.item.id"
+                                [currentNotes]="displayData.item.notes"
                                 (finishEdit)="setEditNotes(false)"></app-completion-set-notes>
     </div>
   </div>

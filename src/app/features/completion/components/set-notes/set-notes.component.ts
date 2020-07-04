@@ -1,23 +1,28 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+    ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output
+} from '@angular/core';
 
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { Store } from '@ngrx/store';
 
-import { State } from 'features/completion/reducers/root.reducer';
+import { UserService } from 'features/auth/services/user.service';
+
 import * as progressActions from 'shared/actions/progress.actions';
 
-import { UserService } from 'features/auth/services/user.service';
+import { State } from 'features/completion/reducers/root.reducer';
 
 import { SetNotesPayload } from 'shared/models';
 
 @Component({
   selector: 'app-completion-set-notes',
   templateUrl: './set-notes.component.html',
-  styleUrls: ['./set-notes.component.scss']
+  styleUrls: ['./set-notes.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SetNotesComponent implements OnInit {
 
   @Input() itemId = '';
+  @Input() currentNotes = '';
   @Output() finishEdit: EventEmitter<null> = new EventEmitter();
   userId: string;
   icons = {
