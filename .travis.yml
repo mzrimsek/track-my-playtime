@@ -14,7 +14,7 @@ before_install:
  - sudo dpkg -i google-chrome*.deb
 
 before_script:
-  - npm install -g @angular/cli
+  - npm install -g @angular/cli@7.0.3
   - npm install coveralls
 
 script:
