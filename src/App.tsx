@@ -1,55 +1,41 @@
 import './App.css';
 
-import { Counter } from './features/counter/Counter';
+import { Box, CssBaseline, ThemeProvider, createTheme } from '@material-ui/core';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-function App() {
+import { Counter } from './features/counter/Counter';
+import { useMemo } from 'react';
+
+function App(): JSX.Element {
+  // const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+  const prefersDarkMode = false;
+  const theme = useMemo(
+    () =>
+      createTheme({
+        palette: {
+          type: prefersDarkMode ? 'dark' : 'light'
+        }
+      }),
+    [prefersDarkMode]
+  );
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <Counter />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <CssBaseline>
+        <Box className="app">
+          <div className="header">Track My Playtime</div>
+          <div className="content">
+            <BrowserRouter>
+              <Switch>
+                <Route path="/counter">
+                  <Counter />
+                </Route>
+              </Switch>
+            </BrowserRouter>
+          </div>
+        </Box>
+      </CssBaseline>
+    </ThemeProvider>
   );
 }
 
