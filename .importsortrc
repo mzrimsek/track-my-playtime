@@ -1,0 +1,6 @@
+{
+  ".js, .ts": {
+    "style": "eslint",
+    "parser": "typescript"
+  }
+}
